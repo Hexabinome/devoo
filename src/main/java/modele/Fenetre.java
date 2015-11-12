@@ -47,8 +47,5 @@ public class Fenetre /*implements Comparable<Fenetre>*/{
     public void setLivraisons(List<Livraison> livraisons) {
         this.livraisons = livraisons;
     }
-    
-    
-    
-    
+
 }
