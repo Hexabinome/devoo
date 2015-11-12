@@ -56,3 +56,5 @@ hs_err_pid*
 # intellij
 devoo.iml
 .idea
+/nbproject/private/
+/build/
