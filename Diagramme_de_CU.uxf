@@ -39,12 +39,12 @@ fontsize=18
   <element>
     <id>UMLActor</id>
     <coordinates>
-      <x>200</x>
+      <x>190</x>
       <y>440</y>
-      <w>80</w>
+      <w>100</w>
       <h>110</h>
     </coordinates>
-    <panel_attributes>Acteur</panel_attributes>
+    <panel_attributes>Utilisateur</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
