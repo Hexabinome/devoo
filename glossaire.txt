@@ -9,48 +9,68 @@
 					    VILLE
 --------------------------------------------------------
 
-Plan de la ville XML : Fichier XML décrivant le plan de la ville
+Plan de ville XML : Fichier XML décrivant le 'plan de ville'
 
-Plan de la ville : Carte de la ville
+Plan de ville : Carte d'une ville
 
-Intersection : Coordonnées d'une intersection
+Intersection : Coordonnées d'intersection
 
-Longitude de l'intersection : Longitude de l'intersection
+Coordonnée x d'intersection : Coordonnée x 'd'intersection'
 
-Latitude de l'intersection : Latitude de l'intersection
+Coordonnée x d'intersection : Coordonnée y 'd'intersection'
 
-Tronçon : Tronçon de rue entre 2 intersections
+Tronçon : Tronçon de rue entre 2 'intersections'
 
-Longueur du tronçon : Longueur d'un tronçon
+Longueur du tronçon : Longueur d'un 'tronçon'
 
-Vitesse moyenne de circulation du tronçon : Vitesse moyenne de circulation sur un tronçon
+Vitesse moyenne de circulation du tronçon : Vitesse moyenne de circulation sur un 'tronçon'
 
 --------------------------------------------------------
-					    LIVRAISON
+					    TOURNEE
 --------------------------------------------------------
 
-Demandes de livraisons XML : Fichier XML décrivant les demandes de livraisons
+Demandes de livraisons XML : Fichier XML décrivant des 'demandes de livraisons'
 
-Demande de livraison : Livraison à effectuer
+Demandes de livraisons : 'Livraisons' à effectuer
 
-Adresse de la livraison : Adresse de livraison
+Tournée : Tournée de 'livraisons'
 
-Fenêtre de la livraison : Plage horaire possible pour effectuer la livraison
+Itinéaire : Ordre de 'livraisons'
 
-Début de la fenêtre : Heure de début de fenêtre de livraison
+Durée de la tournée : Durée de la 'tournée'
 
-Fin de la fenêtre : Heure de fin de fenêtre de livraison
+Entrepot : Adresse de départ et de fin de la 'tournée'
 
+Feuille de route : Fichier texte spécifiant la 'tournée'
 
+--------------------------------------------------------
+					   LIVRAISON
+-------------------------------------------------------- 
 
+Livraison : Livraison à effectuer
 
+Adresse de livraison : Adresse de 'livraison'
 
+Fenêtre de livraison : Plage horaire pour effectuer une 'livraison'
 
+Début de fenêtre de livraison : Heure de début de 'fenêtre de livraison'
 
+Fin de fenêtre de livraison : Heure de fin de 'fenêtre de livraison'
 
+Temps de livraison : 'Temps de trajet de livraison' + 'temps d'arrêt de livraison'
 
+Chemin de livraison : Liste des 'tronçons' entre la 'livraison' et la 'livraison' à effectuer
 
+Temps de trajet de livraison : Temps pour parcourir l'ensemble des 'tronçon' entre 
+									'l'adresse de livraison' précédent la 'livraison'
+									à effectuer
 
+Temps d'arrêt de livraison : Temps pour décharger la 'livraison' (10 min ou plus si le livreur est
+									en avance sur la 'fenêtre de livraison')
 
+Horaire de passage de livraison : Heure au début du 'temps d'arrêt de la livraison'
 
+Horaire de départ de livraison : Heure à la fin du 'temps d'arrêt de livraison' (='horaire de passage de
+						livraison' + 'temps d'arrêt de livraison')
 
+Livraison en retard : 'Livraison' effectuée en dehors de la 'fenêtre de livraison'
