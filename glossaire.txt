@@ -1,0 +1,56 @@
+////////////////////////////////////////////////////////
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+					  GLOSSAIRE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+////////////////////////////////////////////////////////
+
+
+--------------------------------------------------------
+					    VILLE
+--------------------------------------------------------
+
+Plan de la ville XML : Fichier XML décrivant le plan de la ville
+
+Plan de la ville : Carte de la ville
+
+Intersection : Coordonnées d'une intersection
+
+Longitude de l'intersection : Longitude de l'intersection
+
+Latitude de l'intersection : Latitude de l'intersection
+
+Tronçon : Tronçon de rue entre 2 intersections
+
+Longueur du tronçon : Longueur d'un tronçon
+
+Vitesse moyenne de circulation du tronçon : Vitesse moyenne de circulation sur un tronçon
+
+--------------------------------------------------------
+					    LIVRAISON
+--------------------------------------------------------
+
+Demandes de livraisons XML : Fichier XML décrivant les demandes de livraisons
+
+Demande de livraison : Livraison à effectuer
+
+Adresse de la livraison : Adresse de livraison
+
+Fenêtre de la livraison : Plage horaire possible pour effectuer la livraison
+
+Début de la fenêtre : Heure de début de fenêtre de livraison
+
+Fin de la fenêtre : Heure de fin de fenêtre de livraison
+
+
+
+
+
+
+
+
+
+
+
+
+
+
