@@ -27,6 +27,35 @@
                     <target>${jdk.version}</target>
                 </configuration>
             </plugin>
+
+            <!-- Ce plugin crée un jar sans dépendances. -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>2.4.1</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- Spécification du main du jar qui sera généré -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>controleur.DevOO</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
     <dependencies>
