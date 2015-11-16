@@ -6,7 +6,7 @@
 
     <xs:element name="Reseau">
         <xs:complexType>
-            <xs:sequence>
+            <xs:sequence minOccurs="1" maxOccurs="1">
                 <xs:element name="Noeud" type="noeudType" minOccurs="1" maxOccurs="unbounded"/>
             </xs:sequence>
         </xs:complexType>
@@ -21,7 +21,7 @@
     </xs:element>
 
     <xs:complexType name="noeudType">
-        <xs:sequence>
+        <xs:sequence minOccurs="1" maxOccurs="1">
             <xs:element name="LeTronconSortant" type="tronconType" minOccurs="1" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute name="id" use="required" type="xs:unsignedInt"/>
