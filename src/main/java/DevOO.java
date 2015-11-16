@@ -1,8 +1,10 @@
+import java.io.File;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import xml.OuvreurDeFichier;
 
 /**
  * Base control class for the DevOO project
@@ -15,7 +17,9 @@ public class DevOO extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        launch(args);
+        //launch(args);
+        OuvreurDeFichier fichier = new OuvreurDeFichier() ;
+        fichier.ouvrirLivraison(new File("samples/livraison10x10-2.xml"));  
     }
 
     @Override
