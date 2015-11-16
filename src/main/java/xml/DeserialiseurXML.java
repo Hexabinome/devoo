@@ -15,7 +15,9 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Created by elmhaidara on 16/11/15.
+ * DeserialiseurXML comme son nom l'indique permet de déserialiser un fichier xml en créant les objets correspondant.
+ * Dans notre cas, elle déserialisera le Plan de la ville et la demande de livraison.
+ * @author Mohamed El Mouctar HAIDARA
  */
 public class DeserialiseurXML {
 
@@ -45,15 +47,29 @@ public class DeserialiseurXML {
 
             // Récuperation des troncons de chaque Intersection
             List<Element> tronconList = e.getChildren("LeTronconSortant");
-            for (Element troncon: tronconList ) {
-                //System.out.println(troncon.getAttribute("nomRue"));
+            for (Element elementTroncon: tronconList ) {
+                //System.out.println(elementTroncon.getAttribute("nomRue").getValue());
+                String nomRue = elementTroncon.getAttributeValue("nomRue");
 
+                // Récuperation de la vitesse et de la longueur du troncon sous forme de String
+                String vitesseString = elementTroncon.getAttributeValue("vitesse").replace(',','.');
+                String longueurString = elementTroncon.getAttributeValue("longueur").replace(',','.');
 
+                // Conversion des String en float
+                float vitesse = Float.parseFloat(vitesseString);
+                float longueur = Float.parseFloat(longueurString);
+
+                int idDestination = elementTroncon.getAttribute("idNoeudDestination").getIntValue();
+
+                float duree = longueur/vitesse;
+
+                Troncon tronconSortant = new Troncon(nomRue,vitesse,longueur,duree,idDestination);
+
+                // Ajout du troncon sortant à l'intersection
+                intersection.addTroncon(tronconSortant);
             }
-
+            planDeVille.addInstersection(intersection);
         }
-
-
         return planDeVille;
     }
 
@@ -75,7 +91,6 @@ public class DeserialiseurXML {
             e.printStackTrace();
             return null;
         }
-
         return document;
     }
 }

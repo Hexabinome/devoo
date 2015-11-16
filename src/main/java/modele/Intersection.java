@@ -56,6 +56,14 @@ public class Intersection {
     public void setY(int y) {
         this.y = y;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return "Intersection{" +
+                "id=" + id +
+                ", x=" + x +
+                ", y=" + y +
+                ", tronconsSortants=" + tronconsSortants +
+                '}';
+    }
 }

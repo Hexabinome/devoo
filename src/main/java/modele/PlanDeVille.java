@@ -29,4 +29,10 @@ public class PlanDeVille {
     }
 
 
+    @Override
+    public String toString() {
+        return "PlanDeVille{" +
+                "intersections=" + intersections +
+                '}';
+    }
 }
