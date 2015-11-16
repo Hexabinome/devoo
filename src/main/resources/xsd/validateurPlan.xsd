@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema
+    elementFormDefault="qualified"
+    attributeFormDefault="qualified"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:element name="Reseau">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Noeud" type="noeudType" minOccurs="1" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+        <xs:key name="noeudKey">
+            <xs:selector xpath="Noeud"/>
+            <xs:field xpath="@id"/>
+        </xs:key>
+        <xs:keyref name="noeudKeyRef" refer="noeudKey">
+            <xs:selector xpath="Noeud/LeTronconSortant"/>
+            <xs:field xpath="@idNoeudDestination"/>
+        </xs:keyref>
+    </xs:element>
+
+    <xs:complexType name="noeudType">
+        <xs:sequence>
+            <xs:element name="LeTronconSortant" type="tronconType" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="id" use="required" type="xs:unsignedInt"/>
+        <xs:attribute name="x" use="required" type="xs:unsignedInt"/>
+        <xs:attribute name="y" use="required" type="xs:unsignedInt"/>
+    </xs:complexType>
+
+    <xs:complexType name="tronconType">
+        <xs:attribute name="nomRue" use="required" type="xs:string"/>
+        <xs:attribute name="vitesse" use="required" type="float.bilingue"/>
+        <xs:attribute name="longueur" use="required" type="float.bilingue"/>
+        <xs:attribute name="idNoeudDestination" use="required" type="xs:unsignedInt"/>
+    </xs:complexType>
+
+   
+
+    <!-- Source : http://xmlfr.org/documentations/faq/040917-0001 -->
+    <xs:simpleType name="float.fr">
+        <xs:restriction base="xs:token">
+            <xs:pattern value="(\+|-)?(([0-9]+(,[0-9]+)?)|(,[0-9]+))((E|e)(\+|-)?[0-9]+)?"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="float.bilingue">
+        <xs:union memberTypes="float.fr xs:float"/>
+    </xs:simpleType>
+
+</xs:schema>
