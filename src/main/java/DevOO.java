@@ -7,9 +7,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
 import org.jdom2.JDOMException;
+import org.xml.sax.SAXException;
+
 import xml.DeserialiseurXML;
-import xml.OuvreurDeFichier;
 
 /**
  * Base control class for the DevOO project
@@ -26,9 +28,12 @@ public class DevOO extends Application {
         ClassLoader classLoader = ClassLoader.getSystemClassLoader();
         try {
             DeserialiseurXML.ouvrirPlanDeVille(new File(classLoader.getResource("samples/plan20x20.xml").toURI()));
-        } catch (JDOMException | IOException  | URISyntaxException e) {
+        } catch (SAXException | IOException  | URISyntaxException e) {
             e.printStackTrace();
-        }
+        } catch (JDOMException e) {
+			System.err.println("Pas valide car : ");
+			System.err.println(e.getLocalizedMessage());
+		}
     }
 
     @Override
