@@ -1,0 +1,722 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="12.2">
+  <zoom_level>6</zoom_level>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>1062</x>
+      <y>780</y>
+      <w>192</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>modele::PlanDeVille
+--
+-intersections: Map&lt;Integer, Intersection&gt;
+--
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>936</x>
+      <y>846</y>
+      <w>318</w>
+      <h>168</h>
+    </coordinates>
+    <panel_attributes>modele::Livraison
+--
+-id: int
+-clientId: int
+-adresse: Intersection
+-fenetre: Fenetre
+--
++Livraison(int id, int clientId, Intersection adresse, Fenetre fenetre): ctor
++getFenetre(): Fenetre
++setFenetre(Fenetre fenetre): void
++getId(): int
++setId(int id): void
++getClientId(): int
++setClientId(int clientId): void
++getAdresse(): Intersection
++setAdresse(Intersection adresse): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>726</x>
+      <y>810</y>
+      <w>168</w>
+      <h>216</h>
+    </coordinates>
+    <panel_attributes>modele::Troncon
+--
+-nomRue: String
+-vitesse: float
+-longueur: float
+-duree: float
+-depart: Intersection
+-arrive: Intersection
+--
++getDepart(): Intersection
++setDepart(Intersection depart): void
++getArrive(): Intersection
++setArrive(Intersection arrive): void
++getNomRue(): String
++setNomRue(String nomRue): void
++getVitesse(): float
++setVitesse(float vitesse): void
++getLongueur(): float
++setLongueur(float longueur): void
++getDuree(): float
++setDuree(float duree): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>24</x>
+      <y>0</y>
+      <w>1056</w>
+      <h>534</h>
+    </coordinates>
+    <panel_attributes>Controleur
+bg=orange
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>882</x>
+      <y>618</y>
+      <w>222</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>&lt;ModelLecture&gt;
+--
++getPlanDeVille():PlanDeVille
++getLivraisons():Livraison</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>708</x>
+      <y>594</y>
+      <w>558</w>
+      <h>450</h>
+    </coordinates>
+    <panel_attributes>Modele
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>0</x>
+      <y>594</y>
+      <w>558</w>
+      <h>360</h>
+    </coordinates>
+    <panel_attributes>View
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>642</x>
+      <y>606</y>
+      <w>252</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>18;18;126;18;126;42;240;42</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>258</x>
+      <y>78</y>
+      <w>318</w>
+      <h>102</h>
+    </coordinates>
+    <panel_attributes>Controleur
+--
+etat:Etat
+model:Model
+beaucoup des listeners...
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>600</x>
+      <y>588</y>
+      <w>60</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>Observer Pattern</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>378</x>
+      <y>240</y>
+      <w>72</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>EtatPrincipal
+--
++initialiser():void
++cliqueSurPlan():void
++cliqueRetablir():void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>462</x>
+      <y>240</y>
+      <w>72</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>EtatSuppression
+--
++initialiser():void
++cliqueSurPlan():void
++cliqueAnnuler():void
++cliqueRetablir():void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>546</x>
+      <y>240</y>
+      <w>72</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>EtatAjout1
+--
++initialiser():void
++cliqueSurPlan():void
++cliqueAnnuler():void
++cliqueRetablir():void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>630</x>
+      <y>240</y>
+      <w>72</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>EtatAjout2
+--
++initialiser():void
++cliqueSurPlan():void
++cliqueAnnuler():void
++cliqueRetablir():void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>714</x>
+      <y>240</y>
+      <w>72</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>EtatEchange1
+--
++initialiser():void
++cliqueSurPlan():void
++cliqueAnnuler():void
++cliqueRetablir():void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>798</x>
+      <y>240</y>
+      <w>72</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>EtatEchange2
+--
++initialiser():void
++cliqueSurPlan():void
++cliqueAnnuler():void
++cliqueRetablir():void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>294</x>
+      <y>240</y>
+      <w>72</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>EtatInitial
+--
++initialiser():void
++cliqueSurPlan():void
++cliqueRetablir():void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>624</x>
+      <y>90</y>
+      <w>180</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>/AbstractEtat/
+--
+--
+/+initialiser(cheminXmlPlan:String, cheminXmlLivraison:String, ):void/
+/+cliqueSurPlan():void/
++cliqueAnnuler():void
++cliqueRetablir()
+
++cliqueAjouter():Etat
++cliqueSupprimer():Etat
++cliqueEchanger():Etat
++cliqueChargerXML():Etat</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>726</x>
+      <y>162</y>
+      <w>30</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>18;18;18;78</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>726</x>
+      <y>162</y>
+      <w>126</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>18;18;18;48;114;48;114;78</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>648</x>
+      <y>162</y>
+      <w>108</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>96;18;96;48;18;48;18;78</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>318</x>
+      <y>192</y>
+      <w>366</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>18;18;354;18</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>312</x>
+      <y>192</y>
+      <w>30</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>18;18;18;48</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>396</x>
+      <y>192</y>
+      <w>30</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>18;18;18;48</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>480</x>
+      <y>192</y>
+      <w>30</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>18;18;18;48</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>564</x>
+      <y>192</y>
+      <w>30</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>18;18;18;48</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>558</x>
+      <y>120</y>
+      <w>78</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;</panel_attributes>
+    <additional_attributes>18;18;66;18</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>564</x>
+      <y>330</y>
+      <w>96</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>/AbstractCommand/
+--
+/executer():void/
++annuler():void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>276</x>
+      <y>414</y>
+      <w>72</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>ChargerPlan (?)
+--
+executer()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>366</x>
+      <y>414</y>
+      <w>72</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>ChargerLivraisons (?)
+--
+executer()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>456</x>
+      <y>414</y>
+      <w>72</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>AjouterLivraison
+--
+executer()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>246</x>
+      <y>312</y>
+      <w>240</w>
+      <h>66</h>
+    </coordinates>
+    <panel_attributes>Historique
+--
+Collection&lt;AbstractCommand&gt;:historique
+currentCommand:AbstractCommand
+--
++ajouterEtExecuterCommand(command:AbstractCommand):void
++annuler():void
++retablir():void
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>198</x>
+      <y>162</y>
+      <w>474</w>
+      <h>186</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;</panel_attributes>
+    <additional_attributes>462;18;462;36;18;36;18;174;48;174</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>468</x>
+      <y>324</y>
+      <w>108</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;</panel_attributes>
+    <additional_attributes>18;18;96;18</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>300</x>
+      <y>348</y>
+      <w>336</w>
+      <h>78</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>324;18;324;42;18;42;18;66</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>384</x>
+      <y>372</y>
+      <w>30</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>18;18;18;42</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>474</x>
+      <y>372</y>
+      <w>30</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>18;18;18;42</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>546</x>
+      <y>414</y>
+      <w>84</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>EchangerLivraisons
+--
+executer()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>558</x>
+      <y>372</y>
+      <w>30</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>18;18;18;42</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>648</x>
+      <y>414</y>
+      <w>90</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>SupprimerLivraisons
+--
+executer()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>756</x>
+      <y>414</y>
+      <w>90</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>GenererTournee (?)
+--
+executer(model:Model)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>960</x>
+      <y>414</y>
+      <w>90</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>GenererFeuilleDeRoute
+--
+executer()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>678</x>
+      <y>372</y>
+      <w>30</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>18;18;18;42</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>588</x>
+      <y>372</y>
+      <w>330</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>318;18;18;18</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>786</x>
+      <y>372</y>
+      <w>30</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>18;18;18;42</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>888</x>
+      <y>372</y>
+      <w>126</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>18;18;114;18;114;42</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>882</x>
+      <y>684</y>
+      <w>222</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>Model
+--
++getPlanDeVille():PlanDeVille
++getLivraisons():Livraison
++setPlanDeVille(pdv:PlanDeVille):void
++setLivraisons(livr:Livraison):void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>642</x>
+      <y>324</y>
+      <w>516</w>
+      <h>414</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;</panel_attributes>
+    <additional_attributes>18;18;504;18;504;402;462;402</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>858</x>
+      <y>414</y>
+      <w>90</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>MiaAJourTournee
+--
+executer()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>978</x>
+      <y>642</y>
+      <w>30</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>18;18;18;42</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>1032</x>
+      <y>726</y>
+      <w>144</w>
+      <h>66</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>18;18;18;36;132;36;132;54</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>786</x>
+      <y>726</y>
+      <w>186</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>174;18;174;36;18;36;18;84;18;78</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>972</x>
+      <y>726</y>
+      <w>30</w>
+      <h>132</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>18;18;18;36;18;84;18;120</additional_attributes>
+  </element>
+</diagram>
