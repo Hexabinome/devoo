@@ -27,6 +27,10 @@ public class Intersection {
         tronconsSortants = new ArrayList<>();
     }
 
+
+    public void addTroncon(Troncon troncon){
+        tronconsSortants.add(troncon);
+    }
     
     
     public int getId() {

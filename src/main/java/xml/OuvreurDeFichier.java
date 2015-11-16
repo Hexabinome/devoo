@@ -11,28 +11,26 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Created by elmhaidara on 16/11/15.
+ * Ouvre un fichier XML
  */
 public class OuvreurDeFichier { // singleton
 
+
+    private static OuvreurDeFichier instance = null;
+
     private static SAXBuilder builder = new SAXBuilder();
+
 
     private static File file = new File("samples/livraison10x10-1.xml");
 
-
-    public static void ouvrirPlan(){
-
-        try{
-            Document document = (Document) builder.build(file);
-            Element rootElement = document.getRootElement();
-
-
-        } catch (IOException e){
-
-        } catch(JDOMException j){
-
-        }
+    public static OuvreurDeFichier getInstance(){
+        if(instance == null)
+            instance = new OuvreurDeFichier();
+        return instance;
     }
+
+    private OuvreurDeFichier(){}
+
     
     public static void ouvrirLivraison( File livraisonXml){
         // TODO:validifcation du fichier xml      
