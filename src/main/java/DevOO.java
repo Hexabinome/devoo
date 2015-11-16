@@ -22,16 +22,16 @@ public class DevOO extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        launch(args);
-        /*ClassLoader classLoader = ClassLoader.getSystemClassLoader();
+        //launch(args);
+        ClassLoader classLoader = ClassLoader.getSystemClassLoader();
         try {
             DeserialiseurXML.ouvrirPlanDeVille(new File(classLoader.getResource("samples/plan20x20.xml").toURI()));
         } catch (SAXException | IOException | URISyntaxException e) {
             e.printStackTrace();
         } catch (JDOMException e) {
             System.err.println("Pas valide car : ");
-            System.err.println(e.getLocalizedMessage());
-        }*/
+            e.printStackTrace();
+        }
 
     }
 

@@ -1,25 +1,22 @@
 package xml;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
-
+import modele.Demande;
 import modele.Intersection;
 import modele.PlanDeVille;
 import modele.Troncon;
-
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 import org.jdom2.input.sax.XMLReaderJDOMFactory;
 import org.jdom2.input.sax.XMLReaderXSDFactory;
+import org.xml.sax.SAXException;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
-import modele.Demande;
-import org.xml.sax.SAXException;
 
 /**
  * DeserialiseurXML comme son nom l'indique permet de déserialiser un fichier xml en créant les objets correspondant.
@@ -29,8 +26,11 @@ import org.xml.sax.SAXException;
  */
 public class DeserialiseurXML {
 
-    private static final String fichierValidationPlan = ClassLoader.getSystemClassLoader().getResource("xsd/validateurPlan.xsd").getPath();
-    private static final String fichierValidationLivraisons = ClassLoader.getSystemClassLoader().getResource("xsd/validateurLivraisons.xsd").getPath();
+    private static final String fichierValidationPlan = ClassLoader.getSystemClassLoader()
+            .getResource("xsd/validateurPlan.xsd").getPath();
+    private static final String fichierValidationLivraisons = ClassLoader.getSystemClassLoader()
+            .getResource("xsd/validateurLivraisons.xsd").getPath();
+
 
     /**
      * Construis le plan de la ville à partir d'un fichier xml.
@@ -39,10 +39,9 @@ public class DeserialiseurXML {
      * @throws IOException   Problème survenu lors de la lecture du fichier
      * @throws SAXException  Problème survenu lors de la validation par le schéma XSD
      */
-    public static PlanDeVille ouvrirPlanDeVille(File planXML) throws JDOMException, IOException, SAXException {
-
-    	Document document = validerFichierXML(fichierValidationPlan, planXML);
-
+    public static PlanDeVille ouvrirPlanDeVille(InputStream planXML) throws JDOMException, IOException, SAXException {
+        Document document = validerFichierXML(fichierValidationPlan, planXML);
+        // System.out.println(fichierValidationLivraisons);
         PlanDeVille planDeVille = new PlanDeVille();
 
         Element rootElement = document.getRootElement();
@@ -82,63 +81,82 @@ public class DeserialiseurXML {
             planDeVille.addInstersection(intersection);
         }
         System.out.println(planDeVille);
-        return planDeVille;
+        return null;
     }
-    
+
+    /**
+     * Construis le plan de la ville à partir d'un fichier xml.
+     *
+     * @throws JDOMException Problème survenu lors de du parsing
+     * @throws IOException   Problème survenu lors de la lecture du fichier
+     * @throws SAXException  Problème survenu lors de la validation par le schéma XSD
+     */
+    public static PlanDeVille ouvrirPlanDeVille(File planXML) throws JDOMException, IOException, SAXException {
+        InputStream inputStream = new FileInputStream(planXML);
+        return ouvrirPlanDeVille(inputStream);
+    }
+
     /**
      * Construis le plan des livraisons à partir d'un fichier xml.
      *
      * @throws JDOMException Problème survenu lors de du parsing
      * @throws IOException   Problème survenu lors de la lecture du fichier
-     */       
-    public static Demande ouvrirLivraison( File livraisonXml)
-    		throws SAXException, IOException {
-        
-        try {            
-        	Document document = validerFichierXML(fichierValidationLivraisons, livraisonXml);
-            Element journeeType = document.getRootElement();
-            //entrepot   
-            System.out.println("entrepot" + journeeType.getChild("Entrepot").getAttribute("adresse").getIntValue());
-            //plage horaires
-            Element plageHoraires = journeeType.getChild("PlagesHoraires");
-            //plages
-            List<Element> listePlage = plageHoraires.getChildren("Plage");
+     */
+    public static Demande ouvrirLivraison(InputStream livraisonXml) throws SAXException, IOException, JDOMException {
 
-            for (Element plage : listePlage){
-            	// TODO : utilise le format d'heure
-//              System.out.println("heure de debut : " + plage.getAttributeValue("heureDebut"));
-//              System.out.println("Heure de fin : " + plage.getAttribute("heureFin"));
-                //livraisons
-                Element livraisons = plage.getChild("Livraisons");
-                //livraison
-                List<Element> listeLivraison = livraisons.getChildren("Livraison");
-                for (Element livraison : listeLivraison) {
-                    System.out.println("id : " + livraison.getAttribute("id").getIntValue());
-                    System.out.println("client : " + livraison.getAttribute("client").getIntValue());
-                    System.out.println("adresse : " + livraison.getAttribute("adresse").getIntValue());
-                }
+        Document document = validerFichierXML(fichierValidationLivraisons, livraisonXml);
+        Element journeeType = document.getRootElement();
+        //entrepot
+        System.out.println("entrepot" + journeeType.getChild("Entrepot").getAttribute("adresse").getIntValue());
+        //plage horaires
+        Element plageHoraires = journeeType.getChild("PlagesHoraires");
+        //plages
+        List<Element> listePlage = plageHoraires.getChildren("Plage");
+
+        for (Element plage : listePlage) {
+            // TODO : utilise le format d'heure
+              System.out.println("heure de debut : " + plage.getAttributeValue("heureDebut"));
+              System.out.println("Heure de fin : " + plage.getAttribute("heureFin"));
+            //livraisons
+            Element livraisons = plage.getChild("Livraisons");
+            //livraison
+            List<Element> listeLivraison = livraisons.getChildren("Livraison");
+            for (Element livraison : listeLivraison) {
+                System.out.println("id : " + livraison.getAttribute("id").getIntValue());
+                System.out.println("client : " + livraison.getAttribute("client").getIntValue());
+                System.out.println("adresse : " + livraison.getAttribute("adresse").getIntValue());
             }
-        } catch (JDOMException ex) {
-            ex.printStackTrace(); 
-        } catch (IOException ex) {
-            ex.printStackTrace();
         }
-        
+
+
         //TODO return new Demande(...);
-        
         return null;
     }
-    
+
+    /**
+     * Construis le plan des livraisons à partir d'un fichier xml.
+     *
+     * @throws JDOMException Problème survenu lors de du parsing
+     * @throws IOException   Problème survenu lors de la lecture du fichier
+     */
+    public static Demande ouvrirLivraison(File livraisonXml) throws SAXException, IOException, JDOMException {
+
+        InputStream inputStream = new FileInputStream(livraisonXml);
+
+        return ouvrirLivraison(inputStream);
+    }
+
     /**
      * Valide un fichier XML avec le fichier XSD fourni.
+     *
      * @param nomFichierXSD Le schéma XSD à utiliser.
-     * @param fichierXML Le fichier XML à valider.
+     * @param fichierXML    Le fichier XML à valider.
      * @return Renvoie le document correspondant si la validation est effective.
      * @throws JDOMException Si la validation du XML a échoué.
-     * @throws IOException S'il y a eu une erreur de lecture.
+     * @throws IOException   S'il y a eu une erreur de lecture.
      */
-    private static Document validerFichierXML(String nomFichierXSD, File fichierXML)
-    		throws JDOMException, IOException {
+    private static Document validerFichierXML(String nomFichierXSD, InputStream fichierXML)
+            throws JDOMException, IOException {
 
         File fichierXSD = new File(nomFichierXSD);
         Document document = null;
@@ -150,7 +168,4 @@ public class DeserialiseurXML {
         return document;
     }
 
-    public void ok(){
-
-    }
 }
