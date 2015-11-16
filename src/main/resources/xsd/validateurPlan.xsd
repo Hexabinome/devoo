@@ -4,16 +4,21 @@
     attributeFormDefault="qualified"
     xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
+    <!-- Racine du document : élément "Reseau" -->
     <xs:element name="Reseau">
         <xs:complexType>
+            <!-- Reseau est composé d'une seule séquence, contenant au moins un élément "Noeud" -->
             <xs:sequence minOccurs="1" maxOccurs="1">
+                <!-- Un élément "Noeud" est de type "noeudType" -->
                 <xs:element name="Noeud" type="noeudType" minOccurs="1" maxOccurs="unbounded"/>
             </xs:sequence>
         </xs:complexType>
+        <!-- L'attribut "id" de "Noeud" est une clé. Celle-ci est donc unique et peut servir de référence -->
         <xs:key name="noeudKey">
             <xs:selector xpath="Noeud"/>
             <xs:field xpath="@id"/>
         </xs:key>
+        <!-- L'attribut "idNoeudDestination" de "LeTronconSortant" doit faire référence à un "id" de "Noeud" -->
         <xs:keyref name="noeudKeyRef" refer="noeudKey">
             <xs:selector xpath="Noeud/LeTronconSortant"/>
             <xs:field xpath="@idNoeudDestination"/>
@@ -21,15 +26,18 @@
     </xs:element>
 
     <xs:complexType name="noeudType">
+        <!-- Un "Noeud" comporte une seule liste (séquence) d'au moins un "LeTronconSortant" -->
         <xs:sequence minOccurs="1" maxOccurs="1">
             <xs:element name="LeTronconSortant" type="tronconType" minOccurs="1" maxOccurs="unbounded"/>
         </xs:sequence>
+        <!-- Et un "Noeud" comporte trois attributs obligatoires qui sont des entiers positifs -->
         <xs:attribute name="id" use="required" type="xs:unsignedInt"/>
         <xs:attribute name="x" use="required" type="xs:unsignedInt"/>
         <xs:attribute name="y" use="required" type="xs:unsignedInt"/>
     </xs:complexType>
 
     <xs:complexType name="tronconType">
+        <!-- Un tronçon est composé de quatre attributs obligatoires -->
         <xs:attribute name="nomRue" use="required" type="xs:string"/>
         <xs:attribute name="vitesse" use="required" type="float.bilingue"/>
         <xs:attribute name="longueur" use="required" type="float.bilingue"/>
@@ -38,13 +46,14 @@
 
    
 
-    <!-- Source from http://xmlfr.org/documentations/faq/040917-0001 
-    + adapted to allow only positive floats -->
+    <!-- Source : http://xmlfr.org/documentations/faq/040917-0001 (match des nombres floattants avec des virgules et non des points)
+    + adapté pour matcher seulement des nombres flottants positifs -->
     <xs:simpleType name="float.fr">
         <xs:restriction base="xs:token">
             <xs:pattern value="(\+)?(([0-9]+(,[0-9]+)?)|(,[0-9]+))((E|e)(\+)?[0-9]+)?"/>
         </xs:restriction>
     </xs:simpleType>
+    <!-- Combine la notation française et anglaise -->
     <xs:simpleType name="float.bilingue">
         <xs:union memberTypes="float.fr xs:float"/>
     </xs:simpleType>
