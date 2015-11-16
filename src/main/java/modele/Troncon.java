@@ -14,24 +14,24 @@ public class Troncon {
     
     private float duree;
 
-    private Intersection depart;
+    private int idDepart;
 
-    private Intersection arrive;
+    private int idArrive;
 
-    public Intersection getDepart() {
-        return depart;
+    public int getIdDepart() {
+        return idDepart;
     }
 
-    public void setDepart(Intersection depart) {
-        this.depart = depart;
+    public void setIdDepart(int idDepart) {
+        this.idDepart = idDepart;
     }
 
-    public Intersection getArrive() {
-        return arrive;
+    public int getIdArrive() {
+        return idArrive;
     }
 
-    public void setArrive(Intersection arrive) {
-        this.arrive = arrive;
+    public void setIdArrive(int idArrive) {
+        this.idArrive = idArrive;
     }
     
     
