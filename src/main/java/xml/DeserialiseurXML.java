@@ -76,6 +76,7 @@ public class DeserialiseurXML {
             }
             planDeVille.addInstersection(intersection);
         }
+        System.out.println(planDeVille);
         return planDeVille;
     }
 

@@ -1,9 +1,14 @@
 import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.jdom2.JDOMException;
+import xml.DeserialiseurXML;
 import xml.OuvreurDeFichier;
 
 /**
@@ -18,8 +23,12 @@ public class DevOO extends Application {
      */
     public static void main(String[] args) {
         //launch(args);
-        OuvreurDeFichier fichier = new OuvreurDeFichier() ;
-        fichier.ouvrirLivraison(new File("samples/livraison10x10-2.xml"));  
+        ClassLoader classLoader = ClassLoader.getSystemClassLoader();
+        try {
+            DeserialiseurXML.ouvrirPlanDeVille(new File(classLoader.getResource("samples/plan20x20.xml").toURI()));
+        } catch (JDOMException | IOException  | URISyntaxException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
