@@ -13,6 +13,7 @@ import org.jdom2.input.sax.XMLReaderXSDFactory;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import modele.Demande;
 
 /**
  * DeserialiseurXML comme son nom l'indique permet de déserialiser un fichier xml en créant les objets correspondant.
@@ -81,6 +82,54 @@ public class DeserialiseurXML {
     }
 
 
+    /**
+     * Construis le plan des livraisons à partir d'un fichier xml.
+     *
+     * @throws JDOMException Problème survenu lors de du parsing
+     * @throws IOException   Problème survenu lors de la lecture du fichier
+     */   
+    public static Demande ouvrirLivraison( File livraisonXml){
+        // TODO:validifcation du fichier xml    
+        // TODO: construct Demande and return it
+        try {            
+            Document document = (Document) new SAXBuilder().build(livraisonXml);
+            Element journeeType = document.getRootElement();
+            
+            //entrepot   
+            int entrepot =  journeeType.getChild("Entrepot").getAttribute("adresse").getIntValue();
+//            System.out.println(entrepot);
+            //plage horaires
+            Element plageHoraires = journeeType.getChild("PlagesHoraires");
+            //plages
+            List<Element> listePlage = plageHoraires.getChildren("Plage");
+
+            for (Element plage : listePlage){
+                
+                // TODO : utilise le format d'heure
+//                System.out.println("heure de debut : " + plage.getAttributeValue("heureDebut"));
+//                System.out.println("Heure de fin : " + plage.getAttribute("heureFin"));
+                //livraisons
+                Element livraisons = plage.getChild("Livraisons");
+                //livraison
+                List<Element> listeLivraison = livraisons.getChildren("Livraison");
+                for (Element livraison : listeLivraison) {
+                    
+                    int livraisonId = livraison.getAttribute("id").getIntValue();
+                    int livraisonClient = livraison.getAttribute("client").getIntValue();
+                    int livraisonAdresse = livraison.getAttribute("adresse").getIntValue();
+                    
+//                    System.out.println(livraisonId);
+//                    System.out.println(livraisonClient);
+//                    System.out.println(livraisonAdresse);
+                }
+            }
+            
+        } catch (JDOMException ex) {
+        } catch (IOException ex) {
+        }
+        return null;
+    }
+    
     /**
      * Valide un fichier XML avec le fichier XSD fourni.
      *
