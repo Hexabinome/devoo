@@ -17,18 +17,24 @@ import java.util.List;
 /**
  * DeserialiseurXML comme son nom l'indique permet de déserialiser un fichier xml en créant les objets correspondant.
  * Dans notre cas, elle déserialisera le Plan de la ville et la demande de livraison.
+ *
  * @author Mohamed El Mouctar HAIDARA
  */
 public class DeserialiseurXML {
 
 
+
+
     /**
      * Construis le plan de la ville à partir d'un fichier xml.
      *
-     * @throws JDOMException Problème survenu lors de lu parsing
+     * @throws JDOMException Problème survenu lors de du parsing
      * @throws IOException   Problème survenu lors de la lecture du fichier
      */
     public static PlanDeVille ouvrirPlanDeVille(File planXML) throws JDOMException, IOException {
+
+
+
         // TODO : validation du fichier xml en remplaçant la ligne suivante par validerFichierXMl("fichier.xsd",planXML)
         Document document = (Document) new SAXBuilder().build(planXML);
 
@@ -43,17 +49,17 @@ public class DeserialiseurXML {
             int idIntersection = e.getAttribute("id").getIntValue();
             int xIntersection = e.getAttribute("x").getIntValue();
             int yIntersection = e.getAttribute("y").getIntValue();
-            Intersection intersection = new Intersection(idIntersection,xIntersection,yIntersection);
+            Intersection intersection = new Intersection(idIntersection, xIntersection, yIntersection);
 
             // Récuperation des troncons de chaque Intersection
             List<Element> tronconList = e.getChildren("LeTronconSortant");
-            for (Element elementTroncon: tronconList ) {
+            for (Element elementTroncon : tronconList) {
                 //System.out.println(elementTroncon.getAttribute("nomRue").getValue());
                 String nomRue = elementTroncon.getAttributeValue("nomRue");
 
                 // Récuperation de la vitesse et de la longueur du troncon sous forme de String
-                String vitesseString = elementTroncon.getAttributeValue("vitesse").replace(',','.');
-                String longueurString = elementTroncon.getAttributeValue("longueur").replace(',','.');
+                String vitesseString = elementTroncon.getAttributeValue("vitesse").replace(',', '.');
+                String longueurString = elementTroncon.getAttributeValue("longueur").replace(',', '.');
 
                 // Conversion des String en float
                 float vitesse = Float.parseFloat(vitesseString);
@@ -61,9 +67,9 @@ public class DeserialiseurXML {
 
                 int idDestination = elementTroncon.getAttribute("idNoeudDestination").getIntValue();
 
-                float duree = longueur/vitesse;
+                float duree = longueur / vitesse;
 
-                Troncon tronconSortant = new Troncon(nomRue,vitesse,longueur,duree,idDestination);
+                Troncon tronconSortant = new Troncon(nomRue, vitesse, longueur, duree, idDestination);
 
                 // Ajout du troncon sortant à l'intersection
                 intersection.addTroncon(tronconSortant);
@@ -77,20 +83,21 @@ public class DeserialiseurXML {
     /**
      * Valide un fichier XML avec le fichier XSD fourni.
      *
-     * @return Renvoie le document correspondant si la validation est effective. null Sinon
+     * @return Renvoie le document correspondant si la validation est effective.
      */
-    private static Document validerFichierXML(String nomFichierXSD, File fichierXML) {
+    private static Document validerFichierXML(String nomFichierXSD, File fichierXML) throws JDOMException, IOException {
 
         File fichierXSD = new File(nomFichierXSD);
         Document document = null;
-        try {
-            XMLReaderJDOMFactory factory = new XMLReaderXSDFactory(fichierXSD);
-            SAXBuilder saxBuilder = new SAXBuilder(factory);
-            document = saxBuilder.build(fichierXML);
-        } catch (JDOMException | IOException e) {
-            e.printStackTrace();
-            return null;
-        }
+
+        XMLReaderJDOMFactory factory = new XMLReaderXSDFactory(fichierXSD);
+        SAXBuilder saxBuilder = new SAXBuilder(factory);
+        document = saxBuilder.build(fichierXML);
+
         return document;
+    }
+
+    public void ok(){
+
     }
 }
