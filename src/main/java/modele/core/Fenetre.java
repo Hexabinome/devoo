@@ -1,4 +1,4 @@
-package modele;
+package modele.core;
 
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -10,7 +10,7 @@ import java.util.Map;
  */
 public class Fenetre /*implements Comparable<Fenetre>*/{
     
-    private final int heureDebut;    
+    private final int heureDebut;
     private final int heureFin;
     private final Map<Integer, Livraison> livraisons;
     

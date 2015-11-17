@@ -1,4 +1,4 @@
-package modele;
+package modele.core;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -16,7 +16,7 @@ public class Intersection {
     /**
      * On stoque chaque troncon sortant, par l'id de sa cible dans un map.
      */
-    private Map<Integer, Troncon> troncons;
+    private final Map<Integer, Troncon> troncons;
     
     public Intersection(int id, int x, int y) {
         this.id = id;
@@ -47,6 +47,11 @@ public class Intersection {
     protected Troncon getTroncon(int cibleId)
     {
         return troncons.get(cibleId);
+    }
+    
+    protected boolean aLiaison(int cibleId)
+    {
+        return troncons.keySet().contains(cibleId);
     }
 
     @Override

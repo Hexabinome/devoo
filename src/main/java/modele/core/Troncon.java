@@ -1,4 +1,4 @@
-package modele;
+package modele.core;
 
 /**
  * Represente un troncon de rue entre deux intersections.

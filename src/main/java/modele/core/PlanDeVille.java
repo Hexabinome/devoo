@@ -1,4 +1,4 @@
-package modele;
+package modele.core;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -55,7 +55,6 @@ public class PlanDeVille
     {
         return "PlanDeVille{"
                 + "intersections=" + intersections
-                + '}';
+                + "}";
     }
-
 }
