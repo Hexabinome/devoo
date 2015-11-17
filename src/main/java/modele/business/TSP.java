@@ -4,7 +4,7 @@ import modele.xmldata.Graphe;
 
 /**
  *
- * @author maxou
+ * @author C.Solnon
  */
 public interface TSP
 {

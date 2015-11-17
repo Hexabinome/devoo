@@ -9,7 +9,7 @@ import java.util.Map;
  * 
  * @author mhaidara / maxou
  */
-public class Fenetre /*implements Comparable<Fenetre>*/{
+public class Fenetre {
     
     private final int heureDebut;
     private final int heureFin;
