@@ -61,3 +61,7 @@ dependency-reduced-pom.xml
 /nbproject/private/
 /build/
 /target
+
+# netbeans files
+nbactions.xml
+/lib/

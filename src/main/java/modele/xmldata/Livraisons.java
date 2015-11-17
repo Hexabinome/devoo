@@ -5,7 +5,7 @@ package modele.xmldata;
  * 
  * @author mhaidara / maxou
  */
-public class Livraison
+public class Livraisons
 {
 
     /**
@@ -23,7 +23,7 @@ public class Livraison
      */
     private final int adresse;
 
-    public Livraison(int id, int clientId, int idIntersection)
+    public Livraisons(int id, int clientId, int idIntersection)
     {
         this.id = id;
         this.clientId = clientId;

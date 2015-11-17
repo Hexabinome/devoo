@@ -13,7 +13,7 @@ public class Fenetre /*implements Comparable<Fenetre>*/{
     
     private final int heureDebut;
     private final int heureFin;
-    private final Map<Integer, Livraison> livraisons;
+    private final Map<Integer, Livraisons> livraisons;
     
     public Fenetre(int timestampDebut, int timestampFin) {
         this.heureDebut = timestampDebut;
@@ -35,12 +35,12 @@ public class Fenetre /*implements Comparable<Fenetre>*/{
         livraisons.remove(livrasionId);
     }
     
-    public void ajouterLivraison(int id, Livraison livraison)
+    public void ajouterLivraison(int id, Livraisons livraison)
     {
         livraisons.put(id, livraison);
     }
 
-    public Map<Integer, Livraison> getLivraisons() {
+    public Map<Integer, Livraisons> getLivraisons() {
         return Collections.unmodifiableMap(livraisons);
     }
 }
