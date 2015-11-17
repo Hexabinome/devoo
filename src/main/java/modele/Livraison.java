@@ -5,16 +5,30 @@ package modele;
  * @author mhaidara
  */
 public class Livraison {
-    
+
+    /**
+     * Identifiant de la livraison
+     */
     private int id;
-    
+
+    /**
+     * Identifiant du client de la livraison
+     */
     private int clientId;
 
-    private Intersection adresse;
+    /**
+     * Identifiant de l'intersection où s'effectue la livraison
+     */
+    private int adresse;
 
+    /* TODO : peut etre qu'on a pas besoin de mettre la fenetre ici. On a une reférence circulaire avec la fenetre qui contient aussi une liste de Livraison */
+    /**
+     * La fenêtre dans laquelle la livraison se trouve.
+     *
+     */
     private Fenetre fenetre;
 
-    public Livraison(int id, int clientId, Intersection adresse, Fenetre fenetre) {
+    public Livraison(int id, int clientId, int adresse, Fenetre fenetre) {
         this.id = id;
         this.clientId = clientId;
         this.adresse = adresse;
@@ -46,11 +60,11 @@ public class Livraison {
         this.clientId = clientId;
     }
     
-    public Intersection getAdresse() {
+    public int getAdresse() {
         return adresse;
     }
 
-    public void setAdresse(Intersection adresse) {
+    public void setAdresse(int adresse) {
         this.adresse = adresse;
     }
     
