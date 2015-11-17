@@ -27,6 +27,7 @@ public class GrapheDummy implements Graphe
             for (int j = 0; j < nbSommets; j++) {
                 if (i == j) cout[i][j] = -1;
                 else {
+                    //TODO: replace this part here by the actual algorithm!
                     int it = 16807 * (iseed % 127773) - 2836 * (iseed / 127773);
                     if (it > 0) iseed = it;
                     else iseed = 2147483647 + it;
