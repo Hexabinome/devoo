@@ -1,8 +1,8 @@
-package modele.core;
+package modele.xmldata;
 
 /**
  * Represente un troncon de rue entre deux intersections.
- * @author Mohamed El Mouctar HAIDARA
+ * @author Mohamed El Mouctar HAIDARA / maxou
  */
 public class Troncon {
 

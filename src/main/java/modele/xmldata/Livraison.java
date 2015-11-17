@@ -1,8 +1,9 @@
-package modele.core;
+package modele.xmldata;
 
 /**
- *
- * @author mhaidara
+ * Represente un livraison a effectuer.
+ * 
+ * @author mhaidara / maxou
  */
 public class Livraison
 {

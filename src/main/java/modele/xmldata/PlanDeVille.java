@@ -1,13 +1,17 @@
-package modele.core;
+package modele.xmldata;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Réprensente le plan de la ville chargé à partir d'un fichier XML
+ * Réprensente le plan de la ville chargé à partir d'un fichier XML. C'est a
+ * dire: Toutes les intersections. Cette classe permet egalement de recuperer
+ * une intersection pas rapport a son ID. Cette classe est pas a confondre avec
+ * un graphe qui on utiliser pour calculer le chemin optimal avec les algos du
+ * TSP.
  *
- * @author Mohamed El Mouctar HAIDARA
+ * @author Mohamed El Mouctar HAIDARA / maxou
  */
 public class PlanDeVille
 {
@@ -57,4 +61,5 @@ public class PlanDeVille
                 + "intersections=" + intersections
                 + "}";
     }
+
 }

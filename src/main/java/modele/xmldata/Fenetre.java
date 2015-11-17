@@ -1,12 +1,13 @@
-package modele.core;
+package modele.xmldata;
 
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- *
- * @author mhaidara
+ * Une Fenetre correspond a une periode de temps fixe avec une nombre des livraisons prevus.
+ * 
+ * @author mhaidara / maxou
  */
 public class Fenetre /*implements Comparable<Fenetre>*/{
     

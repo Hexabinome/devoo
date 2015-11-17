@@ -1,66 +1,74 @@
-package modele.core;
+package modele.xmldata;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
+ * Cette class represente une intersection dans le plan de ville. (Pas a
+ * confondre avec un neud du graphe).
  *
- * @author mhaidara
+ * @author mhaidara / maxou
  */
-public class Intersection {
-    
+public class Intersection
+{
+
     private final int id;
     private final int x;
     private final int y;
-    
+
     /**
      * On stoque chaque troncon sortant, par l'id de sa cible dans un map.
      */
     private final Map<Integer, Troncon> troncons;
-    
-    public Intersection(int id, int x, int y) {
+
+    public Intersection(int id, int x, int y)
+    {
         this.id = id;
         this.x = x;
         this.y = y;
-        
+
         troncons = new LinkedHashMap<>();
     }
 
-
-    public void addTroncon(int id, Troncon troncon){
+    public void addTroncon(int id, Troncon troncon)
+    {
         troncons.put(id, troncon);
     }
-    
-    
-    public int getId() {
+
+    public int getId()
+    {
         return id;
     }
 
-    public int getX() {
+    public int getX()
+    {
         return x;
     }
 
-    public int getY() {
+    public int getY()
+    {
         return y;
     }
-    
-    protected Troncon getTroncon(int cibleId)
+
+    public Troncon getTroncon(int cibleId)
     {
         return troncons.get(cibleId);
     }
-    
+
     protected boolean aLiaison(int cibleId)
     {
         return troncons.keySet().contains(cibleId);
     }
 
     @Override
-    public String toString() {
-        return "Intersection{" +
-                "id=" + id +
-                ", x=" + x +
-                ", y=" + y +
-                ", tronconsSortants=" + troncons +
-                '}';
+    public String toString()
+    {
+        return "Intersection{"
+                + "id=" + id
+                + ", x=" + x
+                + ", y=" + y
+                + ", tronconsSortants=" + troncons
+                + '}';
     }
+
 }
