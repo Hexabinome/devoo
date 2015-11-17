@@ -2,11 +2,10 @@ package modele.xmldata;
 
 /**
  * Represente un livraison a effectuer.
- * 
+ *
  * @author mhaidara / maxou
  */
-public class Livraisons
-{
+public class Livraison {
 
     /**
      * Identifiant de la livraison
@@ -23,25 +22,30 @@ public class Livraisons
      */
     private final int adresse;
 
-    public Livraisons(int id, int clientId, int idIntersection)
-    {
+    public Livraison(int id, int clientId, int idIntersection) {
         this.id = id;
         this.clientId = clientId;
         this.adresse = idIntersection;
     }
 
-    public int getId()
-    {
+    public int getId() {
         return id;
     }
 
-    public int getClientId()
-    {
+    public int getClientId() {
         return clientId;
     }
 
-    public int getAdresse()
-    {
+    public int getAdresse() {
         return adresse;
+    }
+
+    @Override
+    public String toString() {
+        return "Livraison{" +
+                "id=" + id +
+                ", clientId=" + clientId +
+                ", adresse=" + adresse +
+                '}';
     }
 }

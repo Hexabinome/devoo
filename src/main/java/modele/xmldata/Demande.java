@@ -26,4 +26,12 @@ public class Demande {
     public Collection<Fenetre> getFenetres() {
         return Collections.unmodifiableCollection(fenetres);
     }
+
+    @Override
+    public String toString() {
+        return "Demande{" +
+                "entrepot=" + entrepot +
+                ", fenetres=" + fenetres +
+                '}';
+    }
 }

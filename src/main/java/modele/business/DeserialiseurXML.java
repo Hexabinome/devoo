@@ -134,7 +134,7 @@ public class DeserialiseurXML {
 
         Fenetre nouvelleFenetre;
         List<Fenetre> listeFenetre = new ArrayList<>();
-        Livraisons livraison;
+        Livraison livraison;
 
         for (Element elementFenetre : listePlage) {
             System.out.println(elementFenetre);
@@ -157,7 +157,7 @@ public class DeserialiseurXML {
                 int id = elementLivraison.getAttribute("id").getIntValue();
                 int idClient = elementLivraison.getAttribute("client").getIntValue();
                 int idIntersection = elementLivraison.getAttribute("adresse").getIntValue();
-                livraison = new Livraisons(id, idClient, idIntersection);
+                livraison = new Livraison(id, idClient, idIntersection);
 
                 nouvelleFenetre.ajouterLivraison(id, livraison);
             }

@@ -9,8 +9,7 @@ import java.util.Map;
  *
  * @author mhaidara / maxou
  */
-public class Intersection
-{
+public class Intersection {
 
     private final int id;
     private final int x;
@@ -21,8 +20,7 @@ public class Intersection
      */
     private final Map<Integer, Troncon> troncons;
 
-    public Intersection(int id, int x, int y)
-    {
+    public Intersection(int id, int x, int y) {
         this.id = id;
         this.x = x;
         this.y = y;
@@ -30,39 +28,32 @@ public class Intersection
         troncons = new LinkedHashMap<>();
     }
 
-    public void addTroncon(int id, Troncon troncon)
-    {
+    public void addTroncon(int id, Troncon troncon) {
         troncons.put(id, troncon);
     }
 
-    public int getId()
-    {
+    public int getId() {
         return id;
     }
 
-    public int getX()
-    {
+    public int getX() {
         return x;
     }
 
-    public int getY()
-    {
+    public int getY() {
         return y;
     }
 
-    public Troncon getTroncon(int cibleId)
-    {
+    public Troncon getTroncon(int cibleId) {
         return troncons.get(cibleId);
     }
 
-    protected boolean aLiaison(int cibleId)
-    {
+    protected boolean aLiaison(int cibleId) {
         return troncons.keySet().contains(cibleId);
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "Intersection{"
                 + "id=" + id
                 + ", x=" + x

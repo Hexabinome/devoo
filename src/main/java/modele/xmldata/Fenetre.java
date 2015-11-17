@@ -13,7 +13,7 @@ public class Fenetre {
     
     private final int heureDebut;
     private final int heureFin;
-    private final Map<Integer, Livraisons> livraisons;
+    private final Map<Integer, Livraison> livraisons;
     
     public Fenetre(int timestampDebut, int timestampFin) {
         this.heureDebut = timestampDebut;
@@ -35,12 +35,21 @@ public class Fenetre {
         livraisons.remove(livrasionId);
     }
     
-    public void ajouterLivraison(int id, Livraisons livraison)
+    public void ajouterLivraison(int id, Livraison livraison)
     {
         livraisons.put(id, livraison);
     }
 
-    public Map<Integer, Livraisons> getLivraisons() {
+    public Map<Integer, Livraison> getLivraisons() {
         return Collections.unmodifiableMap(livraisons);
+    }
+
+    @Override
+    public String toString() {
+        return "Fenetre{" +
+                "heureDebut=" + heureDebut +
+                ", heureFin=" + heureFin +
+                ", livraisons=" + livraisons +
+                '}';
     }
 }

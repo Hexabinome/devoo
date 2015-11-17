@@ -60,7 +60,6 @@ public class Troncon {
                 ", vitesse=" + vitesse +
                 ", longueur=" + longueur +
                 ", duree=" + duree +
-//                ", idDestination=" + idDestination +
                 '}';
     }
 }
