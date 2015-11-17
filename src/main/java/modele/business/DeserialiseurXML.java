@@ -1,9 +1,6 @@
 package modele.business;
 
-import modele.xmldata.Demande;
-import modele.xmldata.Intersection;
-import modele.xmldata.PlanDeVille;
-import modele.xmldata.Troncon;
+import modele.xmldata.*;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
@@ -18,8 +15,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -40,13 +36,15 @@ public class DeserialiseurXML {
 
 
     /**
-     * Format des heures stockées dans le fichier xml de la demande de livraison
+     * Constructeur privé. Pas besoin d'instancier la classe
      */
-    private static final SimpleDateFormat HEUREFORMAT = new SimpleDateFormat("HH:mm:ss");
+    private DeserialiseurXML() {
+    }
 
     /**
      * Construis le plan de la ville à partir d'un fichier xml.
      *
+     * @param planXML le fichier xml répresentant le plan de la ville.
      * @throws JDOMException Problème survenu lors de du parsing
      * @throws IOException   Problème survenu lors de la lecture du fichier
      * @throws SAXException  Problème survenu lors de la validation par le schéma XSD
@@ -90,13 +88,14 @@ public class DeserialiseurXML {
             }
             planDeVille.addInstersection(intersection);
         }
-        System.out.println(planDeVille);
-        return null;
+        //  System.out.println(planDeVille);
+        return planDeVille;
     }
 
     /**
      * Construis le plan de la ville à partir d'un fichier xml.
      *
+     * @param planXML le fichier xml répresentant le plan de la ville.
      * @throws JDOMException Problème survenu lors de du parsing
      * @throws IOException   Problème survenu lors de la lecture du fichier
      * @throws SAXException  Problème survenu lors de la validation par le schéma XSD
@@ -109,59 +108,79 @@ public class DeserialiseurXML {
     /**
      * Construis le plan des livraisons à partir d'un fichier xml.
      *
+     * @param livraisonXml le fichier xml répresentant la demande de livraison
+     * @param planDeVille  le plan de la ville préalablement chargé
      * @throws JDOMException Problème survenu lors de du parsing
      * @throws IOException   Problème survenu lors de la lecture du fichier
      */
-    public static Demande ouvrirLivraison(InputStream livraisonXml)
+    public static Demande ouvrirLivraison(InputStream livraisonXml, PlanDeVille planDeVille)
             throws SAXException, IOException, JDOMException, ParseException {
 
         Document document = validerFichierXML(XSDLIVRAISON, livraisonXml);
         Element journeeType = document.getRootElement();
-        //entrepot
-        System.out.println("entrepot : " + journeeType.getChild("Entrepot").getAttribute("adresse").getIntValue());
-        //plage horaires
-        Element plageHoraires = journeeType.getChild("PlagesHoraires");
-        //plages
-        List<Element> listePlage = plageHoraires.getChildren("Plage");
 
-        for (Element fenetre : listePlage) {
-            //System.out.println("heure de debut : " + fenetre.getAttributeValue("heureDebut"));
-            //System.out.println("Heure de fin : " + fenetre.getAttributeValue("heureFin"));
-
-            Date dateDebut = HEUREFORMAT.parse(fenetre.getAttributeValue("heureDebut"));
-            Date dateFin = HEUREFORMAT.parse(fenetre.getAttributeValue("heureFin"));
-
-            System.out.println(dateDebut);
-            System.out.println(dateFin);
-
-            //livraisons
-            Element livraisons = fenetre.getChild("Livraisons");
-            //livraison
-            List<Element> listeLivraison = livraisons.getChildren("Livraison");
-            for (Element livraison : listeLivraison) {
-                System.out.println("id : " + livraison.getAttribute("id").getIntValue());
-                System.out.println("client : " + livraison.getAttribute("client").getIntValue());
-                System.out.println("adresse : " + livraison.getAttribute("adresse").getIntValue());
-            }
+        // Récuperation de l'entrepot
+        // System.out.println("entrepot : " + journeeType.getChild("Entrepot").getAttribute("adresse").getIntValue());
+        int idEntrepot = journeeType.getChild("Entrepot").getAttribute("adresse").getIntValue();
+        Intersection intersectionEntrepot = planDeVille.getIntersection(idEntrepot);
+        if (intersectionEntrepot == null) {
+            // TODO : peut etre utilisé une autre exception
+            throw new JDOMException(
+                    "Il semblerait que l'entrepot ne se trouve pas dans la ville. Veuillez vérifier votre fichier");
         }
 
+        // Récuperation des plages ou fenetre
+        List<Element> listePlage = journeeType.getChild("PlagesHoraires").getChildren();
 
-        //TODO return new Demande(...);
-        return null;
+        Fenetre nouvelleFenetre;
+        List<Fenetre> listeFenetre = new ArrayList<>();
+        Livraisons livraison;
+
+        for (Element elementFenetre : listePlage) {
+            System.out.println(elementFenetre);
+            System.out.println("heure de debut : " + elementFenetre.getAttributeValue("heureDebut"));
+            System.out.println("Heure de fin : " + elementFenetre.getAttributeValue("heureFin"));
+
+            int heureDebut = convertirHeureEnSeconde(elementFenetre.getAttributeValue("heureDebut"));
+            int heureFIn = convertirHeureEnSeconde(elementFenetre.getAttributeValue("heureFin"));
+
+            nouvelleFenetre = new Fenetre(heureDebut, heureDebut);
+
+            // Récuperation des livraison
+            List<Element> listeLivraison = elementFenetre.getChild("Livraisons").getChildren();
+
+            for (Element elementLivraison : listeLivraison) {
+               /* System.out.println("id : " + elementLivraison.getAttribute("id").getIntValue());
+                System.out.println("client : " + elementLivraison.getAttribute("client").getIntValue());
+                System.out.println("adresse : " + elementLivraison.getAttribute("adresse").getIntValue()); */
+
+                int id = elementLivraison.getAttribute("id").getIntValue();
+                int idClient = elementLivraison.getAttribute("client").getIntValue();
+                int idIntersection = elementLivraison.getAttribute("adresse").getIntValue();
+                livraison = new Livraisons(id, idClient, idIntersection);
+
+                nouvelleFenetre.ajouterLivraison(id, livraison);
+            }
+
+            listeFenetre.add(nouvelleFenetre);
+        }
+
+        return new Demande(intersectionEntrepot, listeFenetre);
     }
 
     /**
      * Construis le plan des livraisons à partir d'un fichier xml.
      *
+     * @param planDeVille le plan de la ville préalablement chargé
      * @throws JDOMException Problème survenu lors de du parsing
      * @throws IOException   Problème survenu lors de la lecture du fichier
      */
-    public static Demande ouvrirLivraison(
-            File livraisonXml) throws SAXException, IOException, JDOMException, ParseException {
+    public static Demande ouvrirLivraison(File livraisonXml, PlanDeVille planDeVille)
+            throws SAXException, IOException, JDOMException, ParseException {
 
         InputStream inputStream = new FileInputStream(livraisonXml);
 
-        return ouvrirLivraison(inputStream);
+        return ouvrirLivraison(inputStream, planDeVille);
     }
 
     /**
@@ -182,6 +201,22 @@ public class DeserialiseurXML {
         document = saxBuilder.build(fichierXML);
 
         return document;
+    }
+
+    /**
+     * Convertis un String sous la fomre HH:mm:ss en séconde
+     *
+     * @param heureMnSec Chaine de caractère à convertir
+     * @return
+     */
+    private static int convertirHeureEnSeconde(String heureMnSec) {
+        String[] decoupage = heureMnSec.split(":");
+
+        int heure = Integer.parseInt(decoupage[0]);
+        int mn = Integer.parseInt(decoupage[1]);
+        int sec = Integer.parseInt(decoupage[2]);
+
+        return heure * 3600 + mn * 60 + sec;
     }
 
 }
