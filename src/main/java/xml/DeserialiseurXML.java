@@ -82,12 +82,10 @@ public class DeserialiseurXML {
 
                 int idDestination = elementTroncon.getAttribute("idNoeudDestination").getIntValue();
 
-                float duree = longueur / vitesse;
-
-                Troncon tronconSortant = new Troncon(nomRue, vitesse, longueur, duree, idDestination);
+                Troncon tronconSortant = new Troncon(nomRue, vitesse, longueur, idDestination);
 
                 // Ajout du troncon sortant à l'intersection
-                intersection.addTroncon(tronconSortant);
+                intersection.addTroncon(idDestination, tronconSortant);
             }
             planDeVille.addInstersection(intersection);
         }

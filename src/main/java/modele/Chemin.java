@@ -1,6 +1,8 @@
 package modele;
 
-import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -11,18 +13,28 @@ public class Chemin {
     
     private float duree;
     
-    private Livraison depart;
+    //ToDo: check if needed
+    private final Livraison depart;
     
-    private Livraison arrivee;
+    //ToDo: check if needed
+    private final Livraison arrivee;
     
-    private List<Troncon> troncons;
+    //ToDo: check if needed
+    //private final List<Troncon> troncons;
+    
+    //private final List<Intersection> chemin; 
+    private final List<Integer> intersectionIds;
 
-    public Chemin(float duree, Livraison depart, Livraison arrivee) {
-        this.duree = duree;
+    public Chemin(Livraison depart, Livraison arrivee, List<Integer> chemin) {
+        
+        //TODO calculer duree totale
+        duree = 42;
+        
         this.depart = depart;
         this.arrivee = arrivee;
         
-        troncons = new ArrayList<>();
+        //troncons = new ArrayList<>();
+        intersectionIds = new LinkedList<>();
     }
 
     public float getDuree() {
@@ -37,27 +49,11 @@ public class Chemin {
         return depart;
     }
 
-    public void setDepart(Livraison depart) {
-        this.depart = depart;
-    }
-
     public Livraison getArrivee() {
         return arrivee;
     }
 
-    public void setArrivee(Livraison arrivee) {
-        this.arrivee = arrivee;
+    public Collection<Integer> getIntersectionIds() {
+        return Collections.unmodifiableCollection(intersectionIds);
     }
-
-    public List<Troncon> getTroncons() {
-        return troncons;
-    }
-
-    public void setTroncons(List<Troncon> troncons) {
-        this.troncons = troncons;
-    }
-    
-    
-    
-    
 }

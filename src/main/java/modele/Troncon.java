@@ -14,37 +14,38 @@ public class Troncon {
     /**
      * Vitesse moyenne de circulation sur unt tronçon.
      */
-    private float vitesse;
+    private final float vitesse;
 
     /**
      * Longueur du tronçon.
      */
-    private float longueur;
+    private final float longueur;
 
     /**
      * Durée de traversée du tronçon.
      */
-    private float duree;
+    private final float duree;
 
     /**
      * Identifiant de l'intersection de départ du tronçon.
      */
-    private int idDepart;
+    //TODO: CHeck if really needed an d delete if not
+    //private int idDepart;
 
     /**
      * Identifiiant de l'intersection d'arrivée du tronçon.
      */
-    private int idDestination;
+    //private int idDestination;
 
-    public Troncon(String nomRue, float vitesse, float longueur, float duree, int idDestination) {
+    public Troncon(String nomRue, float vitesse, float longueur, int idDestination) {
         this.nomRue = nomRue;
         this.vitesse = vitesse;
         this.longueur = longueur;
-        this.duree = duree;
-        this.idDestination = idDestination;
+        this.duree = longueur / vitesse;
+ //       this.idDestination = idDestination;
     }
 
-    public int getIdDepart() {
+/*    public int getIdDepart() {
         return idDepart;
     }
 
@@ -59,7 +60,7 @@ public class Troncon {
     public void setIdDestination(int idDestination) {
         this.idDestination = idDestination;
     }
-    
+  */  
     
     
     public String getNomRue() {
@@ -74,24 +75,12 @@ public class Troncon {
         return vitesse;
     }
 
-    public void setVitesse(float vitesse) {
-        this.vitesse = vitesse;
-    }
-
     public float getLongueur() {
         return longueur;
     }
 
-    public void setLongueur(float longueur) {
-        this.longueur = longueur;
-    }
-
     public float getDuree() {
         return duree;
-    }
-
-    public void setDuree(float duree) {
-        this.duree = duree;
     }
 
     @Override
@@ -101,7 +90,7 @@ public class Troncon {
                 ", vitesse=" + vitesse +
                 ", longueur=" + longueur +
                 ", duree=" + duree +
-                ", idDestination=" + idDestination +
+//                ", idDestination=" + idDestination +
                 '}';
     }
 }

@@ -1,8 +1,10 @@
 package modele;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  *
@@ -10,42 +12,36 @@ import java.util.List;
  */
 public class Fenetre /*implements Comparable<Fenetre>*/{
     
-    private Date heureDebut;
+    private final int heureDebut;    
+    private final int heureFin;
+    private final Map<Integer, Livraison> livraisons;
     
-    private Date heureFin;
-
-    
-    private List<Livraison> livraisons;
-    
-    public Fenetre(Date heureDebut, Date heureFin) {
-        this.heureDebut = heureDebut;
-        this.heureFin = heureFin;
+    public Fenetre(int timestampDebut, int timestampFin) {
+        this.heureDebut = timestampDebut;
+        this.heureFin = timestampFin;
         
-        livraisons = new ArrayList<>();
+        livraisons = new LinkedHashMap<>();
     }
 
-    public Date getHeureDebut() {
+    public int getTimestampDebut() {
         return heureDebut;
     }
 
-    public void setHeureDebut(Date heureDebut) {
-        this.heureDebut = heureDebut;
-    }
-
-    public Date getHeureFin() {
+    public int getTimestampFin() {
         return heureFin;
     }
-
-    public void setHeureFin(Date heureFin) {
-        this.heureFin = heureFin;
+    
+    protected void effacerLivraison(int livrasionId)
+    {
+        livraisons.remove(livrasionId);
+    }
+    
+    public void ajouterLivraison(int id, Livraison livraison)
+    {
+        livraisons.put(id, livraison);
     }
 
-    public List<Livraison> getLivraisons() {
-        return livraisons;
+    public Map<Integer, Livraison> getLivraisons() {
+        return Collections.unmodifiableMap(livraisons);
     }
-
-    public void setLivraisons(List<Livraison> livraisons) {
-        this.livraisons = livraisons;
-    }
-
 }

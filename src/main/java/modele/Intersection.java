@@ -1,7 +1,9 @@
 package modele;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -15,21 +17,22 @@ public class Intersection {
     
     private int y;
     
-    private List<Troncon> tronconsSortants;
+    /**
+     * On stoque chaque troncon sortant, par l'id de sa cible dans un map.
+     */
+    private Map<Integer, Troncon> troncons;
     
-    //private List<Troncon> tronconsEntrants;
-
     public Intersection(int id, int x, int y) {
         this.id = id;
         this.x = x;
         this.y = y;
         
-        tronconsSortants = new ArrayList<>();
+        troncons = new LinkedHashMap<>();
     }
 
 
-    public void addTroncon(Troncon troncon){
-        tronconsSortants.add(troncon);
+    public void addTroncon(int id, Troncon troncon){
+        troncons.put(id, troncon);
     }
     
     
@@ -63,7 +66,7 @@ public class Intersection {
                 "id=" + id +
                 ", x=" + x +
                 ", y=" + y +
-                ", tronconsSortants=" + tronconsSortants +
+                ", tronconsSortants=" + troncons +
                 '}';
     }
 }
