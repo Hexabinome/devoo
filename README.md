@@ -1,5 +1,7 @@
 #Devoo : OptimodLyon
 
+[![Build Status](https://travis-ci.org/Hexabinome/devoo.svg?branch=master)](https://travis-ci.org/Hexabinome/devoo)
+
 ## Configuration
 Le projet étant désormais un projet Maven, il suffit de l'importer dans n'importe quel IDE. Il ne devrait pas avoir de 
 soucis. Si vous incluez des librairies plus tard ajoutez-les comme **dépendances Maven**.
