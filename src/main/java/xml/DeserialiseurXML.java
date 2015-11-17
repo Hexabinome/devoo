@@ -16,6 +16,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -26,11 +29,19 @@ import java.util.List;
  */
 public class DeserialiseurXML {
 
+    /**
+     * XML schema definition pour la validation des entrées en XML
+     */
     private static final String fichierValidationPlan = ClassLoader.getSystemClassLoader()
             .getResource("xsd/validateurPlan.xsd").getPath();
     private static final String fichierValidationLivraisons = ClassLoader.getSystemClassLoader()
             .getResource("xsd/validateurLivraisons.xsd").getPath();
 
+
+    /**
+     * Format des heures stockées dans le fichier xml de la demande de livraison
+     */
+    private static final SimpleDateFormat HEUREFORMAT = new SimpleDateFormat("HH:mm:ss");
 
     /**
      * Construis le plan de la ville à partir d'un fichier xml.
@@ -102,23 +113,29 @@ public class DeserialiseurXML {
      * @throws JDOMException Problème survenu lors de du parsing
      * @throws IOException   Problème survenu lors de la lecture du fichier
      */
-    public static Demande ouvrirLivraison(InputStream livraisonXml) throws SAXException, IOException, JDOMException {
+    public static Demande ouvrirLivraison(InputStream livraisonXml) throws SAXException, IOException, JDOMException, ParseException {
 
         Document document = validerFichierXML(fichierValidationLivraisons, livraisonXml);
         Element journeeType = document.getRootElement();
         //entrepot
-        System.out.println("entrepot" + journeeType.getChild("Entrepot").getAttribute("adresse").getIntValue());
+        System.out.println("entrepot : " + journeeType.getChild("Entrepot").getAttribute("adresse").getIntValue());
         //plage horaires
         Element plageHoraires = journeeType.getChild("PlagesHoraires");
         //plages
         List<Element> listePlage = plageHoraires.getChildren("Plage");
 
-        for (Element plage : listePlage) {
-            // TODO : utilise le format d'heure
-              System.out.println("heure de debut : " + plage.getAttributeValue("heureDebut"));
-              System.out.println("Heure de fin : " + plage.getAttribute("heureFin"));
+        for (Element fenetre : listePlage) {
+            //System.out.println("heure de debut : " + fenetre.getAttributeValue("heureDebut"));
+            //System.out.println("Heure de fin : " + fenetre.getAttributeValue("heureFin"));
+
+            Date dateDebut   = HEUREFORMAT.parse(fenetre.getAttributeValue("heureDebut"));
+            Date dateFin = HEUREFORMAT.parse(fenetre.getAttributeValue("heureFin"));
+
+            System.out.println(dateDebut);
+            System.out.println(dateFin);
+
             //livraisons
-            Element livraisons = plage.getChild("Livraisons");
+            Element livraisons = fenetre.getChild("Livraisons");
             //livraison
             List<Element> listeLivraison = livraisons.getChildren("Livraison");
             for (Element livraison : listeLivraison) {
@@ -139,7 +156,7 @@ public class DeserialiseurXML {
      * @throws JDOMException Problème survenu lors de du parsing
      * @throws IOException   Problème survenu lors de la lecture du fichier
      */
-    public static Demande ouvrirLivraison(File livraisonXml) throws SAXException, IOException, JDOMException {
+    public static Demande ouvrirLivraison(File livraisonXml) throws SAXException, IOException, JDOMException, ParseException {
 
         InputStream inputStream = new FileInputStream(livraisonXml);
 

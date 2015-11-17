@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Demande de livraison
- * @author mhaidara
+ * Demande de livraison chargé à partir d'un fichier XML
+ * @author Mohamed El Mouctar HAIDARA
  */
 public class Demande {
     

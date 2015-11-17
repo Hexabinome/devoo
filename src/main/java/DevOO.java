@@ -10,6 +10,7 @@ import xml.DeserialiseurXML;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.text.ParseException;
 
 /**
  * Point d'entrée de l'application
@@ -25,11 +26,14 @@ public class DevOO extends Application {
         //launch(args);
         ClassLoader classLoader = ClassLoader.getSystemClassLoader();
         try {
-            DeserialiseurXML.ouvrirPlanDeVille(new File(classLoader.getResource("samples/plan20x20.xml").toURI()));
+            DeserialiseurXML.ouvrirLivraison(new File(classLoader.getResource("samples/livraison10x10-1.xml").toURI()));
         } catch (SAXException | IOException | URISyntaxException e) {
             e.printStackTrace();
         } catch (JDOMException e) {
             System.err.println("Pas valide car : ");
+            e.printStackTrace();
+        } catch (ParseException e) {
+            System.err.println("Probleme lors du parsing de l'heure");
             e.printStackTrace();
         }
 
