@@ -1,15 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package modele;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Demande de livraison chargé à partir d'un fichier XML
+ * Demande de livraison charge a partir d'un fichier XML
  * @author Mohamed El Mouctar HAIDARA
  */
 public class Demande {
