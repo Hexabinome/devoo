@@ -26,8 +26,8 @@ public class DevOO extends Application {
         //launch(args);
         ClassLoader classLoader = ClassLoader.getSystemClassLoader();
         try {
-            DeserialiseurXML.ouvrirLivraison(new File(classLoader.getResource("samples/livraison10x10-1.xml").toURI()));
-        } catch (SAXException | IOException | URISyntaxException e) {
+            DeserialiseurXML.ouvrirLivraison(classLoader.getResourceAsStream("samples/livraison10x10-1.xml"));
+        } catch (SAXException | IOException  e) {
             e.printStackTrace();
         } catch (JDOMException e) {
             System.err.println("Pas valide car : ");

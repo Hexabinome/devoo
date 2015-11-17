@@ -12,6 +12,7 @@ import org.jdom2.input.sax.XMLReaderJDOMFactory;
 import org.jdom2.input.sax.XMLReaderXSDFactory;
 import org.xml.sax.SAXException;
 
+import javax.xml.transform.stream.StreamSource;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -30,12 +31,12 @@ import java.util.List;
 public class DeserialiseurXML {
 
     /**
-     * XML schema definition pour la validation des entrées en XML
+     * XML schema definition pour la validation des entrées en XML.
+     * On récupère les fichiers comme InputStream dans les ressources ainsi en packageant il n'y aura pas de soucis.
      */
-    private static final String fichierValidationPlan = ClassLoader.getSystemClassLoader()
-            .getResource("xsd/validateurPlan.xsd").getPath();
-    private static final String fichierValidationLivraisons = ClassLoader.getSystemClassLoader()
-            .getResource("xsd/validateurLivraisons.xsd").getPath();
+    private static final InputStream XSDPLAN = ClassLoader.getSystemResourceAsStream("xsd/validateurPlan.xsd");
+    private static final InputStream XSDLIVRAISON = ClassLoader.getSystemResourceAsStream(
+            "xsd/validateurLivraisons.xsd");
 
 
     /**
@@ -51,7 +52,7 @@ public class DeserialiseurXML {
      * @throws SAXException  Problème survenu lors de la validation par le schéma XSD
      */
     public static PlanDeVille ouvrirPlanDeVille(InputStream planXML) throws JDOMException, IOException, SAXException {
-        Document document = validerFichierXML(fichierValidationPlan, planXML);
+        Document document = validerFichierXML(XSDPLAN, planXML);
         // System.out.println(fichierValidationLivraisons);
         PlanDeVille planDeVille = new PlanDeVille();
 
@@ -111,9 +112,10 @@ public class DeserialiseurXML {
      * @throws JDOMException Problème survenu lors de du parsing
      * @throws IOException   Problème survenu lors de la lecture du fichier
      */
-    public static Demande ouvrirLivraison(InputStream livraisonXml) throws SAXException, IOException, JDOMException, ParseException {
+    public static Demande ouvrirLivraison(InputStream livraisonXml)
+            throws SAXException, IOException, JDOMException, ParseException {
 
-        Document document = validerFichierXML(fichierValidationLivraisons, livraisonXml);
+        Document document = validerFichierXML(XSDLIVRAISON, livraisonXml);
         Element journeeType = document.getRootElement();
         //entrepot
         System.out.println("entrepot : " + journeeType.getChild("Entrepot").getAttribute("adresse").getIntValue());
@@ -126,7 +128,7 @@ public class DeserialiseurXML {
             //System.out.println("heure de debut : " + fenetre.getAttributeValue("heureDebut"));
             //System.out.println("Heure de fin : " + fenetre.getAttributeValue("heureFin"));
 
-            Date dateDebut   = HEUREFORMAT.parse(fenetre.getAttributeValue("heureDebut"));
+            Date dateDebut = HEUREFORMAT.parse(fenetre.getAttributeValue("heureDebut"));
             Date dateFin = HEUREFORMAT.parse(fenetre.getAttributeValue("heureFin"));
 
             System.out.println(dateDebut);
@@ -154,7 +156,8 @@ public class DeserialiseurXML {
      * @throws JDOMException Problème survenu lors de du parsing
      * @throws IOException   Problème survenu lors de la lecture du fichier
      */
-    public static Demande ouvrirLivraison(File livraisonXml) throws SAXException, IOException, JDOMException, ParseException {
+    public static Demande ouvrirLivraison(
+            File livraisonXml) throws SAXException, IOException, JDOMException, ParseException {
 
         InputStream inputStream = new FileInputStream(livraisonXml);
 
@@ -164,19 +167,17 @@ public class DeserialiseurXML {
     /**
      * Valide un fichier XML avec le fichier XSD fourni.
      *
-     * @param nomFichierXSD Le schéma XSD à utiliser.
-     * @param fichierXML    Le fichier XML à valider.
+     * @param xsdStream  Le schéma XSD à utiliser.
+     * @param fichierXML Le fichier XML à valider.
      * @return Renvoie le document correspondant si la validation est effective.
      * @throws JDOMException Si la validation du XML a échoué.
      * @throws IOException   S'il y a eu une erreur de lecture.
      */
-    private static Document validerFichierXML(String nomFichierXSD, InputStream fichierXML)
+    private static Document validerFichierXML(InputStream xsdStream, InputStream fichierXML)
             throws JDOMException, IOException {
 
-        File fichierXSD = new File(nomFichierXSD);
         Document document = null;
-
-        XMLReaderJDOMFactory factory = new XMLReaderXSDFactory(fichierXSD);
+        XMLReaderJDOMFactory factory = new XMLReaderXSDFactory(new StreamSource(xsdStream));
         SAXBuilder saxBuilder = new SAXBuilder(factory);
         document = saxBuilder.build(fichierXML);
 
