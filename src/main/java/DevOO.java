@@ -3,6 +3,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import modele.xmldata.PlanDeVille;
 import org.jdom2.JDOMException;
 import org.xml.sax.SAXException;
 import modele.business.DeserialiseurXML;
@@ -26,7 +27,8 @@ public class DevOO extends Application {
         //launch(args);
         ClassLoader classLoader = ClassLoader.getSystemClassLoader();
         try {
-            DeserialiseurXML.ouvrirLivraison(classLoader.getResourceAsStream("samples/livraison10x10-1.xml"));
+            PlanDeVille planDeVille = DeserialiseurXML.ouvrirPlanDeVille(classLoader.getResourceAsStream("samples/plan10x10.xml"));
+            DeserialiseurXML.ouvrirLivraison(classLoader.getResourceAsStream("samples/livraison10x10-1.xml"),planDeVille);
         } catch (SAXException | IOException  e) {
             e.printStackTrace();
         } catch (JDOMException e) {
