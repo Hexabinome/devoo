@@ -1,4 +1,4 @@
-package xml;
+package modele.business;
 
 /**
  * Permet de sérialiser des objets notament la feuille de route

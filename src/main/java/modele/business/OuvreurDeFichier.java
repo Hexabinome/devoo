@@ -1,5 +1,5 @@
 
-package xml;
+package modele.business;
 
 import org.jdom2.input.SAXBuilder;
 

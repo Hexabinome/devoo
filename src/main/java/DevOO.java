@@ -5,7 +5,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.jdom2.JDOMException;
 import org.xml.sax.SAXException;
-import xml.DeserialiseurXML;
+import modele.business.DeserialiseurXML;
 
 import java.io.File;
 import java.io.IOException;

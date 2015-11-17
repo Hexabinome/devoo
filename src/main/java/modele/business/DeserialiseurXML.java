@@ -1,9 +1,9 @@
-package xml;
+package modele.business;
 
-import modele.Demande;
-import modele.Intersection;
-import modele.PlanDeVille;
-import modele.Troncon;
+import modele.core.Demande;
+import modele.core.Intersection;
+import modele.core.PlanDeVille;
+import modele.core.Troncon;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
