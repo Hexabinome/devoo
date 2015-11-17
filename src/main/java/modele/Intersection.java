@@ -1,8 +1,6 @@
 package modele;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -11,11 +9,9 @@ import java.util.Map;
  */
 public class Intersection {
     
-    private int id;
-    
-    private int x;
-    
-    private int y;
+    private final int id;
+    private final int x;
+    private final int y;
     
     /**
      * On stoque chaque troncon sortant, par l'id de sa cible dans un map.
@@ -40,24 +36,17 @@ public class Intersection {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public int getX() {
         return x;
-    }
-
-    public void setX(int x) {
-        this.x = x;
     }
 
     public int getY() {
         return y;
     }
-
-    public void setY(int y) {
-        this.y = y;
+    
+    protected Troncon getTroncon(int cibleId)
+    {
+        return troncons.get(cibleId);
     }
 
     @Override

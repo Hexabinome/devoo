@@ -2,6 +2,7 @@ package modele;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -19,22 +20,17 @@ public class Chemin {
     //ToDo: check if needed
     private final Livraison arrivee;
     
-    //ToDo: check if needed
-    //private final List<Troncon> troncons;
-    
     //private final List<Intersection> chemin; 
-    private final List<Integer> intersectionIds;
+    private final List<Intersection> intersections;
 
-    public Chemin(Livraison depart, Livraison arrivee, List<Integer> chemin) {
+    public Chemin(Livraison depart, Livraison arrivee, List<Intersection> stations) {
         
-        //TODO calculer duree totale
-        duree = 42;
+        duree = calculerDureeTotale(stations);
         
         this.depart = depart;
         this.arrivee = arrivee;
         
-        //troncons = new ArrayList<>();
-        intersectionIds = new LinkedList<>();
+        intersections = new LinkedList<>();
     }
 
     public float getDuree() {
@@ -53,7 +49,31 @@ public class Chemin {
         return arrivee;
     }
 
-    public Collection<Integer> getIntersectionIds() {
-        return Collections.unmodifiableCollection(intersectionIds);
+    public Collection<Intersection> getIntersectionIds() {
+        return Collections.unmodifiableCollection(intersections);
+    }
+    
+    /**
+     * Sommation des durees de toutes les troncons sur le chemin.
+     * 
+     * @param chemin
+     * @return 
+     */
+    private static int calculerDureeTotale(List<Intersection> chemin)
+    {
+        int resultat = 0;
+    
+        Iterator<Intersection> iter = chemin.iterator();
+        Intersection depart;
+        Intersection cible = iter.next();
+        
+        while(iter.hasNext())
+        {
+            depart = cible;
+            cible = iter.next();
+            resultat += depart.getTroncon(cible.getId()).getDuree();
+        }
+     
+        return resultat;
     }
 }
