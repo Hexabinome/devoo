@@ -5,9 +5,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TreeTableView;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import modele.xmldata.Fenetre;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -24,16 +24,8 @@ public class RootLayout implements Initializable {
     @FXML
     private TreeTableView<Fenetre> tableViewFenetre;
 
-    /**
-     * Reférence vers la fenêtre principale de l'application
-     */
-    private Stage primaryStage;
 
     public RootLayout() {
-    }
-
-    public RootLayout(Stage primaryStage) {
-        this.primaryStage = primaryStage;
     }
 
     /**
@@ -41,7 +33,7 @@ public class RootLayout implements Initializable {
      */
     @FXML
     private void ouvrirPlan(ActionEvent actionEvent) {
-        ouvrirFileSelectionneur();
+        ouvrirSelectionneurDeFichier();
 
     }
 
@@ -50,7 +42,7 @@ public class RootLayout implements Initializable {
      */
     @FXML
     private void ouvrirDemande(ActionEvent actionEvent) {
-
+        ouvrirSelectionneurDeFichier();
     }
 
     @Override
@@ -59,9 +51,19 @@ public class RootLayout implements Initializable {
 
     }
 
-    private void ouvrirFileSelectionneur() {
+    /**
+     * Ouvre une boite de dialogue pour choisir un fichier
+     * http://stackoverflow.com/questions/25491732/how-do-i-open-the-javafx-filechooser-from-a-controller-class
+     */
+    private File ouvrirSelectionneurDeFichier() {
         FileChooser fileChooser = new FileChooser();
+        //  Filtrage de l'extension
+        FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("Fichier xml (*.xml)","*.xml");
+        fileChooser.getExtensionFilters().add(extensionFilter);
 
-        fileChooser.showOpenDialog(primaryStage);
+        // Affichage de la boite de dialogque + récuperation du fichier choisi
+        File file = fileChooser.showOpenDialog(tableViewFenetre.getScene().getWindow());
+
+        return file;
     }
 }

@@ -3,15 +3,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import modele.persistence.DeserialiseurXML;
 import modele.xmldata.PlanDeVille;
 import org.jdom2.JDOMException;
 import org.xml.sax.SAXException;
-import modele.persistence.DeserialiseurXML;
-import vue.RootLayout;
 
-import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.text.ParseException;
 
 /**
@@ -28,9 +25,11 @@ public class DevOO extends Application {
         launch(args);
         ClassLoader classLoader = ClassLoader.getSystemClassLoader();
         try {
-            PlanDeVille planDeVille = DeserialiseurXML.ouvrirPlanDeVille(classLoader.getResourceAsStream("samples/plan10x10.xml"));
-            DeserialiseurXML.ouvrirLivraison(classLoader.getResourceAsStream("samples/livraison10x10-1.xml"),planDeVille);
-        } catch (SAXException | IOException  e) {
+            PlanDeVille planDeVille = DeserialiseurXML.ouvrirPlanDeVille(
+                    classLoader.getResourceAsStream("samples/plan10x10.xml"));
+            DeserialiseurXML.ouvrirLivraison(classLoader.getResourceAsStream("samples/livraison10x10-1.xml"),
+                    planDeVille);
+        } catch (SAXException | IOException e) {
             e.printStackTrace();
         } catch (JDOMException e) {
             System.err.println("Pas valide car : ");
@@ -46,7 +45,6 @@ public class DevOO extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setController(new RootLayout(primaryStage));
         Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("fxml/RootLayout.fxml"));
 
         primaryStage.setTitle("OptimodLyon");
