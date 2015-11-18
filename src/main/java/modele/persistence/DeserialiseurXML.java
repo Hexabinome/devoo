@@ -36,7 +36,7 @@ public class DeserialiseurXML {
 
 
     /**
-     * Constructeur privé. Pas besoin d'instancier la classe
+     * Constructeur privé. Pas besoin d'instancier la class
      */
     private DeserialiseurXML() {
     }

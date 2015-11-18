@@ -13,21 +13,18 @@ import java.util.Map;
  *
  * @author Mohamed El Mouctar HAIDARA / maxou
  */
-public class PlanDeVille
-{
+public class PlanDeVille {
 
     /**
      * Répresente l'ensemble des intersections du plan sous la forme d'une MAP
      */
     private final Map<Integer, Intersection> intersections;
 
-    public PlanDeVille()
-    {
+    public PlanDeVille() {
         intersections = new HashMap<>();
     }
 
-    public PlanDeVille(Map<Integer, Intersection> intersections)
-    {
+    public PlanDeVille(Map<Integer, Intersection> intersections) {
         this.intersections = intersections;
     }
 
@@ -36,27 +33,23 @@ public class PlanDeVille
      *
      * @param intersection L'intersection à ajouter
      */
-    public void addInstersection(Intersection intersection)
-    {
+    public void addInstersection(Intersection intersection) {
         intersections.put(intersection.getId(), intersection);
     }
 
     /**
      * Récupère l'intersection correspondant à l'id passé en paramètre
      */
-    public Intersection getIntersection(int id)
-    {
+    public Intersection getIntersection(int id) {
         return intersections.get(id);
     }
 
-    public Map<Integer, Intersection> getIntersections()
-    {
+    public Map<Integer, Intersection> getIntersections() {
         return Collections.unmodifiableMap(intersections);
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "PlanDeVille{"
                 + "intersections=" + intersections
                 + "}";

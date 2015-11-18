@@ -1,7 +1,13 @@
 package controleur;
 
+import modele.persistence.ChargerXML;
+import modele.persistence.OuvreurDeFichierXML;
 import modele.xmldata.Model;
 import modele.xmldata.PlanDeVille;
+import org.jdom2.JDOMException;
+import org.xml.sax.SAXException;
+
+import java.io.IOException;
 
 /**
  *
@@ -24,7 +30,18 @@ class EtatInitial extends AbstractEtat {
     @Override
     public PlanDeVille chargerPlan(String chemin)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        PlanDeVille planDeVille = null;
+        try {
+           planDeVille = ChargerXML.chargePlanDeVille();
+        } catch (JDOMException e) {
+            e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return planDeVille;
     }
 
     @Override
