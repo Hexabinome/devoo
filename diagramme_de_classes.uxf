@@ -129,7 +129,7 @@ bg=red
 --
 etat:Etat
 model:Model
-desactivablesElements:Collection&lt;desactObserver&gt;
+desactivablesElements:Collection&lt;DesactObserver&gt;
 --
 +ajouterDesactObserver():void
 +ajouterModelObserver():void
@@ -389,7 +389,7 @@ bg=red
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>1784</x>
-      <y>344</y>
+      <y>224</y>
       <w>104</w>
       <h>40</h>
     </coordinates>
@@ -698,7 +698,9 @@ bg=red
 --
 
 //notifies on state change
-+notify(active:boolean):void</panel_attributes>
++notify(active:boolean):void
+
+//certaines elements graphices doivent implementer ca</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -1321,7 +1323,7 @@ bg=orange
       <h>184</h>
     </coordinates>
     <panel_attributes>&lt;ControleurInterface&gt;
-bg=red
+bg=green
 --
 +ajouterDesactObserver():void
 +ajouterModelObserver():void
@@ -1359,5 +1361,37 @@ bg=red
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;</panel_attributes>
     <additional_attributes>40;24;40;48;360;48;360;248;24;248;24;280</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>1872</x>
+      <y>160</y>
+      <w>240</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>&lt;EtatInterface&gt;
+bg=red
+--
+//classes are abstract, if and only if there are multiple but not all classes which must implement a certain functionailty
+/+initialiser(model:Model):void/
+/+cliqueSurPlan(model:Model):void/
+/+cliqueSurListItem(item1, item2):void/
++cliqueAnnuler():boolean
++cliqueRetablir():boolean
+/+chargerPlan(chemin:String):Model/
++chargerLivraisons(chemin:String):void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>1968</x>
+      <y>256</y>
+      <w>40</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>24;24;24;48</additional_attributes>
   </element>
 </diagram>
