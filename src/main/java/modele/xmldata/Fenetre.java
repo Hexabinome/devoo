@@ -1,7 +1,9 @@
 package modele.xmldata;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -52,4 +54,25 @@ public class Fenetre {
                 ", livraisons=" + livraisons +
                 '}';
     }
+
+	public void calculerChemins(PlanDeVille plan, GrapheRealisation graphe) {
+		for(Map.Entry<Integer, Livraison> livraison : livraisons.entrySet())
+		{
+			//Récupération de l'intersection de la livraison
+			Intersection intersection = plan.getIntersection(livraison.getKey());
+			
+			for(Chemin chemin : dijkstra(intersection))
+			{
+				graphe.setChemin(chemin);
+			}
+		}
+	}
+	
+	private List<Chemin> dijkstra(Intersection intersectionDepart)
+	{
+		//TODO appel du dijkstra récursif.
+		//récupérer la liste des chemin 
+		
+		return null;
+	}
 }

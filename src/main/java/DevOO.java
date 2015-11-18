@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import modele.persistence.DeserialiseurXML;
+import modele.xmldata.Chemin;
 import modele.xmldata.PlanDeVille;
 import org.jdom2.JDOMException;
 import org.xml.sax.SAXException;
@@ -12,6 +13,7 @@ import vue.RootLayout;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.ArrayList;
 
 /**
  * Point d'entrée de l'application
@@ -40,7 +42,6 @@ public class DevOO extends Application {
             System.err.println("Probleme lors du parsing de l'heure");
             e.printStackTrace();
         }
-
     }
 
 

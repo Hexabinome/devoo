@@ -18,4 +18,5 @@ public interface ModelLecture
 
     public Demande getDemande();
 
+	public void calculerTournee();
 }

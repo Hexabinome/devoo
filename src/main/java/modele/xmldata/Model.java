@@ -40,4 +40,9 @@ public class Model implements ModelLecture
         return demande;
     }
 
+	@Override
+	public void calculerTournee() {
+		demande.creerGraphe(plan);
+	}
+
 }

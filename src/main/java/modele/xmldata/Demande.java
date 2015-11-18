@@ -34,4 +34,15 @@ public class Demande {
                 ", fenetres=" + fenetres +
                 '}';
     }
+
+	public GrapheRealisation creerGraphe(PlanDeVille plan) {
+		GrapheRealisation graphe = new GrapheRealisation(plan.getIntersections().size());
+		
+		for(Fenetre fenetre : fenetres)	
+		{
+			fenetre.calculerChemins(plan, graphe);
+		}
+		
+		return graphe;
+	}
 }
