@@ -1,10 +1,12 @@
 package vue;
 
+import controleur.ControleurInterface;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TreeTableView;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import modele.xmldata.Fenetre;
 
 import java.io.File;
@@ -24,6 +26,15 @@ public class RootLayout implements Initializable {
     @FXML
     private TreeTableView<Fenetre> tableViewFenetre;
 
+
+    /**
+     * Controleur à appeler en cas de besoin
+     */
+    ControleurInterface controleurInterface;
+
+    public void setControleurInterface(ControleurInterface controleurInterface) {
+        this.controleurInterface = controleurInterface;
+    }
 
     public RootLayout() {
     }

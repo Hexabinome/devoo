@@ -1,12 +1,14 @@
+import controleur.Controleur;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import modele.persistence.DeserialiseurXML;
 import modele.xmldata.PlanDeVille;
 import org.jdom2.JDOMException;
 import org.xml.sax.SAXException;
+import vue.RootLayout;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -44,11 +46,14 @@ public class DevOO extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("fxml/RootLayout.fxml"));
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/RootLayout.fxml"));
+        BorderPane rootPane = fxmlLoader.load();
+        RootLayout rootLayout = fxmlLoader.<RootLayout>getController();
+        rootLayout.setControleurInterface(new Controleur());
 
         primaryStage.setTitle("OptimodLyon");
-        primaryStage.setScene(new Scene(root, 1000, 668));
+        primaryStage.setScene(new Scene(rootPane, 1000, 668));
         primaryStage.setMinWidth(1000);
         primaryStage.setMinHeight(668);
         primaryStage.show();
