@@ -4,6 +4,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TreeTableView;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import modele.xmldata.Fenetre;
 
 import java.net.URL;
@@ -22,25 +24,44 @@ public class RootLayout implements Initializable {
     @FXML
     private TreeTableView<Fenetre> tableViewFenetre;
 
+    /**
+     * Reférence vers la fenêtre principale de l'application
+     */
+    private Stage primaryStage;
+
+    public RootLayout() {
+    }
+
+    public RootLayout(Stage primaryStage) {
+        this.primaryStage = primaryStage;
+    }
 
     /**
      * Ecouteur pour ouvrir le plan
      */
     @FXML
-    private void ouvrirPlan(ActionEvent actionEvent){
-        System.out.printf("plan ouvert");
+    private void ouvrirPlan(ActionEvent actionEvent) {
+        ouvrirFileSelectionneur();
+
     }
 
     /**
      * Ecouteur pour la demande de livraison
      */
     @FXML
-    private void ouvrirDemande(ActionEvent actionEvent){
+    private void ouvrirDemande(ActionEvent actionEvent) {
 
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //resources.
 
+    }
+
+    private void ouvrirFileSelectionneur() {
+        FileChooser fileChooser = new FileChooser();
+
+        fileChooser.showOpenDialog(primaryStage);
     }
 }

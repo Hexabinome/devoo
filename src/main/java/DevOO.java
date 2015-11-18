@@ -7,6 +7,7 @@ import modele.xmldata.PlanDeVille;
 import org.jdom2.JDOMException;
 import org.xml.sax.SAXException;
 import modele.persistence.DeserialiseurXML;
+import vue.RootLayout;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,7 +25,7 @@ public class DevOO extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        //launch(args);
+        launch(args);
         ClassLoader classLoader = ClassLoader.getSystemClassLoader();
         try {
             PlanDeVille planDeVille = DeserialiseurXML.ouvrirPlanDeVille(classLoader.getResourceAsStream("samples/plan10x10.xml"));
@@ -44,8 +45,10 @@ public class DevOO extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setController(new RootLayout(primaryStage));
+        Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("fxml/RootLayout.fxml"));
 
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/RootLayout.fxml"));
         primaryStage.setTitle("OptimodLyon");
         primaryStage.setScene(new Scene(root, 1000, 668));
         primaryStage.setMinWidth(1000);
