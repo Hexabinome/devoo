@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 import modele.xmldata.Model;
 import modele.xmldata.ModelLecture;
+import modele.xmldata.PlanDeVille;
 
 /**
  * Implements controller interface. Primary entry point for all interaction with
@@ -25,6 +26,8 @@ public class Controleur implements ControleurInterface
 
     //some gui elements need to be notified when the model changes
     private final Collection<ModelObserver> modelObserverList;
+    
+    private PlanDeVille plan;
 
     public Controleur()
     {
@@ -56,18 +59,19 @@ public class Controleur implements ControleurInterface
     @Override
     public boolean cliqueRetablir()
     {
-        throw new RuntimeException("Not a core feature -> not yet supported");
+        return currentEtat.cliqueRetablir();
     }
 
     @Override
     public void chargerPlan(String chemin)
-    {
-
+    {        
+        plan = currentEtat.chargerPlan(chemin);
     }
 
     @Override
     public void chargerLivraisons(String chemin)
     {
+        currentEtat.chargerLivraisons(chemin, plan);
     }
 
     @Override
@@ -93,7 +97,7 @@ public class Controleur implements ControleurInterface
     {
         if(model == null)
         {
-            throw new RuntimeException("Model n;existe pas, il faut charger des fichiers xml avant");
+            throw new RuntimeException("Model n'existe pas, il faut charger des fichiers xml avant");
         }
         return model;
     }

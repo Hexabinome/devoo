@@ -1,6 +1,7 @@
 package controleur;
 
 import modele.xmldata.Model;
+import modele.xmldata.PlanDeVille;
 
 /**
  *
@@ -21,13 +22,13 @@ class EtatInitial extends AbstractEtat {
     }
 
     @Override
-    public Model chargerPlan(String chemin)
+    public PlanDeVille chargerPlan(String chemin)
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void chargerLivraisons(String chemin, Model model)
+    public Model chargerLivraisons(String chemin, PlanDeVille model)
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

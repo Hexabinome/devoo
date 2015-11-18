@@ -6,6 +6,7 @@
 package controleur;
 
 import modele.xmldata.Model;
+import modele.xmldata.PlanDeVille;
 
 /**
  *
@@ -21,7 +22,7 @@ public interface EtatInterface
 
     public boolean cliqueRetablir();
 
-    public Model chargerPlan(String chemin);
+    public PlanDeVille chargerPlan(String chemin);
 
-    public void chargerLivraisons(String chemin, Model model);
+    public Model chargerLivraisons(String chemin, PlanDeVille plan);
 }
