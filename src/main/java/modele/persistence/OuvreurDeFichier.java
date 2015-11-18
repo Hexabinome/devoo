@@ -1,5 +1,5 @@
 
-package modele.business;
+package modele.persistence;
 
 import org.jdom2.input.SAXBuilder;
 
