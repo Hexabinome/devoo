@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+     X:10 20 40 80
+   Y: _______________
+   15  | 0| 1| 2| 3|
+   30  | 4| 5| 6| 7|
+   60  | 8| 9|10|11|
+  120  |12|13|14|15|
+ -->
+<Reseau>
+    <Noeud id="0" x="10" y="15">
+        <LeTronconSortant nomRue="v0" vitesse="3,900000" longueur="100" idNoeudDestination="1"/>
+        <LeTronconSortant nomRue="h0" vitesse="4,200000" longueur="150" idNoeudDestination="4"/>
+    </Noeud>
+    <Noeud id="1" x="20" y="15">
+        <LeTronconSortant nomRue="v0" vitesse="4,100000" longueur="100" idNoeudDestination="0"/>
+        <LeTronconSortant nomRue="v0" vitesse="3,800000" longueur="200" idNoeudDestination="2"/>
+        <LeTronconSortant nomRue="h1" vitesse="4,000000" longueur="150" idNoeudDestination="5"/>
+    </Noeud>
+    <Noeud id="2" x="40" y="15">
+        <LeTronconSortant nomRue="v0" vitesse="4,100000" longueur="200" idNoeudDestination="1"/>
+        <LeTronconSortant nomRue="v0" vitesse="3,800000" longueur="400" idNoeudDestination="3"/>
+        <LeTronconSortant nomRue="h1" vitesse="4,000000" longueur="150" idNoeudDestination="6"/>
+    </Noeud>
+    <Noeud id="3" x="80" y="15">
+        <LeTronconSortant nomRue="v0" vitesse="4,100000" longueur="400" idNoeudDestination="2"/>
+        <LeTronconSortant nomRue="v0" vitesse="3,800000" longueur="150" idNoeudDestination="7"/>
+    </Noeud>
+    <Noeud id="4" x="10" y="30">
+        <LeTronconSortant nomRue="v0" vitesse="4,100000" longueur="150" idNoeudDestination="0"/>
+        <LeTronconSortant nomRue="v0" vitesse="3,800000" longueur="100" idNoeudDestination="5"/>
+        <LeTronconSortant nomRue="h1" vitesse="4,000000" longueur="300" idNoeudDestination="8"/>
+    </Noeud>
+    <Noeud id="5" x="20" y="30">
+        <LeTronconSortant nomRue="v0" vitesse="4,100000" longueur="150" idNoeudDestination="1"/>
+        <LeTronconSortant nomRue="v0" vitesse="4,100000" longueur="100" idNoeudDestination="4"/>
+        <LeTronconSortant nomRue="v0" vitesse="3,800000" longueur="200" idNoeudDestination="6"/>
+        <LeTronconSortant nomRue="h1" vitesse="4,000000" longueur="300" idNoeudDestination="9"/>
+    </Noeud>
+    <Noeud id="6" x="40" y="30">
+        <LeTronconSortant nomRue="v0" vitesse="4,100000" longueur="150" idNoeudDestination="2"/>
+        <LeTronconSortant nomRue="v0" vitesse="3,800000" longueur="200" idNoeudDestination="5"/>
+        <LeTronconSortant nomRue="h1" vitesse="4,000000" longueur="400" idNoeudDestination="7"/>
+        <LeTronconSortant nomRue="v0" vitesse="4,100000" longueur="300" idNoeudDestination="10"/>
+    </Noeud>
+    <Noeud id="7" x="80" y="30">
+        <LeTronconSortant nomRue="v0" vitesse="4,100000" longueur="150" idNoeudDestination="3"/>
+        <LeTronconSortant nomRue="v0" vitesse="3,800000" longueur="400" idNoeudDestination="6"/>
+        <LeTronconSortant nomRue="h1" vitesse="4,000000" longueur="300" idNoeudDestination="11"/>
+    </Noeud>
+    <Noeud id="8" x="10" y="60">
+        <LeTronconSortant nomRue="v0" vitesse="4,100000" longueur="300" idNoeudDestination="4"/>
+        <LeTronconSortant nomRue="v0" vitesse="3,800000" longueur="100" idNoeudDestination="9"/>
+        <LeTronconSortant nomRue="h1" vitesse="4,000000" longueur="600" idNoeudDestination="12"/>
+    </Noeud>
+    <Noeud id="9" x="20" y="60">
+        <LeTronconSortant nomRue="v0" vitesse="4,100000" longueur="300" idNoeudDestination="5"/>
+        <LeTronconSortant nomRue="v0" vitesse="3,800000" longueur="100" idNoeudDestination="8"/>
+        <LeTronconSortant nomRue="h1" vitesse="4,000000" longueur="200" idNoeudDestination="10"/>
+        <LeTronconSortant nomRue="v0" vitesse="4,100000" longueur="600" idNoeudDestination="13"/>
+    </Noeud>
+    <Noeud id="10" x="40" y="60">
+        <LeTronconSortant nomRue="v0" vitesse="4,100000" longueur="300" idNoeudDestination="6"/>
+        <LeTronconSortant nomRue="v0" vitesse="3,800000" longueur="200" idNoeudDestination="9"/>
+        <LeTronconSortant nomRue="h1" vitesse="4,000000" longueur="400" idNoeudDestination="11"/>
+        <LeTronconSortant nomRue="v0" vitesse="4,100000" longueur="600" idNoeudDestination="14"/>
+    </Noeud>
+    <Noeud id="11" x="80" y="60">
+        <LeTronconSortant nomRue="v0" vitesse="4,100000" longueur="300" idNoeudDestination="7"/>
+        <LeTronconSortant nomRue="v0" vitesse="3,800000" longueur="400" idNoeudDestination="10"/>
+        <LeTronconSortant nomRue="h1" vitesse="4,000000" longueur="600" idNoeudDestination="15"/>
+    </Noeud>
+    <Noeud id="12" x="10" y="120">
+        <LeTronconSortant nomRue="v0" vitesse="4,100000" longueur="600" idNoeudDestination="8"/>
+        <LeTronconSortant nomRue="v0" vitesse="3,800000" longueur="100" idNoeudDestination="13"/>
+    </Noeud>
+    <Noeud id="13" x="20" y="120">
+        <LeTronconSortant nomRue="v0" vitesse="4,100000" longueur="600" idNoeudDestination="9"/>
+        <LeTronconSortant nomRue="v0" vitesse="3,800000" longueur="100" idNoeudDestination="12"/>
+        <LeTronconSortant nomRue="h1" vitesse="4,000000" longueur="200" idNoeudDestination="14"/>
+    </Noeud>
+    <Noeud id="14" x="40" y="120">
+        <LeTronconSortant nomRue="v0" vitesse="4,100000" longueur="600" idNoeudDestination="10"/>
+        <LeTronconSortant nomRue="v0" vitesse="3,800000" longueur="200" idNoeudDestination="13"/>
+        <LeTronconSortant nomRue="h1" vitesse="4,000000" longueur="400" idNoeudDestination="15"/>
+    </Noeud>
+    <Noeud id="15" x="80" y="120">
+        <LeTronconSortant nomRue="v0" vitesse="4,100000" longueur="600" idNoeudDestination="11"/>
+        <LeTronconSortant nomRue="v0" vitesse="3,800000" longueur="400" idNoeudDestination="14"/>
+    </Noeud>
+</Reseau>
