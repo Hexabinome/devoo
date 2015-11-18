@@ -46,11 +46,6 @@ public class Controleur implements ControleurInterface
         modelObserverList.add(observer);
     }
 
-    @Override
-    public void cliqueSurPlan()
-    {
-        currentEtat.cliqueSurPlan(model);
-    }
 
     @Override
     public boolean cliqueAnnuler()
@@ -107,6 +102,12 @@ public class Controleur implements ControleurInterface
     public void cliqueCalculerTourne()
     {
         //call no current etat
+    }
+
+    @Override
+    public void cliqueSurPlan()
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

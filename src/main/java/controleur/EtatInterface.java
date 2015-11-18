@@ -13,10 +13,7 @@ import modele.xmldata.Model;
  */
 public interface EtatInterface
 {
-
-    public void initialiser(Model model);
-
-    public void cliqueSurPlan(Model model);
+    public void cliqueSurPlan(int x, int y);
 
     public void cliqueSurListItem(int livraisonId);
 
