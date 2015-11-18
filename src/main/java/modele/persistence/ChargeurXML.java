@@ -13,12 +13,12 @@ import java.text.ParseException;
  * Cette classe joue le role d'interface pour le chargement des fichiers XML
  * @author Mohamed El Mouctar HAIDARA
  */
-public class ChargerXML {
+public class ChargeurXML {
 
-    private ChargerXML(){}
+    private ChargeurXML(){}
 
     public static PlanDeVille chargePlanDeVille() throws JDOMException, SAXException, IOException {
-        File file = OuvreurDeFichierXML.getInstance().ouvrirSelectionneurDeFichier();
+        File file = OuvreurDeFichierXML.getInstance().ouvrirSelectionneurDeFichier("Choissiez le plan de la ville");
         if (file == null) {
             return null;
         }
@@ -28,7 +28,7 @@ public class ChargerXML {
 
     public static Demande chargeDemande(PlanDeVille planDeVille)
             throws JDOMException, SAXException, ParseException, IOException {
-        File file = OuvreurDeFichierXML.getInstance().ouvrirSelectionneurDeFichier();
+        File file = OuvreurDeFichierXML.getInstance().ouvrirSelectionneurDeFichier("Choisissez la demande de livraison");
         if (file == null) {
             return null;
         }

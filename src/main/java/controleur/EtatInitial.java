@@ -1,7 +1,6 @@
 package controleur;
 
-import modele.persistence.ChargerXML;
-import modele.persistence.OuvreurDeFichierXML;
+import modele.persistence.ChargeurXML;
 import modele.xmldata.Model;
 import modele.xmldata.PlanDeVille;
 import org.jdom2.JDOMException;
@@ -32,7 +31,7 @@ class EtatInitial extends AbstractEtat {
     {
         PlanDeVille planDeVille = null;
         try {
-           planDeVille = ChargerXML.chargePlanDeVille();
+           planDeVille = ChargeurXML.chargePlanDeVille();
         } catch (JDOMException e) {
             e.printStackTrace();
         } catch (SAXException e) {

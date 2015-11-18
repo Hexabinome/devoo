@@ -1,14 +1,8 @@
 package modele.persistence;
 
 import javafx.stage.FileChooser;
-import modele.xmldata.Demande;
-import modele.xmldata.PlanDeVille;
-import org.jdom2.JDOMException;
-import org.xml.sax.SAXException;
 
 import java.io.File;
-import java.io.IOException;
-import java.text.ParseException;
 
 /**
  * Ouvre un fichier XML
@@ -29,9 +23,11 @@ public class OuvreurDeFichierXML { // singleton
     /**
      * Ouvre une boite de dialogue pour choisir un fichier
      * http://stackoverflow.com/questions/25491732/how-do-i-open-the-javafx-filechooser-from-a-controller-class
+     * @param titreDialogue
      */
-    protected File ouvrirSelectionneurDeFichier() {
+    protected File ouvrirSelectionneurDeFichier(String titreDialogue) {
         FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle(titreDialogue);
         //  Filtrage de l'extension
         FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("Fichier xml (*.xml)", "*.xml");
         fileChooser.getExtensionFilters().add(extensionFilter);

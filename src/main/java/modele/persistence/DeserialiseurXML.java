@@ -21,19 +21,13 @@ import java.util.List;
 /**
  * DeserialiseurXML comme son nom l'indique permet de déserialiser un fichier xml en créant les objets correspondant.
  * Dans notre cas, elle déserialisera le Plan de la ville et la demande de livraison.
+ * Cette classe utilise des schémas XML (XSD) pour valider les fichiers XML en entrée. L'utilisation d'InputStream se justifie
+ * par le fait que en créant un du projet jar, on ne pourra pas accéder aux schémas sous la forme de File sans toucher
+ * au système de fichier du système.
  *
  * @author Mohamed El Mouctar HAIDARA
  */
 public class DeserialiseurXML {
-
-    /**
-     * XML schema definition pour la validation des entrées en XML.
-     * On récupère les fichiers comme InputStream dans les ressources ainsi en packageant il n'y aura pas de soucis.
-     */
-    private static final InputStream XSDPLAN = ClassLoader.getSystemResourceAsStream("xsd/validateurPlan.xsd");
-    private static final InputStream XSDLIVRAISON = ClassLoader.getSystemResourceAsStream(
-            "xsd/validateurLivraisons.xsd");
-
 
     /**
      * Constructeur privé. Pas besoin d'instancier la class
@@ -50,6 +44,7 @@ public class DeserialiseurXML {
      * @throws SAXException  Problème survenu lors de la validation par le schéma XSD
      */
     public static PlanDeVille ouvrirPlanDeVille(InputStream planXML) throws JDOMException, IOException, SAXException {
+        InputStream XSDPLAN = ClassLoader.getSystemResourceAsStream("xsd/validateurPlan.xsd");
         Document document = validerFichierXML(XSDPLAN, planXML);
         // System.out.println(fichierValidationLivraisons);
         PlanDeVille planDeVille = new PlanDeVille();
@@ -116,6 +111,8 @@ public class DeserialiseurXML {
     public static Demande ouvrirLivraison(InputStream livraisonXml, final PlanDeVille planDeVille)
             throws SAXException, IOException, JDOMException, ParseException {
 
+        InputStream XSDLIVRAISON = ClassLoader.getSystemResourceAsStream(
+                "xsd/validateurLivraisons.xsd");
         Document document = validerFichierXML(XSDLIVRAISON, livraisonXml);
         Element journeeType = document.getRootElement();
 
