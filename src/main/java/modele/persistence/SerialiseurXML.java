@@ -1,4 +1,4 @@
-package modele.business;
+package modele.persistence;
 
 /**
  * Permet de sérialiser des objets notament la feuille de route

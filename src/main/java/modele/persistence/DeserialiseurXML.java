@@ -1,4 +1,4 @@
-package modele.business;
+package modele.persistence;
 
 import modele.xmldata.*;
 import org.jdom2.Document;
