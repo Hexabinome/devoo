@@ -11,7 +11,7 @@ public class Model implements ModelLecture
     private final Demande demande;
     private Graphe graphe;
 
-    Model(PlanDeVille plan, Demande demande)
+    public Model(PlanDeVille plan, Demande demande)
     {
         this.plan = plan;
         this.demande = demande;
