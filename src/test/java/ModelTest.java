@@ -22,15 +22,6 @@ import org.xml.sax.SAXException;
  * @author robinroyer
  */
 public class ModelTest {
-
-
-
-
-  @Test
-  public void runTest(){
-    assertEquals("les test auraient du se lancer", 1, 1);
-  }
-
   @Test
   public void TestModelPlan() throws JDOMException, IOException, SAXException, ParseException{
     // initialisation

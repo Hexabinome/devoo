@@ -33,7 +33,7 @@ public class ControleurTest {
        ControleurInterface controleur = new Controleur ();
        controleur.chargerPlan("samples/plan10x10.xml");
         
-       assertEquals("", 0, 1);
+       assertEquals("le plan aurait du etre charger", 0, 1);
     }
     
     @Test 
@@ -41,7 +41,7 @@ public class ControleurTest {
        ControleurInterface controleur = new Controleur ();
        controleur.chargerPlan("samples/livraison10x10-1.xml");
        
-       assertEquals("", 0, 1);
+       assertEquals("le livraisons aurait du etre chargees", 0, 1);
         
         
     }
