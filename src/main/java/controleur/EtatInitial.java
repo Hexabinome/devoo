@@ -1,12 +1,14 @@
 package controleur;
 
 import modele.persistence.ChargeurXML;
+import modele.xmldata.Demande;
 import modele.xmldata.Model;
 import modele.xmldata.PlanDeVille;
 import org.jdom2.JDOMException;
 import org.xml.sax.SAXException;
 
 import java.io.IOException;
+import java.text.ParseException;
 
 /**
  *
@@ -44,9 +46,24 @@ class EtatInitial extends AbstractEtat {
     }
 
     @Override
-    public Model chargerLivraisons(String chemin, PlanDeVille model)
+    public Model chargerLivraisons(String chemin, PlanDeVille plan)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Demande demande = null;
+        Model model = null;
+        try {
+            demande = ChargeurXML.chargeDemande(plan);
+        } catch (JDOMException e) {
+            e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return new Model(plan,demande);
+
     }
 
     @Override
