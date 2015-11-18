@@ -137,9 +137,9 @@ public class DeserialiseurXML {
         Livraison livraison;
 
         for (Element elementFenetre : listePlage) {
-            System.out.println(elementFenetre);
-            System.out.println("heure de debut : " + elementFenetre.getAttributeValue("heureDebut"));
-            System.out.println("Heure de fin : " + elementFenetre.getAttributeValue("heureFin"));
+            //   System.out.println(elementFenetre);
+            //  System.out.println("heure de debut : " + elementFenetre.getAttributeValue("heureDebut"));
+            // System.out.println("Heure de fin : " + elementFenetre.getAttributeValue("heureFin"));
 
             int heureDebut = convertirHeureEnSeconde(elementFenetre.getAttributeValue("heureDebut"));
             int heureFIn = convertirHeureEnSeconde(elementFenetre.getAttributeValue("heureFin"));
