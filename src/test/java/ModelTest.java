@@ -10,6 +10,7 @@ import java.text.ParseException;
 import modele.persistence.DeserialiseurXML;
 import modele.xmldata.Demande;
 import modele.xmldata.Model;
+import modele.xmldata.ModelLecture;
 import modele.xmldata.PlanDeVille;
 import org.jdom2.JDOMException;
 import static org.junit.Assert.assertEquals;
@@ -21,21 +22,12 @@ import org.xml.sax.SAXException;
  * @author robinroyer
  */
 public class ModelTest {
-
-
-
-
-  @Test
-  public void runTest(){
-    assertEquals("les test auraient du se lancer", 1, 1);
-  }
-
   @Test
   public void TestModelPlan() throws JDOMException, IOException, SAXException, ParseException{
     // initialisation
     PlanDeVille ville = DeserialiseurXML.ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/plan10x10.xml"));
     Demande demande = DeserialiseurXML.ouvrirLivraison(ClassLoader.getSystemResourceAsStream("samples/livraison10x10-1.xml"), ville);
-    Model monModel = new Model(ville, demande);
+    ModelLecture monModel = new Model(ville, demande);
 
     //test
     assertEquals("Le model doit avoir le plan de ville obtenu a la lecture xml", ville, monModel.getPlan());
