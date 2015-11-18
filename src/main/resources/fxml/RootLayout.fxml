@@ -4,6 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.input.*?>
 <?import javafx.scene.layout.*?>
+
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="668.0" minWidth="1000.0" prefHeight="668.0"
             prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="vue.RootLayout">
