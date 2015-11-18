@@ -6,7 +6,7 @@ import javafx.stage.Stage;
 import modele.xmldata.PlanDeVille;
 import org.jdom2.JDOMException;
 import org.xml.sax.SAXException;
-import modele.business.DeserialiseurXML;
+import modele.persistence.DeserialiseurXML;
 
 import java.io.File;
 import java.io.IOException;
