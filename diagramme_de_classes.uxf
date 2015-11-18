@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="12.2">
+<diagram program="umlet" version="13.3">
   <zoom_level>8</zoom_level>
   <element>
-    <type>com.umlet.element.Class</type>
+    <type>com.baselet.element.old.element.Class</type>
     <coordinates>
       <x>2600</x>
       <y>1288</y>
@@ -21,10 +21,10 @@ bg=green
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Class</type>
+    <type>com.baselet.element.old.element.Class</type>
     <coordinates>
       <x>2008</x>
-      <y>1704</y>
+      <y>1816</y>
       <w>312</w>
       <h>120</h>
     </coordinates>
@@ -44,7 +44,7 @@ bg=green
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Class</type>
+    <type>com.baselet.element.old.element.Class</type>
     <coordinates>
       <x>1736</x>
       <y>1568</y>
@@ -71,7 +71,7 @@ bg=green
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Package</type>
+    <type>com.baselet.element.old.element.Package</type>
     <coordinates>
       <x>1088</x>
       <y>0</y>
@@ -84,7 +84,7 @@ bg=green
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Class</type>
+    <type>com.baselet.element.old.element.Class</type>
     <coordinates>
       <x>2080</x>
       <y>1064</y>
@@ -105,7 +105,7 @@ bg=green
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Package</type>
+    <type>com.baselet.element.old.element.Package</type>
     <coordinates>
       <x>1472</x>
       <y>624</y>
@@ -117,7 +117,7 @@ bg=green
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Class</type>
+    <type>com.baselet.element.old.element.Class</type>
     <coordinates>
       <x>1384</x>
       <y>224</y>
@@ -147,7 +147,7 @@ desactivablesElements:Collection&lt;DesactObserver&gt;
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Class</type>
+    <type>com.baselet.element.old.element.Class</type>
     <coordinates>
       <x>1520</x>
       <y>504</y>
@@ -164,7 +164,7 @@ bg=red
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Class</type>
+    <type>com.baselet.element.old.element.Class</type>
     <coordinates>
       <x>1648</x>
       <y>504</y>
@@ -183,7 +183,7 @@ bg=yellow
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Class</type>
+    <type>com.baselet.element.old.element.Class</type>
     <coordinates>
       <x>1768</x>
       <y>504</y>
@@ -202,7 +202,7 @@ bg=yellow
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Class</type>
+    <type>com.baselet.element.old.element.Class</type>
     <coordinates>
       <x>1880</x>
       <y>504</y>
@@ -221,7 +221,7 @@ bg=yellow
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Class</type>
+    <type>com.baselet.element.old.element.Class</type>
     <coordinates>
       <x>2040</x>
       <y>504</y>
@@ -240,7 +240,7 @@ bg=yellow
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Class</type>
+    <type>com.baselet.element.old.element.Class</type>
     <coordinates>
       <x>2192</x>
       <y>504</y>
@@ -259,7 +259,7 @@ bg=yellow
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Class</type>
+    <type>com.baselet.element.old.element.Class</type>
     <coordinates>
       <x>1208</x>
       <y>504</y>
@@ -277,7 +277,7 @@ bg=red
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Class</type>
+    <type>com.baselet.element.old.element.Class</type>
     <coordinates>
       <x>1872</x>
       <y>304</y>
@@ -298,7 +298,7 @@ bg=red
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
       <x>2008</x>
       <y>400</y>
@@ -309,7 +309,7 @@ bg=red
     <additional_attributes>24;24;24;64;104;64;104;104</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
       <x>2008</x>
       <y>400</y>
@@ -320,7 +320,7 @@ bg=red
     <additional_attributes>24;24;24;64;264;64;264;104</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
       <x>1904</x>
       <y>400</y>
@@ -331,7 +331,7 @@ bg=red
     <additional_attributes>128;24;128;64;24;64;24;104</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
       <x>1464</x>
       <y>440</y>
@@ -342,7 +342,7 @@ bg=red
     <additional_attributes>24;24;472;24</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
       <x>1264</x>
       <y>440</y>
@@ -353,7 +353,7 @@ bg=red
     <additional_attributes>216;24;24;24;24;64</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
       <x>1568</x>
       <y>440</y>
@@ -364,7 +364,7 @@ bg=red
     <additional_attributes>24;24;24;64</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
       <x>1680</x>
       <y>440</y>
@@ -375,7 +375,7 @@ bg=red
     <additional_attributes>24;24;24;64</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
       <x>1792</x>
       <y>440</y>
@@ -386,7 +386,7 @@ bg=red
     <additional_attributes>24;24;24;64</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
       <x>1784</x>
       <y>224</y>
@@ -397,7 +397,7 @@ bg=red
     <additional_attributes>24;24;88;24</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Class</type>
+    <type>com.baselet.element.old.element.Class</type>
     <coordinates>
       <x>1976</x>
       <y>680</y>
@@ -413,7 +413,7 @@ bg=red
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Class</type>
+    <type>com.baselet.element.old.element.Class</type>
     <coordinates>
       <x>1856</x>
       <y>904</y>
@@ -427,7 +427,7 @@ bg=red
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Class</type>
+    <type>com.baselet.element.old.element.Class</type>
     <coordinates>
       <x>1704</x>
       <y>904</y>
@@ -441,7 +441,7 @@ bg=red
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Class</type>
+    <type>com.baselet.element.old.element.Class</type>
     <coordinates>
       <x>1760</x>
       <y>808</y>
@@ -456,7 +456,7 @@ bg=yellow
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Class</type>
+    <type>com.baselet.element.old.element.Class</type>
     <coordinates>
       <x>1552</x>
       <y>672</y>
@@ -477,7 +477,7 @@ currentCommand:AbstractCommand
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
       <x>1848</x>
       <y>400</y>
@@ -488,7 +488,7 @@ currentCommand:AbstractCommand
     <additional_attributes>72;24;72;48;24;48;24;208;24;272</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
       <x>1880</x>
       <y>688</y>
@@ -499,18 +499,18 @@ currentCommand:AbstractCommand
     <additional_attributes>24;24;96;24</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
       <x>1808</x>
       <y>752</y>
-      <w>40</w>
-      <h>72</h>
+      <w>32</w>
+      <h>64</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>24;24;24;56</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Class</type>
+    <type>com.baselet.element.old.element.Class</type>
     <coordinates>
       <x>1920</x>
       <y>808</y>
@@ -525,18 +525,18 @@ bg=yellow
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
       <x>1968</x>
       <y>752</y>
-      <w>40</w>
-      <h>72</h>
+      <w>32</w>
+      <h>64</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>24;24;24;56</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Class</type>
+    <type>com.baselet.element.old.element.Class</type>
     <coordinates>
       <x>2080</x>
       <y>808</y>
@@ -551,7 +551,7 @@ bg=yellow
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Class</type>
+    <type>com.baselet.element.old.element.Class</type>
     <coordinates>
       <x>2160</x>
       <y>904</y>
@@ -565,7 +565,7 @@ bg=red
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Class</type>
+    <type>com.baselet.element.old.element.Class</type>
     <coordinates>
       <x>2312</x>
       <y>904</y>
@@ -579,34 +579,34 @@ bg=red
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
       <x>2128</x>
       <y>752</y>
-      <w>40</w>
-      <h>72</h>
+      <w>32</w>
+      <h>64</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>24;24;24;56</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
       <x>1808</x>
       <y>752</y>
-      <w>360</w>
-      <h>40</h>
+      <w>352</w>
+      <h>32</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>344;24;24;24</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Class</type>
+    <type>com.baselet.element.old.element.Class</type>
     <coordinates>
       <x>2080</x>
-      <y>1192</y>
+      <y>1184</y>
       <w>296</w>
-      <h>128</h>
+      <h>144</h>
     </coordinates>
     <panel_attributes>Model
 bg=green
@@ -620,12 +620,13 @@ bg=green
 +setGraphe(Graphe graphe): void
 +getPlan(): PlanDeVille
 +getDemande(): Demande
++calculerTournee():List&lt;Chemin&gt;
 --
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
       <x>2080</x>
       <y>688</y>
@@ -636,7 +637,7 @@ bg=green
     <additional_attributes>24;24;488;24;488;560;296;560</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Class</type>
+    <type>com.baselet.element.old.element.Class</type>
     <coordinates>
       <x>2008</x>
       <y>904</y>
@@ -650,7 +651,7 @@ bg=yellow
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
       <x>2208</x>
       <y>1136</y>
@@ -661,18 +662,18 @@ bg=yellow
     <additional_attributes>24;24;24;56</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
       <x>2016</x>
       <y>720</y>
-      <w>40</w>
-      <h>72</h>
+      <w>32</w>
+      <h>64</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
     <additional_attributes>24;24;24;56</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Class</type>
+    <type>com.baselet.element.old.element.Class</type>
     <coordinates>
       <x>1128</x>
       <y>224</y>
@@ -686,7 +687,7 @@ bg=red
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Class</type>
+    <type>com.baselet.element.old.element.Class</type>
     <coordinates>
       <x>1128</x>
       <y>304</y>
@@ -704,7 +705,7 @@ bg=red
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
       <x>2192</x>
       <y>960</y>
@@ -715,7 +716,7 @@ bg=red
     <additional_attributes>24;24;24;48;352;48;352;272;184;272</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
       <x>2344</x>
       <y>960</y>
@@ -726,7 +727,7 @@ bg=red
     <additional_attributes>24;24;24;48</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
       <x>2048</x>
       <y>960</y>
@@ -737,7 +738,7 @@ bg=red
     <additional_attributes>24;24;24;48;168;48</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
       <x>1904</x>
       <y>960</y>
@@ -748,7 +749,7 @@ bg=red
     <additional_attributes>24;24;24;48;176;48</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Class</type>
+    <type>com.baselet.element.old.element.Class</type>
     <coordinates>
       <x>2360</x>
       <y>1400</y>
@@ -768,7 +769,7 @@ bg=orange
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
       <x>1232</x>
       <y>240</y>
@@ -779,7 +780,7 @@ bg=orange
     <additional_attributes>152;80;88;80;88;24;24;24</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
       <x>1232</x>
       <y>312</y>
@@ -790,7 +791,7 @@ bg=orange
     <additional_attributes>152;24;24;24</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Class</type>
+    <type>com.baselet.element.old.element.Class</type>
     <coordinates>
       <x>1368</x>
       <y>504</y>
@@ -807,7 +808,7 @@ bg=red
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
       <x>1424</x>
       <y>440</y>
@@ -818,7 +819,7 @@ bg=red
     <additional_attributes>24;24;24;64</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
       <x>1728</x>
       <y>960</y>
@@ -829,7 +830,7 @@ bg=red
     <additional_attributes>24;24;24;48;232;48</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Class</type>
+    <type>com.baselet.element.old.element.Class</type>
     <coordinates>
       <x>2200</x>
       <y>736</y>
@@ -845,89 +846,89 @@ bg=red
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
       <x>2312</x>
       <y>768</y>
-      <w>80</w>
-      <h>152</h>
+      <w>72</w>
+      <h>144</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>24;24;24;112;64;112;64;136</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
       <x>1752</x>
       <y>856</y>
-      <w>608</w>
-      <h>40</h>
+      <w>600</w>
+      <h>32</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>24;24;592;24</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
       <x>2056</x>
       <y>856</y>
-      <w>40</w>
-      <h>64</h>
+      <w>32</w>
+      <h>56</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>24;24;24;48</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
       <x>2208</x>
       <y>856</y>
-      <w>40</w>
-      <h>64</h>
+      <w>32</w>
+      <h>56</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>24;24;24;48</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
       <x>1904</x>
       <y>856</y>
-      <w>40</w>
-      <h>64</h>
+      <w>32</w>
+      <h>56</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>24;24;24;48</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
       <x>1752</x>
       <y>856</y>
-      <w>40</w>
-      <h>64</h>
+      <w>32</w>
+      <h>56</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>24;24;24;48</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
       <x>2296</x>
-      <y>1296</y>
+      <y>1304</y>
       <w>176</w>
-      <h>120</h>
+      <h>112</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-&gt;</panel_attributes>
-    <additional_attributes>24;24;24;56;160;56;160;104</additional_attributes>
+    <additional_attributes>24;24;24;48;160;48;160;96</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Class</type>
+    <type>com.baselet.element.old.element.Class</type>
     <coordinates>
       <x>1960</x>
       <y>1384</y>
       <w>368</w>
-      <h>88</h>
+      <h>104</h>
     </coordinates>
     <panel_attributes>Demande
 bg=yellow
@@ -938,23 +939,24 @@ bg=yellow
 +Demande(Intersection entrepot, List&lt;Fenetre&gt; fenetres): ctor
 +getEntrepot(): Intersection
 +getFenetres(): Collection&lt;Fenetre&gt;
++creerGraphe(PlanDeVille plan):Graphe
 --
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
       <x>2176</x>
-      <y>1296</y>
+      <y>1304</y>
       <w>40</w>
-      <h>104</h>
+      <h>96</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;</panel_attributes>
-    <additional_attributes>24;24;24;88</additional_attributes>
+    <additional_attributes>24;24;24;80</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Class</type>
+    <type>com.baselet.element.old.element.Class</type>
     <coordinates>
       <x>2576</x>
       <y>1600</y>
@@ -978,7 +980,7 @@ bg=orange
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
       <x>2456</x>
       <y>1456</y>
@@ -989,7 +991,7 @@ bg=orange
     <additional_attributes>24;24;24;72;224;72;224;144</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Class</type>
+    <type>com.baselet.element.old.element.Class</type>
     <coordinates>
       <x>2600</x>
       <y>1424</y>
@@ -1007,7 +1009,7 @@ bg=green
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Class</type>
+    <type>com.baselet.element.old.element.Class</type>
     <coordinates>
       <x>1440</x>
       <y>1392</y>
@@ -1030,18 +1032,18 @@ bg=yellow
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
       <x>1560</x>
-      <y>1296</y>
+      <y>1304</y>
       <w>568</w>
-      <h>112</h>
+      <h>104</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;</panel_attributes>
-    <additional_attributes>552;24;552;64;24;64;24;96</additional_attributes>
+    <additional_attributes>552;24;552;56;24;56;24;88</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Class</type>
+    <type>com.baselet.element.old.element.Class</type>
     <coordinates>
       <x>712</x>
       <y>1680</y>
@@ -1065,7 +1067,7 @@ bg=green
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Class</type>
+    <type>com.baselet.element.old.element.Class</type>
     <coordinates>
       <x>2600</x>
       <y>1168</y>
@@ -1085,7 +1087,7 @@ bg=green
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
       <x>2712</x>
       <y>1224</y>
@@ -1096,7 +1098,7 @@ bg=green
     <additional_attributes>24;24;24;64</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
       <x>2712</x>
       <y>1344</y>
@@ -1107,7 +1109,7 @@ bg=green
     <additional_attributes>24;24;24;80</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Class</type>
+    <type>com.baselet.element.old.element.Class</type>
     <coordinates>
       <x>1432</x>
       <y>1568</y>
@@ -1135,7 +1137,7 @@ bg=green
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
       <x>1536</x>
       <y>1480</y>
@@ -1146,7 +1148,7 @@ bg=green
     <additional_attributes>24;24;24;88</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
       <x>1656</x>
       <y>1592</y>
@@ -1157,12 +1159,12 @@ bg=green
     <additional_attributes>24;24;80;24</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Class</type>
+    <type>com.baselet.element.old.element.Class</type>
     <coordinates>
       <x>2008</x>
-      <y>1520</y>
+      <y>1544</y>
       <w>296</w>
-      <h>144</h>
+      <h>200</h>
     </coordinates>
     <panel_attributes>Fenetre
 bg=yellow
@@ -1178,34 +1180,36 @@ o effacerLivraison(livrasionId:int):void
 +ajouterLivraison(id:int,livraison:Livraison):void
 +getLivraisons():Map&lt;Integer, Livraison&gt;
 +toString():String
++calculerChemins(PlanDeVillle plan, Graphe graphe):Graphe
+-dijkstra(PlanDeVille plan, int idIntersectionDepart,List&lt;int&gt; idLivraisons):List&lt;Chemin&gt; chemins 
 --
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
       <x>2144</x>
-      <y>1448</y>
+      <y>1464</y>
       <w>40</w>
-      <h>88</h>
+      <h>96</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-&gt;</panel_attributes>
-    <additional_attributes>24;24;24;72</additional_attributes>
+    <additional_attributes>24;24;24;80</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
       <x>2136</x>
-      <y>1640</y>
+      <y>1720</y>
       <w>40</w>
-      <h>80</h>
+      <h>112</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-&gt;</panel_attributes>
-    <additional_attributes>24;24;24;64</additional_attributes>
+    <additional_attributes>24;24;24;96</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Package</type>
+    <type>com.baselet.element.old.element.Package</type>
     <coordinates>
       <x>0</x>
       <y>208</y>
@@ -1217,7 +1221,7 @@ o effacerLivraison(livrasionId:int):void
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Class</type>
+    <type>com.baselet.element.old.element.Class</type>
     <coordinates>
       <x>480</x>
       <y>528</y>
@@ -1228,7 +1232,7 @@ o effacerLivraison(livrasionId:int):void
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Note</type>
+    <type>com.baselet.element.old.element.Note</type>
     <coordinates>
       <x>1072</x>
       <y>664</y>
@@ -1245,7 +1249,7 @@ afficher</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Class</type>
+    <type>com.baselet.element.old.element.Class</type>
     <coordinates>
       <x>2328</x>
       <y>1600</y>
@@ -1255,21 +1259,19 @@ afficher</panel_attributes>
     <panel_attributes>GrapheRealisation
 bg=orange
 --
--COUT_MAX = 40: int
--COUT_MIN = 10: int
 ~nbSommets: int
-~cout: int[][]
+~chemins: Chemin[][]
 --
-+GrapheDummy(int nbSommets): ctor
++GrapheRealisation(int nbSommets): ctor
 +getNbSommets(): int
 +getCout(int i, int j): int
 +estArc(int i, int j): boolean
---
++getChemin(int i, int j): Chemin
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
       <x>2424</x>
       <y>1456</y>
@@ -1280,18 +1282,18 @@ bg=orange
     <additional_attributes>24;24;24;120;24;144</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
       <x>2040</x>
       <y>696</y>
-      <w>272</w>
-      <h>80</h>
+      <w>264</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>24;48;24;64;120;64;120;24;256;24;256;40</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Package</type>
+    <type>com.baselet.element.old.element.Package</type>
     <coordinates>
       <x>688</x>
       <y>1648</y>
@@ -1303,19 +1305,19 @@ bg=orange
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Package</type>
+    <type>com.baselet.element.old.element.Package</type>
     <coordinates>
       <x>1416</x>
       <y>1040</y>
       <w>1472</w>
-      <h>808</h>
+      <h>976</h>
     </coordinates>
     <panel_attributes>Modele.Core
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Class</type>
+    <type>com.baselet.element.old.element.Class</type>
     <coordinates>
       <x>1384</x>
       <y>24</y>
@@ -1341,7 +1343,7 @@ bg=green
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
       <x>1568</x>
       <y>184</y>
@@ -1352,7 +1354,7 @@ bg=green
     <additional_attributes>24;24;24;40</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
       <x>2040</x>
       <y>400</y>
@@ -1363,7 +1365,7 @@ bg=green
     <additional_attributes>40;24;40;48;360;48;360;248;24;248;24;280</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Class</type>
+    <type>com.baselet.element.old.element.Class</type>
     <coordinates>
       <x>1872</x>
       <y>160</y>
@@ -1384,7 +1386,7 @@ bg=red
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.baselet.element.old.element.Relation</type>
     <coordinates>
       <x>1968</x>
       <y>256</y>
@@ -1393,5 +1395,41 @@ bg=red
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>24;24;24;48</additional_attributes>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Relation</type>
+    <coordinates>
+      <x>2416</x>
+      <y>1704</y>
+      <w>40</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;</panel_attributes>
+    <additional_attributes>24;24;24;104</additional_attributes>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Class</type>
+    <coordinates>
+      <x>2328</x>
+      <y>1808</y>
+      <w>232</w>
+      <h>152</h>
+    </coordinates>
+    <panel_attributes>Chemin
+bg=orange
+--
+~cout:int
+~troncons:List&lt;Troncon&gt;
+~idDepart:int
+~idArrivee:int
+--
++Chemin(int cout, List&lt;Troncon&gt; troncons, int idDepart, int idArrivee)
++getCout(): int
++getTroncons():List&lt;Troncon&gt;
++getDepart();int
++getArrivee():int
+
+</panel_attributes>
+    <additional_attributes/>
   </element>
 </diagram>
