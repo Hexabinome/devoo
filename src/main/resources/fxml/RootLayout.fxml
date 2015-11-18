@@ -59,9 +59,9 @@
             <top>
                 <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="TOP_LEFT">
                     <buttons>
-                        <Button mnemonicParsing="false" text="Ajouter livraisons"/>
-                        <Button mnemonicParsing="false" text="Echanger livraisons"/>
-                        <Button mnemonicParsing="false" text="Supprimer livraisons"/>
+                        <Button mnemonicParsing="false" text="Ajouter livraisons" onAction="#clic_ajouterLivraison" />
+                        <Button mnemonicParsing="false" text="Echanger livraisons" onAction="#clic_echangerLivraison" />
+                        <Button mnemonicParsing="false" text="Supprimer livraisons" />
                     </buttons>
                     <BorderPane.margin>
                         <Insets right="5.0"/>
@@ -79,7 +79,10 @@
                         <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
                     </columnResizePolicy>
                 </TreeTableView>
-            </left>
+            </left
+         <center>
+         	<Pane fx:id="canvasGraphique" style="-fx-background-color: black;"/>
+         </center>
         </BorderPane>
     </center>
 </BorderPane>
