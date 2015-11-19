@@ -67,30 +67,30 @@ public class Controleur implements ControleurInterface
     }
 
     @Override
-    public String chargerPlan(File fichierPlan)
+    public Exception chargerPlan(File fichierPlan)
     {
         //remplacer plan qui est charge d'un nouveau plan (ssi le chargement du xml a reussi)
         try {
             plan = currentEtat.chargerPlan(fichierPlan);
             currentEtat = new EtatPlanCharge();
-            return "";
         }
         catch (JDOMException | SAXException | IOException ex) {
-            return ex.getMessage();
+            return ex;
         }
+        return null;
     }
 
     @Override
-    public String chargerLivraisons(File fichierLivraisons)
+    public Exception chargerLivraisons(File fichierLivraisons)
     {
         try {
             model = currentEtat.chargerLivraisons(fichierLivraisons, plan);
             currentEtat = new EtatPrincipal();
-            return "";
         }
         catch (JDOMException | SAXException | ParseException | IOException ex) {
-            return ex.getMessage();
+            return ex;
         }
+        return null;
     }
 
     @Override
@@ -130,4 +130,5 @@ public class Controleur implements ControleurInterface
     {
         currentEtat.cliqueCalculerTournee(model);
     }
+
 }

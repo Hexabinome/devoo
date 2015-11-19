@@ -1,7 +1,10 @@
 package controleur;
 
 import java.io.File;
+import java.io.IOException;
 import modele.xmldata.ModelLecture;
+import org.jdom2.JDOMException;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -28,7 +31,7 @@ public interface ControleurInterface
      * @return String vide, si la conversion marchait sans erreurs, String avec
      * un message d'erreur sinon.
      */
-    String chargerPlan(File fichierPlan);
+    Exception chargerPlan(File fichierPlan);
 
     /**
      * Cette methode essaye de convertir un fichier XML dans sa representation
@@ -38,7 +41,7 @@ public interface ControleurInterface
      * @return String vide, si la conversion marchait sans erreurs, String avec
      * un message d'erreur sinon.
      */
-    String chargerLivraisons(File fichierLivraisons);
+    Exception chargerLivraisons(File fichierLivraisons);
 
     void cliqueOutilAjouter();
 
