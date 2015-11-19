@@ -2,6 +2,7 @@ package modele.xmldata;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * Cette class represente une intersection dans le plan de ville. (Pas a
@@ -52,6 +53,19 @@ public class Intersection {
         return troncons.keySet().contains(cibleId);
     }
 
+    public float getMinCout()
+    {
+    	float coutMini= Float.MAX_VALUE;
+    	
+    	for(Entry<Integer, Troncon> troncon: troncons.entrySet())
+    	{
+    		if(troncon.getValue().getCout() < coutMini)
+    			coutMini = troncon.getValue().getCout();
+    	}
+    	
+    	return coutMini;
+    }
+
     @Override
     public String toString() {
         return "Intersection{"
@@ -61,5 +75,9 @@ public class Intersection {
                 + ", tronconsSortants=" + troncons
                 + '}';
     }
+
+	public Map<Integer, Troncon> getTroncons() {
+		return troncons;
+	}
 
 }

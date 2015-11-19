@@ -38,10 +38,12 @@ public class Demande {
 	public GrapheRealisation creerGraphe(PlanDeVille plan) {
 		GrapheRealisation graphe = new GrapheRealisation(plan.getIntersections().size());
 		
-		for(Fenetre fenetre : fenetres)	
+		for(int iFenetre = 0; iFenetre < fenetres.size()-1; 	iFenetre++)
 		{
-			fenetre.calculerChemins(plan, graphe);
+			fenetres.get(iFenetre).calculerChemins(plan, graphe, fenetres.get(iFenetre+1));
 		}
+		
+		fenetres.get(fenetres.size()-1).calculerChemins(plan, graphe, null);
 		
 		return graphe;
 	}

@@ -62,4 +62,9 @@ public class Troncon {
                 ", duree=" + duree +
                 '}';
     }
+    
+    public float getCout()
+    {
+    	return vitesse * duree;
+    }
 }

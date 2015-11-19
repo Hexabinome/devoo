@@ -2,9 +2,13 @@ package modele.xmldata;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.PriorityQueue;
+import java.util.Set;
 
 /**
  * Une Fenetre correspond a une periode de temps fixe avec une nombre des livraisons prevus.
@@ -54,25 +58,112 @@ public class Fenetre {
                 ", livraisons=" + livraisons +
                 '}';
     }
-
-	public void calculerChemins(PlanDeVille plan, GrapheRealisation graphe) {
+    
+    /**
+     * Pour chaque points de livraison, on va calculer une liste de chemim vers tous les noeuds de cette fenêtre et de la fenêtre suivante
+     * @param plan
+     * @param graphe
+     * @param fNext
+     */
+	public void calculerChemins(PlanDeVille plan, GrapheRealisation graphe, Fenetre fNext) {
+		//Récupère toutes les intersections avec les quels on doit calculer le plus court chemin.
+		Set<Integer> intersectionsRecherchee = livraisons.keySet();
+		intersectionsRecherchee.addAll(fNext.getLivraisons().keySet());
+		
 		for(Map.Entry<Integer, Livraison> livraison : livraisons.entrySet())
 		{
-			//R�cup�ration de l'intersection de la livraison
+			//R�cup�ration de l'intersection de la livraison
 			Intersection intersection = plan.getIntersection(livraison.getKey());
 			
-			for(Chemin chemin : dijkstra(intersection))
+			for(Chemin chemin : dijkstra(intersection, intersectionsRecherchee, plan))
 			{
 				graphe.setChemin(chemin);
 			}
 		}
 	}
 	
-	private List<Chemin> dijkstra(Intersection intersectionDepart)
+	private List<Chemin> dijkstra(Intersection intersectionDepart, Set<Integer> intersectionsRecherchee, PlanDeVille plan)
 	{
-		//TODO appel du dijkstra r�cursif.
-		//r�cup�rer la liste des chemin 
+		//INITIALISATION
 		
+		//Map de chemin intermédiaires et finaux
+			//La clé est l'id de l'intersection au quel correspond le chemin 
+			//le chemin contient tous tronçons par lesquels on est passé 
+			//+ l'id de l'interserction de départ et la clef de la map comme intersection d'arrivé
+        Map<Integer, Chemin> chemins = new HashMap<>();
+		chemins.put(intersectionDepart.getId(), 
+					new Chemin(0, new ArrayList<>(), intersectionDepart.getId(), intersectionDepart.getId()));
+		
+		Comparator<Intersection> comparator = new CoutComparator();
+        PriorityQueue<Intersection> queue = new PriorityQueue<Intersection>(comparator);
+        queue.add(intersectionDepart);
+		
+        //ALGO
+        while(!queue.isEmpty())
+        {
+        	Intersection intersection = queue.poll();
+        	
+        	//Pour toutes les intersections suivantes
+    		for(Intersection intersectionSuivante : getListeIntersectionSuivante(intersection, plan))
+    		{
+    			//On récupére le chemin en cours de contruction dans la map
+    			Chemin chemin = chemins.get(intersection.getId());
+    			
+    			//Calcule d'information pour le nouveau chemin
+    			Troncon troncon = intersection.getTroncon(intersectionSuivante.getId());
+    			
+    			float cout = chemin.getCout() + troncon.getCout();
+    			
+    			ArrayList<Troncon> tronconsEnCours = (ArrayList<Troncon>) chemin.getTroncons();
+    			tronconsEnCours.add(troncon);
+    			
+    			//Insertion du nouveau chemin dans la map
+    			chemins.put(intersectionSuivante.getId(), 
+    					new Chemin(cout, tronconsEnCours, chemin.getIdDepart(), intersectionSuivante.getId()));
+    		}
+        }
+		
+		//Parcourir la map pour récupérer juste la liste des chemins finaux
+        
 		return null;
+	}
+	
+	/**
+	 * Retourne une liste des intersections suivant
+	 * @param intersection
+	 * @param plan
+	 * @return
+	 */
+    public ArrayList<Intersection> getListeIntersectionSuivante(Intersection intersection, PlanDeVille plan)
+    {
+    	ArrayList<Intersection> intersections = new ArrayList<>();
+    	
+    	for(Integer idIntersection: intersection.getTroncons().keySet())
+    	{
+    		intersections.add(plan.getIntersection(idIntersection));
+    	}
+    	
+    	return intersections;
+    }
+	
+	/**
+	 * Classe utile pour la priority Queue. 
+	 * Le but est de lui fournir un comparateur pour qu'elle s'ordonne. 
+	 * L'intersection en paramètres ne doit contenir qu'un seul tronçon
+	 * @author Djowood
+	 *
+	 */
+	public class CoutComparator implements Comparator<Intersection>
+	{
+	    @Override
+	    public int compare(Intersection x, Intersection y)
+	    {
+	        if(x.getMinCout() != Float.MAX_VALUE && y.getMinCout() != Float.MAX_VALUE)
+	        {
+	        	//Retourne un nombre négatif (donc faux si le coût est inférieur), positif si suppérieur et 0 si égale.
+	        	return (int)(x.getMinCout() - y.getMinCout());
+	        }
+	        return 0;
+	    }
 	}
 }

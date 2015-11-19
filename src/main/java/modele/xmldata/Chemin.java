@@ -1,30 +1,31 @@
 package modele.xmldata;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Chemin {
-	private int cout;
-    private List<Troncon> troncons;
+	private float cout;
+    private ArrayList<Troncon> troncons;
     private int idDepart;
     private int idFin;
     
-	public Chemin(int cout, List<Troncon> troncons, int idDepart, int idFin) {
+	public Chemin(float cout, ArrayList<Troncon> troncons, int idDepart, int idFin) {
 		super();
 		this.cout = cout;
 		this.troncons = troncons;
 		this.idDepart = idDepart;
 		this.idFin = idFin;
 	}
-	public int getCout() {
+	public float getCout() {
 		return cout;
 	}
-	public void setCout(int cout) {
+	public void setCout(float cout) {
 		this.cout = cout;
 	}
 	public List<Troncon> getTroncons() {
 		return troncons;
 	}
-	public void setTroncons(List<Troncon> troncons) {
+	public void setTroncons(ArrayList<Troncon> troncons) {
 		this.troncons = troncons;
 	}
 	public int getIdDepart() {

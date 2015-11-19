@@ -1,7 +1,4 @@
 package modele.xmldata;
-
-import java.util.ArrayList;
-
 /**
  *
  * @author maxou
@@ -30,9 +27,11 @@ public class GrapheRealisation implements Graphe
     public int getCout(int i, int j)
     {
     	//TODO gestion de l'erreur
+    	//TODO revoir la gestion des couts car chemins return un float
         if(chemins[i][j] == null)
         	return -1;
-        return chemins[i][j].getCout();
+        
+        return (int)chemins[i][j].getCout();
     }
 
     @Override
@@ -40,11 +39,13 @@ public class GrapheRealisation implements Graphe
     {
         if (i < 0 || i >= chemins.length || j < 0 || j >= chemins.length)
             return false;
-        //TODO pourquoi faire ça ? 
+        //TODO pourquoi faire ï¿½a ? 
         return i != j;
     }
 
 	public Chemin getChemin(int i, int j) {
+		if (i < 0 || i >= chemins.length || j < 0 || j >= chemins.length)
+			return null;
 		return chemins[i][j];
 	}
 
@@ -54,6 +55,8 @@ public class GrapheRealisation implements Graphe
 	
 	public void setChemin(Chemin chemin)
 	{
-		chemins[chemin.getIdDepart()][chemin.getIdFin()] = chemin;
+		if (chemin.getIdDepart() > 0 && chemin.getIdDepart() < chemins.length 
+				&& chemin.getIdFin() > 0 && chemin.getIdFin() < chemins.length)
+			chemins[chemin.getIdDepart()][chemin.getIdFin()] = chemin;
 	}
 }
