@@ -6,5 +6,7 @@ package controleur;
  */
 public interface DesactivationObserver
 {
-    public void notify(boolean disabled);
+
+    public void notifyObserver(boolean disabled);
+
 }

@@ -11,7 +11,7 @@ import org.xml.sax.SAXException;
 
 /**
  *
- * @author Max Schiedermeier
+ * @author Maxou
  */
 public class EtatPlanCharge extends AbstractEtat
 {

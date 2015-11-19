@@ -71,12 +71,7 @@ public class Controleur implements ControleurInterface
     {
         try {
             plan = currentEtat.chargerPlan(fichierPlan);
-
-            //currentEtat = new Etat
-            
-            
-            
-            
+            currentEtat = new EtatPlanCharge();
             return "";
         }
         catch (JDOMException | SAXException | IOException ex) {
@@ -89,6 +84,7 @@ public class Controleur implements ControleurInterface
     {
         try {
             model = currentEtat.chargerLivraisons(fichierLivraisons, plan);
+            currentEtat = new EtatPrincipal();
             return "";
         }
         catch (JDOMException | SAXException | ParseException | IOException ex) {
