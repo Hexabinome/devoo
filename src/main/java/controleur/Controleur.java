@@ -1,11 +1,17 @@
 package controleur;
 
 import java.io.File;
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import modele.xmldata.Model;
 import modele.xmldata.ModelLecture;
 import modele.xmldata.PlanDeVille;
+import org.jdom2.JDOMException;
+import org.xml.sax.SAXException;
 
 /**
  * Implements controller interface. Primary entry point for all interaction with
@@ -27,7 +33,7 @@ public class Controleur implements ControleurInterface
 
     //some gui elements need to be notified when the model changes
     private final Collection<ModelObserver> modelObserverList;
-    
+
     private PlanDeVille plan;
 
     public Controleur()
@@ -50,7 +56,6 @@ public class Controleur implements ControleurInterface
         modelObserverList.add(observer);
     }
 
-
     @Override
     public boolean cliqueAnnuler()
     {
@@ -65,16 +70,28 @@ public class Controleur implements ControleurInterface
 
     @Override
     public boolean chargerPlan(File fichierPlan)
-    {        
-        //plan = currentEtat.chargerPlan(fichierPlan);
-        return true;
+    {
+        try {
+            //TODO: replace null by file
+            plan = currentEtat.chargerPlan(fichierPlan);
+            return true;
+        }
+        catch (JDOMException | SAXException | IOException ex) {
+            return false;
+        }
     }
 
     @Override
     public boolean chargerLivraisons(File fichierLivraisons)
     {
-        //currentEtat.chargerLivraisons(chemin, plan);
-        return true;
+        try {
+            //TODO: replace null by file
+            model = currentEtat.chargerLivraisons(fichierLivraisons, plan);
+            return true;
+        }
+        catch (JDOMException | SAXException | ParseException | IOException ex) {
+            return false;
+        }
     }
 
     @Override
@@ -98,10 +115,8 @@ public class Controleur implements ControleurInterface
     @Override
     public ModelLecture getModel()
     {
-        if(model == null)
-        {
+        if (model == null)
             throw new RuntimeException("Model n'existe pas, il faut charger des fichiers xml avant");
-        }
         return model;
     }
 

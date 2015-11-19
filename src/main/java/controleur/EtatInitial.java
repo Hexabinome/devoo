@@ -1,7 +1,7 @@
 package controleur;
 
+import java.io.File;
 import modele.persistence.ChargeurXML;
-import modele.xmldata.Demande;
 import modele.xmldata.Model;
 import modele.xmldata.PlanDeVille;
 import org.jdom2.JDOMException;
@@ -27,22 +27,18 @@ class EtatInitial extends AbstractEtat
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public PlanDeVille chargerPlan(String chemin) throws JDOMException, SAXException, IOException
+    @Override
+    public PlanDeVille chargerPlan(File plan) throws JDOMException, SAXException, IOException
     {
-            return ChargeurXML.chargePlanDeVille();
+        //TODO pass file as param
+        return ChargeurXML.chargePlanDeVille();
     }
 
     @Override
-    public Model chargerLivraisons(String chemin, PlanDeVille plan)
+    public Model chargerLivraisons(File livraisons, PlanDeVille plan) throws JDOMException, SAXException, ParseException, IOException
     {
-        Demande demande;
-        try {
-            demande = ChargeurXML.chargeDemande(plan);
-            return new Model(plan, demande);
-        }
-        catch (JDOMException | SAXException | ParseException | IOException e) {
-            throw new RuntimeException("Chargement des livraisonsa echoue");
-        }
+        //TODO pass file as param
+        return new Model(plan, ChargeurXML.chargeDemande(plan));
     }
 
     @Override

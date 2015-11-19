@@ -5,7 +5,9 @@
  */
 package controleur;
 
+import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
 import modele.xmldata.Model;
 import modele.xmldata.PlanDeVille;
 import org.jdom2.JDOMException;
@@ -25,7 +27,7 @@ public interface EtatInterface
 
     public boolean cliqueRetablir();
 
-    public PlanDeVille chargerPlan(String chemin) throws JDOMException, SAXException, IOException;
+    public PlanDeVille chargerPlan(File plan) throws JDOMException, SAXException, IOException;
 
-    public Model chargerLivraisons(String chemin, PlanDeVille plan);
+    public Model chargerLivraisons(File livraisons, PlanDeVille plan) throws JDOMException, SAXException, ParseException, IOException;
 }
