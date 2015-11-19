@@ -10,6 +10,7 @@ import javafx.scene.control.TreeTableView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
+import javafx.stage.FileChooser;
 import modele.persistence.DeserialiseurXML;
 import modele.xmldata.Fenetre;
 import modele.xmldata.Intersection;
@@ -43,8 +44,10 @@ public class RootLayout implements Initializable {
      */
     @FXML
     private TreeTableView<Fenetre> tableViewFenetre;
+
     @FXML
     private Pane canvasGraphique;
+
     private Collection<Ellipse> intersectionsGraphiques = new ArrayList<Ellipse>();
     private double echelleXIntersection = 0;
     private double echelleYIntersection = 0;
@@ -58,6 +61,7 @@ public class RootLayout implements Initializable {
             afficherToutesEllipses();
         }
     };
+
     public RootLayout() {
     }
 
@@ -70,7 +74,7 @@ public class RootLayout implements Initializable {
      */
     @FXML
     private void ouvrirPlan(ActionEvent actionEvent) {
-        File file = OuvreurDeFichierXML.getInstance().ouvrirSelectionneurDeFichier("Choissiez le plan de la ville");
+        File file = ouvrirSelectionneurDeFichier("Choissiez le plan de la ville");
         if (file != null) {
             controleurInterface.chargerPlan(file);
         }
@@ -81,7 +85,7 @@ public class RootLayout implements Initializable {
      */
     @FXML
     private void ouvrirDemande(ActionEvent actionEvent) {
-        File file = OuvreurDeFichierXML.getInstance().ouvrirSelectionneurDeFichier(
+        File file = ouvrirSelectionneurDeFichier(
                 "Choisissez la demande de livraison");
         if (file != null) {
             controleurInterface.chargerLivraisons(file);
@@ -150,4 +154,23 @@ public class RootLayout implements Initializable {
 
         canvasGraphique.getChildren().add(e);
     }
+
+    /**
+     * Ouvre une boite de dialogue pour choisir un fichier
+     * http://stackoverflow.com/questions/25491732/how-do-i-open-the-javafx-filechooser-from-a-controller-class
+     *
+     * @param titreDialogue
+     */
+    protected File ouvrirSelectionneurDeFichier(String titreDialogue) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle(titreDialogue);
+        //  Filtrage de l'extension
+        FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("Fichier xml (*.xml)", "*.xml");
+        fileChooser.getExtensionFilters().add(extensionFilter);
+
+        // Affichage de la boite de dialogque + récuperation du fichier choisi
+
+        return fileChooser.showOpenDialog(tableViewFenetre.getScene().getWindow());
+    }
+
 }
