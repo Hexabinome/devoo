@@ -6,6 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.input.*?>
 <?import javafx.scene.layout.*?>
+<?import org.controlsfx.glyphfont.*?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="668.0" minWidth="1000.0" prefHeight="668.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vue.RootLayout">
     <top>
@@ -56,9 +57,22 @@
             <top>
                 <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="TOP_LEFT">
                     <buttons>
-                        <Button mnemonicParsing="false" onAction="#clic_ajouterLivraison" text="Ajouter livraisons" />
-                        <Button mnemonicParsing="false" onAction="#clic_echangerLivraison" text="Echanger livraisons" />
-                        <Button mnemonicParsing="false" text="Supprimer livraisons" />
+                        <Button mnemonicParsing="false" onAction="#clic_ajouterLivraison" text="Ajouter livraisons">
+                            <graphic>
+                                <Glyph fontFamily="FontAwesome" icon="PLUS"/>
+                            </graphic>
+                                </Button>
+                        <Button mnemonicParsing="false" onAction="#clic_echangerLivraison" text="Echanger livraisons" >
+                            <graphic>
+                                <Glyph fontFamily="FontAwesome" icon="ARROWS_H"/>
+                            </graphic>
+                            </Button>
+
+                        <Button mnemonicParsing="false" text="Supprimer livraisons">
+                            <graphic>
+                                <Glyph fontFamily="FontAwesome" icon="TRASH"/>
+                            </graphic>
+                        </Button>
                     </buttons>
                     <BorderPane.margin>
                         <Insets right="5.0" />
