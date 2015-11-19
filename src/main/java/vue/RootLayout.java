@@ -26,7 +26,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 /**
- * Cette classe joue le rôle de bindind pour la fenetre principale de l'application.
+ * Cette classe joue le rôle de binding pour la fenetre principale de l'application.
  * C'est ici qu'on spécifiera les écouteurs et consorts.
  * Remarque : Les écouteurs peuvent être spécifiés directement dans le fichier xml aussi
  */

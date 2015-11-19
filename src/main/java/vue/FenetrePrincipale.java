@@ -10,6 +10,10 @@ public class FenetrePrincipale extends Application {
 
     private RootLayout vueControleur;
 
+    private final int LARGEUR_FENETRE = 1000;
+
+    private final int HAUTEUR_FENETRE = 668;
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/RootLayout.fxml"));
@@ -17,9 +21,9 @@ public class FenetrePrincipale extends Application {
         vueControleur = (RootLayout) fxmlLoader.getController();
 
         primaryStage.setTitle("OptimodLyon");
-        primaryStage.setScene(new Scene(root, 1000, 668));
-        primaryStage.setMinWidth(1000);
-        primaryStage.setMinHeight(668);
+        primaryStage.setScene(new Scene(root, LARGEUR_FENETRE, HAUTEUR_FENETRE));
+        primaryStage.setMinWidth(LARGEUR_FENETRE);
+        primaryStage.setMinHeight(HAUTEUR_FENETRE);
 
         primaryStage.widthProperty().addListener(vueControleur.ecouteurDeRedimensionnement);
         primaryStage.heightProperty().addListener(vueControleur.ecouteurDeRedimensionnement);
