@@ -6,7 +6,6 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.TreeTableView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -27,7 +26,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 import java.util.ResourceBundle;
-import java.util.concurrent.ExecutionException;
 
 /**
  * Cette classe joue le rôle de binding pour la fenetre principale de l'application.
@@ -52,7 +50,7 @@ public class RootLayout implements Initializable {
     private Pane canvasGraphique;
 
     private final double ERROR_DIALOG_WIDTH = 250;
-    private final double ERROR_DIALOG_HEIGHT = 250;
+    private final double ERROR_DIALOG_HEIGHT = 450;
 
 
     private Collection<Ellipse> intersectionsGraphiques = new ArrayList<Ellipse>();
@@ -85,7 +83,9 @@ public class RootLayout implements Initializable {
         if (file != null) {
             Exception messageErreur = controleurInterface.chargerPlan(file);
             if (messageErreur != null) {
-                ouvrirAlertXML(messageErreur,file.getName());
+                ouvrirAlertXML(messageErreur, file.getName());
+            } else {
+                // TODO : afficher le plan
             }
         }
     }
@@ -98,9 +98,11 @@ public class RootLayout implements Initializable {
         File file = ouvrirSelectionneurDeFichier(
                 "Choisissez la demande de livraison");
         if (file != null) {
-           Exception exception =  controleurInterface.chargerLivraisons(file);
-            if(exception != null){
-                ouvrirAlertXML(exception,file.getName());
+            Exception exception = controleurInterface.chargerLivraisons(file);
+            if (exception != null) {
+                ouvrirAlertXML(exception, file.getName());
+            } else {
+                // TODO : remplir la partie à gauche
             }
         }
     }
@@ -189,9 +191,12 @@ public class RootLayout implements Initializable {
 
         ExceptionDialog exceptionDialog = new ExceptionDialog(message);
         exceptionDialog.setTitle("Erreur");
-        exceptionDialog.setHeaderText("Problème avec le fichier xml : " + "'" + fichier +"'");
+        exceptionDialog.setHeaderText("Problème avec le fichier xml : " + "'" + fichier + "'");
         exceptionDialog.setWidth(ERROR_DIALOG_WIDTH);
-        exceptionDialog.setHeight(ERROR_DIALOG_WIDTH);
+        exceptionDialog.setHeight(ERROR_DIALOG_HEIGHT);
+        exceptionDialog.setResizable(false);
+        exceptionDialog.initOwner(tableViewFenetre.getScene().getWindow());
+
 
         exceptionDialog.showAndWait();
 

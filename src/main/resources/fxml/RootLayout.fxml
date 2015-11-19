@@ -57,20 +57,22 @@
             <top>
                 <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="TOP_LEFT">
                     <buttons>
+                  <Button mnemonicParsing="false" prefWidth="100" text="Générer la feuille de route" />
+                  <HBox prefHeight="100.0" prefWidth="200.0" />
                         <Button mnemonicParsing="false" onAction="#clic_ajouterLivraison" text="Ajouter livraisons">
                             <graphic>
-                                <Glyph fontFamily="FontAwesome" icon="PLUS"/>
+                                <Glyph fontFamily="FontAwesome" icon="PLUS" />
                             </graphic>
                                 </Button>
-                        <Button mnemonicParsing="false" onAction="#clic_echangerLivraison" text="Echanger livraisons" >
+                        <Button mnemonicParsing="false" onAction="#clic_echangerLivraison" text="Echanger livraisons">
                             <graphic>
-                                <Glyph fontFamily="FontAwesome" icon="ARROWS_H"/>
+                                <Glyph fontFamily="FontAwesome" icon="ARROWS_H" />
                             </graphic>
                             </Button>
 
                         <Button mnemonicParsing="false" text="Supprimer livraisons">
                             <graphic>
-                                <Glyph fontFamily="FontAwesome" icon="TRASH"/>
+                                <Glyph fontFamily="FontAwesome" icon="TRASH" />
                             </graphic>
                         </Button>
                     </buttons>
@@ -91,7 +93,7 @@
                 </TreeTableView>
             </left>
          <center>
-         	<Pane fx:id="canvasGraphique" style="-fx-background-color: black;"/>
+         	<Pane fx:id="canvasGraphique" style="-fx-background-color: black;" />
          </center>
         </BorderPane>
     </center>
