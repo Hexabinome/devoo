@@ -14,13 +14,12 @@ import java.text.ParseException;
  *
  * @author Max Schiedermeier
  */
-class EtatInitial extends AbstractEtat {
+class EtatInitial extends AbstractEtat
+{
 
     public EtatInitial()
     {
     }
-
-
 
     @Override
     public void cliqueSurListItem(int livraisonId)
@@ -28,42 +27,22 @@ class EtatInitial extends AbstractEtat {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public PlanDeVille chargerPlan(String chemin)
+    public PlanDeVille chargerPlan(String chemin) throws JDOMException, SAXException, IOException
     {
-        PlanDeVille planDeVille = null;
-        try {
-           planDeVille = ChargeurXML.chargePlanDeVille();
-        } catch (JDOMException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return planDeVille;
+            return ChargeurXML.chargePlanDeVille();
     }
 
     @Override
     public Model chargerLivraisons(String chemin, PlanDeVille plan)
     {
-        Demande demande = null;
-        Model model = null;
+        Demande demande;
         try {
             demande = ChargeurXML.chargeDemande(plan);
-        } catch (JDOMException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+            return new Model(plan, demande);
         }
-
-        return new Model(plan,demande);
-
+        catch (JDOMException | SAXException | ParseException | IOException e) {
+            throw new RuntimeException("Chargement des livraisonsa echoue");
+        }
     }
 
     @Override
@@ -71,4 +50,5 @@ class EtatInitial extends AbstractEtat {
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
 }

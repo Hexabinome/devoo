@@ -1,5 +1,6 @@
 package controleur;
 
+import java.io.File;
 import java.util.Collection;
 import java.util.LinkedList;
 import modele.xmldata.Model;
@@ -63,15 +64,17 @@ public class Controleur implements ControleurInterface
     }
 
     @Override
-    public void chargerPlan(String chemin)
+    public boolean chargerPlan(File fichierPlan)
     {        
-        plan = currentEtat.chargerPlan(chemin);
+        //plan = currentEtat.chargerPlan(fichierPlan);
+        return true;
     }
 
     @Override
-    public void chargerLivraisons(String chemin)
+    public boolean chargerLivraisons(File fichierLivraisons)
     {
-        currentEtat.chargerLivraisons(chemin, plan);
+        //currentEtat.chargerLivraisons(chemin, plan);
+        return true;
     }
 
     @Override

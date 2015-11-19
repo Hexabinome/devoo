@@ -1,5 +1,6 @@
 package controleur;
 
+import java.io.File;
 import modele.xmldata.ModelLecture;
 
 /**
@@ -19,9 +20,9 @@ public interface ControleurInterface
 
     public boolean cliqueRetablir();
 
-    public void chargerPlan(String chemin);
+    public boolean chargerPlan(File fichierPlan);
 
-    public void chargerLivraisons(String chemin);
+    public boolean chargerLivraisons(File fichierLivraisons);
 
     public void cliqueOutilAjouter();
 

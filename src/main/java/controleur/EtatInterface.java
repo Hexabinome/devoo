@@ -5,8 +5,11 @@
  */
 package controleur;
 
+import java.io.IOException;
 import modele.xmldata.Model;
 import modele.xmldata.PlanDeVille;
+import org.jdom2.JDOMException;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -22,7 +25,7 @@ public interface EtatInterface
 
     public boolean cliqueRetablir();
 
-    public PlanDeVille chargerPlan(String chemin);
+    public PlanDeVille chargerPlan(String chemin) throws JDOMException, SAXException, IOException;
 
     public Model chargerLivraisons(String chemin, PlanDeVille plan);
 }
