@@ -45,9 +45,8 @@ public interface ControleurInterface
     void cliqueOutilSupprimer();
 
     void cliqueOutilEchanger();
-
+    
     ModelLecture getModel();
 
     void cliqueCalculerTourne();
-
 }

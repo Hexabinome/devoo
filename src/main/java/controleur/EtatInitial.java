@@ -46,4 +46,10 @@ class EtatInitial extends AbstractEtat
         throw new RuntimeException("Dans cet etat il n y a pas un plan qui on pourrait cliquer.");
     }
 
+    @Override
+    public void cliqueCalculerTournee(Model model)
+    {
+        throw new RuntimeException("On ne peut pas calculer une tournee quand on ne connait pas encore le plan de ville et les livraisons");
+    }
+
 }

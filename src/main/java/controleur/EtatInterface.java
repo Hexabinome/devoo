@@ -10,19 +10,22 @@ import org.xml.sax.SAXException;
 
 /**
  *
- * @author maxou
+ * @author Maxou
  */
 public interface EtatInterface
 {
-    public void cliqueSurPlan(int x, int y);
 
-    public void cliqueSurListItem(int livraisonId);
+    boolean cliqueAnnuler();
 
-    public boolean cliqueAnnuler();
+    boolean cliqueRetablir();
 
-    public boolean cliqueRetablir();
+    void cliqueSurListItem(int livraisonId);
 
-    public PlanDeVille chargerPlan(File plan) throws JDOMException, SAXException, IOException;
+    PlanDeVille chargerPlan(File plan) throws JDOMException, SAXException, IOException;
 
-    public Model chargerLivraisons(File livraisons, PlanDeVille plan) throws JDOMException, SAXException, ParseException, IOException;
+    Model chargerLivraisons(File livraisons, PlanDeVille plan) throws JDOMException, SAXException, ParseException, IOException;
+
+    void cliqueSurPlan(int x, int y);
+    
+    void cliqueCalculerTournee(Model model);
 }

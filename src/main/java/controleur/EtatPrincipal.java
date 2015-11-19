@@ -12,7 +12,8 @@ import org.xml.sax.SAXException;
  *
  * @author Maxou
  */
-class EtatPrincipal implements EtatInterface {
+class EtatPrincipal implements EtatInterface
+{
 
     public EtatPrincipal()
     {
@@ -52,6 +53,12 @@ class EtatPrincipal implements EtatInterface {
     public Model chargerLivraisons(File livraisons, PlanDeVille plan) throws JDOMException, SAXException, ParseException, IOException
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void cliqueCalculerTournee(Model model)
+    {
+        model.calculerTournee();
     }
 
 }

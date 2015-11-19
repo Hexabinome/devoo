@@ -69,6 +69,7 @@ public class Controleur implements ControleurInterface
     @Override
     public String chargerPlan(File fichierPlan)
     {
+        //remplacer plan qui est charge d'un nouveau plan (ssi le chargement du xml a reussi)
         try {
             plan = currentEtat.chargerPlan(fichierPlan);
             currentEtat = new EtatPlanCharge();
@@ -119,15 +120,14 @@ public class Controleur implements ControleurInterface
     }
 
     @Override
-    public void cliqueCalculerTourne()
+    public void cliqueSurPlan()
     {
-        //call to current etat
+        // forward to current etat
     }
 
     @Override
-    public void cliqueSurPlan()
+    public void cliqueCalculerTourne()
     {
-// forward to current etat
+        currentEtat.cliqueCalculerTournee(model);
     }
-
 }
