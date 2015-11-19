@@ -1,4 +1,4 @@
-package modele.persistence;
+package vue;
 
 import javafx.stage.FileChooser;
 
@@ -11,18 +11,19 @@ public class OuvreurDeFichierXML { // singleton
 
     private static OuvreurDeFichierXML instance = null;
 
+    private OuvreurDeFichierXML() {
+    }
+
     protected static OuvreurDeFichierXML getInstance() {
         if (instance == null)
             instance = new OuvreurDeFichierXML();
         return instance;
     }
 
-    private OuvreurDeFichierXML() {
-    }
-
     /**
      * Ouvre une boite de dialogue pour choisir un fichier
      * http://stackoverflow.com/questions/25491732/how-do-i-open-the-javafx-filechooser-from-a-controller-class
+     *
      * @param titreDialogue
      */
     protected File ouvrirSelectionneurDeFichier(String titreDialogue) {

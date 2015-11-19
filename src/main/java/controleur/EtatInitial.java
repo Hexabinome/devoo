@@ -1,7 +1,7 @@
 package controleur;
 
 import java.io.File;
-import modele.persistence.ChargeurXML;
+import modele.persistence.DeserialiseurXML;
 import modele.xmldata.Model;
 import modele.xmldata.PlanDeVille;
 import org.jdom2.JDOMException;
@@ -30,15 +30,15 @@ class EtatInitial extends AbstractEtat
     @Override
     public PlanDeVille chargerPlan(File plan) throws JDOMException, SAXException, IOException
     {
-        //TODO pass file as param
-        return ChargeurXML.chargePlanDeVille();
+
+        return DeserialiseurXML.ouvrirPlanDeVille(plan);
     }
 
     @Override
     public Model chargerLivraisons(File livraisons, PlanDeVille plan) throws JDOMException, SAXException, ParseException, IOException
     {
-        //TODO pass file as param
-        return new Model(plan, ChargeurXML.chargeDemande(plan));
+
+        return new Model(plan, DeserialiseurXML.ouvrirLivraison(livraisons,plan));
     }
 
     @Override
