@@ -72,7 +72,7 @@ public class Fenetre {
 		
 		for(Map.Entry<Integer, Livraison> livraison : livraisons.entrySet())
 		{
-			//R�cup�ration de l'intersection de la livraison
+			//Recupration de l'intersection de la livraison
 			Intersection intersection = plan.getIntersection(livraison.getKey());
 			
 			for(Chemin chemin : dijkstra(intersection, intersectionsRecherchee, plan))

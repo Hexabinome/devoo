@@ -1,7 +1,7 @@
 package controleur;
 
-import modele.persistence.ChargeurXML;
-import modele.xmldata.Demande;
+import java.io.File;
+import modele.persistence.DeserialiseurXML;
 import modele.xmldata.Model;
 import modele.xmldata.PlanDeVille;
 import org.jdom2.JDOMException;
@@ -12,63 +12,44 @@ import java.text.ParseException;
 
 /**
  *
- * @author Max Schiedermeier
+ * @author Maxou
  */
-class EtatInitial extends AbstractEtat {
+class EtatInitial extends AbstractEtat
+{
 
     public EtatInitial()
     {
     }
 
-
-
     @Override
     public void cliqueSurListItem(int livraisonId)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new RuntimeException("Dans cet etat il n y a pas une liste qui on pourrait cliquer.");
     }
 
     @Override
-    public PlanDeVille chargerPlan(String chemin)
+    public PlanDeVille chargerPlan(File plan) throws JDOMException, SAXException, IOException
     {
-        PlanDeVille planDeVille = null;
-        try {
-           planDeVille = ChargeurXML.chargePlanDeVille();
-        } catch (JDOMException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return planDeVille;
+        //TODO implement end call command here
+        return DeserialiseurXML.ouvrirPlanDeVille(plan);
     }
 
     @Override
-    public Model chargerLivraisons(String chemin, PlanDeVille plan)
+    public Model chargerLivraisons(File livraisons, PlanDeVille plan) throws JDOMException, SAXException, ParseException, IOException
     {
-        Demande demande = null;
-        Model model = null;
-        try {
-            demande = ChargeurXML.chargeDemande(plan);
-        } catch (JDOMException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return new Model(plan,demande);
-
+        throw new RuntimeException("Chargement de Livraisons pas possible quand en etat initial.");
     }
 
     @Override
     public void cliqueSurPlan(int x, int y)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new RuntimeException("Dans cet etat il n y a pas un plan qui on pourrait cliquer.");
     }
+
+    @Override
+    public void cliqueCalculerTournee(Model model)
+    {
+        throw new RuntimeException("On ne peut pas calculer une tournee quand on ne connait pas encore le plan de ville et les livraisons");
+    }
+
 }

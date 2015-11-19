@@ -1,10 +1,15 @@
 package controleur;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.Collection;
 import java.util.LinkedList;
 import modele.xmldata.Model;
 import modele.xmldata.ModelLecture;
 import modele.xmldata.PlanDeVille;
+import org.jdom2.JDOMException;
+import org.xml.sax.SAXException;
 
 /**
  * Implements controller interface. Primary entry point for all interaction with
@@ -26,7 +31,7 @@ public class Controleur implements ControleurInterface
 
     //some gui elements need to be notified when the model changes
     private final Collection<ModelObserver> modelObserverList;
-    
+
     private PlanDeVille plan;
 
     public Controleur()
@@ -49,7 +54,6 @@ public class Controleur implements ControleurInterface
         modelObserverList.add(observer);
     }
 
-
     @Override
     public boolean cliqueAnnuler()
     {
@@ -63,15 +67,30 @@ public class Controleur implements ControleurInterface
     }
 
     @Override
-    public void chargerPlan(String chemin)
-    {        
-        plan = currentEtat.chargerPlan(chemin);
+    public Exception chargerPlan(File fichierPlan)
+    {
+        //remplacer plan qui est charge d'un nouveau plan (ssi le chargement du xml a reussi)
+        try {
+            plan = currentEtat.chargerPlan(fichierPlan);
+            currentEtat = new EtatPlanCharge();
+        }
+        catch (JDOMException | SAXException | IOException ex) {
+            return ex;
+        }
+        return null;
     }
 
     @Override
-    public void chargerLivraisons(String chemin)
+    public Exception chargerLivraisons(File fichierLivraisons)
     {
-        currentEtat.chargerLivraisons(chemin, plan);
+        try {
+            model = currentEtat.chargerLivraisons(fichierLivraisons, plan);
+            currentEtat = new EtatPrincipal();
+        }
+        catch (JDOMException | SAXException | ParseException | IOException ex) {
+            return ex;
+        }
+        return null;
     }
 
     @Override
@@ -95,23 +114,21 @@ public class Controleur implements ControleurInterface
     @Override
     public ModelLecture getModel()
     {
-        if(model == null)
-        {
+        if (model == null)
             throw new RuntimeException("Model n'existe pas, il faut charger des fichiers xml avant");
-        }
         return model;
-    }
-
-    @Override
-    public void cliqueCalculerTourne()
-    {
-        //call no current etat
     }
 
     @Override
     public void cliqueSurPlan()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // forward to current etat
+    }
+
+    @Override
+    public void cliqueCalculerTourne()
+    {
+        currentEtat.cliqueCalculerTournee(model);
     }
 
 }

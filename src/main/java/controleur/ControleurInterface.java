@@ -1,6 +1,10 @@
 package controleur;
 
+import java.io.File;
+import java.io.IOException;
 import modele.xmldata.ModelLecture;
+import org.jdom2.JDOMException;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -9,28 +13,43 @@ import modele.xmldata.ModelLecture;
 public interface ControleurInterface
 {
 
-    public void ajouterDesactObserver(DesactivationObserver observer);
+    void ajouterDesactObserver(DesactivationObserver observer);
 
-    public void ajouterModelObserver(ModelObserver observer);
+    void ajouterModelObserver(ModelObserver observer);
 
-    public void cliqueSurPlan();
+    void cliqueSurPlan();
 
-    public boolean cliqueAnnuler();
+    boolean cliqueAnnuler();
 
-    public boolean cliqueRetablir();
+    boolean cliqueRetablir();
 
-    public void chargerPlan(String chemin);
+    /**
+     * Cette methode essaye de convertir un fichier XML dans sa representation
+     * d'objets.
+     *
+     * @param fichierPlan comme objet File qui represente le fichier XML
+     * @return String vide, si la conversion marchait sans erreurs, String avec
+     * un message d'erreur sinon.
+     */
+    Exception chargerPlan(File fichierPlan);
 
-    public void chargerLivraisons(String chemin);
+    /**
+     * Cette methode essaye de convertir un fichier XML dans sa representation
+     * d'objets.
+     *
+     * @param fichierLivraison comme objet File qui represente le fichier XML
+     * @return String vide, si la conversion marchait sans erreurs, String avec
+     * un message d'erreur sinon.
+     */
+    Exception chargerLivraisons(File fichierLivraisons);
 
-    public void cliqueOutilAjouter();
+    void cliqueOutilAjouter();
 
-    public void cliqueOutilSupprimer();
+    void cliqueOutilSupprimer();
 
-    public void cliqueOutilEchanger();
+    void cliqueOutilEchanger();
+    
+    ModelLecture getModel();
 
-    public ModelLecture getModel();
-
-    public void cliqueCalculerTourne();
-
+    void cliqueCalculerTourne();
 }

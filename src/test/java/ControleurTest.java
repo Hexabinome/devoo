@@ -1,6 +1,7 @@
 
 import controleur.Controleur;
 import controleur.ControleurInterface;
+import java.io.File;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
@@ -31,7 +32,8 @@ public class ControleurTest {
     @Test //chargerPlan(chemin:String):void
     public void testchargerPlan() {
        ControleurInterface controleur = new Controleur ();
-       controleur.chargerPlan("samples/plan10x10.xml");
+       File plan = new File("samples/plan10x10.xml");
+       controleur.chargerPlan(plan);
         
        assertEquals("le plan aurait du etre charger", 0, 1);
     }
@@ -39,7 +41,8 @@ public class ControleurTest {
     @Test 
     public void testChargerLivraison() {
        ControleurInterface controleur = new Controleur ();
-       controleur.chargerPlan("samples/livraison10x10-1.xml");
+       File livraisons = new File("samples/livraison10x10-1.xml");
+       controleur.chargerPlan(livraisons);
        
        assertEquals("le livraisons aurait du etre chargees", 0, 1);
         

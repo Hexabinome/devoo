@@ -1,28 +1,31 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controleur;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.ParseException;
 import modele.xmldata.Model;
 import modele.xmldata.PlanDeVille;
+import org.jdom2.JDOMException;
+import org.xml.sax.SAXException;
 
 /**
  *
- * @author maex
+ * @author Maxou
  */
 public interface EtatInterface
 {
-    public void cliqueSurPlan(int x, int y);
 
-    public void cliqueSurListItem(int livraisonId);
+    boolean cliqueAnnuler();
 
-    public boolean cliqueAnnuler();
+    boolean cliqueRetablir();
 
-    public boolean cliqueRetablir();
+    void cliqueSurListItem(int livraisonId);
 
-    public PlanDeVille chargerPlan(String chemin);
+    PlanDeVille chargerPlan(File plan) throws JDOMException, SAXException, IOException;
 
-    public Model chargerLivraisons(String chemin, PlanDeVille plan);
+    Model chargerLivraisons(File livraisons, PlanDeVille plan) throws JDOMException, SAXException, ParseException, IOException;
+
+    void cliqueSurPlan(int x, int y);
+    
+    void cliqueCalculerTournee(Model model);
 }
