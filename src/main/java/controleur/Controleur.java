@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.Collection;
 import java.util.LinkedList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import modele.xmldata.Model;
 import modele.xmldata.ModelLecture;
 import modele.xmldata.PlanDeVille;
@@ -69,28 +67,32 @@ public class Controleur implements ControleurInterface
     }
 
     @Override
-    public boolean chargerPlan(File fichierPlan)
+    public String chargerPlan(File fichierPlan)
     {
         try {
-            //TODO: replace null by file
             plan = currentEtat.chargerPlan(fichierPlan);
-            return true;
+
+            //currentEtat = new Etat
+            
+            
+            
+            
+            return "";
         }
         catch (JDOMException | SAXException | IOException ex) {
-            return false;
+            return ex.getMessage();
         }
     }
 
     @Override
-    public boolean chargerLivraisons(File fichierLivraisons)
+    public String chargerLivraisons(File fichierLivraisons)
     {
         try {
-            //TODO: replace null by file
             model = currentEtat.chargerLivraisons(fichierLivraisons, plan);
-            return true;
+            return "";
         }
         catch (JDOMException | SAXException | ParseException | IOException ex) {
-            return false;
+            return ex.getMessage();
         }
     }
 
@@ -123,13 +125,13 @@ public class Controleur implements ControleurInterface
     @Override
     public void cliqueCalculerTourne()
     {
-        //call no current etat
+        //call to current etat
     }
 
     @Override
     public void cliqueSurPlan()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+// forward to current etat
     }
 
 }
