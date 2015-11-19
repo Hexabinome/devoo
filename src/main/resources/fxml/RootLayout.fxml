@@ -80,7 +80,7 @@
                         <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
                     </columnResizePolicy>
                 </TreeTableView>
-            </left
+            </left>
          <center>
          	<Pane fx:id="canvasGraphique" style="-fx-background-color: black;"/>
          </center>
