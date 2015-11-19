@@ -6,6 +6,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TreeTableView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -15,6 +16,7 @@ import modele.persistence.DeserialiseurXML;
 import modele.xmldata.Fenetre;
 import modele.xmldata.Intersection;
 import modele.xmldata.PlanDeVille;
+import org.controlsfx.dialog.ExceptionDialog;
 import org.jdom2.JDOMException;
 import org.xml.sax.SAXException;
 
@@ -25,6 +27,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Cette classe joue le rôle de binding pour la fenetre principale de l'application.
@@ -47,6 +50,10 @@ public class RootLayout implements Initializable {
 
     @FXML
     private Pane canvasGraphique;
+
+    private final double ERROR_DIALOG_WIDTH = 250;
+    private final double ERROR_DIALOG_HEIGHT = 250;
+
 
     private Collection<Ellipse> intersectionsGraphiques = new ArrayList<Ellipse>();
     private double echelleXIntersection = 0;
@@ -76,7 +83,10 @@ public class RootLayout implements Initializable {
     private void ouvrirPlan(ActionEvent actionEvent) {
         File file = ouvrirSelectionneurDeFichier("Choissiez le plan de la ville");
         if (file != null) {
-            controleurInterface.chargerPlan(file);
+            Exception messageErreur = controleurInterface.chargerPlan(file);
+            if (messageErreur != null) {
+                ouvrirAlertXML(messageErreur,file.getName());
+            }
         }
     }
 
@@ -88,7 +98,10 @@ public class RootLayout implements Initializable {
         File file = ouvrirSelectionneurDeFichier(
                 "Choisissez la demande de livraison");
         if (file != null) {
-            controleurInterface.chargerLivraisons(file);
+           Exception exception =  controleurInterface.chargerLivraisons(file);
+            if(exception != null){
+                ouvrirAlertXML(exception,file.getName());
+            }
         }
     }
 
@@ -161,7 +174,7 @@ public class RootLayout implements Initializable {
      *
      * @param titreDialogue
      */
-    protected File ouvrirSelectionneurDeFichier(String titreDialogue) {
+    private File ouvrirSelectionneurDeFichier(String titreDialogue) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle(titreDialogue);
         //  Filtrage de l'extension
@@ -169,8 +182,19 @@ public class RootLayout implements Initializable {
         fileChooser.getExtensionFilters().add(extensionFilter);
 
         // Affichage de la boite de dialogque + récuperation du fichier choisi
-
         return fileChooser.showOpenDialog(tableViewFenetre.getScene().getWindow());
+    }
+
+    private void ouvrirAlertXML(Exception message, String fichier) {
+
+        ExceptionDialog exceptionDialog = new ExceptionDialog(message);
+        exceptionDialog.setTitle("Erreur");
+        exceptionDialog.setHeaderText("Problème avec le fichier xml : " + "'" + fichier +"'");
+        exceptionDialog.setWidth(ERROR_DIALOG_WIDTH);
+        exceptionDialog.setHeight(ERROR_DIALOG_WIDTH);
+
+        exceptionDialog.showAndWait();
+
     }
 
 }
