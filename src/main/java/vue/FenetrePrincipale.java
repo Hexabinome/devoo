@@ -1,5 +1,6 @@
 package vue;
 
+import controleur.Controleur;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,9 +17,17 @@ public class FenetrePrincipale extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+
+        // Chargement de la fenetre principale
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/RootLayout.fxml"));
         Parent root = fxmlLoader.load();
         vueControleur = (RootLayout) fxmlLoader.getController();
+
+        // Création du controleur de l'application
+        Controleur controleur = new Controleur();
+
+        // Passage du controleur de l'application au controleur de la vue
+        vueControleur.setControleurInterface(controleur);
 
         primaryStage.setTitle("OptimodLyon");
         primaryStage.setScene(new Scene(root, LARGEUR_FENETRE, HAUTEUR_FENETRE));

@@ -58,7 +58,7 @@ public class Fenetre {
 	public void calculerChemins(PlanDeVille plan, GrapheRealisation graphe) {
 		for(Map.Entry<Integer, Livraison> livraison : livraisons.entrySet())
 		{
-			//Récupération de l'intersection de la livraison
+			//Recupration de l'intersection de la livraison
 			Intersection intersection = plan.getIntersection(livraison.getKey());
 			
 			for(Chemin chemin : dijkstra(intersection))
@@ -70,8 +70,8 @@ public class Fenetre {
 	
 	private List<Chemin> dijkstra(Intersection intersectionDepart)
 	{
-		//TODO appel du dijkstra récursif.
-		//récupérer la liste des chemin 
+		//TODO appel du dijkstra rï¿½cursif.
+		//rï¿½cupï¿½rer la liste des chemin 
 		
 		return null;
 	}
