@@ -115,7 +115,9 @@ public class Fenetre {
     			Chemin chemin = chemins.get(intersection.getId());
     			
     			//Calcule d'information pour le nouveau chemin
-    			ArrayList<Troncon> listeTronconsEnCours = (ArrayList<Troncon>) chemin.getTroncons();
+    			//On créer une nouvelle arrayList pour ne pas modifier celles qu'on récupères
+    			ArrayList<Troncon> listeTronconsEnCours = new ArrayList<Troncon>();
+    			listeTronconsEnCours.addAll(chemin.getTroncons());
     			
     			Troncon tronconTraverser = intersection.getTroncon(intersectionSuivante.getId());
     			listeTronconsEnCours.add(tronconTraverser);
