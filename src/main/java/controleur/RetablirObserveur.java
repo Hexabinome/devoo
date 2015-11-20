@@ -4,7 +4,7 @@ package controleur;
  *
  * @author Maxou
  */
-public interface ModelObserver
-{
+public interface RetablirObserveur {
+
     void notifyObserver();
 }

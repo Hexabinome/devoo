@@ -17,39 +17,43 @@ import java.text.ParseException;
 class EtatInitial extends AbstractEtat
 {
 
-    public EtatInitial()
+    private final ControleurDonnees controleurDonnees;
+
+    public EtatInitial(ControleurDonnees controleurDonnees)
     {
+        this.controleurDonnees = controleurDonnees;
     }
 
     @Override
-    public void cliqueSurListItem(int livraisonId)
+    public EtatInterface cliqueSurListItem(int livraisonId)
     {
-        throw new RuntimeException("Dans cet etat il n y a pas une liste qui on pourrait cliquer.");
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public PlanDeVille chargerPlan(File plan) throws JDOMException, SAXException, IOException
+    public EtatInterface chargerPlan(File plan) throws JDOMException, SAXException, IOException
     {
-        //TODO implement end call command here
-        return DeserialiseurXML.ouvrirPlanDeVille(plan);
+        //remplacer plan qui est charge d'un nouveau plan (ssi le chargement du xml a reussi)
+        controleurDonnees.setPlan(DeserialiseurXML.ouvrirPlanDeVille(plan));
+        return new EtatPlanCharge(controleurDonnees);
     }
 
     @Override
-    public Model chargerLivraisons(File livraisons, PlanDeVille plan) throws JDOMException, SAXException, ParseException, IOException
+    public EtatInterface chargerLivraisons(File livraisons) throws JDOMException, SAXException, ParseException, IOException
     {
-        throw new RuntimeException("Chargement de Livraisons pas possible quand en etat initial.");
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void cliqueSurPlan(int x, int y)
+    public EtatInterface cliqueSurPlan(int x, int y)
     {
-        throw new RuntimeException("Dans cet etat il n y a pas un plan qui on pourrait cliquer.");
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void cliqueCalculerTournee(Model model)
+    public EtatInterface cliqueCalculerTournee()
     {
-        throw new RuntimeException("On ne peut pas calculer une tournee quand on ne connait pas encore le plan de ville et les livraisons");
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

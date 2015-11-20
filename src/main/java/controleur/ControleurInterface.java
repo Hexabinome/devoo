@@ -1,10 +1,7 @@
 package controleur;
 
 import java.io.File;
-import java.io.IOException;
 import modele.xmldata.ModelLecture;
-import org.jdom2.JDOMException;
-import org.xml.sax.SAXException;
 
 /**
  *
@@ -17,11 +14,11 @@ public interface ControleurInterface
 
     void ajouterModelObserver(ModelObserver observer);
 
-    void cliqueSurPlan();
+    void cliqueSurPlan(int x, int y);
 
-    boolean cliqueAnnuler();
+    void cliqueAnnuler();
 
-    boolean cliqueRetablir();
+    void cliqueRetablir();
 
     /**
      * Cette methode essaye de convertir un fichier XML dans sa representation

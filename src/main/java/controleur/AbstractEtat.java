@@ -10,18 +10,15 @@ public abstract class AbstractEtat implements EtatInterface
 {
 
     @Override
-    public boolean cliqueAnnuler()
+    public EtatInterface cliqueAnnuler()
     {
-        //TODO: place state independent undo logic here
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-
+        throw new RuntimeException("Not implemented yet");
     }
 
     @Override
-    public boolean cliqueRetablir()
+    public EtatInterface cliqueRetablir()
     {
-        //TODO: place state independent undo logic here
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new RuntimeException("Not implemented yet");
     }
 
 }

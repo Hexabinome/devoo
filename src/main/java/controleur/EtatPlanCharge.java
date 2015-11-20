@@ -3,10 +3,6 @@ package controleur;
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
-import modele.persistence.DeserialiseurXML;
-import modele.xmldata.Demande;
-import modele.xmldata.Model;
-import modele.xmldata.PlanDeVille;
 import org.jdom2.JDOMException;
 import org.xml.sax.SAXException;
 
@@ -17,46 +13,42 @@ import org.xml.sax.SAXException;
 public class EtatPlanCharge extends AbstractEtat
 {
 
-    @Override
-    public void cliqueSurPlan(int x, int y)
+    private final ControleurDonnees controleurDonnees;
+
+    public EtatPlanCharge(ControleurDonnees controleurDonnees)
     {
-        throw new RuntimeException("");
+        this.controleurDonnees = controleurDonnees;
     }
 
     @Override
-    public void cliqueSurListItem(int livraisonId)
+    public EtatInterface cliqueSurListItem(int livraisonId)
     {
-        throw new RuntimeException("");
-    }
-
-    /**
-     * Replace loaded plan by another plan
-     *
-     * @param plan
-     * @return
-     * @throws JDOMException
-     * @throws SAXException
-     * @throws IOException
-     */
-    @Override
-    public PlanDeVille chargerPlan(File plan) throws JDOMException, SAXException, IOException
-    {
-        //TODO: implement command and call command
-        return DeserialiseurXML.ouvrirPlanDeVille(plan);
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Model chargerLivraisons(File livraisons, PlanDeVille plan) throws JDOMException, SAXException, ParseException, IOException
+    public EtatInterface chargerPlan(File plan) throws JDOMException, SAXException, IOException
     {
-        //TODO: implement command and call command
-        Demande demande = DeserialiseurXML.ouvrirLivraison(livraisons, plan);
-        return new Model(plan, DeserialiseurXML.ouvrirLivraison(livraisons, plan));
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void cliqueCalculerTournee(Model model)
+    public EtatInterface chargerLivraisons(File livraisons) throws JDOMException, SAXException, ParseException, IOException
     {
-        throw new RuntimeException("On ne peut pas calculer une tournee quand on ne connait pas encore les livraisons");
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public EtatInterface cliqueSurPlan(int x, int y)
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public EtatInterface cliqueCalculerTournee()
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 
 }
