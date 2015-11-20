@@ -1,7 +1,5 @@
 package controleur;
 
-import modele.xmldata.Model;
-import modele.xmldata.PlanDeVille;
 import org.jdom2.JDOMException;
 import org.xml.sax.SAXException;
 
@@ -16,29 +14,41 @@ import java.text.ParseException;
 public class EtatEchange extends AbstractEtat
 {
 
-    @Override
-    public void cliqueSurListItem(int livraisonId) {
+    private final ControleurDonnees donnees;
 
+    EtatEchange(ControleurDonnees donnees)
+    {
+        this.donnees = donnees;
     }
 
     @Override
-    public PlanDeVille chargerPlan(File plan) throws JDOMException, SAXException, IOException {
-        return null;
+    public EtatInterface cliqueSurListItem(int livraisonId)
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Model chargerLivraisons(File livraisons, PlanDeVille plan)
-            throws JDOMException, SAXException, ParseException, IOException {
-        return null;
+    public EtatInterface chargerPlan(File plan) throws JDOMException, SAXException, IOException
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void cliqueSurPlan(int x, int y) {
-
+    public EtatInterface chargerLivraisons(File livraisons) throws JDOMException, SAXException, ParseException, IOException
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void cliqueCalculerTournee(Model model) {
-
+    public EtatInterface cliqueSurPlan(int x, int y)
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public EtatInterface cliqueCalculerTournee()
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

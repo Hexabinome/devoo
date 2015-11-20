@@ -3,11 +3,7 @@ package controleur;
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.Collection;
-import java.util.LinkedList;
-import modele.xmldata.Model;
 import modele.xmldata.ModelLecture;
-import modele.xmldata.PlanDeVille;
 import org.jdom2.JDOMException;
 import org.xml.sax.SAXException;
 
@@ -20,115 +16,102 @@ import org.xml.sax.SAXException;
 public class Controleur implements ControleurInterface
 {
 
-    // on va deleger la plupart des appels decelnche par une interaction IHM utilisateur par l'etat currant
-    private EtatInterface currentEtat;
-
-    // represente les fichiers XMLs charge. Peut aussi calculer et stoquer une solution
-    private Model model;
-
-    //some gui elements can be disables in certain situations, 
-    private final Collection<DesactivationObserver> desactObserverList;
-
-    //some gui elements need to be notified when the model changes
-    private final Collection<ModelObserver> modelObserverList;
-
-    private PlanDeVille plan;
+    private EtatInterface etat;
+    private final ControleurDonnees controleurDonnees;
 
     public Controleur()
     {
-        desactObserverList = new LinkedList<>();
-        modelObserverList = new LinkedList<>();
-
-        currentEtat = new EtatInitial();
+        controleurDonnees = new ControleurDonnees();
+        etat = new EtatInitial(controleurDonnees);
     }
 
     @Override
     public void ajouterDesactObserver(DesactivationObserver observer)
     {
-        desactObserverList.add(observer);
+        //TODO: rethink if it were not better to pass through state here
+        controleurDonnees.addDesactObserveur(observer);
     }
 
     @Override
     public void ajouterModelObserver(ModelObserver observer)
     {
-        modelObserverList.add(observer);
+        //TODO: rethink if it were not better to pass through state here
+        controleurDonnees.addModelObserveur(observer);
     }
 
     @Override
-    public boolean cliqueAnnuler()
+    public void cliqueAnnuler()
     {
-        return currentEtat.cliqueAnnuler();
+        etat = etat.cliqueAnnuler();
     }
 
     @Override
-    public boolean cliqueRetablir()
+    public void cliqueRetablir()
     {
-        return currentEtat.cliqueRetablir();
+        etat = etat.cliqueRetablir();
     }
 
     @Override
     public Exception chargerPlan(File fichierPlan)
     {
-        //remplacer plan qui est charge d'un nouveau plan (ssi le chargement du xml a reussi)
+        //TODO: catch and return exception here
         try {
-            plan = currentEtat.chargerPlan(fichierPlan);
-            currentEtat = new EtatPlanCharge();
+            etat = etat.chargerPlan(fichierPlan);
+            return null;
         }
-        catch (JDOMException | SAXException | IOException ex) {
-            return ex;
+        catch (JDOMException | SAXException | IOException e) {
+            return null;
         }
-        return null;
     }
 
     @Override
     public Exception chargerLivraisons(File fichierLivraisons)
     {
         try {
-            model = currentEtat.chargerLivraisons(fichierLivraisons, plan);
-            currentEtat = new EtatPrincipal();
+            etat = etat.chargerLivraisons(fichierLivraisons);
+            return null;
         }
-        catch (JDOMException | SAXException | ParseException | IOException ex) {
-            return ex;
+        catch (JDOMException | SAXException | IOException | ParseException e) {
+            return e;
         }
-        return null;
     }
 
     @Override
     public void cliqueOutilAjouter()
     {
-        //replace currentEtat
+        etat = new EtatAjout(controleurDonnees);
     }
 
     @Override
     public void cliqueOutilSupprimer()
     {
-        //replace currentEtat
+        etat = new EtatSupression(controleurDonnees);
     }
 
     @Override
     public void cliqueOutilEchanger()
     {
-        //replace currentEtat
+        etat = new EtatEchange(controleurDonnees);
     }
 
     @Override
     public ModelLecture getModel()
     {
-        if (model == null)
+        if (controleurDonnees.getModel() == null)
             throw new RuntimeException("Model n'existe pas, il faut charger des fichiers xml avant");
-        return model;
+        return controleurDonnees.getModel();
     }
 
     @Override
-    public void cliqueSurPlan()
+    public void cliqueSurPlan(int x, int y)
     {
-        // forward to current etat
+        etat = etat.cliqueSurPlan(x, y);
     }
 
     @Override
     public void cliqueCalculerTourne()
     {
-        currentEtat.cliqueCalculerTournee(model);
+        etat = etat.cliqueCalculerTournee();
     }
 
 }
