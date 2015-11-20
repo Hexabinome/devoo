@@ -92,10 +92,10 @@ public class Fenetre {
 			//+ l'id de l'interserction de départ et la clef de la map comme intersection d'arrivé
         Map<Integer, Chemin> chemins = new HashMap<>();
 		chemins.put(intersectionDepart.getId(), 
-					new Chemin(0, new ArrayList<>(), intersectionDepart.getId(), intersectionDepart.getId()));
+					new Chemin(0, new ArrayList<Troncon>(), intersectionDepart.getId(), intersectionDepart.getId()));
 		
 		Comparator<Intersection> comparator = new CoutComparator();
-        PriorityQueue<Intersection> queue = new PriorityQueue<Intersection>(comparator);
+        PriorityQueue<Intersection> queue = new PriorityQueue<Intersection>(1000, comparator);
         queue.add(intersectionDepart);
 		
         //ALGO
@@ -106,20 +106,32 @@ public class Fenetre {
         	//Pour toutes les intersections suivantes
     		for(Intersection intersectionSuivante : getListeIntersectionSuivante(intersection, plan))
     		{
+    			queue.add(intersectionSuivante);
     			//On récupére le chemin en cours de contruction dans la map
     			Chemin chemin = chemins.get(intersection.getId());
     			
     			//Calcule d'information pour le nouveau chemin
-    			Troncon troncon = intersection.getTroncon(intersectionSuivante.getId());
+    			ArrayList<Troncon> listeTronconsEnCours = (ArrayList<Troncon>) chemin.getTroncons();
     			
-    			float cout = chemin.getCout() + troncon.getCout();
+    			Troncon tronconTraverser = intersection.getTroncon(intersectionSuivante.getId());
+    			listeTronconsEnCours.add(tronconTraverser);
     			
-    			ArrayList<Troncon> tronconsEnCours = (ArrayList<Troncon>) chemin.getTroncons();
-    			tronconsEnCours.add(troncon);
+    			float cout = chemin.getCout() + tronconTraverser.getCout();
     			
-    			//Insertion du nouveau chemin dans la map
-    			chemins.put(intersectionSuivante.getId(), 
-    					new Chemin(cout, tronconsEnCours, chemin.getIdDepart(), intersectionSuivante.getId()));
+    			//Insertion ou remplacement si le cout est inf�rieur du nouveau chemin dans la map
+    			Chemin cheminDejaInserer = chemins.get(intersectionSuivante.getId());
+    			if(cheminDejaInserer != null)
+    			{
+    				if(cheminDejaInserer.getCout() > cout)
+    				{	chemins.put(intersectionSuivante.getId(), 
+            					new Chemin(cout, listeTronconsEnCours, chemin.getIdDepart(), intersectionSuivante.getId()));
+    				}
+    			}
+    			else
+    			{
+    				chemins.put(intersectionSuivante.getId(), 
+        					new Chemin(cout, listeTronconsEnCours, chemin.getIdDepart(), intersectionSuivante.getId()));
+    			}
     		}
         }
 		
