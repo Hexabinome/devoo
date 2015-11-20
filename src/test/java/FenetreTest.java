@@ -3,6 +3,8 @@ import static org.junit.Assert.assertEquals;
 import java.util.ArrayList;
 import java.util.Map.Entry;
 
+import org.junit.Test;
+
 import modele.xmldata.Chemin;
 import modele.xmldata.Fenetre;
 import modele.xmldata.Intersection;
@@ -32,7 +34,7 @@ public class FenetreTest {
             +getLivraisons():Map<Integer, Livraison>
             +toString():String
         */
-	
+	@Test
 	public void dijkstraTest()
 	{
 		Fenetre fenetre = new Fenetre(0, 0);
@@ -91,11 +93,13 @@ public class FenetreTest {
 				case 1 :
 					assertEquals(chemin.getValue().getCout(), 0, 0);
 					assertEquals(chemin.getValue().getTroncons().containsAll(troncon), true);
+					assertEquals(chemin.getValue().getTroncons().size(), troncon.size());
 					break;
 				case 2 :
 					assertEquals(chemin.getValue().getCout(), 1, 0);
 					troncon.add(a);
 					assertEquals(chemin.getValue().getTroncons().containsAll(troncon), true);
+					assertEquals(chemin.getValue().getTroncons().size(), troncon.size());
 					troncon = new ArrayList<>();
 					break;
 				case 3 :
@@ -103,14 +107,16 @@ public class FenetreTest {
 					troncon.add(a);
 					troncon.add(b);
 					assertEquals(chemin.getValue().getTroncons().containsAll(troncon), true);
+					assertEquals(chemin.getValue().getTroncons().size(), troncon.size());
 					
 					troncon = new ArrayList<>();
 					break;
 				case 4 :
-					assertEquals(chemin.getValue().getCout(), 3, 0);
+					assertEquals(chemin.getValue().getCout(), 2, 0);
 					troncon.add(a);
 					troncon.add(d);
 					assertEquals(chemin.getValue().getTroncons().containsAll(troncon), true);
+					assertEquals(chemin.getValue().getTroncons().size(), troncon.size());
 					
 					troncon = new ArrayList<>();
 					break;
@@ -118,6 +124,7 @@ public class FenetreTest {
 					assertEquals(chemin.getValue().getCout(), 1, 0);
 					troncon.add(f);
 					assertEquals(chemin.getValue().getTroncons().containsAll(troncon), true);
+					assertEquals(chemin.getValue().getTroncons().size(), troncon.size());
 					
 					troncon = new ArrayList<>();
 					break;
@@ -125,6 +132,7 @@ public class FenetreTest {
 					assertEquals(chemin.getValue().getCout(), 1, 0);
 					troncon.add(g);
 					assertEquals(chemin.getValue().getTroncons().containsAll(troncon), true);
+					assertEquals(chemin.getValue().getTroncons().size(), troncon.size());
 					
 					troncon = new ArrayList<>();
 					break;
@@ -133,6 +141,7 @@ public class FenetreTest {
 					troncon.add(g);
 					troncon.add(h);
 					assertEquals(chemin.getValue().getTroncons().containsAll(troncon), true);
+					assertEquals(chemin.getValue().getTroncons().size(), troncon.size());
 					
 					troncon = new ArrayList<>();
 					break;
@@ -142,6 +151,7 @@ public class FenetreTest {
 					troncon.add(h);
 					troncon.add(i);
 					assertEquals(chemin.getValue().getTroncons().containsAll(troncon), true);
+					assertEquals(chemin.getValue().getTroncons().size(), troncon.size());
 					
 					troncon = new ArrayList<>();
 					break;
