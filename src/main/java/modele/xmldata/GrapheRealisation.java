@@ -55,8 +55,7 @@ public class GrapheRealisation implements Graphe
 	
 	public void setChemin(Chemin chemin)
 	{
-		if (chemin.getIdDepart() > 0 && chemin.getIdDepart() < chemins.length 
-				&& chemin.getIdFin() > 0 && chemin.getIdFin() < chemins.length)
+		if (chemin.getIdDepart() > 0 && chemin.getIdDepart() < chemins.length && chemin.getIdFin() > 0 && chemin.getIdFin() < chemins.length)
 			chemins[chemin.getIdDepart()][chemin.getIdFin()] = chemin;
 	}
 }

@@ -15,6 +15,8 @@ public class Chemin {
 		this.troncons = troncons;
 		this.idDepart = idDepart;
 		this.idFin = idFin;
+		
+		troncons = new ArrayList<Troncon>();
 	}
 	public float getCout() {
 		return cout;

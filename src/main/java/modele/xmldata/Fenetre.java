@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.PriorityQueue;
 import java.util.Set;
 
@@ -75,14 +76,17 @@ public class Fenetre {
 			//Recupration de l'intersection de la livraison
 			Intersection intersection = plan.getIntersection(livraison.getKey());
 			
-			for(Chemin chemin : dijkstra(intersection, intersectionsRecherchee, plan))
+			//Execute l'algorithme et ajoute dans la matrice les chemins
+			for(Entry<Integer, Chemin> chemin : dijkstra(intersection, plan))
 			{
-				graphe.setChemin(chemin);
+				if(intersectionsRecherchee.contains(chemin))
+					graphe.setChemin(chemin.getValue());
 			}
 		}
 	}
 	
-	private List<Chemin> dijkstra(Intersection intersectionDepart, Set<Integer> intersectionsRecherchee, PlanDeVille plan)
+	//TODO set private (public pour les test)
+	public Set<Entry<Integer, Chemin>> dijkstra(Intersection intersectionDepart, PlanDeVille plan)
 	{
 		//INITIALISATION
 		
@@ -118,7 +122,7 @@ public class Fenetre {
     			
     			float cout = chemin.getCout() + tronconTraverser.getCout();
     			
-    			//Insertion ou remplacement si le cout est inf�rieur du nouveau chemin dans la map
+    			//Insertion ou remplacement si le cout est inf�rieur du nouveau chemin dans la map
     			Chemin cheminDejaInserer = chemins.get(intersectionSuivante.getId());
     			if(cheminDejaInserer != null)
     			{
@@ -134,10 +138,10 @@ public class Fenetre {
     			}
     		}
         }
-		
+        
 		//Parcourir la map pour récupérer juste la liste des chemins finaux
         
-		return null;
+		return chemins.entrySet();
 	}
 	
 	/**
