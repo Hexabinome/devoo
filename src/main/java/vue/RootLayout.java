@@ -78,6 +78,18 @@ public class RootLayout implements Initializable {
     private TreeTableView<Livraison> tableViewFenetre;
 
     /**
+     * Colonne livraison de la vue à gauche
+     *
+     */
+    private final TreeTableColumn<Livraison, String> colonneLivraison = new TreeTableColumn<>("Livraisons");
+
+    /**
+     * Colonne horaire de passage de la vue à gauche
+     */
+    TreeTableColumn<Livraison, String> colonneHoraire = new TreeTableColumn<>("Horaires de passage");
+
+
+    /**
      * Partie droite de la fenêtre, affichant de la graphe du plan de la ville et des livraisons
      */
     @FXML
@@ -158,6 +170,10 @@ public class RootLayout implements Initializable {
         } catch (ParseException e) {
             e.printStackTrace();
         }*/
+
+        colonneLivraison.setPrefWidth(161);
+        colonneHoraire.setPrefWidth(161);
+        tableViewFenetre.getColumns().addAll(colonneLivraison,colonneHoraire);
 
     }
 
@@ -369,17 +385,8 @@ public class RootLayout implements Initializable {
             dummyRoot.getChildren().add(construireFenetreItem(f));
         }
 
-
-        // Colonne livraison
-        TreeTableColumn<Livraison, String> livraisonColonne = new TreeTableColumn<>("Livraisons");
-        livraisonColonne.setPrefWidth(161);
-
-        TreeTableColumn<Livraison, String> horaireColonne = new TreeTableColumn<>("Horaires de passage");
-        horaireColonne.setPrefWidth(161);
-
-
         //livraisonColum.setResizable(false);
-        livraisonColonne.setCellValueFactory((TreeTableColumn.CellDataFeatures<Livraison, String> param)
+        colonneLivraison.setCellValueFactory((TreeTableColumn.CellDataFeatures<Livraison, String> param)
                 -> {
             return new ReadOnlyStringWrapper(Integer.toString(param.getValue().getValue().getAdresse()));
         });
@@ -390,7 +397,7 @@ public class RootLayout implements Initializable {
         dummyRoot.setExpanded(true);
         tableViewFenetre.setShowRoot(false);
 
-        tableViewFenetre.getColumns().addAll(livraisonColonne, horaireColonne);
+        tableViewFenetre.getColumns().addAll(colonneLivraison, colonneHoraire);
 
     }
 
