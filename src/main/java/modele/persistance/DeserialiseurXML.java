@@ -1,4 +1,4 @@
-package modele.persistence;
+package modele.persistance;
 
 import modele.xmldata.*;
 import org.jdom2.Document;

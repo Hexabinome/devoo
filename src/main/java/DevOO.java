@@ -1,12 +1,3 @@
-import java.io.IOException;
-import java.text.ParseException;
-
-import modele.persistence.DeserialiseurXML;
-import modele.xmldata.PlanDeVille;
-
-import org.jdom2.JDOMException;
-import org.xml.sax.SAXException;
-
 import vue.FenetrePrincipale;
 
 /**

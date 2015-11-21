@@ -1,6 +1,12 @@
 package vue;
 
-import controleur.ControleurInterface;
+import java.io.File;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Map;
+import java.util.ResourceBundle;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -11,65 +17,63 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
 import javafx.stage.FileChooser;
-import modele.persistence.DeserialiseurXML;
 import modele.xmldata.Fenetre;
 import modele.xmldata.Intersection;
 import modele.xmldata.PlanDeVille;
-import org.controlsfx.dialog.ExceptionDialog;
-import org.jdom2.JDOMException;
-import org.xml.sax.SAXException;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Map;
-import java.util.ResourceBundle;
+import org.controlsfx.dialog.ExceptionDialog;
+
+import controleur.ControleurInterface;
 
 /**
  * Cette classe joue le rôle de binding pour la fenetre principale de l'application.
  * C'est ici qu'on spécifiera les écouteurs et consorts.
  * Remarque : Les écouteurs peuvent être spécifiés directement dans le fichier xml aussi
  */
+/**
+ * @author David
+ *
+ */
 public class RootLayout implements Initializable {
 
+    /** La taille sur l'interface graphique d'une intersection du plan de la ville */
     private final double DIAMETRE_INTERSECTION = 7;
+    /** La marge à laisser sur les côté du canvas graphique afin d'avoir plus du lisibilité */
     private final int MARGE_INTERSECTION = 30;
+
+    /** Largeur de la boîte de dialogue d'erreur */
+    private final double ERROR_DIALOG_WIDTH = 250;
+    /** Hauteur de la boîte de dialogue d'erreur */
+    private final double ERROR_DIALOG_HEIGHT = 450;
+    
     /**
-     * Controleur à appeler en cas de besoin
+     * Controleur déléguant la logique applicative à la couche controleur
      */
     ControleurInterface controleurInterface;
+    
     /**
      * Vue à gauche qui affiche les livraisons
      */
     @FXML
     private TreeTableView<Fenetre> tableViewFenetre;
-
+    
+    /**
+     * Partie droite de la fenêtre, affichant de la graphe du plan de la ville et des livraisons
+     */
     @FXML
     private Pane canvasGraphique;
 
-    private final double ERROR_DIALOG_WIDTH = 250;
-    private final double ERROR_DIALOG_HEIGHT = 450;
 
-
+    /** Contient tous les points graphiques actuellement afficher pour les intersections */
     private Collection<Ellipse> intersectionsGraphiques = new ArrayList<Ellipse>();
+    /** Contient l'échelle X actuelle par rapport à laquelle les intersections sont affichés */
     private double echelleXIntersection = 0;
+    /** Contient l'échelle Y actuelle par rapport à laquelle les intersections sont affichés */
     private double echelleYIntersection = 0;
-    final ChangeListener<Number> ecouteurDeRedimensionnement = new ChangeListener<Number>() {
 
-        @Override
-        public void changed(ObservableValue<? extends Number> observable,
-                            Number oldValue, Number newValue) {
-
-            canvasGraphique.getChildren().clear();
-            afficherToutesEllipses();
-        }
-    };
-
-    public RootLayout() {
-    }
-
+    /** Met à jour le controleur d'interface
+     * @param controleurInterface Le nouveau controleur d'interface
+     */
     public void setControleurInterface(ControleurInterface controleurInterface) {
         this.controleurInterface = controleurInterface;
     }
@@ -83,9 +87,9 @@ public class RootLayout implements Initializable {
         if (file != null) {
             Exception messageErreur = controleurInterface.chargerPlan(file);
             if (messageErreur != null) {
-                ouvrirAlertXML(messageErreur, file.getName());
+                ouvrirAlerteXML(messageErreur, file.getName());
             } else {
-                // TODO : afficher le plan
+            	construireGraphe(controleurInterface.getModel().getPlan());
             }
         }
     }
@@ -100,7 +104,7 @@ public class RootLayout implements Initializable {
         if (file != null) {
             Exception exception = controleurInterface.chargerLivraisons(file);
             if (exception != null) {
-                ouvrirAlertXML(exception, file.getName());
+                ouvrirAlerteXML(exception, file.getName());
             } else {
                 // TODO : remplir la partie à gauche
             }
@@ -114,20 +118,44 @@ public class RootLayout implements Initializable {
     }
 
     @FXML
-    void clic_ajouterLivraison() throws JDOMException, IOException, SAXException {
-        PlanDeVille planDeVille = DeserialiseurXML.ouvrirPlanDeVille(
-                ClassLoader.getSystemClassLoader().getResourceAsStream("samples/plan10x10.xml"));
-        construireGraphe(planDeVille);
+    void clic_ajouterLivraison() {
+    	// TODO : aller à l'état ajouter
     }
 
     @FXML
     void clic_echangerLivraison() {
-        System.out.println(canvasGraphique.getHeight());
-        System.out.println(canvasGraphique.getWidth());
+    	// TODO : aller à l'état d'échange
     }
+    
+    @FXML
+    void clic_supprimerLivraison() {
+    	// TODO : aller à l'état de suppression
+    }
+    
+    /**
+     * Méthode appelée lors du redimensionnement de la fenêtre.
+     * Elle replace les arrêtes du graphe à leur bonne position
+     */
+    final ChangeListener<Number> ecouteurDeRedimensionnement = new ChangeListener<Number>() {
 
+        @Override
+        public void changed(ObservableValue<? extends Number> observable,
+                            Number oldValue, Number newValue) {
+
+            canvasGraphique.getChildren().clear();
+            afficherToutesEllipses();
+        }
+    };
+
+
+    
+    /**
+     * Construit et affiche le graphe du plan de la ville sur le canvas graphique de la fenêtre
+     * @param plan Le plan de la ville, chargée par le couche controleur et persistance
+     */
     private void construireGraphe(PlanDeVille plan) {
-
+    	canvasGraphique.getChildren().clear();
+    	
         Map<Integer, Intersection> toutesIntersections = plan.getIntersections();
         intersectionsGraphiques = new ArrayList<Ellipse>();
 
@@ -142,12 +170,22 @@ public class RootLayout implements Initializable {
         afficherToutesEllipses();
     }
 
+    /**
+     * Construit un point graphique pour une intersection du plan de la ville
+     * @param i L'intersection
+     * @return Le point du graphe, à sa position du fichier XML du plan de la ville
+     */
     private Ellipse construireEllipse(Intersection i) {
         Ellipse intersection = new Ellipse(i.getX(), i.getY(), DIAMETRE_INTERSECTION, DIAMETRE_INTERSECTION);
         intersection.setFill(Color.YELLOW);
         return intersection;
     }
 
+    /**
+     * Affiche tous les points du plan et met à jour la taille du canvas graphique.
+     * Les points sont toujours affichés par rapport :
+     * (leur taille initiale dans le fichier XML / la plus grande taille dans le fichier XML) => (la nouvelle taille / la taille du canvas)
+     */
     private void afficherToutesEllipses() {
         for (Ellipse e : intersectionsGraphiques)
             afficherEllipse(e);
@@ -160,6 +198,9 @@ public class RootLayout implements Initializable {
         }
     }
 
+    /** Affiche une ellipse sur l'interface, en fonction de la taille actuelle
+     * @param e Le point à afficher
+     */
     private void afficherEllipse(Ellipse e) {
         double newX = e.getCenterX() * canvasGraphique.getWidth() / (echelleXIntersection + MARGE_INTERSECTION);
         double newY = e.getCenterY() * canvasGraphique.getHeight() / (echelleYIntersection + MARGE_INTERSECTION);
@@ -174,7 +215,7 @@ public class RootLayout implements Initializable {
      * Ouvre une boite de dialogue pour choisir un fichier
      * http://stackoverflow.com/questions/25491732/how-do-i-open-the-javafx-filechooser-from-a-controller-class
      *
-     * @param titreDialogue
+     * @param titreDialogue Le titre du sélectionneur de fichier
      */
     private File ouvrirSelectionneurDeFichier(String titreDialogue) {
         FileChooser fileChooser = new FileChooser();
@@ -187,7 +228,12 @@ public class RootLayout implements Initializable {
         return fileChooser.showOpenDialog(tableViewFenetre.getScene().getWindow());
     }
 
-    private void ouvrirAlertXML(Exception message, String fichier) {
+    /**
+     * Ouvre une boîte de dialogue d'exception modale afin de signalier à l'utilisateur une erreur avec un fichier XML
+     * @param message Le message à afficher
+     * @param fichier Le nom du fichier qui a généré l'erreur
+     */
+    private void ouvrirAlerteXML(Exception message, String fichier) {
 
         ExceptionDialog exceptionDialog = new ExceptionDialog(message);
         exceptionDialog.setTitle("Erreur");
@@ -197,9 +243,7 @@ public class RootLayout implements Initializable {
         exceptionDialog.setResizable(false);
         exceptionDialog.initOwner(tableViewFenetre.getScene().getWindow());
 
-
         exceptionDialog.showAndWait();
-
     }
 
 }

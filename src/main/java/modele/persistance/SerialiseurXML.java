@@ -1,4 +1,4 @@
-package modele.persistence;
+package modele.persistance;
 
 /**
  * Permet de sérialiser des objets notament la feuille de route

@@ -1,14 +1,13 @@
 package controleur;
 
 import java.io.File;
-import modele.persistence.DeserialiseurXML;
-import modele.xmldata.Model;
-import modele.xmldata.PlanDeVille;
-import org.jdom2.JDOMException;
-import org.xml.sax.SAXException;
-
 import java.io.IOException;
 import java.text.ParseException;
+
+import modele.persistance.DeserialiseurXML;
+
+import org.jdom2.JDOMException;
+import org.xml.sax.SAXException;
 
 /**
  *

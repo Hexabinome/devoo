@@ -1,13 +1,17 @@
 import java.io.IOException;
 import java.text.ParseException;
-import modele.persistence.DeserialiseurXML;
+
+import modele.persistance.DeserialiseurXML;
 import modele.xmldata.Demande;
 import modele.xmldata.Model;
 import modele.xmldata.ModelLecture;
 import modele.xmldata.PlanDeVille;
 import modele.xmldata.Troncon;
+
 import org.jdom2.JDOMException;
+
 import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 import org.xml.sax.SAXException;
 

@@ -70,7 +70,7 @@
                             </graphic>
                             </Button>
 
-                        <Button mnemonicParsing="false" text="Supprimer livraisons">
+                        <Button mnemonicParsing="false" onAction="#clic_supprimerLivraison" text="Supprimer livraisons">
                             <graphic>
                                 <Glyph fontFamily="FontAwesome" icon="TRASH" />
                             </graphic>

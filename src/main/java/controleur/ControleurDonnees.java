@@ -6,11 +6,11 @@ import modele.xmldata.Model;
 import modele.xmldata.PlanDeVille;
 
 /**
- * Cette classe contient les donnes necessaire pour la gestion des etats. On
+ * Cette classe contient les donnees necessaires pour la gestion des etats. On
  * pourrait dire qu'elle represente seulement des donnees et devrait du coup
  * mieux etre situe dans le package model. Par contre cette classe est lie a une
  * seul IHM, du coup il y a un bon raison pour la laisser ici dans le
- * controlleur.
+ * controleur.
  *
  * @author Maxou
  */
