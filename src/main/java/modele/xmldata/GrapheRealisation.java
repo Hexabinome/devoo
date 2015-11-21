@@ -42,13 +42,13 @@ public class GrapheRealisation implements Graphe
     @Override
     public boolean estArc(int i, int j)
     {
-    	if(idCheminToIdMatrice.get(i) == null || idCheminToIdMatrice.get(j) == null || i > chemins.length || j > chemins.length)
+    	if(idCheminToIdMatrice.get(i) == null || idCheminToIdMatrice.get(j) == null || idCheminToIdMatrice.get(i) > chemins.length || idCheminToIdMatrice.get(i) > chemins.length)
     		return false;
         return idCheminToIdMatrice.get(i) != idCheminToIdMatrice.get(j);
     }
 
 	public Chemin getChemin(int i, int j) {
-    	if(idCheminToIdMatrice.get(i) == null || idCheminToIdMatrice.get(j) == null || i > chemins.length || j > chemins.length)
+    	if(idCheminToIdMatrice.get(i) == null || idCheminToIdMatrice.get(j) == null || idCheminToIdMatrice.get(i) > chemins.length || idCheminToIdMatrice.get(i) > chemins.length)
     		return null;
 		return chemins[idCheminToIdMatrice.get(i)][idCheminToIdMatrice.get(j)];
 	}

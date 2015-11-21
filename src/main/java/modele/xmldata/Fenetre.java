@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -68,7 +69,8 @@ public class Fenetre {
      */
 	public void calculerChemins(PlanDeVille plan, GrapheRealisation graphe, Fenetre fNext) {
 		//Récupère toutes les intersections avec les quels on doit calculer le plus court chemin.
-		Set<Integer> intersectionsRecherchee = livraisons.keySet();
+		Set<Integer> intersectionsRecherchee = new HashSet<Integer>();
+		intersectionsRecherchee.addAll(livraisons.keySet());
 		intersectionsRecherchee.addAll(fNext.getLivraisons().keySet());
 		
 		for(Map.Entry<Integer, Livraison> livraison : livraisons.entrySet())
@@ -79,7 +81,7 @@ public class Fenetre {
 			//Execute l'algorithme et ajoute dans la matrice les chemins
 			for(Entry<Integer, Chemin> chemin : dijkstra(intersection, plan))
 			{
-				if(intersectionsRecherchee.contains(chemin))
+				if(intersectionsRecherchee.contains(chemin.getKey()))
 					graphe.setChemin(chemin.getValue());
 			}
 		}
@@ -110,7 +112,6 @@ public class Fenetre {
         	//Pour toutes les intersections suivantes
     		for(Intersection intersectionSuivante : getListeIntersectionSuivante(intersection, plan))
     		{
-    			queue.add(intersectionSuivante);
     			//On récupére le chemin en cours de contruction dans la map
     			Chemin chemin = chemins.get(intersection.getId());
     			
@@ -135,6 +136,7 @@ public class Fenetre {
     			}
     			else
     			{
+    				queue.add(intersectionSuivante);
     				chemins.put(intersectionSuivante.getId(), 
         					new Chemin(cout, listeTronconsEnCours, chemin.getIdDepart(), intersectionSuivante.getId()));
     			}
