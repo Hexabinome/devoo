@@ -35,7 +35,7 @@ import java.util.*;
  * C'est ici qu'on spécifiera les écouteurs et consorts.
  * Remarque : Les écouteurs peuvent être spécifiés directement dans le fichier xml aussi
  */
-
+//TODO : split thi class
 /**
  * @author David
  */
