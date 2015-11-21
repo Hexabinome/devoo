@@ -31,7 +31,7 @@ public class ControleurDonnees
     // collection des observers pour la passibilite d'annuler / retablis des interactions effectuees.
     private final Collection<RetablirObserveur> retablirObserveurs;
 
-    private PlanDeVille plan;
+    private PlanDeVille plan = null;
 
     private Historique hist;
 

@@ -3,6 +3,10 @@ package controleur;
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
+import modele.persistance.DeserialiseurXML;
+import modele.xmldata.Demande;
+import modele.xmldata.Model;
+import modele.xmldata.PlanDeVille;
 import org.jdom2.JDOMException;
 import org.xml.sax.SAXException;
 
@@ -23,43 +27,49 @@ class EtatPrincipal implements EtatInterface
     @Override
     public EtatInterface cliqueAnnuler()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Undo/Redo is allowed in this state, but not supported yet, since not a core feature."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public EtatInterface cliqueRetablir()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Undo/Redo is allowed in this state, but not supported yet, since not a core feature."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public EtatInterface cliqueSurListItem(int livraisonId)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Interaction with list is allowed in this state, but not supported yet, since not a core feature."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public EtatInterface chargerPlan(File plan) throws JDOMException, SAXException, IOException
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //remplacer plan qui est charge d'un nouveau plan (ssi le chargement du xml a reussi)
+        controleurDonnees.setPlan(DeserialiseurXML.ouvrirPlanDeVille(plan));
+        return new EtatPlanCharge(controleurDonnees);
     }
 
     @Override
     public EtatInterface chargerLivraisons(File livraisons) throws JDOMException, SAXException, ParseException, IOException
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //TODO use command instead if direct implementation here
+        PlanDeVille plan = controleurDonnees.getPlan();
+        Demande demande = DeserialiseurXML.ouvrirLivraison(livraisons, plan);
+        controleurDonnees.setModel(new Model(plan, demande));
+        return this;
     }
 
     @Override
     public EtatInterface cliqueSurPlan(int x, int y)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Interaction with plan is allowed in this state, but not supported yet, since not a core feature."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public EtatInterface cliqueCalculerTournee()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Request to calculate tournee is allowed in this state, but not supported yet, since not a core feature."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

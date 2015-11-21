@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import modele.xmldata.ModelLecture;
+import modele.xmldata.PlanDeVille;
 import org.jdom2.JDOMException;
 import org.xml.sax.SAXException;
 
@@ -28,14 +29,12 @@ public class Controleur implements ControleurInterface
     @Override
     public void ajouterDesactObserver(DesactivationObserver observer)
     {
-        //TODO: rethink if it were not better to pass through state here
         controleurDonnees.addDesactObserveur(observer);
     }
 
     @Override
     public void ajouterModelObserver(ModelObserver observer)
     {
-        //TODO: rethink if it were not better to pass through state here
         controleurDonnees.addModelObserveur(observer);
     }
 
@@ -60,7 +59,7 @@ public class Controleur implements ControleurInterface
             return null;
         }
         catch (JDOMException | SAXException | IOException e) {
-            return null;
+            return e;
         }
     }
 
@@ -112,6 +111,15 @@ public class Controleur implements ControleurInterface
     public void cliqueCalculerTourne()
     {
         etat = etat.cliqueCalculerTournee();
+    }
+
+    @Override
+    public PlanDeVille getPlanDeVille()
+    {
+        PlanDeVille plan = controleurDonnees.getPlan();
+        if (plan == null)
+            throw new RuntimeException("Plan n'existe pas, il faut charger le fichier xml avant d'appeler cette methode");
+        return plan;
     }
 
 }

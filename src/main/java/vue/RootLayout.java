@@ -119,7 +119,7 @@ public class RootLayout implements Initializable {
             if (messageErreur != null) {
                 ouvrirAlerteXML(messageErreur, file.getName());
             } else {
-                construireGraphe(controleurInterface.getModel().getPlan());
+                construireGraphe(controleurInterface.getPlanDeVille());
             }
         }
     }

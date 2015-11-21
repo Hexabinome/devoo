@@ -2,6 +2,7 @@ package controleur;
 
 import java.io.File;
 import modele.xmldata.ModelLecture;
+import modele.xmldata.PlanDeVille;
 
 /**
  *
@@ -47,6 +48,8 @@ public interface ControleurInterface
     void cliqueOutilEchanger();
     
     ModelLecture getModel();
+    
+    PlanDeVille getPlanDeVille();
 
     void cliqueCalculerTourne();
 }

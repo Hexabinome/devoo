@@ -45,7 +45,6 @@ public class EtatPlanCharge extends AbstractEtat
         PlanDeVille plan = controleurDonnees.getPlan();
         Demande demande = DeserialiseurXML.ouvrirLivraison(livraisons, plan);
         controleurDonnees.setModel(new Model(plan, demande));
-        
         return new EtatPrincipal(controleurDonnees);
     }
 
