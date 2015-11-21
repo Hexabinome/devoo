@@ -1,12 +1,16 @@
 package modele.xmldata;
+
+import java.util.HashMap;
+
 /**
  *
  * @author maxou
  */
 public class GrapheRealisation implements Graphe
 {
-    Chemin[][] chemins;
-
+    private Chemin[][] chemins;
+    private HashMap<Integer, Integer> idCheminToIdMatrice;
+    private int nombreCheminInserer = 0;
     /**
      * Cree un graphe 
      *
@@ -15,6 +19,7 @@ public class GrapheRealisation implements Graphe
     public GrapheRealisation(int nbSommets)
     {
         chemins = new Chemin[nbSommets][nbSommets];
+        idCheminToIdMatrice = new HashMap<>();
     }
 
     @Override
@@ -28,25 +33,24 @@ public class GrapheRealisation implements Graphe
     {
     	//TODO gestion de l'erreur
     	//TODO revoir la gestion des couts car chemins return un float
-        if(chemins[i][j] == null)
+        if(chemins[idCheminToIdMatrice.get(i)][idCheminToIdMatrice.get(j)] == null)
         	return -1;
         
-        return (int)chemins[i][j].getCout();
+        return (int)chemins[idCheminToIdMatrice.get(i)][idCheminToIdMatrice.get(j)].getCout();
     }
 
     @Override
     public boolean estArc(int i, int j)
     {
-        if (i < 0 || i >= chemins.length || j < 0 || j >= chemins.length)
-            return false;
-        //TODO pourquoi faire �a ? 
-        return i != j;
+    	if(idCheminToIdMatrice.get(i) == null || idCheminToIdMatrice.get(j) == null || i > chemins.length || j > chemins.length)
+    		return false;
+        return idCheminToIdMatrice.get(i) != idCheminToIdMatrice.get(j);
     }
 
 	public Chemin getChemin(int i, int j) {
-		if (i < 0 || i >= chemins.length || j < 0 || j >= chemins.length)
-			return null;
-		return chemins[i][j];
+    	if(idCheminToIdMatrice.get(i) == null || idCheminToIdMatrice.get(j) == null || i > chemins.length || j > chemins.length)
+    		return null;
+		return chemins[idCheminToIdMatrice.get(i)][idCheminToIdMatrice.get(j)];
 	}
 
 	public void setChemins(Chemin[][] chemins) {
@@ -55,7 +59,20 @@ public class GrapheRealisation implements Graphe
 	
 	public void setChemin(Chemin chemin)
 	{
-		if (chemin.getIdDepart() > 0 && chemin.getIdDepart() < chemins.length && chemin.getIdFin() > 0 && chemin.getIdFin() < chemins.length)
-			chemins[chemin.getIdDepart()][chemin.getIdFin()] = chemin;
+		Integer i, j;
+
+		if((i = idCheminToIdMatrice.get(chemin.getIdDepart())) == null)
+		{
+			i = nombreCheminInserer;
+			idCheminToIdMatrice.put(chemin.getIdDepart(), nombreCheminInserer++);
+		}
+		if((j = idCheminToIdMatrice.get(chemin.getIdFin())) == null)
+		{
+			j = nombreCheminInserer;
+			idCheminToIdMatrice.put(chemin.getIdFin(), nombreCheminInserer++);
+		}
+		
+		if(i < chemins.length && j < chemins.length)
+			chemins[i][j] = chemin;
 	}
 }

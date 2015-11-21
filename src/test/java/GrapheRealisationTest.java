@@ -31,7 +31,7 @@ public class GrapheRealisationTest {
     
   @Test
   public void testAjoutChemin() {
-  	GrapheRealisation graphe = new GrapheRealisation(10);
+  	GrapheRealisation graphe = new GrapheRealisation(2);
   	
     assertEquals("On peut bien accéder à des chemins (nulls par défaut)", graphe.getChemin(1, 1), null);
     
@@ -45,7 +45,7 @@ public class GrapheRealisationTest {
      
 	graphe.setChemin(chemin2);
        
-	assertEquals("Le chemin a bien pas été ajouté car out of bound", graphe.getChemin(11, 2), null);
+	assertEquals("Le chemin n'a pas été ajouté car out of bound", graphe.getChemin(11, 2), null);
       
   }  
 }
