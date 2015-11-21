@@ -34,7 +34,7 @@ public interface ControleurInterface
      * Cette methode essaye de convertir un fichier XML dans sa representation
      * d'objets.
      *
-     * @param fichierLivraison comme objet File qui represente le fichier XML
+     * @param fichierLivraisons comme objet File qui represente le fichier XML
      * @return String vide, si la conversion marchait sans erreurs, String avec
      * un message d'erreur sinon.
      */

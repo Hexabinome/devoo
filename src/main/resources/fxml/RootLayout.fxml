@@ -83,10 +83,6 @@
             </top>
             <left>
                 <TreeTableView fx:id="tableViewFenetre" prefHeight="599.0" prefWidth="324.0" BorderPane.alignment="CENTER">
-                    <columns>
-                        <TreeTableColumn prefWidth="75.0" text="Livraisons" />
-                        <TreeTableColumn prefWidth="75.0" text="Horaires de passage" />
-                    </columns>
                     <columnResizePolicy>
                         <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                     </columnResizePolicy>
