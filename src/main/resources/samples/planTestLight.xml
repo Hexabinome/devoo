@@ -8,14 +8,22 @@
   120  |  |  |  |  |
  -->
 <Reseau>
-    <Noeud id="1" x="20" y="15"></Noeud>
-    <Noeud id="4" x="10" y="30"></Noeud> 
-    <Noeud id="5" x="20" y="30">
-        <LeTronconSortant nomRue="v0" vitesse="4" longueur="150" idNoeudDestination="1"/>
-        <LeTronconSortant nomRue="v0" vitesse="5" longueur="100" idNoeudDestination="4"/>
-        <LeTronconSortant nomRue="v0" vitesse="6" longueur="200" idNoeudDestination="6"/>
-        <LeTronconSortant nomRue="v0" vitesse="7" longueur="300" idNoeudDestination="9"/>
+    <Noeud id="1" x="20" y="15">
+        <LeTronconSortant nomRue="r0" vitesse="1" longueur="150" idNoeudDestination="5"/>
     </Noeud>
-    <Noeud id="6" x="40" y="30"></Noeud>
-    <Noeud id="9" x="20" y="60"></Noeud>   
+    <Noeud id="4" x="10" y="30">
+        <LeTronconSortant nomRue="v0" vitesse="2" longueur="100" idNoeudDestination="5"/>
+    </Noeud> 
+    <Noeud id="5" x="20" y="30">
+        <LeTronconSortant nomRue="v0" vitesse="3" longueur="150" idNoeudDestination="1"/>
+        <LeTronconSortant nomRue="v0" vitesse="4" longueur="100" idNoeudDestination="4"/>
+        <LeTronconSortant nomRue="v0" vitesse="5" longueur="200" idNoeudDestination="6"/>
+        <LeTronconSortant nomRue="v0" vitesse="6" longueur="300" idNoeudDestination="9"/>
+    </Noeud>
+    <Noeud id="6" x="40" y="30">
+        <LeTronconSortant nomRue="q0" vitesse="7" longueur="200" idNoeudDestination="5"/>
+    </Noeud>
+    <Noeud id="9" x="20" y="60">
+        <LeTronconSortant nomRue="h0" vitesse="8" longueur="300" idNoeudDestination="5"/>
+    </Noeud>   
 </Reseau>
