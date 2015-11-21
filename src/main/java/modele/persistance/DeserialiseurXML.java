@@ -139,9 +139,9 @@ public class DeserialiseurXML {
             // System.out.println("Heure de fin : " + elementFenetre.getAttributeValue("heureFin"));
 
             int heureDebut = convertirHeureEnSeconde(elementFenetre.getAttributeValue("heureDebut"));
-            int heureFIn = convertirHeureEnSeconde(elementFenetre.getAttributeValue("heureFin"));
+            int heureFin = convertirHeureEnSeconde(elementFenetre.getAttributeValue("heureFin"));
 
-            nouvelleFenetre = new Fenetre(heureDebut, heureDebut);
+            nouvelleFenetre = new Fenetre(heureDebut, heureFin);
 
             // Récuperation des livraison
             List<Element> listeLivraison = elementFenetre.getChild("Livraisons").getChildren();
