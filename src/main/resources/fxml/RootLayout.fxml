@@ -82,7 +82,7 @@
                 </ButtonBar>
             </top>
             <left>
-                <TreeTableView fx:id="tableViewFenetre" prefHeight="599.0" prefWidth="324.0" BorderPane.alignment="CENTER">
+                <TreeTableView fx:id="tableViewFenetre" prefHeight="599.0" prefWidth="368.0" BorderPane.alignment="CENTER">
                     <columnResizePolicy>
                         <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                     </columnResizePolicy>
