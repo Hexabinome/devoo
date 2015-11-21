@@ -13,8 +13,11 @@ import org.xml.sax.SAXException;
 class EtatPrincipal implements EtatInterface
 {
 
-    public EtatPrincipal()
+    private final ControleurDonnees controleurDonnees;
+
+    public EtatPrincipal(ControleurDonnees controleurDonnees)
     {
+        this.controleurDonnees = controleurDonnees;
     }
 
     @Override
@@ -58,7 +61,5 @@ class EtatPrincipal implements EtatInterface
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-
 
 }

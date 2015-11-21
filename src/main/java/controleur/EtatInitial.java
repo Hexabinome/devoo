@@ -26,7 +26,7 @@ class EtatInitial extends AbstractEtat
     @Override
     public EtatInterface cliqueSurListItem(int livraisonId)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new RuntimeException("Cet etat ne permet pas d'interagir avec la liste.");
     }
 
     @Override
@@ -40,19 +40,19 @@ class EtatInitial extends AbstractEtat
     @Override
     public EtatInterface chargerLivraisons(File livraisons) throws JDOMException, SAXException, ParseException, IOException
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new RuntimeException("Cet etat ne permet pas de charger un fichier de livraison");
     }
 
     @Override
     public EtatInterface cliqueSurPlan(int x, int y)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new RuntimeException("Cet etat ne permet pas d'interagir avec le plan.");
     }
 
     @Override
     public EtatInterface cliqueCalculerTournee()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new RuntimeException("Cet etat ne permet pas d'calculer la tournee");
     }
 
 }
