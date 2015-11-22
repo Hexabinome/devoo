@@ -3,13 +3,15 @@ package vue;
 import controleur.Controleur;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
+/**
+ * Cette classe crée la fenetre principale avec ses enfants. Elle se charge aussi de créer le controleur.
+ */
 public class FenetrePrincipale extends Application {
-
-    private RootLayout vueControleur;
 
     private final int LARGEUR_FENETRE = 1000;
 
@@ -20,8 +22,8 @@ public class FenetrePrincipale extends Application {
 
         // Chargement de la fenetre principale
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/RootLayout.fxml"));
-        Parent root = fxmlLoader.load();
-        vueControleur = (RootLayout) fxmlLoader.getController();
+        BorderPane root = fxmlLoader.load();
+        RootLayout vueControleur = (RootLayout) fxmlLoader.getController();
 
         // Création du controleur de l'application
         Controleur controleur = new Controleur();
@@ -30,6 +32,17 @@ public class FenetrePrincipale extends Application {
         vueControleur.setControleurInterface(controleur);
         vueControleur.initialiserObserveurs();
 
+
+        // Chargement de la vue des livraison
+        FXMLLoader fxmlLoader2 = new FXMLLoader(
+                getClass().getClassLoader().getResource("fxml/VueLivraisonHoraire.fxml"));
+        AnchorPane anchorPane = fxmlLoader2.load();
+        VueLivraisonHoraireControleur vueLivraisonHoraireControleur = (VueLivraisonHoraireControleur) fxmlLoader2.getController();
+        vueLivraisonHoraireControleur.setControleurInterface(controleur);
+
+        BorderPane centerBorderPane = (BorderPane) root.getCenter();
+        centerBorderPane.setLeft(anchorPane.getChildren().get(0));
+
         primaryStage.setTitle("OptimodLyon");
         primaryStage.setScene(new Scene(root, LARGEUR_FENETRE, HAUTEUR_FENETRE));
         primaryStage.setMinWidth(LARGEUR_FENETRE);
@@ -37,7 +50,9 @@ public class FenetrePrincipale extends Application {
 
         primaryStage.widthProperty().addListener(vueControleur.ecouteurDeRedimensionnement);
         primaryStage.heightProperty().addListener(vueControleur.ecouteurDeRedimensionnement);
-        
+
         primaryStage.show();
     }
+
+
 }

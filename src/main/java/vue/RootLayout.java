@@ -68,23 +68,6 @@ public class RootLayout implements Initializable, Visiteur
      * Controleur déléguant la logique applicative à la couche controleur
      */
     ControleurInterface controleurInterface;
-
-    /**
-     * Vue à gauche qui affiche les livraisons
-     */
-    @FXML
-    private TreeTableView<Visitable> tableViewFenetre;
-
-    /**
-     * Colonne livraison de la vue à gauche
-     */
-    private final TreeTableColumn<Visitable, String> colonneLivraison = new TreeTableColumn<>("Livraisons");
-
-    /**
-     * Colonne horaire de passage de la vue à gauche
-     */
-    private final TreeTableColumn<Visitable, String> colonneHoraire = new TreeTableColumn<>("Horaires de passage");
-
     /**
      * Partie droite de la fenêtre, affichant de la graphe du plan de la ville
      * et des livraisons
@@ -184,7 +167,7 @@ public class RootLayout implements Initializable, Visiteur
             if (exception != null)
                 ouvrirAlerteXML(exception, file.getName());
             else {
-                construireVueLivraion(controleurInterface.getModel().getDemande());
+                //construireVueLivraion(controleurInterface.getModel().getDemande());
             }
         }
     }
@@ -192,9 +175,7 @@ public class RootLayout implements Initializable, Visiteur
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
-        colonneLivraison.setPrefWidth(161);
-        colonneHoraire.setPrefWidth(161);
-        tableViewFenetre.getColumns().addAll(colonneLivraison, colonneHoraire);
+
     }
 
     @FXML
@@ -403,7 +384,7 @@ public class RootLayout implements Initializable, Visiteur
         fileChooser.getExtensionFilters().add(extensionFilter);
 
         // Affichage de la boite de dialogque + récuperation du fichier choisi
-        return fileChooser.showOpenDialog(tableViewFenetre.getScene().getWindow());
+        return fileChooser.showOpenDialog(canvasGraphique.getScene().getWindow());
     }
 
     /**
@@ -422,52 +403,11 @@ public class RootLayout implements Initializable, Visiteur
         exceptionDialog.setWidth(ERROR_DIALOG_WIDTH);
         exceptionDialog.setHeight(ERROR_DIALOG_HEIGHT);
         exceptionDialog.setResizable(false);
-        exceptionDialog.initOwner(tableViewFenetre.getScene().getWindow());
+        exceptionDialog.initOwner(canvasGraphique.getScene().getWindow());
 
         exceptionDialog.showAndWait();
     }
 
-    private void construireVueLivraion(Demande demande)
-    {
-        TreeItem<Visitable> dummyRoot = new TreeItem<>();
-        for (Fenetre f : demande.getFenetres()) {
-            dummyRoot.getChildren().add(construireFenetreItem(f));
-        }
-
-        //livraisonColum.setResizable(false);
-        colonneLivraison.setCellValueFactory((TreeTableColumn.CellDataFeatures<Visitable, String> param)
-                -> new ReadOnlyStringWrapper(param.getValue().getValue().accepter(this)));
-
-        // On n'affiche pas le root car c'est pas la peine
-        // http://stackoverflow.com/questions/22893461/javafx8-treetableview-multiple-root-items
-        tableViewFenetre.setRoot(dummyRoot);
-        dummyRoot.setExpanded(true);
-        tableViewFenetre.setShowRoot(false);
-
-    }
-
-    /**
-     * Contruis une item correspondant à une fenetre et ses enfants
-     */
-    private static TreeItem<Visitable> construireFenetreItem(Fenetre fenetre)
-    {
-
-        // Récuperation des livraisons de la fenetre
-        List<Livraison> livraisonList = new ArrayList<>();
-        fenetre.getLivraisons().forEach((integer, livraison1) -> {
-            livraisonList.add(livraison1);
-        });
-
-        // Construction des items de chaque livraison
-        TreeItem<Visitable> rootItem = new TreeItem<>(fenetre);
-        for (Livraison l : livraisonList) {
-
-            TreeItem<Visitable> livraisonTreeItem = new TreeItem<>(l);
-            rootItem.getChildren().add(livraisonTreeItem);
-        }
-
-        return rootItem;
-    }
 
     /**
      * Convertis un temps en seconde en HH:mm:ss
