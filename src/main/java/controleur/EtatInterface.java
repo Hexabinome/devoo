@@ -19,7 +19,7 @@ public interface EtatInterface
 
     EtatInterface cliqueSurLivraison(int livraisonId);
 
-    EtatInterface chargerPlan(File plan) throws JDOMException, SAXException, IOException;
+    EtatInterface chargerPlan(File plan) throws JDOMException, SAXException, IOException, ParseException;
 
     EtatInterface chargerLivraisons(File livraisons) throws JDOMException, SAXException, ParseException, IOException;
 

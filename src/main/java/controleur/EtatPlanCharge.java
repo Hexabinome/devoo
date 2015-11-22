@@ -31,28 +31,16 @@ public class EtatPlanCharge extends AbstractEtat
     }
 
     @Override
-    public EtatInterface chargerPlan(File plan) throws JDOMException, SAXException, IOException
+    public EtatInterface chargerPlan(File plan) throws JDOMException, SAXException, IOException, ParseException
     {
-        //TODO create and launch command here...
-        //remplacer plan qui est charge d'un nouveau plan (ssi le chargement du xml a reussi)
-        controleurDonnees.setPlan(DeserialiseurXML.ouvrirPlanDeVille(plan));
-        
-        //notifier la vue que maintenant on ne peut plus interagir avec les elements prinicpaux.
-        controleurDonnees.notifyAllActObserveurs(true);
-        
+        new CommandChargerPlan(controleurDonnees, plan).executer();
         return this;
     }
 
     @Override
     public EtatInterface chargerLivraisons(File livraisons) throws JDOMException, SAXException, ParseException, IOException
     {
-        PlanDeVille plan = controleurDonnees.getPlan();
-        Demande demande = DeserialiseurXML.ouvrirLivraison(livraisons, plan);
-        controleurDonnees.setModel(new Model(plan, demande));
-        
-        //notifier la vue que maintenant on peux interagir avec les elements prinicpaux.
-        controleurDonnees.notifyAllActObserveurs(false);
-        
+        new CommandChargerLivraisons(controleurDonnees, livraisons).executer();
         return new EtatPrincipal(controleurDonnees);
     }
 

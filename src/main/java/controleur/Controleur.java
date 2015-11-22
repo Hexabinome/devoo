@@ -58,7 +58,7 @@ public class Controleur implements ControleurInterface
             etat = etat.chargerPlan(fichierPlan);
             return null;
         }
-        catch (JDOMException | SAXException | IOException e) {
+        catch (JDOMException | SAXException | IOException | ParseException e) {
             return e;
         }
     }

@@ -267,7 +267,7 @@ bg=yellow
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>1208</x>
+      <x>1216</x>
       <y>504</y>
       <w>144</w>
       <h>88</h>
@@ -340,13 +340,13 @@ bg=green
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>1264</x>
+      <x>1272</x>
       <y>440</y>
-      <w>232</w>
+      <w>224</w>
       <h>80</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>216;24;24;24;24;64</additional_attributes>
+    <additional_attributes>208;24;24;24;24;64</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
@@ -475,13 +475,13 @@ currentCommand:AbstractCommand
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>1720</x>
-      <y>408</y>
-      <w>168</w>
-      <h>280</h>
+      <x>1848</x>
+      <y>392</y>
+      <w>40</w>
+      <h>296</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;</panel_attributes>
-    <additional_attributes>24;24;152;24;152;40;152;200;152;264</additional_attributes>
+    <additional_attributes>24;24;24;40;24;56;24;216;24;280</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>

@@ -3,9 +3,6 @@ package controleur;
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
-
-import modele.persistance.DeserialiseurXML;
-
 import org.jdom2.JDOMException;
 import org.xml.sax.SAXException;
 
@@ -30,11 +27,9 @@ class EtatInitial extends AbstractEtat
     }
 
     @Override
-    public EtatInterface chargerPlan(File plan) throws JDOMException, SAXException, IOException
+    public EtatInterface chargerPlan(File plan) throws JDOMException, SAXException, IOException, ParseException
     {
-        //remplacer plan qui est charge d'un nouveau plan (ssi le chargement du xml a reussi)
-        controleurDonnees.setPlan(DeserialiseurXML.ouvrirPlanDeVille(plan));
-        controleurDonnees.notifyAllActObserveurs(true);
+        new CommandChargerPlan(controleurDonnees, plan).executer();
         return new EtatPlanCharge(controleurDonnees);
     }
 
