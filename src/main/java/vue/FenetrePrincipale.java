@@ -28,6 +28,7 @@ public class FenetrePrincipale extends Application {
 
         // Passage du controleur de l'application au controleur de la vue
         vueControleur.setControleurInterface(controleur);
+        vueControleur.initialiserObserveurs();
 
         primaryStage.setTitle("OptimodLyon");
         primaryStage.setScene(new Scene(root, LARGEUR_FENETRE, HAUTEUR_FENETRE));

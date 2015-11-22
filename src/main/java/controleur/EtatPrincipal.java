@@ -48,6 +48,7 @@ class EtatPrincipal implements EtatInterface
     {
         //remplacer plan qui est charge d'un nouveau plan (ssi le chargement du xml a reussi)
         controleurDonnees.setPlan(DeserialiseurXML.ouvrirPlanDeVille(plan));
+        controleurDonnees.notifyAllActObserveurs(true);
         return new EtatPlanCharge(controleurDonnees);
     }
 

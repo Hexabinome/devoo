@@ -20,7 +20,7 @@ public class ControleurDonnees
     private Model model;
 
     //collection des observeurs (pour gui avec functionalite reduit si plan et livraisons n'sons pas encore charge)
-    private final Collection<DesactivationObserver> desactObserveurs;
+    private final Collection<MainActivationObserverInterface> desactObserveurs;
 
     //collection des observeurs pour le model
     private final Collection<ModelObserver> modelObserveurs;
@@ -73,7 +73,7 @@ public class ControleurDonnees
         this.hist = hist;
     }
 
-    public void addDesactObserveur(DesactivationObserver obs)
+    public void addDesactObserveur(MainActivationObserverInterface obs)
     {
         desactObserveurs.add(obs);
     }

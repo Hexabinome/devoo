@@ -7,6 +7,7 @@
 <?import javafx.scene.input.*?>
 <?import javafx.scene.layout.*?>
 <?import org.controlsfx.glyphfont.*?>
+<?import vue.ObserverButton?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="668.0" minWidth="1000.0" prefHeight="668.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vue.RootLayout">
     <top>
@@ -57,24 +58,23 @@
             <top>
                 <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="TOP_LEFT">
                     <buttons>
-                  <Button mnemonicParsing="false" disable="true" prefWidth="100" text="Générer la feuille de route" />
-                  <HBox prefHeight="100.0" prefWidth="200.0" />
-                        <Button mnemonicParsing="false" disable="true" onAction="#clic_ajouterLivraison" text="Ajouter livraisons">
+                        <ObserverButton fx:id="genererFeuilleBouton" mnemonicParsing="false" disable="true" prefWidth="100" text="Générer la feuille de route" />
+                        <HBox prefHeight="100.0" prefWidth="200.0" />
+                        <ObserverButton fx:id="ajouterLivraisonBouton" mnemonicParsing="false" disable="true" onAction="#clic_ajouterLivraison" text="Ajouter livraisons">
                             <graphic>
                                 <Glyph fontFamily="FontAwesome" icon="PLUS" />
                             </graphic>
-                                </Button>
-                        <Button mnemonicParsing="false" disable="true" onAction="#clic_echangerLivraison" text="Echanger livraisons">
+                        </ObserverButton>
+                        <ObserverButton fx:id="echangerLivraisonsBouton" mnemonicParsing="false" disable="true" onAction="#clic_echangerLivraison" text="Echanger livraisons">
                             <graphic>
                                 <Glyph fontFamily="FontAwesome" icon="ARROWS_H" />
                             </graphic>
-                            </Button>
-
-                        <Button mnemonicParsing="false" disable="true" onAction="#clic_supprimerLivraison" text="Supprimer livraisons">
+                        </ObserverButton>
+                        <ObserverButton fx:id="supprimerLivraisonBouton" mnemonicParsing="false" disable="true" onAction="#clic_supprimerLivraison" text="Supprimer livraisons">
                             <graphic>
                                 <Glyph fontFamily="FontAwesome" icon="TRASH" />
                             </graphic>
-                        </Button>
+                        </ObserverButton>
                     </buttons>
                     <BorderPane.margin>
                         <Insets right="5.0" />
@@ -88,9 +88,9 @@
                     </columnResizePolicy>
                 </TreeTableView>
             </left>
-         <center>
-         	<Pane fx:id="canvasGraphique" style="-fx-background-color: black;" />
-         </center>
+            <center>
+                <Pane fx:id="canvasGraphique" style="-fx-background-color: black;" />
+            </center>
         </BorderPane>
     </center>
 </BorderPane>

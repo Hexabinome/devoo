@@ -27,7 +27,7 @@ public class Controleur implements ControleurInterface
     }
 
     @Override
-    public void ajouterDesactObserver(DesactivationObserver observer)
+    public void ajouterDesactObserver(MainActivationObserverInterface observer)
     {
         controleurDonnees.addDesactObserveur(observer);
     }

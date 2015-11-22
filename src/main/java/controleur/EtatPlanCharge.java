@@ -38,7 +38,7 @@ public class EtatPlanCharge extends AbstractEtat
         controleurDonnees.setPlan(DeserialiseurXML.ouvrirPlanDeVille(plan));
         
         //notifier la vue que maintenant on ne peut plus interagir avec les elements prinicpaux.
-        controleurDonnees.notifyAllActObserveurs(false);
+        controleurDonnees.notifyAllActObserveurs(true);
         
         return this;
     }
@@ -51,7 +51,7 @@ public class EtatPlanCharge extends AbstractEtat
         controleurDonnees.setModel(new Model(plan, demande));
         
         //notifier la vue que maintenant on peux interagir avec les elements prinicpaux.
-        controleurDonnees.notifyAllActObserveurs(true);
+        controleurDonnees.notifyAllActObserveurs(false);
         
         return new EtatPrincipal(controleurDonnees);
     }

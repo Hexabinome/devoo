@@ -11,7 +11,7 @@ import modele.xmldata.PlanDeVille;
 public interface ControleurInterface
 {
 
-    void ajouterDesactObserver(DesactivationObserver observer);
+    void ajouterDesactObserver(MainActivationObserverInterface observer);
 
     void ajouterModelObserver(ModelObserver observer);
 

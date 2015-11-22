@@ -90,12 +90,36 @@ public class RootLayout implements Initializable
      */
     @FXML
     private Pane canvasGraphique;
-    
+
     /**
      * Le menu en haut
      */
     @FXML
     private Menu menuFichier;
+
+    /**
+     * Bouton qui permet d'ajouter des livraisons
+     */
+    @FXML
+    private ObserverButton ajouterLivraisonBouton;
+
+    /**
+     * Bouton qui permet d'echanger des livraisons
+     */
+    @FXML
+    private ObserverButton echangerLivraisonsBouton;
+
+    /**
+     * Bouton qui permet de supprimer des livraisons
+     */
+    @FXML
+    private ObserverButton supprimerLivraisonBouton;
+
+    /**
+     * Bouton qui permet de generer le feuille de route
+     */
+    @FXML
+    private ObserverButton genererFeuilleBouton;
 
     /**
      * Contient tous les points graphiques actuellement afficher grâce à leur
@@ -189,7 +213,6 @@ public class RootLayout implements Initializable
         catch (ParseException e) {
             e.printStackTrace();
         }
-
     }
 
     @FXML
@@ -474,6 +497,15 @@ public class RootLayout implements Initializable
     {
         // TODO
         return null;
+    }
+
+    public void initialiserObserveurs()
+    {
+        controleurInterface.ajouterDesactObserver(ajouterLivraisonBouton);
+        controleurInterface.ajouterDesactObserver(echangerLivraisonsBouton);
+        controleurInterface.ajouterDesactObserver(supprimerLivraisonBouton);
+        controleurInterface.ajouterDesactObserver(genererFeuilleBouton);
+
     }
 
 }
