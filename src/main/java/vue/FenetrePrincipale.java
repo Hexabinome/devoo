@@ -35,7 +35,7 @@ public class FenetrePrincipale extends Application {
     public void start(Stage primaryStage) throws Exception {
 
         // Chargement de la fenetre principale
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/RootLayout.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/VuePrincipale.fxml"));
         BorderPane root = fxmlLoader.load();
         vuePrincipaleControleur = (VuePrincipale) fxmlLoader.getController();
 

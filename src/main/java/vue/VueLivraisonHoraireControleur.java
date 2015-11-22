@@ -5,8 +5,10 @@ import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeTableCell;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableView;
+import javafx.util.Callback;
 import modele.xmldata.*;
 
 import java.net.URL;
@@ -66,6 +68,23 @@ public class VueLivraisonHoraireControleur implements Initializable, Visiteur {
         //livraisonColum.setResizable(false);
         colonneLivraison.setCellValueFactory((TreeTableColumn.CellDataFeatures<Visitable, String> param)
                 -> new ReadOnlyStringWrapper(param.getValue().getValue().accepter(this)));
+        /*colonneLivraison.setCellFactory(
+                new Callback<TreeTableColumn<Visitable, String>, TreeTableCell<Visitable, String>>() {
+                    @Override
+                    public TreeTableCell<Visitable, String> call(TreeTableColumn<Visitable, String> param) {
+                        return new TreeTableCell<Visitable, String>(){
+                            @Override
+                            protected void updateItem(String item, boolean empty) {
+
+                                super.updateItem(item, empty);
+                                setText(item);
+                                String style = null;
+                                style = "-fx-font-weight: bold; -fx-text-fill: skyblue; -fx-underline: true;";
+                                setStyle(style);
+                            }
+                        };
+                    }
+                });*/
 
         // On n'affiche pas le root car c'est pas la peine
         // http://stackoverflow.com/questions/22893461/javafx8-treetableview-multiple-root-items
