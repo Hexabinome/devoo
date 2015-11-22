@@ -71,7 +71,8 @@ class EtatPrincipal implements EtatInterface
     @Override
     public EtatInterface cliqueCalculerTournee()
     {
-        throw new UnsupportedOperationException("Request to calculate tournee is allowed in this state, but not supported yet, since not a core feature."); //To change body of generated methods, choose Tools | Templates.
+        controleurDonnees.getModel().calculerTournee();
+        return this;
     }
 
 }

@@ -40,9 +40,12 @@ public class Model implements ModelLecture
         return demande;
     }
 
-	@Override
-	public void calculerTournee() {
-		demande.creerGraphe(plan);
-	}
+    @Override
+    public void calculerTournee()
+    {
+        demande.creerGraphe(plan);
+        
+        //TODO: apres avoir calcule le graphe il faut appeler TSP ici.
+    }
 
 }
