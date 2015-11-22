@@ -25,7 +25,7 @@ public class EtatPlanCharge extends AbstractEtat
     }
 
     @Override
-    public EtatInterface cliqueSurListItem(int livraisonId)
+    public EtatInterface cliqueSurLivraison(int livraisonId)
     {
         throw new RuntimeException("Cet etat ne permet pas d'interagir avec la liste.");
     }
@@ -36,6 +36,10 @@ public class EtatPlanCharge extends AbstractEtat
         //TODO create and launch command here...
         //remplacer plan qui est charge d'un nouveau plan (ssi le chargement du xml a reussi)
         controleurDonnees.setPlan(DeserialiseurXML.ouvrirPlanDeVille(plan));
+        
+        //notifier la vue que maintenant on ne peut plus interagir avec les elements prinicpaux.
+        controleurDonnees.notifyAllActObserveurs(false);
+        
         return this;
     }
 
@@ -45,6 +49,10 @@ public class EtatPlanCharge extends AbstractEtat
         PlanDeVille plan = controleurDonnees.getPlan();
         Demande demande = DeserialiseurXML.ouvrirLivraison(livraisons, plan);
         controleurDonnees.setModel(new Model(plan, demande));
+        
+        //notifier la vue que maintenant on peux interagir avec les elements prinicpaux.
+        controleurDonnees.notifyAllActObserveurs(true);
+        
         return new EtatPrincipal(controleurDonnees);
     }
 

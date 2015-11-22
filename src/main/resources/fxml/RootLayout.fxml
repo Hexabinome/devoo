@@ -19,7 +19,7 @@
                                 <KeyCodeCombination alt="UP" code="P" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                             </accelerator>
                         </MenuItem>
-                        <MenuItem mnemonicParsing="false" onAction="#ouvrirDemande" text="Ouvrir demande de livraisons">
+                        <MenuItem mnemonicParsing="false" disable="true" onAction="#ouvrirDemande" text="Ouvrir demande de livraisons">
                             <accelerator>
                                 <KeyCodeCombination alt="UP" code="L" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                             </accelerator>
@@ -32,12 +32,12 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edition">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Annuler">
+                        <MenuItem mnemonicParsing="false" disable="true" text="Annuler">
                             <accelerator>
                                 <KeyCodeCombination alt="UP" code="Z" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                             </accelerator>
                         </MenuItem>
-                        <MenuItem mnemonicParsing="false" text="Refaire">
+                        <MenuItem mnemonicParsing="false" disable="true" text="Refaire">
                             <accelerator>
                                 <KeyCodeCombination alt="UP" code="Y" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                             </accelerator>

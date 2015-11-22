@@ -21,7 +21,7 @@ public class EtatAjout extends AbstractEtat
     }
 
     @Override
-    public EtatInterface cliqueSurListItem(int livraisonId)
+    public EtatInterface cliqueSurLivraison(int livraisonId)
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

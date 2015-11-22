@@ -122,4 +122,10 @@ public class Controleur implements ControleurInterface
         return plan;
     }
 
+    @Override
+    public void cliqueSurLivraison(int livraisonId)
+    {
+        etat.cliqueSurLivraison(livraisonId);
+    }
+
 }

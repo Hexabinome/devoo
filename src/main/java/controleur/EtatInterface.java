@@ -17,7 +17,7 @@ public interface EtatInterface
 
     EtatInterface cliqueRetablir();
 
-    EtatInterface cliqueSurListItem(int livraisonId);
+    EtatInterface cliqueSurLivraison(int livraisonId);
 
     EtatInterface chargerPlan(File plan) throws JDOMException, SAXException, IOException;
 

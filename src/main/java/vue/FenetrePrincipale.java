@@ -36,7 +36,7 @@ public class FenetrePrincipale extends Application {
 
         primaryStage.widthProperty().addListener(vueControleur.ecouteurDeRedimensionnement);
         primaryStage.heightProperty().addListener(vueControleur.ecouteurDeRedimensionnement);
-
+        
         primaryStage.show();
     }
 }

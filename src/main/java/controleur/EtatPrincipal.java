@@ -37,9 +37,10 @@ class EtatPrincipal implements EtatInterface
     }
 
     @Override
-    public EtatInterface cliqueSurListItem(int livraisonId)
+    public EtatInterface cliqueSurLivraison(int livraisonId)
     {
-        throw new UnsupportedOperationException("Interaction with list is allowed in this state, but not supported yet, since not a core feature."); //To change body of generated methods, choose Tools | Templates.
+        //cet interation sera sans effect.
+        return this;
     }
 
     @Override

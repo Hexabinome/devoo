@@ -93,7 +93,7 @@ public class ControleurDonnees
         retablirObserveurs.add(obs);
     }
 
-    public void notifyAllDesactObserveurs(boolean state)
+    public void notifyAllActObserveurs(boolean state)
     {
         desactObserveurs.stream().forEach((obs) -> {
             obs.notifyObserver(state);

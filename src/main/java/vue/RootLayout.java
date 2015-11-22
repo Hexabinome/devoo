@@ -31,22 +31,25 @@ import java.text.ParseException;
 import java.util.*;
 
 /**
- * Cette classe joue le rôle de binding pour la fenetre principale de l'application.
- * C'est ici qu'on spécifiera les écouteurs et consorts.
- * Remarque : Les écouteurs peuvent être spécifiés directement dans le fichier xml aussi
+ * Cette classe joue le rôle de binding pour la fenetre principale de
+ * l'application. C'est ici qu'on spécifiera les écouteurs et consorts. Remarque
+ * : Les écouteurs peuvent être spécifiés directement dans le fichier xml aussi
  */
 //TODO : split thi class
 /**
  * @author David
  */
-public class RootLayout implements Initializable {
+public class RootLayout implements Initializable
+{
 
     /**
-     * La taille sur l'interface graphique d'une intersection du plan de la ville
+     * La taille sur l'interface graphique d'une intersection du plan de la
+     * ville
      */
     private final double DIAMETRE_INTERSECTION = 7;
     /**
-     * La marge à laisser sur les côté du canvas graphique afin d'avoir plus du lisibilité
+     * La marge à laisser sur les côté du canvas graphique afin d'avoir plus du
+     * lisibilité
      */
     private final int MARGE_INTERSECTION = 30;
 
@@ -80,26 +83,28 @@ public class RootLayout implements Initializable {
      */
     private final TreeTableColumn<Object, String> colonneHoraire = new TreeTableColumn<>("Horaires de passage");
 
-
     /**
-     * Partie droite de la fenêtre, affichant de la graphe du plan de la ville et des livraisons
+     * Partie droite de la fenêtre, affichant de la graphe du plan de la ville
+     * et des livraisons
      */
     @FXML
     private Pane canvasGraphique;
 
-
     /**
-     * Contient tous les points graphiques actuellement afficher grâce à leur id,
-     * et pour chaque intersection, ses arcs graphiques ainsi que l'intersection ciblée
+     * Contient tous les points graphiques actuellement afficher grâce à leur
+     * id, et pour chaque intersection, ses arcs graphiques ainsi que
+     * l'intersection ciblée
      */
     private Map<Integer, Pair<Ellipse, Collection<Integer>>> intersectionsGraphiques = new HashMap<Integer, Pair<Ellipse, Collection<Integer>>>();
 
     /**
-     * Contient l'échelle X actuelle par rapport à laquelle les intersections sont affichés
+     * Contient l'échelle X actuelle par rapport à laquelle les intersections
+     * sont affichés
      */
     private double echelleXIntersection = 0;
     /**
-     * Contient l'échelle Y actuelle par rapport à laquelle les intersections sont affichés
+     * Contient l'échelle Y actuelle par rapport à laquelle les intersections
+     * sont affichés
      */
     private double echelleYIntersection = 0;
 
@@ -108,7 +113,8 @@ public class RootLayout implements Initializable {
      *
      * @param controleurInterface Le nouveau controleur d'interface
      */
-    public void setControleurInterface(ControleurInterface controleurInterface) {
+    public void setControleurInterface(ControleurInterface controleurInterface)
+    {
         this.controleurInterface = controleurInterface;
     }
 
@@ -116,15 +122,15 @@ public class RootLayout implements Initializable {
      * Ecouteur pour ouvrir le plan
      */
     @FXML
-    private void ouvrirPlan(ActionEvent actionEvent) {
+    private void ouvrirPlan(ActionEvent actionEvent)
+    {
         File file = ouvrirSelectionneurDeFichier("Choissiez le plan de la ville");
         if (file != null) {
             Exception messageErreur = controleurInterface.chargerPlan(file);
-            if (messageErreur != null) {
+            if (messageErreur != null)
                 ouvrirAlerteXML(messageErreur, file.getName());
-            } else {
+            else
                 construireGraphe(controleurInterface.getPlanDeVille());
-            }
         }
     }
 
@@ -132,21 +138,23 @@ public class RootLayout implements Initializable {
      * Ecouteur pour la demande de livraison
      */
     @FXML
-    private void ouvrirDemande(ActionEvent actionEvent) {
+    private void ouvrirDemande(ActionEvent actionEvent)
+    {
         File file = ouvrirSelectionneurDeFichier(
                 "Choisissez la demande de livraison");
         if (file != null) {
             Exception exception = controleurInterface.chargerLivraisons(file);
-            if (exception != null) {
+            if (exception != null)
                 ouvrirAlerteXML(exception, file.getName());
-            } else {
+            else {
                 // TODO : remplir la partie à gauche
             }
         }
     }
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(URL location, ResourceBundle resources)
+    {
         colonneLivraison.setPrefWidth(161);
         colonneHoraire.setPrefWidth(161);
         tableViewFenetre.getColumns().addAll(colonneLivraison, colonneHoraire);
@@ -156,63 +164,79 @@ public class RootLayout implements Initializable {
             Demande demande = DeserialiseurXML.ouvrirLivraison(
                     ClassLoader.getSystemResourceAsStream("samples/livraison20x20-2.xml"), planDeVille);
             construireVueLivraion(demande);
-        } catch (JDOMException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
+        }
+        catch (JDOMException e) {
             e.printStackTrace();
         }
-
-
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        catch (SAXException e) {
+            e.printStackTrace();
+        }
+        catch (ParseException e) {
+            e.printStackTrace();
+        }
 
     }
 
     @FXML
-    void clic_ajouterLivraison() {
+    void clic_ajouterLivraison()
+    {
         // TODO : aller à l'état ajouter + supprimer les lignes en dessous (servant de test uniquement)
+        // @N'importe qui va implementer ca: En fait c'est pas ici qu'on change l'etat, on seulement demande le controleur.
+        // Tu appeles "controleur.cliqueOutilAjouter". Et c'est deja tout. 
+        // Le controleur sera deja notifie des que l'utilisatuer clique sur le plan pour choissir
+        // la destionation de la livraison. [Maxou]
         try {
             construireGraphe(DeserialiseurXML.ouvrirPlanDeVille(
                     ClassLoader.getSystemClassLoader().getResourceAsStream("samples/plan10x10.xml")));
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
 
     @FXML
-    void clic_echangerLivraison() {
+    void clic_echangerLivraison()
+    {
         // TODO : aller à l'état d'échange
     }
 
     @FXML
-    void clic_supprimerLivraison() {
+    void clic_supprimerLivraison()
+    {
         // TODO : aller à l'état de suppression
     }
 
     /**
-     * Méthode appelée lors du redimensionnement de la fenêtre.
-     * Elle replace les arrêtes du graphe à leur bonne position
+     * Méthode appelée lors du redimensionnement de la fenêtre. Elle replace les
+     * arrêtes du graphe à leur bonne position
      */
-    final ChangeListener<Number> ecouteurDeRedimensionnement = new ChangeListener<Number>() {
+    final ChangeListener<Number> ecouteurDeRedimensionnement = new ChangeListener<Number>()
+    {
 
         @Override
         public void changed(ObservableValue<? extends Number> observable,
-                            Number oldValue, Number newValue) {
+                Number oldValue, Number newValue)
+        {
 
             canvasGraphique.getChildren().clear();
             afficherPlan();
         }
+
     };
 
     /**
-     * Construit et affiche le graphe du plan de la ville sur le canvas graphique de la fenêtre
+     * Construit et affiche le graphe du plan de la ville sur le canvas
+     * graphique de la fenêtre
      *
-     * @param plan Le plan de la ville, chargée par le couche controleur et persistance
+     * @param plan Le plan de la ville, chargée par le couche controleur et
+     * persistance
      */
-    private void construireGraphe(PlanDeVille plan) {
+    private void construireGraphe(PlanDeVille plan)
+    {
         canvasGraphique.getChildren().clear();
 
         Map<Integer, Intersection> toutesIntersections = plan.getIntersections();
@@ -239,20 +263,24 @@ public class RootLayout implements Initializable {
      * Construit un point graphique pour une intersection du plan de la ville
      *
      * @param i L'intersection
-     * @return Le point du graphe, à sa position du fichier XML du plan de la ville
+     * @return Le point du graphe, à sa position du fichier XML du plan de la
+     * ville
      */
-    private Ellipse construireEllipse(Intersection i) {
+    private Ellipse construireEllipse(Intersection i)
+    {
         Ellipse intersection = new Ellipse(i.getX(), i.getY(), DIAMETRE_INTERSECTION, DIAMETRE_INTERSECTION);
         intersection.setFill(Color.YELLOW);
         return intersection;
     }
 
     /**
-     * Affiche tous les points du plan et met à jour la taille du canvas graphique.
-     * Les points sont toujours affichés par rapport :
-     * (leur taille initiale dans le fichier XML / la plus grande taille dans le fichier XML) => (la nouvelle taille / la taille du canvas)
+     * Affiche tous les points du plan et met à jour la taille du canvas
+     * graphique. Les points sont toujours affichés par rapport : (leur taille
+     * initiale dans le fichier XML / la plus grande taille dans le fichier XML)
+     * => (la nouvelle taille / la taille du canvas)
      */
-    private void afficherPlan() {
+    private void afficherPlan()
+    {
         // Affichage (+ mise à l'échelle) des intersections
         for (Pair<Ellipse, Collection<Integer>> pair : intersectionsGraphiques.values()) {
             afficherEllipse(pair.getKey());
@@ -275,9 +303,8 @@ public class RootLayout implements Initializable {
 
         // Put nodes to the front
         for (Node n : canvasGraphique.getChildrenUnmodifiable()) {
-            if (n instanceof Ellipse) {
+            if (n instanceof Ellipse)
                 n.toFront();
-            }
         }
     }
 
@@ -286,7 +313,8 @@ public class RootLayout implements Initializable {
      *
      * @param e Le point à afficher
      */
-    private void afficherEllipse(Ellipse e) {
+    private void afficherEllipse(Ellipse e)
+    {
         double newX = e.getCenterX() * canvasGraphique.getWidth() / (echelleXIntersection + MARGE_INTERSECTION);
         double newY = e.getCenterY() * canvasGraphique.getHeight() / (echelleYIntersection + MARGE_INTERSECTION);
 
@@ -302,7 +330,8 @@ public class RootLayout implements Initializable {
      * @param debut Le point de début
      * @param cible Le point de destination
      */
-    private void afficherTroncon(Ellipse debut, Ellipse cible) {
+    private void afficherTroncon(Ellipse debut, Ellipse cible)
+    {
         double p1X = debut.getCenterX();
         double p1Y = debut.getCenterY();
         double p2X = cible.getCenterX();
@@ -346,7 +375,8 @@ public class RootLayout implements Initializable {
      *
      * @param titreDialogue Le titre du sélectionneur de fichier
      */
-    private File ouvrirSelectionneurDeFichier(String titreDialogue) {
+    private File ouvrirSelectionneurDeFichier(String titreDialogue)
+    {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle(titreDialogue);
         //  Filtrage de l'extension
@@ -358,12 +388,14 @@ public class RootLayout implements Initializable {
     }
 
     /**
-     * Ouvre une boîte de dialogue d'exception modale afin de signalier à l'utilisateur une erreur avec un fichier XML
+     * Ouvre une boîte de dialogue d'exception modale afin de signalier à
+     * l'utilisateur une erreur avec un fichier XML
      *
      * @param message Le message à afficher
      * @param fichier Le nom du fichier qui a généré l'erreur
      */
-    private void ouvrirAlerteXML(Exception message, String fichier) {
+    private void ouvrirAlerteXML(Exception message, String fichier)
+    {
 
         ExceptionDialog exceptionDialog = new ExceptionDialog(message);
         exceptionDialog.setTitle("Erreur");
@@ -376,8 +408,8 @@ public class RootLayout implements Initializable {
         exceptionDialog.showAndWait();
     }
 
-
-    private void construireVueLivraion(Demande demande) {
+    private void construireVueLivraion(Demande demande)
+    {
         TreeItem<Object> dummyRoot = new TreeItem<>();
         for (Fenetre f : demande.getFenetres()) {
             dummyRoot.getChildren().add(construireFenetreItem(f));
@@ -386,15 +418,14 @@ public class RootLayout implements Initializable {
         //livraisonColum.setResizable(false);
         colonneLivraison.setCellValueFactory((TreeTableColumn.CellDataFeatures<Object, String> param)
                 -> {
-            Object objetDeLigneCourante = param.getValue().getValue();
-            String stringLigneCourante = "";
-            if (objetDeLigneCourante instanceof Fenetre) {
-                stringLigneCourante = ((Fenetre) objetDeLigneCourante).toString();
-            } else if(objetDeLigneCourante instanceof Livraison){
-                stringLigneCourante = ((Livraison) objetDeLigneCourante).toString();
-            }
-            return new ReadOnlyStringWrapper(stringLigneCourante);
-        });
+                    Object objetDeLigneCourante = param.getValue().getValue();
+                    String stringLigneCourante = "";
+                    if (objetDeLigneCourante instanceof Fenetre)
+                        stringLigneCourante = ((Fenetre) objetDeLigneCourante).toString();
+                    else if (objetDeLigneCourante instanceof Livraison)
+                        stringLigneCourante = ((Livraison) objetDeLigneCourante).toString();
+                    return new ReadOnlyStringWrapper(stringLigneCourante);
+                });
 
         // On n'affiche pas le root car c'est pas la peine
         // http://stackoverflow.com/questions/22893461/javafx8-treetableview-multiple-root-items
@@ -407,7 +438,8 @@ public class RootLayout implements Initializable {
     /**
      * Contruis une item correspondant à une fenetre et ces enfants
      */
-    private TreeItem<Object> construireFenetreItem(Fenetre fenetre) {
+    private TreeItem<Object> construireFenetreItem(Fenetre fenetre)
+    {
 
         // Récuperation des livraisons de la fenetre
         List<Livraison> livraisonList = new ArrayList<>();
@@ -423,11 +455,11 @@ public class RootLayout implements Initializable {
             rootItem.getChildren().add(livraisonTreeItem);
         }
 
-
         return rootItem;
     }
 
-    private static String convertirTimeStampEnHoraire(int timestamp) {
+    private static String convertirTimeStampEnHoraire(int timestamp)
+    {
         // TODO
         return null;
     }

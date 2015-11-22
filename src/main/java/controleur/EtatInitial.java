@@ -24,7 +24,7 @@ class EtatInitial extends AbstractEtat
     }
 
     @Override
-    public EtatInterface cliqueSurListItem(int livraisonId)
+    public EtatInterface cliqueSurLivraison(int livraisonId)
     {
         throw new RuntimeException("Cet etat ne permet pas d'interagir avec la liste.");
     }
