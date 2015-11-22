@@ -7,11 +7,25 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import modele.xmldata.Demande;
 
 /**
  * Cette classe crée la fenetre principale avec ses enfants. Elle se charge aussi de créer le controleur.
+ * Elle joue le role de mediateur pour la communication entre les differents controleur de la vue.
+  * https://sourcemaking.com/design_patterns/mediator
  */
 public class FenetrePrincipale extends Application {
+
+
+    private VuePrincipale vuePrincipaleControleur;
+
+    private VueLivraisonHoraireControleur vueLivraisonHoraireControleur;
+
+    /**
+     * Le controleur de l'application
+     */
+    private Controleur controleurApplication;
+
 
     private final int LARGEUR_FENETRE = 1000;
 
@@ -23,22 +37,24 @@ public class FenetrePrincipale extends Application {
         // Chargement de la fenetre principale
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/RootLayout.fxml"));
         BorderPane root = fxmlLoader.load();
-        RootLayout vueControleur = (RootLayout) fxmlLoader.getController();
+        vuePrincipaleControleur = (VuePrincipale) fxmlLoader.getController();
 
         // Création du controleur de l'application
-        Controleur controleur = new Controleur();
+        controleurApplication = new Controleur();
 
         // Passage du controleur de l'application au controleur de la vue
-        vueControleur.setControleurInterface(controleur);
-        vueControleur.initialiserObserveurs();
+        vuePrincipaleControleur.setControleurInterface(controleurApplication);
+        vuePrincipaleControleur.initialiserObserveurs();
+        vuePrincipaleControleur.initialiserMediateur(this);
 
 
         // Chargement de la vue des livraison
         FXMLLoader fxmlLoader2 = new FXMLLoader(
                 getClass().getClassLoader().getResource("fxml/VueLivraisonHoraire.fxml"));
         AnchorPane anchorPane = fxmlLoader2.load();
-        VueLivraisonHoraireControleur vueLivraisonHoraireControleur = (VueLivraisonHoraireControleur) fxmlLoader2.getController();
-        vueLivraisonHoraireControleur.setControleurInterface(controleur);
+        vueLivraisonHoraireControleur = (VueLivraisonHoraireControleur) fxmlLoader2.getController();
+        vueLivraisonHoraireControleur.setControleurInterface(controleurApplication);
+        vueLivraisonHoraireControleur.initialiserMediateur(this);
 
         BorderPane centerBorderPane = (BorderPane) root.getCenter();
         centerBorderPane.setLeft(anchorPane.getChildren().get(0));
@@ -48,10 +64,17 @@ public class FenetrePrincipale extends Application {
         primaryStage.setMinWidth(LARGEUR_FENETRE);
         primaryStage.setMinHeight(HAUTEUR_FENETRE);
 
-        primaryStage.widthProperty().addListener(vueControleur.ecouteurDeRedimensionnement);
-        primaryStage.heightProperty().addListener(vueControleur.ecouteurDeRedimensionnement);
+        primaryStage.widthProperty().addListener(vuePrincipaleControleur.ecouteurDeRedimensionnement);
+        primaryStage.heightProperty().addListener(vuePrincipaleControleur.ecouteurDeRedimensionnement);
 
         primaryStage.show();
+    }
+
+    /**
+     * Demande à la vue des livraions de contruire la vue
+     */
+    public void construireVueLivraison(Demande demande){
+        vueLivraisonHoraireControleur.construireVueLivraion(demande);
     }
 
 

@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.input.*?>
 <?import javafx.scene.layout.*?>
-<?import org.controlsfx.glyphfont.*?>
+<?import org.controlsfx.glyphfont.Glyph?>
 <?import vue.ObserverButton?>
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="668.0" minWidth="1000.0" prefHeight="668.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vue.RootLayout">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="668.0" minWidth="1000.0" prefHeight="668.0"
+            prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="vue.VuePrincipale">
     <top>
         <MenuBar BorderPane.alignment="CENTER">
             <menus>
@@ -17,37 +16,42 @@
                     <items>
                         <MenuItem mnemonicParsing="false" onAction="#ouvrirPlan" text="Ouvrir plan de la ville">
                             <accelerator>
-                                <KeyCodeCombination alt="UP" code="P" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                                <KeyCodeCombination alt="UP" code="P" control="DOWN" meta="UP" shift="UP"
+                                                    shortcut="UP"/>
                             </accelerator>
                         </MenuItem>
-                        <MenuItem disable="true" mnemonicParsing="false" onAction="#ouvrirDemande" text="Ouvrir demande de livraisons">
+                        <MenuItem disable="true" mnemonicParsing="false" onAction="#ouvrirDemande"
+                                  text="Ouvrir demande de livraisons">
                             <accelerator>
-                                <KeyCodeCombination alt="UP" code="L" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                                <KeyCodeCombination alt="UP" code="L" control="DOWN" meta="UP" shift="UP"
+                                                    shortcut="UP"/>
                             </accelerator>
                         </MenuItem>
-                        <MenuItem mnemonicParsing="false" text="Quitter" />
+                        <MenuItem mnemonicParsing="false" text="Quitter"/>
                     </items>
                     <accelerator>
-                        <KeyCodeCombination alt="UP" code="E" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                        <KeyCodeCombination alt="UP" code="E" control="DOWN" meta="UP" shift="UP" shortcut="UP"/>
                     </accelerator>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edition">
                     <items>
                         <MenuItem disable="true" mnemonicParsing="false" text="Annuler">
                             <accelerator>
-                                <KeyCodeCombination alt="UP" code="Z" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                                <KeyCodeCombination alt="UP" code="Z" control="DOWN" meta="UP" shift="UP"
+                                                    shortcut="UP"/>
                             </accelerator>
                         </MenuItem>
                         <MenuItem disable="true" mnemonicParsing="false" text="Refaire">
                             <accelerator>
-                                <KeyCodeCombination alt="UP" code="Y" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                                <KeyCodeCombination alt="UP" code="Y" control="DOWN" meta="UP" shift="UP"
+                                                    shortcut="UP"/>
                             </accelerator>
                         </MenuItem>
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Aide">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="A propos" />
+                        <MenuItem mnemonicParsing="false" text="A propos"/>
                     </items>
                 </Menu>
             </menus>
@@ -58,38 +62,35 @@
             <top>
                 <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="TOP_LEFT">
                     <buttons>
-                        <ObserverButton fx:id="genererFeuilleBouton" mnemonicParsing="false" disable="true" prefWidth="100" text="Générer la feuille de route" />
-                        <HBox prefHeight="100.0" prefWidth="200.0" />
-                        <ObserverButton fx:id="ajouterLivraisonBouton" mnemonicParsing="false" disable="true" onAction="#clic_ajouterLivraison" text="Ajouter livraisons">
+                        <ObserverButton fx:id="genererFeuilleBouton" mnemonicParsing="false" disable="true"
+                                        prefWidth="100" text="Générer la feuille de route"/>
+                        <HBox prefHeight="100.0" prefWidth="200.0"/>
+                        <ObserverButton fx:id="ajouterLivraisonBouton" mnemonicParsing="false" disable="true"
+                                        onAction="#clic_ajouterLivraison" text="Ajouter livraisons">
                             <graphic>
-                                <Glyph fontFamily="FontAwesome" icon="PLUS" />
+                                <Glyph fontFamily="FontAwesome" icon="PLUS"/>
                             </graphic>
                         </ObserverButton>
-                        <ObserverButton fx:id="echangerLivraisonsBouton" mnemonicParsing="false" disable="true" onAction="#clic_echangerLivraison" text="Echanger livraisons">
+                        <ObserverButton fx:id="echangerLivraisonsBouton" mnemonicParsing="false" disable="true"
+                                        onAction="#clic_echangerLivraison" text="Echanger livraisons">
                             <graphic>
-                                <Glyph fontFamily="FontAwesome" icon="ARROWS_H" />
+                                <Glyph fontFamily="FontAwesome" icon="ARROWS_H"/>
                             </graphic>
                         </ObserverButton>
-                        <ObserverButton fx:id="supprimerLivraisonBouton" mnemonicParsing="false" disable="true" onAction="#clic_supprimerLivraison" text="Supprimer livraisons">
+                        <ObserverButton fx:id="supprimerLivraisonBouton" mnemonicParsing="false" disable="true"
+                                        onAction="#clic_supprimerLivraison" text="Supprimer livraisons">
                             <graphic>
-                                <Glyph fontFamily="FontAwesome" icon="TRASH" />
+                                <Glyph fontFamily="FontAwesome" icon="TRASH"/>
                             </graphic>
                         </ObserverButton>
                     </buttons>
                     <BorderPane.margin>
-                        <Insets right="5.0" />
+                        <Insets right="5.0"/>
                     </BorderPane.margin>
                 </ButtonBar>
             </top>
-            <left>
-                <TreeTableView fx:id="tableViewFenetre" prefHeight="599.0" prefWidth="368.0" BorderPane.alignment="CENTER">
-                    <columnResizePolicy>
-                        <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                    </columnResizePolicy>
-                </TreeTableView>
-            </left>
             <center>
-                <Pane fx:id="canvasGraphique" style="-fx-background-color: black;" />
+                <Pane fx:id="canvasGraphique" style="-fx-background-color: black;"/>
             </center>
         </BorderPane>
     </center>

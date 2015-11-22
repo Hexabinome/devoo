@@ -35,6 +35,13 @@ public class VueLivraisonHoraireControleur implements Initializable, Visiteur {
      */
     private final TreeTableColumn<Visitable, String> colonneHoraire = new TreeTableColumn<>("Horaires de passage");
 
+
+    private FenetrePrincipale mediateur;
+
+    public void initialiserMediateur(FenetrePrincipale fenetrePrincipale) {
+        this.mediateur = fenetrePrincipale;
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         colonneLivraison.setPrefWidth(161);
@@ -50,7 +57,7 @@ public class VueLivraisonHoraireControleur implements Initializable, Visiteur {
         return convertirEnHeureLisible(debut) + " - " + convertirEnHeureLisible(fin);
     }
 
-    private void construireVueLivraion(Demande demande) {
+    protected void construireVueLivraion(Demande demande) {
         TreeItem<Visitable> dummyRoot = new TreeItem<>();
         for (Fenetre f : demande.getFenetres()) {
             dummyRoot.getChildren().add(construireFenetreItem(f));
@@ -94,8 +101,7 @@ public class VueLivraisonHoraireControleur implements Initializable, Visiteur {
 
     @Override
     public String visit(Livraison livraison) {
-        String message = livraison.getId() + " - Client " + livraison.getClientId() + " à " + livraison.getAdresse();
-        return message;
+        return livraison.getId() + " - Client " + livraison.getClientId() + " à " + livraison.getAdresse();
     }
 
     /**

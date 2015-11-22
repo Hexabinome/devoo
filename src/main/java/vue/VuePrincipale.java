@@ -1,17 +1,13 @@
 package vue;
 
 import controleur.ControleurInterface;
-import javafx.beans.property.ReadOnlyStringWrapper;
-import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeTableColumn;
-import javafx.scene.control.TreeTableView;
+import javafx.scene.control.Menu;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
@@ -20,29 +16,26 @@ import javafx.scene.shape.Polygon;
 import javafx.stage.FileChooser;
 import javafx.util.Pair;
 import modele.persistance.DeserialiseurXML;
-import modele.xmldata.*;
+import modele.xmldata.Intersection;
+import modele.xmldata.PlanDeVille;
 import org.controlsfx.dialog.ExceptionDialog;
-import org.jdom2.JDOMException;
-import org.xml.sax.SAXException;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
-import java.text.ParseException;
 import java.util.*;
-import javafx.scene.control.Menu;
 
 /**
  * Cette classe joue le rôle de binding pour la fenetre principale de
  * l'application. C'est ici qu'on spécifiera les écouteurs et consorts. Remarque
  * : Les écouteurs peuvent être spécifiés directement dans le fichier xml aussi
- */
-//TODO : split thi class
-/**
  * @author David
  */
-public class RootLayout implements Initializable, Visiteur
-{
+public class VuePrincipale implements Initializable {
+
+    /**
+     * Mediateur : permet de communiquer avec les autres controleurs
+     */
+    private FenetrePrincipale mediateur;
 
     /**
      * La taille sur l'interface graphique d'une intersection du plan de la
@@ -122,14 +115,33 @@ public class RootLayout implements Initializable, Visiteur
      * sont affichés
      */
     private double echelleYIntersection = 0;
+    /**
+     * Méthode appelée lors du redimensionnement de la fenêtre. Elle replace les
+     * arrêtes du graphe à leur bonne position
+     */
+    final ChangeListener<Number> ecouteurDeRedimensionnement = new ChangeListener<Number>() {
+
+        @Override
+        public void changed(ObservableValue<? extends Number> observable,
+                            Number oldValue, Number newValue) {
+
+            canvasGraphique.getChildren().clear();
+            afficherPlan();
+        }
+
+    };
+
+
+    public void initialiserMediateur(FenetrePrincipale fenetrePrincipale) {
+        this.mediateur = fenetrePrincipale;
+    }
 
     /**
      * Met à jour le controleur d'interface
      *
      * @param controleurInterface Le nouveau controleur d'interface
      */
-    public void setControleurInterface(ControleurInterface controleurInterface)
-    {
+    public void setControleurInterface(ControleurInterface controleurInterface) {
         this.controleurInterface = controleurInterface;
     }
 
@@ -137,8 +149,7 @@ public class RootLayout implements Initializable, Visiteur
      * Ecouteur pour ouvrir le plan
      */
     @FXML
-    private void ouvrirPlan(ActionEvent actionEvent)
-    {
+    private void ouvrirPlan(ActionEvent actionEvent) {
         File file = ouvrirSelectionneurDeFichier("Choissiez le plan de la ville");
         if (file != null) {
             Exception messageErreur = controleurInterface.chargerPlan(file);
@@ -158,8 +169,7 @@ public class RootLayout implements Initializable, Visiteur
      * Ecouteur pour la demande de livraison
      */
     @FXML
-    private void ouvrirDemande(ActionEvent actionEvent)
-    {
+    private void ouvrirDemande(ActionEvent actionEvent) {
         File file = ouvrirSelectionneurDeFichier(
                 "Choisissez la demande de livraison");
         if (file != null) {
@@ -167,74 +177,50 @@ public class RootLayout implements Initializable, Visiteur
             if (exception != null)
                 ouvrirAlerteXML(exception, file.getName());
             else {
-                //construireVueLivraion(controleurInterface.getModel().getDemande());
+                mediateur.construireVueLivraison(controleurInterface.getModel().getDemande());
             }
         }
     }
 
     @Override
-    public void initialize(URL location, ResourceBundle resources)
-    {
+    public void initialize(URL location, ResourceBundle resources) {
 
     }
 
     @FXML
-    void clic_ajouterLivraison()
-    {
+    void clic_ajouterLivraison() {
         // TODO : aller à l'état ajouter + supprimer les lignes en dessous (servant de test uniquement)
         // @N'importe qui va implementer ca: En fait c'est pas ici qu'on change l'etat, on seulement demande le controleur.
-        // Tu appeles "controleur.cliqueOutilAjouter". Et c'est deja tout. 
+        // Tu appeles "controleur.cliqueOutilAjouter". Et c'est deja tout.
         // Le controleur sera deja notifie des que l'utilisatuer clique sur le plan pour choissir
         // la destionation de la livraison. [Maxou]
         try {
             construireGraphe(DeserialiseurXML.ouvrirPlanDeVille(
                     ClassLoader.getSystemClassLoader().getResourceAsStream("samples/plan10x10.xml")));
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
 
     @FXML
-    void clic_echangerLivraison()
-    {
+    void clic_echangerLivraison() {
         // TODO : aller à l'état d'échange
     }
 
     @FXML
-    void clic_supprimerLivraison()
-    {
+    void clic_supprimerLivraison() {
         // TODO : aller à l'état de suppression
     }
-
-    /**
-     * Méthode appelée lors du redimensionnement de la fenêtre. Elle replace les
-     * arrêtes du graphe à leur bonne position
-     */
-    final ChangeListener<Number> ecouteurDeRedimensionnement = new ChangeListener<Number>()
-    {
-
-        @Override
-        public void changed(ObservableValue<? extends Number> observable,
-                Number oldValue, Number newValue)
-        {
-
-            canvasGraphique.getChildren().clear();
-            afficherPlan();
-        }
-
-    };
 
     /**
      * Construit et affiche le graphe du plan de la ville sur le canvas
      * graphique de la fenêtre
      *
      * @param plan Le plan de la ville, chargée par le couche controleur et
-     * persistance
+     *             persistance
      */
-    private void construireGraphe(PlanDeVille plan)
-    {
+    private void construireGraphe(PlanDeVille plan) {
         canvasGraphique.getChildren().clear();
 
         Map<Integer, Intersection> toutesIntersections = plan.getIntersections();
@@ -264,8 +250,7 @@ public class RootLayout implements Initializable, Visiteur
      * @return Le point du graphe, à sa position du fichier XML du plan de la
      * ville
      */
-    private Ellipse construireEllipse(Intersection i)
-    {
+    private Ellipse construireEllipse(Intersection i) {
         Ellipse intersection = new Ellipse(i.getX(), i.getY(), DIAMETRE_INTERSECTION, DIAMETRE_INTERSECTION);
         intersection.setFill(Color.YELLOW);
         return intersection;
@@ -277,8 +262,7 @@ public class RootLayout implements Initializable, Visiteur
      * initiale dans le fichier XML / la plus grande taille dans le fichier XML)
      * => (la nouvelle taille / la taille du canvas)
      */
-    private void afficherPlan()
-    {
+    private void afficherPlan() {
         // Affichage (+ mise à l'échelle) des intersections
         for (Pair<Ellipse, Collection<Integer>> pair : intersectionsGraphiques.values()) {
             afficherEllipse(pair.getKey());
@@ -311,8 +295,7 @@ public class RootLayout implements Initializable, Visiteur
      *
      * @param e Le point à afficher
      */
-    private void afficherEllipse(Ellipse e)
-    {
+    private void afficherEllipse(Ellipse e) {
         double newX = e.getCenterX() * canvasGraphique.getWidth() / (echelleXIntersection + MARGE_INTERSECTION);
         double newY = e.getCenterY() * canvasGraphique.getHeight() / (echelleYIntersection + MARGE_INTERSECTION);
 
@@ -328,8 +311,7 @@ public class RootLayout implements Initializable, Visiteur
      * @param debut Le point de début
      * @param cible Le point de destination
      */
-    private void afficherTroncon(Ellipse debut, Ellipse cible)
-    {
+    private void afficherTroncon(Ellipse debut, Ellipse cible) {
         double p1X = debut.getCenterX();
         double p1Y = debut.getCenterY();
         double p2X = cible.getCenterX();
@@ -373,8 +355,7 @@ public class RootLayout implements Initializable, Visiteur
      *
      * @param titreDialogue Le titre du sélectionneur de fichier
      */
-    private File ouvrirSelectionneurDeFichier(String titreDialogue)
-    {
+    private File ouvrirSelectionneurDeFichier(String titreDialogue) {
 
         FileChooser fileChooser = new FileChooser();
 
@@ -394,8 +375,7 @@ public class RootLayout implements Initializable, Visiteur
      * @param message Le message à afficher
      * @param fichier Le nom du fichier qui a généré l'erreur
      */
-    private void ouvrirAlerteXML(Exception message, String fichier)
-    {
+    private void ouvrirAlerteXML(Exception message, String fichier) {
 
         ExceptionDialog exceptionDialog = new ExceptionDialog(message);
         exceptionDialog.setTitle("Erreur");
@@ -409,28 +389,7 @@ public class RootLayout implements Initializable, Visiteur
     }
 
 
-    /**
-     * Convertis un temps en seconde en HH:mm:ss
-     */
-    private static String convertirEnHeureLisible(int tempsEnSeconde){
-        int heure = tempsEnSeconde / 3600;
-        int mn = (tempsEnSeconde % 3600) /60;
-        int sec = tempsEnSeconde %60;
-        return String.format("%02d:%02d:%02d",heure,mn,sec);
-    }
-
-
-    @Override
-    public String visit(Fenetre fenetre) {
-        int debut = fenetre.getTimestampDebut();
-        int fin = fenetre.getTimestampFin();
-
-        return convertirEnHeureLisible(debut) +" - " + convertirEnHeureLisible(fin);
-    }
-
-
-    public void initialiserObserveurs()
-    {
+    public void initialiserObserveurs() {
         controleurInterface.ajouterDesactObserver(ajouterLivraisonBouton);
         controleurInterface.ajouterDesactObserver(echangerLivraisonsBouton);
         controleurInterface.ajouterDesactObserver(supprimerLivraisonBouton);
@@ -438,11 +397,5 @@ public class RootLayout implements Initializable, Visiteur
 
     }
 
-
-    @Override
-    public String visit(Livraison livraison) {
-        String message = livraison.getId()+" - Client "+livraison.getClientId() +" à " +livraison.getAdresse();
-        return message;
-    }
 
 }
