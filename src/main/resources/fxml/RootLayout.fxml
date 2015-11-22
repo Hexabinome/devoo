@@ -12,7 +12,7 @@
     <top>
         <MenuBar BorderPane.alignment="CENTER">
             <menus>
-                <Menu mnemonicParsing="false" text="Fichier">
+                <Menu fx:id="menuFichier" mnemonicParsing="false" text="Fichier">
                     <items>
                         <MenuItem mnemonicParsing="false" onAction="#ouvrirPlan" text="Ouvrir plan de la ville">
                             <accelerator>
@@ -57,20 +57,20 @@
             <top>
                 <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="TOP_LEFT">
                     <buttons>
-                  <Button mnemonicParsing="false" prefWidth="100" text="Générer la feuille de route" />
+                  <Button mnemonicParsing="false" disable="true" prefWidth="100" text="Générer la feuille de route" />
                   <HBox prefHeight="100.0" prefWidth="200.0" />
-                        <Button mnemonicParsing="false" onAction="#clic_ajouterLivraison" text="Ajouter livraisons">
+                        <Button mnemonicParsing="false" disable="true" onAction="#clic_ajouterLivraison" text="Ajouter livraisons">
                             <graphic>
                                 <Glyph fontFamily="FontAwesome" icon="PLUS" />
                             </graphic>
                                 </Button>
-                        <Button mnemonicParsing="false" onAction="#clic_echangerLivraison" text="Echanger livraisons">
+                        <Button mnemonicParsing="false" disable="true" onAction="#clic_echangerLivraison" text="Echanger livraisons">
                             <graphic>
                                 <Glyph fontFamily="FontAwesome" icon="ARROWS_H" />
                             </graphic>
                             </Button>
 
-                        <Button mnemonicParsing="false" onAction="#clic_supprimerLivraison" text="Supprimer livraisons">
+                        <Button mnemonicParsing="false" disable="true" onAction="#clic_supprimerLivraison" text="Supprimer livraisons">
                             <graphic>
                                 <Glyph fontFamily="FontAwesome" icon="TRASH" />
                             </graphic>

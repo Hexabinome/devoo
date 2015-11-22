@@ -29,6 +29,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.text.ParseException;
 import java.util.*;
+import javafx.scene.control.Menu;
 
 /**
  * Cette classe joue le rôle de binding pour la fenetre principale de
@@ -89,6 +90,12 @@ public class RootLayout implements Initializable
      */
     @FXML
     private Pane canvasGraphique;
+    
+    /**
+     * Le menu en haut
+     */
+    @FXML
+    private Menu menuFichier;
 
     /**
      * Contient tous les points graphiques actuellement afficher grâce à leur
@@ -129,8 +136,13 @@ public class RootLayout implements Initializable
             Exception messageErreur = controleurInterface.chargerPlan(file);
             if (messageErreur != null)
                 ouvrirAlerteXML(messageErreur, file.getName());
-            else
+            else {
                 construireGraphe(controleurInterface.getPlanDeVille());
+
+                //activation de menu element graphique qui permet de charger un fichier de livraison
+                //(Ici on peut le faire sans appel observeur, parce qu' a parti d'ici on possede toujours un plan valide.)
+                menuFichier.getItems().get(1).setDisable(false);
+            }
         }
     }
 
