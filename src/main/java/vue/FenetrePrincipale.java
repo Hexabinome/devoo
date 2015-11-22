@@ -7,7 +7,9 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import modele.persistance.DeserialiseurXML;
 import modele.xmldata.Demande;
+import modele.xmldata.PlanDeVille;
 
 /**
  * Cette classe crée la fenetre principale avec ses enfants. Elle se charge aussi de créer le controleur.

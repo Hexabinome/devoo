@@ -46,7 +46,7 @@ class EtatPrincipal implements EtatInterface
     @Override
     public EtatInterface chargerPlan(File plan) throws JDOMException, SAXException, IOException, ParseException
     {
-        new CommandChargerPlan(controleurDonnees, plan).executer();
+     //   new CommandChargerPlan(controleurDonnees, plan).executer();
         return new EtatPlanCharge(controleurDonnees);
     }
 

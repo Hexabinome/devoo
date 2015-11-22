@@ -6,7 +6,6 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.PriorityQueue;
@@ -167,8 +166,13 @@ public class Fenetre implements Visitable {
     }
 
 	@Override
-	public String accepter(Visiteur v) {
-		return v.visit(this);
+	public String accepterVisiteurInformation(Visiteur v) {
+		return v.recupererInformation(this);
+	}
+
+	@Override
+	public void accepterVisiteurObjet(Visiteur v) {
+		v.recupererObject(this);
 	}
 
 	/**

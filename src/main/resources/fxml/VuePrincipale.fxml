@@ -62,7 +62,10 @@
          <top>
             <AnchorPane style="-fx-background-color: white;">
                <children>
-                  <ObserverButton fx:id="genererFeuilleBouton" disable="true" layoutY="11.0" mnemonicParsing="false" text="Générer la feuille de route" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="11.0" />
+                  <ObserverButton fx:id="genererFeuilleBouton" disable="true" layoutY="11.0" mnemonicParsing="false" text="Générer la feuille de route" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="11.0">
+                      serverButton fx:id="ajouterLivraisonBouton" disable="true" mnemonicParsing="false" onAction="#clic_ajouterLivraison" text="Ajouter livraisons">
+
+                  </ObserverButton>
                   <ToolBar style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="5.0">
                      <items>
                         <ObserverButton fx:id="ajouterLivraisonBouton" disable="true" mnemonicParsing="false" onAction="#clic_ajouterLivraison" text="Ajouter livraisons">

@@ -5,10 +5,8 @@ import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeTableCell;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableView;
-import javafx.util.Callback;
 import modele.xmldata.*;
 
 import java.net.URL;
@@ -51,13 +49,7 @@ public class VueLivraisonHoraireControleur implements Initializable, Visiteur {
         tableViewFenetre.getColumns().addAll(colonneLivraison, colonneHoraire);
     }
 
-    @Override
-    public String visit(Fenetre fenetre) {
-        int debut = fenetre.getTimestampDebut();
-        int fin = fenetre.getTimestampFin();
 
-        return convertirEnHeureLisible(debut) + " - " + convertirEnHeureLisible(fin);
-    }
 
     protected void construireVueLivraion(Demande demande) {
         TreeItem<Visitable> dummyRoot = new TreeItem<>();
@@ -65,9 +57,8 @@ public class VueLivraisonHoraireControleur implements Initializable, Visiteur {
             dummyRoot.getChildren().add(construireFenetreItem(f));
         }
 
-        //livraisonColum.setResizable(false);
         colonneLivraison.setCellValueFactory((TreeTableColumn.CellDataFeatures<Visitable, String> param)
-                -> new ReadOnlyStringWrapper(param.getValue().getValue().accepter(this)));
+                -> new ReadOnlyStringWrapper(param.getValue().getValue().accepterVisiteurInformation(this)));
         /*colonneLivraison.setCellFactory(
                 new Callback<TreeTableColumn<Visitable, String>, TreeTableCell<Visitable, String>>() {
                     @Override
@@ -91,6 +82,12 @@ public class VueLivraisonHoraireControleur implements Initializable, Visiteur {
         tableViewFenetre.setRoot(dummyRoot);
         dummyRoot.setExpanded(true);
         tableViewFenetre.setShowRoot(false);
+
+
+       tableViewFenetre.getSelectionModel().selectedItemProperty().addListener(
+               (observable, oldValue, newValue) -> {
+                   newValue.getValue().accepterVisiteurObjet(this);
+               });
 
     }
 
@@ -117,10 +114,29 @@ public class VueLivraisonHoraireControleur implements Initializable, Visiteur {
         return rootItem;
     }
 
+    @Override
+    public String recupererInformation(Fenetre fenetre) {
+        int debut = fenetre.getTimestampDebut();
+        int fin = fenetre.getTimestampFin();
+
+        return convertirEnHeureLisible(debut) + " - " + convertirEnHeureLisible(fin);
+    }
 
     @Override
-    public String visit(Livraison livraison) {
+    public String recupererInformation(Livraison livraison) {
         return livraison.getId() + " - Client " + livraison.getClientId() + " à " + livraison.getAdresse();
+    }
+
+    @Override
+    public void recupererObject(Fenetre fenetre) {
+        //TODO : appeler la vue principale pour qu'elle fasse un truc sur la map
+        System.out.println(fenetre);
+    }
+
+    @Override
+    public void recupererObject(Livraison livraison) {
+        //TODO : appeler la vue principale pour qu'elle fasse un truc sur la map
+        System.out.println(livraison);
     }
 
     /**

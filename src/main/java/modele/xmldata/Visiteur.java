@@ -8,7 +8,17 @@ package modele.xmldata;
  */
 public interface Visiteur {
 
-    String visit(Fenetre fenetre);
+    /**
+     * Retourne l'heure de debut et de fin de la livraison sous la forme "HH:mm:ss - HH:mm:ss"
+     */
+    String recupererInformation(Fenetre fenetre);
 
-    String visit(Livraison livraison);
+    /**
+     * Retourne quelques infos sur la livraison
+     */
+    String recupererInformation(Livraison livraison);
+
+    void recupererObject(Fenetre fenetre);
+
+    void recupererObject(Livraison livraison);
 }
