@@ -1,5 +1,8 @@
 package modele.xmldata;
 
+import modele.business.TSP;
+import modele.business.TSP1;
+
 /**
  *
  * @author Max Schiedermeier
@@ -58,11 +61,12 @@ public class Model implements ModelLecture
         // + soit (1) effacer tournee / soit (2) recalculer tournee avec TSP -> encore a discuter mais a mon avis (2)
     }
 
-    @Override
     public void calculerTournee()
     {
-        demande.creerGraphe(plan);
+        graphe = demande.creerGraphe(plan);
 
-        //TODO: apres avoir calcule le graphe il faut appeler TSP ici.
+        // apres avoir calcule le graphe il faut appeler TSP ici.
+        TSP tsp = new TSP1();
+        tsp.chercheSolution(1000, graphe);
     }
 }

@@ -3,7 +3,7 @@ import vue.FenetrePrincipale;
 /**
  * Point d'entrée de l'application
  *
- * @author Maximilian Schiedermeier
+ * @author Maxou
  */
 public class DevOO {
 

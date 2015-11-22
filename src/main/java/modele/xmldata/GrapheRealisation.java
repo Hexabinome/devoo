@@ -1,6 +1,7 @@
 package modele.xmldata;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 /**
  *
@@ -9,7 +10,7 @@ import java.util.HashMap;
 public class GrapheRealisation implements Graphe
 {
     private Chemin[][] chemins;
-    private HashMap<Integer, Integer> idCheminToIdMatrice;
+    private final HashMap<Integer, Integer> idCheminToIdMatrice;
     private int nombreCheminInserer = 0;
     /**
      * Cree un graphe 
@@ -44,7 +45,7 @@ public class GrapheRealisation implements Graphe
     {
     	if(idCheminToIdMatrice.get(i) == null || idCheminToIdMatrice.get(j) == null || idCheminToIdMatrice.get(i) > chemins.length || idCheminToIdMatrice.get(i) > chemins.length)
     		return false;
-        return idCheminToIdMatrice.get(i) != idCheminToIdMatrice.get(j);
+        return !Objects.equals(idCheminToIdMatrice.get(i), idCheminToIdMatrice.get(j));
     }
 
 	public Chemin getChemin(int i, int j) {

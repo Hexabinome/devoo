@@ -125,7 +125,7 @@ bg=green
       <h>224</h>
     </coordinates>
     <panel_attributes>Controleur
-bg=red
+bg=green
 --
 etat:Etat
 model:Model
@@ -1497,7 +1497,7 @@ bg=orange</panel_attributes>
       <h>144</h>
     </coordinates>
     <panel_attributes>ControleurDonnees
-bg=red
+bg=green
 --
 -model:Model
 -currentState:currentState

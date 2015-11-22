@@ -17,6 +17,4 @@ public interface ModelLecture
     public PlanDeVille getPlan();
 
     public Demande getDemande();
-
-	public void calculerTournee();
 }
