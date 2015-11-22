@@ -25,12 +25,15 @@ public class Troncon {
      * Duree de traversee du troncon.
      */
     private final float duree;
+    
+    private final int idDestination;
 
     public Troncon(String nomRue, float vitesse, float longueur, int idDestination) {
         this.nomRue = nomRue;
         this.vitesse = vitesse;
         this.longueur = longueur;
         this.duree = longueur / vitesse;
+        this.idDestination = idDestination;
     }
     
     public String getNomRue() {
@@ -67,4 +70,11 @@ public class Troncon {
     {
     	return vitesse * duree;
     }
+
+    public int getIdDestination()
+    {
+        return idDestination;
+    }
+    
+    
 }

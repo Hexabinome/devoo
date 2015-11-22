@@ -1,20 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package modele.xmldata;
+
+import java.util.List;
 
 /**
  *
- * @author maex
+ * @author maxou
  */
 public interface ModelLecture
 {
-
-    public Graphe getGraphe();
-
     public PlanDeVille getPlan();
 
     public Demande getDemande();
+    
+    public List<List<Integer>> getTournee();
 }

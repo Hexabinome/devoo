@@ -1,5 +1,9 @@
 package modele.xmldata;
 
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 import modele.business.TSP;
 import modele.business.TSP1;
 
@@ -12,7 +16,8 @@ public class Model implements ModelLecture
 
     private final PlanDeVille plan;
     private final Demande demande;
-    private Graphe graphe;
+    private GrapheRealisation graphe;
+    private TSP tsp;
 
     public Model(PlanDeVille plan, Demande demande)
     {
@@ -20,17 +25,18 @@ public class Model implements ModelLecture
         this.demande = demande;
     }
 
-    @Override
-    public Graphe getGraphe()
-    {
-        return graphe;
-    }
+    /*
+     @Override
+     public Graphe getGraphe()
+     {
+     return graphe;
+     }
 
-    public void setGraphe(Graphe graphe)
-    {
-        this.graphe = graphe;
-    }
-
+     public void setGraphe(Graphe graphe)
+     {
+     this.graphe = graphe;
+     }
+     */
     @Override
     public PlanDeVille getPlan()
     {
@@ -66,7 +72,48 @@ public class Model implements ModelLecture
         graphe = demande.creerGraphe(plan);
 
         // apres avoir calcule le graphe il faut appeler TSP ici.
-        TSP tsp = new TSP1();
+        tsp = new TSP1();
         tsp.chercheSolution(1000, graphe);
     }
+
+    @Override
+    public List<List<Integer>> getTournee()
+    {
+        List<List<Integer>> tournee = new LinkedList<>();
+        int compteurDesLivraisons = 0;
+        
+        /**
+         * pour toutes les fentres de la demande:
+         */
+        int livraisonDepart;
+        int livraisonArrivee = tsp.getSolution(compteurDesLivraisons++);
+        Iterator<Fenetre> iter = demande.getFenetres().iterator();
+        while(iter.hasNext())
+        {
+            List<Integer> routePartielle = new LinkedList<>();
+            
+            iter.next();
+            int livraisonsFenetre = iter.next().getLivraisons().size();
+            /**
+             * demander TSP a quelle ordre on doit parcourir les destinations de cette fenetre
+             */
+            while(livraisonsFenetre > 0)
+            {
+                livraisonsFenetre--;
+                livraisonDepart = livraisonArrivee;
+                livraisonArrivee = tsp.getSolution(compteurDesLivraisons);
+                
+                // demander Graphe du chemin pour passer du depart a l'arrivee
+                Chemin chemin = graphe.getChemin(livraisonDepart, livraisonDepart);
+                for(Troncon troncon: chemin.getTroncons())
+                {
+                    routePartielle.add(troncon.getIdDestination());
+                }
+                
+            }
+            tournee.add(routePartielle);
+        }
+        return tournee;
+    }
+
 }
