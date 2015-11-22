@@ -2,6 +2,7 @@ package vue;
 
 import controleur.ControleurInterface;
 import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -183,7 +184,7 @@ public class RootLayout implements Initializable, Visiteur
             if (exception != null)
                 ouvrirAlerteXML(exception, file.getName());
             else {
-                // TODO : remplir la partie à gauche
+                construireVueLivraion(controleurInterface.getModel().getDemande());
             }
         }
     }
@@ -194,25 +195,6 @@ public class RootLayout implements Initializable, Visiteur
         colonneLivraison.setPrefWidth(161);
         colonneHoraire.setPrefWidth(161);
         tableViewFenetre.getColumns().addAll(colonneLivraison, colonneHoraire);
-        try {
-            PlanDeVille planDeVille = DeserialiseurXML.ouvrirPlanDeVille(
-                    ClassLoader.getSystemResourceAsStream("samples/plan20x20.xml"));
-            Demande demande = DeserialiseurXML.ouvrirLivraison(
-                    ClassLoader.getSystemResourceAsStream("samples/livraison20x20-2.xml"), planDeVille);
-            construireVueLivraion(demande);
-        }
-        catch (JDOMException e) {
-            e.printStackTrace();
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-        catch (SAXException e) {
-            e.printStackTrace();
-        }
-        catch (ParseException e) {
-            e.printStackTrace();
-        }
     }
 
     @FXML
@@ -412,7 +394,9 @@ public class RootLayout implements Initializable, Visiteur
      */
     private File ouvrirSelectionneurDeFichier(String titreDialogue)
     {
+
         FileChooser fileChooser = new FileChooser();
+
         fileChooser.setTitle(titreDialogue);
         //  Filtrage de l'extension
         FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("Fichier xml (*.xml)", "*.xml");
@@ -463,9 +447,9 @@ public class RootLayout implements Initializable, Visiteur
     }
 
     /**
-     * Contruis une item correspondant à une fenetre et ces enfants
+     * Contruis une item correspondant à une fenetre et ses enfants
      */
-    private TreeItem<Visitable> construireFenetreItem(Fenetre fenetre)
+    private static TreeItem<Visitable> construireFenetreItem(Fenetre fenetre)
     {
 
         // Récuperation des livraisons de la fenetre
@@ -485,13 +469,23 @@ public class RootLayout implements Initializable, Visiteur
         return rootItem;
     }
 
+    /**
+     * Convertis un temps en seconde en HH:mm:ss
+     */
+    private static String convertirEnHeureLisible(int tempsEnSeconde){
+        int heure = tempsEnSeconde / 3600;
+        int mn = (tempsEnSeconde % 3600) /60;
+        int sec = tempsEnSeconde %60;
+        return String.format("%02d:%02d:%02d",heure,mn,sec);
+    }
+
 
     @Override
     public String visit(Fenetre fenetre) {
         int debut = fenetre.getTimestampDebut();
         int fin = fenetre.getTimestampFin();
 
-        return null;
+        return convertirEnHeureLisible(debut) +" - " + convertirEnHeureLisible(fin);
     }
 
 
@@ -507,7 +501,8 @@ public class RootLayout implements Initializable, Visiteur
 
     @Override
     public String visit(Livraison livraison) {
-        return null;
+        String message = livraison.getId()+" - Client "+livraison.getClientId() +" à " +livraison.getAdresse();
+        return message;
     }
 
 }
