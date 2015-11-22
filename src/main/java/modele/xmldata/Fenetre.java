@@ -17,7 +17,7 @@ import java.util.Set;
  * 
  * @author mhaidara / maxou
  */
-public class Fenetre {
+public class Fenetre implements Visitable {
     
     private final int heureDebut;
     private final int heureFin;
@@ -165,7 +165,12 @@ public class Fenetre {
     	
     	return intersections;
     }
-	
+
+	@Override
+	public String accepter(Visiteur v) {
+		return v.visit(this);
+	}
+
 	/**
 	 * Classe utile pour la priority Queue. 
 	 * Le but est de lui fournir un comparateur pour qu'elle s'ordonne. 

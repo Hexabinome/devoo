@@ -5,7 +5,7 @@ package modele.xmldata;
  *
  * @author mhaidara / maxou
  */
-public class Livraison {
+public class Livraison implements Visitable{
 
     /**
      * Identifiant de la livraison
@@ -47,5 +47,10 @@ public class Livraison {
                 ", clientId=" + clientId +
                 ", adresse=" + adresse +
                 '}';
+    }
+
+    @Override
+    public String accepter(Visiteur v) {
+        return v.visit(this);
     }
 }

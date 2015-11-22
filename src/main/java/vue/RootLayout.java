@@ -40,7 +40,7 @@ import javafx.scene.control.Menu;
 /**
  * @author David
  */
-public class RootLayout implements Initializable
+public class RootLayout implements Initializable, Visiteur
 {
 
     /**
@@ -72,17 +72,17 @@ public class RootLayout implements Initializable
      * Vue à gauche qui affiche les livraisons
      */
     @FXML
-    private TreeTableView<Object> tableViewFenetre;
+    private TreeTableView<Visitable> tableViewFenetre;
 
     /**
      * Colonne livraison de la vue à gauche
      */
-    private final TreeTableColumn<Object, String> colonneLivraison = new TreeTableColumn<>("Livraisons");
+    private final TreeTableColumn<Visitable, String> colonneLivraison = new TreeTableColumn<>("Livraisons");
 
     /**
      * Colonne horaire de passage de la vue à gauche
      */
-    private final TreeTableColumn<Object, String> colonneHoraire = new TreeTableColumn<>("Horaires de passage");
+    private final TreeTableColumn<Visitable, String> colonneHoraire = new TreeTableColumn<>("Horaires de passage");
 
     /**
      * Partie droite de la fenêtre, affichant de la graphe du plan de la ville
@@ -445,22 +445,14 @@ public class RootLayout implements Initializable
 
     private void construireVueLivraion(Demande demande)
     {
-        TreeItem<Object> dummyRoot = new TreeItem<>();
+        TreeItem<Visitable> dummyRoot = new TreeItem<>();
         for (Fenetre f : demande.getFenetres()) {
             dummyRoot.getChildren().add(construireFenetreItem(f));
         }
 
         //livraisonColum.setResizable(false);
-        colonneLivraison.setCellValueFactory((TreeTableColumn.CellDataFeatures<Object, String> param)
-                -> {
-                    Object objetDeLigneCourante = param.getValue().getValue();
-                    String stringLigneCourante = "";
-                    if (objetDeLigneCourante instanceof Fenetre)
-                        stringLigneCourante = ((Fenetre) objetDeLigneCourante).toString();
-                    else if (objetDeLigneCourante instanceof Livraison)
-                        stringLigneCourante = ((Livraison) objetDeLigneCourante).toString();
-                    return new ReadOnlyStringWrapper(stringLigneCourante);
-                });
+        colonneLivraison.setCellValueFactory((TreeTableColumn.CellDataFeatures<Visitable, String> param)
+                -> new ReadOnlyStringWrapper(param.getValue().getValue().accepter(this)));
 
         // On n'affiche pas le root car c'est pas la peine
         // http://stackoverflow.com/questions/22893461/javafx8-treetableview-multiple-root-items
@@ -473,7 +465,7 @@ public class RootLayout implements Initializable
     /**
      * Contruis une item correspondant à une fenetre et ces enfants
      */
-    private TreeItem<Object> construireFenetreItem(Fenetre fenetre)
+    private TreeItem<Visitable> construireFenetreItem(Fenetre fenetre)
     {
 
         // Récuperation des livraisons de la fenetre
@@ -483,21 +475,25 @@ public class RootLayout implements Initializable
         });
 
         // Construction des items de chaque livraison
-        TreeItem<Object> rootItem = new TreeItem<>(fenetre);
+        TreeItem<Visitable> rootItem = new TreeItem<>(fenetre);
         for (Livraison l : livraisonList) {
 
-            TreeItem<Object> livraisonTreeItem = new TreeItem<>(l);
+            TreeItem<Visitable> livraisonTreeItem = new TreeItem<>(l);
             rootItem.getChildren().add(livraisonTreeItem);
         }
 
         return rootItem;
     }
 
-    private static String convertirTimeStampEnHoraire(int timestamp)
-    {
-        // TODO
+
+    @Override
+    public String visit(Fenetre fenetre) {
+        int debut = fenetre.getTimestampDebut();
+        int fin = fenetre.getTimestampFin();
+
         return null;
     }
+
 
     public void initialiserObserveurs()
     {
@@ -506,6 +502,12 @@ public class RootLayout implements Initializable
         controleurInterface.ajouterDesactObserver(supprimerLivraisonBouton);
         controleurInterface.ajouterDesactObserver(genererFeuilleBouton);
 
+    }
+
+
+    @Override
+    public String visit(Livraison livraison) {
+        return null;
     }
 
 }
