@@ -39,7 +39,7 @@ public class EtatAjout extends AbstractEtat
     }
 
     @Override
-    public EtatInterface cliqueSurPlan(int x, int y)
+    public EtatInterface cliqueSurPlan(int intersectionId)
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

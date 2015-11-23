@@ -36,7 +36,7 @@ class EtatInitial extends AbstractEtat
     }
 
     @Override
-    public EtatInterface cliqueSurPlan(int x, int y)
+    public EtatInterface cliqueSurPlan(int intersectionId)
     {
         throw new RuntimeException("Cet etat ne permet pas d'interagir avec le plan.");
     }

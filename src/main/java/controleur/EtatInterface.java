@@ -19,7 +19,7 @@ public interface EtatInterface
 
     EtatInterface chargerLivraisons(File livraisons)  throws CommandException;
 
-    EtatInterface cliqueSurPlan(int x, int y);
+    EtatInterface cliqueSurPlan(int intersectionId);
     
     EtatInterface cliqueCalculerTournee();
 }

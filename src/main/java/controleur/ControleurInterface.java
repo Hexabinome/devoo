@@ -15,7 +15,7 @@ public interface ControleurInterface
 
     void ajouterModelObserver(ModelObserver observer);
 
-    void cliqueSurPlan(int x, int y);
+    void cliqueSurPlan(int intersectionId);
     
     void cliqueSurLivraison(int livraisonId);
 

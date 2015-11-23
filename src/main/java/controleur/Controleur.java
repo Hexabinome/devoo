@@ -98,9 +98,9 @@ public class Controleur implements ControleurInterface
     }
 
     @Override
-    public void cliqueSurPlan(int x, int y)
+    public void cliqueSurPlan(int intersectionId)
     {
-        etat = etat.cliqueSurPlan(x, y);
+        etat = etat.cliqueSurPlan(intersectionId);
     }
 
     @Override
