@@ -8,10 +8,6 @@ package modele.xmldata;
  * @author Mohamed El Mouctar HAIDAR
  */
 public interface Visitable {
-    /**
-     * Permet de récuperer quelques infos sur l'object visitable
-     */
-    String accepterVisiteurInformation(Visiteur v);
 
     /**
      * Permet de récuperer l'object visitable

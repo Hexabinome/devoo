@@ -11,7 +11,10 @@ import javafx.scene.control.TreeTableCell;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableView;
 import javafx.util.Callback;
-import modele.xmldata.*;
+import modele.xmldata.Demande;
+import modele.xmldata.Fenetre;
+import modele.xmldata.Livraison;
+import modele.xmldata.Visiteur;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -27,12 +30,12 @@ public class VueTableLivraisonControleur implements Initializable, Visiteur, Mai
         ModelObserver {
 
     @FXML
-    TreeTableView<Visitable> tableViewFenetre;
+    TreeTableView<ObjetVisualisable> tableViewFenetre;
 
     /**
      * Element racine de la Table qui contient tous les autres éléments.Il ne sera pas affiché dans la table
      */
-    private TreeItem<Visitable> elementRacine = new TreeItem<>();
+    private TreeItem<ObjetVisualisable> elementRacine = new TreeItem<>();
 
     /**
      * Controleur principale
@@ -43,13 +46,13 @@ public class VueTableLivraisonControleur implements Initializable, Visiteur, Mai
      * Colonne livraison de la vue à gauche
      */
     @FXML
-    private TreeTableColumn<Visitable, String> colonneLivraison;
+    private TreeTableColumn<ObjetVisualisable, String> colonneLivraison;
 
     /**
      * Colonne horaire de passage de la vue à gauche
      */
     @FXML
-    private TreeTableColumn<Visitable, String> colonneHoraire;
+    private TreeTableColumn<ObjetVisualisable, String> colonneHoraire;
 
     /**
      * Mediateur pour la communication avec les autres controleurs de vue
@@ -70,6 +73,8 @@ public class VueTableLivraisonControleur implements Initializable, Visiteur, Mai
         tableViewFenetre.setShowRoot(false);
         initialiserEcouteurDeClic();
         initialiserColonneLivraison();
+        initialiserColonneHoraire();
+        //ajouterStyleCssColonneLivraison();
     }
 
     /**
@@ -78,6 +83,7 @@ public class VueTableLivraisonControleur implements Initializable, Visiteur, Mai
      * @param demande La demande de livraison chargée à partir d'un fichier XML
      */
     protected void construireVueTableLivraion(Demande demande) {
+        // TODO : afficher l'entrepo
         for (Fenetre f : demande.getFenetres()) {
             elementRacine.getChildren().add(construireFenetreItem(f));
         }
@@ -86,10 +92,11 @@ public class VueTableLivraisonControleur implements Initializable, Visiteur, Mai
     private void ajouterStyleCssColonneLivraison() {
         // TODO : à completer pour le hover ou des trucs du genre
         colonneLivraison.setCellFactory(
-                new Callback<TreeTableColumn<Visitable, String>, TreeTableCell<Visitable, String>>() {
+                new Callback<TreeTableColumn<ObjetVisualisable, String>, TreeTableCell<ObjetVisualisable, String>>() {
                     @Override
-                    public TreeTableCell<Visitable, String> call(TreeTableColumn<Visitable, String> param) {
-                        return new TreeTableCell<Visitable, String>() {
+                    public TreeTableCell<ObjetVisualisable, String> call(
+                            TreeTableColumn<ObjetVisualisable, String> param) {
+                        return new TreeTableCell<ObjetVisualisable, String>() {
                             @Override
                             protected void updateItem(String item, boolean empty) {
 
@@ -110,7 +117,7 @@ public class VueTableLivraisonControleur implements Initializable, Visiteur, Mai
     private void initialiserEcouteurDeClic() {
         tableViewFenetre.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> {
-                    newValue.getValue().accepterVisiteurObjet(this);
+                    //newValue.getValue().accepterVisiteurObjet(this);
                 });
     }
 
@@ -118,8 +125,16 @@ public class VueTableLivraisonControleur implements Initializable, Visiteur, Mai
      * Initialise la methode de remplissage de la colonne 'Livraisons'
      */
     private void initialiserColonneLivraison() {
-        colonneLivraison.setCellValueFactory((TreeTableColumn.CellDataFeatures<Visitable, String> param)
-                -> new ReadOnlyStringWrapper(param.getValue().getValue().accepterVisiteurInformation(this)));
+        colonneLivraison.setCellValueFactory((TreeTableColumn.CellDataFeatures<ObjetVisualisable, String> param)
+                -> new ReadOnlyStringWrapper(param.getValue().getValue().afficherCaracteriquesGloable()));
+    }
+
+    /**
+     * Initialise la methode de remplissage de la colonne 'Horaire de passage'
+     */
+    private void initialiserColonneHoraire() {
+        colonneHoraire.setCellValueFactory((TreeTableColumn.CellDataFeatures<ObjetVisualisable, String> param)
+                -> new ReadOnlyStringWrapper(param.getValue().getValue().afficherCaracteriqueSpeciale()));
     }
 
     /**
@@ -132,7 +147,7 @@ public class VueTableLivraisonControleur implements Initializable, Visiteur, Mai
     /**
      * Contruis un élement correspondant à une fenetre et ses enfants
      */
-    private static TreeItem<Visitable> construireFenetreItem(Fenetre fenetre) {
+    private static TreeItem<ObjetVisualisable> construireFenetreItem(Fenetre fenetre) {
 
         // Récuperation des livraisons de la fenetre
         List<Livraison> livraisonList = new ArrayList<>();
@@ -141,10 +156,10 @@ public class VueTableLivraisonControleur implements Initializable, Visiteur, Mai
         });
 
         // Construction des items de chaque livraison
-        TreeItem<Visitable> elementRacine = new TreeItem<>(fenetre);
+        TreeItem<ObjetVisualisable> elementRacine = new TreeItem<>(new DetailFenetre(fenetre));
         for (Livraison l : livraisonList) {
 
-            TreeItem<Visitable> livraisonTreeItem = new TreeItem<>(l);
+            TreeItem<ObjetVisualisable> livraisonTreeItem = new TreeItem<>(new DetailLivraison(l));
             elementRacine.getChildren().add(livraisonTreeItem);
         }
 
@@ -153,38 +168,16 @@ public class VueTableLivraisonControleur implements Initializable, Visiteur, Mai
     }
 
     @Override
-    public String recupererInformation(Fenetre fenetre) {
-        int debut = fenetre.getTimestampDebut();
-        int fin = fenetre.getTimestampFin();
-
-        return convertirEnHeureLisible(debut) + " - " + convertirEnHeureLisible(fin);
-    }
-
-    @Override
-    public String recupererInformation(Livraison livraison) {
-        return livraison.getId() + " - Client " + livraison.getClientId() + " à " + livraison.getAdresse();
-    }
-
-    @Override
     public void recupererObject(Fenetre fenetre) {
-        //TODO : appeler la vue principale pour qu'elle fasse un truc sur la map
+        //TODO : Faire un un truc sur la map
         System.out.println(fenetre);
     }
 
     @Override
     public void recupererObject(Livraison livraison) {
+        //TODO : Faire un un truc sur la map
         System.out.println(livraison);
         controleurInterface.cliqueSurLivraison(livraison.getId());
-    }
-
-    /**
-     * Convertis un temps en seconde en HH:mm:ss
-     */
-    private static String convertirEnHeureLisible(int tempsEnSeconde) {
-        int heure = tempsEnSeconde / 3600;
-        int mn = (tempsEnSeconde % 3600) / 60;
-        int sec = tempsEnSeconde % 60;
-        return String.format("%02d:%02d:%02d", heure, mn, sec);
     }
 
     public void setControleurInterface(ControleurInterface controleurInterface) {
@@ -208,7 +201,7 @@ public class VueTableLivraisonControleur implements Initializable, Visiteur, Mai
         construireVueTableLivraion(controleurInterface.getModel().getDemande());
     }
 
-    public void initialiserObserveurs(){
+    public void initialiserObserveurs() {
         controleurInterface.ajouterDesactObserver(this);
         controleurInterface.ajouterModelObserver(this);
     }

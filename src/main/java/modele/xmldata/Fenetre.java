@@ -181,12 +181,6 @@ public class Fenetre implements Visitable
     }
 
     @Override
-    public String accepterVisiteurInformation(Visiteur v)
-    {
-        return v.recupererInformation(this);
-    }
-
-    @Override
     public void accepterVisiteurObjet(Visiteur v)
     {
         v.recupererObject(this);

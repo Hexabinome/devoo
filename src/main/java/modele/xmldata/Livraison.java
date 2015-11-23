@@ -36,9 +36,9 @@ public class Livraison implements Visitable
      */
     private final int adresse;
 
-    public Livraison(int id, int clientId, int idIntersection)
+    public Livraison(int idLivraison, int clientId, int idIntersection)
     {
-        this.id = id;
+        this.id = idLivraison;
         this.clientId = clientId;
         this.adresse = idIntersection;
     }
@@ -66,12 +66,6 @@ public class Livraison implements Visitable
                 + ", clientId=" + clientId
                 + ", adresse=" + adresse
                 + '}';
-    }
-
-    @Override
-    public String accepterVisiteurInformation(Visiteur v)
-    {
-        return v.recupererInformation(this);
     }
 
     @Override
