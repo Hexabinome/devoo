@@ -404,7 +404,7 @@ bg=green
 bg=green
 --
 /+isUndoAble():boolean/
-/+executer():void/
+/+executer():void throws CommandException/
 /+annuler():void/</panel_attributes>
     <additional_attributes/>
   </element>
@@ -419,7 +419,7 @@ bg=green
     <panel_attributes>ChargerPlan
 bg=green
 --
-+executer():void</panel_attributes>
++executer():void throws CommandException</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -433,7 +433,7 @@ bg=green
     <panel_attributes>ChargerLivraisons
 bg=green
 --
-+executer():void</panel_attributes>
++executer():void throws CommandException</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -837,7 +837,6 @@ bg=green
     <panel_attributes>UninvertibleCommand
 bg=green
 --
-/+executer():void/
 +isUndoable:false
 +annuler():void</panel_attributes>
     <additional_attributes/>

@@ -27,21 +27,25 @@ public class CommandChargerLivraisons extends UninvertibelCommand
     }
 
     @Override
-    public void executer() throws JDOMException, IOException, SAXException, ParseException
+    public void executer() throws CommandException
     {
-        PlanDeVille plan = controleurDonnees.getPlan();
-        Demande demande = DeserialiseurXML.ouvrirLivraison(livraisonsFichier, plan);
-        controleurDonnees.setModel(new Model(plan, demande));
+        try {
+            PlanDeVille plan = controleurDonnees.getPlan();
+            Demande demande = DeserialiseurXML.ouvrirLivraison(livraisonsFichier, plan);
+            controleurDonnees.setModel(new Model(plan, demande));
 
-        //TODO: enable claculation as soon as bug in graph class (Nullpointer) is fixed. [Maxou]
-        //calculer la tournee
-        controleurDonnees.getModel().calculerTournee();
+            //calculer la tournee
+            controleurDonnees.getModel().calculerTournee();
 
-        //notifier la vue que maintenant on peux interagir avec les elements prinicpaux.
-        controleurDonnees.notifyAllActObserveurs(false);
-        
-        //notifier la vue que le modele a change
-        controleurDonnees.notifyAllModelObserveurs();
+            //notifier la vue que maintenant on peux interagir avec les elements prinicpaux.
+            controleurDonnees.notifyAllActObserveurs(false);
+
+            //notifier la vue que le modele a change
+            controleurDonnees.notifyAllModelObserveurs();
+        }
+        catch (SAXException | IOException | JDOMException | ParseException ex) {
+            throw new CommandException(ex.getMessage());
+        }
     }
 
 }

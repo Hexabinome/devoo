@@ -2,7 +2,6 @@ package controleur;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.ParseException;
 import modele.persistance.DeserialiseurXML;
 import org.jdom2.JDOMException;
 import org.xml.sax.SAXException;
@@ -24,11 +23,16 @@ public class CommandChargerPlan extends UninvertibelCommand
     }
 
     @Override
-    public void executer() throws JDOMException, IOException, SAXException, ParseException
+    public void executer() throws CommandException
     {
-        //remplacer plan qui est charge d'un nouveau plan (ssi le chargement du xml a reussi)
-        controleurDonnees.setPlan(DeserialiseurXML.ouvrirPlanDeVille(planFichier));
-        controleurDonnees.notifyAllActObserveurs(true);
+        try {
+            //remplacer plan qui est charge d'un nouveau plan (ssi le chargement du xml a reussi)
+            controleurDonnees.setPlan(DeserialiseurXML.ouvrirPlanDeVille(planFichier));
+            controleurDonnees.notifyAllActObserveurs(true);
+        }
+        catch (JDOMException | IOException | SAXException ex) {
+            throw new CommandException(ex.getMessage());
+        }
     }
 
 }

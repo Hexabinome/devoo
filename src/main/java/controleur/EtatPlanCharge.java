@@ -1,14 +1,6 @@
 package controleur;
 
 import java.io.File;
-import java.io.IOException;
-import java.text.ParseException;
-import modele.persistance.DeserialiseurXML;
-import modele.xmldata.Demande;
-import modele.xmldata.Model;
-import modele.xmldata.PlanDeVille;
-import org.jdom2.JDOMException;
-import org.xml.sax.SAXException;
 
 /**
  *
@@ -31,14 +23,14 @@ public class EtatPlanCharge extends AbstractEtat
     }
 
     @Override
-    public EtatInterface chargerPlan(File plan) throws JDOMException, SAXException, IOException, ParseException
+    public EtatInterface chargerPlan(File plan) throws CommandException
     {
         new CommandChargerPlan(controleurDonnees, plan).executer();
         return this;
     }
 
     @Override
-    public EtatInterface chargerLivraisons(File livraisons) throws JDOMException, SAXException, ParseException, IOException
+    public EtatInterface chargerLivraisons(File livraisons) throws CommandException
     {
         new CommandChargerLivraisons(controleurDonnees, livraisons).executer();
         return new EtatPrincipal(controleurDonnees);

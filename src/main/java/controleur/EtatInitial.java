@@ -1,10 +1,6 @@
 package controleur;
 
 import java.io.File;
-import java.io.IOException;
-import java.text.ParseException;
-import org.jdom2.JDOMException;
-import org.xml.sax.SAXException;
 
 /**
  *
@@ -27,14 +23,14 @@ class EtatInitial extends AbstractEtat
     }
 
     @Override
-    public EtatInterface chargerPlan(File plan) throws JDOMException, SAXException, IOException, ParseException
+    public EtatInterface chargerPlan(File plan) throws CommandException
     {
         new CommandChargerPlan(controleurDonnees, plan).executer();
         return new EtatPlanCharge(controleurDonnees);
     }
 
     @Override
-    public EtatInterface chargerLivraisons(File livraisons) throws JDOMException, SAXException, ParseException, IOException
+    public EtatInterface chargerLivraisons(File livraisons)  throws CommandException
     {
         throw new RuntimeException("Cet etat ne permet pas de charger un fichier de livraison");
     }

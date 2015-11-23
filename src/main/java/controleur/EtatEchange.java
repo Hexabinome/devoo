@@ -1,15 +1,11 @@
 package controleur;
 
-import org.jdom2.JDOMException;
-import org.xml.sax.SAXException;
 
 import java.io.File;
-import java.io.IOException;
-import java.text.ParseException;
 
 /**
  *
- * @author Max Schiedermeier
+ * @author Maxou
  */
 public class EtatEchange extends AbstractEtat
 {
@@ -28,13 +24,13 @@ public class EtatEchange extends AbstractEtat
     }
 
     @Override
-    public EtatInterface chargerPlan(File plan) throws JDOMException, SAXException, IOException
+    public EtatInterface chargerPlan(File plan) throws CommandException
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public EtatInterface chargerLivraisons(File livraisons) throws JDOMException, SAXException, ParseException, IOException
+    public EtatInterface chargerLivraisons(File livraisons) throws CommandException
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

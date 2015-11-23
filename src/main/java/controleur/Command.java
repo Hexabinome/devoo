@@ -30,7 +30,7 @@ public interface Command
      * (c'est notamment utile pour l'historique, qund on veut reexecuter un
      * command)
      */
-    void executer() throws JDOMException, IOException, SAXException, ParseException;
+    void executer() throws CommandException;
 
     /**
      * Ssi un command est annulable on peut revenir dans un ancien etat du model

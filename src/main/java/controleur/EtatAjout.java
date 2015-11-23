@@ -8,7 +8,7 @@ import org.xml.sax.SAXException;
 
 /**
  *
- * @author Max Schiedermeier
+ * @author Maxou
  */
 public class EtatAjout extends AbstractEtat
 {
@@ -27,13 +27,13 @@ public class EtatAjout extends AbstractEtat
     }
 
     @Override
-    public EtatInterface chargerPlan(File plan) throws JDOMException, SAXException, IOException
+    public EtatInterface chargerPlan(File plan) throws CommandException
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public EtatInterface chargerLivraisons(File livraisons) throws JDOMException, SAXException, ParseException, IOException
+    public EtatInterface chargerLivraisons(File livraisons) throws CommandException
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
