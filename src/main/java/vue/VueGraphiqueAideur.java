@@ -228,16 +228,18 @@ public class VueGraphiqueAideur {
 		this.entrepot = new Pair<Integer, Ellipse>(entrepot.getId(), construireEllipse(entrepot, ConstantesGraphique.COULEUR_ENTREPOT));
 		
 		this.tournee = new ArrayList<List<Integer>>();
+		//Pour chaque fenêtre de livraison
 		for (int idxFenetre = 0; idxFenetre < demande.getFenetres().size(); ++idxFenetre) {
-			List<Integer> tourneeFenetre = tournee.get(idxFenetre);
-			Map<Integer, Livraison> livraisonsFenetre = demande.getFenetres().get(idxFenetre).getLivraisons();
+			//On récupére la liste des livraisons associé à cette fenêtre
+			/*Map<Integer, Livraison> livraisonsFenetre = demande.getFenetres().get(idxFenetre).getLivraisons();
 			
 			List<Integer> tourneeFenetreGraphique = new ArrayList<Integer>();
-			for (int idLivraison : tourneeFenetre) {
+			//Pour chaque point de la tournée (id d'intersection)
+			for (int idLivraison : tournee.get(idxFenetre)) {
 				tourneeFenetreGraphique.add(livraisonsFenetre.get(idLivraison).getAdresse());
-			}
+			}*/
 			
-			this.tournee.add(tourneeFenetreGraphique);
+			this.tournee.add(tournee.get(idxFenetre));
 		}
 		
 		afficherTournee();

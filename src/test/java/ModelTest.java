@@ -6,10 +6,13 @@
 
 
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+import modele.business.TSP;
+import modele.business.TSP1;
 import modele.persistance.DeserialiseurXML;
 import modele.xmldata.Chemin;
 import modele.xmldata.Demande;
@@ -47,7 +50,7 @@ public class ModelTest {
 	  }
 	  
 	  @Test
-	  public void TestCalculerTournee() 
+	  public void TestCalculerTournee() throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException 
 	  {
 		  	Fenetre fenetre0 = new Fenetre(1448105516, 1448105516);
 			Fenetre fenetre1 = new Fenetre(1448105516, 1448105616);
@@ -147,13 +150,23 @@ public class ModelTest {
 			Model monModel = new Model(plan, demande);
 			
 			monModel.calculerTournee();
-			List<Troncon> troncons = new ArrayList<Troncon>();
+
+			Field field = monModel.getClass().getDeclaredField("tsp");
+			field.setAccessible(true);
+			
+			TSP tsp = new TSP1();
+			//TODO a voire
 			/*
-			for(Chemin chemin :chemins)
+			field.get(tsp);
+			
+			int h1 = 0, solution;
+			Integer[] res = {0, 3, 1, 2, 4, 5};
+			
+			while((solution = tsp.getSolution(h1++)) != -1)
 			{
-				troncons.addAll(chemin.getTroncons());
-			}*/
-			System.out.println(troncons);
+				assertEquals((long)solution, (long)res[h1]);
+			}
+			*/
 	  }
 }
 

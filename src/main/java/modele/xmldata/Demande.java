@@ -1,5 +1,6 @@
 package modele.xmldata;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -17,10 +18,22 @@ public class Demande
 
     private final List<Fenetre> fenetres;
 
+    /**
+     * Lors de la consturction d'une demande, on ajoute automatiquement l'entrepot comme premiere fenêtre 
+     * @param entrepot
+     * @param fenetres
+     */
     public Demande(Intersection entrepot, List<Fenetre> fenetres)
     {
         this.entrepot = entrepot;
-        this.fenetres = fenetres;
+        Fenetre fenetreEntrepot = new Fenetre(0, 0);
+        
+        Livraison livraisonEntrepot = new Livraison(-1, -1, entrepot.getId());
+        fenetreEntrepot.ajouterLivraison(livraisonEntrepot.getId(), livraisonEntrepot);
+        
+        this.fenetres = new ArrayList<Fenetre>();
+        this.fenetres.add(fenetreEntrepot);
+        this.fenetres.addAll(fenetres);
     }
 
     public Intersection getEntrepot()

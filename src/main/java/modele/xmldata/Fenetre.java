@@ -82,11 +82,18 @@ public class Fenetre
     {
         //Récupère toutes les livraisons avec les quels on doit calculer le plus court chemin.
         Set<Integer> intersectionsRecherchee = new HashSet<>();
-        intersectionsRecherchee.addAll(livraisons.keySet());
-        intersectionsRecherchee.addAll(fNext.getLivraisons().keySet());
+        
+        ArrayList<Livraison> listeLivraisons = new ArrayList<>();
+        listeLivraisons.addAll(livraisons.values());
+        listeLivraisons.addAll(fNext.getLivraisons().values());
+        for(Livraison l : listeLivraisons)
+        {
+        	intersectionsRecherchee.add(l.getAdresse());
+        }
 
         // pour chaque livraison de cette fenetre:
-        for (Livraison livraison : livraisons.values()) {
+        for (Livraison livraison : livraisons.values()) 
+        {
             // recupere l'intersection
             Intersection intersection = plan.getIntersection(livraison.getAdresse());
 

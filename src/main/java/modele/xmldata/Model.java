@@ -85,7 +85,7 @@ public class Model implements ModelLecture
     			Livraison livraison = new Livraison(((ArrayList<Fenetre>)demande.getFenetres()).get(iFenetre).getLivraisons().size(), 0, intersectionId);
     			((ArrayList<Fenetre>)demande.getFenetres()).get(iFenetre).getLivraisons().put(livraison.getId(), livraison);
 				
-				//TODO à optimiser
+				//TODO à optimiser (pas desoin de rappeller dijkstra pour toutes les intersections
     			if(iFenetre == demande.getFenetres().size()-1)
     				((ArrayList<Fenetre>)demande.getFenetres()).get(iFenetre).calculerChemins(plan, graphe, ((ArrayList<Fenetre>)demande.getFenetres()).get(0));
     			else
@@ -111,36 +111,52 @@ public class Model implements ModelLecture
     public List<List<Integer>> getTournee()
     {
         List<List<Integer>> tournee = new LinkedList<>();
-        int compteurDesLivraisons = 0;
+        int compteurSolutions = 0;
 
         /**
          * pour toutes les fentres de la demande:
          */
         int livraisonDepart;
-        int livraisonArrivee = tsp.getSolution(compteurDesLivraisons++);
+        int livraisonArrivee = tsp.getSolution(compteurSolutions++);
         Iterator<Fenetre> iter = demande.getFenetres().iterator();
         while (iter.hasNext()) {
             List<Integer> routePartielle = new LinkedList<>();
 
-            iter.next();
-            int livraisonsFenetre = iter.next().getLivraisons().size();
-            /**
-             * demander TSP a quelle ordre on doit parcourir les destinations de
-             * cette fenetre
-             */
-            while (livraisonsFenetre > 0) {
-                livraisonsFenetre--;
-                livraisonDepart = livraisonArrivee;
-                livraisonArrivee = tsp.getSolution(compteurDesLivraisons);
+            //iter.next();            
+            //Récupére le nombre de livraisons dans la fenêtre pour remplire routePartielle
+            int nbLivraisonsFenetre = iter.next().getLivraisons().size();
+            if(nbLivraisonsFenetre == 1)
+            {
+            	livraisonDepart = livraisonArrivee;
+                livraisonArrivee = tsp.getSolution(compteurSolutions++);
 
                 // demander Graphe du chemin pour passer du depart a l'arrivee
-                Chemin chemin = graphe.getChemin(livraisonDepart, livraisonDepart);
+                Chemin chemin = graphe.getCheminGrapheIndice(livraisonDepart, livraisonArrivee);
                 for (Troncon troncon : chemin.getTroncons()) {
                     routePartielle.add(troncon.getIdDestination());
                 }
-
+                tournee.add(routePartielle);
             }
-            tournee.add(routePartielle);
+            else
+            {
+            	 /**
+                 * demander TSP a quelle ordre on doit parcourir les destinations de
+                 * cette fenetre
+                 */
+                while (--nbLivraisonsFenetre > 0) {
+                    livraisonDepart = livraisonArrivee;
+                    livraisonArrivee = tsp.getSolution(compteurSolutions++);
+
+                    // demander Graphe du chemin pour passer du depart a l'arrivee
+                    Chemin chemin = graphe.getCheminGrapheIndice(livraisonDepart, livraisonArrivee);
+                    for (Troncon troncon : chemin.getTroncons()) {
+                        routePartielle.add(troncon.getIdDestination());
+                    }
+
+                }
+                tournee.add(routePartielle);
+            }
+           
         }
         return tournee;
     }

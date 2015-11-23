@@ -18,6 +18,11 @@ public abstract class TemplateTSP implements TSP {
 	private int coutMeilleureSolution;
 	private int tpsLimite;
 	private long tpsDebut;
+	
+	public Integer[] getMeilleurSolution()
+	{
+		return meilleureSolution;
+	}
 
 	/**
 	 * Supprime la "indiceLivraison" éme solution
@@ -63,14 +68,14 @@ public abstract class TemplateTSP implements TSP {
 	public Integer getSolution(int i){
 		if (g != null && i>=0 && i<g.getNbSommets())
 			return meilleureSolution[i];
-		return -1;
+		return -666;
 	}
 	
 	@Override
 	public int getCoutSolution(){
 		if (g != null)
 			return coutMeilleureSolution;
-		return -1;
+		return -666;
 	}
 	
 	/**
