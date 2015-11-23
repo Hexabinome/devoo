@@ -1,14 +1,6 @@
 package controleur;
 
 import java.io.File;
-import java.io.IOException;
-import java.text.ParseException;
-import modele.persistance.DeserialiseurXML;
-import modele.xmldata.Demande;
-import modele.xmldata.Model;
-import modele.xmldata.PlanDeVille;
-import org.jdom2.JDOMException;
-import org.xml.sax.SAXException;
 
 /**
  *
@@ -31,33 +23,21 @@ public class EtatPlanCharge extends AbstractEtat
     }
 
     @Override
-    public EtatInterface chargerPlan(File plan) throws JDOMException, SAXException, IOException
+    public EtatInterface chargerPlan(File plan) throws CommandException
     {
-        //TODO create and launch command here...
-        //remplacer plan qui est charge d'un nouveau plan (ssi le chargement du xml a reussi)
-        controleurDonnees.setPlan(DeserialiseurXML.ouvrirPlanDeVille(plan));
-        
-        //notifier la vue que maintenant on ne peut plus interagir avec les elements prinicpaux.
-        controleurDonnees.notifyAllActObserveurs(true);
-        
+        new CommandChargerPlan(controleurDonnees, plan).executer();
         return this;
     }
 
     @Override
-    public EtatInterface chargerLivraisons(File livraisons) throws JDOMException, SAXException, ParseException, IOException
+    public EtatInterface chargerLivraisons(File livraisons) throws CommandException
     {
-        PlanDeVille plan = controleurDonnees.getPlan();
-        Demande demande = DeserialiseurXML.ouvrirLivraison(livraisons, plan);
-        controleurDonnees.setModel(new Model(plan, demande));
-        
-        //notifier la vue que maintenant on peux interagir avec les elements prinicpaux.
-        controleurDonnees.notifyAllActObserveurs(false);
-        
+        new CommandChargerLivraisons(controleurDonnees, livraisons).executer();
         return new EtatPrincipal(controleurDonnees);
     }
 
     @Override
-    public EtatInterface cliqueSurPlan(int x, int y)
+    public EtatInterface cliqueSurPlan(int intersectionId)
     {
         throw new RuntimeException("Cet etat ne permet pas d'interagir avec le plan.");
     }

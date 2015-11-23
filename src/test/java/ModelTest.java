@@ -146,13 +146,13 @@ public class ModelTest {
 			
 			Model monModel = new Model(plan, demande);
 			
-			List<Chemin> chemins = monModel.calculerTournee();
+			monModel.calculerTournee();
 			List<Troncon> troncons = new ArrayList<Troncon>();
-			
+			/*
 			for(Chemin chemin :chemins)
 			{
 				troncons.addAll(chemin.getTroncons());
-			}
+			}*/
 			System.out.println(troncons);
 	  }
 }

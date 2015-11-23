@@ -1,13 +1,6 @@
 package controleur;
 
 import java.io.File;
-import java.io.IOException;
-import java.text.ParseException;
-
-import modele.persistance.DeserialiseurXML;
-
-import org.jdom2.JDOMException;
-import org.xml.sax.SAXException;
 
 /**
  *
@@ -30,22 +23,20 @@ class EtatInitial extends AbstractEtat
     }
 
     @Override
-    public EtatInterface chargerPlan(File plan) throws JDOMException, SAXException, IOException
+    public EtatInterface chargerPlan(File plan) throws CommandException
     {
-        //remplacer plan qui est charge d'un nouveau plan (ssi le chargement du xml a reussi)
-        controleurDonnees.setPlan(DeserialiseurXML.ouvrirPlanDeVille(plan));
-        controleurDonnees.notifyAllActObserveurs(true);
+        new CommandChargerPlan(controleurDonnees, plan).executer();
         return new EtatPlanCharge(controleurDonnees);
     }
 
     @Override
-    public EtatInterface chargerLivraisons(File livraisons) throws JDOMException, SAXException, ParseException, IOException
+    public EtatInterface chargerLivraisons(File livraisons)  throws CommandException
     {
         throw new RuntimeException("Cet etat ne permet pas de charger un fichier de livraison");
     }
 
     @Override
-    public EtatInterface cliqueSurPlan(int x, int y)
+    public EtatInterface cliqueSurPlan(int intersectionId)
     {
         throw new RuntimeException("Cet etat ne permet pas d'interagir avec le plan.");
     }

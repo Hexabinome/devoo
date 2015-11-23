@@ -1,10 +1,6 @@
 package controleur;
 
 import java.io.File;
-import java.io.IOException;
-import java.text.ParseException;
-import org.jdom2.JDOMException;
-import org.xml.sax.SAXException;
 
 /**
  *
@@ -19,11 +15,11 @@ public interface EtatInterface
 
     EtatInterface cliqueSurLivraison(int livraisonId);
 
-    EtatInterface chargerPlan(File plan) throws JDOMException, SAXException, IOException;
+    EtatInterface chargerPlan(File plan)  throws CommandException;
 
-    EtatInterface chargerLivraisons(File livraisons) throws JDOMException, SAXException, ParseException, IOException;
+    EtatInterface chargerLivraisons(File livraisons)  throws CommandException;
 
-    EtatInterface cliqueSurPlan(int x, int y);
+    EtatInterface cliqueSurPlan(int intersectionId);
     
     EtatInterface cliqueCalculerTournee();
 }

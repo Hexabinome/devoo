@@ -1,18 +1,14 @@
 package controleur;
 
 import java.io.File;
-import java.io.IOException;
-import java.text.ParseException;
 import modele.xmldata.ModelLecture;
 import modele.xmldata.PlanDeVille;
-import org.jdom2.JDOMException;
-import org.xml.sax.SAXException;
 
 /**
  * Implements controller interface. Primary entry point for all interaction with
  * package view.
  *
- * @author maxou
+ * @author Maxou
  */
 public class Controleur implements ControleurInterface
 {
@@ -58,7 +54,7 @@ public class Controleur implements ControleurInterface
             etat = etat.chargerPlan(fichierPlan);
             return null;
         }
-        catch (JDOMException | SAXException | IOException e) {
+        catch (CommandException e) {
             return e;
         }
     }
@@ -70,7 +66,7 @@ public class Controleur implements ControleurInterface
             etat = etat.chargerLivraisons(fichierLivraisons);
             return null;
         }
-        catch (JDOMException | SAXException | IOException | ParseException e) {
+        catch (CommandException e) {
             return e;
         }
     }
@@ -102,9 +98,9 @@ public class Controleur implements ControleurInterface
     }
 
     @Override
-    public void cliqueSurPlan(int x, int y)
+    public void cliqueSurPlan(int intersectionId)
     {
-        etat = etat.cliqueSurPlan(x, y);
+        etat = etat.cliqueSurPlan(intersectionId);
     }
 
     @Override
