@@ -34,7 +34,6 @@ public class VueTableLivraisonControleur implements Initializable, Visiteur, Mai
      */
     private TreeItem<Visitable> elementRacine = new TreeItem<>();
 
-
     /**
      * Controleur principale
      */
@@ -174,6 +173,7 @@ public class VueTableLivraisonControleur implements Initializable, Visiteur, Mai
 
     @Override
     public void recupererObject(Livraison livraison) {
+        System.out.println(livraison);
         controleurInterface.cliqueSurLivraison(livraison.getId());
     }
 
@@ -206,6 +206,11 @@ public class VueTableLivraisonControleur implements Initializable, Visiteur, Mai
     public void notifyObserver() {
         effacerVueTableLivraison();
         construireVueTableLivraion(controleurInterface.getModel().getDemande());
+    }
+
+    public void initialiserObserveurs(){
+        controleurInterface.ajouterDesactObserver(this);
+        controleurInterface.ajouterModelObserver(this);
     }
 
 }

@@ -43,7 +43,6 @@ public class FenetrePrincipale extends Application {
 
         // Passage du controleur de l'application au controleur de la vue
         vuePrincipaleControleur.setControleurInterface(controleurApplication);
-        vuePrincipaleControleur.initialiserObserveurs();
         vuePrincipaleControleur.initialiserMediateur(this);
 
 
@@ -54,8 +53,7 @@ public class FenetrePrincipale extends Application {
         vueTableLivraisonControleur = (VueTableLivraisonControleur) fxmlLoader2.getController();
         vueTableLivraisonControleur.setControleurInterface(controleurApplication);
         vueTableLivraisonControleur.initialiserMediateur(this);
-        controleurApplication.ajouterDesactObserver(vueTableLivraisonControleur);
-        controleurApplication.ajouterModelObserver(vueTableLivraisonControleur);
+        vueTableLivraisonControleur.initialiserObserveurs();
 
         BorderPane centerBorderPane = (BorderPane) root.getCenter();
         centerBorderPane.setLeft(anchorPane.getChildren().get(0));
