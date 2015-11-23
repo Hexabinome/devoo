@@ -1,15 +1,12 @@
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
-import java.util.Map.Entry;
 
 import org.junit.Test;
 
 import modele.xmldata.Chemin;
 import modele.xmldata.Fenetre;
-import modele.xmldata.GrapheRealisation;
 import modele.xmldata.Intersection;
-import modele.xmldata.Livraison;
 import modele.xmldata.PlanDeVille;
 import modele.xmldata.Troncon;
 
@@ -88,72 +85,72 @@ public class FenetreTest {
 		
 		ArrayList<Troncon> troncon = new ArrayList<>();
 		
-		for(Entry<Integer, Chemin> chemin : fenetre.dijkstra(i1, plan))
+		for(Chemin chemin : fenetre.dijkstra(i1, plan))
 		{
-			switch(chemin.getKey())
+			switch(chemin.getIdFin())
 			{
 				case 1 :
-					assertEquals(chemin.getValue().getCout(), 0, 0);
-					assertEquals(chemin.getValue().getTroncons().containsAll(troncon), true);
-					assertEquals(chemin.getValue().getTroncons().size(), troncon.size());
+					assertEquals(chemin.getCout(), 0, 0);
+					assertEquals(chemin.getTroncons().containsAll(troncon), true);
+					assertEquals(chemin.getTroncons().size(), troncon.size());
 					break;
 				case 2 :
-					assertEquals(chemin.getValue().getCout(), 1, 0);
+					assertEquals(chemin.getCout(), 1, 0);
 					troncon.add(a);
-					assertEquals(chemin.getValue().getTroncons().containsAll(troncon), true);
-					assertEquals(chemin.getValue().getTroncons().size(), troncon.size());
+					assertEquals(chemin.getTroncons().containsAll(troncon), true);
+					assertEquals(chemin.getTroncons().size(), troncon.size());
 					troncon = new ArrayList<>();
 					break;
 				case 3 :
-					assertEquals(chemin.getValue().getCout(), 2, 0);
+					assertEquals(chemin.getCout(), 2, 0);
 					troncon.add(a);
 					troncon.add(b);
-					assertEquals(chemin.getValue().getTroncons().containsAll(troncon), true);
-					assertEquals(chemin.getValue().getTroncons().size(), troncon.size());
+					assertEquals(chemin.getTroncons().containsAll(troncon), true);
+					assertEquals(chemin.getTroncons().size(), troncon.size());
 					
 					troncon = new ArrayList<>();
 					break;
 				case 4 :
-					assertEquals(chemin.getValue().getCout(), 2, 0);
+					assertEquals(chemin.getCout(), 2, 0);
 					troncon.add(a);
 					troncon.add(d);
-					assertEquals(chemin.getValue().getTroncons().containsAll(troncon), true);
-					assertEquals(chemin.getValue().getTroncons().size(), troncon.size());
+					assertEquals(chemin.getTroncons().containsAll(troncon), true);
+					assertEquals(chemin.getTroncons().size(), troncon.size());
 					
 					troncon = new ArrayList<>();
 					break;
 				case 5 :
-					assertEquals(chemin.getValue().getCout(), 1, 0);
+					assertEquals(chemin.getCout(), 1, 0);
 					troncon.add(f);
-					assertEquals(chemin.getValue().getTroncons().containsAll(troncon), true);
-					assertEquals(chemin.getValue().getTroncons().size(), troncon.size());
+					assertEquals(chemin.getTroncons().containsAll(troncon), true);
+					assertEquals(chemin.getTroncons().size(), troncon.size());
 					
 					troncon = new ArrayList<>();
 					break;
 				case 6 :
-					assertEquals(chemin.getValue().getCout(), 1, 0);
+					assertEquals(chemin.getCout(), 1, 0);
 					troncon.add(g);
-					assertEquals(chemin.getValue().getTroncons().containsAll(troncon), true);
-					assertEquals(chemin.getValue().getTroncons().size(), troncon.size());
+					assertEquals(chemin.getTroncons().containsAll(troncon), true);
+					assertEquals(chemin.getTroncons().size(), troncon.size());
 					
 					troncon = new ArrayList<>();
 					break;
 				case 7 :
-					assertEquals(chemin.getValue().getCout(), 2, 0);
+					assertEquals(chemin.getCout(), 2, 0);
 					troncon.add(g);
 					troncon.add(h);
-					assertEquals(chemin.getValue().getTroncons().containsAll(troncon), true);
-					assertEquals(chemin.getValue().getTroncons().size(), troncon.size());
+					assertEquals(chemin.getTroncons().containsAll(troncon), true);
+					assertEquals(chemin.getTroncons().size(), troncon.size());
 					
 					troncon = new ArrayList<>();
 					break;
 				case 8 :
-					assertEquals(chemin.getValue().getCout(), 3, 0);
+					assertEquals(chemin.getCout(), 3, 0);
 					troncon.add(g);
 					troncon.add(h);
 					troncon.add(i);
-					assertEquals(chemin.getValue().getTroncons().containsAll(troncon), true);
-					assertEquals(chemin.getValue().getTroncons().size(), troncon.size());
+					assertEquals(chemin.getTroncons().containsAll(troncon), true);
+					assertEquals(chemin.getTroncons().size(), troncon.size());
 					
 					troncon = new ArrayList<>();
 					break;

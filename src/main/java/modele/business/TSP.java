@@ -1,8 +1,5 @@
 package modele.business;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import modele.xmldata.Graphe;
 
 /**
@@ -36,18 +33,20 @@ public interface TSP
      * encore ete appele).
      */
     public int getCoutSolution();
-    
-    /**
-	 * Supprime la "indiceLivraison" éme solution
-	 * @param indiceLivraison
-	 */
-	public void supprimerSolution(int indiceLivraison);
 
-	/**
-	 * Ajout après la "indicePrecendent"éme solution la valeur : valeurIndice
-	 * @param indicePrecendent
-	 * @param valeurIndice
-	 */
-	public void ajouterSolution(int indicePrecendent, int valeurIndice);
+    /**
+     * Supprime la "indiceLivraison" éme solution
+     *
+     * @param indiceLivraison
+     */
+    public void supprimerSolution(int indiceLivraison);
+
+    /**
+     * Ajout après la "indicePrecendent"éme solution la valeur : valeurIndice
+     *
+     * @param indicePrecendent
+     * @param valeurIndice
+     */
+    public void ajouterSolution(int indicePrecendent, int valeurIndice);
 
 }

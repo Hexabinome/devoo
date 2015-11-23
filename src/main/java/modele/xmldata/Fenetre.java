@@ -71,7 +71,7 @@ public class Fenetre implements Visitable
     }
 
     /**
-     * Pour chaque points de livraison, on va calculer une liste de chemim vers
+     * Pour intersection-livraison, on va calculer une liste de chemins vers
      * tous les noeuds de cette fenêtre et de la fenêtre suivante
      *
      * @param plan

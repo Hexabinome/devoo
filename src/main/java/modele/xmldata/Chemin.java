@@ -14,14 +14,10 @@ public class Chemin
 
     public Chemin(float cout, ArrayList<Troncon> troncons, int idDepart, int idFin)
     {
-        super();
         this.cout = cout;
         this.troncons = troncons;
         this.idDepart = idDepart;
         this.idFin = idFin;
-
-        //TODO: This seems terribly wrong - check!
-        troncons = new ArrayList<>();
     }
 
     public float getCout()
@@ -38,12 +34,6 @@ public class Chemin
     {
         return Collections.unmodifiableList(troncons);
     }
-
-    /*
-    public void setTroncons(ArrayList<Troncon> troncons)
-    {
-        this.troncons = troncons;
-    }*/
 
     public int getIdDepart()
     {

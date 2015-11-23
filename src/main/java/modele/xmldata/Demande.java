@@ -1,6 +1,5 @@
 package modele.xmldata;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -13,6 +12,7 @@ import java.util.Set;
  */
 public class Demande
 {
+
     private final Intersection entrepot;
 
     private final List<Fenetre> fenetres;
@@ -43,9 +43,11 @@ public class Demande
     }
 
     /**
-     * On parcour la liste de fenêtre pour calculer le graphe. 
-     * Chaque fenêtre insert dans le graphe des Chemins en fonciton de ces points de livraisons et les points de livraisons de la fenêtre suivante
-     * La première fenêtre est l'entrepot
+     * On parcour la liste de fenêtre pour calculer le graphe. Chaque fenêtre
+     * insert dans le graphe des Chemins en fonciton de ces points de livraisons
+     * et les points de livraisons de la fenêtre suivante La première fenêtre
+     * est l'entrepot
+     *
      * @param plan
      * @return
      */
@@ -56,7 +58,7 @@ public class Demande
         for (int iFenetre = 0; iFenetre < fenetres.size() - 1; iFenetre++) {
             fenetres.get(iFenetre).calculerChemins(plan, graphe, fenetres.get(iFenetre + 1));
         }
-        
+
         //Calcule le chemin entre la dernière fenêtre et l'entrepot
         fenetres.get(fenetres.size() - 1).calculerChemins(plan, graphe, fenetres.get(0));
 
@@ -65,12 +67,12 @@ public class Demande
 
     private int getNombreLivraison()
     {
-    	Set<Integer> livraison = new HashSet<Integer>();
-    	
+        Set<Integer> livraison = new HashSet<>();
+
         for (int iFenetre = 0; iFenetre < fenetres.size(); iFenetre++) {
-        	livraison.addAll(( fenetres.get(iFenetre).getLivraisons().keySet()));
+            livraison.addAll((fenetres.get(iFenetre).getLivraisons().keySet()));
         }
-        
+
         return livraison.size();
     }
 
