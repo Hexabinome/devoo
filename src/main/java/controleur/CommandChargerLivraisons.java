@@ -35,10 +35,13 @@ public class CommandChargerLivraisons extends UninvertibelCommand
 
         //TODO: enable claculation as soon as bug in graph class (Nullpointer) is fixed. [Maxou]
         //calculer la tournee
-        //controleurDonnees.getModel().calculerTournee();
+        controleurDonnees.getModel().calculerTournee();
 
         //notifier la vue que maintenant on peux interagir avec les elements prinicpaux.
         controleurDonnees.notifyAllActObserveurs(false);
+        
+        //notifier la vue que le modele a change
+        controleurDonnees.notifyAllModelObserveurs();
     }
 
 }

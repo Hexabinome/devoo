@@ -30,7 +30,7 @@ public abstract class TemplateTSP implements TSP {
 		Collection<Integer> vus = new ArrayList<>(g.getNbSommets());
 		vus.add(0); // le premier sommet visite est 0
 		coutMeilleureSolution = Integer.MAX_VALUE;
-		branchAndBound(0, nonVus, vus, 0);
+		branchAndBound(0, nonVus, vus, 0);                
 	}
 	
         @Override

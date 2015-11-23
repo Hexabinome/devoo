@@ -44,7 +44,7 @@ public class Demande
     public GrapheRealisation creerGraphe(PlanDeVille plan)
     {
         GrapheRealisation graphe = new GrapheRealisation(plan.getIntersections().size());
-
+        
         for (int iFenetre = 0; iFenetre < fenetres.size() - 1; iFenetre++) {
             fenetres.get(iFenetre).calculerChemins(plan, graphe, fenetres.get(iFenetre + 1));
         }
