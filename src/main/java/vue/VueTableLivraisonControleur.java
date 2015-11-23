@@ -151,7 +151,6 @@ public class VueTableLivraisonControleur implements Initializable, Visiteur, Mai
     }
 
 
-
     public void setControleurInterface(ControleurInterface controleurInterface) {
         this.controleurInterface = controleurInterface;
     }
@@ -180,19 +179,19 @@ public class VueTableLivraisonControleur implements Initializable, Visiteur, Mai
 
     @Override
     public void visit(DetailFenetre detailFenetre) {
-        // TODO : completer
+        // TODO : completer si besoin
         System.out.println(detailFenetre.getFenetre());
     }
 
     @Override
     public void visit(DetailLivraison detailLivraison) {
-        // TODO : completer
+        // TODO : completer si besoin
         System.out.println(detailLivraison.getLivraison());
+        controleurInterface.cliqueSurLivraison(detailLivraison.getLivraison().getId());
     }
 
     /**
      * Gestion du clic et hover sur les elements de la table.
-     *
      */
     class TableCellSpecial extends TreeTableCell<ObjetVisualisable, String> {
 
@@ -208,18 +207,17 @@ public class VueTableLivraisonControleur implements Initializable, Visiteur, Mai
             setText(item);
         }
 
-        private void initialiserClic(){
+        private void initialiserClic() {
             setOnMouseClicked(event -> {
-               getTreeTableRow().getTreeItem().getValue().accepter(VueTableLivraisonControleur.this);
+                getTreeTableRow().getTreeItem().getValue().accepter(VueTableLivraisonControleur.this);
             });
         }
 
-        private void initialiserHover(){
+        private void initialiserHover() {
             setOnMouseEntered(event -> {
 
             });
         }
-
 
 
     }
