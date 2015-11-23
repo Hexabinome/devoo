@@ -50,7 +50,7 @@ class EtatPrincipal implements EtatInterface
     }
 
     @Override
-    public EtatInterface cliqueSurPlan(int x, int y)
+    public EtatInterface cliqueSurPlan(int intersectionId)
     {
         throw new UnsupportedOperationException("Interaction with plan is allowed in this state, but not supported yet, since not a core feature."); //To change body of generated methods, choose Tools | Templates.
     }
