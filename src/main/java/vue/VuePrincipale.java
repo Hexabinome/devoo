@@ -148,9 +148,6 @@ public class VuePrincipale implements Initializable {
             Exception exception = controleurInterface.chargerLivraisons(file);
             if (exception != null)
                 ouvrirAlerteXML(exception, file.getName());
-            else {
-                mediateur.construireVueLivraison(controleurInterface.getModel().getDemande());
-            }
         }
     }
 

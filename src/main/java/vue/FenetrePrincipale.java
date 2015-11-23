@@ -7,19 +7,18 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import modele.xmldata.Demande;
 
 /**
  * Cette classe crée la fenetre principale avec ses enfants. Elle se charge aussi de créer le controleur.
  * Elle joue le role de mediateur pour la communication entre les differents controleur de la vue.
-  * https://sourcemaking.com/design_patterns/mediator
+ * https://sourcemaking.com/design_patterns/mediator
  */
 public class FenetrePrincipale extends Application {
 
 
     private VuePrincipale vuePrincipaleControleur;
 
-    private VueLivraisonHoraireControleur vueLivraisonHoraireControleur;
+    private VueTableLivraisonControleur vueTableLivraisonControleur;
 
     /**
      * Le controleur de l'application
@@ -52,9 +51,11 @@ public class FenetrePrincipale extends Application {
         FXMLLoader fxmlLoader2 = new FXMLLoader(
                 getClass().getClassLoader().getResource("fxml/VueLivraisonHoraire.fxml"));
         AnchorPane anchorPane = fxmlLoader2.load();
-        vueLivraisonHoraireControleur = (VueLivraisonHoraireControleur) fxmlLoader2.getController();
-        vueLivraisonHoraireControleur.setControleurInterface(controleurApplication);
-        vueLivraisonHoraireControleur.initialiserMediateur(this);
+        vueTableLivraisonControleur = (VueTableLivraisonControleur) fxmlLoader2.getController();
+        vueTableLivraisonControleur.setControleurInterface(controleurApplication);
+        vueTableLivraisonControleur.initialiserMediateur(this);
+        controleurApplication.ajouterDesactObserver(vueTableLivraisonControleur);
+        controleurApplication.ajouterModelObserver(vueTableLivraisonControleur);
 
         BorderPane centerBorderPane = (BorderPane) root.getCenter();
         centerBorderPane.setLeft(anchorPane.getChildren().get(0));
@@ -69,13 +70,5 @@ public class FenetrePrincipale extends Application {
 
         primaryStage.show();
     }
-
-    /**
-     * Demande à la vue des livraions de contruire la vue
-     */
-    public void construireVueLivraison(Demande demande){
-        vueLivraisonHoraireControleur.construireVueLivraion(demande);
-    }
-
 
 }
