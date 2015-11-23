@@ -14,7 +14,10 @@ import javafx.util.Callback;
 import modele.xmldata.Demande;
 import modele.xmldata.Fenetre;
 import modele.xmldata.Livraison;
-import modele.xmldata.Visiteur;
+import vue.vueTextuelle.DetailFenetre;
+import vue.vueTextuelle.DetailLivraison;
+import vue.vueTextuelle.ObjetVisualisable;
+import vue.vueTextuelle.Visiteur;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -71,10 +74,9 @@ public class VueTableLivraisonControleur implements Initializable, Visiteur, Mai
         tableViewFenetre.setRoot(elementRacine);
         elementRacine.setExpanded(true);
         tableViewFenetre.setShowRoot(false);
-        initialiserEcouteurDeClic();
         initialiserColonneLivraison();
         initialiserColonneHoraire();
-        //ajouterStyleCssColonneLivraison();
+        ajouterStyleCssColonneLivraison();
     }
 
     /**
@@ -96,28 +98,9 @@ public class VueTableLivraisonControleur implements Initializable, Visiteur, Mai
                     @Override
                     public TreeTableCell<ObjetVisualisable, String> call(
                             TreeTableColumn<ObjetVisualisable, String> param) {
-                        return new TreeTableCell<ObjetVisualisable, String>() {
-                            @Override
-                            protected void updateItem(String item, boolean empty) {
+                        return new TableCellSpecial();
 
-                                super.updateItem(item, empty);
-                                setText(item);
-                                String style = null;
-                                style = "-fx-font-weight: bold; -fx-text-fill: skyblue; -fx-underline: true;";
-                                setStyle(style);
-                            }
-                        };
                     }
-                });
-    }
-
-    /**
-     * Initialise l'écouteur de clique sur un élement de la table
-     */
-    private void initialiserEcouteurDeClic() {
-        tableViewFenetre.getSelectionModel().selectedItemProperty().addListener(
-                (observable, oldValue, newValue) -> {
-                    //newValue.getValue().accepterVisiteurObjet(this);
                 });
     }
 
@@ -167,18 +150,7 @@ public class VueTableLivraisonControleur implements Initializable, Visiteur, Mai
         return elementRacine;
     }
 
-    @Override
-    public void recupererObject(Fenetre fenetre) {
-        //TODO : Faire un un truc sur la map
-        System.out.println(fenetre);
-    }
 
-    @Override
-    public void recupererObject(Livraison livraison) {
-        //TODO : Faire un un truc sur la map
-        System.out.println(livraison);
-        controleurInterface.cliqueSurLivraison(livraison.getId());
-    }
 
     public void setControleurInterface(ControleurInterface controleurInterface) {
         this.controleurInterface = controleurInterface;
@@ -204,6 +176,52 @@ public class VueTableLivraisonControleur implements Initializable, Visiteur, Mai
     public void initialiserObserveurs() {
         controleurInterface.ajouterDesactObserver(this);
         controleurInterface.ajouterModelObserver(this);
+    }
+
+    @Override
+    public void visit(DetailFenetre detailFenetre) {
+        // TODO : completer
+        System.out.println(detailFenetre.getFenetre());
+    }
+
+    @Override
+    public void visit(DetailLivraison detailLivraison) {
+        // TODO : completer
+        System.out.println(detailLivraison.getLivraison());
+    }
+
+    /**
+     * Gestion du clic et hover sur les elements de la table.
+     *
+     */
+    class TableCellSpecial extends TreeTableCell<ObjetVisualisable, String> {
+
+
+        public TableCellSpecial() {
+            initialiserClic();
+            initialiserHover();
+        }
+
+        @Override
+        protected void updateItem(String item, boolean empty) {
+            super.updateItem(item, empty);
+            setText(item);
+        }
+
+        private void initialiserClic(){
+            setOnMouseClicked(event -> {
+               getTreeTableRow().getTreeItem().getValue().accepter(VueTableLivraisonControleur.this);
+            });
+        }
+
+        private void initialiserHover(){
+            setOnMouseEntered(event -> {
+
+            });
+        }
+
+
+
     }
 
 }

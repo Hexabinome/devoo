@@ -1,4 +1,4 @@
-package modele.xmldata;
+package vue.vueTextuelle;
 
 /**
  * Représente un object visitable pour le pattern visiteur. Le pattern visiteur sera utile au niveau de l'interface
@@ -12,6 +12,6 @@ public interface Visitable {
     /**
      * Permet de récuperer l'object visitable
      */
-    void accepterVisiteurObjet(Visiteur v);
+    void accepter(Visiteur v);
 
 }

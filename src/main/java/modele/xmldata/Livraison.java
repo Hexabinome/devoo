@@ -5,7 +5,7 @@ package modele.xmldata;
  *
  * @author mhaidara / maxou
  */
-public class Livraison implements Visitable
+public class Livraison
 {
 
     //une fois la tourne a ete calcule on peut associer une horarie de passage a chaque livraison
@@ -66,12 +66,6 @@ public class Livraison implements Visitable
                 + ", clientId=" + clientId
                 + ", adresse=" + adresse
                 + '}';
-    }
-
-    @Override
-    public void accepterVisiteurObjet(Visiteur v)
-    {
-        v.recupererObject(this);
     }
 
 }

@@ -168,6 +168,7 @@ public class VuePrincipale implements Initializable {
     	Alert confirmationDialog = new Alert(AlertType.CONFIRMATION);
     	confirmationDialog.setTitle("Quitter");
     	confirmationDialog.setHeaderText("Êtes-vous sûr(e) de vouloir quitter l'application ?");
+        confirmationDialog.setResizable(false);
     	
     	Optional<ButtonType> resultat = confirmationDialog.showAndWait();
     	if (resultat.get() == ButtonType.OK) {
