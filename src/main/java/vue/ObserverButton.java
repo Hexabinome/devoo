@@ -7,7 +7,7 @@ import javafx.scene.control.Button;
  *
  * @author Max Schiedermeier
  */
-public class ObserverButton extends Button  implements MainActivationObserverInterface{
+public class ObserverButton extends Button implements MainActivationObserverInterface{
 
     @Override
     public void notifyObserver(boolean disabled)

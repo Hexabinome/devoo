@@ -26,7 +26,7 @@
                                 <KeyCodeCombination alt="UP" code="L" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                             </accelerator>
                         </MenuItem>
-                        <MenuItem mnemonicParsing="false" text="Quitter" />
+                        <MenuItem mnemonicParsing="false" onAction="#quitterApplication" text="Quitter" />
                     </items>
                     <accelerator>
                         <KeyCodeCombination alt="UP" code="E" control="DOWN" meta="UP" shift="UP" shortcut="UP" />

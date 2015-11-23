@@ -1,12 +1,23 @@
 package vue;
 
-import controleur.ControleurInterface;
+import java.io.File;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+import java.util.ResourceBundle;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Menu;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -15,14 +26,12 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
 import javafx.stage.FileChooser;
 import javafx.util.Pair;
-import modele.persistance.DeserialiseurXML;
 import modele.xmldata.Intersection;
 import modele.xmldata.PlanDeVille;
+
 import org.controlsfx.dialog.ExceptionDialog;
 
-import java.io.File;
-import java.net.URL;
-import java.util.*;
+import controleur.ControleurInterface;
 
 /**
  * Cette classe joue le rôle de binding pour la fenetre principale de
@@ -188,29 +197,30 @@ public class VuePrincipale implements Initializable {
     }
 
     @FXML
+    void quitterApplication() {
+    	Alert confirmationDialog = new Alert(AlertType.CONFIRMATION);
+    	confirmationDialog.setTitle("Quitter");
+    	confirmationDialog.setHeaderText("Êtes-vous sûr(e) de vouloir quitter l'application ?");
+    	
+    	Optional<ButtonType> resultat = confirmationDialog.showAndWait();
+    	if (resultat.get() == ButtonType.OK) {
+    		System.exit(0);
+    	}
+    }
+    
+    @FXML
     void clic_ajouterLivraison() {
-        // TODO : aller à l'état ajouter + supprimer les lignes en dessous (servant de test uniquement)
-        // @N'importe qui va implementer ca: En fait c'est pas ici qu'on change l'etat, on seulement demande le controleur.
-        // Tu appeles "controleur.cliqueOutilAjouter". Et c'est deja tout.
-        // Le controleur sera deja notifie des que l'utilisatuer clique sur le plan pour choissir
-        // la destionation de la livraison. [Maxou]
-        try {
-            construireGraphe(DeserialiseurXML.ouvrirPlanDeVille(
-                    ClassLoader.getSystemClassLoader().getResourceAsStream("samples/plan10x10.xml")));
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+    	controleurInterface.cliqueOutilAjouter();
     }
 
     @FXML
     void clic_echangerLivraison() {
-        // TODO : aller à l'état d'échange
+    	controleurInterface.cliqueOutilEchanger();
     }
 
     @FXML
     void clic_supprimerLivraison() {
-        // TODO : aller à l'état de suppression
+    	controleurInterface.cliqueOutilSupprimer();
     }
 
     /**
