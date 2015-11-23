@@ -13,7 +13,7 @@ import org.junit.Test;
  * @author robinroyer
  */
 public class PlanDeVilleTest {
-    
+
         //-----------TEST  plan de ville
         /** +PlanDeVille(Map<Integer, Intersection> intersections)
             +addInstersection(Intersection intersection):void
@@ -21,10 +21,10 @@ public class PlanDeVilleTest {
             +getIntersections():Map<Integer, Intersection>
             +toString():String
          */
-     
-    @Test   
-    public void caca(){
+
+    @Test
+    public void totest(){
         //assertEquals("Le model doit avoir le plan de ville obtenu a la lecture xml", ville, monModel.getPlan());
 
-    }    
+    }
 }
