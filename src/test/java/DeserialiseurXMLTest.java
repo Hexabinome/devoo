@@ -123,6 +123,8 @@ public class DeserialiseurXMLTest {
       // assertEquals("La livraison 3 doit etre stockee", livr3, ((Fenetre)((ArrayList <Fenetre>)demande.getFenetres()).get(1)).getLivraisons().get(3));
     }
 
+
+    // -------- TEST : ERREUR SUR LE FICHIER PLAN DE VILLE XML ----------
     @Test
     public void TestOuvrirPlanDeVilleSansNoeud() throws java.lang.RuntimeException, org.jdom2.JDOMException, java.io.IOException, org.xml.sax.SAXException{
       //noeud sans livraison
@@ -241,6 +243,105 @@ public class DeserialiseurXMLTest {
       fail("le chargement devrait lever une erreur");
       }
       catch(JDOMException | IOException | SAXException e){
+        assertEquals( org.jdom2.input.JDOMParseException.class, e.getClass() );
+      }
+    }
+
+    // -------- TEST : ERREUR SUR LE FICHIER PLAN DE LIVRAISON XML ----------
+    @Test
+    public void TestOuvrirPlanDeLivraisonMemeId() throws java.lang.RuntimeException, org.jdom2.JDOMException, java.io.IOException, org.xml.sax.SAXException{
+      // 2 livraison succesif avec le meme id
+      try{
+      PlanDeVille ville = DeserialiseurXML.ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/plan10x10.xml"));
+      Demande demande = DeserialiseurXML.ouvrirLivraison(ClassLoader.getSystemResourceAsStream("samples/livraisonErreur1.xml"), ville);
+      fail("le chargement devrait lever une erreur");
+      }
+      catch(JDOMException | IOException | SAXException | ParseException e){
+        assertEquals( org.jdom2.input.JDOMParseException.class, e.getClass() );
+      }
+    }
+    @Test
+    public void TestOuvrirPlanDeLivraisonEntrepotInexistant() throws java.lang.RuntimeException, org.jdom2.JDOMException, java.io.IOException, org.xml.sax.SAXException{
+      // Adresse de l'entreport inexistant
+      try{
+      PlanDeVille ville = DeserialiseurXML.ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/plan10x10.xml"));
+      Demande demande = DeserialiseurXML.ouvrirLivraison(ClassLoader.getSystemResourceAsStream("samples/livraisonErreur2.xml"), ville);
+      fail("le chargement devrait lever une erreur");
+      }
+      catch(JDOMException | IOException | SAXException | ParseException e){
+        assertEquals( org.jdom2.input.JDOMParseException.class, e.getClass() );
+      }
+    }
+    @Test
+    public void TestOuvrirPlanDeLivraisonFenetreNegative() throws java.lang.RuntimeException, org.jdom2.JDOMException, java.io.IOException, org.xml.sax.SAXException{
+      // heure de fin avant l'heure de debut
+      try{
+      PlanDeVille ville = DeserialiseurXML.ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/plan10x10.xml"));
+      Demande demande = DeserialiseurXML.ouvrirLivraison(ClassLoader.getSystemResourceAsStream("samples/livraisonErreur3.xml"), ville);
+      fail("le chargement devrait lever une erreur");
+      }
+      catch(JDOMException | IOException | SAXException | ParseException e){
+        assertEquals( org.jdom2.input.JDOMParseException.class, e.getClass() );
+      }
+    }
+    @Test
+    public void TestOuvrirPlanDeLivraisonHorairesNegatifs() throws java.lang.RuntimeException, org.jdom2.JDOMException, java.io.IOException, org.xml.sax.SAXException{
+      // Les horaires de la fenetre sont negatifs
+      try{
+      PlanDeVille ville = DeserialiseurXML.ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/plan10x10.xml"));
+      Demande demande = DeserialiseurXML.ouvrirLivraison(ClassLoader.getSystemResourceAsStream("samples/livraisonErreur4.xml"), ville);
+      fail("le chargement devrait lever une erreur");
+      }
+      catch(JDOMException | IOException | SAXException | ParseException e){
+        assertEquals( org.jdom2.input.JDOMParseException.class, e.getClass() );
+      }
+    }
+    @Test
+    public void TestOuvrirPlanDeLivraisonHeureHorsFormat() throws java.lang.RuntimeException, org.jdom2.JDOMException, java.io.IOException, org.xml.sax.SAXException{
+      // Horaires hors du format 24:60:60
+      try{
+      PlanDeVille ville = DeserialiseurXML.ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/plan10x10.xml"));
+      Demande demande = DeserialiseurXML.ouvrirLivraison(ClassLoader.getSystemResourceAsStream("samples/livraisonErreur5.xml"), ville);
+      fail("le chargement devrait lever une erreur");
+      }
+      catch(JDOMException | IOException | SAXException | ParseException e){
+        assertEquals( org.jdom2.input.JDOMParseException.class, e.getClass() );
+      }
+    }
+    @Test
+    public void TestOuvrirPlanDeLivraisonSansLivraison() throws java.lang.RuntimeException, org.jdom2.JDOMException, java.io.IOException, org.xml.sax.SAXException{
+      // fichier xml sans livraisons
+      try{
+      PlanDeVille ville = DeserialiseurXML.ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/plan10x10.xml"));
+      Demande demande = DeserialiseurXML.ouvrirLivraison(ClassLoader.getSystemResourceAsStream("samples/livraisonErreur6.xml"), ville);
+      fail("le chargement devrait lever une erreur");
+      }
+      catch(JDOMException | IOException | SAXException | ParseException e){
+        assertEquals( org.jdom2.input.JDOMParseException.class, e.getClass() );
+      }
+    }
+    @Test
+    public void TestOuvrirPlanDeLivraisonAdresseInexistante() throws java.lang.RuntimeException, org.jdom2.JDOMException, java.io.IOException, org.xml.sax.SAXException{
+      // adresse de livraison inexistante
+      try{
+      PlanDeVille ville = DeserialiseurXML.ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/plan10x10.xml"));
+      Demande demande = DeserialiseurXML.ouvrirLivraison(ClassLoader.getSystemResourceAsStream("samples/livraisonErreur7.xml"), ville);
+      fail("le chargement devrait lever une erreur");
+      }
+      catch(JDOMException | IOException | SAXException | ParseException e){
+        assertEquals( org.jdom2.input.JDOMParseException.class, e.getClass() );
+      }
+    }
+
+    @Test
+    public void TestOuvrirPlanDeLivraisonEntrepotManquant() throws java.lang.RuntimeException, org.jdom2.JDOMException, java.io.IOException, org.xml.sax.SAXException{
+      // la balise entrepot non presente dans le xml
+      try{
+      PlanDeVille ville = DeserialiseurXML.ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/plan10x10.xml"));
+      Demande demande = DeserialiseurXML.ouvrirLivraison(ClassLoader.getSystemResourceAsStream("samples/livraisonErreur8.xml"), ville);
+      fail("le chargement devrait lever une erreur");
+      }
+      catch(JDOMException | IOException | SAXException | ParseException e){
         assertEquals( org.jdom2.input.JDOMParseException.class, e.getClass() );
       }
     }
