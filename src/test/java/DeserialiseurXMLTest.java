@@ -129,7 +129,7 @@ public class DeserialiseurXMLTest {
     public void TestOuvrirPlanDeVilleSansNoeud() throws java.lang.RuntimeException, org.jdom2.JDOMException, java.io.IOException, org.xml.sax.SAXException{
       //noeud sans livraison
       try{
-      PlanDeVille ville1 = DeserialiseurXML.ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/planTestFail1.xml"));
+      PlanDeVille ville1 = DeserialiseurXML.ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/planTestErreur1.xml"));
       fail("le chargement devrait lever une erreur");
       }
       catch(JDOMException | IOException | SAXException e){
@@ -141,7 +141,7 @@ public class DeserialiseurXMLTest {
     public void TestOuvrirPlanDeVilleBaliseManquante() throws java.lang.RuntimeException, org.jdom2.JDOMException, java.io.IOException, org.xml.sax.SAXException{
       // une balise noeud fermante manquante
       try{
-      PlanDeVille ville2 = DeserialiseurXML.ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/planTestFail2.xml"));
+      PlanDeVille ville2 = DeserialiseurXML.ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/planTestErreur2.xml"));
       fail("le chargement devrait lever une erreur");
       }
       catch(JDOMException | IOException | SAXException e){
@@ -155,7 +155,7 @@ public class DeserialiseurXMLTest {
     public void TestOuvrirPlanDeVilleMauvaisFormat() throws java.lang.RuntimeException, org.jdom2.JDOMException, java.io.IOException, org.xml.sax.SAXException{
       // Données au mauvais format(lettre a la place de chiffre)
       try{
-      PlanDeVille ville3 = DeserialiseurXML.ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/planTestFail3.xml"));
+      PlanDeVille ville3 = DeserialiseurXML.ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/planTestErreur3.xml"));
       fail("le chargement devrait lever une erreur");
       }
       catch(JDOMException | IOException | SAXException e){
@@ -167,7 +167,7 @@ public class DeserialiseurXMLTest {
     public void TestOuvrirPlanDeVilleErreurDestination() throws java.lang.RuntimeException, org.jdom2.JDOMException, java.io.IOException, org.xml.sax.SAXException{
       //les troncons ont pour destination le meme noeud
       try{
-      PlanDeVille ville4 = DeserialiseurXML.ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/planTestFail4.xml"));
+      PlanDeVille ville4 = DeserialiseurXML.ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/planTestErreur4.xml"));
       fail("le chargement devrait lever une erreur");
       }
       catch(JDOMException | IOException | SAXException e){
@@ -179,7 +179,7 @@ public class DeserialiseurXMLTest {
     public void TestOuvrirPlanDeVilleVitesseNegative() throws java.lang.RuntimeException, org.jdom2.JDOMException, java.io.IOException, org.xml.sax.SAXException{
       // vitesses negatives
       try{
-      PlanDeVille ville5 = DeserialiseurXML.ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/planTestFail5.xml"));
+      PlanDeVille ville5 = DeserialiseurXML.ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/planTestErreur5.xml"));
       fail("le chargement devrait lever une erreur");
       }
       catch(JDOMException | IOException | SAXException e){
@@ -191,7 +191,7 @@ public class DeserialiseurXMLTest {
     public void TestOuvrirPlanDeVilleLongueurNegative() throws java.lang.RuntimeException, org.jdom2.JDOMException, java.io.IOException, org.xml.sax.SAXException{
       // longueurs negatives
       try{
-      PlanDeVille ville6 = DeserialiseurXML.ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/planTestFail6.xml"));
+      PlanDeVille ville6 = DeserialiseurXML.ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/planTestErreur6.xml"));
       fail("le chargement devrait lever une erreur");
       }
       catch(JDOMException | IOException | SAXException e){
@@ -203,7 +203,7 @@ public class DeserialiseurXMLTest {
     public void TestOuvrirPlanDeVilleNombreFlotant() throws java.lang.RuntimeException, org.jdom2.JDOMException, java.io.IOException, org.xml.sax.SAXException{
       // id et coordonneées flotante
       try{
-      PlanDeVille ville7 = DeserialiseurXML.ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/planTestFail7.xml"));
+      PlanDeVille ville7 = DeserialiseurXML.ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/planTestErreur7.xml"));
       fail("le chargement devrait lever une erreur");
       }
       catch(JDOMException | IOException | SAXException e){
@@ -215,7 +215,7 @@ public class DeserialiseurXMLTest {
     public void TestOuvrirPlanDeVilleTronconsHorsNoeud() throws java.lang.RuntimeException, org.jdom2.JDOMException, java.io.IOException, org.xml.sax.SAXException{
       // troncon a l'exterieur d'un noeud
       try{
-      PlanDeVille ville8 = DeserialiseurXML.ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/planTestFail8.xml"));
+      PlanDeVille ville8 = DeserialiseurXML.ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/planTestErreur8.xml"));
       fail("le chargement devrait lever une erreur");
       }
       catch(JDOMException | IOException | SAXException e){
@@ -227,7 +227,7 @@ public class DeserialiseurXMLTest {
     public void TestOuvrirPlanDeVille2Reseaux() throws java.lang.RuntimeException, org.jdom2.JDOMException, java.io.IOException, org.xml.sax.SAXException{
       // 2 reseaux
       try{
-      PlanDeVille ville9 = DeserialiseurXML.ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/planTestFail9.xml"));
+      PlanDeVille ville9 = DeserialiseurXML.ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/planTestErreur9.xml"));
       fail("le chargement devrait lever une erreur");
       }
       catch(JDOMException | IOException | SAXException e){
@@ -239,7 +239,7 @@ public class DeserialiseurXMLTest {
     public void TestOuvrirPlanDeVilleIdInexistant() throws java.lang.RuntimeException, org.jdom2.JDOMException, java.io.IOException, org.xml.sax.SAXException{
       // troncon avec id de destination inexistant
       try{
-      PlanDeVille ville10 = DeserialiseurXML.ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/planTestFail8.xml"));
+      PlanDeVille ville10 = DeserialiseurXML.ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/planTestErreur10.xml"));
       fail("le chargement devrait lever une erreur");
       }
       catch(JDOMException | IOException | SAXException e){
