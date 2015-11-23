@@ -3,6 +3,7 @@ package vue;
 import controleur.ControleurInterface;
 import controleur.MainActivationObserverInterface;
 import controleur.ModelObserver;
+import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -10,7 +11,6 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableCell;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableView;
-import javafx.util.Callback;
 import modele.xmldata.Demande;
 import modele.xmldata.Fenetre;
 import modele.xmldata.Livraison;
@@ -76,7 +76,11 @@ public class VueTableLivraisonControleur implements Initializable, Visiteur, Mai
         tableViewFenetre.setShowRoot(false);
         initialiserColonneLivraison();
         initialiserColonneHoraire();
-        ajouterStyleCssColonneLivraison();
+        initialiserEcouteurs();
+        tableViewFenetre.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
+            if(newValue != null)
+                newValue.getValue().accepter(this);
+        }));
     }
 
     /**
@@ -91,17 +95,10 @@ public class VueTableLivraisonControleur implements Initializable, Visiteur, Mai
         }
     }
 
-    private void ajouterStyleCssColonneLivraison() {
+    private void initialiserEcouteurs() {
         // TODO : à completer pour le hover ou des trucs du genre
         colonneLivraison.setCellFactory(
-                new Callback<TreeTableColumn<ObjetVisualisable, String>, TreeTableCell<ObjetVisualisable, String>>() {
-                    @Override
-                    public TreeTableCell<ObjetVisualisable, String> call(
-                            TreeTableColumn<ObjetVisualisable, String> param) {
-                        return new TableCellSpecial();
-
-                    }
-                });
+                param -> new TableCellSpecial());
     }
 
     /**
@@ -209,7 +206,9 @@ public class VueTableLivraisonControleur implements Initializable, Visiteur, Mai
 
         private void initialiserClic() {
             setOnMouseClicked(event -> {
-                getTreeTableRow().getTreeItem().getValue().accepter(VueTableLivraisonControleur.this);
+                ObjetVisualisable objetVisualisable = getTreeTableRow().getTreeItem().getValue();
+                if (objetVisualisable != null)
+                    getTreeTableRow().getTreeItem().getValue().accepter(VueTableLivraisonControleur.this);
             });
         }
 
@@ -218,7 +217,6 @@ public class VueTableLivraisonControleur implements Initializable, Visiteur, Mai
 
             });
         }
-
 
     }
 
