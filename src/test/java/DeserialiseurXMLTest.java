@@ -1,6 +1,9 @@
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import static jdk.nashorn.internal.objects.NativeRegExp.test;
 
 import modele.persistance.DeserialiseurXML;
 import modele.xmldata.Demande;
@@ -12,8 +15,11 @@ import modele.xmldata.Troncon;
 import org.jdom2.JDOMException;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+import org.junit.Rule;
 
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.xml.sax.SAXException;
 
 /**
@@ -54,10 +60,10 @@ public class DeserialiseurXMLTest {
       assertEquals("L'intersection stockees doit avoir ses troncons", troncon56.getNomRue(), ville.getIntersection(5).getTroncon(6).getNomRue());
       assertEquals("L'intersection stockees doit avoir ses troncons", troncon59.getNomRue(), ville.getIntersection(5).getTroncon(9).getNomRue());
       //test des vitesses de troncons partant de l'intersection 5
-     assertEquals("L'intersection stockees doit avoir ses troncons", troncon51.getVitesse(), ville.getIntersection(5).getTroncon(1).getVitesse(), 0);
-     assertEquals("L'intersection stockees doit avoir ses troncons", troncon54.getVitesse(), ville.getIntersection(5).getTroncon(4).getVitesse(), 0);
-     assertEquals("L'intersection stockees doit avoir ses troncons", troncon56.getVitesse(), ville.getIntersection(5).getTroncon(6).getVitesse(), 0);
-     assertEquals("L'intersection stockees doit avoir ses troncons", troncon59.getVitesse(), ville.getIntersection(5).getTroncon(9).getVitesse(), 0);
+      assertEquals("L'intersection stockees doit avoir ses troncons", troncon51.getVitesse(), ville.getIntersection(5).getTroncon(1).getVitesse(), 0);
+      assertEquals("L'intersection stockees doit avoir ses troncons", troncon54.getVitesse(), ville.getIntersection(5).getTroncon(4).getVitesse(), 0);
+      assertEquals("L'intersection stockees doit avoir ses troncons", troncon56.getVitesse(), ville.getIntersection(5).getTroncon(6).getVitesse(), 0);
+      assertEquals("L'intersection stockees doit avoir ses troncons", troncon59.getVitesse(), ville.getIntersection(5).getTroncon(9).getVitesse(), 0);
       //test des longueurs de troncons partant de  l'intersection 5
       assertEquals("L'intersection stockees doit avoir ses troncons", troncon51.getLongueur(), ville.getIntersection(5).getTroncon(1).getLongueur(), 0);
       assertEquals("L'intersection stockees doit avoir ses troncons", troncon54.getLongueur(), ville.getIntersection(5).getTroncon(4).getLongueur(), 0);
@@ -117,7 +123,126 @@ public class DeserialiseurXMLTest {
       // assertEquals("La livraison 3 doit etre stockee", livr3, ((Fenetre)((ArrayList <Fenetre>)demande.getFenetres()).get(1)).getLivraisons().get(3));
     }
 
+    @Test
+    public void TestOuvrirPlanDeVilleSansNoeud() throws java.lang.RuntimeException, org.jdom2.JDOMException, java.io.IOException, org.xml.sax.SAXException{
+      //noeud sans livraison
+      try{
+      PlanDeVille ville1 = DeserialiseurXML.ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/planTestFail1.xml"));
+      fail("le chargement devrait lever une erreur");
+      }
+      catch(JDOMException | IOException | SAXException e){
+        assertEquals( org.jdom2.input.JDOMParseException.class, e.getClass() );
+      }
+    }
+
+    @Test
+    public void TestOuvrirPlanDeVilleBaliseManquante() throws java.lang.RuntimeException, org.jdom2.JDOMException, java.io.IOException, org.xml.sax.SAXException{
+      // une balise noeud fermante manquante
+      try{
+      PlanDeVille ville2 = DeserialiseurXML.ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/planTestFail2.xml"));
+      fail("le chargement devrait lever une erreur");
+      }
+      catch(JDOMException | IOException | SAXException e){
+        assertEquals( org.jdom2.input.JDOMParseException.class, e.getClass() );
+      }
+
+    }
 
 
+    @Test
+    public void TestOuvrirPlanDeVilleMauvaisFormat() throws java.lang.RuntimeException, org.jdom2.JDOMException, java.io.IOException, org.xml.sax.SAXException{
+      // Données au mauvais format(lettre a la place de chiffre)
+      try{
+      PlanDeVille ville3 = DeserialiseurXML.ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/planTestFail3.xml"));
+      fail("le chargement devrait lever une erreur");
+      }
+      catch(JDOMException | IOException | SAXException e){
+        assertEquals( org.jdom2.input.JDOMParseException.class, e.getClass() );
+      }
+    }
+
+    @Test
+    public void TestOuvrirPlanDeVilleErreurDestination() throws java.lang.RuntimeException, org.jdom2.JDOMException, java.io.IOException, org.xml.sax.SAXException{
+      //les troncons ont pour destination le meme noeud
+      try{
+      PlanDeVille ville4 = DeserialiseurXML.ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/planTestFail4.xml"));
+      fail("le chargement devrait lever une erreur");
+      }
+      catch(JDOMException | IOException | SAXException e){
+        assertEquals( org.jdom2.input.JDOMParseException.class, e.getClass() );
+      }
+    }
+
+    @Test
+    public void TestOuvrirPlanDeVilleVitesseNegative() throws java.lang.RuntimeException, org.jdom2.JDOMException, java.io.IOException, org.xml.sax.SAXException{
+      // vitesses negatives
+      try{
+      PlanDeVille ville5 = DeserialiseurXML.ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/planTestFail5.xml"));
+      fail("le chargement devrait lever une erreur");
+      }
+      catch(JDOMException | IOException | SAXException e){
+        assertEquals( org.jdom2.input.JDOMParseException.class, e.getClass() );
+      }
+    }
+
+    @Test
+    public void TestOuvrirPlanDeVilleLongueurNegative() throws java.lang.RuntimeException, org.jdom2.JDOMException, java.io.IOException, org.xml.sax.SAXException{
+      // longueurs negatives
+      try{
+      PlanDeVille ville6 = DeserialiseurXML.ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/planTestFail6.xml"));
+      fail("le chargement devrait lever une erreur");
+      }
+      catch(JDOMException | IOException | SAXException e){
+        assertEquals( org.jdom2.input.JDOMParseException.class, e.getClass() );
+      }
+    }
+
+    @Test
+    public void TestOuvrirPlanDeVilleNombreFlotant() throws java.lang.RuntimeException, org.jdom2.JDOMException, java.io.IOException, org.xml.sax.SAXException{
+      // id et coordonneées flotante
+      try{
+      PlanDeVille ville7 = DeserialiseurXML.ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/planTestFail7.xml"));
+      fail("le chargement devrait lever une erreur");
+      }
+      catch(JDOMException | IOException | SAXException e){
+        assertEquals( org.jdom2.input.JDOMParseException.class, e.getClass() );
+      }
+    }
+
+    @Test
+    public void TestOuvrirPlanDeVilleTronconsHorsNoeud() throws java.lang.RuntimeException, org.jdom2.JDOMException, java.io.IOException, org.xml.sax.SAXException{
+      // troncon a l'exterieur d'un noeud
+      try{
+      PlanDeVille ville8 = DeserialiseurXML.ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/planTestFail8.xml"));
+      fail("le chargement devrait lever une erreur");
+      }
+      catch(JDOMException | IOException | SAXException e){
+      assertEquals( org.jdom2.input.JDOMParseException.class, e.getClass() );
+      }
+    }
+
+    @Test
+    public void TestOuvrirPlanDeVille2Reseaux() throws java.lang.RuntimeException, org.jdom2.JDOMException, java.io.IOException, org.xml.sax.SAXException{
+      // 2 reseaux
+      try{
+      PlanDeVille ville9 = DeserialiseurXML.ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/planTestFail9.xml"));
+      fail("le chargement devrait lever une erreur");
+      }
+      catch(JDOMException | IOException | SAXException e){
+        assertEquals( org.jdom2.input.JDOMParseException.class, e.getClass() );
+      }
+    }
+
+    @Test
+    public void TestOuvrirPlanDeVilleIdInexistant() throws java.lang.RuntimeException, org.jdom2.JDOMException, java.io.IOException, org.xml.sax.SAXException{
+      // troncon avec id de destination inexistant
+      try{
+      PlanDeVille ville10 = DeserialiseurXML.ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/planTestFail8.xml"));
+      fail("le chargement devrait lever une erreur");
+      }
+      catch(JDOMException | IOException | SAXException e){
+        assertEquals( org.jdom2.input.JDOMParseException.class, e.getClass() );
+      }
+    }
 
 }
