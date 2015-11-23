@@ -38,7 +38,7 @@ class EtatPrincipal implements EtatInterface
     @Override
     public EtatInterface chargerPlan(File plan) throws CommandException
     {
-        //   new CommandChargerPlan(controleurDonnees, plan).executer();
+        new CommandChargerPlan(controleurDonnees, plan).executer();
         return new EtatPlanCharge(controleurDonnees);
     }
 
