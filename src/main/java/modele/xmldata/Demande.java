@@ -28,9 +28,9 @@ public class Demande
         return entrepot;
     }
 
-    public Collection<Fenetre> getFenetres()
+    public List<Fenetre> getFenetres()
     {
-        return Collections.unmodifiableCollection(fenetres);
+        return Collections.unmodifiableList(fenetres);
     }
 
     @Override

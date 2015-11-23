@@ -16,6 +16,8 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Menu;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
+import modele.xmldata.Demande;
+import modele.xmldata.ModelLecture;
 
 import org.controlsfx.dialog.ExceptionDialog;
 
@@ -142,12 +144,17 @@ public class VuePrincipale implements Initializable {
      */
     @FXML
     private void ouvrirDemande(ActionEvent actionEvent) {
-        File file = ouvrirSelectionneurDeFichier(
-                "Choisissez la demande de livraison");
+        File file = ouvrirSelectionneurDeFichier("Choisissez la demande de livraison");
         if (file != null) {
             Exception exception = controleurInterface.chargerLivraisons(file);
             if (exception != null)
                 ouvrirAlerteXML(exception, file.getName());
+            else {
+            	ModelLecture modele = controleurInterface.getModel();
+            	Demande demande = modele.getDemande();
+                //mediateur.construireVueLivraison(demande);
+                vueGraphique.construireTournee(modele.getDemande().getEntrepot(), modele.getTournee(), modele.getDemande());
+            }
         }
     }
 
