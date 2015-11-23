@@ -5,7 +5,21 @@ package modele.xmldata;
  *
  * @author mhaidara / maxou
  */
-public class Livraison implements Visitable{
+public class Livraison implements Visitable
+{
+
+    //une fois la tourne a ete calcule on peut associer une horarie de passage a chaque livraison
+    private int horaireDePassage;
+
+    public int getHoraireDePassage()
+    {
+        return horaireDePassage;
+    }
+
+    public void setHoraireDePassage(int horaireDePassage)
+    {
+        this.horaireDePassage = horaireDePassage;
+    }
 
     /**
      * Identifiant de la livraison
@@ -22,40 +36,48 @@ public class Livraison implements Visitable{
      */
     private final int adresse;
 
-    public Livraison(int id, int clientId, int idIntersection) {
+    public Livraison(int id, int clientId, int idIntersection)
+    {
         this.id = id;
         this.clientId = clientId;
         this.adresse = idIntersection;
     }
 
-    public int getId() {
+    public int getId()
+    {
         return id;
     }
 
-    public int getClientId() {
+    public int getClientId()
+    {
         return clientId;
     }
 
-    public int getAdresse() {
+    public int getAdresse()
+    {
         return adresse;
     }
 
     @Override
-    public String toString() {
-        return "Livraison{" +
-                "id=" + id +
-                ", clientId=" + clientId +
-                ", adresse=" + adresse +
-                '}';
+    public String toString()
+    {
+        return "Livraison{"
+                + "id=" + id
+                + ", clientId=" + clientId
+                + ", adresse=" + adresse
+                + '}';
     }
 
     @Override
-    public String accepterVisiteurInformation(Visiteur v) {
+    public String accepterVisiteurInformation(Visiteur v)
+    {
         return v.recupererInformation(this);
     }
 
     @Override
-    public void accepterVisiteurObjet(Visiteur v) {
+    public void accepterVisiteurObjet(Visiteur v)
+    {
         v.recupererObject(this);
     }
+
 }

@@ -10,6 +10,10 @@
          <columnResizePolicy>
             <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
+         <columns>
+            <TreeTableColumn fx:id="colonneLivraison" prefWidth="161.0" text="Livraisons" />
+            <TreeTableColumn fx:id="colonneHoraire" prefWidth="75.0" text="Horaire de passage" />
+         </columns>
       </TreeTableView>
    </children>
 </AnchorPane>

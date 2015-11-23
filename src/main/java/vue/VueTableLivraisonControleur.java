@@ -33,19 +33,24 @@ public class VueTableLivraisonControleur implements Initializable, Visiteur, Mai
      * Element racine de la Table qui contient tous les autres éléments.Il ne sera pas affiché dans la table
      */
     private TreeItem<Visitable> elementRacine = new TreeItem<>();
-    ;
 
+
+    /**
+     * Controleur principale
+     */
     private ControleurInterface controleurInterface;
 
     /**
      * Colonne livraison de la vue à gauche
      */
-    private final TreeTableColumn<Visitable, String> colonneLivraison = new TreeTableColumn<>("Livraisons");
+    @FXML
+    private TreeTableColumn<Visitable, String> colonneLivraison;
 
     /**
      * Colonne horaire de passage de la vue à gauche
      */
-    private final TreeTableColumn<Visitable, String> colonneHoraire = new TreeTableColumn<>("Horaires de passage");
+    @FXML
+    private TreeTableColumn<Visitable, String> colonneHoraire;
 
     /**
      * Mediateur pour la communication avec les autres controleurs de vue
@@ -61,25 +66,26 @@ public class VueTableLivraisonControleur implements Initializable, Visiteur, Mai
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        colonneLivraison.setPrefWidth(161);
-        colonneHoraire.setPrefWidth(161);
-        tableViewFenetre.getColumns().addAll(colonneLivraison, colonneHoraire);
         tableViewFenetre.setRoot(elementRacine);
         elementRacine.setExpanded(true);
         tableViewFenetre.setShowRoot(false);
+        initialiserEcouteurDeClic();
+        initialiserColonneLivraison();
     }
 
     /**
      * Contruis la table des livraisons
+     *
+     * @param demande La demande de livraison chargée à partir d'un fichier XML
      */
     protected void construireVueTableLivraion(Demande demande) {
-
         for (Fenetre f : demande.getFenetres()) {
             elementRacine.getChildren().add(construireFenetreItem(f));
         }
+    }
 
-        colonneLivraison.setCellValueFactory((TreeTableColumn.CellDataFeatures<Visitable, String> param)
-                -> new ReadOnlyStringWrapper(param.getValue().getValue().accepterVisiteurInformation(this)));
+    private void ajouterStyleCssColonneLivraison() {
+        // TODO : à completer pour le hover ou des trucs du genre
         colonneLivraison.setCellFactory(
                 new Callback<TreeTableColumn<Visitable, String>, TreeTableCell<Visitable, String>>() {
                     @Override
@@ -97,18 +103,35 @@ public class VueTableLivraisonControleur implements Initializable, Visiteur, Mai
                         };
                     }
                 });
+    }
+
+    /**
+     * Initialise l'écouteur de clique sur un élement de la table
+     */
+    private void initialiserEcouteurDeClic() {
         tableViewFenetre.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> {
                     newValue.getValue().accepterVisiteurObjet(this);
                 });
     }
 
-    protected void effacerVueTableLivraison() {
+    /**
+     * Initialise la methode de remplissage de la colonne 'Livraisons'
+     */
+    private void initialiserColonneLivraison() {
+        colonneLivraison.setCellValueFactory((TreeTableColumn.CellDataFeatures<Visitable, String> param)
+                -> new ReadOnlyStringWrapper(param.getValue().getValue().accepterVisiteurInformation(this)));
+    }
+
+    /**
+     * Efface le contenu de la table de livraison table de livraison
+     */
+    private void effacerVueTableLivraison() {
         elementRacine.getChildren().clear();
     }
 
     /**
-     * Contruis une item correspondant à une fenetre et ses enfants
+     * Contruis un élement correspondant à une fenetre et ses enfants
      */
     private static TreeItem<Visitable> construireFenetreItem(Fenetre fenetre) {
 
@@ -119,14 +142,15 @@ public class VueTableLivraisonControleur implements Initializable, Visiteur, Mai
         });
 
         // Construction des items de chaque livraison
-        TreeItem<Visitable> rootItem = new TreeItem<>(fenetre);
+        TreeItem<Visitable> elementRacine = new TreeItem<>(fenetre);
         for (Livraison l : livraisonList) {
 
             TreeItem<Visitable> livraisonTreeItem = new TreeItem<>(l);
-            rootItem.getChildren().add(livraisonTreeItem);
+            elementRacine.getChildren().add(livraisonTreeItem);
         }
 
-        return rootItem;
+        elementRacine.setExpanded(true);
+        return elementRacine;
     }
 
     @Override
@@ -150,8 +174,7 @@ public class VueTableLivraisonControleur implements Initializable, Visiteur, Mai
 
     @Override
     public void recupererObject(Livraison livraison) {
-        //TODO : appeler la vue principale pour qu'elle fasse un truc sur la map
-        System.out.println(livraison);
+        controleurInterface.cliqueSurLivraison(livraison.getId());
     }
 
     /**
@@ -171,17 +194,18 @@ public class VueTableLivraisonControleur implements Initializable, Visiteur, Mai
     @Override
     public void notifyObserver(boolean disabled) {
         if (disabled) {
-            System.out.println("clear");
             effacerVueTableLivraison();
         }
 
     }
 
+    /**
+     * Notification déclenchée lors d'un changement dans le model
+     */
     @Override
     public void notifyObserver() {
-        //TODO: utiliser controlerInterface pour recuperer les livraisons et les affichier.
+        effacerVueTableLivraison();
         construireVueTableLivraion(controleurInterface.getModel().getDemande());
-        System.out.println("sout");
     }
 
 }
