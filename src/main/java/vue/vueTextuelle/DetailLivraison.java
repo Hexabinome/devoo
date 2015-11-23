@@ -1,11 +1,11 @@
-package vue;
+package vue.vueTextuelle;
 
 import modele.xmldata.Livraison;
 
 /**
  * Created by elmhaidara on 23/11/15.
  */
-public class DetailLivraison implements ObjetVisualisable {
+public class DetailLivraison extends ObjetVisualisable {
 
     private final Livraison livraison;
 
@@ -21,5 +21,14 @@ public class DetailLivraison implements ObjetVisualisable {
     @Override
     public String afficherCaracteriqueSpeciale() {
         return String.valueOf(livraison.getHoraireDePassage());
+    }
+
+    @Override
+    public void accepter(Visiteur v) {
+        v.visit(this);
+    }
+
+    public Livraison getLivraison() {
+        return livraison;
     }
 }

@@ -1,4 +1,4 @@
-package modele.xmldata;
+package vue.vueTextuelle;
 
 /**
  * Représente le visiteur du pattern visiteur.
@@ -8,7 +8,7 @@ package modele.xmldata;
  */
 public interface Visiteur {
 
-    void recupererObject(Fenetre fenetre);
+    void visit(DetailFenetre fenetre);
 
-    void recupererObject(Livraison livraison);
+    void visit(DetailLivraison livraison);
 }

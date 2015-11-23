@@ -1,11 +1,11 @@
-package vue;
+package vue.vueTextuelle;
 
 import modele.xmldata.Fenetre;
 
 /**
  * Created by elmhaidara on 23/11/15.
  */
-public class DetailFenetre implements ObjetVisualisable {
+public class DetailFenetre extends ObjetVisualisable {
 
     private final Fenetre fenetre;
 
@@ -35,4 +35,12 @@ public class DetailFenetre implements ObjetVisualisable {
         return String.format("%02d:%02d:%02d", heure, mn, sec);
     }
 
+    @Override
+    public void accepter(Visiteur v) {
+        v.visit(this);
+    }
+
+    public Fenetre getFenetre() {
+        return fenetre;
+    }
 }

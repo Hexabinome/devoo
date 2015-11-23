@@ -3,6 +3,7 @@ package vue;
 import controleur.ControleurInterface;
 import controleur.MainActivationObserverInterface;
 import controleur.ModelObserver;
+import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -10,11 +11,13 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableCell;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableView;
-import javafx.util.Callback;
 import modele.xmldata.Demande;
 import modele.xmldata.Fenetre;
 import modele.xmldata.Livraison;
-import modele.xmldata.Visiteur;
+import vue.vueTextuelle.DetailFenetre;
+import vue.vueTextuelle.DetailLivraison;
+import vue.vueTextuelle.ObjetVisualisable;
+import vue.vueTextuelle.Visiteur;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -71,10 +74,13 @@ public class VueTableLivraisonControleur implements Initializable, Visiteur, Mai
         tableViewFenetre.setRoot(elementRacine);
         elementRacine.setExpanded(true);
         tableViewFenetre.setShowRoot(false);
-        initialiserEcouteurDeClic();
         initialiserColonneLivraison();
         initialiserColonneHoraire();
-        //ajouterStyleCssColonneLivraison();
+        initialiserEcouteurs();
+        tableViewFenetre.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
+            if(newValue != null)
+                newValue.getValue().accepter(this);
+        }));
     }
 
     /**
@@ -89,36 +95,10 @@ public class VueTableLivraisonControleur implements Initializable, Visiteur, Mai
         }
     }
 
-    private void ajouterStyleCssColonneLivraison() {
+    private void initialiserEcouteurs() {
         // TODO : à completer pour le hover ou des trucs du genre
         colonneLivraison.setCellFactory(
-                new Callback<TreeTableColumn<ObjetVisualisable, String>, TreeTableCell<ObjetVisualisable, String>>() {
-                    @Override
-                    public TreeTableCell<ObjetVisualisable, String> call(
-                            TreeTableColumn<ObjetVisualisable, String> param) {
-                        return new TreeTableCell<ObjetVisualisable, String>() {
-                            @Override
-                            protected void updateItem(String item, boolean empty) {
-
-                                super.updateItem(item, empty);
-                                setText(item);
-                                String style = null;
-                                style = "-fx-font-weight: bold; -fx-text-fill: skyblue; -fx-underline: true;";
-                                setStyle(style);
-                            }
-                        };
-                    }
-                });
-    }
-
-    /**
-     * Initialise l'écouteur de clique sur un élement de la table
-     */
-    private void initialiserEcouteurDeClic() {
-        tableViewFenetre.getSelectionModel().selectedItemProperty().addListener(
-                (observable, oldValue, newValue) -> {
-                    //newValue.getValue().accepterVisiteurObjet(this);
-                });
+                param -> new TableCellSpecial());
     }
 
     /**
@@ -167,18 +147,6 @@ public class VueTableLivraisonControleur implements Initializable, Visiteur, Mai
         return elementRacine;
     }
 
-    @Override
-    public void recupererObject(Fenetre fenetre) {
-        //TODO : Faire un un truc sur la map
-        System.out.println(fenetre);
-    }
-
-    @Override
-    public void recupererObject(Livraison livraison) {
-        //TODO : Faire un un truc sur la map
-        System.out.println(livraison);
-        controleurInterface.cliqueSurLivraison(livraison.getId());
-    }
 
     public void setControleurInterface(ControleurInterface controleurInterface) {
         this.controleurInterface = controleurInterface;
@@ -204,6 +172,52 @@ public class VueTableLivraisonControleur implements Initializable, Visiteur, Mai
     public void initialiserObserveurs() {
         controleurInterface.ajouterDesactObserver(this);
         controleurInterface.ajouterModelObserver(this);
+    }
+
+    @Override
+    public void visit(DetailFenetre detailFenetre) {
+        // TODO : completer si besoin
+        System.out.println(detailFenetre.getFenetre());
+    }
+
+    @Override
+    public void visit(DetailLivraison detailLivraison) {
+        // TODO : completer si besoin
+        System.out.println(detailLivraison.getLivraison());
+        controleurInterface.cliqueSurLivraison(detailLivraison.getLivraison().getId());
+    }
+
+    /**
+     * Gestion du clic et hover sur les elements de la table.
+     */
+    class TableCellSpecial extends TreeTableCell<ObjetVisualisable, String> {
+
+
+        public TableCellSpecial() {
+            initialiserClic();
+            initialiserHover();
+        }
+
+        @Override
+        protected void updateItem(String item, boolean empty) {
+            super.updateItem(item, empty);
+            setText(item);
+        }
+
+        private void initialiserClic() {
+            setOnMouseClicked(event -> {
+                ObjetVisualisable objetVisualisable = getTreeTableRow().getTreeItem().getValue();
+                if (objetVisualisable != null)
+                    getTreeTableRow().getTreeItem().getValue().accepter(VueTableLivraisonControleur.this);
+            });
+        }
+
+        private void initialiserHover() {
+            setOnMouseEntered(event -> {
+
+            });
+        }
+
     }
 
 }
