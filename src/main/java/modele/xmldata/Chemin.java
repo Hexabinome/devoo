@@ -20,6 +20,7 @@ public class Chemin
         this.idDepart = idDepart;
         this.idFin = idFin;
 
+        //TODO: This seems terribly wrong - check!
         troncons = new ArrayList<>();
     }
 

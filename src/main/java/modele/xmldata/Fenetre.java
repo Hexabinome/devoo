@@ -1,6 +1,7 @@
 package modele.xmldata;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -90,26 +91,28 @@ public class Fenetre implements Visitable
             Intersection intersection = plan.getIntersection(livraison.getAdresse());
 
             // utilise dijkstra pour calculer le plus court chemin vers chaque intersection...
-            for (Entry<Integer, Chemin> chemin : dijkstra(intersection, plan)) {
+            for (Chemin chemin : dijkstra(intersection, plan)) {
                 // ... et stoque le chemin ssi l'intersection correspond a une livrasion de cette ou la prochaine fenetre
-                if (intersectionsRecherchee.contains(chemin.getKey()))
-                    graphe.setChemin(chemin.getValue());
+                if (intersectionsRecherchee.contains(chemin.getIdFin()))
+                    graphe.setChemin(chemin);
             }
         }
     }
 
     //TODO set private (public pour les test)
     //TODO optimisation : quand on a calculer tous les chemins vers la fenêtre suivantes, on arête.  
-    public Set<Entry<Integer, Chemin>> dijkstra(Intersection intersectionDepart, PlanDeVille plan)
+    public Collection<Chemin> dijkstra(Intersection intersectionDepart, PlanDeVille plan)
     {
-		//INITIALISATION
+        //INITIALISATION
 
         //Map de chemin intermédiaires et finaux
-        //La clé est l'id de l'intersection au quel correspond le chemin 
+        //La clé est l'id de l'intersection (cible) au quel correspond le chemin 
         //le chemin contient tous tronçons par lesquels on est passé 
         //+ l'id de l'interserction de départ et la clef de la map comme intersection d'arrivé
         //TODO changer en set
         Map<Integer, Chemin> chemins = new HashMap<>();
+        
+        // chemin vers se meme
         chemins.put(intersectionDepart.getId(),
                 new Chemin(0, new ArrayList<>(), intersectionDepart.getId(), intersectionDepart.getId()));
 
@@ -155,7 +158,7 @@ public class Fenetre implements Visitable
         }
 
         //Parcourir la map pour récupérer juste la liste des chemins finaux
-        return chemins.entrySet();
+        return chemins.values();
     }
 
     /**
