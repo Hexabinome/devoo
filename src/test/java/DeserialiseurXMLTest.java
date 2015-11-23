@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 import static jdk.nashorn.internal.objects.NativeRegExp.test;
 
 import modele.persistance.DeserialiseurXML;
+import modele.persistance.ExceptionXML;
 import modele.xmldata.Demande;
 import modele.xmldata.Fenetre;
 import modele.xmldata.Livraison;
@@ -101,7 +102,7 @@ public class DeserialiseurXMLTest {
 
 
     @Test
-    public void TestOuvrirLivraison() throws JDOMException, IOException, SAXException, ParseException{
+    public void TestOuvrirLivraison() throws JDOMException, IOException, SAXException, ParseException, ExceptionXML {
       PlanDeVille ville = DeserialiseurXML.ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/planTest.xml"));
       Demande demande = DeserialiseurXML.ouvrirLivraison(ClassLoader.getSystemResourceAsStream("samples/livraisonTest.xml"), ville);
 
@@ -249,7 +250,9 @@ public class DeserialiseurXMLTest {
 
     // -------- TEST : ERREUR SUR LE FICHIER PLAN DE LIVRAISON XML ----------
     @Test
-    public void TestOuvrirPlanDeLivraisonMemeId() throws java.lang.RuntimeException, org.jdom2.JDOMException, java.io.IOException, org.xml.sax.SAXException{
+    public void TestOuvrirPlanDeLivraisonMemeId()
+            throws java.lang.RuntimeException, org.jdom2.JDOMException, java.io.IOException, org.xml.sax.SAXException,
+            ExceptionXML {
       // 2 livraison succesif avec le meme id
       try{
       PlanDeVille ville = DeserialiseurXML.ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/plan10x10.xml"));
@@ -261,7 +264,9 @@ public class DeserialiseurXMLTest {
       }
     }
     @Test
-    public void TestOuvrirPlanDeLivraisonEntrepotInexistant() throws java.lang.RuntimeException, org.jdom2.JDOMException, java.io.IOException, org.xml.sax.SAXException{
+    public void TestOuvrirPlanDeLivraisonEntrepotInexistant()
+            throws java.lang.RuntimeException, org.jdom2.JDOMException, java.io.IOException, org.xml.sax.SAXException,
+            ExceptionXML {
       // Adresse de l'entreport inexistant
       try{
       PlanDeVille ville = DeserialiseurXML.ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/plan10x10.xml"));
@@ -273,7 +278,9 @@ public class DeserialiseurXMLTest {
       }
     }
     @Test
-    public void TestOuvrirPlanDeLivraisonFenetreNegative() throws java.lang.RuntimeException, org.jdom2.JDOMException, java.io.IOException, org.xml.sax.SAXException{
+    public void TestOuvrirPlanDeLivraisonFenetreNegative()
+            throws java.lang.RuntimeException, org.jdom2.JDOMException, java.io.IOException, org.xml.sax.SAXException,
+            ExceptionXML {
       // heure de fin avant l'heure de debut
       try{
       PlanDeVille ville = DeserialiseurXML.ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/plan10x10.xml"));
@@ -285,7 +292,9 @@ public class DeserialiseurXMLTest {
       }
     }
     @Test
-    public void TestOuvrirPlanDeLivraisonHorairesNegatifs() throws java.lang.RuntimeException, org.jdom2.JDOMException, java.io.IOException, org.xml.sax.SAXException{
+    public void TestOuvrirPlanDeLivraisonHorairesNegatifs()
+            throws java.lang.RuntimeException, org.jdom2.JDOMException, java.io.IOException, org.xml.sax.SAXException,
+            ExceptionXML {
       // Les horaires de la fenetre sont negatifs
       try{
       PlanDeVille ville = DeserialiseurXML.ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/plan10x10.xml"));
@@ -297,7 +306,9 @@ public class DeserialiseurXMLTest {
       }
     }
     @Test
-    public void TestOuvrirPlanDeLivraisonHeureHorsFormat() throws java.lang.RuntimeException, org.jdom2.JDOMException, java.io.IOException, org.xml.sax.SAXException{
+    public void TestOuvrirPlanDeLivraisonHeureHorsFormat()
+            throws java.lang.RuntimeException, org.jdom2.JDOMException, java.io.IOException, org.xml.sax.SAXException,
+            ExceptionXML {
       // Horaires hors du format 24:60:60
       try{
       PlanDeVille ville = DeserialiseurXML.ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/plan10x10.xml"));
@@ -309,7 +320,9 @@ public class DeserialiseurXMLTest {
       }
     }
     @Test
-    public void TestOuvrirPlanDeLivraisonSansLivraison() throws java.lang.RuntimeException, org.jdom2.JDOMException, java.io.IOException, org.xml.sax.SAXException{
+    public void TestOuvrirPlanDeLivraisonSansLivraison()
+            throws java.lang.RuntimeException, org.jdom2.JDOMException, java.io.IOException, org.xml.sax.SAXException,
+            ExceptionXML {
       // fichier xml sans livraisons
       try{
       PlanDeVille ville = DeserialiseurXML.ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/plan10x10.xml"));
@@ -321,7 +334,9 @@ public class DeserialiseurXMLTest {
       }
     }
     @Test
-    public void TestOuvrirPlanDeLivraisonAdresseInexistante() throws java.lang.RuntimeException, org.jdom2.JDOMException, java.io.IOException, org.xml.sax.SAXException{
+    public void TestOuvrirPlanDeLivraisonAdresseInexistante()
+            throws java.lang.RuntimeException, org.jdom2.JDOMException, java.io.IOException, org.xml.sax.SAXException,
+            ExceptionXML {
       // adresse de livraison inexistante
       try{
       PlanDeVille ville = DeserialiseurXML.ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/plan10x10.xml"));
@@ -334,7 +349,9 @@ public class DeserialiseurXMLTest {
     }
 
     @Test
-    public void TestOuvrirPlanDeLivraisonEntrepotManquant() throws java.lang.RuntimeException, org.jdom2.JDOMException, java.io.IOException, org.xml.sax.SAXException{
+    public void TestOuvrirPlanDeLivraisonEntrepotManquant()
+            throws java.lang.RuntimeException, org.jdom2.JDOMException, java.io.IOException, org.xml.sax.SAXException,
+            ExceptionXML {
       // la balise entrepot non presente dans le xml
       try{
       PlanDeVille ville = DeserialiseurXML.ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/plan10x10.xml"));

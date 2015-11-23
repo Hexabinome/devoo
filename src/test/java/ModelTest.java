@@ -14,6 +14,7 @@ import java.util.List;
 import modele.business.TSP;
 import modele.business.TSP1;
 import modele.persistance.DeserialiseurXML;
+import modele.persistance.ExceptionXML;
 import modele.xmldata.Chemin;
 import modele.xmldata.Demande;
 import modele.xmldata.Fenetre;
@@ -38,7 +39,7 @@ import org.xml.sax.SAXException;
  */
 public class ModelTest {
 	  @Test
-	  public void TestModelPlan() throws JDOMException, IOException, SAXException, ParseException{
+	  public void TestModelPlan() throws JDOMException, IOException, SAXException, ParseException, ExceptionXML {
 	    // initialisation
 	    PlanDeVille ville = DeserialiseurXML.ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/plan10x10.xml"));
 	    Demande demande = DeserialiseurXML.ouvrirLivraison(ClassLoader.getSystemResourceAsStream("samples/livraison10x10-1.xml"), ville);
