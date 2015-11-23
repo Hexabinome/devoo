@@ -7,8 +7,10 @@ import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeTableCell;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableView;
+import javafx.util.Callback;
 import modele.xmldata.*;
 
 import java.net.URL;
@@ -68,6 +70,7 @@ public class VueTableLivraisonControleur implements Initializable, Visiteur, Mai
         elementRacine.setExpanded(true);
         tableViewFenetre.setShowRoot(false);
         initialiserEcouteurDeClic();
+        initialiserColonneLivraison();
     }
 
     /**
@@ -76,14 +79,14 @@ public class VueTableLivraisonControleur implements Initializable, Visiteur, Mai
      * @param demande La demande de livraison chargée à partir d'un fichier XML
      */
     protected void construireVueTableLivraion(Demande demande) {
-
         for (Fenetre f : demande.getFenetres()) {
             elementRacine.getChildren().add(construireFenetreItem(f));
         }
+    }
 
-        colonneLivraison.setCellValueFactory((TreeTableColumn.CellDataFeatures<Visitable, String> param)
-                -> new ReadOnlyStringWrapper(param.getValue().getValue().accepterVisiteurInformation(this)));
-        /*colonneLivraison.setCellFactory(
+    private void ajouterStyleCssColonneLivraison() {
+        // TODO : à completer pour le hover ou des trucs du genre
+        colonneLivraison.setCellFactory(
                 new Callback<TreeTableColumn<Visitable, String>, TreeTableCell<Visitable, String>>() {
                     @Override
                     public TreeTableCell<Visitable, String> call(TreeTableColumn<Visitable, String> param) {
@@ -99,8 +102,7 @@ public class VueTableLivraisonControleur implements Initializable, Visiteur, Mai
                             }
                         };
                     }
-                });*/
-
+                });
     }
 
     /**
@@ -111,6 +113,14 @@ public class VueTableLivraisonControleur implements Initializable, Visiteur, Mai
                 (observable, oldValue, newValue) -> {
                     newValue.getValue().accepterVisiteurObjet(this);
                 });
+    }
+
+    /**
+     * Initialise la methode de remplissage de la colonne 'Livraisons'
+     */
+    private void initialiserColonneLivraison() {
+        colonneLivraison.setCellValueFactory((TreeTableColumn.CellDataFeatures<Visitable, String> param)
+                -> new ReadOnlyStringWrapper(param.getValue().getValue().accepterVisiteurInformation(this)));
     }
 
     /**
