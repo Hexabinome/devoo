@@ -12,7 +12,6 @@ import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableView;
 import javafx.util.Callback;
 import modele.xmldata.*;
-import sun.reflect.generics.tree.Tree;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -33,7 +32,8 @@ public class VueTableLivraisonControleur implements Initializable, Visiteur, Mai
     /**
      * Element racine de la Table qui contient tous les autres éléments.Il ne sera pas affiché dans la table
      */
-    private TreeItem<Visitable> elementRacine = new TreeItem<>();;
+    private TreeItem<Visitable> elementRacine = new TreeItem<>();
+    ;
 
     private ControleurInterface controleurInterface;
 
@@ -80,7 +80,7 @@ public class VueTableLivraisonControleur implements Initializable, Visiteur, Mai
 
         colonneLivraison.setCellValueFactory((TreeTableColumn.CellDataFeatures<Visitable, String> param)
                 -> new ReadOnlyStringWrapper(param.getValue().getValue().accepterVisiteurInformation(this)));
-        /*colonneLivraison.setCellFactory(
+        colonneLivraison.setCellFactory(
                 new Callback<TreeTableColumn<Visitable, String>, TreeTableCell<Visitable, String>>() {
                     @Override
                     public TreeTableCell<Visitable, String> call(TreeTableColumn<Visitable, String> param) {
@@ -96,15 +96,14 @@ public class VueTableLivraisonControleur implements Initializable, Visiteur, Mai
                             }
                         };
                     }
-                });*/
-
+                });
         tableViewFenetre.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> {
                     newValue.getValue().accepterVisiteurObjet(this);
                 });
     }
 
-    protected void effacerVueTableLivraison(){
+    protected void effacerVueTableLivraison() {
         elementRacine.getChildren().clear();
     }
 
