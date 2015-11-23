@@ -28,7 +28,7 @@ public class GrapheCreateurDummy implements GrapheCreateur
     @Override
     public void creerGraphe()
     {
-        model.setGraphe(new GrapheDummy(42));
+        //model.setGraphe(new GrapheDummy(42));
 
         //TODO: create a valid dummy graph here. maybe just 2 or three nodes and the valid time to pass between them...
     }

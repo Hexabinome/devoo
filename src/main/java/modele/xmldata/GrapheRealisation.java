@@ -34,24 +34,30 @@ public class GrapheRealisation implements Graphe
     {
     	//TODO gestion de l'erreur
     	//TODO revoir la gestion des couts car chemins return un float
-        if(chemins[idCheminToIdMatrice.get(i)][idCheminToIdMatrice.get(j)] == null)
-        	return -1;
+        if(i > chemins.length || j > chemins.length || i < 0 || j < 0 || chemins[i][j] == null)
+        	return Integer.MAX_VALUE;
         
-        return (int)chemins[idCheminToIdMatrice.get(i)][idCheminToIdMatrice.get(j)].getCout();
+        return (int)chemins[i][j].getCout();
     }
 
     @Override
     public boolean estArc(int i, int j)
     {
-    	if(idCheminToIdMatrice.get(i) == null || idCheminToIdMatrice.get(j) == null || idCheminToIdMatrice.get(i) > chemins.length || idCheminToIdMatrice.get(i) > chemins.length)
+    	if(i > chemins.length || j > chemins.length || i < 0 || j < 0 || chemins[i][j] == null)
     		return false;
-        return !Objects.equals(idCheminToIdMatrice.get(i), idCheminToIdMatrice.get(j));
+        return !Objects.equals(i, j);
     }
 
 	public Chemin getChemin(int i, int j) {
     	if(idCheminToIdMatrice.get(i) == null || idCheminToIdMatrice.get(j) == null || idCheminToIdMatrice.get(i) > chemins.length || idCheminToIdMatrice.get(i) > chemins.length)
     		return null;
 		return chemins[idCheminToIdMatrice.get(i)][idCheminToIdMatrice.get(j)];
+	}
+
+	public Chemin getCheminGrapheIndice(int i, int j) {
+		if(i > chemins.length || i > chemins.length || i < 0 || j < 0)
+			return null;
+		return chemins[i][j];
 	}
 
 	public void setChemins(Chemin[][] chemins) {

@@ -64,11 +64,12 @@ public class Fenetre implements Visitable {
     /**
      * Pour chaque points de livraison, on va calculer une liste de chemim vers tous les noeuds de cette fenêtre et de la fenêtre suivante
      * @param plan
-     * @param graphe
+     * @param graphe in/out
      * @param fNext
      */
-	public void calculerChemins(PlanDeVille plan, GrapheRealisation graphe, Fenetre fNext) {
-		//Récupère toutes les intersections avec les quels on doit calculer le plus court chemin.
+	public void calculerChemins(PlanDeVille plan, GrapheRealisation graphe, Fenetre fNext) 
+	{
+		//Récupère toutes les livraisons avec les quels on doit calculer le plus court chemin.
 		Set<Integer> intersectionsRecherchee = new HashSet<Integer>();
 		intersectionsRecherchee.addAll(livraisons.keySet());
 		intersectionsRecherchee.addAll(fNext.getLivraisons().keySet());
@@ -88,6 +89,7 @@ public class Fenetre implements Visitable {
 	}
 	
 	//TODO set private (public pour les test)
+	//TODO optimisation : quand on a calculer tous les chemins vers la fenêtre suivantes, on arête.  
 	public Set<Entry<Integer, Chemin>> dijkstra(Intersection intersectionDepart, PlanDeVille plan)
 	{
 		//INITIALISATION
@@ -96,6 +98,7 @@ public class Fenetre implements Visitable {
 			//La clé est l'id de l'intersection au quel correspond le chemin 
 			//le chemin contient tous tronçons par lesquels on est passé 
 			//+ l'id de l'interserction de départ et la clef de la map comme intersection d'arrivé
+		//TODO changer en set
         Map<Integer, Chemin> chemins = new HashMap<>();
 		chemins.put(intersectionDepart.getId(), 
 					new Chemin(0, new ArrayList<Troncon>(), intersectionDepart.getId(), intersectionDepart.getId()));
@@ -120,6 +123,7 @@ public class Fenetre implements Visitable {
     			ArrayList<Troncon> listeTronconsEnCours = new ArrayList<Troncon>();
     			listeTronconsEnCours.addAll(chemin.getTroncons());
     			
+    			//Tronçon qu'on va traverser en allant au suivant
     			Troncon tronconTraverser = intersection.getTroncon(intersectionSuivante.getId());
     			listeTronconsEnCours.add(tronconTraverser);
     			
@@ -141,6 +145,7 @@ public class Fenetre implements Visitable {
         					new Chemin(cout, listeTronconsEnCours, chemin.getIdDepart(), intersectionSuivante.getId()));
     			}
     		}
+    		//intersection est maintenant noir. On peut maintenant le pop de la liste des intersection recherché
         }
         
 		//Parcourir la map pour récupérer juste la liste des chemins finaux
