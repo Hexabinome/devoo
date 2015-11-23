@@ -6,6 +6,7 @@ package modele.business;
  */
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import modele.xmldata.Graphe;
@@ -17,8 +18,33 @@ public abstract class TemplateTSP implements TSP {
 	private int coutMeilleureSolution;
 	private int tpsLimite;
 	private long tpsDebut;
+
+	/**
+	 * Supprime la "indiceLivraison" éme solution
+	 * @param indiceLivraison
+	 */
+	public void supprimerSolution(int indiceLivraison)
+	{
+		ArrayList<Integer> list = new ArrayList<Integer>(Arrays.asList(meilleureSolution));
+		list.remove(indiceLivraison);
+		
+		meilleureSolution = (Integer[]) list.toArray();
+	}
+
+	/**
+	 * Ajout après la "indicePrecendent"éme solution la valeur : valeurIndice
+	 * @param indicePrecendent
+	 * @param valeurIndice
+	 */
+	public void ajouterSolution(int indicePrecendent, int valeurIndice)
+	{
+		ArrayList<Integer> list = new ArrayList<Integer>(Arrays.asList(meilleureSolution));
+		list.add(indicePrecendent+1, valeurIndice);
+		
+		meilleureSolution = (Integer[]) list.toArray();
+	}
 	
-        @Override
+	@Override
 	public void chercheSolution(int tpsLimite, Graphe g){
 		if (tpsLimite <= 0) return;
 		tpsDebut = System.currentTimeMillis();	
@@ -33,14 +59,14 @@ public abstract class TemplateTSP implements TSP {
 		branchAndBound(0, nonVus, vus, 0);                
 	}
 	
-        @Override
+	@Override
 	public Integer getSolution(int i){
 		if (g != null && i>=0 && i<g.getNbSommets())
 			return meilleureSolution[i];
 		return -1;
 	}
 	
-        @Override
+	@Override
 	public int getCoutSolution(){
 		if (g != null)
 			return coutMeilleureSolution;

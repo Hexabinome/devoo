@@ -12,6 +12,7 @@ public class GrapheRealisation implements Graphe
     private Chemin[][] chemins;
     private final HashMap<Integer, Integer> idCheminToIdMatrice;
     private int nombreCheminInserer = 0;
+    
     /**
      * Cree un graphe 
      *
@@ -30,34 +31,34 @@ public class GrapheRealisation implements Graphe
     }
 
     @Override
-    public int getCout(int i, int j)
+    public int getCout(int depart, int arrivee)
     {
     	//TODO gestion de l'erreur
     	//TODO revoir la gestion des couts car chemins return un float
-        if(i > chemins.length || j > chemins.length || i < 0 || j < 0 || chemins[i][j] == null)
+        if(depart > chemins.length || arrivee > chemins.length || depart < 0 || arrivee < 0 || chemins[depart][arrivee] == null)
         	return Integer.MAX_VALUE;
         
-        return (int)chemins[i][j].getCout();
+        return (int)chemins[depart][arrivee].getCout();
     }
 
     @Override
-    public boolean estArc(int i, int j)
+    public boolean estArc(int depart, int arrivee)
     {
-    	if(i > chemins.length || j > chemins.length || i < 0 || j < 0 || chemins[i][j] == null)
+    	if(depart > chemins.length || arrivee > chemins.length || depart < 0 || arrivee < 0 || chemins[depart][arrivee] == null)
     		return false;
-        return !Objects.equals(i, j);
+        return !Objects.equals(depart, arrivee);
     }
 
-	public Chemin getChemin(int i, int j) {
-    	if(idCheminToIdMatrice.get(i) == null || idCheminToIdMatrice.get(j) == null || idCheminToIdMatrice.get(i) > chemins.length || idCheminToIdMatrice.get(i) > chemins.length)
+	public Chemin getChemin(int idLivraisonDepart, int idLivraisonArrivee) {
+    	if(idCheminToIdMatrice.get(idLivraisonDepart) == null || idCheminToIdMatrice.get(idLivraisonArrivee) == null || idCheminToIdMatrice.get(idLivraisonDepart) > chemins.length || idCheminToIdMatrice.get(idLivraisonDepart) > chemins.length)
     		return null;
-		return chemins[idCheminToIdMatrice.get(i)][idCheminToIdMatrice.get(j)];
+		return chemins[idCheminToIdMatrice.get(idLivraisonDepart)][idCheminToIdMatrice.get(idLivraisonArrivee)];
 	}
 
-	public Chemin getCheminGrapheIndice(int i, int j) {
-		if(i > chemins.length || i > chemins.length || i < 0 || j < 0)
+	public Chemin getCheminGrapheIndice(int depart, int arrivee) {
+		if(depart > chemins.length || depart > chemins.length || depart < 0 || arrivee < 0)
 			return null;
-		return chemins[i][j];
+		return chemins[depart][arrivee];
 	}
 
 	public void setChemins(Chemin[][] chemins) {
@@ -81,5 +82,15 @@ public class GrapheRealisation implements Graphe
 		
 		if(i < chemins.length && j < chemins.length)
 			chemins[i][j] = chemin;
+	}
+	
+	/**
+	 * Retourne l'indice dans la matrice de solution à partir de l'id de livraison
+	 * @param idLivraison
+	 * @return
+	 */
+	public int getIndiceFromIdLivraison(int idLivraison)
+	{
+		return idCheminToIdMatrice.get(idLivraison);
 	}
 }
