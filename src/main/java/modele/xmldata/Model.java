@@ -136,7 +136,7 @@ public class Model implements ModelLecture
             }
             // pour toutes les autres fenetres
             else
-                // TODO: Verifier que ca se plante pas si il y a deux livraisons pour une seul intersection
+                // TODO: Verifier que ca se ne plante pas si il y a deux livraisons pour une seul intersection
                 // recoupererer les prochaines n elements de la sollution de tsp, dont n est egal a la numero des livraisons attendu dans cette fenetre. Ca nous donne l'ordre pour parcourir les livraisons de cette fenetre.
                 for (int livraisonComteur = 0; livraisonComteur < fenetre.getLivraisons().size(); livraisonComteur++) {
                     //recuperer prochain livraison prevu
@@ -158,27 +158,7 @@ public class Model implements ModelLecture
             tournee.add(sousTournee);
         }
 
-        /*
-         int livraisonArrivee = tsp.getSolution(0);
-         sousTournee.add(graphDictionnaire.get(tsp.getSolution(0)));
-
-         //pour chaque sollution calculle par TSP...
-         for (int i = 1; i < graphDictionnaire.keySet().size(); i++) {
-
-         livraisonDepart = livraisonArrivee;
-         livraisonArrivee = tsp.getSolution(i);
-
-         // ... ajouter tous les intersections sur le chemin entre depart et arrive
-         Chemin chemin = graphe.getCheminGrapheIndice(livraisonDepart, livraisonArrivee);
-         for (Troncon troncon : chemin.getTroncons()) {
-         sousTournee.add(troncon.getIdDestination());
-         }
-         }
-
-         //TODO: vorifier si on doit retourne a l'entrepot a la fin
-         tournee.add(sousTournee);
-         */ return tournee;
-
+        return tournee;
     }
 
     private void remplirHoraires()

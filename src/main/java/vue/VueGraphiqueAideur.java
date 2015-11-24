@@ -16,7 +16,6 @@ import javafx.scene.shape.Polygon;
 import javafx.util.Pair;
 import modele.xmldata.Demande;
 import modele.xmldata.Intersection;
-import modele.xmldata.Livraison;
 import modele.xmldata.PlanDeVille;
 
 /**
@@ -132,9 +131,9 @@ public class VueGraphiqueAideur
      */
     private Ellipse construireEllipse(Intersection i, Paint couleur)
     {
-        Ellipse intersection = new Ellipse(i.getX(), i.getY(), ConstantesGraphique.DIAMETRE_INTERSECTION, ConstantesGraphique.DIAMETRE_INTERSECTION);
-        intersection.setFill(couleur);
-        return intersection;
+        Ellipse ellipse = new Ellipse(i.getX(), i.getY(), ConstantesGraphique.DIAMETRE_INTERSECTION, ConstantesGraphique.DIAMETRE_INTERSECTION);
+        ellipse.setFill(couleur);
+        return ellipse;
     }
 
     /**
@@ -280,35 +279,5 @@ public class VueGraphiqueAideur
 
 
         }
-
-        // Afficher les liaisons entre fenêtres et avec l'entrepôt
-        // TODO: Prendre code de david, des que getTournee supporte de triage par fenetres... pour l'instant il y a que une seule grande list dedans.
-        //for (int idFenetre = 0; idFenetre < tournee.size(); ++idFenetre) {
-        int idFenetre = 0;
-        Paint couleur = ConstantesGraphique.COULEURS_FENETRES[idFenetre % ConstantesGraphique.COULEURS_FENETRES.length];
-        Ellipse debut;
-        Ellipse fin;
-        // Première fenêtre, départ de l'entrepot
-        if (idFenetre == 0) {
-            debut = entrepot.getValue();
-            fin = intersectionsGraphiques.get(tournee.get(0).get(0)).getKey();
-        }
-        // Dernière fenetre, retour à l'entrepot
-        else if (idFenetre + 1 == tournee.size()) {
-            int idDerniereLivraison = tournee.get(idFenetre).get(tournee.get(idFenetre).size() - 1);
-            debut = intersectionsGraphiques.get(idDerniereLivraison).getKey();
-            fin = entrepot.getValue();
-        }
-        // Entre deux fenêtres
-        else {
-            int idDerniereLivraisonFenetre = tournee.get(idFenetre).get(tournee.get(idFenetre).size() - 1);
-            int idPremiereLivraisonProchaineFenetre = tournee.get(idFenetre + 1).get(0);
-            debut = intersectionsGraphiques.get(idDerniereLivraisonFenetre).getKey();
-            fin = intersectionsGraphiques.get(idPremiereLivraisonProchaineFenetre).getKey();
-        }
-
-        afficherTroncon(debut, fin, couleur);
-        //}
     }
-
 }

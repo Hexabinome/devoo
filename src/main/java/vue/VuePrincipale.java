@@ -27,7 +27,8 @@ import java.util.ResourceBundle;
  *
  * @author David
  */
-public class VuePrincipale implements Initializable {
+public class VuePrincipale implements Initializable
+{
 
     /**
      * Mediateur : permet de communiquer avec les autres controleurs
@@ -86,16 +87,17 @@ public class VuePrincipale implements Initializable {
     @FXML
     private ObserverButton genererFeuilleBouton;
 
-
     /**
      * Méthode appelée lors du redimensionnement de la fenêtre. Elle replace les
      * arrêtes du graphe à leur bonne position
      */
-    final ChangeListener<Number> ecouteurDeRedimensionnement = new ChangeListener<Number>() {
+    final ChangeListener<Number> ecouteurDeRedimensionnement = new ChangeListener<Number>()
+    {
 
         @Override
         public void changed(ObservableValue<? extends Number> observable,
-                            Number oldValue, Number newValue) {
+                Number oldValue, Number newValue)
+        {
 
             canvasGraphique.getChildren().clear();
             vueGraphique.afficherPlan();
@@ -103,8 +105,8 @@ public class VuePrincipale implements Initializable {
 
     };
 
-
-    public void initialiserMediateur(FenetrePrincipale fenetrePrincipale) {
+    public void initialiserMediateur(FenetrePrincipale fenetrePrincipale)
+    {
         this.mediateur = fenetrePrincipale;
     }
 
@@ -113,7 +115,8 @@ public class VuePrincipale implements Initializable {
      *
      * @param controleurInterface Le nouveau controleur d'interface
      */
-    public void setControleurInterface(ControleurInterface controleurInterface) {
+    public void setControleurInterface(ControleurInterface controleurInterface)
+    {
         this.controleurInterface = controleurInterface;
     }
 
@@ -121,13 +124,16 @@ public class VuePrincipale implements Initializable {
      * Ecouteur pour ouvrir le plan
      */
     @FXML
-    private void ouvrirPlan(ActionEvent actionEvent) {
+    private void ouvrirPlan(ActionEvent actionEvent)
+    {
         File file = ouvrirSelectionneurDeFichier("Choissiez le plan de la ville");
         if (file != null) {
             Exception messageErreur = controleurInterface.chargerPlan(file);
             if (messageErreur != null)
                 ouvrirAlerteXML(messageErreur, file.getName());
             else {
+
+                //TODO: do not directly access model data here -> implement observer and wait for being notifies (constructing the model may take a while and directly accessing it may cause a nullpointer exception)
                 vueGraphique.construireGraphe(controleurInterface.getPlanDeVille());
 
                 //activation de menu element graphique qui permet de charger un fichier de livraison
@@ -141,13 +147,15 @@ public class VuePrincipale implements Initializable {
      * Ecouteur pour la demande de livraison
      */
     @FXML
-    private void ouvrirDemande(ActionEvent actionEvent) {
+    private void ouvrirDemande(ActionEvent actionEvent)
+    {
         File file = ouvrirSelectionneurDeFichier("Choisissez la demande de livraison");
         if (file != null) {
             Exception exception = controleurInterface.chargerLivraisons(file);
             if (exception != null)
                 ouvrirAlerteXML(exception, file.getName());
             else {
+                //TODO: do not directly access model data here -> implement observer and wait for being notified (constructing the model may take a while and directly accessing it may cause a nullpointer exception)
                 ModelLecture modele = controleurInterface.getModel();
                 vueGraphique.construireTournee(modele.getDemande().getEntrepot(), modele.getTournee(),
                         modele.getDemande());
@@ -156,35 +164,39 @@ public class VuePrincipale implements Initializable {
     }
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(URL location, ResourceBundle resources)
+    {
         vueGraphique = new VueGraphiqueAideur(canvasGraphique);
     }
 
     @FXML
-    void quitterApplication() {
+    void quitterApplication()
+    {
         Alert confirmationDialog = new Alert(AlertType.CONFIRMATION);
         confirmationDialog.setTitle("Quitter");
         confirmationDialog.setHeaderText("Êtes-vous sûr(e) de vouloir quitter l'application ?");
         confirmationDialog.setResizable(false);
 
         Optional<ButtonType> resultat = confirmationDialog.showAndWait();
-        if (resultat.get() == ButtonType.OK) {
+        if (resultat.get() == ButtonType.OK)
             System.exit(0);
-        }
     }
 
     @FXML
-    void clic_ajouterLivraison() {
+    void clic_ajouterLivraison()
+    {
         controleurInterface.cliqueOutilAjouter();
     }
 
     @FXML
-    void clic_echangerLivraison() {
+    void clic_echangerLivraison()
+    {
         controleurInterface.cliqueOutilEchanger();
     }
 
     @FXML
-    void clic_supprimerLivraison() {
+    void clic_supprimerLivraison()
+    {
         controleurInterface.cliqueOutilSupprimer();
     }
 
@@ -193,7 +205,8 @@ public class VuePrincipale implements Initializable {
      *
      * @param titreDialogue Le titre du sélectionneur de fichier
      */
-    private File ouvrirSelectionneurDeFichier(String titreDialogue) {
+    private File ouvrirSelectionneurDeFichier(String titreDialogue)
+    {
 
         FileChooser fileChooser = new FileChooser();
 
@@ -213,7 +226,8 @@ public class VuePrincipale implements Initializable {
      * @param message Le message à afficher
      * @param fichier Le nom du fichier qui a généré l'erreur
      */
-    private void ouvrirAlerteXML(Exception message, String fichier) {
+    private void ouvrirAlerteXML(Exception message, String fichier)
+    {
 
         ExceptionDialog exceptionDialog = new ExceptionDialog(message);
         exceptionDialog.setTitle("Erreur");
@@ -226,14 +240,13 @@ public class VuePrincipale implements Initializable {
         exceptionDialog.showAndWait();
     }
 
-
-    public void initialiserObserveurs() {
+    public void initialiserObserveurs()
+    {
         controleurInterface.ajouterDesactObserver(ajouterLivraisonBouton);
         controleurInterface.ajouterDesactObserver(echangerLivraisonsBouton);
         controleurInterface.ajouterDesactObserver(supprimerLivraisonBouton);
         controleurInterface.ajouterDesactObserver(genererFeuilleBouton);
 
     }
-
 
 }

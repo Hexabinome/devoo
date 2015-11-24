@@ -38,7 +38,7 @@ public class VueTableLivraisonControleur implements Initializable, Visiteur, Mai
     /**
      * Element racine de la Table qui contient tous les autres éléments.Il ne sera pas affiché dans la table
      */
-    private TreeItem<ObjetVisualisable> elementRacine = new TreeItem<>();
+    private final TreeItem<ObjetVisualisable> elementRacine = new TreeItem<>();
 
     /**
      * Controleur principale
