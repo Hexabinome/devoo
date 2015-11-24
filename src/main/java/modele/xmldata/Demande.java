@@ -31,7 +31,7 @@ public class Demande
         Livraison livraisonEntrepot = new Livraison(-1, -1, entrepot.getId());
         fenetreEntrepot.ajouterLivraison(livraisonEntrepot.getId(), livraisonEntrepot);
         
-        this.fenetres = new ArrayList<Fenetre>();
+        this.fenetres = new ArrayList<>();
         this.fenetres.add(fenetreEntrepot);
         this.fenetres.addAll(fenetres);
     }

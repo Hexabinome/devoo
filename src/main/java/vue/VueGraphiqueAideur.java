@@ -225,11 +225,11 @@ public class VueGraphiqueAideur {
 	 */
 	public void construireTournee(Intersection entrepot, List<List<Integer>> tournee, Demande demande) {
 		
-		this.entrepot = new Pair<Integer, Ellipse>(entrepot.getId(), construireEllipse(entrepot, ConstantesGraphique.COULEUR_ENTREPOT));
+		this.entrepot = new Pair<>(entrepot.getId(), construireEllipse(entrepot, ConstantesGraphique.COULEUR_ENTREPOT));
 		
-		this.tournee = new ArrayList<List<Integer>>();
+		this.tournee = new ArrayList<>();
 		//Pour chaque fenêtre de livraison
-		for (int idxFenetre = 0; idxFenetre < demande.getFenetres().size(); ++idxFenetre) {
+		//for (int idxFenetre = 0; idxFenetre < demande.getFenetres().size(); idxFenetre++) {
 			//On récupére la liste des livraisons associé à cette fenêtre
 			/*Map<Integer, Livraison> livraisonsFenetre = demande.getFenetres().get(idxFenetre).getLivraisons();
 			
@@ -239,8 +239,9 @@ public class VueGraphiqueAideur {
 				tourneeFenetreGraphique.add(livraisonsFenetre.get(idLivraison).getAdresse());
 			}*/
 			
-			this.tournee.add(tournee.get(idxFenetre));
-		}
+			//this.tournee.add(tournee.get(idxFenetre));
+                this.tournee.add(tournee.get(0));
+		//}
 		
 		afficherTournee();
 	}
@@ -253,16 +254,22 @@ public class VueGraphiqueAideur {
 
 			Paint couleur = ConstantesGraphique.COULEURS_FENETRES[idFenetre % ConstantesGraphique.COULEURS_FENETRES.length];
 
-			for (int idIntersectionLivraison = 0; idIntersectionLivraison < tournee.get(idFenetre).size() - 1; ++idIntersectionLivraison) {
+                        // TODO: Prendre code de david, des que getTournee supporte de triage par fenetres... pour l'instant il y a que une seule grande list dedans.
+			/*
+                        for (int idIntersectionLivraison = 0; idIntersectionLivraison < tournee.get(idFenetre).size() - 1; ++idIntersectionLivraison) {
 				Ellipse debut = intersectionsGraphiques.get(idIntersectionLivraison).getKey();
 				Ellipse fin = intersectionsGraphiques.get(idIntersectionLivraison+1).getKey();
 				
 				afficherTroncon(debut, fin, couleur);
-			}
+			}*/
+                        
 		}
 		
 		// Afficher les liaisons entre fenêtres et avec l'entrepôt
-		for (int idFenetre = 0; idFenetre < tournee.size(); ++idFenetre) {
+                // TODO: Prendre code de david, des que getTournee supporte de triage par fenetres... pour l'instant il y a que une seule grande list dedans.
+
+		//for (int idFenetre = 0; idFenetre < tournee.size(); ++idFenetre) {
+                int idFenetre = 0;
 			Paint couleur = ConstantesGraphique.COULEURS_FENETRES[idFenetre % ConstantesGraphique.COULEURS_FENETRES.length];
 			Ellipse debut;
 			Ellipse fin;
@@ -286,6 +293,6 @@ public class VueGraphiqueAideur {
 			}
 			
 			afficherTroncon(debut, fin, couleur);
-		}
+		//}
 	}
 }

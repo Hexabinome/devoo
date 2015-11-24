@@ -1,6 +1,8 @@
 package modele.xmldata;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -9,19 +11,21 @@ import java.util.Objects;
  */
 public class GrapheRealisation implements Graphe
 {
+
     private Chemin[][] chemins;
-    private final HashMap<Integer, Integer> idCheminToIdMatrice;
+    //dictionnaire pour rechercher l'id dans la matrice d'une intersection (depart d'un chemin)
+    private final HashMap<Integer, Integer> idIntersectionToIdMatrice;
     private int nombreCheminInserer = 0;
-    
+
     /**
-     * Cree un graphe 
+     * Cree un graphe
      *
      * @param nbSommets
      */
     public GrapheRealisation(int nbSommets)
     {
         chemins = new Chemin[nbSommets][nbSommets];
-        idCheminToIdMatrice = new HashMap<>();
+        idIntersectionToIdMatrice = new HashMap<>();
     }
 
     @Override
@@ -33,64 +37,83 @@ public class GrapheRealisation implements Graphe
     @Override
     public int getCout(int depart, int arrivee)
     {
-    	//TODO gestion de l'erreur
-    	//TODO revoir la gestion des couts car chemins return un float
-        if(depart > chemins.length || arrivee > chemins.length || depart < 0 || arrivee < 0 || chemins[depart][arrivee] == null)
-        	return Integer.MAX_VALUE;
-        
-        return (int)chemins[depart][arrivee].getCout();
+        //TODO gestion de l'erreur
+        //TODO revoir la gestion des couts car chemins return un float
+        if (depart > chemins.length || arrivee > chemins.length || depart < 0 || arrivee < 0 || chemins[depart][arrivee] == null)
+            return Integer.MAX_VALUE;
+
+        return (int) chemins[depart][arrivee].getCout();
     }
 
     @Override
     public boolean estArc(int depart, int arrivee)
     {
-    	if(depart > chemins.length || arrivee > chemins.length || depart < 0 || arrivee < 0 || chemins[depart][arrivee] == null)
-    		return false;
+        if (depart > chemins.length || arrivee > chemins.length || depart < 0 || arrivee < 0 || chemins[depart][arrivee] == null)
+            return false;
         return !Objects.equals(depart, arrivee);
     }
 
-	public Chemin getChemin(int idLivraisonDepart, int idLivraisonArrivee) {
-    	if(idCheminToIdMatrice.get(idLivraisonDepart) == null || idCheminToIdMatrice.get(idLivraisonArrivee) == null || idCheminToIdMatrice.get(idLivraisonDepart) > chemins.length || idCheminToIdMatrice.get(idLivraisonDepart) > chemins.length)
-    		return null;
-		return chemins[idCheminToIdMatrice.get(idLivraisonDepart)][idCheminToIdMatrice.get(idLivraisonArrivee)];
-	}
+    public Chemin getChemin(int idLivraisonDepart, int idLivraisonArrivee)
+    {
+        if (idIntersectionToIdMatrice.get(idLivraisonDepart) == null || idIntersectionToIdMatrice.get(idLivraisonArrivee) == null || idIntersectionToIdMatrice.get(idLivraisonDepart) > chemins.length || idIntersectionToIdMatrice.get(idLivraisonDepart) > chemins.length)
+            return null;
+        return chemins[idIntersectionToIdMatrice.get(idLivraisonDepart)][idIntersectionToIdMatrice.get(idLivraisonArrivee)];
+    }
 
-	public Chemin getCheminGrapheIndice(int depart, int arrivee) {
-		if(depart > chemins.length || depart > chemins.length || depart < 0 || arrivee < 0)
-			return null;
-		return chemins[depart][arrivee];
-	}
+    public Chemin getCheminGrapheIndice(int depart, int arrivee)
+    {
+        if (depart > chemins.length || depart > chemins.length || depart < 0 || arrivee < 0)
+            return null;
+        return chemins[depart][arrivee];
+    }
 
-	public void setChemins(Chemin[][] chemins) {
-		this.chemins = chemins;
-	}
-	
-	public void setChemin(Chemin chemin)
-	{
-		Integer i, j;
+    public void setChemins(Chemin[][] chemins)
+    {
+        this.chemins = chemins;
+    }
 
-		if((i = idCheminToIdMatrice.get(chemin.getIdDepart())) == null)
-		{
-			i = nombreCheminInserer;
-			idCheminToIdMatrice.put(chemin.getIdDepart(), nombreCheminInserer++);
-		}
-		if((j = idCheminToIdMatrice.get(chemin.getIdFin())) == null)
-		{
-			j = nombreCheminInserer;
-			idCheminToIdMatrice.put(chemin.getIdFin(), nombreCheminInserer++);
-		}
-		
-		if(i < chemins.length && j < chemins.length)
-			chemins[i][j] = chemin;
-	}
-	
-	/**
-	 * Retourne l'indice dans la matrice de solution à partir de l'id de livraison
-	 * @param idLivraison
-	 * @return
-	 */
-	public int getIndiceFromIdLivraison(int idLivraison)
-	{
-		return idCheminToIdMatrice.get(idLivraison);
-	}
+    public void setChemin(Chemin chemin)
+    {
+        Integer i, j;
+
+        if ((i = idIntersectionToIdMatrice.get(chemin.getIdDepart())) == null) {
+            i = nombreCheminInserer;
+            idIntersectionToIdMatrice.put(chemin.getIdDepart(), nombreCheminInserer++);
+        }
+        if ((j = idIntersectionToIdMatrice.get(chemin.getIdFin())) == null) {
+            j = nombreCheminInserer;
+            idIntersectionToIdMatrice.put(chemin.getIdFin(), nombreCheminInserer++);
+        }
+
+        if (i < chemins.length && j < chemins.length)
+            chemins[i][j] = chemin;
+    }
+
+    /**
+     * Retourne l'indice dans la matrice de solution à partir de l'id de
+     * livraison
+     *
+     * @param idLivraison
+     * @return
+     */
+    public int getIndiceFromIdLivraison(int idLivraison)
+    {
+        return idIntersectionToIdMatrice.get(idLivraison);
+    }
+
+    /**
+     * Creer et remplir dictionnaire pour trouver l'id d'une interseciton a
+     * parti de sa position dans la matrice. Cette map est rempli quand la
+     * creation du graphe a ete termine. On en a besoin notamment pour affichier
+     * la solution calculle par TSP.
+     */
+    public Map<Integer, Integer> getIntersectionDictionnaire()
+    {
+        Map<Integer, Integer> dictionnaire = new LinkedHashMap<>();
+        idIntersectionToIdMatrice.keySet().stream().forEach((cle) -> {
+            dictionnaire.put(idIntersectionToIdMatrice.get(cle), cle);
+        });
+        return dictionnaire;
+    }
+
 }

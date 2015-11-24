@@ -28,9 +28,10 @@ public abstract class TemplateTSP implements TSP {
 	 * Supprime la "indiceLivraison" éme solution
 	 * @param indiceLivraison
 	 */
+        @Override
 	public void supprimerSolution(int indiceLivraison)
 	{
-		ArrayList<Integer> list = new ArrayList<Integer>(Arrays.asList(meilleureSolution));
+		ArrayList<Integer> list = new ArrayList<>(Arrays.asList(meilleureSolution));
 		list.remove(indiceLivraison);
 		
 		meilleureSolution = (Integer[]) list.toArray();
@@ -41,9 +42,10 @@ public abstract class TemplateTSP implements TSP {
 	 * @param indicePrecendent
 	 * @param valeurIndice
 	 */
+        @Override
 	public void ajouterSolution(int indicePrecendent, int valeurIndice)
 	{
-		ArrayList<Integer> list = new ArrayList<Integer>(Arrays.asList(meilleureSolution));
+		ArrayList<Integer> list = new ArrayList<>(Arrays.asList(meilleureSolution));
 		list.add(indicePrecendent+1, valeurIndice);
 		
 		meilleureSolution = (Integer[]) list.toArray();
