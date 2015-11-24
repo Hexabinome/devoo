@@ -1,4 +1,4 @@
-package vue.vueTextuelle;
+package vue.vuetextuelle;
 
 import modele.xmldata.Livraison;
 

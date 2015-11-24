@@ -3,7 +3,6 @@ package vue;
 import controleur.ControleurInterface;
 import controleur.MainActivationObserverInterface;
 import controleur.ModelObserver;
-import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,10 +13,10 @@ import javafx.scene.control.TreeTableView;
 import modele.xmldata.Demande;
 import modele.xmldata.Fenetre;
 import modele.xmldata.Livraison;
-import vue.vueTextuelle.DetailFenetre;
-import vue.vueTextuelle.DetailLivraison;
-import vue.vueTextuelle.ObjetVisualisable;
-import vue.vueTextuelle.Visiteur;
+import vue.vuetextuelle.DetailFenetre;
+import vue.vuetextuelle.DetailLivraison;
+import vue.vuetextuelle.ObjetVisualisable;
+import vue.vuetextuelle.Visiteur;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -29,7 +28,7 @@ import java.util.ResourceBundle;
  * Elle passe par le controleur principale de la vue quand elle reçoie des
  * actions.
  */
-public class VueTableLivraisonControleur implements Initializable, Visiteur, MainActivationObserverInterface,
+public class VueTextuelle implements Initializable, Visiteur, MainActivationObserverInterface,
         ModelObserver {
 
     @FXML
@@ -209,7 +208,7 @@ public class VueTableLivraisonControleur implements Initializable, Visiteur, Mai
             setOnMouseClicked(event -> {
                 ObjetVisualisable objetVisualisable = getTreeTableRow().getTreeItem().getValue();
                 if (objetVisualisable != null)
-                    getTreeTableRow().getTreeItem().getValue().accepter(VueTableLivraisonControleur.this);
+                    getTreeTableRow().getTreeItem().getValue().accepter(VueTextuelle.this);
             });
         }
 

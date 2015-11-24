@@ -3,4 +3,4 @@
  * graphique. Elle contient
  * @author Mohamed El Mouctar HAIDARA
  */
-package vue.vueTextuelle;
+package vue.vuetextuelle;

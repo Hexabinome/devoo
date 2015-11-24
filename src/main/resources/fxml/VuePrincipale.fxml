@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import org.controlsfx.control.*?>
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import vue.*?>
@@ -90,4 +91,7 @@
          </top>
         </BorderPane>
     </center>
+   <bottom>
+      <StatusBar fx:id="barreDeStatus" text="" BorderPane.alignment="CENTER" />
+   </bottom>
 </BorderPane>

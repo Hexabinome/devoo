@@ -1,4 +1,4 @@
-package vue.vueTextuelle;
+package vue.vuetextuelle;
 
 /**
  * Représente un object visitable pour le pattern visiteur. Le pattern visiteur sera utile au niveau de l'interface

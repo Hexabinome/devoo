@@ -18,7 +18,7 @@ public class FenetrePrincipale extends Application {
 
     private VuePrincipale vuePrincipaleControleur;
 
-    private VueTableLivraisonControleur vueTableLivraisonControleur;
+    private VueTextuelle vueTextuelle;
 
     /**
      * Le controleur de l'application
@@ -50,10 +50,10 @@ public class FenetrePrincipale extends Application {
         FXMLLoader fxmlLoader2 = new FXMLLoader(
                 getClass().getClassLoader().getResource("fxml/VueLivraisonHoraire.fxml"));
         AnchorPane anchorPane = fxmlLoader2.load();
-        vueTableLivraisonControleur = (VueTableLivraisonControleur) fxmlLoader2.getController();
-        vueTableLivraisonControleur.setControleurInterface(controleurApplication);
-        vueTableLivraisonControleur.initialiserMediateur(this);
-        vueTableLivraisonControleur.initialiserObserveurs();
+        vueTextuelle = (VueTextuelle) fxmlLoader2.getController();
+        vueTextuelle.setControleurInterface(controleurApplication);
+        vueTextuelle.initialiserMediateur(this);
+        vueTextuelle.initialiserObserveurs();
 
         BorderPane centerBorderPane = (BorderPane) root.getCenter();
         centerBorderPane.setLeft(anchorPane.getChildren().get(0));

@@ -1,4 +1,4 @@
-package vue.vueTextuelle;
+package vue.vuetextuelle;
 
 /**
  * Représente le visiteur du pattern visiteur.

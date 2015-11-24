@@ -4,15 +4,15 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="370.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vue.VueTableLivraisonControleur">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vue.VueTextuelle">
    <children>
-      <TreeTableView fx:id="tableViewFenetre" prefHeight="600.0" prefWidth="370.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <TreeTableView fx:id="tableViewFenetre" prefHeight="600.0" prefWidth="325.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <columnResizePolicy>
             <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
          <columns>
-            <TreeTableColumn fx:id="colonneLivraison" prefWidth="161.0" text="Livraisons" />
-            <TreeTableColumn fx:id="colonneHoraire" prefWidth="75.0" text="Horaire de passage" />
+            <TreeTableColumn fx:id="colonneLivraison" prefWidth="198.0" text="Livraisons" />
+            <TreeTableColumn fx:id="colonneHoraire" prefWidth="170.0" text="Horaire de passage" />
          </columns>
       </TreeTableView>
    </children>
