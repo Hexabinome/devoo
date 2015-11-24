@@ -111,33 +111,73 @@ public class Model implements ModelLecture
     public List<List<Integer>> getTournee()
     {
         List<List<Integer>> tournee = new LinkedList<>();
-        List<Integer> sousTournee = new LinkedList<>();
 
-        //les ids calcule par TSP sont unique, mais il s'agit pas des 
+        //les ids calcule par TSP sont unique, mais il s'agit pas des id's d;intersections. On utilise un dictionnaire pour les identifier.
         Map<Integer, Integer> graphDictionnaire = graphe.getIntersectionDictionnaire();
 
+        //compteur pour iterer sur la solution cree par TSP
+        int tspCompteur = 0;
+
         //initilaiser avec l'id de l'enrepot
-        int livraisonDepart;
-        int livraisonArrivee = tsp.getSolution(0);
-        sousTournee.add(graphDictionnaire.get(tsp.getSolution(0)));
+        int livraisonDepart = tsp.getSolution(tspCompteur++);
 
-        //pour chaque sollution calculle par TSP...
-        for (int i = 1; i < graphDictionnaire.keySet().size(); i++) {
+        //pour chaque fenetre... (sauf le premier qui contient que l'entrepot)
+        boolean premiereFenetre = true;
+        for (Fenetre fenetre : demande.getFenetres()) {
+            //ajouter toutes les intersecitons qui on doit parcourir pour realiser le resultat du TSP
+            //(dans le premiere fentre il y a que l'entrepot)
+            List<Integer> sousTournee = new LinkedList<>();
 
-            livraisonDepart = livraisonArrivee;
-            livraisonArrivee = tsp.getSolution(i);
-
-            // ... ajouter tous les intersections sur le chemin entre depart et arrive
-            Chemin chemin = graphe.getCheminGrapheIndice(livraisonDepart, livraisonArrivee);
-            for (Troncon troncon : chemin.getTroncons()) {
-                sousTournee.add(troncon.getIdDestination());
+            // en cas de premier fenetre
+            if (premiereFenetre) {
+                //ajouter que l'entrepot
+                premiereFenetre = false;
+                sousTournee.add(graphDictionnaire.get(livraisonDepart));
             }
-        }
-        
-        //TODO: vorifier si on doit retourne a l'entrepot a la fin
+            // pour toutes les autres fenetres
+            else
+                // TODO: Verifier que ca se plante pas si il y a deux livraisons pour une seul intersection
+                // recoupererer les prochaines n elements de la sollution de tsp, dont n est egal a la numero des livraisons attendu dans cette fenetre. Ca nous donne l'ordre pour parcourir les livraisons de cette fenetre.
+                for (int livraisonComteur = 0; livraisonComteur < fenetre.getLivraisons().size(); livraisonComteur++) {
+                    //recuperer prochain livraison prevu
+                    int livraisonArrivee = tsp.getSolution(tspCompteur++);
 
-        tournee.add(sousTournee);
-        return tournee;
+                    //recuperer chemin etrne depart et arrivee
+                    Chemin chemin = graphe.getCheminGrapheIndice(livraisonDepart, livraisonArrivee);
+
+                    //ajouter chaque intersection qui on passe en suivant chemin
+                    for (Troncon troncon : chemin.getTroncons()) {
+                        sousTournee.add(troncon.getIdDestination());
+                    }
+
+                    //mis a jour de depart et arrivee
+                    livraisonDepart = livraisonArrivee;
+                }
+
+            //ajouter la liste cree pour cette fenetre a la liste principale
+            tournee.add(sousTournee);
+        }
+
+        /*
+         int livraisonArrivee = tsp.getSolution(0);
+         sousTournee.add(graphDictionnaire.get(tsp.getSolution(0)));
+
+         //pour chaque sollution calculle par TSP...
+         for (int i = 1; i < graphDictionnaire.keySet().size(); i++) {
+
+         livraisonDepart = livraisonArrivee;
+         livraisonArrivee = tsp.getSolution(i);
+
+         // ... ajouter tous les intersections sur le chemin entre depart et arrive
+         Chemin chemin = graphe.getCheminGrapheIndice(livraisonDepart, livraisonArrivee);
+         for (Troncon troncon : chemin.getTroncons()) {
+         sousTournee.add(troncon.getIdDestination());
+         }
+         }
+
+         //TODO: vorifier si on doit retourne a l'entrepot a la fin
+         tournee.add(sousTournee);
+         */ return tournee;
 
     }
 
