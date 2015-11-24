@@ -109,7 +109,7 @@ public class DeserialiseurXML {
      * @throws IOException   Problème survenu lors de la lecture du fichier
      */
     public static Demande ouvrirLivraison(InputStream livraisonXml, final PlanDeVille planDeVille)
-            throws SAXException, IOException, JDOMException, ParseException {
+            throws SAXException, IOException, JDOMException, ParseException, ExceptionXML {
 
         InputStream XSDLIVRAISON = ClassLoader.getSystemResourceAsStream(
                 "xsd/validateurLivraisons.xsd");
@@ -121,8 +121,7 @@ public class DeserialiseurXML {
         int idEntrepot = journeeType.getChild("Entrepot").getAttribute("adresse").getIntValue();
         Intersection intersectionEntrepot = planDeVille.getIntersection(idEntrepot);
         if (intersectionEntrepot == null) {
-            // TODO : peut etre utilisé une autre exception
-            throw new JDOMException(
+            throw new ExceptionXML(
                     "Il semblerait que l'entrepot ne se trouve pas dans la ville. Veuillez vérifier votre fichier");
         }
 
@@ -141,6 +140,10 @@ public class DeserialiseurXML {
             int heureDebut = convertirHeureEnSeconde(elementFenetre.getAttributeValue("heureDebut"));
             int heureFin = convertirHeureEnSeconde(elementFenetre.getAttributeValue("heureFin"));
 
+            if(heureDebut >= heureFin){
+                throw new ExceptionXML("Une des fenêtres est incorrecte. L'heure de début est supérieure ou égale à l'heure de fin");
+            }
+
             nouvelleFenetre = new Fenetre(heureDebut, heureFin);
 
             // Récuperation des livraison
@@ -151,12 +154,18 @@ public class DeserialiseurXML {
                 System.out.println("client : " + elementLivraison.getAttribute("client").getIntValue());
                 System.out.println("adresse : " + elementLivraison.getAttribute("adresse").getIntValue()); */
 
-                int id = elementLivraison.getAttribute("id").getIntValue();
+                int idLivraison = elementLivraison.getAttribute("id").getIntValue();
                 int idClient = elementLivraison.getAttribute("client").getIntValue();
                 int idIntersection = elementLivraison.getAttribute("adresse").getIntValue();
-                livraison = new Livraison(id, idClient, idIntersection);
 
-                nouvelleFenetre.ajouterLivraison(id, livraison);
+                // vérification de la présence de l'intersection dans la ville
+                if(planDeVille.getIntersection(idIntersection) == null){
+                    throw new ExceptionXML("Impossible de charger la demande de livraison. L'intersection : "+idIntersection+" ne se trouve pas dans la ville.");
+                }
+
+                livraison = new Livraison(idLivraison, idClient, idIntersection);
+
+                nouvelleFenetre.ajouterLivraison(idLivraison, livraison);
             }
 
             listeFenetre.add(nouvelleFenetre);
@@ -173,7 +182,7 @@ public class DeserialiseurXML {
      * @throws IOException   Problème survenu lors de la lecture du fichier
      */
     public static Demande ouvrirLivraison(File livraisonXml, final PlanDeVille planDeVille)
-            throws SAXException, IOException, JDOMException, ParseException {
+            throws SAXException, IOException, JDOMException, ParseException, ExceptionXML {
 
         InputStream inputStream = new FileInputStream(livraisonXml);
 

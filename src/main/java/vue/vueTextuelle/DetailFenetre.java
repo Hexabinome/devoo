@@ -3,7 +3,7 @@ package vue.vueTextuelle;
 import modele.xmldata.Fenetre;
 
 /**
- * Created by elmhaidara on 23/11/15.
+ * Gére l'affichage sous forme textuelle des details d'une fenêtre de livraison dans la TreeTableView.
  */
 public class DetailFenetre extends ObjetVisualisable {
 
@@ -21,12 +21,13 @@ public class DetailFenetre extends ObjetVisualisable {
 
     @Override
     public String afficherCaracteriqueSpeciale() {
-        // Pour la fenetre ya rien de particulier à afficher
+        // Pour la fenetre ya rien de particulier à afficher dans ce cas
         return "";
     }
 
     /**
-     * Convertis un temps en seconde en HH:mm:ss
+     * Convertis un temps en seconde en chaine de caractère sous la forme HH:mm:ss
+     * @param tempsEnSeconde temps à convertir
      */
     private static String convertirEnHeureLisible(int tempsEnSeconde) {
         int heure = tempsEnSeconde / 3600;

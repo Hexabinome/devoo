@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import modele.persistance.DeserialiseurXML;
+import modele.persistance.ExceptionXML;
 import modele.xmldata.Demande;
 import modele.xmldata.Model;
 import modele.xmldata.PlanDeVille;
@@ -43,7 +44,7 @@ public class CommandChargerLivraisons extends UninvertibelCommand
             //notifier la vue que le modele a change
             controleurDonnees.notifyAllModelObserveurs();
         }
-        catch (SAXException | IOException | JDOMException | ParseException ex) {
+        catch (SAXException | ExceptionXML | IOException | JDOMException | ParseException ex) {
             throw new CommandException(ex.getMessage());
         }
     }

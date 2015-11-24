@@ -3,7 +3,7 @@ package vue.vueTextuelle;
 import modele.xmldata.Livraison;
 
 /**
- * Created by elmhaidara on 23/11/15.
+ * Gére l'affichage sous forme textuelle des details d'une livraison dans la TreeTableView.
  */
 public class DetailLivraison extends ObjetVisualisable {
 

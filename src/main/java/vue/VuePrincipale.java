@@ -1,10 +1,6 @@
 package vue;
 
-import java.io.File;
-import java.net.URL;
-import java.util.Optional;
-import java.util.ResourceBundle;
-
+import controleur.ControleurInterface;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -16,17 +12,19 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Menu;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
-import modele.xmldata.Demande;
 import modele.xmldata.ModelLecture;
-
 import org.controlsfx.dialog.ExceptionDialog;
 
-import controleur.ControleurInterface;
+import java.io.File;
+import java.net.URL;
+import java.util.Optional;
+import java.util.ResourceBundle;
 
 /**
  * Cette classe joue le rôle de binding pour la fenetre principale de
  * l'application. C'est ici qu'on spécifiera les écouteurs et consorts. Remarque
  * : Les écouteurs peuvent être spécifiés directement dans le fichier xml aussi
+ *
  * @author David
  */
 public class VuePrincipale implements Initializable {
@@ -55,7 +53,7 @@ public class VuePrincipale implements Initializable {
      */
     @FXML
     private Pane canvasGraphique;
-    
+
     private VueGraphiqueAideur vueGraphique;
 
     /**
@@ -150,50 +148,48 @@ public class VuePrincipale implements Initializable {
             if (exception != null)
                 ouvrirAlerteXML(exception, file.getName());
             else {
-            	ModelLecture modele = controleurInterface.getModel();
-            	Demande demande = modele.getDemande();
-                //mediateur.construireVueLivraison(demande);
-                vueGraphique.construireTournee(modele.getDemande().getEntrepot(), modele.getTournee(), modele.getDemande());
+                ModelLecture modele = controleurInterface.getModel();
+                vueGraphique.construireTournee(modele.getDemande().getEntrepot(), modele.getTournee(),
+                        modele.getDemande());
             }
         }
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-    	vueGraphique = new VueGraphiqueAideur(canvasGraphique);
+        vueGraphique = new VueGraphiqueAideur(canvasGraphique);
     }
 
     @FXML
     void quitterApplication() {
-    	Alert confirmationDialog = new Alert(AlertType.CONFIRMATION);
-    	confirmationDialog.setTitle("Quitter");
-    	confirmationDialog.setHeaderText("Êtes-vous sûr(e) de vouloir quitter l'application ?");
+        Alert confirmationDialog = new Alert(AlertType.CONFIRMATION);
+        confirmationDialog.setTitle("Quitter");
+        confirmationDialog.setHeaderText("Êtes-vous sûr(e) de vouloir quitter l'application ?");
         confirmationDialog.setResizable(false);
-    	
-    	Optional<ButtonType> resultat = confirmationDialog.showAndWait();
-    	if (resultat.get() == ButtonType.OK) {
-    		System.exit(0);
-    	}
+
+        Optional<ButtonType> resultat = confirmationDialog.showAndWait();
+        if (resultat.get() == ButtonType.OK) {
+            System.exit(0);
+        }
     }
-    
+
     @FXML
     void clic_ajouterLivraison() {
-    	controleurInterface.cliqueOutilAjouter();
+        controleurInterface.cliqueOutilAjouter();
     }
 
     @FXML
     void clic_echangerLivraison() {
-    	controleurInterface.cliqueOutilEchanger();
+        controleurInterface.cliqueOutilEchanger();
     }
 
     @FXML
     void clic_supprimerLivraison() {
-    	controleurInterface.cliqueOutilSupprimer();
+        controleurInterface.cliqueOutilSupprimer();
     }
 
     /**
      * Ouvre une boite de dialogue pour choisir un fichier
-     * http://stackoverflow.com/questions/25491732/how-do-i-open-the-javafx-filechooser-from-a-controller-class
      *
      * @param titreDialogue Le titre du sélectionneur de fichier
      */

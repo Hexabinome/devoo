@@ -96,7 +96,6 @@ public class VueTableLivraisonControleur implements Initializable, Visiteur, Mai
     }
 
     private void initialiserEcouteurs() {
-        // TODO : à completer pour le hover ou des trucs du genre
         colonneLivraison.setCellFactory(
                 param -> new TableCellSpecial());
     }
@@ -188,9 +187,11 @@ public class VueTableLivraisonControleur implements Initializable, Visiteur, Mai
     }
 
     /**
-     * Gestion du clic et hover sur les elements de la table.
+     * Gestion du clic et hover sur les elements de la table. En créant une autre classe séparée, on n'aurait
+     * pas pu acceder aux membres de la classe VueTableLivraisonControleur d'autant plus que la gestion des évenements
+     * est intimement liée à la classe
      */
-    class TableCellSpecial extends TreeTableCell<ObjetVisualisable, String> {
+    private class TableCellSpecial extends TreeTableCell<ObjetVisualisable, String> {
 
 
         public TableCellSpecial() {
