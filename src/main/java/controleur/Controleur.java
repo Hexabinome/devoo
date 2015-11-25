@@ -36,6 +36,11 @@ public class Controleur implements ControleurInterface
     }
 
     @Override
+    public void ajouterPlanObserveur(PlanObserveur planObserveur) {
+        controleurDonnees.ajouterPlanObserveur(planObserveur);
+    }
+
+    @Override
     public void cliqueAnnuler()
     {
         etat = etat.cliqueAnnuler();
