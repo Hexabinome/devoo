@@ -43,16 +43,17 @@ public class DeserialiseurXML {
      * @throws IOException   Problème survenu lors de la lecture du fichier
      * @throws SAXException  Problème survenu lors de la validation par le schéma XSD
      */
-    public static PlanDeVille ouvrirPlanDeVille(InputStream planXML) throws JDOMException, IOException, SAXException {
+    public static PlanDeVille ouvrirPlanDeVille(InputStream planXML)
+            throws JDOMException, IOException, SAXException, ExceptionXML {
         InputStream XSDPLAN = ClassLoader.getSystemResourceAsStream("xsd/validateurPlan.xsd");
         Document document = validerFichierXML(XSDPLAN, planXML);
         // System.out.println(fichierValidationLivraisons);
         PlanDeVille planDeVille = new PlanDeVille();
 
-        Element rootElement = document.getRootElement();
+        Element elementPere = document.getRootElement();
 
         // Récuperation des Intersections
-        List<Element> intersectionList = rootElement.getChildren("Noeud");
+        List<Element> intersectionList = elementPere.getChildren("Noeud");
         for (Element e : intersectionList) {
             //System.out.println(e.getAttribute("id")+" - " + e.getAttribute("x") +" - " + e.getAttribute("y"));
             int idIntersection = e.getAttribute("id").getIntValue();
@@ -60,7 +61,7 @@ public class DeserialiseurXML {
             int yIntersection = e.getAttribute("y").getIntValue();
             Intersection intersection = new Intersection(idIntersection, xIntersection, yIntersection);
 
-            // Récuperation des troncons de chaque Intersection
+            // Récuperation des troncons sortant de chaque Intersection
             List<Element> tronconList = e.getChildren("LeTronconSortant");
             for (Element elementTroncon : tronconList) {
                 //System.out.println(elementTroncon.getAttribute("nomRue").getValue());
@@ -73,13 +74,15 @@ public class DeserialiseurXML {
                 // Conversion des String en float
                 float vitesse = Float.parseFloat(vitesseString);
                 float longueur = Float.parseFloat(longueurString);
+                int idIntersectionDestination = elementTroncon.getAttribute("idNoeudDestination").getIntValue();
+                if (idIntersectionDestination == idIntersection) {
+                    throw new ExceptionXML("Impossible de charger le plan : une intersection plointe vers elle même");
+                }
 
-                int idDestination = elementTroncon.getAttribute("idNoeudDestination").getIntValue();
-
-                Troncon tronconSortant = new Troncon(nomRue, vitesse, longueur, idDestination);
+                Troncon tronconSortant = new Troncon(nomRue, vitesse, longueur, idIntersectionDestination);
 
                 // Ajout du troncon sortant à l'intersection
-                intersection.addTroncon(idDestination, tronconSortant);
+                intersection.addTroncon(idIntersectionDestination, tronconSortant);
             }
             planDeVille.addInstersection(intersection);
         }
@@ -95,7 +98,8 @@ public class DeserialiseurXML {
      * @throws IOException   Problème survenu lors de la lecture du fichier
      * @throws SAXException  Problème survenu lors de la validation par le schéma XSD
      */
-    public static PlanDeVille ouvrirPlanDeVille(File planXML) throws JDOMException, IOException, SAXException {
+    public static PlanDeVille ouvrirPlanDeVille(File planXML)
+            throws JDOMException, IOException, SAXException, ExceptionXML {
         InputStream inputStream = new FileInputStream(planXML);
         return ouvrirPlanDeVille(inputStream);
     }
@@ -140,8 +144,9 @@ public class DeserialiseurXML {
             int heureDebut = convertirHeureEnSeconde(elementFenetre.getAttributeValue("heureDebut"));
             int heureFin = convertirHeureEnSeconde(elementFenetre.getAttributeValue("heureFin"));
 
-            if(heureDebut >= heureFin){
-                throw new ExceptionXML("Une des fenêtres est incorrecte. L'heure de début est supérieure ou égale à l'heure de fin");
+            if (heureDebut >= heureFin) {
+                throw new ExceptionXML(
+                        "Une des fenêtres est incorrecte. L'heure de début est supérieure ou égale à l'heure de fin");
             }
 
             nouvelleFenetre = new Fenetre(heureDebut, heureFin);
@@ -159,8 +164,9 @@ public class DeserialiseurXML {
                 int idIntersection = elementLivraison.getAttribute("adresse").getIntValue();
 
                 // vérification de la présence de l'intersection dans la ville
-                if(planDeVille.getIntersection(idIntersection) == null){
-                    throw new ExceptionXML("Impossible de charger la demande de livraison. L'intersection : "+idIntersection+" ne se trouve pas dans la ville.");
+                if (planDeVille.getIntersection(idIntersection) == null) {
+                    throw new ExceptionXML(
+                            "Impossible de charger la demande de livraison. L'intersection : " + idIntersection + " ne se trouve pas dans la ville.");
                 }
 
                 livraison = new Livraison(idLivraison, idClient, idIntersection);

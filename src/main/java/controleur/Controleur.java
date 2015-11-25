@@ -1,6 +1,8 @@
 package controleur;
 
 import java.io.File;
+import java.util.Observable;
+
 import modele.xmldata.ModelLecture;
 import modele.xmldata.PlanDeVille;
 
@@ -10,7 +12,7 @@ import modele.xmldata.PlanDeVille;
  *
  * @author Maxou
  */
-public class Controleur implements ControleurInterface
+public class Controleur extends Observable implements ControleurInterface 
 {
 
     private EtatInterface etat;

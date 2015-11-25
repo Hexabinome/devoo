@@ -32,6 +32,8 @@ public class CommandChargerPlan extends UninvertibelCommand
         }
         catch (JDOMException | IOException | SAXException ex) {
             throw new CommandException(ex.getMessage());
+        } catch (modele.persistance.ExceptionXML exceptionXML) {
+            exceptionXML.printStackTrace();
         }
     }
 

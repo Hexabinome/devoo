@@ -1,6 +1,10 @@
 package vue;
 
-import controleur.ControleurInterface;
+import java.io.File;
+import java.net.URL;
+import java.util.Optional;
+import java.util.ResourceBundle;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -13,13 +17,11 @@ import javafx.scene.control.Menu;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import modele.xmldata.ModelLecture;
+
 import org.controlsfx.control.StatusBar;
 import org.controlsfx.dialog.ExceptionDialog;
 
-import java.io.File;
-import java.net.URL;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import controleur.ControleurInterface;
 
 /**
  * Cette classe joue le rôle de binding pour la fenetre principale de
@@ -102,6 +104,7 @@ public class VuePrincipale implements Initializable {
 
             canvasGraphique.getChildren().clear();
             vueGraphique.afficherPlan();
+            vueGraphique.afficherTournee();
         }
 
     };
@@ -161,6 +164,10 @@ public class VuePrincipale implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         vueGraphique = new VueGraphiqueAideur(canvasGraphique);
+    }
+    
+    public VueGraphiqueAideur getAideurVueGraphique() {
+    	return vueGraphique;
     }
 
     @FXML
@@ -235,7 +242,6 @@ public class VuePrincipale implements Initializable {
         controleurInterface.ajouterDesactObserver(echangerLivraisonsBouton);
         controleurInterface.ajouterDesactObserver(supprimerLivraisonBouton);
         controleurInterface.ajouterDesactObserver(genererFeuilleBouton);
-
     }
 
 

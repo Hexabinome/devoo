@@ -2,7 +2,12 @@
 import controleur.Controleur;
 import controleur.ControleurInterface;
 import java.io.File;
+import java.util.Observable;
+import java.util.Observer;
+
 import static org.junit.Assert.assertEquals;
+
+import org.junit.Before;
 import org.junit.Test;
 
 /*
@@ -28,25 +33,37 @@ public class ControleurTest {
         +getModel():ModelLecture
         +cliqueCalculerTourne():void 
     */
+	
+	Observer observer;
+	boolean miseAJourAppelee;
+	
+	@Before
+	public void setUp(){
+		miseAJourAppelee = false;
+		observer = new Observer(){public void update(Observable o, Object arg){miseAJourAppelee = true;}};
+	}
         
-    @Test //chargerPlan(chemin:String):void
+    @Test
     public void testchargerPlan() {
-       ControleurInterface controleur = new Controleur ();
-       File plan = new File("samples/plan10x10.xml");
+       Controleur controleur = new Controleur ();
+       controleur.addObserver(observer);
+       File plan = new File("samples/plan10x10-1.xml");
        controleur.chargerPlan(plan);
         
-       assertEquals("le plan aurait du etre charger", 0, 1);
+       assert(miseAJourAppelee);
     }
     
-    @Test 
-    public void testChargerLivraison() {
-       ControleurInterface controleur = new Controleur ();
-       File livraisons = new File("samples/livraison10x10-1.xml");
-       controleur.chargerPlan(livraisons);
+    @Test
+    public void testchargerLivraisons() {
+       Controleur controleur = new Controleur ();
+       controleur.addObserver(observer);
        
-       assertEquals("le livraisons aurait du etre chargees", 0, 1);
-        
-        
-    }
-    
+       File plan = new File("samples/plan10x10-1.xml");
+       controleur.chargerPlan(plan);
+       
+       File livraisons = new File("samples/livraison10x10-3.xml");
+       controleur.chargerLivraisons(livraisons);
+       
+       assert(miseAJourAppelee);
+    }    
 }
