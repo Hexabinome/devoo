@@ -1,7 +1,6 @@
 package controleur;
 
 import java.io.File;
-import java.util.Observable;
 
 import modele.xmldata.ModelLecture;
 import modele.xmldata.PlanDeVille;
@@ -31,7 +30,7 @@ public class Controleur implements ControleurInterface
     }
 
     @Override
-    public void ajouterModelObserver(ModelObserver observer)
+    public void ajouterModelObserver(ModelObserveur observer)
     {
         controleurDonnees.addModelObserveur(observer);
     }
@@ -82,7 +81,7 @@ public class Controleur implements ControleurInterface
     @Override
     public void cliqueOutilSupprimer()
     {
-        etat = new EtatSupression(controleurDonnees);
+        etat = new EtatSuppression(controleurDonnees);
     }
 
     @Override

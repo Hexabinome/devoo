@@ -6,12 +6,12 @@ import java.io.File;
  *
  * @author Maxou
  */
-public class EtatSupression extends AbstractEtat
+public class EtatSuppression extends AbstractEtat
 {
 
     private final ControleurDonnees donnees;
 
-    EtatSupression(ControleurDonnees donnees)
+    EtatSuppression(ControleurDonnees donnees)
     {
         this.donnees = donnees;
     }

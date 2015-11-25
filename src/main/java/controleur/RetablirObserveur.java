@@ -6,5 +6,5 @@ package controleur;
  */
 public interface RetablirObserveur {
 
-    void notifyObserver();
+    void notifierLesObserveurs();
 }

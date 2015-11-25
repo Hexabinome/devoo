@@ -1,7 +1,7 @@
 
 import controleur.Controleur;
 import controleur.ControleurInterface;
-import controleur.ModelObserver;
+import controleur.ModelObserveur;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -30,7 +30,7 @@ public class ControleurTest {
         +cliqueCalculerTourne():void 
     */
 
-    ModelObserver observer;
+    ModelObserveur observer;
     boolean miseAJourAppelee;
     ControleurInterface controleurInterface;
 
@@ -39,9 +39,9 @@ public class ControleurTest {
 
         controleurInterface = new Controleur();
         miseAJourAppelee = false;
-        observer = new ModelObserver() {
+        observer = new ModelObserveur() {
             @Override
-            public void notifyObserver() {
+            public void notifierLesOberseursDuModel() {
                 miseAJourAppelee = true;
             }
         };

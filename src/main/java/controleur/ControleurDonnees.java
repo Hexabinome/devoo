@@ -23,7 +23,7 @@ public class ControleurDonnees
     private final Collection<MainActivationObserverInterface> desactObserveurs;
 
     //collection des observeurs pour le model
-    private final Collection<ModelObserver> modelObserveurs;
+    private final Collection<ModelObserveur> modelObserveurs;
 
     // collection des observers pour la passibilite d'annuler / retablis des interactions effectuees.
     private final Collection<AnnulerObserveur> annulerObserveurs;
@@ -81,7 +81,7 @@ public class ControleurDonnees
         desactObserveurs.add(obs);
     }
 
-    public void addModelObserveur(ModelObserver obs)
+    public void addModelObserveur(ModelObserveur obs)
     {
         modelObserveurs.add(obs);
     }
@@ -109,14 +109,14 @@ public class ControleurDonnees
     public void notifyAllActObserveurs(boolean state)
     {
         desactObserveurs.stream().forEach((obs) -> {
-            obs.notifyObserver(state);
+            obs.notifierLesObserveurs(state);
         });
     }
 
     public void notifyAllModelObserveurs()
     {
         modelObserveurs.stream().forEach((obs) -> {
-            obs.notifyObserver();
+            obs.notifierLesOberseursDuModel();
         });
     }
 
@@ -130,7 +130,7 @@ public class ControleurDonnees
     public void notifyAllRetablirObserveurs()
     {
         retablirObserveurs.stream().forEach((obs) -> {
-            obs.notifyObserver();
+            obs.notifierLesObserveurs();
         });
     }
 
