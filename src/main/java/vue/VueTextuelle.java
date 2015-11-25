@@ -228,9 +228,13 @@ public class VueTextuelle implements Initializable, Visiteur, MainActivationObse
 
         private void initialiserHover() {
             setOnMouseEntered(event -> {
+        		ObjetVisualisable objetSurpasse = getTreeTableRow().getItem();
+        		
+        		if (objetSurpasse == null)
+        			return;
+            	
         		setStyle("-fx-background-color: yellow; -fx-text-fill: black;");
 
-        		ObjetVisualisable objetSurpasse = getTreeTableRow().getItem();
         		if (objetSurpasse instanceof DetailLivraison) {
         			Livraison livraison = ((DetailLivraison) objetSurpasse).getLivraison();
         			vueGraphique.surbrillanceLivraison(livraison);

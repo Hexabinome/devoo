@@ -17,6 +17,7 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
 import javafx.util.Pair;
 import modele.xmldata.Demande;
+import modele.xmldata.Fenetre;
 import modele.xmldata.Intersection;
 import modele.xmldata.Livraison;
 import modele.xmldata.PlanDeVille;
@@ -169,11 +170,17 @@ public class VueGraphiqueAideur
     		int idIntersection = pairIntersection.getKey();
     		Ellipse intersection = pairIntersection.getValue().getKey();
     		
+    		// Choix de la bonne couleur
     		Paint couleur;
-    		if (idIntersection == entrepot)
+    		if (idIntersection == entrepot) {
     			couleur = ConstantesGraphique.COULEUR_ENTREPOT;
-    		else
+    		}
+    		else if (intersectionsLivraisons.contains(idIntersection)) {
+    			couleur = ConstantesGraphique.COULEUR_LIVRAISON;
+    		}
+    		else {
     			couleur = ConstantesGraphique.COULEUR_INTERSECTION;
+    		}
     			
 			intersection.setFill(couleur);
     	}
@@ -194,7 +201,6 @@ public class VueGraphiqueAideur
 
     /**
      * Affiche une ellipse sur l'interface, en fonction de la taille actuelle
-     *
      * @param e Le point à afficher
      */
     private void afficherEllipse(Ellipse e) {
@@ -256,6 +262,7 @@ public class VueGraphiqueAideur
      */
     private int entrepot;
     private List<List<Integer>> tournee;
+    private List<Integer> intersectionsLivraisons = new ArrayList<Integer>();
 
     /**
      * Construit et affiche la tournée
@@ -266,24 +273,17 @@ public class VueGraphiqueAideur
      */
     public void construireTournee(Intersection entrepot, List<List<Integer>> tournee, Demande demande) {
 
+		// Mémoriser entrepot
         this.entrepot = entrepot.getId();
+        
+        // Mémoriser l'id des intersections où il y a des livraisons
+        for (Fenetre f : demande.getFenetres()) {
+        	intersectionsLivraisons.addAll(f.getLivraisons().keySet());
+        }
 
-  //      this.tournee = new ArrayList<>();
-        //Pour chaque fenêtre de livraison
-   //     for (int idxFenetre = 0; idxFenetre < demande.getFenetres().size(); idxFenetre++) {
-            //On récupére la liste des livraisons associé à cette fenêtre
-            /*
-            Map<Integer, Livraison> livraisonsFenetre = demande.getFenetres().get(idxFenetre).getLivraisons();
-
-            List<Integer> tourneeFenetreGraphique = new ArrayList<Integer>();
-            //Pour chaque point de la tournée (id d'intersection)
-            for (int idLivraison : tournee.get(idxFenetre)) {
-                tourneeFenetreGraphique.add(livraisonsFenetre.get(idLivraison).getAdresse());
-            }*/
-
-   //         this.tournee.add(tournee.get(idxFenetre));
-   //     }
+        // Mémoriser l'ordre de tournée
         this.tournee = tournee;
+        
         afficherTournee();
     }
 
@@ -295,7 +295,7 @@ public class VueGraphiqueAideur
     	intersectionsGraphiques.get(entrepot).getKey().setFill(ConstantesGraphique.COULEUR_ENTREPOT);
 
         // Afficher tournée dans chaque fenêtre
-        for (int idFenetre = 0; idFenetre < tournee.size(); idFenetre++) {
+        for (int idFenetre = 0; idFenetre < tournee.size(); ++idFenetre) {
 
             Paint couleur = ConstantesGraphique.COULEURS_FENETRES[idFenetre % ConstantesGraphique.COULEURS_FENETRES.length];
             
@@ -307,6 +307,25 @@ public class VueGraphiqueAideur
 
                 afficherTroncon(debut, fin, couleur);
             }
+        }
+        
+        // Afficher les trajets entre les fenêtres
+        for (int idFenetre = 0; idFenetre < tournee.size() - 1; ++idFenetre) {
+
+            Paint couleur = ConstantesGraphique.COULEURS_FENETRES[idFenetre % ConstantesGraphique.COULEURS_FENETRES.length];
+            
+            int derniereIntersectionFenetre = tournee.get(idFenetre).get(tournee.get(idFenetre).size() - 1);
+            int premiereIntersectionFenetreSuivante = tournee.get(idFenetre + 1).get(tournee.get(idFenetre + 1).size() - 1);
+
+            Ellipse debut = intersectionsGraphiques.get(derniereIntersectionFenetre).getKey();
+            Ellipse fin = intersectionsGraphiques.get(premiereIntersectionFenetreSuivante).getKey();
+
+            afficherTroncon(debut, fin, couleur);
+        }
+        
+        // Coloration des intersections où il y a des livraisons
+        for (int idIntersection : intersectionsLivraisons) {
+        	intersectionsGraphiques.get(idIntersection).getKey().setFill(ConstantesGraphique.COULEUR_LIVRAISON);
         }
     }
     
@@ -330,10 +349,11 @@ public class VueGraphiqueAideur
         private final static Paint COULEUR_TRONCON = Color.WHITE;
 
         private final static Paint COULEUR_ENTREPOT = Color.RED;
+        private final static Paint COULEUR_LIVRAISON = Color.SALMON;
 
         private final static Paint[] COULEURS_FENETRES = new Paint[] {
-            Color.LIGHTBLUE,
             Color.RED,
+            Color.LIGHTBLUE,
             Color.GREEN
         };
     }
