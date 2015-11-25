@@ -139,7 +139,7 @@ public class VueTextuelle implements Initializable, Visiteur, MainActivationObse
 
         // Récuperation des livraisons de la fenetre
         List<Livraison> livraisonList = new ArrayList<>();
-        fenetre.getLivraisons().forEach((integer, livraison1) -> {
+        fenetre.getListeLivraisons().forEach((integer, livraison1) -> {
             livraisonList.add(livraison1);
         });
 
@@ -236,7 +236,7 @@ public class VueTextuelle implements Initializable, Visiteur, MainActivationObse
         			vueGraphique.surbrillanceLivraison(livraison);
         		}
         		else if (objetSurpasse instanceof DetailFenetre) {
-        			Collection<Livraison> livraisons = ((DetailFenetre) objetSurpasse).getFenetre().getLivraisons().values();
+        			Collection<Livraison> livraisons = ((DetailFenetre) objetSurpasse).getFenetre().getListeLivraisons().values();
         			vueGraphique.surbrillanceLivraisons(livraisons);
         		}
             });

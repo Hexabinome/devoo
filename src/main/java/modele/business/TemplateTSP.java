@@ -126,5 +126,11 @@ public abstract class TemplateTSP implements TSP {
 	        }	    
 	    }
 	}
+	
+
+	@Override
+	public int getNbSolution() {
+		return meilleureSolution.length;
+	}
 }
 

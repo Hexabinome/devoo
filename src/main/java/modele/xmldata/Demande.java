@@ -83,7 +83,7 @@ public class Demande
         Set<Integer> livraison = new HashSet<>();
 
         for (int iFenetre = 0; iFenetre < fenetres.size(); iFenetre++) {
-            livraison.addAll((fenetres.get(iFenetre).getLivraisons().keySet()));
+            livraison.addAll((fenetres.get(iFenetre).getListeLivraisons().keySet()));
         }
 
         return livraison.size();

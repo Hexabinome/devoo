@@ -81,9 +81,9 @@ public class Model implements ModelLecture
         //On ajout la solution dans la fenêtre
         for (int iFenetre = 0; iFenetre < demande.getFenetres().size(); iFenetre++) {
             //On a trouvé la fenêtre qui contient la previousId livraison
-            if (((ArrayList<Fenetre>) demande.getFenetres()).get(iFenetre).getLivraisons().get(previousId) != null) {
-                Livraison livraison = new Livraison(((ArrayList<Fenetre>) demande.getFenetres()).get(iFenetre).getLivraisons().size(), 0, intersectionId);
-                ((ArrayList<Fenetre>) demande.getFenetres()).get(iFenetre).getLivraisons().put(livraison.getId(), livraison);
+            if (((ArrayList<Fenetre>) demande.getFenetres()).get(iFenetre).getListeLivraisons().get(previousId) != null) {
+                Livraison livraison = new Livraison(((ArrayList<Fenetre>) demande.getFenetres()).get(iFenetre).getListeLivraisons().size(), 0, intersectionId);
+                ((ArrayList<Fenetre>) demande.getFenetres()).get(iFenetre).getListeLivraisons().put(livraison.getId(), livraison);
 
                 //TODO à optimiser (pas desoin de rappeller dijkstra pour toutes les intersections
                 if (iFenetre == demande.getFenetres().size() - 1)
@@ -106,6 +106,19 @@ public class Model implements ModelLecture
 
         //des que le TSP a fini il faut stoquer les horaires de passage dans l'objet demande
         remplirHoraires();
+    }
+    
+    private List<Livraison> getLivraisonFromSolutionTsp(Fenetre fenetre, int indiceDebutSolutionTsp)
+    {
+    	List<Livraison> listLivraison = new ArrayList<>();
+    	
+    	for(int iSolution = indiceDebutSolutionTsp; iSolution < fenetre.getNbLivraison(); iSolution++)
+    	{
+    		int idLivraison = graphe.getIdLivraisonParIdMatrice(tsp.getSolution(iSolution));
+    		listLivraison.add(fenetre.getLivraison(idLivraison));
+    	}
+    	
+    	return listLivraison;
     }
 
     @Override
@@ -133,7 +146,7 @@ public class Model implements ModelLecture
 
         	// TODO: Verifier que ca se ne plante pas si il y a deux livraisons pour une seul intersection
         	// recupére les n prochaines solutions de la solution de tsp, avec n egal au nombre de livraisons voulus pour cette fenetre. 
-            for (int livraisonComteur = 0; livraisonComteur < fenetre.getLivraisons().size(); livraisonComteur++) {
+            for (int livraisonComteur = 0; livraisonComteur < fenetre.getListeLivraisons().size(); livraisonComteur++) {
                 //recuperer prochain livraison prevu
                 int livraisonArrivee = tsp.getSolution(compteurSolutionTSP++);
 
@@ -160,7 +173,7 @@ public class Model implements ModelLecture
     {
         //TODO: replace mock implementation by data actually derived from TSP sollution
         demande.getFenetres().stream().forEach((fenetre) -> {
-            fenetre.getLivraisons().values().stream().forEach((livraison) -> {
+            fenetre.getListeLivraisons().values().stream().forEach((livraison) -> {
                 livraison.setHoraireDePassage((int) (Math.random() * 3600));
             });
         });
