@@ -111,8 +111,9 @@ public class Model implements ModelLecture
     public List<List<Integer>> getTournee()
     {
         List<List<Integer>> tournee = new LinkedList<>();
-
-        //les ids calcule par TSP sont unique, mais il s'agit pas des id's d;intersections. On utilise un dictionnaire pour les identifier.
+        List<Integer> sousTournee = new LinkedList<>();
+        
+        //les ids calcule par TSP sont unique, mais il s'agit pas des id's d'intersections. On utilise un dictionnaire pour les identifier.
         Map<Integer, Integer> graphDictionnaire = graphe.getIntersectionDictionnaire();
 
         //compteur pour iterer sur la solution cree par TSP
@@ -120,40 +121,35 @@ public class Model implements ModelLecture
 
         //initilaiser avec l'id de l'enrepot
         int livraisonDepart = tsp.getSolution(tspCompteur++);
-
+        
+        //ajoute de l'entrepot
+        sousTournee.add(graphDictionnaire.get(livraisonDepart));
+        
         //pour chaque fenetre... (sauf le premier qui contient que l'entrepot)
-        boolean premiereFenetre = true;
-        for (Fenetre fenetre : demande.getFenetres()) {
-            //ajouter toutes les intersecitons qui on doit parcourir pour realiser le resultat du TSP
-            //(dans le premiere fentre il y a que l'entrepot)
-            List<Integer> sousTournee = new LinkedList<>();
+        List<Fenetre> listFenetres = demande.getFenetres();
+        listFenetres.remove(0);
+        for (Fenetre fenetre : listFenetres) {
+            //ajouter toutes les intersections qui on doit parcourir pour realiser le resultat du TSP
+            sousTournee = new LinkedList<>();
 
-            // en cas de premier fenetre
-            if (premiereFenetre) {
-                //ajouter que l'entrepot
-                premiereFenetre = false;
-                sousTournee.add(graphDictionnaire.get(livraisonDepart));
-            }
-            // pour toutes les autres fenetres
-            else
-                // TODO: Verifier que ca se ne plante pas si il y a deux livraisons pour une seul intersection
-                // recoupererer les prochaines n elements de la sollution de tsp, dont n est egal a la numero des livraisons attendu dans cette fenetre. Ca nous donne l'ordre pour parcourir les livraisons de cette fenetre.
-                for (int livraisonComteur = 0; livraisonComteur < fenetre.getLivraisons().size(); livraisonComteur++) {
-                    //recuperer prochain livraison prevu
-                    int livraisonArrivee = tsp.getSolution(tspCompteur++);
+        	// TODO: Verifier que ca se ne plante pas si il y a deux livraisons pour une seul intersection
+        	// recupére les n prochaines solutions de la solution de tsp, avec n egal au nombre de livraisons voulus pour cette fenetre. 
+            for (int livraisonComteur = 0; livraisonComteur < fenetre.getLivraisons().size(); livraisonComteur++) {
+                //recuperer prochain livraison prevu
+                int livraisonArrivee = tsp.getSolution(tspCompteur++);
 
-                    //recuperer chemin etrne depart et arrivee
-                    Chemin chemin = graphe.getCheminGrapheIndice(livraisonDepart, livraisonArrivee);
+                //recuperer chemin etrne depart et arrivee
+                Chemin chemin = graphe.getCheminGrapheIndice(livraisonDepart, livraisonArrivee);
 
-                    //ajouter chaque intersection qui on passe en suivant chemin
-                    for (Troncon troncon : chemin.getTroncons()) {
-                        sousTournee.add(troncon.getIdDestination());
-                    }
-
-                    //mis a jour de depart et arrivee
-                    livraisonDepart = livraisonArrivee;
+                //ajouter chaque intersection qui on passe en suivant chemin
+                for (Troncon troncon : chemin.getTroncons()) {
+                    sousTournee.add(troncon.getIdDestination());
                 }
 
+                //mis a jour de depart et arrivee
+                livraisonDepart = livraisonArrivee;
+            }
+            
             //ajouter la liste cree pour cette fenetre a la liste principale
             tournee.add(sousTournee);
         }

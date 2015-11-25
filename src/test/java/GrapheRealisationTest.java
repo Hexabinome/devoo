@@ -37,15 +37,9 @@ public class GrapheRealisationTest {
     
     Chemin chemin = new Chemin(1, new ArrayList<Troncon>(), 1, 2);
     
-  	graphe.setChemin(chemin);
+  	graphe.setChemin(chemin, 3, 4);
       
-    assertEquals("On peut bien accéder au chemin ajouté", graphe.getChemin(1, 2), chemin);
-     
-    Chemin chemin2 = new Chemin(1, new ArrayList<Troncon>(), 11, 2);
-     
-	graphe.setChemin(chemin2);
-       
-	assertEquals("Le chemin n'a pas été ajouté car out of bound", graphe.getChemin(11, 2), null);
+    assertEquals("On peut bien accéder au chemin ajouté", graphe.getChemin(3, 4), chemin);
       
   }  
 }

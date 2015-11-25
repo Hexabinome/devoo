@@ -13,8 +13,10 @@ public class GrapheRealisation implements Graphe
 {
 
     private Chemin[][] chemins;
-    //dictionnaire pour rechercher l'id dans la matrice d'une intersection (depart d'un chemin)
-    private final HashMap<Integer, Integer> idIntersectionToIdMatrice;
+    
+    //Key : id de livraison (30, 50, 12); 
+    //Value : indice dans la matrice(0, 1, 2)
+    private final HashMap<Integer, Integer> idLivraisonToIdMatrice;
     private int nombreCheminInserer = 0;
 
     /**
@@ -25,7 +27,7 @@ public class GrapheRealisation implements Graphe
     public GrapheRealisation(int nbSommets)
     {
         chemins = new Chemin[nbSommets][nbSommets];
-        idIntersectionToIdMatrice = new HashMap<>();
+        idLivraisonToIdMatrice = new HashMap<>();
     }
 
     @Override
@@ -55,9 +57,9 @@ public class GrapheRealisation implements Graphe
 
     public Chemin getChemin(int idLivraisonDepart, int idLivraisonArrivee)
     {
-        if (idIntersectionToIdMatrice.get(idLivraisonDepart) == null || idIntersectionToIdMatrice.get(idLivraisonArrivee) == null || idIntersectionToIdMatrice.get(idLivraisonDepart) > chemins.length || idIntersectionToIdMatrice.get(idLivraisonDepart) > chemins.length)
+        if (idLivraisonToIdMatrice.get(idLivraisonDepart) == null || idLivraisonToIdMatrice.get(idLivraisonArrivee) == null || idLivraisonToIdMatrice.get(idLivraisonDepart) > chemins.length || idLivraisonToIdMatrice.get(idLivraisonDepart) > chemins.length)
             return null;
-        return chemins[idIntersectionToIdMatrice.get(idLivraisonDepart)][idIntersectionToIdMatrice.get(idLivraisonArrivee)];
+        return chemins[idLivraisonToIdMatrice.get(idLivraisonDepart)][idLivraisonToIdMatrice.get(idLivraisonArrivee)];
     }
 
     public Chemin getCheminGrapheIndice(int depart, int arrivee)
@@ -72,25 +74,29 @@ public class GrapheRealisation implements Graphe
         this.chemins = chemins;
     }
 
-    public void setChemin(Chemin chemin)
+    /**
+     * Insert un chemin dans la matrice
+     * Fait la correspondance entre les id des livraisons et les indices dans la matrice
+     * @param chemin
+     * @param livraisonDepartId
+     * @param livraisonArriveeId
+     */
+    public void setChemin(Chemin chemin, int livraisonDepartId, int livraisonArriveeId)
     {
-        Integer i, j;
+    	Integer i, j;
 
-        if ((i = idIntersectionToIdMatrice.get(chemin.getIdDepart())) == null) {
+    	//Test si l'id de la livraison est déjà dans la Map de correspondance ou non 
+        if ((i = idLivraisonToIdMatrice.get(livraisonDepartId)) == null) {
             i = nombreCheminInserer;
-            idIntersectionToIdMatrice.put(chemin.getIdDepart(), nombreCheminInserer++);
+            idLivraisonToIdMatrice.put(livraisonDepartId, nombreCheminInserer++);
         }
-        if ((j = idIntersectionToIdMatrice.get(chemin.getIdFin())) == null) {
+        if ((j = idLivraisonToIdMatrice.get(livraisonArriveeId)) == null) {
             j = nombreCheminInserer;
-            idIntersectionToIdMatrice.put(chemin.getIdFin(), nombreCheminInserer++);
+            idLivraisonToIdMatrice.put(chemin.getIdFin(), nombreCheminInserer++);
         }
 
         if (i < chemins.length && j < chemins.length)
             chemins[i][j] = chemin;
-    }
-
-    public void setChemin(Chemin chemin, int livraisonDepartId, int livraisonArriveeId)
-    {
     }
 
     /**
@@ -102,7 +108,7 @@ public class GrapheRealisation implements Graphe
      */
     public int getIndiceFromIdLivraison(int idLivraison)
     {
-        return idIntersectionToIdMatrice.get(idLivraison);
+        return idLivraisonToIdMatrice.get(idLivraison);
     }
 
     /**
@@ -114,8 +120,8 @@ public class GrapheRealisation implements Graphe
     public Map<Integer, Integer> getIntersectionDictionnaire()
     {
         Map<Integer, Integer> dictionnaire = new LinkedHashMap<>();
-        idIntersectionToIdMatrice.keySet().stream().forEach((cle) -> {
-            dictionnaire.put(idIntersectionToIdMatrice.get(cle), cle);
+        idLivraisonToIdMatrice.keySet().stream().forEach((cle) -> {
+            dictionnaire.put(idLivraisonToIdMatrice.get(cle), cle);
         });
         return dictionnaire;
     }
