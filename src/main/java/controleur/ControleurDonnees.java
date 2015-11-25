@@ -23,13 +23,15 @@ public class ControleurDonnees
     private final Collection<MainActivationObserverInterface> desactObserveurs;
 
     //collection des observeurs pour le model
-    private final Collection<ModelObserver> modelObserveurs;
+    private final Collection<ModelObserveur> modelObserveurs;
 
     // collection des observers pour la passibilite d'annuler / retablis des interactions effectuees.
     private final Collection<AnnulerObserveur> annulerObserveurs;
 
     // collection des observers pour la passibilite d'annuler / retablis des interactions effectuees.
     private final Collection<RetablirObserveur> retablirObserveurs;
+
+    private final Collection<PlanObserveur> planObserveurs;
 
     private PlanDeVille plan = null;
 
@@ -41,6 +43,7 @@ public class ControleurDonnees
         modelObserveurs = new LinkedList<>();
         annulerObserveurs = new LinkedList<>();
         retablirObserveurs = new LinkedList<>();
+        planObserveurs = new LinkedList<>();
     }
 
     public Model getModel()
@@ -78,7 +81,7 @@ public class ControleurDonnees
         desactObserveurs.add(obs);
     }
 
-    public void addModelObserveur(ModelObserver obs)
+    public void addModelObserveur(ModelObserveur obs)
     {
         modelObserveurs.add(obs);
     }
@@ -93,17 +96,27 @@ public class ControleurDonnees
         retablirObserveurs.add(obs);
     }
 
+    public void ajouterPlanObserveur(PlanObserveur planObserveur){
+        planObserveurs.add(planObserveur);
+    }
+
+    public void notifierLesObserveursDuPlan(){
+        planObserveurs.stream().forEach((planObserveur -> {
+            planObserveur.notifierLesObserveursDuPlan();
+        }));
+    }
+
     public void notifyAllActObserveurs(boolean state)
     {
         desactObserveurs.stream().forEach((obs) -> {
-            obs.notifyObserver(state);
+            obs.notifierLesObserveurs(state);
         });
     }
 
     public void notifyAllModelObserveurs()
     {
         modelObserveurs.stream().forEach((obs) -> {
-            obs.notifyObserver();
+            obs.notifierLesOberseursDuModel();
         });
     }
 
@@ -117,7 +130,7 @@ public class ControleurDonnees
     public void notifyAllRetablirObserveurs()
     {
         retablirObserveurs.stream().forEach((obs) -> {
-            obs.notifyObserver();
+            obs.notifierLesObserveurs();
         });
     }
 

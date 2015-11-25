@@ -7,6 +7,6 @@ package controleur;
 public interface MainActivationObserverInterface
 {
 
-    public void notifyObserver(boolean disabled);
+    void notifierLesObserveurs(boolean disabled);
 
 }
