@@ -19,5 +19,4 @@ public class TSP1 extends TemplateTSP {
 	protected Iterator<Integer> iterator(Integer sommetCrt, Collection<Integer> nonVus, Graphe g) {
 		return new IteratorSeq(nonVus, sommetCrt, g);
 	}
-
 }

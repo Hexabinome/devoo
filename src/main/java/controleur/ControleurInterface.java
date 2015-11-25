@@ -13,7 +13,7 @@ public interface ControleurInterface
 
     void ajouterDesactObserver(MainActivationObserverInterface observer);
 
-    void ajouterModelObserver(ModelObserver observer);
+    void ajouterModelObserver(ModelObserveur observer);
 
     void cliqueSurPlan(int intersectionId);
     

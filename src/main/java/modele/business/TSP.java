@@ -48,5 +48,7 @@ public interface TSP
      * @param valeurIndice
      */
     public void ajouterSolution(int indicePrecendent, int valeurIndice);
+    
+    public int getNbSolution();
 
 }

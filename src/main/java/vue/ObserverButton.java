@@ -10,7 +10,7 @@ import javafx.scene.control.Button;
 public class ObserverButton extends Button implements MainActivationObserverInterface{
 
     @Override
-    public void notifyObserver(boolean disabled)
+    public void notifierLesObserveurs(boolean disabled)
     {
         setDisable(disabled);
     }

@@ -23,7 +23,7 @@ import vue.vuetextuelle.ObjetVisualisable;
 import vue.vuetextuelle.Visiteur;
 import controleur.ControleurInterface;
 import controleur.MainActivationObserverInterface;
-import controleur.ModelObserver;
+import controleur.ModelObserveur;
 
 /**
  * Controleur de la TreeTableView qui affiche les livraisons et les horaires.
@@ -31,7 +31,7 @@ import controleur.ModelObserver;
  * actions.
  */
 public class VueTextuelle implements Initializable, Visiteur, MainActivationObserverInterface,
-        ModelObserver {
+        ModelObserveur {
 
     @FXML
     TreeTableView<ObjetVisualisable> tableViewFenetre;
@@ -139,7 +139,7 @@ public class VueTextuelle implements Initializable, Visiteur, MainActivationObse
 
         // Récuperation des livraisons de la fenetre
         List<Livraison> livraisonList = new ArrayList<>();
-        fenetre.getLivraisons().forEach((integer, livraison1) -> {
+        fenetre.getListeLivraisons().forEach((integer, livraison1) -> {
             livraisonList.add(livraison1);
         });
 
@@ -160,7 +160,7 @@ public class VueTextuelle implements Initializable, Visiteur, MainActivationObse
     }
 
     @Override
-    public void notifyObserver(boolean disabled) {
+    public void notifierLesObserveurs(boolean disabled) {
         if (disabled) {
             effacerVueTableLivraison();
         }
@@ -171,7 +171,7 @@ public class VueTextuelle implements Initializable, Visiteur, MainActivationObse
      * Notification déclenchée lors d'un changement dans le model
      */
     @Override
-    public void notifyObserver() {
+    public void notifierLesOberseursDuModel() {
         effacerVueTableLivraison();
         construireVueTableLivraion(controleurInterface.getModel().getDemande());
     }
@@ -228,15 +228,19 @@ public class VueTextuelle implements Initializable, Visiteur, MainActivationObse
 
         private void initialiserHover() {
             setOnMouseEntered(event -> {
+        		ObjetVisualisable objetSurpasse = getTreeTableRow().getItem();
+        		
+        		if (objetSurpasse == null)
+        			return;
+            	
         		setStyle("-fx-background-color: yellow; -fx-text-fill: black;");
 
-        		ObjetVisualisable objetSurpasse = getTreeTableRow().getItem();
         		if (objetSurpasse instanceof DetailLivraison) {
         			Livraison livraison = ((DetailLivraison) objetSurpasse).getLivraison();
         			vueGraphique.surbrillanceLivraison(livraison);
         		}
         		else if (objetSurpasse instanceof DetailFenetre) {
-        			Collection<Livraison> livraisons = ((DetailFenetre) objetSurpasse).getFenetre().getLivraisons().values();
+        			Collection<Livraison> livraisons = ((DetailFenetre) objetSurpasse).getFenetre().getListeLivraisons().values();
         			vueGraphique.surbrillanceLivraisons(livraisons);
         		}
             });

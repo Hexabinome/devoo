@@ -81,9 +81,9 @@ public class Model implements ModelLecture
         //On ajout la solution dans la fenêtre
         for (int iFenetre = 0; iFenetre < demande.getFenetres().size(); iFenetre++) {
             //On a trouvé la fenêtre qui contient la previousId livraison
-            if (((ArrayList<Fenetre>) demande.getFenetres()).get(iFenetre).getLivraisons().get(previousId) != null) {
-                Livraison livraison = new Livraison(((ArrayList<Fenetre>) demande.getFenetres()).get(iFenetre).getLivraisons().size(), 0, intersectionId);
-                ((ArrayList<Fenetre>) demande.getFenetres()).get(iFenetre).getLivraisons().put(livraison.getId(), livraison);
+            if (((ArrayList<Fenetre>) demande.getFenetres()).get(iFenetre).getListeLivraisons().get(previousId) != null) {
+                Livraison livraison = new Livraison(((ArrayList<Fenetre>) demande.getFenetres()).get(iFenetre).getListeLivraisons().size(), 0, intersectionId);
+                ((ArrayList<Fenetre>) demande.getFenetres()).get(iFenetre).getListeLivraisons().put(livraison.getId(), livraison);
 
                 //TODO à optimiser (pas desoin de rappeller dijkstra pour toutes les intersections
                 if (iFenetre == demande.getFenetres().size() - 1)
@@ -98,6 +98,7 @@ public class Model implements ModelLecture
     public void calculerTournee()
     {
         graphe = demande.creerGraphe(plan);
+        graphe.creerInverseLivraisonDictionnaire();
 
         // apres avoir calcule le graphe il faut appeler TSP ici.
         tsp = new TSP1();
@@ -106,25 +107,35 @@ public class Model implements ModelLecture
         //des que le TSP a fini il faut stoquer les horaires de passage dans l'objet demande
         remplirHoraires();
     }
+    
+    private List<Livraison> getLivraisonFromSolutionTsp(Fenetre fenetre, int indiceDebutSolutionTsp)
+    {
+    	List<Livraison> listLivraison = new ArrayList<>();
+    	
+    	for(int iSolution = indiceDebutSolutionTsp; iSolution < fenetre.getNbLivraison(); iSolution++)
+    	{
+    		int idLivraison = graphe.getIdLivraisonParIdMatrice(tsp.getSolution(iSolution));
+    		listLivraison.add(fenetre.getLivraison(idLivraison));
+    	}
+    	
+    	return listLivraison;
+    }
 
     @Override
     public List<List<Integer>> getTournee()
     {
         List<List<Integer>> tournee = new LinkedList<>();
         List<Integer> sousTournee = new LinkedList<>();
-        
-        //les ids calcule par TSP sont unique, mais il s'agit pas des id's d'intersections. On utilise un dictionnaire pour les identifier.
-        Map<Integer, Integer> graphDictionnaire = graphe.getIntersectionDictionnaire();
 
         //compteur pour iterer sur la solution cree par TSP
-        int tspCompteur = 0;
+        int compteurSolutionTSP = 0;
 
         //initilaiser avec l'id de l'enrepot
-        int livraisonDepart = tsp.getSolution(tspCompteur++);
-        
+        int indiceMatriceDepart = tsp.getSolution(compteurSolutionTSP++);
+
         //ajoute de l'entrepot
-        sousTournee.add(graphDictionnaire.get(livraisonDepart));
-        
+        //Livraison l = 
+        //sousTournee.add(graphe.getIdLivraisonParIdMatrice(indiceMatriceDepart)));
         //pour chaque fenetre... (sauf le premier qui contient que l'entrepot)
         List<Fenetre> listFenetres = demande.getFenetres();
         listFenetres.remove(0);
@@ -134,12 +145,12 @@ public class Model implements ModelLecture
 
         	// TODO: Verifier que ca se ne plante pas si il y a deux livraisons pour une seul intersection
         	// recupére les n prochaines solutions de la solution de tsp, avec n egal au nombre de livraisons voulus pour cette fenetre. 
-            for (int livraisonComteur = 0; livraisonComteur < fenetre.getLivraisons().size(); livraisonComteur++) {
+            for (int livraisonComteur = 0; livraisonComteur < fenetre.getListeLivraisons().size(); livraisonComteur++) {
                 //recuperer prochain livraison prevu
-                int livraisonArrivee = tsp.getSolution(tspCompteur++);
+                int livraisonArrivee = tsp.getSolution(compteurSolutionTSP++);
 
                 //recuperer chemin etrne depart et arrivee
-                Chemin chemin = graphe.getCheminGrapheIndice(livraisonDepart, livraisonArrivee);
+                Chemin chemin = graphe.getCheminGrapheIndice(indiceMatriceDepart, livraisonArrivee);
 
                 //ajouter chaque intersection qui on passe en suivant chemin
                 for (Troncon troncon : chemin.getTroncons()) {
@@ -147,9 +158,9 @@ public class Model implements ModelLecture
                 }
 
                 //mis a jour de depart et arrivee
-                livraisonDepart = livraisonArrivee;
+                indiceMatriceDepart = livraisonArrivee;
             }
-            
+
             //ajouter la liste cree pour cette fenetre a la liste principale
             tournee.add(sousTournee);
         }
@@ -157,11 +168,33 @@ public class Model implements ModelLecture
         return tournee;
     }
 
+    private List<Integer> creerSourTournee(Livraison depart, List<Livraison> sousTourneeLivraisons)
+    {
+        // Ce liste represente tous les intersections (dans la bonne ordre) qui on doit parcourir pour effecture les livraisons prevus.
+        List<Integer> sousTournee = new LinkedList<>();
+
+        //Pour chaque chemin entre les livraisons prevus: ajoute les intersection sur le chemin a la sous tournee
+        for (Livraison arrivee : sousTourneeLivraisons) {
+            Chemin chemin = graphe.getChemin(depart.getId(), arrivee.getId());
+            
+            //pour toutes les troncons sur le chemin, ajoute le arrivee
+            for(Troncon troncon : chemin.getTroncons())
+            {
+                sousTournee.add(troncon.getIdDestination());
+            }
+            
+            //mis a jour du depart
+            depart = arrivee;
+        }
+        
+        return sousTournee;
+    }
+
     private void remplirHoraires()
     {
         //TODO: replace mock implementation by data actually derived from TSP sollution
         demande.getFenetres().stream().forEach((fenetre) -> {
-            fenetre.getLivraisons().values().stream().forEach((livraison) -> {
+            fenetre.getListeLivraisons().values().stream().forEach((livraison) -> {
                 livraison.setHoraireDePassage((int) (Math.random() * 3600));
             });
         });

@@ -56,11 +56,16 @@ public class Fenetre
         livraisons.put(id, livraison);
     }
 
-    public Map<Integer, Livraison> getLivraisons()
+    public Map<Integer, Livraison> getListeLivraisons()
     {
         return Collections.unmodifiableMap(livraisons);
     }
 
+    public Livraison getLivraison(int idLivraison)
+    {
+    	return livraisons.get(idLivraison);
+    }
+    
     @Override
     public String toString()
     {
@@ -93,7 +98,7 @@ public class Fenetre
 
             intersectionVersLivraisons.get(livraison.getAdresse()).add(livraison);
         }
-        for (Livraison livraison : fNext.getLivraisons().values()) {
+        for (Livraison livraison : fNext.getListeLivraisons().values()) {
             if (intersectionVersLivraisons.get(livraison.getAdresse()) == null)
                 //ajouter nouveau entry
                 intersectionVersLivraisons.put(livraison.getAdresse(), new LinkedList<>());
@@ -103,7 +108,7 @@ public class Fenetre
         //stoque toutes les livraisons de cette et la prochaine fenetre
         Collection<Livraison> livraisonsArrivees = new LinkedList<>();
         livraisonsArrivees.addAll(livraisons.values());
-        livraisonsArrivees.addAll(fNext.getLivraisons().values());
+        livraisonsArrivees.addAll(fNext.getListeLivraisons().values());
         for (Livraison l : livraisonsArrivees) {
             intersectionsRecherchee.add(l.getAdresse());
         }
@@ -235,4 +240,9 @@ public class Fenetre
         }
 
     }
+
+	
+    public int getNbLivraison() {
+		return livraisons.size();
+	}
 }
