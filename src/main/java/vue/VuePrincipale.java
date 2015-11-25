@@ -50,6 +50,7 @@ public class VuePrincipale implements Initializable {
      * Controleur déléguant la logique applicative à la couche controleur
      */
     private ControleurInterface controleurInterface;
+    
     /**
      * Partie droite de la fenêtre, affichant de la graphe du plan de la ville
      * et des livraisons
