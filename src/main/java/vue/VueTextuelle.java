@@ -6,8 +6,10 @@ import controleur.ModelObserver;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
-import javafx.util.Callback;
+import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeTableCell;
+import javafx.scene.control.TreeTableColumn;
+import javafx.scene.control.TreeTableView;
 import modele.xmldata.Demande;
 import modele.xmldata.Fenetre;
 import modele.xmldata.Livraison;
@@ -18,7 +20,6 @@ import vue.vuetextuelle.Visiteur;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -76,7 +77,7 @@ public class VueTextuelle implements Initializable, Visiteur, MainActivationObse
         initialiserColonneHoraire();
         initialiserEcouteurs();
         tableViewFenetre.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
-            if(newValue != null)
+            if (newValue != null)
                 newValue.getValue().accepter(this);
         }));
     }
@@ -90,7 +91,7 @@ public class VueTextuelle implements Initializable, Visiteur, MainActivationObse
         // On recupère l'entrepot
         //TreeItem<ObjetVisualisable> entropt = new TreeItem<>(new DetailFenetre(demande.getFenetres().get(0)));
         //elementRacine.getChildren().add(entropt);
-        for (Fenetre f : demande.getFenetres().subList(0,demande.getFenetres().size())) {
+        for (Fenetre f : demande.getFenetres().subList(0, demande.getFenetres().size())) {
             elementRacine.getChildren().add(construireFenetreItem(f));
         }
     }
