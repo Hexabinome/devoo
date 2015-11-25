@@ -5,6 +5,8 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import controleur.ModelObserveur;
+import controleur.PlanObserveur;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -30,7 +32,7 @@ import controleur.ControleurInterface;
  *
  * @author David
  */
-public class VuePrincipale implements Initializable {
+public class VuePrincipale implements Initializable, PlanObserveur, ModelObserveur {
 
     /**
      * Mediateur : permet de communiquer avec les autres controleurs
@@ -134,13 +136,6 @@ public class VuePrincipale implements Initializable {
             Exception messageErreur = controleurInterface.chargerPlan(file);
             if (messageErreur != null)
                 ouvrirAlerteXML(messageErreur, file.getName());
-            else {
-                vueGraphique.construireGraphe(controleurInterface.getPlanDeVille());
-
-                //activation de menu element graphique qui permet de charger un fichier de livraison
-                //(Ici on peut le faire sans appel observeur, parce qu' a parti d'ici on possede toujours un plan valide.)
-                menuFichier.getItems().get(1).setDisable(false);
-            }
         }
     }
 
@@ -243,7 +238,21 @@ public class VuePrincipale implements Initializable {
         controleurInterface.ajouterDesactObserver(echangerLivraisonsBouton);
         controleurInterface.ajouterDesactObserver(supprimerLivraisonBouton);
         controleurInterface.ajouterDesactObserver(genererFeuilleBouton);
+        controleurInterface.ajouterPlanObserveur(this);
     }
 
 
+    @Override
+    public void notifierLesObserveursDuPlan() {
+        vueGraphique.construireGraphe(controleurInterface.getPlanDeVille());
+        //activation de menu element graphique qui permet de charger un fichier de livraison
+        //(Ici on peut le faire sans appel observeur, parce qu' a parti d'ici on possede toujours un plan valide.)
+        menuFichier.getItems().get(1).setDisable(false);
+
+    }
+
+    @Override
+    public void notifierLesOberseursDuModel() {
+        // TODO : completer
+    }
 }
