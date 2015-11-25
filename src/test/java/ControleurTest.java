@@ -1,14 +1,11 @@
 
 import controleur.Controleur;
 import controleur.ControleurInterface;
-import java.io.File;
-import java.util.Observable;
-import java.util.Observer;
-
-import static org.junit.Assert.assertEquals;
-
+import controleur.ModelObserver;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.io.File;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -17,7 +14,6 @@ import org.junit.Test;
  */
 
 /**
- *
  * @author robinroyer
  */
 public class ControleurTest {
@@ -33,37 +29,42 @@ public class ControleurTest {
         +getModel():ModelLecture
         +cliqueCalculerTourne():void 
     */
-	
-	Observer observer;
-	boolean miseAJourAppelee;
-	
-	@Before
-	public void setUp(){
-		miseAJourAppelee = false;
-		observer = new Observer(){public void update(Observable o, Object arg){miseAJourAppelee = true;}};
-	}
-        
+
+    ModelObserver observer;
+    boolean miseAJourAppelee;
+    ControleurInterface controleurInterface;
+
+    @Before
+    public void setUp() {
+
+        controleurInterface = new Controleur();
+        miseAJourAppelee = false;
+        observer = new ModelObserver() {
+            @Override
+            public void notifyObserver() {
+                miseAJourAppelee = true;
+            }
+        };
+        controleurInterface.ajouterModelObserver(observer);
+    }
+
     @Test
     public void testchargerPlan() {
-       Controleur controleur = new Controleur ();
-       controleur.addObserver(observer);
-       File plan = new File("samples/plan10x10-1.xml");
-       controleur.chargerPlan(plan);
-        
-       assert(miseAJourAppelee);
+        File plan = new File("samples/plan10x10.xml");
+        controleurInterface.chargerPlan(plan);
+        assert (miseAJourAppelee);
     }
-    
+
     @Test
     public void testchargerLivraisons() {
-       Controleur controleur = new Controleur ();
-       controleur.addObserver(observer);
-       
-       File plan = new File("samples/plan10x10-1.xml");
-       controleur.chargerPlan(plan);
-       
-       File livraisons = new File("samples/livraison10x10-3.xml");
-       controleur.chargerLivraisons(livraisons);
-       
-       assert(miseAJourAppelee);
-    }    
+        File plan = new File("samples/plan10x10.xml");
+        controleurInterface.chargerPlan(plan);
+
+        File livraisons = new File("samples/livraison10x10-3.xml");
+        controleurInterface.chargerLivraisons(livraisons);
+
+        assert (miseAJourAppelee);
+    }
+
+
 }

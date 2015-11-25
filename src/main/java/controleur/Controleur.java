@@ -12,7 +12,7 @@ import modele.xmldata.PlanDeVille;
  *
  * @author Maxou
  */
-public class Controleur extends Observable implements ControleurInterface 
+public class Controleur implements ControleurInterface
 {
 
     private EtatInterface etat;
