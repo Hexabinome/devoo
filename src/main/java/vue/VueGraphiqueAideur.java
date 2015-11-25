@@ -120,17 +120,28 @@ public class VueGraphiqueAideur
         }
     }
     
-    public void surbrillanceLivraison(Livraison livraison, boolean activer) {
-    	Ellipse livraisonGraphique = intersectionsGraphiques.get(livraison.getAdresse()).getKey();
-    	
+    public void surbrillanceLivraison(Livraison livraison) {
     	// Repeindre toutes les intersections en couleur normal (pour parvenir aux entrées et sorties non détectées) 
+    	desactiverSurbrillance();
+    	
+    	// Mise en surbrillance d'une intersection
+    	Ellipse livraisonGraphique = intersectionsGraphiques.get(livraison.getAdresse()).getKey();
+		livraisonGraphique.setFill(ConstantesGraphique.COULEUR_INTERSECTION_SURBRILLANCE);
+    }
+    
+    public void surbrillanceLivraisons(Collection<Livraison> livraisons) {
+    	desactiverSurbrillance();
+    	
+    	// Surbrillance de toutes les livraisons
+    	for (Livraison livraison : livraisons) {
+    		Ellipse livraisonGraphique = intersectionsGraphiques.get(livraison.getAdresse()).getKey();
+    		livraisonGraphique.setFill(ConstantesGraphique.COULEUR_INTERSECTION_SURBRILLANCE);
+    	}
+    }
+    
+    public void desactiverSurbrillance() {
     	for (Pair<Ellipse, Collection<Integer>> autreIntersection : intersectionsGraphiques.values()) {
     		autreIntersection.getKey().setFill(ConstantesGraphique.COULEUR_INTERSECTION);
-    	}
-    	
-		// S'il faut mettre en surbrillance
-    	if (activer) {
-    		livraisonGraphique.setFill(ConstantesGraphique.COULEUR_INTERSECTION_SURBRILLANCE);
     	}
     }
 

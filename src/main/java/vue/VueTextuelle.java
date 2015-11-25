@@ -2,8 +2,10 @@ package vue;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.ResourceBundle;
+
 
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.fxml.FXML;
@@ -227,21 +229,23 @@ public class VueTextuelle implements Initializable, Visiteur, MainActivationObse
         private void initialiserHover() {
             setOnMouseEntered(event -> {
         		setStyle("-fx-background-color: yellow; -fx-text-fill: black;");
-// HOVER FENETRE = hover toutes les livraisons
-        		// HOVER = texte en noir
-        		ObjetVisualisable objetSurpasse = getTreeTableRow().getItem(); 
+
+        		ObjetVisualisable objetSurpasse = getTreeTableRow().getItem();
         		if (objetSurpasse instanceof DetailLivraison) {
-        			vueGraphique.surbrillanceLivraison(((DetailLivraison) objetSurpasse).getLivraison(), true);
+        			Livraison livraison = ((DetailLivraison) objetSurpasse).getLivraison();
+        			vueGraphique.surbrillanceLivraison(livraison);
+        		}
+        		else if (objetSurpasse instanceof DetailFenetre) {
+        			Collection<Livraison> livraisons = ((DetailFenetre) objetSurpasse).getFenetre().getLivraisons().values();
+        			vueGraphique.surbrillanceLivraisons(livraisons);
         		}
             });
             
             setOnMouseExited(event -> {
             	setStyle("-fx-background-color: white; -fx-text-fill: black;");
             	
-        		ObjetVisualisable objetSurpasse = getTreeTableRow().getItem(); 
-        		if (objetSurpasse instanceof DetailLivraison) {
-        			vueGraphique.surbrillanceLivraison(((DetailLivraison) objetSurpasse).getLivraison(), false);
-        		}
+        		// Dans tous les cas, on désactive la surbrillance partout
+    			vueGraphique.desactiverSurbrillance();;
             });
         }
 

@@ -242,7 +242,6 @@ public class VuePrincipale implements Initializable {
         controleurInterface.ajouterDesactObserver(echangerLivraisonsBouton);
         controleurInterface.ajouterDesactObserver(supprimerLivraisonBouton);
         controleurInterface.ajouterDesactObserver(genererFeuilleBouton);
-
     }
 
 
