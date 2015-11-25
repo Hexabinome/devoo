@@ -51,6 +51,7 @@ public class FenetrePrincipale extends Application {
                 getClass().getClassLoader().getResource("fxml/VueLivraisonHoraire.fxml"));
         AnchorPane anchorPane = fxmlLoader2.load();
         vueTextuelle = (VueTextuelle) fxmlLoader2.getController();
+        vueTextuelle.setAideurVueGraphique(vuePrincipaleControleur.getAideurVueGraphique());
         vueTextuelle.setControleurInterface(controleurApplication);
         vueTextuelle.initialiserMediateur(this);
         vueTextuelle.initialiserObserveurs();

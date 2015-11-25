@@ -16,6 +16,7 @@ import javafx.scene.shape.Polygon;
 import javafx.util.Pair;
 import modele.xmldata.Demande;
 import modele.xmldata.Intersection;
+import modele.xmldata.Livraison;
 import modele.xmldata.PlanDeVille;
 
 /**
@@ -115,11 +116,25 @@ public class VueGraphiqueAideur
             echelleYIntersection = Math.max(echelleYIntersection, pair.getKey().getCenterY());
         }
 
-        // Put nodes to the front
+        // Mettre les noeuds devant
         for (Node n : canvas.getChildrenUnmodifiable()) {
             if (n instanceof Ellipse)
                 n.toFront();
         }
+    }
+    
+    public void surbrillanceLivraison(Livraison livraison, boolean activer) {
+    	Ellipse livraisonGraphique = intersectionsGraphiques.get(livraison.getAdresse()).getKey();
+    	
+    	// Repeindre toutes les intersections en couleur normal (pour parvenir aux entrées et sorties non détectées) 
+    	for (Pair<Ellipse, Collection<Integer>> autreIntersection : intersectionsGraphiques.values()) {
+    		autreIntersection.getKey().setFill(ConstantesGraphique.COULEUR_INTERSECTION);
+    	}
+    	
+		// S'il faut mettre en surbrillance
+    	if (activer) {
+    		livraisonGraphique.setFill(ConstantesGraphique.COULEUR_INTERSECTION_SURBRILLANCE);
+    	}
     }
 
     /**
@@ -197,33 +212,6 @@ public class VueGraphiqueAideur
         canvas.getChildren().add(fleche);
     }
 
-    private static class ConstantesGraphique
-    {
-
-        /**
-         * La taille sur l'interface graphique d'une intersection du plan de la
-         * ville
-         */
-        private final static double DIAMETRE_INTERSECTION = 7;
-        /**
-         * La marge à laisser sur les côté du canvas graphique afin d'avoir plus
-         * du lisibilité
-         */
-        private final static int MARGE_INTERSECTION = 30;
-
-        private final static Paint COULEUR_INTERSECTION = Color.WHITE;
-        private final static Paint COULEUR_TRONCON = Color.WHITE;
-
-        private final static Paint COULEUR_ENTREPOT = Color.RED;
-
-        private final static Paint[] COULEURS_FENETRES = new Paint[]{
-            Color.LIGHTBLUE,
-            Color.YELLOW,
-            Color.RED,
-            Color.GREEN
-        };
-    }
-
     private Pair<Integer, Ellipse> entrepot;
     private List<List<Integer>> tournee;
 
@@ -237,7 +225,7 @@ public class VueGraphiqueAideur
     public void construireTournee(Intersection entrepot, List<List<Integer>> tournee, Demande demande)
     {
 
-        this.entrepot = new Pair<>(entrepot.getId(), construireEllipse(entrepot, ConstantesGraphique.COULEUR_ENTREPOT));
+        this.entrepot = new Pair<Integer, Ellipse>(entrepot.getId(), construireEllipse(entrepot, ConstantesGraphique.COULEUR_ENTREPOT));
 
   //      this.tournee = new ArrayList<>();
         //Pour chaque fenêtre de livraison
@@ -276,8 +264,32 @@ public class VueGraphiqueAideur
 
                 afficherTroncon(debut, fin, couleur);
             }
-
-
         }
+    }
+    
+    private static class ConstantesGraphique
+    {
+		/**
+         * La taille sur l'interface graphique d'une intersection du plan de la
+         * ville
+         */
+        private final static double DIAMETRE_INTERSECTION = 7;
+        /**
+         * La marge à laisser sur les côté du canvas graphique afin d'avoir plus
+         * du lisibilité
+         */
+        private final static int MARGE_INTERSECTION = 30;
+
+        private final static Paint COULEUR_INTERSECTION = Color.WHITE;
+        private final static Paint COULEUR_INTERSECTION_SURBRILLANCE = Color.BLUE;
+        private final static Paint COULEUR_TRONCON = Color.WHITE;
+
+        private final static Paint COULEUR_ENTREPOT = Color.RED;
+
+        private final static Paint[] COULEURS_FENETRES = new Paint[]{
+            Color.LIGHTBLUE,
+            Color.RED,
+            Color.GREEN
+        };
     }
 }
