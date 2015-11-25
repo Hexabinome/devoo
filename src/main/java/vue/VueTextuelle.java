@@ -153,7 +153,6 @@ public class VueTextuelle implements Initializable, Visiteur, MainActivationObse
         return elementRacine;
     }
 
-
     public void setControleurInterface(ControleurInterface controleurInterface) {
         this.controleurInterface = controleurInterface;
     }
@@ -227,8 +226,9 @@ public class VueTextuelle implements Initializable, Visiteur, MainActivationObse
 
         private void initialiserHover() {
             setOnMouseEntered(event -> {
-        		setStyle("-fx-background-color: yellow");
-
+        		setStyle("-fx-background-color: yellow; -fx-text-fill: black;");
+// HOVER FENETRE = hover toutes les livraisons
+        		// HOVER = texte en noir
         		ObjetVisualisable objetSurpasse = getTreeTableRow().getItem(); 
         		if (objetSurpasse instanceof DetailLivraison) {
         			vueGraphique.surbrillanceLivraison(((DetailLivraison) objetSurpasse).getLivraison(), true);
@@ -236,7 +236,7 @@ public class VueTextuelle implements Initializable, Visiteur, MainActivationObse
             });
             
             setOnMouseExited(event -> {
-            	setStyle("-fx-background-color: white");
+            	setStyle("-fx-background-color: white; -fx-text-fill: black;");
             	
         		ObjetVisualisable objetSurpasse = getTreeTableRow().getItem(); 
         		if (objetSurpasse instanceof DetailLivraison) {

@@ -104,6 +104,7 @@ public class VuePrincipale implements Initializable {
 
             canvasGraphique.getChildren().clear();
             vueGraphique.afficherPlan();
+            vueGraphique.afficherTournee();
         }
 
     };

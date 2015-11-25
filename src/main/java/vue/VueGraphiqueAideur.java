@@ -49,8 +49,7 @@ public class VueGraphiqueAideur
 
     private Pane canvas;
 
-    public VueGraphiqueAideur(Pane canvas)
-    {
+    public VueGraphiqueAideur(Pane canvas) {
         this.canvas = canvas;
     }
 
@@ -61,8 +60,7 @@ public class VueGraphiqueAideur
      * @param plan Le plan de la ville, chargée par le couche controleur et
      * persistance
      */
-    public void construireGraphe(PlanDeVille plan)
-    {
+    public void construireGraphe(PlanDeVille plan) {
         canvas.getChildren().clear();
 
         Map<Integer, Intersection> toutesIntersections = plan.getIntersections();
@@ -91,8 +89,7 @@ public class VueGraphiqueAideur
      * initiale dans le fichier XML / la plus grande taille dans le fichier XML)
      * => (la nouvelle taille / la taille du canvas)
      */
-    public void afficherPlan()
-    {
+    public void afficherPlan() {
         if (intersectionsGraphiques == null || intersectionsGraphiques.isEmpty())
             return;
 
@@ -144,8 +141,7 @@ public class VueGraphiqueAideur
      * @return Le point du graphe, à sa position du fichier XML du plan de la
      * ville
      */
-    private Ellipse construireEllipse(Intersection i, Paint couleur)
-    {
+    private Ellipse construireEllipse(Intersection i, Paint couleur) {
         Ellipse ellipse = new Ellipse(i.getX(), i.getY(), ConstantesGraphique.DIAMETRE_INTERSECTION, ConstantesGraphique.DIAMETRE_INTERSECTION);
         ellipse.setFill(couleur);
         return ellipse;
@@ -156,8 +152,7 @@ public class VueGraphiqueAideur
      *
      * @param e Le point à afficher
      */
-    private void afficherEllipse(Ellipse e)
-    {
+    private void afficherEllipse(Ellipse e) {
         double newX = e.getCenterX() * canvas.getWidth() / (echelleXIntersection + ConstantesGraphique.MARGE_INTERSECTION);
         double newY = e.getCenterY() * canvas.getHeight() / (echelleYIntersection + ConstantesGraphique.MARGE_INTERSECTION);
 
@@ -173,8 +168,7 @@ public class VueGraphiqueAideur
      * @param debut Le point de début
      * @param cible Le point de destination
      */
-    private void afficherTroncon(Ellipse debut, Ellipse cible, Paint couleur)
-    {
+    private void afficherTroncon(Ellipse debut, Ellipse cible, Paint couleur) {
         double p1X = debut.getCenterX();
         double p1Y = debut.getCenterY();
         double p2X = cible.getCenterX();
@@ -222,8 +216,7 @@ public class VueGraphiqueAideur
      * @param tournee
      * @param demande
      */
-    public void construireTournee(Intersection entrepot, List<List<Integer>> tournee, Demande demande)
-    {
+    public void construireTournee(Intersection entrepot, List<List<Integer>> tournee, Demande demande) {
 
         this.entrepot = new Pair<Integer, Ellipse>(entrepot.getId(), construireEllipse(entrepot, ConstantesGraphique.COULEUR_ENTREPOT));
 
@@ -246,15 +239,16 @@ public class VueGraphiqueAideur
         afficherTournee();
     }
 
-    public void afficherTournee()
-    {
+    public void afficherTournee() {
+    	if (tournee == null || tournee.isEmpty())
+    		return;
+    	
         afficherEllipse(entrepot.getValue());
 
         // Afficher tournée dans chaque fenêtre
         for (int idFenetre = 0; idFenetre < tournee.size(); idFenetre++) {
 
             Paint couleur = ConstantesGraphique.COULEURS_FENETRES[idFenetre % ConstantesGraphique.COULEURS_FENETRES.length];
-
             
             for (int idIntersectionLivraison = 0; idIntersectionLivraison < tournee.get(idFenetre).size() - 1; idIntersectionLivraison++) {
                 int departIntersectionId = tournee.get(idFenetre).get(idIntersectionLivraison);
@@ -267,8 +261,7 @@ public class VueGraphiqueAideur
         }
     }
     
-    private static class ConstantesGraphique
-    {
+    private static class ConstantesGraphique {
 		/**
          * La taille sur l'interface graphique d'une intersection du plan de la
          * ville
@@ -286,7 +279,7 @@ public class VueGraphiqueAideur
 
         private final static Paint COULEUR_ENTREPOT = Color.RED;
 
-        private final static Paint[] COULEURS_FENETRES = new Paint[]{
+        private final static Paint[] COULEURS_FENETRES = new Paint[] {
             Color.LIGHTBLUE,
             Color.RED,
             Color.GREEN
