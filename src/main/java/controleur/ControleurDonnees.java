@@ -31,6 +31,8 @@ public class ControleurDonnees
     // collection des observers pour la passibilite d'annuler / retablis des interactions effectuees.
     private final Collection<RetablirObserveur> retablirObserveurs;
 
+    private final Collection<PlanObserveur> planObserveurs;
+
     private PlanDeVille plan = null;
 
     private Historique hist;
@@ -41,6 +43,7 @@ public class ControleurDonnees
         modelObserveurs = new LinkedList<>();
         annulerObserveurs = new LinkedList<>();
         retablirObserveurs = new LinkedList<>();
+        planObserveurs = new LinkedList<>();
     }
 
     public Model getModel()
@@ -91,6 +94,16 @@ public class ControleurDonnees
     public void addRetablirObserveur(RetablirObserveur obs)
     {
         retablirObserveurs.add(obs);
+    }
+
+    public void ajouterPlanObserveur(PlanObserveur planObserveur){
+        planObserveurs.add(planObserveur);
+    }
+
+    public void notifierLesObserveursDuPlan(){
+        planObserveurs.stream().forEach((planObserveur -> {
+            planObserveur.notifierLesObserveursDuPlan();
+        }));
     }
 
     public void notifyAllActObserveurs(boolean state)

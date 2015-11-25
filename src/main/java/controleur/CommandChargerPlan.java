@@ -29,7 +29,7 @@ public class CommandChargerPlan extends UninvertibelCommand
             //remplacer plan qui est charge d'un nouveau plan (ssi le chargement du xml a reussi)
             controleurDonnees.setPlan(DeserialiseurXML.ouvrirPlanDeVille(planFichier));
             controleurDonnees.notifyAllActObserveurs(true);
-            controleurDonnees.notifyAllModelObserveurs();
+            controleurDonnees.notifierLesObserveursDuPlan(); // notification des observeurs du plan
         }
         catch (JDOMException | IOException | SAXException ex) {
             ex.printStackTrace();
