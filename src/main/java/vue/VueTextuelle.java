@@ -220,7 +220,11 @@ public class VueTextuelle implements Initializable, Visiteur, MainActivationObse
 
         private void initialiserHover() {
             setOnMouseEntered(event -> {
-
+        		setStyle("-fx-background-color: yellow");
+            });
+            
+            setOnMouseExited(event -> {
+            	setStyle("-fx-background-color: white");
             });
         }
 

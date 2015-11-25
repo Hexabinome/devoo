@@ -15,7 +15,7 @@ public class DetailLivraison extends ObjetVisualisable {
 
     @Override
     public String afficherCaracteriquesGloable() {
-        return livraison.getId() + " - Client " + livraison.getClientId() + " à " + livraison.getAdresse();
+        return String.format("%d - Client %d à %d", livraison.getId(), livraison.getClientId(), livraison.getAdresse());
     }
 
     @Override
