@@ -197,6 +197,36 @@ public class ControleurTest {
         assert (miseAJourAppelee);
     }
     
+    @Test
+    public void testCliqueOutilSupprimerSansPlan() {
+
+    	boolean jetee = false;
+
+    	try {
+    		controleurInterface.cliqueOutilSupprimer();
+    	} catch (RuntimeException e) {
+    		jetee = true;
+    	}
+    	
+    	assert(jetee);
+    }
+    
+    @Test
+    public void testCliqueOutilSupprimerSansLivraisons() {
+
+    	boolean jetee = false;
+
+    	try {
+    		File plan = new File("samples/plan10x10.xml");
+            controleurInterface.chargerPlan(plan);
+    		controleurInterface.cliqueOutilSupprimer();
+    	} catch (RuntimeException e) {
+    		jetee = true;
+    	}
+    	
+    	assert(jetee);
+    }
+    
     /*************************************************
      * Tests cliqueOutilAjouter
      *************************************************/
@@ -216,6 +246,36 @@ public class ControleurTest {
         assert (miseAJourAppelee);
     }
     
+    @Test
+    public void testCliqueOutilAjouterSansPlan() {
+
+    	boolean jetee = false;
+
+    	try {
+    		controleurInterface.cliqueOutilAjouter();
+    	} catch (RuntimeException e) {
+    		jetee = true;
+    	}
+    	
+    	assert(jetee);
+    }
+    
+    @Test
+    public void testCliqueOutilAjouterSansLivraisons() {
+
+    	boolean jetee = false;
+
+    	try {
+    		File plan = new File("samples/plan10x10.xml");
+            controleurInterface.chargerPlan(plan);
+    		controleurInterface.cliqueOutilAjouter();
+    	} catch (RuntimeException e) {
+    		jetee = true;
+    	}
+    	
+    	assert(jetee);
+    }
+    
     /*************************************************
      * Tests cliqueOutilEchanger
      *************************************************/
@@ -233,6 +293,36 @@ public class ControleurTest {
         controleurInterface.cliqueOutilEchanger();
 
         assert (miseAJourAppelee);
+    }
+    
+    @Test
+    public void testCliqueOutilEchangerSansPlan() {
+
+    	boolean jetee = false;
+
+    	try {
+    		controleurInterface.cliqueOutilEchanger();
+    	} catch (RuntimeException e) {
+    		jetee = true;
+    	}
+    	
+    	assert(jetee);
+    }
+    
+    @Test
+    public void testCliqueOutilEchangerSansLivraisons() {
+
+    	boolean jetee = false;
+
+    	try {
+    		File plan = new File("samples/plan10x10.xml");
+            controleurInterface.chargerPlan(plan);
+    		controleurInterface.cliqueOutilEchanger();
+    	} catch (RuntimeException e) {
+    		jetee = true;
+    	}
+    	
+    	assert(jetee);
     }
     
     /*************************************************
@@ -319,7 +409,37 @@ public class ControleurTest {
      *************************************************/
     
     @Test
-    public void testCliqueAnnuler() {
+    public void testCliqueAnnulerSansPlan() {
+
+    	boolean jetee = false;
+
+    	try {
+    		controleurInterface.cliqueAnnuler();;
+    	} catch (RuntimeException e) {
+    		jetee = true;
+    	}
+    	
+    	assert(jetee);
+    }
+    
+    @Test
+    public void testCliqueAnnulerSansLivraisons() {
+
+    	boolean jetee = false;
+
+    	try {
+    		File plan = new File("samples/plan10x10.xml");
+            controleurInterface.chargerPlan(plan);
+    		controleurInterface.cliqueAnnuler();
+    	} catch (RuntimeException e) {
+    		jetee = true;
+    	}
+    	
+    	assert(jetee);
+    }
+    
+    @Test
+    public void testCliqueAnnulerApresAjouter() {
         File plan = new File("samples/plan10x10.xml");
         controleurInterface.chargerPlan(plan);
 
@@ -343,6 +463,35 @@ public class ControleurTest {
      * Tests cliqueRetablir
      *************************************************/
     
+    @Test
+    public void testCliqueRetablirSansPlan() {
+
+    	boolean jetee = false;
+
+    	try {
+    		controleurInterface.cliqueRetablir();;
+    	} catch (RuntimeException e) {
+    		jetee = true;
+    	}
+    	
+    	assert(jetee);
+    }
+    
+    @Test
+    public void testCliqueRetablirSansLivraisons() {
+
+    	boolean jetee = false;
+
+    	try {
+    		File plan = new File("samples/plan10x10.xml");
+            controleurInterface.chargerPlan(plan);
+    		controleurInterface.cliqueRetablir();
+    	} catch (RuntimeException e) {
+    		jetee = true;
+    	}
+    	
+    	assert(jetee);
+    }
     
     /*************************************************
      * Tests getModel
