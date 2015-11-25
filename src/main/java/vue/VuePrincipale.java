@@ -111,7 +111,7 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
         }
 
     };
-
+    
 
     public void initialiserMediateur(FenetrePrincipale fenetrePrincipale) {
         this.mediateur = fenetrePrincipale;

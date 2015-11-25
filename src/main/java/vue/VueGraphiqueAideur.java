@@ -261,8 +261,16 @@ public class VueGraphiqueAideur
      * Id (adresse) de l'intersection où se situe l'entrepot
      */
     private int entrepot;
+    
+    /**
+     * Une liste d'entier = les id des intersections par lesquelles on passe dans une fenêtre
+     */
     private List<List<Integer>> tournee;
-    private List<Integer> intersectionsLivraisons = new ArrayList<>();
+    
+    /**
+     * Liste des identifiants des intersections qui 
+     */
+    private List<Integer> intersectionsLivraisons = new ArrayList<Integer>();
 
     /**
      * Construit et affiche la tournée
