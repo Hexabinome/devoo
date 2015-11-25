@@ -262,7 +262,7 @@ public class VueGraphiqueAideur
      */
     private int entrepot;
     private List<List<Integer>> tournee;
-    private List<Integer> intersectionsLivraisons = new ArrayList<Integer>();
+    private List<Integer> intersectionsLivraisons = new ArrayList<>();
 
     /**
      * Construit et affiche la tournée
@@ -278,7 +278,7 @@ public class VueGraphiqueAideur
         
         // Mémoriser l'id des intersections où il y a des livraisons
         for (Fenetre f : demande.getFenetres()) {
-        	intersectionsLivraisons.addAll(f.getLivraisons().keySet());
+        	intersectionsLivraisons.addAll(f.getListeLivraisons().keySet());
         }
 
         // Mémoriser l'ordre de tournée
