@@ -40,8 +40,8 @@ public class PlanDeVille {
     /**
      * Récupère l'intersection correspondant à l'id passé en paramètre
      */
-    public Intersection getIntersection(int id) {
-        return intersections.get(id);
+    public Intersection getIntersection(int idIntersection) {
+        return intersections.get(idIntersection);
     }
 
     public Map<Integer, Intersection> getIntersections() {

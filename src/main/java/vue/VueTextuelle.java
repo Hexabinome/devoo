@@ -6,10 +6,8 @@ import controleur.ModelObserver;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeTableCell;
-import javafx.scene.control.TreeTableColumn;
-import javafx.scene.control.TreeTableView;
+import javafx.scene.control.*;
+import javafx.util.Callback;
 import modele.xmldata.Demande;
 import modele.xmldata.Fenetre;
 import modele.xmldata.Livraison;
@@ -20,6 +18,7 @@ import vue.vuetextuelle.Visiteur;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -88,8 +87,10 @@ public class VueTextuelle implements Initializable, Visiteur, MainActivationObse
      * @param demande La demande de livraison chargée à partir d'un fichier XML
      */
     protected void construireVueTableLivraion(Demande demande) {
-        // TODO : afficher l'entrepo
-        for (Fenetre f : demande.getFenetres()) {
+        // On recupère l'entrepot
+        //TreeItem<ObjetVisualisable> entropt = new TreeItem<>(new DetailFenetre(demande.getFenetres().get(0)));
+        //elementRacine.getChildren().add(entropt);
+        for (Fenetre f : demande.getFenetres().subList(0,demande.getFenetres().size())) {
             elementRacine.getChildren().add(construireFenetreItem(f));
         }
     }
@@ -201,7 +202,12 @@ public class VueTextuelle implements Initializable, Visiteur, MainActivationObse
         @Override
         protected void updateItem(String item, boolean empty) {
             super.updateItem(item, empty);
-            setText(item);
+            // Pour afficher l'entrepot
+            if(item != null && item.startsWith("-1")){
+                setText("Entrepot");
+            }
+            else
+                setText(item);
         }
 
         private void initialiserClic() {
