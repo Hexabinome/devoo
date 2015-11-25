@@ -98,6 +98,7 @@ public class Model implements ModelLecture
     public void calculerTournee()
     {
         graphe = demande.creerGraphe(plan);
+        graphe.creerInverseLivraisonDictionnaire();
 
         // apres avoir calcule le graphe il faut appeler TSP ici.
         tsp = new TSP1();
@@ -113,21 +114,19 @@ public class Model implements ModelLecture
         List<List<Integer>> tournee = new LinkedList<>();
         List<Integer> sousTournee = new LinkedList<>();
         
-        //les ids calcule par TSP sont unique, mais il s'agit pas des id's d'intersections. On utilise un dictionnaire pour les identifier.
-        Map<Integer, Integer> graphDictionnaire = graphe.getIntersectionDictionnaire();
 
         //compteur pour iterer sur la solution cree par TSP
-        int tspCompteur = 0;
+        int compteurSolutionTSP = 0;
 
         //initilaiser avec l'id de l'enrepot
-        int livraisonDepart = tsp.getSolution(tspCompteur++);
+        int indiceMatriceDepart = tsp.getSolution(compteurSolutionTSP++);
         
         //ajoute de l'entrepot
-        sousTournee.add(graphDictionnaire.get(livraisonDepart));
+        //Livraison l = 
+        //sousTournee.add(graphe.getIdLivraisonParIdMatrice(indiceMatriceDepart)));
         
-        //pour chaque fenetre... (sauf le premier qui contient que l'entrepot)
+        //pour chaque fenetre... 
         List<Fenetre> listFenetres = demande.getFenetres();
-        listFenetres.remove(0);
         for (Fenetre fenetre : listFenetres) {
             //ajouter toutes les intersections qui on doit parcourir pour realiser le resultat du TSP
             sousTournee = new LinkedList<>();
@@ -136,10 +135,10 @@ public class Model implements ModelLecture
         	// recupére les n prochaines solutions de la solution de tsp, avec n egal au nombre de livraisons voulus pour cette fenetre. 
             for (int livraisonComteur = 0; livraisonComteur < fenetre.getLivraisons().size(); livraisonComteur++) {
                 //recuperer prochain livraison prevu
-                int livraisonArrivee = tsp.getSolution(tspCompteur++);
+                int livraisonArrivee = tsp.getSolution(compteurSolutionTSP++);
 
                 //recuperer chemin etrne depart et arrivee
-                Chemin chemin = graphe.getCheminGrapheIndice(livraisonDepart, livraisonArrivee);
+                Chemin chemin = graphe.getCheminGrapheIndice(indiceMatriceDepart, livraisonArrivee);
 
                 //ajouter chaque intersection qui on passe en suivant chemin
                 for (Troncon troncon : chemin.getTroncons()) {
@@ -147,7 +146,7 @@ public class Model implements ModelLecture
                 }
 
                 //mis a jour de depart et arrivee
-                livraisonDepart = livraisonArrivee;
+                indiceMatriceDepart = livraisonArrivee;
             }
             
             //ajouter la liste cree pour cette fenetre a la liste principale

@@ -13,10 +13,11 @@ public class GrapheRealisation implements Graphe
 {
 
     private Chemin[][] chemins;
-    
+
     //Key : id de livraison (30, 50, 12); 
     //Value : indice dans la matrice(0, 1, 2)
     private final HashMap<Integer, Integer> idLivraisonToIdMatrice;
+    private final HashMap<Integer, Integer> idMatriceToIdLivraison;
     private int nombreCheminInserer = 0;
 
     /**
@@ -28,6 +29,7 @@ public class GrapheRealisation implements Graphe
     {
         chemins = new Chemin[nbSommets][nbSommets];
         idLivraisonToIdMatrice = new HashMap<>();
+        idMatriceToIdLivraison = new HashMap<>();
     }
 
     @Override
@@ -75,17 +77,18 @@ public class GrapheRealisation implements Graphe
     }
 
     /**
-     * Insert un chemin dans la matrice
-     * Fait la correspondance entre les id des livraisons et les indices dans la matrice
+     * Insert un chemin dans la matrice Fait la correspondance entre les id des
+     * livraisons et les indices dans la matrice
+     *
      * @param chemin
      * @param livraisonDepartId
      * @param livraisonArriveeId
      */
     public void setChemin(Chemin chemin, int livraisonDepartId, int livraisonArriveeId)
     {
-    	Integer i, j;
+        Integer i, j;
 
-    	//Test si l'id de la livraison est déjà dans la Map de correspondance ou non 
+        //Test si l'id de la livraison est déjà dans la Map de correspondance ou non 
         if ((i = idLivraisonToIdMatrice.get(livraisonDepartId)) == null) {
             i = nombreCheminInserer;
             idLivraisonToIdMatrice.put(livraisonDepartId, nombreCheminInserer++);
@@ -112,18 +115,21 @@ public class GrapheRealisation implements Graphe
     }
 
     /**
-     * Creer et remplir dictionnaire pour trouver l'id d'une interseciton a
-     * parti de sa position dans la matrice. Cette map est rempli quand la
-     * creation du graphe a ete termine. On en a besoin notamment pour affichier
-     * la solution calculle par TSP.
+     * Creer et remplir dictionnaire pour trouver l'id d'une livraison a parti
+     * de sa position dans la matrice. Le map dont on a besoin pour faire ca est
+     * rempli pendant la creation du graphe.
      */
-    public Map<Integer, Integer> getIntersectionDictionnaire()
+    public void creerInverseLivraisonDictionnaire()
     {
-        Map<Integer, Integer> dictionnaire = new LinkedHashMap<>();
         idLivraisonToIdMatrice.keySet().stream().forEach((cle) -> {
-            dictionnaire.put(idLivraisonToIdMatrice.get(cle), cle);
+            idMatriceToIdLivraison.put(idLivraisonToIdMatrice.get(cle), cle);
         });
-        return dictionnaire;
+        
+    }
+    
+    public int getIdLivraisonParIdMatrice(int idMatrice)
+    {
+        return idMatriceToIdLivraison.get(idMatrice);
     }
 
 }
