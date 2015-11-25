@@ -3,8 +3,10 @@ package vue;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
@@ -158,8 +160,22 @@ public class VueGraphiqueAideur
      * Désactive la surbrillance pour toutes les surbrillances
      */
     public void desactiverSurbrillance() {
-    	for (Pair<Ellipse, Collection<Integer>> autreIntersection : intersectionsGraphiques.values()) {
-    		autreIntersection.getKey().setFill(ConstantesGraphique.COULEUR_INTERSECTION);
+    	Iterator<Entry<Integer, Pair<Ellipse, Collection<Integer>>>> it = intersectionsGraphiques.entrySet().iterator();
+    	
+    	while(it.hasNext()) {
+    		Map.Entry<Integer, Pair<Ellipse, Collection<Integer>>> pairIntersection = 
+    				(Map.Entry<Integer, Pair<Ellipse, Collection<Integer>>>)it.next();
+    		
+    		int idIntersection = pairIntersection.getKey();
+    		Ellipse intersection = pairIntersection.getValue().getKey();
+    		
+    		Paint couleur;
+    		if (idIntersection == entrepot)
+    			couleur = ConstantesGraphique.COULEUR_ENTREPOT;
+    		else
+    			couleur = ConstantesGraphique.COULEUR_INTERSECTION;
+    			
+			intersection.setFill(couleur);
     	}
     }
 
@@ -235,7 +251,10 @@ public class VueGraphiqueAideur
         canvas.getChildren().add(fleche);
     }
 
-    private Pair<Integer, Ellipse> entrepot;
+    /**
+     * Id (adresse) de l'intersection où se situe l'entrepot
+     */
+    private int entrepot;
     private List<List<Integer>> tournee;
 
     /**
@@ -247,7 +266,7 @@ public class VueGraphiqueAideur
      */
     public void construireTournee(Intersection entrepot, List<List<Integer>> tournee, Demande demande) {
 
-        this.entrepot = new Pair<Integer, Ellipse>(entrepot.getId(), construireEllipse(entrepot, ConstantesGraphique.COULEUR_ENTREPOT));
+        this.entrepot = entrepot.getId();
 
   //      this.tournee = new ArrayList<>();
         //Pour chaque fenêtre de livraison
@@ -272,7 +291,8 @@ public class VueGraphiqueAideur
     	if (tournee == null || tournee.isEmpty())
     		return;
     	
-        afficherEllipse(entrepot.getValue());
+    	// Coloration de l'entrepot
+    	intersectionsGraphiques.get(entrepot).getKey().setFill(ConstantesGraphique.COULEUR_ENTREPOT);
 
         // Afficher tournée dans chaque fenêtre
         for (int idFenetre = 0; idFenetre < tournee.size(); idFenetre++) {
