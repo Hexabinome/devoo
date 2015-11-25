@@ -113,26 +113,25 @@ public class Model implements ModelLecture
     {
         List<List<Integer>> tournee = new LinkedList<>();
         List<Integer> sousTournee = new LinkedList<>();
-        
 
         //compteur pour iterer sur la solution cree par TSP
         int compteurSolutionTSP = 0;
 
         //initilaiser avec l'id de l'enrepot
         int indiceMatriceDepart = tsp.getSolution(compteurSolutionTSP++);
-        
+
         //ajoute de l'entrepot
         //Livraison l = 
         //sousTournee.add(graphe.getIdLivraisonParIdMatrice(indiceMatriceDepart)));
-        
-        //pour chaque fenetre... 
+        //pour chaque fenetre... (sauf le premier qui contient que l'entrepot)
         List<Fenetre> listFenetres = demande.getFenetres();
+        listFenetres.remove(0);
         for (Fenetre fenetre : listFenetres) {
             //ajouter toutes les intersections qui on doit parcourir pour realiser le resultat du TSP
             sousTournee = new LinkedList<>();
 
-        	// TODO: Verifier que ca se ne plante pas si il y a deux livraisons pour une seul intersection
-        	// recupére les n prochaines solutions de la solution de tsp, avec n egal au nombre de livraisons voulus pour cette fenetre. 
+            // TODO: Verifier que ca se ne plante pas si il y a deux livraisons pour une seul intersection
+            // recupére les n prochaines solutions de la solution de tsp, avec n egal au nombre de livraisons voulus pour cette fenetre. 
             for (int livraisonComteur = 0; livraisonComteur < fenetre.getLivraisons().size(); livraisonComteur++) {
                 //recuperer prochain livraison prevu
                 int livraisonArrivee = tsp.getSolution(compteurSolutionTSP++);
@@ -148,12 +147,34 @@ public class Model implements ModelLecture
                 //mis a jour de depart et arrivee
                 indiceMatriceDepart = livraisonArrivee;
             }
-            
+
             //ajouter la liste cree pour cette fenetre a la liste principale
             tournee.add(sousTournee);
         }
 
         return tournee;
+    }
+
+    private List<Integer> creerSourTournee(Livraison depart, List<Livraison> sousTourneeLivraisons)
+    {
+        // Ce liste represente tous les intersections (dans la bonne ordre) qui on doit parcourir pour effecture les livraisons prevus.
+        List<Integer> sousTournee = new LinkedList<>();
+
+        //Pour chaque chemin entre les livraisons prevus: ajoute les intersection sur le chemin a la sous tournee
+        for (Livraison arrivee : sousTourneeLivraisons) {
+            Chemin chemin = graphe.getChemin(depart.getId(), arrivee.getId());
+            
+            //pour toutes les troncons sur le chemin, ajoute le arrivee
+            for(Troncon troncon : chemin.getTroncons())
+            {
+                sousTournee.add(troncon.getIdDestination());
+            }
+            
+            //mis a jour du depart
+            depart = arrivee;
+        }
+        
+        return sousTournee;
     }
 
     private void remplirHoraires()
