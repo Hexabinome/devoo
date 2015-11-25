@@ -89,6 +89,10 @@ public class GrapheRealisation implements Graphe
             chemins[i][j] = chemin;
     }
 
+    public void setChemin(Chemin chemin, int livraisonDepartId, int livraisonArriveeId)
+    {
+    }
+
     /**
      * Retourne l'indice dans la matrice de solution à partir de l'id de
      * livraison

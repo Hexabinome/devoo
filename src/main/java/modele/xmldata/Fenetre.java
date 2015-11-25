@@ -7,6 +7,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.PriorityQueue;
@@ -24,7 +25,7 @@ public class Fenetre
     private final int heureDebut;
     private final int heureFin;
 
-    // map qui stoque des livraisons idntifie evec leur livraisonId
+    // map qui stoque des livraisons idntifie avec leur livraisonId
     private final Map<Integer, Livraison> livraisons;
 
     public Fenetre(int timestampDebut, int timestampFin)
@@ -82,32 +83,56 @@ public class Fenetre
     {
         //Récupère toutes les livraisons avec les quels on doit calculer le plus court chemin.
         Set<Integer> intersectionsRecherchee = new HashSet<>();
-        
-        ArrayList<Livraison> listeLivraisons = new ArrayList<>();
-        listeLivraisons.addAll(livraisons.values());
-        listeLivraisons.addAll(fNext.getLivraisons().values());
-        for(Livraison l : listeLivraisons)
-        {
-        	intersectionsRecherchee.add(l.getAdresse());
+
+        Map<Integer, Collection<Livraison>> intersectionVersLivraisons = new LinkedHashMap<>();
+        //remplit liste de toutes les livraisons prevus, dans un Map dont kle est l'intersectionId de la livraison
+        for (Livraison livraison : livraisons.values()) {
+            if (intersectionVersLivraisons.get(livraison.getAdresse()) == null)
+                //ajouter nouveau entry
+                intersectionVersLivraisons.put(livraison.getAdresse(), new LinkedList<>());
+
+            intersectionVersLivraisons.get(livraison.getAdresse()).add(livraison);
+        }
+        for (Livraison livraison : fNext.getLivraisons().values()) {
+            if (intersectionVersLivraisons.get(livraison.getAdresse()) == null)
+                //ajouter nouveau entry
+                intersectionVersLivraisons.put(livraison.getAdresse(), new LinkedList<>());
+
+            intersectionVersLivraisons.get(livraison.getAdresse()).add(livraison);        }
+
+        //stoque toutes les livraisons de cette et la prochaine fenetre
+        Collection<Livraison> livraisonsArrivees = new LinkedList<>();
+        livraisonsArrivees.addAll(livraisons.values());
+        livraisonsArrivees.addAll(fNext.getLivraisons().values());
+        for (Livraison l : livraisonsArrivees) {
+            intersectionsRecherchee.add(l.getAdresse());
         }
 
         // pour chaque livraison de cette fenetre:
-        for (Livraison livraison : livraisons.values()) 
-        {
+        for (Livraison livraison : livraisons.values()) {
             // recupere l'intersection
             Intersection intersection = plan.getIntersection(livraison.getAdresse());
 
             // utilise dijkstra pour calculer le plus court chemin vers chaque intersection...
+            // TODO: Change order: either dont calculate or stoque, but don't calculate something and throw it away afterwards.
+            // TODO: Better store everything calculated...
             for (Chemin chemin : dijkstra(intersection, plan)) {
                 // ... et stoque le chemin ssi l'intersection correspond a une livrasion de cette ou la prochaine fenetre
-                if (intersectionsRecherchee.contains(chemin.getIdFin()))
-                    graphe.setChemin(chemin);
+                if (intersectionsRecherchee.contains(chemin.getIdFin())) {
+                    //TODO: trouver toutes les livraisons qui sont prevu pour l'intersection a la fin du chemin.
+                    chemin.getIdFin();
+
+                    for (Livraison cibleLivraison : intersectionVersLivraisons.get(chemin.getIdFin())) //TODO: For optimasation: Cannot store all resultats in one matriax, TSP relies on receiving livr., only.
+                    {
+                        graphe.setChemin(chemin, livraison.getId(), cibleLivraison.getId());
+                    }
+                }
+
             }
         }
     }
 
     //TODO set private (public pour les test)
-    //TODO optimisation : quand on a calculer tous les chemins vers la fenêtre suivantes, on arête.  
     public Collection<Chemin> dijkstra(Intersection intersectionDepart, PlanDeVille plan)
     {
         //INITIALISATION
@@ -117,13 +142,15 @@ public class Fenetre
         //le chemin contient tous tronçons par lesquels on est passé 
         //+ l'id de l'interserction de départ et la clef de la map comme intersection d'arrivé
         //TODO changer en set
-        Map<Integer, Chemin> chemins = new HashMap<>();
-        
+        Map<Integer, Chemin> mapChemins = new HashMap<>();
+
         // chemin vers se meme
-        chemins.put(intersectionDepart.getId(),
+        mapChemins.put(intersectionDepart.getId(),
                 new Chemin(0, new ArrayList<>(), intersectionDepart.getId(), intersectionDepart.getId()));
 
         Comparator<Intersection> comparator = new CoutComparator();
+
+        //Liste des toutes les intersection qui sont encore a faire avec dijkstra
         PriorityQueue<Intersection> queue = new PriorityQueue<>(1000, comparator);
         queue.add(intersectionDepart);
 
@@ -133,8 +160,9 @@ public class Fenetre
 
             //Pour toutes les intersections suivantes
             for (Intersection intersectionSuivante : getListeIntersectionSuivante(intersection, plan)) {
+
                 //On récupére le chemin en cours de contruction dans la map
-                Chemin chemin = chemins.get(intersection.getId());
+                Chemin chemin = mapChemins.get(intersection.getId());
 
                 //Calcule d'information pour le nouveau chemin
                 //On créer une nouvelle arrayList pour ne pas modifier celles qu'on récupères
@@ -148,15 +176,15 @@ public class Fenetre
                 float cout = chemin.getCout() + tronconTraverser.getCout();
 
                 //Insertion ou remplacement si le cout est inf�rieur du nouveau chemin dans la map
-                Chemin cheminDejaInserer = chemins.get(intersectionSuivante.getId());
-                if (cheminDejaInserer != null) {
-                    if (cheminDejaInserer.getCout() > cout)
-                        chemins.put(intersectionSuivante.getId(),
+                Chemin cheminDejaInsere = mapChemins.get(intersectionSuivante.getId());
+                if (cheminDejaInsere != null) {
+                    if (cheminDejaInsere.getCout() > cout)
+                        mapChemins.put(intersectionSuivante.getId(),
                                 new Chemin(cout, listeTronconsEnCours, chemin.getIdDepart(), intersectionSuivante.getId()));
                 }
                 else {
                     queue.add(intersectionSuivante);
-                    chemins.put(intersectionSuivante.getId(),
+                    mapChemins.put(intersectionSuivante.getId(),
                             new Chemin(cout, listeTronconsEnCours, chemin.getIdDepart(), intersectionSuivante.getId()));
                 }
             }
@@ -165,7 +193,7 @@ public class Fenetre
         }
 
         //Parcourir la map pour récupérer juste la liste des chemins finaux
-        return chemins.values();
+        return mapChemins.values();
     }
 
     /**
@@ -185,7 +213,6 @@ public class Fenetre
 
         return intersections;
     }
-
 
     /**
      * Classe utile pour la priority Queue. Le but est de lui fournir un
