@@ -202,7 +202,7 @@ public class VueTextuelle implements Initializable, Visiteur, MainActivationObse
 
 
         public TableCellSpecial() {
-            initialiserClic();
+           // initialiserClic();
             initialiserHover();
         }
 
