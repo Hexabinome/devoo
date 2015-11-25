@@ -47,8 +47,15 @@ public class VueGraphiqueAideur
      */
     private double echelleYIntersection = 0;
 
+    /**
+     * Le canvas graphique sur lequel on dessinera les éléments graphiques
+     */
     private Pane canvas;
 
+    /**
+     * Constructeur de la vue graphique
+     * @param canvas Le canvas sur lequel on dessinera les éléments graphiques
+     */
     public VueGraphiqueAideur(Pane canvas) {
         this.canvas = canvas;
     }
@@ -120,6 +127,10 @@ public class VueGraphiqueAideur
         }
     }
     
+    /**
+     * Affiche une livraison en surbrillance sur la partie graphique
+     * @param livraison La livraison à mettre en surbrillance
+     */
     public void surbrillanceLivraison(Livraison livraison) {
     	// Repeindre toutes les intersections en couleur normal (pour parvenir aux entrées et sorties non détectées) 
     	desactiverSurbrillance();
@@ -129,6 +140,10 @@ public class VueGraphiqueAideur
 		livraisonGraphique.setFill(ConstantesGraphique.COULEUR_INTERSECTION_SURBRILLANCE);
     }
     
+    /**
+     * Mets plusieurs livraisons en surbrillance sur la partie graphique
+     * @param livraisons Les livraisons à mettre en surbrillance
+     */
     public void surbrillanceLivraisons(Collection<Livraison> livraisons) {
     	desactiverSurbrillance();
     	
@@ -139,6 +154,9 @@ public class VueGraphiqueAideur
     	}
     }
     
+    /**
+     * Désactive la surbrillance pour toutes les surbrillances
+     */
     public void desactiverSurbrillance() {
     	for (Pair<Ellipse, Collection<Integer>> autreIntersection : intersectionsGraphiques.values()) {
     		autreIntersection.getKey().setFill(ConstantesGraphique.COULEUR_INTERSECTION);
@@ -272,6 +290,9 @@ public class VueGraphiqueAideur
         }
     }
     
+    /**
+     * Contient les constantes définissant certaines propriétés (taille, marge, couleur,...) de la fenêtre
+     */
     private static class ConstantesGraphique {
 		/**
          * La taille sur l'interface graphique d'une intersection du plan de la
