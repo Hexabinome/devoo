@@ -10,13 +10,13 @@ import org.xml.sax.SAXException;
  *
  * @author Max Schiedermeier
  */
-public class CommandChargerPlan extends UninvertibelCommand
+public class CommandeChargerPlan extends CommandeNonAnnulable
 {
 
     private final ControleurDonnees controleurDonnees;
     private final File planFichier;
 
-    public CommandChargerPlan(ControleurDonnees controleurDonnees, File plan)
+    public CommandeChargerPlan(ControleurDonnees controleurDonnees, File plan)
     {
         this.controleurDonnees = controleurDonnees;
         planFichier = plan;

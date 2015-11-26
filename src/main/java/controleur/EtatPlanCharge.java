@@ -25,14 +25,14 @@ public class EtatPlanCharge extends AbstractEtat
     @Override
     public EtatInterface chargerPlan(File plan) throws CommandException
     {
-        new CommandChargerPlan(controleurDonnees, plan).executer();
+        new CommandeChargerPlan(controleurDonnees, plan).executer();
         return this;
     }
 
     @Override
     public EtatInterface chargerLivraisons(File livraisons) throws CommandException
     {
-        new CommandChargerLivraisons(controleurDonnees, livraisons).executer();
+        new CommandeChargerLivraisons(controleurDonnees, livraisons).executer();
         return new EtatPrincipal(controleurDonnees);
     }
 

@@ -38,14 +38,14 @@ class EtatPrincipal implements EtatInterface
     @Override
     public EtatInterface chargerPlan(File plan) throws CommandException
     {
-        new CommandChargerPlan(controleurDonnees, plan).executer();
+        new CommandeChargerPlan(controleurDonnees, plan).executer();
         return new EtatPlanCharge(controleurDonnees);
     }
 
     @Override
     public EtatInterface chargerLivraisons(File livraisons) throws CommandException
     {
-        new CommandChargerLivraisons(controleurDonnees, livraisons).executer();
+        new CommandeChargerLivraisons(controleurDonnees, livraisons).executer();
         return this;
     }
 
@@ -58,7 +58,7 @@ class EtatPrincipal implements EtatInterface
     @Override
     public EtatInterface cliqueCalculerTournee()
     {
-        controleurDonnees.getModel().calculerTournee();
+        controleurDonnees.getModele().calculerTournee();
         return this;
     }
 

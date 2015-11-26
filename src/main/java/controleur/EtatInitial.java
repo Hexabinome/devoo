@@ -25,7 +25,7 @@ class EtatInitial extends AbstractEtat
     @Override
     public EtatInterface chargerPlan(File plan) throws CommandException
     {
-        new CommandChargerPlan(controleurDonnees, plan).executer();
+        new CommandeChargerPlan(controleurDonnees, plan).executer();
         return new EtatPlanCharge(controleurDonnees);
     }
 

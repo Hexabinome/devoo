@@ -4,11 +4,11 @@ package controleur;
  *
  * @author Max Schiedermeier
  */
-public abstract class UninvertibelCommand implements Command
+public abstract class CommandeNonAnnulable implements Commande
 {
 
     @Override
-    public boolean isUndoable()
+    public boolean estAnnulable()
     {
         return false;
     }

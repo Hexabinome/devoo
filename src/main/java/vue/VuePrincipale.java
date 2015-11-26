@@ -14,7 +14,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Menu;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
-import modele.xmldata.ModelLecture;
+import modele.xmldata.ModeleLecture;
 import org.controlsfx.control.StatusBar;
 import org.controlsfx.dialog.ExceptionDialog;
 
@@ -245,7 +245,7 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
 
     @Override
     public void notifierLesOberseursDuModel() {
-        ModelLecture modele = controleurInterface.getModel();
+        ModeleLecture modele = controleurInterface.getModel();
         vueGraphique.construireTournee(modele.getDemande().getEntrepot(), modele.getTournee(),
                 modele.getDemande());
     }

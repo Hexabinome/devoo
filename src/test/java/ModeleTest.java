@@ -9,20 +9,18 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.List;
 
 import modele.business.TSP;
 import modele.business.TSP1;
 import modele.persistance.DeserialiseurXML;
 import modele.persistance.ExceptionXML;
-import modele.xmldata.Chemin;
 import modele.xmldata.Demande;
 import modele.xmldata.Fenetre;
 import modele.xmldata.GrapheRealisation;
 import modele.xmldata.Intersection;
 import modele.xmldata.Livraison;
-import modele.xmldata.Model;
-import modele.xmldata.ModelLecture;
+import modele.xmldata.Modele;
+import modele.xmldata.ModeleLecture;
 import modele.xmldata.PlanDeVille;
 import modele.xmldata.Troncon;
 
@@ -37,13 +35,13 @@ import org.xml.sax.SAXException;
  *
  * @author robinroyer
  */
-public class ModelTest {
+public class ModeleTest {
 	  @Test
 	  public void TestModelPlan() throws JDOMException, IOException, SAXException, ParseException, ExceptionXML {
 	    // initialisation
 	    PlanDeVille ville = DeserialiseurXML.ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/plan10x10.xml"));
 	    Demande demande = DeserialiseurXML.ouvrirLivraison(ClassLoader.getSystemResourceAsStream("samples/livraison10x10-1.xml"), ville);
-	    ModelLecture monModel = new Model(ville, demande);
+	    ModeleLecture monModel = new Modele(ville, demande);
 
 	    //test
 	    assertEquals("Le model doit avoir le plan de ville obtenu a la lecture xml", ville, monModel.getPlan());
@@ -148,11 +146,11 @@ public class ModelTest {
 			Demande demande = new Demande(i1, fenetres);
 			graphe = demande.creerGraphe(plan);
 			
-			Model monModel = new Model(plan, demande);
+			Modele monModele = new Modele(plan, demande);
 			
-			monModel.calculerTournee();
+			monModele.calculerTournee();
 
-			Field field = monModel.getClass().getDeclaredField("tsp");
+			Field field = monModele.getClass().getDeclaredField("tsp");
 			field.setAccessible(true);
 			
 			TSP tsp = new TSP1();

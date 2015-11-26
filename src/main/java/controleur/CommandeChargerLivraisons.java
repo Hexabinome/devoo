@@ -6,7 +6,7 @@ import java.text.ParseException;
 import modele.persistance.DeserialiseurXML;
 import modele.persistance.ExceptionXML;
 import modele.xmldata.Demande;
-import modele.xmldata.Model;
+import modele.xmldata.Modele;
 import modele.xmldata.PlanDeVille;
 import org.jdom2.JDOMException;
 import org.xml.sax.SAXException;
@@ -15,13 +15,13 @@ import org.xml.sax.SAXException;
  *
  * @author Max Schiedermeier
  */
-public class CommandChargerLivraisons extends UninvertibelCommand
+public class CommandeChargerLivraisons extends CommandeNonAnnulable
 {
 
     private final ControleurDonnees controleurDonnees;
     private final File livraisonsFichier;
 
-    public CommandChargerLivraisons(ControleurDonnees controleurDonnees, File livraisons)
+    public CommandeChargerLivraisons(ControleurDonnees controleurDonnees, File livraisons)
     {
         this.controleurDonnees = controleurDonnees;
         livraisonsFichier = livraisons;
@@ -33,10 +33,10 @@ public class CommandChargerLivraisons extends UninvertibelCommand
         try {
             PlanDeVille plan = controleurDonnees.getPlan();
             Demande demande = DeserialiseurXML.ouvrirLivraison(livraisonsFichier, plan);
-            controleurDonnees.setModel(new Model(plan, demande));
+            controleurDonnees.setModele(new Modele(plan, demande));
 
             //calculer la tournee
-            controleurDonnees.getModel().calculerTournee();
+            controleurDonnees.getModele().calculerTournee();
 
             //notifier la vue que maintenant on peux interagir avec les elements prinicpaux.
             controleurDonnees.notifyAllActObserveurs(false);

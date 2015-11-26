@@ -3,7 +3,7 @@ package modele.xmldata;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.Map;
+
 import modele.business.TSP;
 import modele.business.TSP1;
 
@@ -11,7 +11,7 @@ import modele.business.TSP1;
  *
  * @author Max Schiedermeier
  */
-public class Model implements ModelLecture
+public class Modele implements ModeleLecture
 {
 
     private final PlanDeVille plan;
@@ -19,7 +19,7 @@ public class Model implements ModelLecture
     private GrapheRealisation graphe;
     private TSP tsp;
 
-    public Model(PlanDeVille plan, Demande demande)
+    public Modele(PlanDeVille plan, Demande demande)
     {
         this.plan = plan;
         this.demande = demande;

@@ -14,7 +14,7 @@ import org.xml.sax.SAXException;
  *
  * @author maxou
  */
-public interface Command
+public interface Commande
 {
 
     /**
@@ -23,7 +23,7 @@ public interface Command
      *
      * @return boolean, si cette type de commande est annulable
      */
-    boolean isUndoable();
+    boolean estAnnulable();
 
     /**
      * La creation d'une commande ne declenche pas automatiquement sa execution

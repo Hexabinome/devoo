@@ -2,7 +2,7 @@ package controleur;
 
 import java.util.Collection;
 import java.util.LinkedList;
-import modele.xmldata.Model;
+import modele.xmldata.Modele;
 import modele.xmldata.PlanDeVille;
 
 /**
@@ -17,7 +17,7 @@ import modele.xmldata.PlanDeVille;
 public class ControleurDonnees
 {
     // represente les fichiers XMLs charge. Peut aussi calculer et stoquer une solution
-    private Model model;
+    private Modele modele;
 
     //collection des observeurs (pour gui avec functionalite reduit si plan et livraisons n'sons pas encore charge)
     private final Collection<MainActivationObserverInterface> desactObserveurs;
@@ -46,14 +46,14 @@ public class ControleurDonnees
         planObserveurs = new LinkedList<>();
     }
 
-    public Model getModel()
+    public Modele getModele()
     {
-        return model;
+        return modele;
     }
 
-    public void setModel(Model model)
+    public void setModele(Modele modele)
     {
-        this.model = model;
+        this.modele = modele;
     }
 
     public PlanDeVille getPlan()

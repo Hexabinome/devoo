@@ -2,7 +2,7 @@ package controleur;
 
 import java.io.File;
 
-import modele.xmldata.ModelLecture;
+import modele.xmldata.ModeleLecture;
 import modele.xmldata.PlanDeVille;
 
 /**
@@ -96,11 +96,11 @@ public class Controleur implements ControleurInterface
     }
 
     @Override
-    public ModelLecture getModel()
+    public ModeleLecture getModel()
     {
-        if (controleurDonnees.getModel() == null)
+        if (controleurDonnees.getModele() == null)
             throw new RuntimeException("Model n'existe pas, il faut charger des fichiers xml avant");
-        return controleurDonnees.getModel();
+        return controleurDonnees.getModele();
     }
 
     @Override
