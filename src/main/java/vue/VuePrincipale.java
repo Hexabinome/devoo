@@ -12,6 +12,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Menu;
+import javafx.scene.control.Slider;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import modele.xmldata.ModeleLecture;
@@ -92,6 +93,9 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
 
     @FXML
     private ObserverButton calculerTourneeBouton;
+
+    @FXML
+    private Slider sliderZoom;
 
     /**
      * Méthode appelée lors du redimensionnement de la fenêtre. Elle replace les
