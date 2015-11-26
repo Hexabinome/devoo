@@ -266,8 +266,8 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
     @Override
     public void notifierLesOberseursDuModel() {
         ModeleLecture modele = controleurInterface.getModel();
-        vueGraphique.construireTournee(modele.getDemande().getEntrepot(), modele.getTournee(),
-                modele.getDemande());
+    //    vueGraphique.construireTournee(modele.getDemande().getEntrepot(), modele.getTournee(),
+        //        modele.getDemande());
 
         vueGraphique.construireDemande(modele.getDemande());
     }

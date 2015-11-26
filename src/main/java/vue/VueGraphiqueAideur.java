@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
@@ -140,7 +141,9 @@ public class VueGraphiqueAideur
     	
     	// Mise en surbrillance d'une intersection
     	Ellipse livraisonGraphique = intersectionsGraphiques.get(livraison.getAdresse()).getKey();
-		livraisonGraphique.setFill(ConstantesGraphique.COULEUR_INTERSECTION_SURBRILLANCE);
+        if(livraison.getId() != -1){ // on touche pas à l'entrepot dont l'id vaut -1
+            livraisonGraphique.setFill(ConstantesGraphique.COULEUR_INTERSECTION_SURBRILLANCE);
+        }
     }
     
     /**
@@ -152,8 +155,10 @@ public class VueGraphiqueAideur
     	
     	// Surbrillance de toutes les livraisons
     	for (Livraison livraison : livraisons) {
-    		Ellipse livraisonGraphique = intersectionsGraphiques.get(livraison.getAdresse()).getKey();
-    		livraisonGraphique.setFill(ConstantesGraphique.COULEUR_INTERSECTION_SURBRILLANCE);
+            if(livraison.getId() != -1){ // on touche pas à l'entrepot dont l'id vaut -1
+                Ellipse livraisonGraphique = intersectionsGraphiques.get(livraison.getAdresse()).getKey();
+                livraisonGraphique.setFill(ConstantesGraphique.COULEUR_INTERSECTION_SURBRILLANCE);
+            }
     	}
     }
     
@@ -282,7 +287,7 @@ public class VueGraphiqueAideur
     public void construireTournee(Intersection entrepot, List<List<Integer>> tournee, Demande demande) {
 
 		// Mémoriser entrepot
-        this.entrepot = entrepot.getId();
+        //this.entrepot = entrepot.getId();
         
         // Mémoriser l'id des intersections où il y a des livraisons
         for (Fenetre f : demande.getFenetres()) {
@@ -300,7 +305,7 @@ public class VueGraphiqueAideur
     		return;
     	
     	// Coloration de l'entrepot
-    	intersectionsGraphiques.get(entrepot).getKey().setFill(ConstantesGraphique.COULEUR_ENTREPOT);
+    	//intersectionsGraphiques.get(entrepot).getKey().setFill(ConstantesGraphique.COULEUR_ENTREPOT);
 
         // Afficher tournée dans chaque fenêtre
         for (int idFenetre = 0; idFenetre < tournee.size(); ++idFenetre) {
@@ -339,10 +344,11 @@ public class VueGraphiqueAideur
 
     public void construireDemande( final Demande demande){
         listeIdLivraison = new LinkedList<>();
-
+        this.entrepot = demande.getEntrepot().getId();
+        intersectionsGraphiques.get(entrepot).getKey().setFill(ConstantesGraphique.COULEUR_ENTREPOT);
         for(Fenetre fenetre : demande.getFenetres()){
             fenetre.getListeLivraisons().forEach((idLivraison, livraison) -> {
-                if(idLivraison != -1) // -1 c'est l'identifiant de l'entrepot
+                if(idLivraison != -1) // -1 c'est l'identifiant de l'entrepot qui est crée comme une livraison dans une fenetre speciale
                     listeIdLivraison.add(livraison.getAdresse());
             });
         }
