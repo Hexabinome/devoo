@@ -142,6 +142,8 @@ public class VueGraphiqueAideur
     	// Mise en surbrillance d'une intersection
     	Ellipse livraisonGraphique = intersectionsGraphiques.get(livraison.getAdresse()).getKey();
         if(livraison.getId() != -1){ // on touche pas à l'entrepot dont l'id vaut -1
+            livraisonGraphique.setRadiusX(ConstantesGraphique.DIAMETRE_INTERSECTION*ConstantesGraphique.COEFFICIENT_LIVRAISON);
+            livraisonGraphique.setRadiusY(ConstantesGraphique.DIAMETRE_INTERSECTION*ConstantesGraphique.COEFFICIENT_LIVRAISON);
             livraisonGraphique.setFill(ConstantesGraphique.COULEUR_INTERSECTION_SURBRILLANCE);
         }
     }
@@ -157,6 +159,8 @@ public class VueGraphiqueAideur
     	for (Livraison livraison : livraisons) {
             if(livraison.getId() != -1){ // on touche pas à l'entrepot dont l'id vaut -1
                 Ellipse livraisonGraphique = intersectionsGraphiques.get(livraison.getAdresse()).getKey();
+                livraisonGraphique.setRadiusX(ConstantesGraphique.DIAMETRE_INTERSECTION*ConstantesGraphique.COEFFICIENT_LIVRAISON);
+                livraisonGraphique.setRadiusY(ConstantesGraphique.DIAMETRE_INTERSECTION*ConstantesGraphique.COEFFICIENT_LIVRAISON);
                 livraisonGraphique.setFill(ConstantesGraphique.COULEUR_INTERSECTION_SURBRILLANCE);
             }
     	}
@@ -174,6 +178,8 @@ public class VueGraphiqueAideur
     		
     		int idIntersection = pairIntersection.getKey();
     		Ellipse intersection = pairIntersection.getValue().getKey();
+            intersection.setRadiusX(ConstantesGraphique.DIAMETRE_INTERSECTION);
+            intersection.setRadiusY(ConstantesGraphique.DIAMETRE_INTERSECTION);
     		
     		// Choix de la bonne couleur
     		Paint couleur;
@@ -345,7 +351,7 @@ public class VueGraphiqueAideur
     public void construireDemande( final Demande demande){
         listeIdLivraison = new LinkedList<>();
         this.entrepot = demande.getEntrepot().getId();
-        intersectionsGraphiques.get(entrepot).getKey().setFill(ConstantesGraphique.COULEUR_ENTREPOT);
+
         for(Fenetre fenetre : demande.getFenetres()){
             fenetre.getListeLivraisons().forEach((idLivraison, livraison) -> {
                 if(idLivraison != -1) // -1 c'est l'identifiant de l'entrepot qui est crée comme une livraison dans une fenetre speciale
@@ -364,8 +370,16 @@ public class VueGraphiqueAideur
         if(listeIdLivraison == null)
             return;
 
+        // affichage entrepot
+        Ellipse ellipseEntrepot = intersectionsGraphiques.get(entrepot).getKey();
+        ellipseEntrepot.setFill(ConstantesGraphique.COULEUR_ENTREPOT);
+        ellipseEntrepot.setRadiusX(ConstantesGraphique.DIAMETRE_INTERSECTION*ConstantesGraphique.COEFFICIENT_LIVRAISON);
+        ellipseEntrepot.setRadiusY(ConstantesGraphique.DIAMETRE_INTERSECTION*ConstantesGraphique.COEFFICIENT_LIVRAISON);
+
         listeIdLivraison.forEach(integer -> {
             Ellipse livraisonGraphique = intersectionsGraphiques.get(integer).getKey();
+            livraisonGraphique.setRadiusX(ConstantesGraphique.DIAMETRE_INTERSECTION*ConstantesGraphique.COEFFICIENT_LIVRAISON);
+            livraisonGraphique.setRadiusY(ConstantesGraphique.DIAMETRE_INTERSECTION*ConstantesGraphique.COEFFICIENT_LIVRAISON);
             livraisonGraphique.setFill(ConstantesGraphique.COULEUR_INTERSECTION_SURBRILLANCE);
         });
     }
@@ -376,6 +390,8 @@ public class VueGraphiqueAideur
 
         listeIdLivraison.forEach(integer -> {
             Ellipse livraisonGraphique = intersectionsGraphiques.get(integer).getKey();
+            livraisonGraphique.setRadiusX(ConstantesGraphique.DIAMETRE_INTERSECTION);
+            livraisonGraphique.setRadiusY(ConstantesGraphique.DIAMETRE_INTERSECTION);
             livraisonGraphique.setFill(ConstantesGraphique.COULEUR_INTERSECTION);
         });
     }
@@ -394,6 +410,11 @@ public class VueGraphiqueAideur
          * du lisibilité
          */
         private final static int MARGE_INTERSECTION = 30;
+
+        /**
+         * Coefficient mutliplicateur des ellipse pour les livraisons
+         */
+        private final static double COEFFICIENT_LIVRAISON = 1.3;
 
         private final static Paint COULEUR_INTERSECTION = Color.WHITE;
         private final static Paint COULEUR_INTERSECTION_SURBRILLANCE = Color.BLUE;
