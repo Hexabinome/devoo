@@ -50,7 +50,7 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
      * Controleur déléguant la logique applicative à la couche controleur
      */
     private ControleurInterface controleurInterface;
-    
+
     /**
      * Partie droite de la fenêtre, affichant de la graphe du plan de la ville
      * et des livraisons
@@ -108,7 +108,7 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
         }
 
     };
-    
+
 
     public void initialiserMediateur(FenetrePrincipale fenetrePrincipale) {
         this.mediateur = fenetrePrincipale;
@@ -146,11 +146,6 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
             Exception exception = controleurInterface.chargerLivraisons(file);
             if (exception != null)
                 ouvrirAlerteXML(exception, file.getName());
-            else {
-                ModelLecture modele = controleurInterface.getModel();
-                vueGraphique.construireTournee(modele.getDemande().getEntrepot(), modele.getTournee(),
-                        modele.getDemande());
-            }
         }
     }
 
@@ -250,6 +245,8 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
 
     @Override
     public void notifierLesOberseursDuModel() {
-        // TODO : completer
+        ModelLecture modele = controleurInterface.getModel();
+        vueGraphique.construireTournee(modele.getDemande().getEntrepot(), modele.getTournee(),
+                modele.getDemande());
     }
 }
