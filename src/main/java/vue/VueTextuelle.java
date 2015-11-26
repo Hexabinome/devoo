@@ -1,12 +1,8 @@
 package vue;
 
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.ResourceBundle;
-
-
+import controleur.ControleurInterface;
+import controleur.MainActivationObserverInterface;
+import controleur.ModelObserveur;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -21,9 +17,12 @@ import vue.vuetextuelle.DetailFenetre;
 import vue.vuetextuelle.DetailLivraison;
 import vue.vuetextuelle.ObjetVisualisable;
 import vue.vuetextuelle.Visiteur;
-import controleur.ControleurInterface;
-import controleur.MainActivationObserverInterface;
-import controleur.ModelObserveur;
+
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.ResourceBundle;
 
 /**
  * Controleur de la TreeTableView qui affiche les livraisons et les horaires.
@@ -62,11 +61,11 @@ public class VueTextuelle implements Initializable, Visiteur, MainActivationObse
      * Mediateur pour la communication avec les autres controleurs de vue
      */
     private FenetrePrincipale mediateur;
-    
+
     private VueGraphiqueAideur vueGraphique;
-    
+
     public void setAideurVueGraphique(VueGraphiqueAideur vueGraphique) {
-    	this.vueGraphique = vueGraphique;
+        this.vueGraphique = vueGraphique;
     }
 
     public void initialiserMediateur(FenetrePrincipale fenetrePrincipale) {
@@ -191,7 +190,7 @@ public class VueTextuelle implements Initializable, Visiteur, MainActivationObse
     public void visit(DetailLivraison detailLivraison) {
         // TODO : completer si besoin
         System.out.println(detailLivraison.getLivraison());
-        controleurInterface.cliqueSurLivraison(detailLivraison.getLivraison().getId());
+        //controleurInterface.cliqueSurLivraison(detailLivraison.getLivraison().getId());
     }
 
     /**
@@ -203,7 +202,7 @@ public class VueTextuelle implements Initializable, Visiteur, MainActivationObse
 
 
         public TableCellSpecial() {
-           // initialiserClic();
+            // initialiserClic();
             initialiserHover();
         }
 
@@ -211,10 +210,9 @@ public class VueTextuelle implements Initializable, Visiteur, MainActivationObse
         protected void updateItem(String item, boolean empty) {
             super.updateItem(item, empty);
             // Pour afficher l'entrepot
-            if(item != null && item.startsWith("-1")){
+            if (item != null && item.startsWith("-1")) {
                 setText("Entrepot");
-            }
-            else
+            } else
                 setText(item);
         }
 
@@ -228,33 +226,32 @@ public class VueTextuelle implements Initializable, Visiteur, MainActivationObse
 
         private void initialiserHover() {
             setOnMouseEntered(event -> {
-        		ObjetVisualisable objetSurpasse = getTreeTableRow().getItem();
-        		
-        		if (objetSurpasse == null)
-        			return;
-            	
-        		setStyle("-fx-background-color: yellow; -fx-text-fill: black;");
+                ObjetVisualisable objetSurpasse = getTreeTableRow().getItem();
+
+                if (objetSurpasse == null)
+                    return;
+
+                setStyle("-fx-background-color: yellow; -fx-text-fill: black;");
 
                 // On cache la demande
                 vueGraphique.cacherDemande();
 
-        		if (objetSurpasse instanceof DetailLivraison) {
-        			Livraison livraison = ((DetailLivraison) objetSurpasse).getLivraison();
-        			vueGraphique.surbrillanceLivraison(livraison);
-        		}
-        		else if (objetSurpasse instanceof DetailFenetre) {
-        			Collection<Livraison> livraisons = ((DetailFenetre) objetSurpasse).getFenetre().getListeLivraisons().values();
-        			vueGraphique.surbrillanceLivraisons(livraisons);
-        		}
+                if (objetSurpasse instanceof DetailLivraison) {
+                    Livraison livraison = ((DetailLivraison) objetSurpasse).getLivraison();
+                    vueGraphique.surbrillanceLivraison(livraison);
+                } else if (objetSurpasse instanceof DetailFenetre) {
+                    Collection<Livraison> livraisons = ((DetailFenetre) objetSurpasse).getFenetre().getListeLivraisons().values();
+                    vueGraphique.surbrillanceLivraisons(livraisons);
+                }
 
 
             });
-            
+
             setOnMouseExited(event -> {
-            	setStyle("-fx-background-color: white; -fx-text-fill: black;");
-            	
-        		// Dans tous les cas, on désactive la surbrillance partout
-    			vueGraphique.desactiverSurbrillance();
+                setStyle("-fx-background-color: white; -fx-text-fill: black;");
+
+                // Dans tous les cas, on désactive la surbrillance partout
+                vueGraphique.desactiverSurbrillance();
                 // On reaffiche la demande à chaque fois qu'on la souris quitte
                 vueGraphique.afficherDemande();
             });

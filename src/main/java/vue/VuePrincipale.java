@@ -91,7 +91,7 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
     private ObserverButton genererFeuilleBouton;
 
     @FXML
-    private StatusBar barreDeStatus;
+    private ObserverButton calculerTourneeBouton;
 
     /**
      * Méthode appelée lors du redimensionnement de la fenêtre. Elle replace les
@@ -104,6 +104,7 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
                             Number oldValue, Number newValue) {
             canvasGraphique.getChildren().clear();
             vueGraphique.afficherPlan();
+            vueGraphique.afficherDemande();
             vueGraphique.afficherTournee();
         }
 
@@ -124,7 +125,7 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
     }
 
     /**
-     * Ecouteur pour ouvrir le plan
+     * Appelée quand l'utilisateur clique sur "Ouvrir plan de ville"
      */
     @FXML
     private void ouvrirPlan(ActionEvent actionEvent) {
@@ -137,7 +138,7 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
     }
 
     /**
-     * Ecouteur pour la demande de livraison
+     * Appelée quand l'utilisateur clique sur "Ouvrir demande de livraisons"
      */
     @FXML
     private void ouvrirDemande(ActionEvent actionEvent) {
@@ -158,6 +159,9 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
         return vueGraphique;
     }
 
+    /**
+     * Appelée quand l'utilisateur clique sur "Quitter dans le menu Fichier"
+     */
     @FXML
     void quitterApplication() {
         Alert confirmationDialog = new Alert(AlertType.CONFIRMATION);
@@ -171,19 +175,33 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
         }
     }
 
+    /**
+     * Appelée quand l'utilisateur clique sur le bouton "Ajouter livraisons"
+     */
     @FXML
     void clic_ajouterLivraison() {
         controleurInterface.cliqueOutilAjouter();
     }
 
+    /**
+     * Appelée quand l'utilisateur clique sur le bouton "Echanger livraisons"
+     */
     @FXML
     void clic_echangerLivraison() {
         controleurInterface.cliqueOutilEchanger();
     }
 
+    /**
+     * Appelée quand l'utilisateur clique sur le bouton "Supprimer livraisons"
+     */
     @FXML
     void clic_supprimerLivraison() {
         controleurInterface.cliqueOutilSupprimer();
+    }
+
+    @FXML
+    void clic_calculer_tournee(){
+        controleurInterface.cliqueCalculerTourne();
     }
 
     /**
@@ -230,6 +248,7 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
         controleurInterface.ajouterDesactObserver(echangerLivraisonsBouton);
         controleurInterface.ajouterDesactObserver(supprimerLivraisonBouton);
         controleurInterface.ajouterDesactObserver(genererFeuilleBouton);
+        controleurInterface.ajouterDesactObserver(calculerTourneeBouton);
         controleurInterface.ajouterPlanObserveur(this);
         controleurInterface.ajouterModelObserver(this);
     }
