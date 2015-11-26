@@ -235,6 +235,9 @@ public class VueTextuelle implements Initializable, Visiteur, MainActivationObse
             	
         		setStyle("-fx-background-color: yellow; -fx-text-fill: black;");
 
+                // On cache la demande
+                vueGraphique.cacherDemande();
+
         		if (objetSurpasse instanceof DetailLivraison) {
         			Livraison livraison = ((DetailLivraison) objetSurpasse).getLivraison();
         			vueGraphique.surbrillanceLivraison(livraison);
@@ -243,6 +246,8 @@ public class VueTextuelle implements Initializable, Visiteur, MainActivationObse
         			Collection<Livraison> livraisons = ((DetailFenetre) objetSurpasse).getFenetre().getListeLivraisons().values();
         			vueGraphique.surbrillanceLivraisons(livraisons);
         		}
+
+
             });
             
             setOnMouseExited(event -> {
@@ -250,6 +255,8 @@ public class VueTextuelle implements Initializable, Visiteur, MainActivationObse
             	
         		// Dans tous les cas, on désactive la surbrillance partout
     			vueGraphique.desactiverSurbrillance();
+                // On reaffiche la demande à chaque fois qu'on la souris quitte
+                vueGraphique.afficherDemande();
             });
         }
 

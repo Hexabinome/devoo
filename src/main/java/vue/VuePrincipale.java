@@ -231,6 +231,7 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
         controleurInterface.ajouterDesactObserver(supprimerLivraisonBouton);
         controleurInterface.ajouterDesactObserver(genererFeuilleBouton);
         controleurInterface.ajouterPlanObserveur(this);
+        controleurInterface.ajouterModelObserver(this);
     }
 
 
@@ -248,5 +249,7 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
         ModeleLecture modele = controleurInterface.getModel();
         vueGraphique.construireTournee(modele.getDemande().getEntrepot(), modele.getTournee(),
                 modele.getDemande());
+
+        vueGraphique.construireDemande(modele.getDemande());
     }
 }

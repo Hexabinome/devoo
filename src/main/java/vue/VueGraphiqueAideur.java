@@ -1,11 +1,6 @@
 package vue;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
 
 import javafx.scene.Node;
@@ -51,6 +46,11 @@ public class VueGraphiqueAideur
     private double echelleYIntersection = 0;
 
     /**
+     * Liste des id des livraisons récupéreés après avoir chargé la demande
+     */
+    private List<Integer> listeIdLivraison;
+
+    /**
      * Le canvas graphique sur lequel on dessinera les éléments graphiques
      */
     private Pane canvas;
@@ -85,12 +85,12 @@ public class VueGraphiqueAideur
 
             Collection<Integer> destinations = new ArrayList<>(); // Tous les tronçons de destinations
             destinations.addAll(i.getTroncons().keySet());
-
             intersectionsGraphiques.put(i.getId(),
                     new Pair<>(construireEllipse(i, ConstantesGraphique.COULEUR_INTERSECTION), destinations));
         }
 
         afficherPlan();
+        listeIdLivraison = null;
     }
 
     /**
@@ -336,7 +336,44 @@ public class VueGraphiqueAideur
         	intersectionsGraphiques.get(idIntersection).getKey().setFill(ConstantesGraphique.COULEUR_LIVRAISON);
         }
     }
-    
+
+    public void construireDemande( final Demande demande){
+        listeIdLivraison = new LinkedList<>();
+
+        for(Fenetre fenetre : demande.getFenetres()){
+            fenetre.getListeLivraisons().forEach((idLivraison, livraison) -> {
+                if(idLivraison != -1) // -1 c'est l'identifiant de l'entrepot
+                    listeIdLivraison.add(livraison.getAdresse());
+            });
+        }
+
+        afficherDemande();
+    }
+
+    /**
+     * Affiche les livraisons contenues dans une demande de livraison
+     */
+    public void afficherDemande(){
+
+        if(listeIdLivraison == null)
+            return;
+
+        listeIdLivraison.forEach(integer -> {
+            Ellipse livraisonGraphique = intersectionsGraphiques.get(integer).getKey();
+            livraisonGraphique.setFill(ConstantesGraphique.COULEUR_INTERSECTION_SURBRILLANCE);
+        });
+    }
+
+    public void cacherDemande(){
+        if(listeIdLivraison == null)
+            return;
+
+        listeIdLivraison.forEach(integer -> {
+            Ellipse livraisonGraphique = intersectionsGraphiques.get(integer).getKey();
+            livraisonGraphique.setFill(ConstantesGraphique.COULEUR_INTERSECTION);
+        });
+    }
+
     /**
      * Contient les constantes définissant certaines propriétés (taille, marge, couleur,...) de la fenêtre
      */

@@ -2,8 +2,6 @@ package vue;
 
 import controleur.Controleur;
 import javafx.application.Application;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -50,7 +48,7 @@ public class FenetrePrincipale extends Application {
 
         // Chargement de la vue des livraison
         FXMLLoader fxmlLoader2 = new FXMLLoader(
-                getClass().getClassLoader().getResource("fxml/VueLivraisonHoraire.fxml"));
+                getClass().getClassLoader().getResource("fxml/VueTextuelle.fxml"));
         AnchorPane anchorPane = fxmlLoader2.load();
         vueTextuelle = (VueTextuelle) fxmlLoader2.getController();
         vueTextuelle.setAideurVueGraphique(vuePrincipaleControleur.getAideurVueGraphique());
