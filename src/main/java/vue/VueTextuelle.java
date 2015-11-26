@@ -249,7 +249,7 @@ public class VueTextuelle implements Initializable, Visiteur, MainActivationObse
             	setStyle("-fx-background-color: white; -fx-text-fill: black;");
             	
         		// Dans tous les cas, on désactive la surbrillance partout
-    			vueGraphique.desactiverSurbrillance();;
+    			vueGraphique.desactiverSurbrillance();
             });
         }
 
