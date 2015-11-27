@@ -16,6 +16,7 @@ import modele.xmldata.PlanDeVille;
  */
 public class ControleurDonnees
 {
+
     // represente les fichiers XMLs charge. Peut aussi calculer et stoquer une solution
     private Modele modele;
 
@@ -33,6 +34,8 @@ public class ControleurDonnees
 
     private final Collection<PlanObserveur> planObserveurs;
 
+    private final Collection<TourneeObserveur> tourneeObserveurs;
+
     private PlanDeVille plan = null;
 
     private Historique hist;
@@ -44,6 +47,7 @@ public class ControleurDonnees
         annulerObserveurs = new LinkedList<>();
         retablirObserveurs = new LinkedList<>();
         planObserveurs = new LinkedList<>();
+        tourneeObserveurs = new LinkedList<>();
     }
 
     public Modele getModele()
@@ -96,11 +100,18 @@ public class ControleurDonnees
         retablirObserveurs.add(obs);
     }
 
-    public void ajouterPlanObserveur(PlanObserveur planObserveur){
+    public void ajouterPlanObserveur(PlanObserveur planObserveur)
+    {
         planObserveurs.add(planObserveur);
     }
 
-    public void notifierLesObserveursDuPlan(){
+    void addTourneeObserveur(TourneeObserveur tourneeObserveur)
+    {
+        tourneeObserveurs.add(tourneeObserveur);
+    }
+
+    public void notifierLesObserveursDuPlan()
+    {
         planObserveurs.stream().forEach((planObserveur -> {
             planObserveur.notifierLesObserveursDuPlan();
         }));
@@ -131,6 +142,13 @@ public class ControleurDonnees
     {
         retablirObserveurs.stream().forEach((obs) -> {
             obs.notifierLesObserveurs();
+        });
+    }
+
+    public void notifyAllTourneeObserveurs()
+    {
+        tourneeObserveurs.stream().forEach((obs) -> {
+            obs.notifierTourneeObserveur();
         });
     }
 

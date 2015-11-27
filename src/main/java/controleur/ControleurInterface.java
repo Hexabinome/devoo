@@ -16,6 +16,8 @@ public interface ControleurInterface
     void ajouterModelObserver(ModelObserveur observer);
 
     void ajouterPlanObserveur(PlanObserveur planObserveur);
+    
+    void ajouterTourneeObserveur(TourneeObserveur tourneeObserveur);
 
     void cliqueSurPlan(int intersectionId);
     

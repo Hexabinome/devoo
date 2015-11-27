@@ -130,4 +130,10 @@ public class Controleur implements ControleurInterface
         etat.cliqueSurLivraison(livraisonId);
     }
 
+    @Override
+    public void ajouterTourneeObserveur(TourneeObserveur tourneeObserveur)
+    {
+        controleurDonnees.addTourneeObserveur(tourneeObserveur);
+    }
+
 }

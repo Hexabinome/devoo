@@ -58,7 +58,16 @@ class EtatPrincipal implements EtatInterface
     @Override
     public EtatInterface cliqueCalculerTournee()
     {
+        //TODO: Refactoring: metrre le code de cette methode dans un propre command et la appeller.
+        
         controleurDonnees.getModele().calculerTournee();
+        
+        //notifier la vue que maintenant il y a une tournee qui on peut afficher / des horaires prevus
+        controleurDonnees.notifyAllTourneeObserveurs();
+
+        //notifier la vue que maintenant on peux interagir avec les elements prinicpaux.
+        controleurDonnees.notifyAllActObserveurs(false);
+
         return this;
     }
 

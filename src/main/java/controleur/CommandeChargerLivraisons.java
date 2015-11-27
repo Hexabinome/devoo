@@ -36,10 +36,7 @@ public class CommandeChargerLivraisons extends CommandeNonAnnulable
             controleurDonnees.setModele(new Modele(plan, demande));
 
             //calculer la tournee
-            controleurDonnees.getModele().calculerTournee();
-
-            //notifier la vue que maintenant on peux interagir avec les elements prinicpaux.
-            controleurDonnees.notifyAllActObserveurs(false);
+            //controleurDonnees.getModele().calculerTournee();
 
             //notifier la vue que le modele a change
             controleurDonnees.notifyAllModelObserveurs();
