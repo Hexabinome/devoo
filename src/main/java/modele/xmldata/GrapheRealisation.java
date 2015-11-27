@@ -1,8 +1,6 @@
 package modele.xmldata;
 
 import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -95,7 +93,8 @@ public class GrapheRealisation implements Graphe
         }
         if ((j = idLivraisonToIdMatrice.get(livraisonArriveeId)) == null) {
             j = nombreCheminInserer;
-            idLivraisonToIdMatrice.put(chemin.getIdFin(), nombreCheminInserer++);
+            //idLivraisonToIdMatrice.put(chemin.getIdFin(), nombreCheminInserer++);
+            idLivraisonToIdMatrice.put(livraisonArriveeId, nombreCheminInserer++);
         }
 
         if (i < chemins.length && j < chemins.length)

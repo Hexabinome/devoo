@@ -100,7 +100,7 @@ public class Modele implements ModeleLecture
         graphe = demande.creerGraphe(plan);
         graphe.creerInverseLivraisonDictionnaire();
 
-        // apres avoir calcule le graphe il faut appeler TSP ici.
+        // apres avoir calcule le graphe il faut qu'on appele TSP ici.
         tsp = new TSP1();
         tsp.chercheSolution(1000, graphe);
 
