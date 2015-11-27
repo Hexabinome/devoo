@@ -8,8 +8,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Group;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Menu;
@@ -98,7 +97,7 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
     private Slider sliderZoom;
 
     @FXML
-    private Group group;
+    private ScrollPane scrollPane;
 
     /**
      * Méthode appelée lors du redimensionnement de la fenêtre. Elle replace les
@@ -109,9 +108,8 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
 
         @Override
         public void changed(ObservableValue<? extends Number> observable,
-                Number oldValue, Number newValue)
-        {
-            group.getChildren().clear();
+                            Number oldValue, Number newValue) {
+            canvasGraphique.getChildren().clear();
             vueGraphique.afficherPlan();
             vueGraphique.afficherDemande();
             vueGraphique.afficherTournee();
@@ -163,12 +161,10 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
     }
 
     @Override
-    public void initialize(URL location, ResourceBundle resources)
-    {
-        vueGraphique = new VueGraphiqueAideur(canvasGraphique, group);
-        canvasGraphique.initZoom();
-        //sliderZoom.setShowTickLabels(true);
-        sliderZoom.setShowTickMarks(true);
+    public void initialize(URL location, ResourceBundle resources) {
+        vueGraphique = new VueGraphiqueAideur(canvasGraphique);
+        canvasGraphique.initZoom(scrollPane);
+
         canvasGraphique.zoomFactorProperty().bind(sliderZoom.valueProperty());
 
     }

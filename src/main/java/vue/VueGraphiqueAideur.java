@@ -60,15 +60,12 @@ public class VueGraphiqueAideur
      */
     private PaneZoomable canvas;
 
-    private Group group;
-
     /**
      * Constructeur de la vue graphique
      * @param canvas Le canvas sur lequel on dessinera les éléments graphiques
      */
-    public VueGraphiqueAideur(PaneZoomable canvas,Group group) {
+    public VueGraphiqueAideur(PaneZoomable canvas) {
         this.canvas = canvas;
-        this.group = group;
     }
 
     /**
@@ -79,7 +76,7 @@ public class VueGraphiqueAideur
      * persistance
      */
     public void construireGraphe(PlanDeVille plan) {
-        group.getChildren().clear();
+        canvas.getChildren().clear();
 
         Map<Integer, Intersection> toutesIntersections = plan.getIntersections();
         intersectionsGraphiques = new HashMap<>();
@@ -135,7 +132,7 @@ public class VueGraphiqueAideur
     }
     
     private void intersectionAuPremierPlan() {
-    	group.getChildrenUnmodifiable().stream()
+        canvas.getChildrenUnmodifiable().stream()
 	    	.filter(node -> node instanceof Ellipse)
 	    	.forEach(node -> node.toFront());
 	}
@@ -211,6 +208,7 @@ public class VueGraphiqueAideur
     private Ellipse construireEllipse(Intersection i, Paint couleur) {
         Ellipse ellipse = new Ellipse(i.getX(), i.getY(), ConstantesGraphique.DIAMETRE_INTERSECTION, ConstantesGraphique.DIAMETRE_INTERSECTION);
         colorerEllipse(ellipse, couleur);
+        canvas.setListenerForNode(ellipse);
         return ellipse;
     }
 
@@ -225,7 +223,7 @@ public class VueGraphiqueAideur
         e.setCenterX(newX);
         e.setCenterY(newY);
 
-        group.getChildren().add(e);
+        canvas.getChildren().add(e);
     }
     
     /** Change la couleur d'une ellipse
@@ -268,7 +266,7 @@ public class VueGraphiqueAideur
         Line ligne = new Line(p1X, p1Y, p2X, p2Y);
         ligne.setStroke(couleur);
 
-        group.getChildren().add(ligne);
+        canvas.getChildren().add(ligne);
 
         // Création flèche
         double longueur = 8 * Math.sqrt(3);
@@ -294,7 +292,7 @@ public class VueGraphiqueAideur
                 extremiteFleche2Y);
         fleche.setFill(couleur);
 
-        group.getChildren().add(fleche);
+        canvas.getChildren().add(fleche);
     }
 
     /**

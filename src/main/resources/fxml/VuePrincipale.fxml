@@ -60,13 +60,11 @@
     <center>
         <BorderPane BorderPane.alignment="CENTER">
             <center>
-                <ScrollPane pannable="true" fitToHeight="true" fitToWidth="true">
+                <ScrollPane fx:id="scrollPane" pannable="true" fitToHeight="true" fitToWidth="true">
                     <content>
                             <PaneZoomable fx:id="canvasGraphique"
                                           style="-fx-background-color: #7b7b7b;">
-                                <children>
-                                    <Group fx:id="group"/>
-                                </children>
+                            <children></children>
                             </PaneZoomable>
                     </content>
                 </ScrollPane>
