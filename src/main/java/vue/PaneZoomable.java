@@ -22,7 +22,7 @@ public class PaneZoomable extends Pane {
     private DoubleProperty zoomFactor = new SimpleDoubleProperty(1);
 
     /**
-     * La scrollpanr
+     * La scrollpane
      */
     private ScrollPane scrollPane;
 

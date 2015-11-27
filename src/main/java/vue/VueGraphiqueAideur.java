@@ -1,26 +1,28 @@
 package vue;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.EventHandler;
+import javafx.geometry.Bounds;
+import javafx.geometry.Point2D;
 import javafx.scene.Group;
+import javafx.scene.Node;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ScrollEvent;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
 import javafx.util.Pair;
-import modele.xmldata.Demande;
-import modele.xmldata.Fenetre;
-import modele.xmldata.Intersection;
-import modele.xmldata.Livraison;
-import modele.xmldata.PlanDeVille;
+import modele.xmldata.*;
+
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * Contient les méthodes permettant d'afficher les éléments dans la zone
@@ -58,14 +60,92 @@ public class VueGraphiqueAideur
     /**
      * Le canvas graphique sur lequel on dessinera les éléments graphiques
      */
-    private PaneZoomable canvas;
+    private StackPane canvas;
+
+    private Group group;
+
+    private ScrollPane scrollPane;
 
     /**
      * Constructeur de la vue graphique
      * @param canvas Le canvas sur lequel on dessinera les éléments graphiques
      */
-    public VueGraphiqueAideur(PaneZoomable canvas) {
+    public VueGraphiqueAideur(StackPane canvas, Group group, ScrollPane scrollPane) {
         this.canvas = canvas;
+        this.group = group;
+        this.scrollPane = scrollPane;
+        initzoom();
+    }
+
+    private void initzoom(){
+        final double SCALE_DELTA = 1.1;
+        final Group scrollContent = new Group(canvas);
+        scrollPane.setContent(scrollContent);
+
+        scrollPane.viewportBoundsProperty().addListener(new ChangeListener<Bounds>() {
+            @Override
+            public void changed(ObservableValue<? extends Bounds> observable,
+                                Bounds oldValue, Bounds newValue) {
+                canvas.setMinSize(newValue.getWidth(), newValue.getHeight());
+            }
+        });
+
+       // scrollPane.setPrefViewportWidth(256);
+       // scrollPane.setPrefViewportHeight(256);
+
+        canvas.setOnScroll(new EventHandler<ScrollEvent>() {
+            @Override
+            public void handle(ScrollEvent event) {
+                event.consume();
+
+                if (event.getDeltaY() == 0) {
+                    return;
+                }
+
+                double scaleFactor = (event.getDeltaY() > 0) ? SCALE_DELTA
+                        : 1 / SCALE_DELTA;
+
+                // amount of scrolling in each direction in scrollContent coordinate
+                // units
+              Point2D scrollOffset = figureScrollOffset(scrollContent, scrollPane);
+
+                group.setScaleX(group.getScaleX() * scaleFactor);
+                group.setScaleY(group.getScaleY() * scaleFactor);
+
+                // move viewport so that old center remains in the center after the
+                // scaling
+                repositionScroller(scrollContent, scrollPane, scaleFactor, scrollOffset);
+
+
+            }
+        });
+
+        // Panning via drag....
+        final ObjectProperty<Point2D> lastMouseCoordinates = new SimpleObjectProperty<Point2D>();
+        scrollContent.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                lastMouseCoordinates.set(new Point2D(event.getX(), event.getY()));
+            }
+        });
+
+        scrollContent.setOnMouseDragged(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                double deltaX = event.getX() - lastMouseCoordinates.get().getX();
+                double extraWidth = scrollContent.getLayoutBounds().getWidth() - scrollPane.getViewportBounds().getWidth();
+                double deltaH = deltaX * (scrollPane.getHmax() - scrollPane.getHmin()) / extraWidth;
+                double desiredH = scrollPane.getHvalue() - deltaH;
+                scrollPane.setHvalue(Math.max(0, Math.min(scrollPane.getHmax(), desiredH)));
+
+                double deltaY = event.getY() - lastMouseCoordinates.get().getY();
+                double extraHeight = scrollContent.getLayoutBounds().getHeight() - scrollPane.getViewportBounds().getHeight();
+                double deltaV = deltaY * (scrollPane.getHmax() - scrollPane.getHmin()) / extraHeight;
+                double desiredV = scrollPane.getVvalue() - deltaV;
+                scrollPane.setVvalue(Math.max(0, Math.min(scrollPane.getVmax(), desiredV)));
+            }
+        });
+
     }
 
     /**
@@ -76,7 +156,7 @@ public class VueGraphiqueAideur
      * persistance
      */
     public void construireGraphe(PlanDeVille plan) {
-        canvas.getChildren().clear();
+        group.getChildren().clear();
 
         Map<Integer, Intersection> toutesIntersections = plan.getIntersections();
         intersectionsGraphiques = new HashMap<>();
@@ -132,7 +212,7 @@ public class VueGraphiqueAideur
     }
     
     private void intersectionAuPremierPlan() {
-        canvas.getChildrenUnmodifiable().stream()
+        group.getChildrenUnmodifiable().stream()
 	    	.filter(node -> node instanceof Ellipse)
 	    	.forEach(node -> node.toFront());
 	}
@@ -208,7 +288,6 @@ public class VueGraphiqueAideur
     private Ellipse construireEllipse(Intersection i, Paint couleur) {
         Ellipse ellipse = new Ellipse(i.getX(), i.getY(), ConstantesGraphique.DIAMETRE_INTERSECTION, ConstantesGraphique.DIAMETRE_INTERSECTION);
         colorerEllipse(ellipse, couleur);
-        canvas.setListenerForNode(ellipse);
         return ellipse;
     }
 
@@ -223,7 +302,7 @@ public class VueGraphiqueAideur
         e.setCenterX(newX);
         e.setCenterY(newY);
 
-        canvas.getChildren().add(e);
+        group.getChildren().add(e);
     }
     
     /** Change la couleur d'une ellipse
@@ -266,7 +345,7 @@ public class VueGraphiqueAideur
         Line ligne = new Line(p1X, p1Y, p2X, p2Y);
         ligne.setStroke(couleur);
 
-        canvas.getChildren().add(ligne);
+        group.getChildren().add(ligne);
 
         // Création flèche
         double longueur = 8 * Math.sqrt(3);
@@ -292,7 +371,7 @@ public class VueGraphiqueAideur
                 extremiteFleche2Y);
         fleche.setFill(couleur);
 
-        canvas.getChildren().add(fleche);
+        group.getChildren().add(fleche);
     }
 
     /**
@@ -385,6 +464,39 @@ public class VueGraphiqueAideur
         listeIdLivraison.forEach(idLivraison -> colorerEllipse(idLivraison, ConstantesGraphique.COULEUR_INTERSECTION_LIVRAISON));
         
         intersectionAuPremierPlan();
+    }
+
+
+
+    private Point2D figureScrollOffset(Node scrollContent, ScrollPane scroller) {
+        double extraWidth = scrollContent.getLayoutBounds().getWidth() - scroller.getViewportBounds().getWidth();
+        double hScrollProportion = (scroller.getHvalue() - scroller.getHmin()) / (scroller.getHmax() - scroller.getHmin());
+        double scrollXOffset = hScrollProportion * Math.max(0, extraWidth);
+        double extraHeight = scrollContent.getLayoutBounds().getHeight() - scroller.getViewportBounds().getHeight();
+        double vScrollProportion = (scroller.getVvalue() - scroller.getVmin()) / (scroller.getVmax() - scroller.getVmin());
+        double scrollYOffset = vScrollProportion * Math.max(0, extraHeight);
+        return new Point2D(scrollXOffset, scrollYOffset);
+    }
+
+    private void repositionScroller(Node scrollContent, ScrollPane scroller, double scaleFactor, Point2D scrollOffset) {
+        double scrollXOffset = scrollOffset.getX();
+        double scrollYOffset = scrollOffset.getY();
+        double extraWidth = scrollContent.getLayoutBounds().getWidth() - scroller.getViewportBounds().getWidth();
+        if (extraWidth > 0) {
+            double halfWidth = scroller.getViewportBounds().getWidth() / 2 ;
+            double newScrollXOffset = (scaleFactor - 1) *  halfWidth + scaleFactor * scrollXOffset;
+            scroller.setHvalue(scroller.getHmin() + newScrollXOffset * (scroller.getHmax() - scroller.getHmin()) / extraWidth);
+        } else {
+            scroller.setHvalue(scroller.getHmin());
+        }
+        double extraHeight = scrollContent.getLayoutBounds().getHeight() - scroller.getViewportBounds().getHeight();
+        if (extraHeight > 0) {
+            double halfHeight = scroller.getViewportBounds().getHeight() / 2 ;
+            double newScrollYOffset = (scaleFactor - 1) * halfHeight + scaleFactor * scrollYOffset;
+            scroller.setVvalue(scroller.getVmin() + newScrollYOffset * (scroller.getVmax() - scroller.getVmin()) / extraHeight);
+        } else {
+            scroller.setHvalue(scroller.getHmin());
+        }
     }
 
     /**
