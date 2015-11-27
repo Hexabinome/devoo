@@ -60,14 +60,14 @@
     <center>
         <BorderPane BorderPane.alignment="CENTER">
             <center>
-                <ScrollPane fitToHeight="true" fitToWidth="true">
+                <ScrollPane pannable="true" fitToHeight="true" fitToWidth="true">
                     <content>
-                        <Pane fx:id="canvasGraphique"
-                              style="-fx-background-color: #7b7b7b;">
-                            <children>
-                                <Group fx:id="group"/>
-                            </children>
-                        </Pane>
+                            <PaneZoomable fx:id="canvasGraphique"
+                                          style="-fx-background-color: #7b7b7b;">
+                                <children>
+                                    <Group fx:id="group"/>
+                                </children>
+                            </PaneZoomable>
                     </content>
                 </ScrollPane>
 
@@ -110,7 +110,7 @@
                 </AnchorPane>
             </top>
             <right>
-                <Slider fx:id="sliderZoom" orientation="VERTICAL" BorderPane.alignment="CENTER"/>
+                <Slider min="0.5" max="9" value="1" fx:id="sliderZoom" orientation="VERTICAL" BorderPane.alignment="CENTER"/>
             </right>
         </BorderPane>
     </center>

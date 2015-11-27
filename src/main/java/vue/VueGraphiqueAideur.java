@@ -55,7 +55,7 @@ public class VueGraphiqueAideur
     /**
      * Le canvas graphique sur lequel on dessinera les éléments graphiques
      */
-    private Pane canvas;
+    private PaneZoomable canvas;
 
     private Group group;
 
@@ -63,7 +63,7 @@ public class VueGraphiqueAideur
      * Constructeur de la vue graphique
      * @param canvas Le canvas sur lequel on dessinera les éléments graphiques
      */
-    public VueGraphiqueAideur(Pane canvas,Group group) {
+    public VueGraphiqueAideur(PaneZoomable canvas,Group group) {
         this.canvas = canvas;
         this.group = group;
     }

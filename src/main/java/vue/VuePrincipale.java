@@ -58,7 +58,7 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
      * et des livraisons
      */
     @FXML
-    private Pane canvasGraphique;
+    private PaneZoomable canvasGraphique;
 
     private VueGraphiqueAideur vueGraphique;
 
@@ -161,6 +161,10 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         vueGraphique = new VueGraphiqueAideur(canvasGraphique,group);
+        canvasGraphique.initZoom();
+        //sliderZoom.setShowTickLabels(true);
+        sliderZoom.setShowTickMarks(true);
+        canvasGraphique.zoomFactorProperty().bind(sliderZoom.valueProperty());
 
     }
 

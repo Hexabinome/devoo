@@ -17,15 +17,16 @@ public class PaneZoomable extends Pane {
     private DoubleProperty zoomFactor = new SimpleDoubleProperty(1);
 
 
-    public PaneZoomable(){super();}
+    public PaneZoomable(){
+        super();
+        System.out.println("Appel au constructeur");
+    }
 
 
-    public PaneZoomable(Node content) {
-        this.content = content;
-        getChildren().add(content);
+    public void initZoom(){
         Scale scale = new Scale(1, 1);
+        content = getChildren().get(0);
         content.getTransforms().add(scale);
-
         zoomFactor.addListener(new ChangeListener<Number>() {
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 scale.setX(newValue.doubleValue());
