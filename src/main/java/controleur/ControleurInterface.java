@@ -11,13 +11,13 @@ import modele.xmldata.PlanDeVille;
 public interface ControleurInterface
 {
 
-    void ajouterDesactObserver(MainActivationObserverInterface observer);
+    void ajouterDesactObserver(ActivationObserverInterface observer);
 
     void ajouterModelObserver(ModelObserveur observer);
 
     void ajouterPlanObserveur(PlanObserveur planObserveur);
     
-    void ajouterTourneeObserveur(TourneeObserveur tourneeObserveur);
+    void ajouterTourneeObserveur(ActivationObserverInterface tourneeObserveur);
 
     void cliqueSurPlan(int intersectionId);
     

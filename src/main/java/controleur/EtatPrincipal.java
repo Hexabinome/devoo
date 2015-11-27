@@ -62,8 +62,8 @@ class EtatPrincipal implements EtatInterface
         
         controleurDonnees.getModele().calculerTournee();
         
-        //notifier la vue que maintenant il y a une tournee qui on peut afficher / des horaires prevus
-        controleurDonnees.notifyAllTourneeObserveurs();
+        //notifier la vue que maintenant il y a un model qui on peut afficher / des horaires prevus
+        controleurDonnees.notifyAllModelObserveurs();
 
         //notifier la vue que maintenant on peux interagir avec les elements prinicpaux.
         controleurDonnees.notifyAllActObserveurs(false);

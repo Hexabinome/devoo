@@ -23,6 +23,7 @@ public class Modele implements ModeleLecture
     {
         this.plan = plan;
         this.demande = demande;
+        tsp = null;
     }
 
     public void setGraphe(GrapheRealisation graphe)
@@ -107,23 +108,25 @@ public class Modele implements ModeleLecture
         //des que le TSP a fini il faut stoquer les horaires de passage dans l'objet demande
         remplirHoraires();
     }
-    
+
     private List<Livraison> getLivraisonFromSolutionTsp(Fenetre fenetre, int indiceDebutSolutionTsp)
     {
-    	List<Livraison> listLivraison = new ArrayList<>();
-    	
-    	for(int iSolution = indiceDebutSolutionTsp; iSolution < indiceDebutSolutionTsp + fenetre.getNbLivraison(); iSolution++)
-    	{
-    		int idLivraison = graphe.getIdLivraisonParIdMatrice(tsp.getSolution(iSolution));
-    		listLivraison.add(fenetre.getLivraison(idLivraison));
-    	}
-    	
-    	return listLivraison;
+        List<Livraison> listLivraison = new ArrayList<>();
+
+        for (int iSolution = indiceDebutSolutionTsp; iSolution < indiceDebutSolutionTsp + fenetre.getNbLivraison(); iSolution++) {
+            int idLivraison = graphe.getIdLivraisonParIdMatrice(tsp.getSolution(iSolution));
+            listLivraison.add(fenetre.getLivraison(idLivraison));
+        }
+
+        return listLivraison;
     }
 
     @Override
     public List<List<Integer>> getTournee()
     {
+        if (tsp == null)
+            return null;
+
         List<List<Integer>> tournee = new LinkedList<>();
 
         // compteur pour iterer sur la solution cree par TSP
@@ -131,16 +134,19 @@ public class Modele implements ModeleLecture
 
         // pour chaque fenetre... (sauf le premier qui contient que l'entrepot, on l'enleve)
         List<Fenetre> listFenetres = new LinkedList<>();
+
         listFenetres.addAll(demande.getFenetres());
         Livraison depart = listFenetres.get(0).getListeLivraisons().values().iterator().next();
-        listFenetres.remove(0);
+
+        listFenetres.remove(
+                0);
         for (Fenetre fenetre : listFenetres) {
-            
+
             List<Livraison> tspLivraisons = getLivraisonFromSolutionTsp(fenetre, compteurSolutionTSP);
             compteurSolutionTSP += tspLivraisons.size();
-            
+
             List<Integer> sousTournee = creerSourTournee(depart, tspLivraisons);
-            depart = tspLivraisons.get(tspLivraisons.size()-1);
+            depart = tspLivraisons.get(tspLivraisons.size() - 1);
 
             //ajouter la liste cree pour cette fenetre a la liste principale
             tournee.add(sousTournee);
@@ -157,17 +163,16 @@ public class Modele implements ModeleLecture
         //Pour chaque chemin entre les livraisons prevus: ajoute les intersection sur le chemin a la sous tournee
         for (Livraison arrivee : sousTourneeLivraisons) {
             Chemin chemin = graphe.getChemin(depart.getId(), arrivee.getId());
-            
+
             //pour toutes les troncons sur le chemin, ajoute le arrivee
-            for(Troncon troncon : chemin.getTroncons())
-            {
+            for (Troncon troncon : chemin.getTroncons()) {
                 sousTournee.add(troncon.getIdDestination());
             }
-            
+
             //mis a jour du depart
             depart = arrivee;
         }
-        
+
         return sousTournee;
     }
 

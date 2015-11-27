@@ -1,7 +1,7 @@
 package vue;
 
 import controleur.ControleurInterface;
-import controleur.MainActivationObserverInterface;
+import controleur.ActivationObserverInterface;
 import controleur.ModelObserveur;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.fxml.FXML;
@@ -29,7 +29,7 @@ import java.util.ResourceBundle;
  * Elle passe par le controleur principale de la vue quand elle reçoie des
  * actions.
  */
-public class VueTextuelle implements Initializable, Visiteur, MainActivationObserverInterface,
+public class VueTextuelle implements Initializable, Visiteur, ActivationObserverInterface,
         ModelObserveur {
 
     @FXML

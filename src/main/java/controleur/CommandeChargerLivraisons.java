@@ -35,10 +35,10 @@ public class CommandeChargerLivraisons extends CommandeNonAnnulable
             Demande demande = DeserialiseurXML.ouvrirLivraison(livraisonsFichier, plan);
             controleurDonnees.setModele(new Modele(plan, demande));
 
-            //calculer la tournee
-            //controleurDonnees.getModele().calculerTournee();
-
-            //notifier la vue que le modele a change
+            //permettre de calculer la tournee
+            controleurDonnees.notifyAllCalculerTourneeObserveurs();
+            
+            //notifier les observeurs que il y a un model maintenant
             controleurDonnees.notifyAllModelObserveurs();
         }
         catch (SAXException | ExceptionXML | IOException | JDOMException | ParseException ex) {

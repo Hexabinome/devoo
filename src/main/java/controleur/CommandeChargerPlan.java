@@ -3,6 +3,7 @@ package controleur;
 import java.io.File;
 import java.io.IOException;
 import modele.persistance.DeserialiseurXML;
+import modele.persistance.ExceptionXML;
 import org.jdom2.JDOMException;
 import org.xml.sax.SAXException;
 
@@ -31,11 +32,8 @@ public class CommandeChargerPlan extends CommandeNonAnnulable
             controleurDonnees.notifyAllActObserveurs(true);
             controleurDonnees.notifierLesObserveursDuPlan(); // notification des observeurs du plan
         }
-        catch (JDOMException | IOException | SAXException ex) {
-            ex.printStackTrace();
+        catch (JDOMException | IOException | SAXException | ExceptionXML ex) {
             throw new CommandException(ex.getMessage());
-        } catch (modele.persistance.ExceptionXML exceptionXML) {
-            exceptionXML.printStackTrace();
         }
     }
 

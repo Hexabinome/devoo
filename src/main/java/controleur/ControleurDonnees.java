@@ -21,7 +21,7 @@ public class ControleurDonnees
     private Modele modele;
 
     //collection des observeurs (pour gui avec functionalite reduit si plan et livraisons n'sons pas encore charge)
-    private final Collection<MainActivationObserverInterface> desactObserveurs;
+    private final Collection<ActivationObserverInterface> desactObserveurs;
 
     //collection des observeurs pour le model
     private final Collection<ModelObserveur> modelObserveurs;
@@ -34,7 +34,7 @@ public class ControleurDonnees
 
     private final Collection<PlanObserveur> planObserveurs;
 
-    private final Collection<TourneeObserveur> tourneeObserveurs;
+    private final Collection<ActivationObserverInterface> tourneeObserveurs;
 
     private PlanDeVille plan = null;
 
@@ -80,7 +80,7 @@ public class ControleurDonnees
         this.hist = hist;
     }
 
-    public void addDesactObserveur(MainActivationObserverInterface obs)
+    public void addDesactObserveur(ActivationObserverInterface obs)
     {
         desactObserveurs.add(obs);
     }
@@ -105,7 +105,7 @@ public class ControleurDonnees
         planObserveurs.add(planObserveur);
     }
 
-    void addTourneeObserveur(TourneeObserveur tourneeObserveur)
+    void addTourneeObserveur(ActivationObserverInterface tourneeObserveur)
     {
         tourneeObserveurs.add(tourneeObserveur);
     }
@@ -145,10 +145,10 @@ public class ControleurDonnees
         });
     }
 
-    public void notifyAllTourneeObserveurs()
+    public void notifyAllCalculerTourneeObserveurs()
     {
         tourneeObserveurs.stream().forEach((obs) -> {
-            obs.notifierTourneeObserveur();
+            obs.notifierLesObserveurs(false);
         });
     }
 

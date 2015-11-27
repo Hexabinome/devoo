@@ -24,7 +24,7 @@ public class Controleur implements ControleurInterface
     }
 
     @Override
-    public void ajouterDesactObserver(MainActivationObserverInterface observer)
+    public void ajouterDesactObserver(ActivationObserverInterface observer)
     {
         controleurDonnees.addDesactObserveur(observer);
     }
@@ -131,7 +131,7 @@ public class Controleur implements ControleurInterface
     }
 
     @Override
-    public void ajouterTourneeObserveur(TourneeObserveur tourneeObserveur)
+    public void ajouterTourneeObserveur(ActivationObserverInterface tourneeObserveur)
     {
         controleurDonnees.addTourneeObserveur(tourneeObserveur);
     }
