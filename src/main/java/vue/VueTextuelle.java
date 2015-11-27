@@ -231,11 +231,10 @@ public class VueTextuelle implements Initializable, Visiteur, MainActivationObse
                 if (objetSurpasse == null)
                     return;
 
+                // Change style de la vue textuelle
                 setStyle("-fx-background-color: yellow; -fx-text-fill: black;");
 
-                // On cache la demande
-                vueGraphique.cacherDemande();
-
+                // On met en surbrillance une intersection ou toutes les intersections d'une fenêtre
                 if (objetSurpasse instanceof DetailLivraison) {
                     Livraison livraison = ((DetailLivraison) objetSurpasse).getLivraison();
                     vueGraphique.surbrillanceLivraison(livraison);
@@ -250,10 +249,7 @@ public class VueTextuelle implements Initializable, Visiteur, MainActivationObse
             setOnMouseExited(event -> {
                 setStyle("-fx-background-color: white; -fx-text-fill: black;");
 
-                // Dans tous les cas, on désactive la surbrillance partout
                 vueGraphique.desactiverSurbrillance();
-                // On reaffiche la demande à chaque fois qu'on la souris quitte
-                vueGraphique.afficherDemande();
             });
         }
 
