@@ -1,6 +1,8 @@
 package controleur;
 
 import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -58,15 +60,12 @@ class EtatPrincipal implements EtatInterface
     @Override
     public EtatInterface cliqueCalculerTournee()
     {
-        //TODO: Refactoring: metrre le code de cette methode dans un propre command et la appeller.
-        
-        controleurDonnees.getModele().calculerTournee();
-        
-        //notifier la vue que maintenant il y a un model qui on peut afficher / des horaires prevus
-        controleurDonnees.notifyAllModelObserveurs();
-
-        //notifier la vue que maintenant on peux interagir avec les elements prinicpaux.
-        controleurDonnees.notifyAllActObserveurs(false);
+        try {
+            new CommandeCalculerTournee(controleurDonnees).executer();
+        }
+        catch (CommandException ex) {
+            throw new RuntimeException("Pas possible de determiner la tournee");
+        }
 
         return this;
     }

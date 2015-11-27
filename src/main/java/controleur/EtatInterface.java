@@ -15,11 +15,12 @@ public interface EtatInterface
 
     EtatInterface cliqueSurLivraison(int livraisonId);
 
-    EtatInterface chargerPlan(File plan)  throws CommandException;
+    EtatInterface chargerPlan(File plan) throws CommandException;
 
-    EtatInterface chargerLivraisons(File livraisons)  throws CommandException;
+    EtatInterface chargerLivraisons(File livraisons) throws CommandException;
 
     EtatInterface cliqueSurPlan(int intersectionId);
-    
+
     EtatInterface cliqueCalculerTournee();
+
 }
