@@ -2,6 +2,8 @@ package modele.xmldata;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedList;
 
 import modele.business.TSP;
@@ -18,12 +20,14 @@ public class Modele implements ModeleLecture
     private final Demande demande;
     private GrapheRealisation graphe;
     private TSP tsp;
+    private List<List<Integer>> tournee;
 
     public Modele(PlanDeVille plan, Demande demande)
     {
         this.plan = plan;
         this.demande = demande;
         tsp = null;
+        tournee = null;
     }
 
     public void setGraphe(GrapheRealisation graphe)
@@ -55,9 +59,10 @@ public class Modele implements ModeleLecture
         // + mis a jour du graphe (supprimer les liasion qui utilisent l'intersection utilise pas la livraison)
         // + soit (1) effacer tournee / soit (2) recalculer tournee avec TSP -> encore a discuter mais a mon avis (2)
 
-        int indiceLivraison = graphe.getIndiceFromIdLivraison(idLivraison);
-        tsp.supprimerSolution(indiceLivraison);
-
+        /*
+         int indiceLivraison = graphe.getIndiceFromIdLivraison(idLivraison);
+         tsp.supprimerSolution(indiceLivraison);
+         */
         //TODO tester si idLivraison est tous seul dans sa fenêtre.
         //Refaire dijkstra entre fenêtre d'avant et fenêtre suivante et tsp.
     }
@@ -76,24 +81,26 @@ public class Modele implements ModeleLecture
         // + ajouter la livraison dans la bonne fenter dans demande
         // + mis a jour du graphe (calculer distance vers chque intersection deja utilise pour une livraison dans graphe)
         // + soit (1) effacer tournee / soit (2) recalculer tournee avec TSP -> encore a discuter mais a mon avis (2)
-        int indiceLivraison = graphe.getIndiceFromIdLivraison(previousId);
 
-        tsp.ajouterSolution(indiceLivraison, indiceLivraison);
-        //On ajout la solution dans la fenêtre
-        for (int iFenetre = 0; iFenetre < demande.getFenetres().size(); iFenetre++) {
-            //On a trouvé la fenêtre qui contient la previousId livraison
-            if (((ArrayList<Fenetre>) demande.getFenetres()).get(iFenetre).getListeLivraisons().get(previousId) != null) {
-                Livraison livraison = new Livraison(((ArrayList<Fenetre>) demande.getFenetres()).get(iFenetre).getListeLivraisons().size(), 0, intersectionId);
-                ((ArrayList<Fenetre>) demande.getFenetres()).get(iFenetre).getListeLivraisons().put(livraison.getId(), livraison);
+        /*
+         int indiceLivraison = graphe.getIndiceFromIdLivraison(previousId);
 
-                //TODO à optimiser (pas desoin de rappeller dijkstra pour toutes les intersections
-                if (iFenetre == demande.getFenetres().size() - 1)
-                    ((ArrayList<Fenetre>) demande.getFenetres()).get(iFenetre).calculerChemins(plan, graphe, ((ArrayList<Fenetre>) demande.getFenetres()).get(0));
-                else
-                    ((ArrayList<Fenetre>) demande.getFenetres()).get(iFenetre).calculerChemins(plan, graphe, ((ArrayList<Fenetre>) demande.getFenetres()).get(iFenetre + 1));
-            }
+         tsp.ajouterSolution(indiceLivraison, indiceLivraison);
+         //On ajout la solution dans la fenêtre
+         for (int iFenetre = 0; iFenetre < demande.getFenetres().size(); iFenetre++) {
+         //On a trouvé la fenêtre qui contient la previousId livraison
+         if (((ArrayList<Fenetre>) demande.getFenetres()).get(iFenetre).getListeLivraisons().get(previousId) != null) {
+         Livraison livraison = new Livraison(((ArrayList<Fenetre>) demande.getFenetres()).get(iFenetre).getListeLivraisons().size(), 0, intersectionId);
+         ((ArrayList<Fenetre>) demande.getFenetres()).get(iFenetre).getListeLivraisons().put(livraison.getId(), livraison);
 
-        }
+         //TODO à optimiser (pas desoin de rappeller dijkstra pour toutes les intersections
+         if (iFenetre == demande.getFenetres().size() - 1)
+         ((ArrayList<Fenetre>) demande.getFenetres()).get(iFenetre).calculerChemins(plan, graphe, ((ArrayList<Fenetre>) demande.getFenetres()).get(0));
+         else
+         ((ArrayList<Fenetre>) demande.getFenetres()).get(iFenetre).calculerChemins(plan, graphe, ((ArrayList<Fenetre>) demande.getFenetres()).get(iFenetre + 1));
+         }
+
+         }*/
     }
 
     public void calculerTournee()
@@ -104,6 +111,7 @@ public class Modele implements ModeleLecture
         // apres avoir calcule le graphe il faut qu'on appele TSP ici.
         tsp = new TSP1();
         tsp.chercheSolution(1000, graphe);
+        tournee = creerIntersectionTournee();
 
         //des que le TSP a fini il faut stoquer les horaires de passage dans l'objet demande
         remplirHoraires();
@@ -121,14 +129,13 @@ public class Modele implements ModeleLecture
         return listLivraison;
     }
 
-    @Override
-    public List<List<Integer>> getTournee()
+    private List<List<Integer>> creerIntersectionTournee()
     {
         if (tsp == null)
             return null;
 
-        List<List<Integer>> tournee = new LinkedList<>();
-
+        tournee = new LinkedList<>();
+        
         // compteur pour iterer sur la solution cree par TSP
         int compteurSolutionTSP = 1;
 
@@ -184,6 +191,21 @@ public class Modele implements ModeleLecture
                 livraison.setHoraireDePassage((int) (Math.random() * 3600));
             });
         });
+    }
+
+    @Override
+    public List<List<Integer>> getTournee()
+    {
+        if(tournee == null)
+            return null;
+        
+        List<List<Integer>> inmodifiableTournee = new LinkedList<>();
+
+        for (List<Integer> sousTournee : tournee) {
+            inmodifiableTournee.add(Collections.unmodifiableList(sousTournee));
+        }
+        return Collections.unmodifiableList(inmodifiableTournee);
+
     }
 
 }
