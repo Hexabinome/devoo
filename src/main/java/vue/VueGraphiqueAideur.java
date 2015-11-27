@@ -29,10 +29,8 @@ import java.util.Map.Entry;
  * graphique
  *
  * @author David
- *
  */
-public class VueGraphiqueAideur
-{
+public class VueGraphiqueAideur {
 
     /**
      * Contient tous les points graphiques actuellement afficher pour le plan
@@ -68,6 +66,7 @@ public class VueGraphiqueAideur
 
     /**
      * Constructeur de la vue graphique
+     *
      * @param canvas Le canvas sur lequel on dessinera les éléments graphiques
      */
     public VueGraphiqueAideur(StackPane canvas, Group group, ScrollPane scrollPane) {
@@ -77,7 +76,7 @@ public class VueGraphiqueAideur
         initzoom();
     }
 
-    private void initzoom(){
+    private void initzoom() {
         final double SCALE_DELTA = 1.1;
         final Group scrollContent = new Group(canvas);
         scrollPane.setContent(scrollContent);
@@ -90,8 +89,8 @@ public class VueGraphiqueAideur
             }
         });
 
-       // scrollPane.setPrefViewportWidth(256);
-       // scrollPane.setPrefViewportHeight(256);
+        // scrollPane.setPrefViewportWidth(256);
+        // scrollPane.setPrefViewportHeight(256);
 
         canvas.setOnScroll(new EventHandler<ScrollEvent>() {
             @Override
@@ -102,16 +101,16 @@ public class VueGraphiqueAideur
                     return;
                 }
 
-                double scaleFactor = (event.getDeltaY() > 0) ? SCALE_DELTA
-                        : 1 / SCALE_DELTA;
+                double scaleFactor = (event.getDeltaY() > 0) ? SCALE_DELTA : 1 / SCALE_DELTA;
 
                 // amount of scrolling in each direction in scrollContent coordinate
                 // units
-              Point2D scrollOffset = figureScrollOffset(scrollContent, scrollPane);
+                Point2D scrollOffset = figureScrollOffset(scrollContent, scrollPane);
 
-                group.setScaleX(group.getScaleX() * scaleFactor);
-                group.setScaleY(group.getScaleY() * scaleFactor);
+                group.setScaleX(Math.min(ConstantesGraphique.MAX_ZOOM,group.getScaleX() * scaleFactor));
+                group.setScaleY(Math.min(ConstantesGraphique.MAX_ZOOM,group.getScaleY() * scaleFactor));
 
+                System.out.println(group.getScaleX() * scaleFactor);
                 // move viewport so that old center remains in the center after the
                 // scaling
                 repositionScroller(scrollContent, scrollPane, scaleFactor, scrollOffset);
@@ -153,7 +152,7 @@ public class VueGraphiqueAideur
      * graphique de la fenêtre
      *
      * @param plan Le plan de la ville, chargée par le couche controleur et
-     * persistance
+     *             persistance
      */
     public void construireGraphe(PlanDeVille plan) {
         group.getChildren().clear();
@@ -196,7 +195,8 @@ public class VueGraphiqueAideur
         // Affichage (+ mise à l'échalle) des tronçons
         for (Pair<Ellipse, Collection<Integer>> pair : intersectionsGraphiques.values()) {
             for (int destination : pair.getValue()) {
-                afficherTroncon(pair.getKey(), intersectionsGraphiques.get(destination).getKey(), ConstantesGraphique.COULEUR_TRONCON);
+                afficherTroncon(pair.getKey(), intersectionsGraphiques.get(destination).getKey(),
+                        ConstantesGraphique.COULEUR_TRONCON);
             }
         }
 
@@ -207,75 +207,76 @@ public class VueGraphiqueAideur
             echelleXIntersection = Math.max(echelleXIntersection, pair.getKey().getCenterX());
             echelleYIntersection = Math.max(echelleYIntersection, pair.getKey().getCenterY());
         }
-        
+
         intersectionAuPremierPlan();
     }
-    
+
     private void intersectionAuPremierPlan() {
         group.getChildrenUnmodifiable().stream()
-	    	.filter(node -> node instanceof Ellipse)
-	    	.forEach(node -> node.toFront());
-	}
-    
+                .filter(node -> node instanceof Ellipse)
+                .forEach(node -> node.toFront());
+    }
+
     /**
      * Affiche une livraison en surbrillance sur la partie graphique
+     *
      * @param livraison La livraison à mettre en surbrillance
      */
     public void surbrillanceLivraison(Livraison livraison) {
-    	surbrillanceLivraison(livraison, true);
+        surbrillanceLivraison(livraison, true);
     }
-    
-    private void surbrillanceLivraison(Livraison livraison, boolean desactiverSurbrillance) {
-    	// Repeindre toutes les intersections en couleur normal (pour parvenir aux entrées et sorties non détectées) si demandé
-    	if (desactiverSurbrillance)
-        	desactiverSurbrillance();
 
-    	// Mise en surbrillance d'une intersection + agrandissement
-    	Ellipse livraisonGraphique = intersectionsGraphiques.get(livraison.getAdresse()).getKey();
-    	colorerEllipse(livraisonGraphique, ConstantesGraphique.COULEUR_INTERSECTION_SURBRILLANCE);
-    	
-    	changerTailleEllipse(livraisonGraphique, ConstantesGraphique.DIAMETRE_INTERSECTION * ConstantesGraphique.COEFFICIENT_INTERSECTION_SURBRILLANCE);
+    private void surbrillanceLivraison(Livraison livraison, boolean desactiverSurbrillance) {
+        // Repeindre toutes les intersections en couleur normal (pour parvenir aux entrées et sorties non détectées) si demandé
+        if (desactiverSurbrillance)
+            desactiverSurbrillance();
+
+        // Mise en surbrillance d'une intersection + agrandissement
+        Ellipse livraisonGraphique = intersectionsGraphiques.get(livraison.getAdresse()).getKey();
+        colorerEllipse(livraisonGraphique, ConstantesGraphique.COULEUR_INTERSECTION_SURBRILLANCE);
+
+        changerTailleEllipse(livraisonGraphique,
+                ConstantesGraphique.DIAMETRE_INTERSECTION * ConstantesGraphique.COEFFICIENT_INTERSECTION_SURBRILLANCE);
     }
-    
+
     /**
      * Mets plusieurs livraisons en surbrillance sur la partie graphique
+     *
      * @param livraisons Les livraisons à mettre en surbrillance
      */
     public void surbrillanceLivraisons(Collection<Livraison> livraisons) {
-    	desactiverSurbrillance();
-    	
-    	// Surbrillance de toutes les livraisons
-    	livraisons.forEach(livraison -> surbrillanceLivraison(livraison, false));
+        desactiverSurbrillance();
+
+        // Surbrillance de toutes les livraisons
+        livraisons.forEach(livraison -> surbrillanceLivraison(livraison, false));
     }
-    
+
     /**
      * Désactive la surbrillance pour toutes les surbrillances
      */
     public void desactiverSurbrillance() {
-    	Iterator<Entry<Integer, Pair<Ellipse, Collection<Integer>>>> it = intersectionsGraphiques.entrySet().iterator();
-    	
-    	while(it.hasNext()) {
-    		Map.Entry<Integer, Pair<Ellipse, Collection<Integer>>> pairIntersection = 
-    				(Map.Entry<Integer, Pair<Ellipse, Collection<Integer>>>)it.next();
-    		
-    		int idIntersection = pairIntersection.getKey();
-    		Ellipse intersection = pairIntersection.getValue().getKey();
-    		changerTailleEllipse(intersection, ConstantesGraphique.DIAMETRE_INTERSECTION);
-    		
-    		// Choix de la bonne couleur
-    		Paint couleur;
-    		if (idIntersection == entrepot) {
-    			couleur = ConstantesGraphique.COULEUR_ENTREPOT;
-    		}
-    		else if (listeIdLivraison.contains(idIntersection)) {
-    			couleur = ConstantesGraphique.COULEUR_INTERSECTION_LIVRAISON;
-    		}
-    		else {
-    			couleur = ConstantesGraphique.COULEUR_INTERSECTION;
-    		}
-    		
-    		colorerEllipse(intersection, couleur);
-    	}
+        Iterator<Entry<Integer, Pair<Ellipse, Collection<Integer>>>> it = intersectionsGraphiques.entrySet().iterator();
+
+        while (it.hasNext()) {
+            Map.Entry<Integer, Pair<Ellipse, Collection<Integer>>> pairIntersection =
+                    (Map.Entry<Integer, Pair<Ellipse, Collection<Integer>>>) it.next();
+
+            int idIntersection = pairIntersection.getKey();
+            Ellipse intersection = pairIntersection.getValue().getKey();
+            changerTailleEllipse(intersection, ConstantesGraphique.DIAMETRE_INTERSECTION);
+
+            // Choix de la bonne couleur
+            Paint couleur;
+            if (idIntersection == entrepot) {
+                couleur = ConstantesGraphique.COULEUR_ENTREPOT;
+            } else if (listeIdLivraison.contains(idIntersection)) {
+                couleur = ConstantesGraphique.COULEUR_INTERSECTION_LIVRAISON;
+            } else {
+                couleur = ConstantesGraphique.COULEUR_INTERSECTION;
+            }
+
+            colorerEllipse(intersection, couleur);
+        }
     }
 
     /**
@@ -286,13 +287,15 @@ public class VueGraphiqueAideur
      * ville
      */
     private Ellipse construireEllipse(Intersection i, Paint couleur) {
-        Ellipse ellipse = new Ellipse(i.getX(), i.getY(), ConstantesGraphique.DIAMETRE_INTERSECTION, ConstantesGraphique.DIAMETRE_INTERSECTION);
+        Ellipse ellipse = new Ellipse(i.getX(), i.getY(), ConstantesGraphique.DIAMETRE_INTERSECTION,
+                ConstantesGraphique.DIAMETRE_INTERSECTION);
         colorerEllipse(ellipse, couleur);
         return ellipse;
     }
 
     /**
      * Affiche une ellipse sur l'interface, en fonction de la taille actuelle
+     *
      * @param e Le point à afficher
      */
     private void afficherEllipse(Ellipse e) {
@@ -304,30 +307,36 @@ public class VueGraphiqueAideur
 
         group.getChildren().add(e);
     }
-    
-    /** Change la couleur d'une ellipse
+
+    /**
+     * Change la couleur d'une ellipse
+     *
      * @param idEllipse L'identifiant de l'ellipse
-     * @param couleur La nouvelle couleur
+     * @param couleur   La nouvelle couleur
      */
     private void colorerEllipse(int idEllipse, Paint couleur) {
-    	colorerEllipse(intersectionsGraphiques.get(idEllipse).getKey(), couleur);
+        colorerEllipse(intersectionsGraphiques.get(idEllipse).getKey(), couleur);
     }
-    
-    /** Change la couleur d'une ellipse
-     * @param e L'ellipse à modifier
+
+    /**
+     * Change la couleur d'une ellipse
+     *
+     * @param e       L'ellipse à modifier
      * @param couleur La nouvelle couleur
      */
     private void colorerEllipse(Ellipse e, Paint couleur) {
-    	e.setFill(couleur);
+        e.setFill(couleur);
     }
-    
-    /** Change le rayon d'une ellipse (qui est un cercle)
-     * @param e L'ellipse à modifier
+
+    /**
+     * Change le rayon d'une ellipse (qui est un cercle)
+     *
+     * @param e     L'ellipse à modifier
      * @param rayon Le nouveau rayon
      */
     private void changerTailleEllipse(Ellipse e, double rayon) {
-    	e.setRadiusX(rayon);
-    	e.setRadiusY(rayon);
+        e.setRadiusX(rayon);
+        e.setRadiusY(rayon);
     }
 
     /**
@@ -378,7 +387,7 @@ public class VueGraphiqueAideur
      * Id (adresse) de l'intersection où se situe l'entrepot
      */
     private int entrepot;
-    
+
     /**
      * Une liste d'entier = les id des intersections par lesquelles on passe dans une fenêtre
      */
@@ -392,7 +401,7 @@ public class VueGraphiqueAideur
     public void construireTournee(List<List<Integer>> tournee) {
         // Mémoriser l'ordre de tournée
         this.tournee = tournee;
-        
+
         afficherTournee();
     }
 
@@ -400,38 +409,40 @@ public class VueGraphiqueAideur
      * Affiche la tournée (les tronçons empreintés entre les lieux de livraisons)
      */
     public void afficherTournee() {
-    	if (tournee == null || tournee.isEmpty())
-    		return;
-    	
+        if (tournee == null || tournee.isEmpty())
+            return;
+
         // Afficher tournée dans chaque fenêtre
         for (int idFenetre = 0; idFenetre < tournee.size(); ++idFenetre) {
 
             Paint couleur = ConstantesGraphique.COULEURS_FENETRES[idFenetre % ConstantesGraphique.COULEURS_FENETRES.length];
-            
-            for (int idIntersectionLivraison = 0; idIntersectionLivraison < tournee.get(idFenetre).size() - 1; idIntersectionLivraison++) {
+
+            for (int idIntersectionLivraison = 0; idIntersectionLivraison < tournee.get(
+                    idFenetre).size() - 1; idIntersectionLivraison++) {
                 int departIntersectionId = tournee.get(idFenetre).get(idIntersectionLivraison);
-                int arriveeIntersectionId = tournee.get(idFenetre).get(idIntersectionLivraison+1);
+                int arriveeIntersectionId = tournee.get(idFenetre).get(idIntersectionLivraison + 1);
                 Ellipse debut = intersectionsGraphiques.get(departIntersectionId).getKey();
                 Ellipse fin = intersectionsGraphiques.get(arriveeIntersectionId).getKey();
 
                 afficherTroncon(debut, fin, couleur);
             }
         }
-        
+
         // Afficher les trajets entre les fenêtres
         for (int idFenetre = 0; idFenetre < tournee.size() - 1; ++idFenetre) {
 
             Paint couleur = ConstantesGraphique.COULEURS_FENETRES[idFenetre % ConstantesGraphique.COULEURS_FENETRES.length];
-            
+
             int derniereIntersectionFenetre = tournee.get(idFenetre).get(tournee.get(idFenetre).size() - 1);
-            int premiereIntersectionFenetreSuivante = tournee.get(idFenetre + 1).get(tournee.get(idFenetre + 1).size() - 1);
+            int premiereIntersectionFenetreSuivante = tournee.get(idFenetre + 1).get(
+                    tournee.get(idFenetre + 1).size() - 1);
 
             Ellipse debut = intersectionsGraphiques.get(derniereIntersectionFenetre).getKey();
             Ellipse fin = intersectionsGraphiques.get(premiereIntersectionFenetreSuivante).getKey();
 
             afficherTroncon(debut, fin, couleur);
         }
-        
+
         intersectionAuPremierPlan();
     }
 
@@ -441,7 +452,7 @@ public class VueGraphiqueAideur
 
         for (Fenetre fenetre : demande.getFenetres()) {
             fenetre.getListeLivraisons().forEach((idLivraison, livraison) -> {
-                if(idLivraison != -1) // -1 c'est l'identifiant de l'entrepot qui est crée comme une livraison dans une fenetre speciale
+                if (idLivraison != -1) // -1 c'est l'identifiant de l'entrepot qui est crée comme une livraison dans une fenetre speciale
                     listeIdLivraison.add(livraison.getAdresse());
             });
         }
@@ -454,18 +465,18 @@ public class VueGraphiqueAideur
      */
     public void afficherDemande() {
 
-        if(listeIdLivraison == null)
+        if (listeIdLivraison == null)
             return;
 
         // Affichage entrepot
         colorerEllipse(entrepot, ConstantesGraphique.COULEUR_ENTREPOT);
 
         // Affichage des 
-        listeIdLivraison.forEach(idLivraison -> colorerEllipse(idLivraison, ConstantesGraphique.COULEUR_INTERSECTION_LIVRAISON));
-        
+        listeIdLivraison.forEach(
+                idLivraison -> colorerEllipse(idLivraison, ConstantesGraphique.COULEUR_INTERSECTION_LIVRAISON));
+
         intersectionAuPremierPlan();
     }
-
 
 
     private Point2D figureScrollOffset(Node scrollContent, ScrollPane scroller) {
@@ -483,17 +494,19 @@ public class VueGraphiqueAideur
         double scrollYOffset = scrollOffset.getY();
         double extraWidth = scrollContent.getLayoutBounds().getWidth() - scroller.getViewportBounds().getWidth();
         if (extraWidth > 0) {
-            double halfWidth = scroller.getViewportBounds().getWidth() / 2 ;
-            double newScrollXOffset = (scaleFactor - 1) *  halfWidth + scaleFactor * scrollXOffset;
-            scroller.setHvalue(scroller.getHmin() + newScrollXOffset * (scroller.getHmax() - scroller.getHmin()) / extraWidth);
+            double halfWidth = scroller.getViewportBounds().getWidth() / 2;
+            double newScrollXOffset = (scaleFactor - 1) * halfWidth + scaleFactor * scrollXOffset;
+            scroller.setHvalue(
+                    scroller.getHmin() + newScrollXOffset * (scroller.getHmax() - scroller.getHmin()) / extraWidth);
         } else {
             scroller.setHvalue(scroller.getHmin());
         }
         double extraHeight = scrollContent.getLayoutBounds().getHeight() - scroller.getViewportBounds().getHeight();
         if (extraHeight > 0) {
-            double halfHeight = scroller.getViewportBounds().getHeight() / 2 ;
+            double halfHeight = scroller.getViewportBounds().getHeight() / 2;
             double newScrollYOffset = (scaleFactor - 1) * halfHeight + scaleFactor * scrollYOffset;
-            scroller.setVvalue(scroller.getVmin() + newScrollYOffset * (scroller.getVmax() - scroller.getVmin()) / extraHeight);
+            scroller.setVvalue(
+                    scroller.getVmin() + newScrollYOffset * (scroller.getVmax() - scroller.getVmin()) / extraHeight);
         } else {
             scroller.setHvalue(scroller.getHmin());
         }
@@ -503,7 +516,7 @@ public class VueGraphiqueAideur
      * Contient les constantes définissant certaines propriétés (taille, marge, couleur,...) de la fenêtre
      */
     private static class ConstantesGraphique {
-		/**
+        /**
          * La taille sur l'interface graphique d'une intersection du plan de la
          * ville
          */
@@ -513,6 +526,8 @@ public class VueGraphiqueAideur
          * du lisibilité
          */
         private final static int MARGE_INTERSECTION = 30;
+
+        private final static double MAX_ZOOM = 15;
 
         /**
          * Coefficient mutliplicateur des ellipse pour les livraisons
@@ -526,11 +541,11 @@ public class VueGraphiqueAideur
 
         private final static Paint COULEUR_ENTREPOT = Color.RED;
 
-        private final static Paint[] COULEURS_FENETRES = new Paint[] {
-            Color.RED,
-            Color.LIGHTBLUE,
-            Color.GREEN,
-            Color.VIOLET
+        private final static Paint[] COULEURS_FENETRES = new Paint[]{
+                Color.RED,
+                Color.LIGHTBLUE,
+                Color.GREEN,
+                Color.VIOLET
         };
     }
 }
