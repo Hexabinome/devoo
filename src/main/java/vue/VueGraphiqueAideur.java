@@ -3,6 +3,7 @@ package vue;
 import java.util.*;
 import java.util.Map.Entry;
 
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -56,12 +57,15 @@ public class VueGraphiqueAideur
      */
     private Pane canvas;
 
+    private Group group;
+
     /**
      * Constructeur de la vue graphique
      * @param canvas Le canvas sur lequel on dessinera les éléments graphiques
      */
-    public VueGraphiqueAideur(Pane canvas) {
+    public VueGraphiqueAideur(Pane canvas,Group group) {
         this.canvas = canvas;
+        this.group = group;
     }
 
     /**
@@ -72,7 +76,7 @@ public class VueGraphiqueAideur
      * persistance
      */
     public void construireGraphe(PlanDeVille plan) {
-        canvas.getChildren().clear();
+        group.getChildren().clear();
 
         Map<Integer, Intersection> toutesIntersections = plan.getIntersections();
         intersectionsGraphiques = new HashMap<>();
@@ -125,9 +129,10 @@ public class VueGraphiqueAideur
         }
 
         // Mettre les noeuds devant
-        for (Node n : canvas.getChildrenUnmodifiable()) {
-            if (n instanceof Ellipse)
+        for (Node n : group.getChildrenUnmodifiable()) {
+            if (n instanceof Ellipse){
                 n.toFront();
+            }
         }
     }
     
@@ -221,7 +226,7 @@ public class VueGraphiqueAideur
         e.setCenterX(newX);
         e.setCenterY(newY);
 
-        canvas.getChildren().add(e);
+        group.getChildren().add(e);
     }
 
     /**
@@ -239,7 +244,7 @@ public class VueGraphiqueAideur
         Line ligne = new Line(p1X, p1Y, p2X, p2Y);
         ligne.setStroke(couleur);
 
-        canvas.getChildren().add(ligne);
+        group.getChildren().add(ligne);
 
         // Création flèche
         double longueur = 8 * Math.sqrt(3);
@@ -265,7 +270,7 @@ public class VueGraphiqueAideur
                 extremiteFleche2Y);
         fleche.setFill(couleur);
 
-        canvas.getChildren().add(fleche);
+        group.getChildren().add(fleche);
     }
 
     /**

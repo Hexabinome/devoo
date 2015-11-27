@@ -8,6 +8,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Group;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
@@ -97,6 +98,9 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
     @FXML
     private Slider sliderZoom;
 
+    @FXML
+    private Group group;
+
     /**
      * Méthode appelée lors du redimensionnement de la fenêtre. Elle replace les
      * arrêtes du graphe à leur bonne position
@@ -106,7 +110,7 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
         @Override
         public void changed(ObservableValue<? extends Number> observable,
                             Number oldValue, Number newValue) {
-            canvasGraphique.getChildren().clear();
+            group.getChildren().clear();
             vueGraphique.afficherPlan();
             vueGraphique.afficherDemande();
             vueGraphique.afficherTournee();
@@ -156,7 +160,8 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        vueGraphique = new VueGraphiqueAideur(canvasGraphique);
+        vueGraphique = new VueGraphiqueAideur(canvasGraphique,group);
+
     }
 
     public VueGraphiqueAideur getAideurVueGraphique() {
