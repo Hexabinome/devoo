@@ -1,14 +1,17 @@
 package vue;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import javafx.scene.Group;
-import javafx.scene.Node;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
@@ -127,30 +130,34 @@ public class VueGraphiqueAideur
             echelleXIntersection = Math.max(echelleXIntersection, pair.getKey().getCenterX());
             echelleYIntersection = Math.max(echelleYIntersection, pair.getKey().getCenterY());
         }
-
-        // Mettre les noeuds devant
-        for (Node n : group.getChildrenUnmodifiable()) {
-            if (n instanceof Ellipse){
-                n.toFront();
-            }
-        }
+        
+        intersectionAuPremierPlan();
     }
+    
+    private void intersectionAuPremierPlan() {
+    	group.getChildrenUnmodifiable().stream()
+	    	.filter(node -> node instanceof Ellipse)
+	    	.forEach(node -> node.toFront());
+	}
     
     /**
      * Affiche une livraison en surbrillance sur la partie graphique
      * @param livraison La livraison à mettre en surbrillance
      */
     public void surbrillanceLivraison(Livraison livraison) {
-    	// Repeindre toutes les intersections en couleur normal (pour parvenir aux entrées et sorties non détectées) 
-    	desactiverSurbrillance();
-    	
-    	// Mise en surbrillance d'une intersection
+    	surbrillanceLivraison(livraison, true);
+    }
+    
+    private void surbrillanceLivraison(Livraison livraison, boolean desactiverSurbrillance) {
+    	// Repeindre toutes les intersections en couleur normal (pour parvenir aux entrées et sorties non détectées) si demandé
+    	if (desactiverSurbrillance)
+        	desactiverSurbrillance();
+
+    	// Mise en surbrillance d'une intersection + agrandissement
     	Ellipse livraisonGraphique = intersectionsGraphiques.get(livraison.getAdresse()).getKey();
-        if(livraison.getId() != -1){ // on touche pas à l'entrepot dont l'id vaut -1
-            livraisonGraphique.setRadiusX(ConstantesGraphique.DIAMETRE_INTERSECTION*ConstantesGraphique.COEFFICIENT_LIVRAISON);
-            livraisonGraphique.setRadiusY(ConstantesGraphique.DIAMETRE_INTERSECTION*ConstantesGraphique.COEFFICIENT_LIVRAISON);
-            livraisonGraphique.setFill(ConstantesGraphique.COULEUR_INTERSECTION_SURBRILLANCE);
-        }
+    	colorerEllipse(livraisonGraphique, ConstantesGraphique.COULEUR_INTERSECTION_SURBRILLANCE);
+    	
+    	changerTailleEllipse(livraisonGraphique, ConstantesGraphique.DIAMETRE_INTERSECTION * ConstantesGraphique.COEFFICIENT_INTERSECTION_SURBRILLANCE);
     }
     
     /**
@@ -161,14 +168,7 @@ public class VueGraphiqueAideur
     	desactiverSurbrillance();
     	
     	// Surbrillance de toutes les livraisons
-    	for (Livraison livraison : livraisons) {
-            if(livraison.getId() != -1){ // on touche pas à l'entrepot dont l'id vaut -1
-                Ellipse livraisonGraphique = intersectionsGraphiques.get(livraison.getAdresse()).getKey();
-                livraisonGraphique.setRadiusX(ConstantesGraphique.DIAMETRE_INTERSECTION*ConstantesGraphique.COEFFICIENT_LIVRAISON);
-                livraisonGraphique.setRadiusY(ConstantesGraphique.DIAMETRE_INTERSECTION*ConstantesGraphique.COEFFICIENT_LIVRAISON);
-                livraisonGraphique.setFill(ConstantesGraphique.COULEUR_INTERSECTION_SURBRILLANCE);
-            }
-    	}
+    	livraisons.forEach(livraison -> surbrillanceLivraison(livraison, false));
     }
     
     /**
@@ -183,22 +183,21 @@ public class VueGraphiqueAideur
     		
     		int idIntersection = pairIntersection.getKey();
     		Ellipse intersection = pairIntersection.getValue().getKey();
-            intersection.setRadiusX(ConstantesGraphique.DIAMETRE_INTERSECTION);
-            intersection.setRadiusY(ConstantesGraphique.DIAMETRE_INTERSECTION);
+    		changerTailleEllipse(intersection, ConstantesGraphique.DIAMETRE_INTERSECTION);
     		
     		// Choix de la bonne couleur
     		Paint couleur;
     		if (idIntersection == entrepot) {
     			couleur = ConstantesGraphique.COULEUR_ENTREPOT;
     		}
-    		else if (intersectionsLivraisons.contains(idIntersection)) {
-    			couleur = ConstantesGraphique.COULEUR_LIVRAISON;
+    		else if (listeIdLivraison.contains(idIntersection)) {
+    			couleur = ConstantesGraphique.COULEUR_INTERSECTION_LIVRAISON;
     		}
     		else {
     			couleur = ConstantesGraphique.COULEUR_INTERSECTION;
     		}
-    			
-			intersection.setFill(couleur);
+    		
+    		colorerEllipse(intersection, couleur);
     	}
     }
 
@@ -211,7 +210,7 @@ public class VueGraphiqueAideur
      */
     private Ellipse construireEllipse(Intersection i, Paint couleur) {
         Ellipse ellipse = new Ellipse(i.getX(), i.getY(), ConstantesGraphique.DIAMETRE_INTERSECTION, ConstantesGraphique.DIAMETRE_INTERSECTION);
-        ellipse.setFill(couleur);
+        colorerEllipse(ellipse, couleur);
         return ellipse;
     }
 
@@ -227,6 +226,31 @@ public class VueGraphiqueAideur
         e.setCenterY(newY);
 
         group.getChildren().add(e);
+    }
+    
+    /** Change la couleur d'une ellipse
+     * @param idEllipse L'identifiant de l'ellipse
+     * @param couleur La nouvelle couleur
+     */
+    private void colorerEllipse(int idEllipse, Paint couleur) {
+    	colorerEllipse(intersectionsGraphiques.get(idEllipse).getKey(), couleur);
+    }
+    
+    /** Change la couleur d'une ellipse
+     * @param e L'ellipse à modifier
+     * @param couleur La nouvelle couleur
+     */
+    private void colorerEllipse(Ellipse e, Paint couleur) {
+    	e.setFill(couleur);
+    }
+    
+    /** Change le rayon d'une ellipse (qui est un cercle)
+     * @param e L'ellipse à modifier
+     * @param rayon Le nouveau rayon
+     */
+    private void changerTailleEllipse(Ellipse e, double rayon) {
+    	e.setRadiusX(rayon);
+    	e.setRadiusY(rayon);
     }
 
     /**
@@ -282,42 +306,26 @@ public class VueGraphiqueAideur
      * Une liste d'entier = les id des intersections par lesquelles on passe dans une fenêtre
      */
     private List<List<Integer>> tournee;
-    
-    /**
-     * Liste des identifiants des intersections qui 
-     */
-    private List<Integer> intersectionsLivraisons = new ArrayList<Integer>();
 
     /**
      * Construit et affiche la tournée
      *
-     * @param entrepot
      * @param tournee
-     * @param demande
      */
-    public void construireTournee(Intersection entrepot, List<List<Integer>> tournee, Demande demande) {
-
-		// Mémoriser entrepot
-        //this.entrepot = entrepot.getId();
-        
-        // Mémoriser l'id des intersections où il y a des livraisons
-        for (Fenetre f : demande.getFenetres()) {
-        	intersectionsLivraisons.addAll(f.getListeLivraisons().keySet());
-        }
-
+    public void construireTournee(List<List<Integer>> tournee) {
         // Mémoriser l'ordre de tournée
         this.tournee = tournee;
         
         afficherTournee();
     }
 
+    /**
+     * Affiche la tournée (les tronçons empreintés entre les lieux de livraisons)
+     */
     public void afficherTournee() {
     	if (tournee == null || tournee.isEmpty())
     		return;
     	
-    	// Coloration de l'entrepot
-    	//intersectionsGraphiques.get(entrepot).getKey().setFill(ConstantesGraphique.COULEUR_ENTREPOT);
-
         // Afficher tournée dans chaque fenêtre
         for (int idFenetre = 0; idFenetre < tournee.size(); ++idFenetre) {
 
@@ -347,17 +355,14 @@ public class VueGraphiqueAideur
             afficherTroncon(debut, fin, couleur);
         }
         
-        // Coloration des intersections où il y a des livraisons
-        for (int idIntersection : intersectionsLivraisons) {
-        	intersectionsGraphiques.get(idIntersection).getKey().setFill(ConstantesGraphique.COULEUR_LIVRAISON);
-        }
+        intersectionAuPremierPlan();
     }
 
-    public void construireDemande( final Demande demande){
+    public void construireDemande(final Demande demande) {
         listeIdLivraison = new LinkedList<>();
         this.entrepot = demande.getEntrepot().getId();
 
-        for(Fenetre fenetre : demande.getFenetres()){
+        for (Fenetre fenetre : demande.getFenetres()) {
             fenetre.getListeLivraisons().forEach((idLivraison, livraison) -> {
                 if(idLivraison != -1) // -1 c'est l'identifiant de l'entrepot qui est crée comme une livraison dans une fenetre speciale
                     listeIdLivraison.add(livraison.getAdresse());
@@ -370,35 +375,18 @@ public class VueGraphiqueAideur
     /**
      * Affiche les livraisons contenues dans une demande de livraison
      */
-    public void afficherDemande(){
+    public void afficherDemande() {
 
         if(listeIdLivraison == null)
             return;
 
-        // affichage entrepot
-        Ellipse ellipseEntrepot = intersectionsGraphiques.get(entrepot).getKey();
-        ellipseEntrepot.setFill(ConstantesGraphique.COULEUR_ENTREPOT);
-        ellipseEntrepot.setRadiusX(ConstantesGraphique.DIAMETRE_INTERSECTION*ConstantesGraphique.COEFFICIENT_LIVRAISON);
-        ellipseEntrepot.setRadiusY(ConstantesGraphique.DIAMETRE_INTERSECTION*ConstantesGraphique.COEFFICIENT_LIVRAISON);
+        // Affichage entrepot
+        colorerEllipse(entrepot, ConstantesGraphique.COULEUR_ENTREPOT);
 
-        listeIdLivraison.forEach(integer -> {
-            Ellipse livraisonGraphique = intersectionsGraphiques.get(integer).getKey();
-            livraisonGraphique.setRadiusX(ConstantesGraphique.DIAMETRE_INTERSECTION*ConstantesGraphique.COEFFICIENT_LIVRAISON);
-            livraisonGraphique.setRadiusY(ConstantesGraphique.DIAMETRE_INTERSECTION*ConstantesGraphique.COEFFICIENT_LIVRAISON);
-            livraisonGraphique.setFill(ConstantesGraphique.COULEUR_INTERSECTION_SURBRILLANCE);
-        });
-    }
-
-    public void cacherDemande(){
-        if(listeIdLivraison == null)
-            return;
-
-        listeIdLivraison.forEach(integer -> {
-            Ellipse livraisonGraphique = intersectionsGraphiques.get(integer).getKey();
-            livraisonGraphique.setRadiusX(ConstantesGraphique.DIAMETRE_INTERSECTION);
-            livraisonGraphique.setRadiusY(ConstantesGraphique.DIAMETRE_INTERSECTION);
-            livraisonGraphique.setFill(ConstantesGraphique.COULEUR_INTERSECTION);
-        });
+        // Affichage des 
+        listeIdLivraison.forEach(idLivraison -> colorerEllipse(idLivraison, ConstantesGraphique.COULEUR_INTERSECTION_LIVRAISON));
+        
+        intersectionAuPremierPlan();
     }
 
     /**
@@ -419,19 +407,20 @@ public class VueGraphiqueAideur
         /**
          * Coefficient mutliplicateur des ellipse pour les livraisons
          */
-        private final static double COEFFICIENT_LIVRAISON = 1.3;
+        private final static double COEFFICIENT_INTERSECTION_SURBRILLANCE = 1.4;
 
         private final static Paint COULEUR_INTERSECTION = Color.WHITE;
-        private final static Paint COULEUR_INTERSECTION_SURBRILLANCE = Color.BLUE;
+        private final static Paint COULEUR_INTERSECTION_LIVRAISON = Color.BLUE;
+        private final static Paint COULEUR_INTERSECTION_SURBRILLANCE = Color.YELLOW;
         private final static Paint COULEUR_TRONCON = Color.WHITE;
 
         private final static Paint COULEUR_ENTREPOT = Color.RED;
-        private final static Paint COULEUR_LIVRAISON = Color.SALMON;
 
         private final static Paint[] COULEURS_FENETRES = new Paint[] {
             Color.RED,
             Color.LIGHTBLUE,
-            Color.GREEN
+            Color.GREEN,
+            Color.VIOLET
         };
     }
 }

@@ -19,7 +19,6 @@ public class PaneZoomable extends Pane {
 
     public PaneZoomable(){
         super();
-        System.out.println("Appel au constructeur");
     }
 
 
