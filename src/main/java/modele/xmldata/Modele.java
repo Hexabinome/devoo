@@ -290,7 +290,7 @@ public class Modele implements ModeleLecture
         return sousTournee;
     }
 
-    private void remplirHoraires() {
+    public void remplirHoraires() {
     	
     	int heure = demande.getFenetres().get(1).getTimestampDebut();
     	int intersectionCourante = demande.getEntrepot().getId();

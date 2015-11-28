@@ -27,6 +27,7 @@ public class CommandeSupprimerLivraison implements Commande {
     public void executer() throws CommandException {
 
         controleurDonnees.getModele().removeLivraison(livraisonSupprimee.getId());
+        controleurDonnees.getModele().remplirHoraires();
         controleurDonnees.notifyAllAnnulerObserveurs(false);
         controleurDonnees.notifyAllModelObserveurs();
 
