@@ -4,7 +4,7 @@ package controleur;
  *
  * @author Maxou
  */
-public interface RetablirObserveur {
+public interface RetablirCommandeObserveur {
 
     void notifierLesObserveurs();
 }

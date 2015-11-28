@@ -27,10 +27,10 @@ public class ControleurDonnees
     private final Collection<ModelObserveur> modelObserveurs;
 
     // collection des observers pour la passibilite d'annuler / retablis des interactions effectuees.
-    private final Collection<AnnulerObserveur> annulerObserveurs;
+    private final Collection<AnnulerCommandeObserveur> annulerCommandeObserveurs;
 
     // collection des observers pour la passibilite d'annuler / retablis des interactions effectuees.
-    private final Collection<RetablirObserveur> retablirObserveurs;
+    private final Collection<RetablirCommandeObserveur> retablirCommandeObserveurs;
 
     private final Collection<PlanObserveur> planObserveurs;
 
@@ -44,8 +44,8 @@ public class ControleurDonnees
     {
         desactObserveurs = new LinkedList<>();
         modelObserveurs = new LinkedList<>();
-        annulerObserveurs = new LinkedList<>();
-        retablirObserveurs = new LinkedList<>();
+        annulerCommandeObserveurs = new LinkedList<>();
+        retablirCommandeObserveurs = new LinkedList<>();
         planObserveurs = new LinkedList<>();
         tourneeObserveurs = new LinkedList<>();
     }
@@ -90,14 +90,14 @@ public class ControleurDonnees
         modelObserveurs.add(obs);
     }
 
-    public void addAnnulerObserveur(AnnulerObserveur obs)
+    public void addAnnulerObserveur(AnnulerCommandeObserveur obs)
     {
-        annulerObserveurs.add(obs);
+        annulerCommandeObserveurs.add(obs);
     }
 
-    public void addRetablirObserveur(RetablirObserveur obs)
+    public void addRetablirObserveur(RetablirCommandeObserveur obs)
     {
-        retablirObserveurs.add(obs);
+        retablirCommandeObserveurs.add(obs);
     }
 
     public void ajouterPlanObserveur(PlanObserveur planObserveur)
@@ -133,14 +133,14 @@ public class ControleurDonnees
 
     public void notifyAllAnnulerObserveurs()
     {
-        annulerObserveurs.stream().forEach((obs) -> {
-            obs.notifyObserver();
+        annulerCommandeObserveurs.stream().forEach((obs) -> {
+            obs.notifierLesObserveurs();
         });
     }
 
     public void notifyAllRetablirObserveurs()
     {
-        retablirObserveurs.stream().forEach((obs) -> {
+        retablirCommandeObserveurs.stream().forEach((obs) -> {
             obs.notifierLesObserveurs();
         });
     }

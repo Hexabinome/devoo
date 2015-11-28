@@ -67,10 +67,16 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
     private VueGraphiqueAideur vueGraphique;
 
     /**
-     * Le menu en haut
+     * Le menu fichier en haut
      */
     @FXML
     private Menu menuFichier;
+
+    /**
+     * Le menu edition en haut
+     */
+    @FXML
+    private Menu menuEdition;
 
     /**
      * Bouton qui permet d'ajouter des livraisons

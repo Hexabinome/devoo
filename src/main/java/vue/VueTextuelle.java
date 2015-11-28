@@ -144,6 +144,7 @@ public class VueTextuelle implements Initializable, Visiteur, ActivationObserver
 
         // Construction des items de chaque livraison
         TreeItem<ObjetVisualisable> elementRacine = new TreeItem<>(new DetailFenetre(fenetre));
+
         for (Livraison l : livraisonList) {
 
             TreeItem<ObjetVisualisable> livraisonTreeItem = new TreeItem<>(new DetailLivraison(l));
@@ -257,7 +258,6 @@ public class VueTextuelle implements Initializable, Visiteur, ActivationObserver
         	else
         		setStyle("-fx-background-color: white; -fx-text-fill: black;");
         }
-
     }
 
 }
