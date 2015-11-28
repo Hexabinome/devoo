@@ -57,8 +57,10 @@ public class GrapheRealisation implements Graphe
 
     public Chemin getChemin(int idLivraisonDepart, int idLivraisonArrivee)
     {
-        if (idLivraisonToIdMatrice.get(idLivraisonDepart) == null || idLivraisonToIdMatrice.get(idLivraisonArrivee) == null || idLivraisonToIdMatrice.get(idLivraisonDepart) > chemins.length || idLivraisonToIdMatrice.get(idLivraisonDepart) > chemins.length)
-            return null;
+        if(!idLivraisonToIdMatrice.containsKey(idLivraisonDepart))
+            throw new RuntimeException("Livraison id "+idLivraisonDepart+" est inconnu a graphe");
+        if(!idLivraisonToIdMatrice.containsKey(idLivraisonArrivee))
+            throw new RuntimeException("Livraison id "+idLivraisonArrivee+" est inconnu a graphe");
         return chemins[idLivraisonToIdMatrice.get(idLivraisonDepart)][idLivraisonToIdMatrice.get(idLivraisonArrivee)];
     }
 
