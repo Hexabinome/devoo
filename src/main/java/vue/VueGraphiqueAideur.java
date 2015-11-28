@@ -575,7 +575,9 @@ public class VueGraphiqueAideur {
             Color.BLUE,
             Color.GREEN,
             Color.VIOLET,
-            Color.BISQUE
+            Color.ORANGE,
+            Color.CHARTREUSE,
+            Color.DARKSLATEBLUE
         };
     }
 }
