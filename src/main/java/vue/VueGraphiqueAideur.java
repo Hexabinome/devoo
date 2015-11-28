@@ -51,9 +51,9 @@ public class VueGraphiqueAideur {
     private double echelleYIntersection = 0;
 
     /**
-     * Liste des id des livraisons récupéreés après avoir chargé la demande
+     * Liste des id des livraisons récupéreés après avoir chargé la demande, associés au numéro de la fenêtre
      */
-    private List<Integer> listeIdLivraison;
+    private Map<Integer, Integer> listeIdLivraison;
 
     /**
      * Le canvas graphique sur lequel on dessinera les éléments graphiques
@@ -269,8 +269,8 @@ public class VueGraphiqueAideur {
             Paint couleur;
             if (idIntersection == entrepot) {
                 couleur = ConstantesGraphique.COULEUR_ENTREPOT;
-            } else if (listeIdLivraison.contains(idIntersection)) {
-                couleur = ConstantesGraphique.COULEUR_INTERSECTION_LIVRAISON;
+            } else if (listeIdLivraison.containsKey(idIntersection)) {
+                couleur = ConstantesGraphique.COULEURS_FENETRES[listeIdLivraison.get(idIntersection) % ConstantesGraphique.COULEURS_FENETRES.length];
             } else {
                 couleur = ConstantesGraphique.COULEUR_INTERSECTION;
             }
@@ -447,14 +447,16 @@ public class VueGraphiqueAideur {
     }
 
     public void construireDemande(final Demande demande) {
-        listeIdLivraison = new LinkedList<>();
+        listeIdLivraison = new HashMap<Integer, Integer>();
         this.entrepot = demande.getEntrepot().getId();
 
-        for (Fenetre fenetre : demande.getFenetres()) {
-            fenetre.getListeLivraisons().forEach((idLivraison, livraison) -> {
-                if (idLivraison != -1) // -1 c'est l'identifiant de l'entrepot qui est crée comme une livraison dans une fenetre speciale
-                    listeIdLivraison.add(livraison.getAdresse());
-            });
+    	List<Fenetre> fenetres = demande.getFenetres();
+        for (int i = 0; i < fenetres.size(); ++i) {
+    		Fenetre fenetre = fenetres.get(i);
+            for (Entry<Integer, Livraison> pair : fenetre.getListeLivraisons().entrySet()) {
+                if(pair.getKey() != -1) // -1 c'est l'identifiant de l'entrepot qui est crée comme une livraison dans une fenetre speciale
+                    listeIdLivraison.put(pair.getValue().getAdresse(), i);
+            }
         }
 
         afficherDemande();
@@ -471,10 +473,9 @@ public class VueGraphiqueAideur {
         // Affichage entrepot
         colorerEllipse(entrepot, ConstantesGraphique.COULEUR_ENTREPOT);
 
-        // Affichage des 
-        listeIdLivraison.forEach(
-                idLivraison -> colorerEllipse(idLivraison, ConstantesGraphique.COULEUR_INTERSECTION_LIVRAISON));
-
+        // Affichage des livraisons
+        listeIdLivraison.forEach((idLivraison, idCouleur) -> colorerEllipse(idLivraison, ConstantesGraphique.COULEURS_FENETRES[idCouleur % ConstantesGraphique.COULEURS_FENETRES.length]));
+        
         intersectionAuPremierPlan();
     }
 
@@ -535,17 +536,16 @@ public class VueGraphiqueAideur {
         private final static double COEFFICIENT_INTERSECTION_SURBRILLANCE = 1.4;
 
         private final static Paint COULEUR_INTERSECTION = Color.WHITE;
-        private final static Paint COULEUR_INTERSECTION_LIVRAISON = Color.BLUE;
         private final static Paint COULEUR_INTERSECTION_SURBRILLANCE = Color.YELLOW;
         private final static Paint COULEUR_TRONCON = Color.WHITE;
 
         private final static Paint COULEUR_ENTREPOT = Color.RED;
 
-        private final static Paint[] COULEURS_FENETRES = new Paint[]{
-                Color.RED,
-                Color.LIGHTBLUE,
-                Color.GREEN,
-                Color.VIOLET
+        private final static Paint[] COULEURS_FENETRES = new Paint[] {
+            Color.LIGHTSEAGREEN,
+            Color.BLUE,
+            Color.GREEN,
+            Color.VIOLET
         };
     }
 }
