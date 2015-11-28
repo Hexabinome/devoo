@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import javafx.scene.*?>
 <?import org.controlsfx.glyphfont.*?>
@@ -34,12 +35,12 @@
                 </Menu>
                 <Menu fx:id="menuEdition" mnemonicParsing="false" text="Edition">
                     <items>
-                        <MenuItem onAction="#annuler" disable="true" mnemonicParsing="false" text="Annuler">
+                        <MenuItem disable="true" mnemonicParsing="false" onAction="#annuler" text="Annuler">
                             <accelerator>
                                 <KeyCodeCombination alt="UP" code="Z" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                             </accelerator>
                         </MenuItem>
-                        <MenuItem onAction="#retablir" disable="true" mnemonicParsing="false" text="Refaire">
+                        <MenuItem disable="true" mnemonicParsing="false" onAction="#retablir" text="Refaire">
                             <accelerator>
                                 <KeyCodeCombination alt="UP" code="Y" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                             </accelerator>
@@ -99,8 +100,15 @@
                 </AnchorPane>
             </top>
             <right>
-                <Slider min="1" max="9" value="1" fx:id="sliderZoom" orientation="VERTICAL" BorderPane.alignment="CENTER"/>
+                <Slider fx:id="sliderZoom" max="9" min="1" orientation="VERTICAL" value="1" BorderPane.alignment="CENTER" />
             </right>
+         <bottom>
+            <Pane prefHeight="21.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Text fx:id="message" layoutX="16.0" layoutY="16.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Message : ..." />
+               </children>
+            </Pane>
+         </bottom>
         </BorderPane>
     </center>
 </BorderPane>

@@ -51,7 +51,8 @@ public class EtatSuppression extends AbstractEtat
     @Override
     public EtatInterface cliqueCalculerTournee()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // Ne fais rien
+        return this;
     }
 
     @Override

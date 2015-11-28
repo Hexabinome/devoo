@@ -77,4 +77,15 @@ class Historique {
         commandesExecutees.clear();
     }
 
+    /**
+     * Renvoie true s'il reste des commandes à annuler
+     */
+    public boolean estVideCommandesAnnulees(){
+        return commandesAnnulees.isEmpty();
+    }
+
+    public boolean estVideCommandesExecutees(){
+        return commandesExecutees.isEmpty();
+    }
+
 }
