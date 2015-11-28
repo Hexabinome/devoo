@@ -61,8 +61,16 @@ public class Modele implements ModeleLecture
      */
     public void removeLivraison(int idLivraison)
     {
+    	// On ne peut pas supprimer l'entrepot
+    	if (idLivraison == -1)
+    		return;
+    	
         //identifier la livraison
         Livraison liv = demande.identifierLivraison(idLivraison);
+        
+        // On ne peut pas supprimer la dernière livraison d'une fenêtre
+        if (demande.identifierFenetre(liv).getListeLivraisons().size() == 1)
+        	return;
 
         //parcourir la tournee calculle par tsp et supprimer la livraison specifiee
         livraisonTournee.stream().forEach((fenetre) -> {

@@ -124,4 +124,19 @@ public class Demande
         throw new RuntimeException("Fenetre introuvable pour livraison: " + idLivraison);
     }
 
+	/**
+	 * Renvoie la fenêtre à laquelle appartient la livraison
+	 * @param liv La livraison qui est dans la fenêtre
+	 * @return La fenêtre ou null si livraison non trouvée
+	 */
+	public Fenetre identifierFenetre(Livraison liv) {
+		for (Fenetre f : fenetres) {
+			if (f.getListeLivraisons().values().contains(liv)) {
+				return f;
+			}
+		}
+		
+		return null;
+	}
+
 }
