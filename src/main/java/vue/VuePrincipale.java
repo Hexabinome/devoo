@@ -119,7 +119,8 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
         @Override
         public void changed(ObservableValue<? extends Number> observable,
                             Number oldValue, Number newValue) {
-            group.getChildren().clear();
+        	
+        	vueGraphique.nettoyerAffichage();
             vueGraphique.afficherPlan();
             vueGraphique.afficherDemande();
             vueGraphique.afficherTournee();

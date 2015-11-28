@@ -584,4 +584,8 @@ public class VueGraphiqueAideur {
             Color.DARKSLATEBLUE
         };
     }
+
+	public void nettoyerAffichage() {
+		group.getChildren().clear();
+	}
 }

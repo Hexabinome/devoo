@@ -187,7 +187,13 @@ public class VueTextuelle implements Initializable, Visiteur, ActivationObserver
     @Override
     public void notificationModelAChange() {
         effacerVueTableLivraison();
-        construireVueTableLivraion(controleurInterface.getModel().getDemande());
+        Demande demandeModifiee = controleurInterface.getModel().getDemande();
+        construireVueTableLivraion(demandeModifiee);
+        
+        vueGraphique.nettoyerAffichage();
+        vueGraphique.afficherPlan();
+        vueGraphique.construireDemande(demandeModifiee);
+        vueGraphique.construireTournee(controleurInterface.getModel().getTournee());
     }
 
     public void initialiserObserveurs() {
