@@ -255,7 +255,8 @@ public class VueGraphiqueAideur {
             Paint couleur;
             if (idIntersection == entrepot) {
                 couleur = ConstantesGraphique.COULEUR_ENTREPOT;
-            } else if (listeIdLivraison.containsKey(idIntersection)) {
+                System.out.println("entrepot : " + idIntersection);
+            } else if ( listeIdLivraison != null && listeIdLivraison.containsKey(idIntersection)) {
                 couleur = ConstantesGraphique.COULEURS_FENETRES[listeIdLivraison.get(idIntersection) % ConstantesGraphique.COULEURS_FENETRES.length];
             } else {
                 couleur = ConstantesGraphique.COULEUR_INTERSECTION;
@@ -372,7 +373,7 @@ public class VueGraphiqueAideur {
     /**
      * Id (adresse) de l'intersection où se situe l'entrepot
      */
-    private int entrepot;
+    private int entrepot = -1;
 
     /**
      * Une liste d'entier = les id des intersections par lesquelles on passe dans une fenêtre
