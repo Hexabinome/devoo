@@ -415,7 +415,7 @@ public class VueGraphiqueAideur {
         // Afficher tournée dans chaque fenêtre
         for (int idFenetre = 0; idFenetre < tournee.size(); ++idFenetre) {
 
-            Paint couleur = ConstantesGraphique.COULEURS_FENETRES[idFenetre % ConstantesGraphique.COULEURS_FENETRES.length];
+            Paint couleur = ConstantesGraphique.COULEURS_FENETRES[(idFenetre + 1) % ConstantesGraphique.COULEURS_FENETRES.length];
 
             for (int idIntersectionLivraison = 0; idIntersectionLivraison < tournee.get(
                     idFenetre).size() - 1; idIntersectionLivraison++) {
@@ -427,15 +427,19 @@ public class VueGraphiqueAideur {
                 afficherTroncon(debut, fin, couleur);
             }
         }
+        
+        // Affichage départ de l'entrepot
+        Ellipse entrepot = intersectionsGraphiques.get(this.entrepot).getKey();
+        Ellipse premierNoeud = intersectionsGraphiques.get(tournee.get(0).get(0)).getKey();
+        afficherTroncon(entrepot, premierNoeud, ConstantesGraphique.COULEURS_FENETRES[0]);
 
         // Afficher les trajets entre les fenêtres
         for (int idFenetre = 0; idFenetre < tournee.size() - 1; ++idFenetre) {
 
-            Paint couleur = ConstantesGraphique.COULEURS_FENETRES[idFenetre % ConstantesGraphique.COULEURS_FENETRES.length];
+            Paint couleur = ConstantesGraphique.COULEURS_FENETRES[(idFenetre + 2) % ConstantesGraphique.COULEURS_FENETRES.length];
 
             int derniereIntersectionFenetre = tournee.get(idFenetre).get(tournee.get(idFenetre).size() - 1);
-            int premiereIntersectionFenetreSuivante = tournee.get(idFenetre + 1).get(
-                    tournee.get(idFenetre + 1).size() - 1);
+            int premiereIntersectionFenetreSuivante = tournee.get(idFenetre + 1).get(0);
 
             Ellipse debut = intersectionsGraphiques.get(derniereIntersectionFenetre).getKey();
             Ellipse fin = intersectionsGraphiques.get(premiereIntersectionFenetreSuivante).getKey();
