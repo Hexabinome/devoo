@@ -2,7 +2,6 @@ package modele.xmldata;
 
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
 
@@ -135,29 +134,35 @@ public class Modele implements ModeleLecture
             return null;
 
         tournee = new LinkedList<>();
-        
+
         // compteur pour iterer sur la solution cree par TSP
         int compteurSolutionTSP = 1;
 
-        // pour chaque fenetre... (sauf le premier qui contient que l'entrepot, on l'enleve)
         List<Fenetre> listFenetres = new LinkedList<>();
 
         listFenetres.addAll(demande.getFenetres());
         Livraison depart = listFenetres.get(0).getListeLivraisons().values().iterator().next();
+        Livraison entrepot = depart;
 
-        listFenetres.remove(
-                0);
+        // pour chaque fenetre... (sauf le premier qui contient que l'entrepot, on l'enleve)
+        listFenetres.remove(0);
         for (Fenetre fenetre : listFenetres) {
 
-            List<Livraison> tspLivraisons = getLivraisonFromSolutionTsp(fenetre, compteurSolutionTSP);
-            compteurSolutionTSP += tspLivraisons.size();
+            List<Livraison> fenetreTspLivraisons = getLivraisonFromSolutionTsp(fenetre, compteurSolutionTSP);
+            compteurSolutionTSP += fenetreTspLivraisons.size();
 
-            List<Integer> sousTournee = creerSourTournee(depart, tspLivraisons);
-            depart = tspLivraisons.get(tspLivraisons.size() - 1);
+            List<Integer> sousTournee = creerSourTournee(depart, fenetreTspLivraisons);
+            depart = fenetreTspLivraisons.get(fenetreTspLivraisons.size() - 1);
 
             //ajouter la liste cree pour cette fenetre a la liste principale
             tournee.add(sousTournee);
         }
+
+        //ajouter une dernier fenetre fictive pour retourner a l'entrepot
+        List retourEntrepotFenetre = new LinkedList<>();
+        retourEntrepotFenetre.add(entrepot);
+        List<Integer> retourEntrepotSousTournee = creerSourTournee(depart, retourEntrepotFenetre);
+        tournee.add(retourEntrepotSousTournee);
 
         return tournee;
     }
@@ -196,9 +201,9 @@ public class Modele implements ModeleLecture
     @Override
     public List<List<Integer>> getTournee()
     {
-        if(tournee == null)
+        if (tournee == null)
             return null;
-        
+
         List<List<Integer>> inmodifiableTournee = new LinkedList<>();
 
         for (List<Integer> sousTournee : tournee) {
