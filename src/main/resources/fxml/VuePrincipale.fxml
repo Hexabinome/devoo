@@ -34,12 +34,12 @@
                 </Menu>
                 <Menu fx:id="menuEdition" mnemonicParsing="false" text="Edition">
                     <items>
-                        <MenuItem disable="true" mnemonicParsing="false" text="Annuler">
+                        <MenuItem onAction="#annuler" disable="true" mnemonicParsing="false" text="Annuler">
                             <accelerator>
                                 <KeyCodeCombination alt="UP" code="Z" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                             </accelerator>
                         </MenuItem>
-                        <MenuItem disable="true" mnemonicParsing="false" text="Refaire">
+                        <MenuItem onAction="#retablir" disable="true" mnemonicParsing="false" text="Refaire">
                             <accelerator>
                                 <KeyCodeCombination alt="UP" code="Y" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                             </accelerator>

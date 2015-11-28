@@ -219,6 +219,16 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
         controleurInterface.cliqueCalculerTourne();
     }
 
+    @FXML
+    void annuler(){
+        controleurInterface.cliqueAnnuler();
+    }
+
+    @FXML
+    void retablir(){
+        controleurInterface.cliqueRetablir();
+    }
+
     /**
      * Ouvre une boite de dialogue pour choisir un fichier
      *
