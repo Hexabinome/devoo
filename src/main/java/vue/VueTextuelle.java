@@ -101,14 +101,6 @@ public class VueTextuelle implements Initializable, Visiteur, ActivationObserver
         initialiserColonneLivraison();
         initialiserColonneHoraire();
         initialiserEcouteurs();
-        tableViewFenetre.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
-            if (newValue != null){
-                ObjetVisualisable objetVisualisable = newValue.getValue();
-                if(objetVisualisable instanceof DetailLivraison){
-                    controleurInterface.cliqueSurLivraison(((DetailLivraison)objetVisualisable).getLivraison().getId());
-                }
-            }
-        }));
     }
 
     /**
@@ -223,7 +215,7 @@ public class VueTextuelle implements Initializable, Visiteur, ActivationObserver
     private class TableCellSpecial extends TreeTableCell<ObjetVisualisable, String> {
 
         public TableCellSpecial() {
-            // initialiserClic();
+             initialiserClic();
             initialiserHover();
 
         }
@@ -241,8 +233,8 @@ public class VueTextuelle implements Initializable, Visiteur, ActivationObserver
         private void initialiserClic() {
             setOnMouseClicked(event -> {
                 ObjetVisualisable objetVisualisable = getTreeTableRow().getTreeItem().getValue();
-                if (objetVisualisable != null)
-                    getTreeTableRow().getTreeItem().getValue().accepter(VueTextuelle.this);
+                if (objetVisualisable instanceof DetailLivraison)
+                    controleurInterface.cliqueSurLivraison(((DetailLivraison)objetVisualisable).getLivraison().getId());
             });
 
         }
