@@ -73,46 +73,17 @@ public class Modele implements ModeleLecture
         intersectionTournee = creerIntersectionTournee();
         remplirHoraires();
     }
-    
-    public void addLivraison(int idLivraisonAvant)
-    {
-        
-    }
 
     /**
      * Ajoute la solution dans le tsp, aprés le previousId. Ajoute aussi
      * l'intersection dans la fenêtre de previousId.
      *
-     * @param previousId
+     * @param idLivraisonAvant
      * @param intersectionId
      */
-    public void addLivraison(int previousId, int intersectionId)
+    public void addLivraison(int idLivraisonAvant, int intersectionId)
     {
-        //TODO: (cette methode ne fait pas parti du noyau... pas prioritaire maintenant.)
-        // Quoi on doit faire ici:
-        // + ajouter la livraison dans la bonne fenter dans demande
-        // + mis a jour du graphe (calculer distance vers chque intersection deja utilise pour une livraison dans graphe)
-        // + soit (1) effacer tournee / soit (2) recalculer tournee avec TSP -> encore a discuter mais a mon avis (2)
 
-        /*
-         int indiceLivraison = graphe.getIndiceFromIdLivraison(previousId);
-
-         tsp.ajouterSolution(indiceLivraison, indiceLivraison);
-         //On ajout la solution dans la fenêtre
-         for (int iFenetre = 0; iFenetre < demande.getFenetres().size(); iFenetre++) {
-         //On a trouvé la fenêtre qui contient la previousId livraison
-         if (((ArrayList<Fenetre>) demande.getFenetres()).get(iFenetre).getListeLivraisons().get(previousId) != null) {
-         Livraison livraison = new Livraison(((ArrayList<Fenetre>) demande.getFenetres()).get(iFenetre).getListeLivraisons().size(), 0, intersectionId);
-         ((ArrayList<Fenetre>) demande.getFenetres()).get(iFenetre).getListeLivraisons().put(livraison.getId(), livraison);
-
-         //TODO à optimiser (pas desoin de rappeller dijkstra pour toutes les intersections
-         if (iFenetre == demande.getFenetres().size() - 1)
-         ((ArrayList<Fenetre>) demande.getFenetres()).get(iFenetre).calculerChemins(plan, graphe, ((ArrayList<Fenetre>) demande.getFenetres()).get(0));
-         else
-         ((ArrayList<Fenetre>) demande.getFenetres()).get(iFenetre).calculerChemins(plan, graphe, ((ArrayList<Fenetre>) demande.getFenetres()).get(iFenetre + 1));
-         }
-
-         }*/
     }
 
     public void calculerTournee()

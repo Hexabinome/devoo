@@ -9,11 +9,9 @@ import java.util.Objects;
  */
 public class GrapheRealisation implements Graphe
 {
+    private final Chemin[][] chemins;
 
-    private Chemin[][] chemins;
-
-    //Key : id de livraison (30, 50, 12); 
-    //Value : indice dans la matrice(0, 1, 2)
+    //pour pouvoir tradiure les ids des livraisons en ids matrice (utilise par TSP) et egalement l'inverse on utilise deux hashmaps.
     private final HashMap<Integer, Integer> idLivraisonToIdMatrice;
     private final HashMap<Integer, Integer> idMatriceToIdLivraison;
     private int nombreCheminInserer = 0;
@@ -57,10 +55,10 @@ public class GrapheRealisation implements Graphe
 
     public Chemin getChemin(int idLivraisonDepart, int idLivraisonArrivee)
     {
-        if(!idLivraisonToIdMatrice.containsKey(idLivraisonDepart))
-            throw new RuntimeException("Livraison id "+idLivraisonDepart+" est inconnu a graphe");
-        if(!idLivraisonToIdMatrice.containsKey(idLivraisonArrivee))
-            throw new RuntimeException("Livraison id "+idLivraisonArrivee+" est inconnu a graphe");
+        if (!idLivraisonToIdMatrice.containsKey(idLivraisonDepart))
+            throw new RuntimeException("Livraison id " + idLivraisonDepart + " est inconnu a graphe");
+        if (!idLivraisonToIdMatrice.containsKey(idLivraisonArrivee))
+            throw new RuntimeException("Livraison id " + idLivraisonArrivee + " est inconnu a graphe");
         return chemins[idLivraisonToIdMatrice.get(idLivraisonDepart)][idLivraisonToIdMatrice.get(idLivraisonArrivee)];
     }
 
@@ -69,11 +67,6 @@ public class GrapheRealisation implements Graphe
         if (depart > chemins.length || depart > chemins.length || depart < 0 || arrivee < 0)
             return null;
         return chemins[depart][arrivee];
-    }
-
-    public void setChemins(Chemin[][] chemins)
-    {
-        this.chemins = chemins;
     }
 
     /**
@@ -95,7 +88,6 @@ public class GrapheRealisation implements Graphe
         }
         if ((j = idLivraisonToIdMatrice.get(livraisonArriveeId)) == null) {
             j = nombreCheminInserer;
-            //idLivraisonToIdMatrice.put(chemin.getIdFin(), nombreCheminInserer++);
             idLivraisonToIdMatrice.put(livraisonArriveeId, nombreCheminInserer++);
         }
 
@@ -125,9 +117,9 @@ public class GrapheRealisation implements Graphe
         idLivraisonToIdMatrice.keySet().stream().forEach((cle) -> {
             idMatriceToIdLivraison.put(idLivraisonToIdMatrice.get(cle), cle);
         });
-        
+
     }
-    
+
     public int getIdLivraisonParIdMatrice(int idMatrice)
     {
         return idMatriceToIdLivraison.get(idMatrice);
