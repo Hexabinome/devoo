@@ -150,10 +150,10 @@ public class ControleurDonnees
         });
     }
 
-    public void notifyAllCalculerTourneeObserveurs()
+    public void notifyAllCalculerTourneeObserveurs(boolean activation)
     {
         tourneeObserveurs.stream().forEach((obs) -> {
-            obs.notifierLesObserveurs(false);
+            obs.notifierLesObserveurs(!activation);
         });
     }
 
