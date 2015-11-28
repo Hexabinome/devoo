@@ -19,7 +19,15 @@ public class EtatSuppression extends AbstractEtat
     @Override
     public EtatInterface cliqueSurLivraison(int livraisonId)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            Commande commande = new CommandeSupprimerLivraison(donnees,livraisonId);
+            commande.executer();
+            donnees.ajouterCommande(commande);
+
+        } catch (CommandException e) {
+            e.printStackTrace();
+        }
+        return this;
     }
 
     @Override

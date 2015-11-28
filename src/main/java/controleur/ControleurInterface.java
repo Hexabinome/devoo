@@ -19,6 +19,10 @@ public interface ControleurInterface
     
     void ajouterTourneeObserveur(ActivationObserverInterface tourneeObserveur);
 
+    void ajouterAnnulerCommandeObserveur(AnnulerCommandeObserveur annulerCommandeObserveur);
+
+    void ajouterRetablirCommandeObserveur(RetablirCommandeObserveur retablirCommandeObserveur);
+
     void cliqueSurPlan(int intersectionId);
     
     void cliqueSurLivraison(int livraisonId);

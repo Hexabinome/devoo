@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import controleur.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -23,10 +24,6 @@ import modele.xmldata.ModeleLecture;
 
 import org.controlsfx.dialog.ExceptionDialog;
 
-import controleur.ControleurInterface;
-import controleur.ModelObserveur;
-import controleur.PlanObserveur;
-
 /**
  * Cette classe joue le rôle de binding pour la fenetre principale de
  * l'application. C'est ici qu'on spécifiera les écouteurs et consorts. Remarque
@@ -34,7 +31,8 @@ import controleur.PlanObserveur;
  *
  * @author David
  */
-public class VuePrincipale implements Initializable, PlanObserveur, ModelObserveur {
+public class VuePrincipale implements Initializable, PlanObserveur, ModelObserveur, AnnulerCommandeObserveur,
+        RetablirCommandeObserveur {
 
     /**
      * Mediateur : permet de communiquer avec les autres controleurs
@@ -267,6 +265,8 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
         controleurInterface.ajouterTourneeObserveur(calculerTourneeBouton);
         controleurInterface.ajouterPlanObserveur(this);
         controleurInterface.ajouterModelObserver(this);
+        controleurInterface.ajouterAnnulerCommandeObserveur(this);
+        controleurInterface.ajouterRetablirCommandeObserveur(this);
     }
 
     @Override
@@ -286,5 +286,15 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
             vueGraphique.construireTournee(modele.getTournee());
 
         vueGraphique.construireDemande(modele.getDemande());
+    }
+
+    @Override
+    public void notificationAnnulerCommande(boolean activation) {
+        menuEdition.getItems().get(0).setDisable(activation);
+    }
+
+    @Override
+    public void notificationRetablirCommande(boolean activation) {
+        menuEdition.getItems().get(1).setDisable(activation);
     }
 }

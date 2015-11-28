@@ -6,5 +6,8 @@ package controleur;
  */
 public interface RetablirCommandeObserveur {
 
-    void notificationRetablirCommande();
+    /**
+     * @param active Dit si l'action retablir doit etre activée ou non
+     */
+    void notificationRetablirCommande(boolean active);
 }

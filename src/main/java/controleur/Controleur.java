@@ -136,4 +136,14 @@ public class Controleur implements ControleurInterface
         controleurDonnees.addTourneeObserveur(tourneeObserveur);
     }
 
+    @Override
+    public void ajouterAnnulerCommandeObserveur(AnnulerCommandeObserveur annulerCommandeObserveur) {
+        controleurDonnees.ajouterAnnulerCommandeObserveur(annulerCommandeObserveur);
+    }
+
+    @Override
+    public void ajouterRetablirCommandeObserveur(RetablirCommandeObserveur retablirCommandeObserveur) {
+        controleurDonnees.ajouterRetablirCommandeObserveur(retablirCommandeObserveur);
+    }
+
 }

@@ -174,8 +174,8 @@ public class DeserialiseurXML
                 int idLivraison = elementLivraison.getAttribute("id").getIntValue();
 
                 /**
-                 * on ajoute 10000 fois l'index du fenetre. Comme ca les ids
-                 * restentent unqie (supposant qu'on a moins de 10000 livraisons
+                 * on ajoute 10000 l'index du fenetre. Comme ca les ids
+                 * restent unique (supposant qu'on a moins de 10000 livraisons
                  * pas fenetre, mais ca semble realiste)
                  */
                 idLivraison += fenetreCompteur * 10000;

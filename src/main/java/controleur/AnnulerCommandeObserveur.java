@@ -6,6 +6,9 @@ package controleur;
 public interface AnnulerCommandeObserveur
 {
 
-    void notificationAnnulerCommande();
+    /**
+     * @param active Dit si l'action Annuler doit etre activée ou non
+     */
+    void notificationAnnulerCommande(boolean active);
 
 }

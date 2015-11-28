@@ -48,6 +48,7 @@ public class ControleurDonnees
         retablirCommandeObserveurs = new LinkedList<>();
         planObserveurs = new LinkedList<>();
         tourneeObserveurs = new LinkedList<>();
+        hist = new Historique();
     }
 
     public Modele getModele()
@@ -90,12 +91,12 @@ public class ControleurDonnees
         modelObserveurs.add(obs);
     }
 
-    public void addAnnulerObserveur(AnnulerCommandeObserveur obs)
+    public void ajouterAnnulerCommandeObserveur(AnnulerCommandeObserveur obs)
     {
         annulerCommandeObserveurs.add(obs);
     }
 
-    public void addRetablirObserveur(RetablirCommandeObserveur obs)
+    public void ajouterRetablirCommandeObserveur(RetablirCommandeObserveur obs)
     {
         retablirCommandeObserveurs.add(obs);
     }
@@ -108,6 +109,10 @@ public class ControleurDonnees
     void addTourneeObserveur(ActivationObserverInterface tourneeObserveur)
     {
         tourneeObserveurs.add(tourneeObserveur);
+    }
+
+    public void ajouterCommande(Commande commande){
+        hist.ajouterCommande(commande);
     }
 
     public void notifierLesObserveursDuPlan()
@@ -131,17 +136,17 @@ public class ControleurDonnees
         });
     }
 
-    public void notifyAllAnnulerObserveurs()
+    public void notifyAllAnnulerObserveurs(boolean activation)
     {
         annulerCommandeObserveurs.stream().forEach((obs) -> {
-            obs.notificationAnnulerCommande();
+            obs.notificationAnnulerCommande(activation);
         });
     }
 
-    public void notifyAllRetablirObserveurs()
+    public void notifyAllRetablirObserveurs(boolean activation)
     {
         retablirCommandeObserveurs.stream().forEach((obs) -> {
-            obs.notificationRetablirCommande();
+            obs.notificationRetablirCommande(activation);
         });
     }
 
