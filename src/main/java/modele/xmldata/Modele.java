@@ -57,18 +57,26 @@ public class Modele implements ModeleLecture
      */
     public void removeLivraison(int idLivraison)
     {
-        //TODO: (cette methode ne fait pas parti du noyau... pas prioritaire maintenant.)
-        // Quoi on doit faire ici:
-        // + effacer la livraison dans demande
-        // + mis a jour du graphe (supprimer les liasion qui utilisent l'intersection utilise pas la livraison)
-        // + soit (1) effacer tournee / soit (2) recalculer tournee avec TSP -> encore a discuter mais a mon avis (2)
+        //parcourir la tournee calculle par tsp et supprimer la livraison specifiee
+        livraisonTournee.stream().forEach((fenetre) -> {
+            Livraison livraison = null;
 
-        /*
-         int indiceLivraison = graphe.getIndiceFromIdLivraison(idLivraison);
-         tsp.supprimerSolution(indiceLivraison);
-         */
-        //TODO tester si idLivraison est tous seul dans sa fenêtre.
-        //Refaire dijkstra entre fenêtre d'avant et fenêtre suivante et tsp.
+            for (Livraison l : fenetre) {
+                if (l.getId() == idLivraison)
+                    livraison = l;
+            }
+
+            fenetre.remove(livraison);
+        });
+
+        //mettre a jour la tournee et les horaires
+        intersectionTournee = creerIntersectionTournee();
+        remplirHoraires();
+    }
+    
+    public void addLivraison(int idLivraisonAvant)
+    {
+        
     }
 
     /**
@@ -200,7 +208,7 @@ public class Modele implements ModeleLecture
                 //on doit sauter la premiere fenetre (l'algo desous utilise toujours une fenetre et sa fenetre precedente)
                 entrepot = false;
             else {
-                List<Integer> sousTournee = creerSourTournee(depart, fenetre);
+                List<Integer> sousTournee = creerSousTournee(depart, fenetre);
 
                 //depart de prochaine fenetre est la derniere livraison de cette fenetre
                 depart = fenetre.get(fenetre.size() - 1);
@@ -214,7 +222,7 @@ public class Modele implements ModeleLecture
         return intersectionTournee;
     }
 
-    private List<Integer> creerSourTournee(Livraison depart, List<Livraison> sousTourneeLivraisons)
+    private List<Integer> creerSousTournee(Livraison depart, List<Livraison> sousTourneeLivraisons)
     {
         // Ce liste represente tous les intersections (dans la bonne ordre) qui on doit parcourir pour effecture les livraisons prevus.
         List<Integer> sousTournee = new LinkedList<>();
