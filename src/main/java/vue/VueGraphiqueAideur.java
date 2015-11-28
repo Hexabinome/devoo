@@ -35,7 +35,7 @@ public class VueGraphiqueAideur {
      * grâce à leur id, et pour chaque intersection, ses arcs graphiques ainsi
      * que l'intersection ciblée
      */
-    private Map<Integer, Pair<Ellipse, Collection<Integer>>> intersectionsGraphiques = new HashMap<>();
+    private Map<Integer, Pair<Ellipse, Collection<Integer>>> intersectionsGraphiques = null;
 
     /**
      * Contient l'échelle X actuelle par rapport à laquelle les intersections
@@ -145,6 +145,10 @@ public class VueGraphiqueAideur {
      *             persistance
      */
     public void construireGraphe(PlanDeVille plan) {
+    	intersectionsGraphiques = new HashMap<Integer, Pair<Ellipse,Collection<Integer>>>();
+    	listeIdLivraison = null;
+    	livraisons = null;
+    	tournee = null;
         group.getChildren().clear();
 
         Map<Integer, Intersection> toutesIntersections = plan.getIntersections();
@@ -246,6 +250,9 @@ public class VueGraphiqueAideur {
      * Désactive la surbrillance pour toutes les surbrillances
      */
     public void desactiverSurbrillance() {
+    	if (intersectionsGraphiques == null || listeIdLivraison == null)
+    		return;
+    	
         Iterator<Entry<Integer, Pair<Ellipse, Collection<Integer>>>> it = intersectionsGraphiques.entrySet().iterator();
 
         while (it.hasNext()) {
@@ -448,9 +455,12 @@ public class VueGraphiqueAideur {
     }
 
     public void construireDemande(final Demande demande) {
+        tournee = null;
+        
         listeIdLivraison = new HashMap<Integer, Integer>();
         livraisons = new ArrayList<Livraison>();
         this.entrepot = demande.getEntrepot().getId();
+        
 
     	List<Fenetre> fenetres = demande.getFenetres();
         for (int i = 0; i < fenetres.size(); ++i) {
@@ -523,7 +533,7 @@ public class VueGraphiqueAideur {
 	 * @return null si les coordonnées ne sont sur aucune livraison
 	 */
 	public Livraison estSurLivraison(double x, double y) {
-		if (livraisons == null || livraisons.isEmpty())
+		if (livraisons == null || livraisons.isEmpty() || intersectionsGraphiques == null)
 			return null;
 
 		for (Livraison l : livraisons) {
