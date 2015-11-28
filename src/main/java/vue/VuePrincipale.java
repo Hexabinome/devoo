@@ -8,16 +8,17 @@ import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Menu;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Slider;
 import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
-import modele.xmldata.Livraison;
 import modele.xmldata.ModeleLecture;
 
 import org.controlsfx.dialog.ExceptionDialog;
@@ -170,20 +171,6 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         vueGraphique = new VueGraphiqueAideur(canvasGraphique, group, scrollPane, sliderZoom);
-        
-        canvasGraphique.setOnMouseMoved(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				Livraison l = vueGraphique.estSurLivraison(event.getX(), event.getY());
-				if (l == null) {
-					vueGraphique.desactiverSurbrillance();
-					return;
-				}
-				
-				vueGraphique.surbrillanceLivraison(l);
-				// TODO mettre en surbrillance élément dans la liste
-			}
-		});
     }
 
     public VueGraphiqueAideur getAideurVueGraphique() {

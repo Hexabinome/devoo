@@ -78,6 +78,10 @@ public class VueGraphiqueAideur {
         this.sliderZoom = slider;
         initzoom();
     }
+    
+    public StackPane getCanvas() {
+    	return canvas;
+    }
 
     private void initzoom() {
         final Group scrollContent = (Group) scrollPane.getContent();
@@ -219,7 +223,8 @@ public class VueGraphiqueAideur {
 
         // Mise en surbrillance d'une intersection + agrandissement
         Ellipse livraisonGraphique = intersectionsGraphiques.get(livraison.getAdresse()).getKey();
-        colorerEllipse(livraisonGraphique, ConstantesGraphique.COULEUR_INTERSECTION_SURBRILLANCE);
+        
+        colorerEllipse(livraison.getAdresse(), livraisonGraphique);
 
         changerTailleEllipse(livraisonGraphique,
                 ConstantesGraphique.DIAMETRE_INTERSECTION * ConstantesGraphique.COEFFICIENT_INTERSECTION_SURBRILLANCE);
@@ -251,17 +256,7 @@ public class VueGraphiqueAideur {
             Ellipse intersection = pairIntersection.getValue().getKey();
             changerTailleEllipse(intersection, ConstantesGraphique.DIAMETRE_INTERSECTION);
 
-            // Choix de la bonne couleur
-            Paint couleur;
-            if (idIntersection == entrepot) {
-                couleur = ConstantesGraphique.COULEUR_ENTREPOT;
-            } else if ( listeIdLivraison != null && listeIdLivraison.containsKey(idIntersection)) {
-                couleur = ConstantesGraphique.COULEURS_FENETRES[listeIdLivraison.get(idIntersection) % ConstantesGraphique.COULEURS_FENETRES.length];
-            } else {
-                couleur = ConstantesGraphique.COULEUR_INTERSECTION;
-            }
-
-            colorerEllipse(intersection, couleur);
+            colorerEllipse(idIntersection, intersection);
         }
     }
 
@@ -311,7 +306,23 @@ public class VueGraphiqueAideur {
      * @param couleur La nouvelle couleur
      */
     private void colorerEllipse(Ellipse e, Paint couleur) {
+       
         e.setFill(couleur);
+    }
+    
+    private void colorerEllipse(int idIntersection, Ellipse e) {
+    	 // Choix de la bonne couleur
+        Paint couleur;
+
+        if (idIntersection == entrepot) {
+            couleur = ConstantesGraphique.COULEUR_ENTREPOT;
+        } else if (listeIdLivraison != null && listeIdLivraison.containsKey(idIntersection)) {
+            couleur = ConstantesGraphique.COULEURS_FENETRES[listeIdLivraison.get(idIntersection) % ConstantesGraphique.COULEURS_FENETRES.length];
+        } else {
+            couleur = ConstantesGraphique.COULEUR_INTERSECTION;
+        }
+        
+        colorerEllipse(e, couleur);
     }
 
     /**
@@ -546,10 +557,9 @@ public class VueGraphiqueAideur {
         /**
          * Coefficient mutliplicateur des ellipse pour les livraisons
          */
-        private final static double COEFFICIENT_INTERSECTION_SURBRILLANCE = 1.4;
+        private final static double COEFFICIENT_INTERSECTION_SURBRILLANCE = 1.5;
 
         private final static Paint COULEUR_INTERSECTION = Color.WHITE;
-        private final static Paint COULEUR_INTERSECTION_SURBRILLANCE = Color.YELLOW;
         private final static Paint COULEUR_TRONCON = Color.WHITE;
 
         private final static Paint COULEUR_ENTREPOT = Color.RED;
