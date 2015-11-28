@@ -112,38 +112,12 @@ public class VueGraphiqueAideur {
                 group.setScaleX(Math.min(ConstantesGraphique.MAX_ZOOM,group.getScaleX() * scaleFactor));
                 group.setScaleY(Math.min(ConstantesGraphique.MAX_ZOOM,group.getScaleY() * scaleFactor));
 
-                System.out.println(group.getScaleX() * scaleFactor);
+                System.out.println(scaleFactor);
                 // move viewport so that old center remains in the center after the
                 // scaling
                 repositionScroller(scrollContent, scrollPane, scaleFactor, scrollOffset);
 
 
-            }
-        });
-
-        // Panning via drag....
-        final ObjectProperty<Point2D> lastMouseCoordinates = new SimpleObjectProperty<Point2D>();
-        scrollContent.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                lastMouseCoordinates.set(new Point2D(event.getX(), event.getY()));
-            }
-        });
-
-        scrollContent.setOnMouseDragged(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                double deltaX = event.getX() - lastMouseCoordinates.get().getX();
-                double extraWidth = scrollContent.getLayoutBounds().getWidth() - scrollPane.getViewportBounds().getWidth();
-                double deltaH = deltaX * (scrollPane.getHmax() - scrollPane.getHmin()) / extraWidth;
-                double desiredH = scrollPane.getHvalue() - deltaH;
-                scrollPane.setHvalue(Math.max(0, Math.min(scrollPane.getHmax(), desiredH)));
-
-                double deltaY = event.getY() - lastMouseCoordinates.get().getY();
-                double extraHeight = scrollContent.getLayoutBounds().getHeight() - scrollPane.getViewportBounds().getHeight();
-                double deltaV = deltaY * (scrollPane.getHmax() - scrollPane.getHmin()) / extraHeight;
-                double desiredV = scrollPane.getVvalue() - deltaV;
-                scrollPane.setVvalue(Math.max(0, Math.min(scrollPane.getVmax(), desiredV)));
             }
         });
 
