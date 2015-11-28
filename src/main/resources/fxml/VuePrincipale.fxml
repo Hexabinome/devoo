@@ -59,11 +59,13 @@
             <center>
                 <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" pannable="true" style="-fx-background-color: #7b7b7b;">
                     <content>
-                        <StackPane fx:id="canvasGraphique" style="-fx-background-color: #7b7b7b;">
-                            <children>
-                                <Group fx:id="group" />
-                            </children>
-                        </StackPane>
+                        <Group>
+                            <StackPane fx:id="canvasGraphique" style="-fx-background-color: #7b7b7b;">
+                                <children>
+                                    <Group fx:id="group" />
+                                </children>
+                            </StackPane>
+                        </Group>
                     </content>
                 </ScrollPane>
 
@@ -96,6 +98,9 @@
                     </children>
                 </AnchorPane>
             </top>
+            <right>
+                <Slider min="1" max="9" value="1" fx:id="sliderZoom" orientation="VERTICAL" BorderPane.alignment="CENTER"/>
+            </right>
         </BorderPane>
     </center>
 </BorderPane>
