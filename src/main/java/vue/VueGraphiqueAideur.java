@@ -1,7 +1,5 @@
 package vue;
 
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
@@ -10,7 +8,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.control.Slider;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -54,7 +52,7 @@ public class VueGraphiqueAideur {
      * Liste des id des livraisons récupéreés après avoir chargé la demande, associés au numéro de la fenêtre
      */
     private Map<Integer, Integer> listeIdLivraison;
-    
+
     private List<Livraison> livraisons = null;
 
     /**
@@ -66,22 +64,24 @@ public class VueGraphiqueAideur {
 
     private ScrollPane scrollPane;
 
+    private Slider sliderZoom;
+
     /**
      * Constructeur de la vue graphique
      *
      * @param canvas Le canvas sur lequel on dessinera les éléments graphiques
      */
-    public VueGraphiqueAideur(StackPane canvas, Group group, ScrollPane scrollPane) {
+    public VueGraphiqueAideur(StackPane canvas, Group group, ScrollPane scrollPane, Slider slider) {
         this.canvas = canvas;
         this.group = group;
         this.scrollPane = scrollPane;
+        this.sliderZoom = slider;
         initzoom();
     }
 
     private void initzoom() {
-        final double SCALE_DELTA = 1.1;
-        final Group scrollContent = new Group(canvas);
-        scrollPane.setContent(scrollContent);
+        final Group scrollContent = (Group) scrollPane.getContent();
+        sliderZoom.setBlockIncrement(0.5);
 
         scrollPane.viewportBoundsProperty().addListener(new ChangeListener<Bounds>() {
             @Override
@@ -91,59 +91,43 @@ public class VueGraphiqueAideur {
             }
         });
 
-        // scrollPane.setPrefViewportWidth(256);
-        // scrollPane.setPrefViewportHeight(256);
+
+        /**
+         * Liaison du slider avec le canvas.
+         */
+        canvas.scaleXProperty().bind(sliderZoom.valueProperty());
+        canvas.scaleYProperty().bind(sliderZoom.valueProperty());
 
         canvas.setOnScroll(new EventHandler<ScrollEvent>() {
             @Override
             public void handle(ScrollEvent event) {
                 event.consume();
 
+
+                double oldScale = canvas.getScaleX();
+
                 if (event.getDeltaY() == 0) {
                     return;
                 }
+                if (event.getDeltaY() > 0) {
+                    sliderZoom.increment();
+                } else {
+                    sliderZoom.decrement();
+                }
 
-                double scaleFactor = (event.getDeltaY() > 0) ? SCALE_DELTA : 1 / SCALE_DELTA;
+                double newScale = canvas.getScaleX();
+
+                double scaleFactor = newScale / oldScale;
+
 
                 // amount of scrolling in each direction in scrollContent coordinate
-                // units
+                // Calcul le decalage
                 Point2D scrollOffset = figureScrollOffset(scrollContent, scrollPane);
 
-                group.setScaleX(Math.min(ConstantesGraphique.MAX_ZOOM,group.getScaleX() * scaleFactor));
-                group.setScaleY(Math.min(ConstantesGraphique.MAX_ZOOM,group.getScaleY() * scaleFactor));
-
-                System.out.println(group.getScaleX() * scaleFactor);
-                // move viewport so that old center remains in the center after the
-                // scaling
+                // Repositionne la scrollbare pour que la fenetre soit centrée
                 repositionScroller(scrollContent, scrollPane, scaleFactor, scrollOffset);
 
 
-            }
-        });
-
-        // Panning via drag....
-        final ObjectProperty<Point2D> lastMouseCoordinates = new SimpleObjectProperty<Point2D>();
-        scrollContent.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                lastMouseCoordinates.set(new Point2D(event.getX(), event.getY()));
-            }
-        });
-
-        scrollContent.setOnMouseDragged(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                double deltaX = event.getX() - lastMouseCoordinates.get().getX();
-                double extraWidth = scrollContent.getLayoutBounds().getWidth() - scrollPane.getViewportBounds().getWidth();
-                double deltaH = deltaX * (scrollPane.getHmax() - scrollPane.getHmin()) / extraWidth;
-                double desiredH = scrollPane.getHvalue() - deltaH;
-                scrollPane.setHvalue(Math.max(0, Math.min(scrollPane.getHmax(), desiredH)));
-
-                double deltaY = event.getY() - lastMouseCoordinates.get().getY();
-                double extraHeight = scrollContent.getLayoutBounds().getHeight() - scrollPane.getViewportBounds().getHeight();
-                double deltaV = deltaY * (scrollPane.getHmax() - scrollPane.getHmin()) / extraHeight;
-                double desiredV = scrollPane.getVvalue() - deltaV;
-                scrollPane.setVvalue(Math.max(0, Math.min(scrollPane.getVmax(), desiredV)));
             }
         });
 
@@ -429,7 +413,7 @@ public class VueGraphiqueAideur {
                 afficherTroncon(debut, fin, couleur);
             }
         }
-        
+
         // Affichage départ de l'entrepot
         Ellipse entrepot = intersectionsGraphiques.get(this.entrepot).getKey();
         Ellipse premierNoeud = intersectionsGraphiques.get(tournee.get(0).get(0)).getKey();
@@ -483,7 +467,7 @@ public class VueGraphiqueAideur {
 
         // Affichage des livraisons
         listeIdLivraison.forEach((idLivraison, idCouleur) -> colorerEllipse(idLivraison, ConstantesGraphique.COULEURS_FENETRES[idCouleur % ConstantesGraphique.COULEURS_FENETRES.length]));
-        
+
         intersectionAuPremierPlan();
     }
 
@@ -522,7 +506,7 @@ public class VueGraphiqueAideur {
     }
 
 	/**
-	 * Retourne la livraison si les coordonnées paramètres correspondent à la position de la livraison 
+	 * Retourne la livraison si les coordonnées paramètres correspondent à la position de la livraison
 	 * @param x Coordonnées X du canvas graphique
 	 * @param y Coordonnées Y du canvas graphique
 	 * @return null si les coordonnées ne sont sur aucune livraison
@@ -530,7 +514,7 @@ public class VueGraphiqueAideur {
 	public Livraison estSurLivraison(double x, double y) {
 		if (livraisons == null || livraisons.isEmpty())
 			return null;
-		
+
 		for (Livraison l : livraisons) {
 			Ellipse e = intersectionsGraphiques.get(l.getAdresse()).getKey();
 			if (e.getCenterX() - ConstantesGraphique.DIAMETRE_INTERSECTION <= x && x <= e.getCenterX() + ConstantesGraphique.DIAMETRE_INTERSECTION
@@ -538,7 +522,7 @@ public class VueGraphiqueAideur {
 				return l;
 			}
 		}
-		
+
 		return null;
 	}
 
@@ -575,7 +559,9 @@ public class VueGraphiqueAideur {
             Color.BLUE,
             Color.GREEN,
             Color.VIOLET,
-            Color.BISQUE
+            Color.ORANGE,
+            Color.CHARTREUSE,
+            Color.DARKSLATEBLUE
         };
     }
 }

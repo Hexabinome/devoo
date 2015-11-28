@@ -12,11 +12,8 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Menu;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
@@ -105,6 +102,9 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
     @FXML
     private ScrollPane scrollPane;
 
+    @FXML
+    private Slider sliderZoom;
+
     /**
      * Méthode appelée lors du redimensionnement de la fenêtre. Elle replace les
      * arrêtes du graphe à leur bonne position
@@ -163,7 +163,7 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        vueGraphique = new VueGraphiqueAideur(canvasGraphique, group, scrollPane);
+        vueGraphique = new VueGraphiqueAideur(canvasGraphique, group, scrollPane, sliderZoom);
         
         canvasGraphique.setOnMouseMoved(new EventHandler<MouseEvent>() {
 			@Override

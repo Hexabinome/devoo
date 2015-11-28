@@ -57,7 +57,7 @@ hs_err_pid*
 devoo.iml
 .idea
 dependency-reduced-pom.xml
-
+*.iml
 /nbproject/private/
 /build/
 /target

@@ -231,7 +231,7 @@ public class VueTextuelle implements Initializable, Visiteur, ActivationObserver
                     return;
 
                 // Change style de la vue textuelle
-                setStyle("-fx-background-color: yellow; -fx-text-fill: black;");
+                setSurbrillance(true);
 
                 // On met en surbrillance une intersection ou toutes les intersections d'une fenêtre
                 if (objetSurpasse instanceof DetailLivraison) {
@@ -245,10 +245,17 @@ public class VueTextuelle implements Initializable, Visiteur, ActivationObserver
             });
 
             setOnMouseExited(event -> {
-                setStyle("-fx-background-color: white; -fx-text-fill: black;");
+            	setSurbrillance(false);
 
                 vueGraphique.desactiverSurbrillance();
             });
+        }
+        
+        private void setSurbrillance(boolean activer) {
+        	if (activer)
+                setStyle("-fx-background-color: yellow; -fx-text-fill: black;");
+        	else
+        		setStyle("-fx-background-color: white; -fx-text-fill: black;");
         }
 
     }
