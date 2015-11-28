@@ -20,7 +20,7 @@ public class DetailLivraison extends ObjetVisualisable {
 
     @Override
     public String afficherCaracteriqueSpeciale() {
-        return String.valueOf(livraison.getHoraireDePassage());
+        return convertirEnHeureLisible(livraison.getHoraireDePassage());
     }
 
     @Override

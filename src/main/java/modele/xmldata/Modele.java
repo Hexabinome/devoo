@@ -1,11 +1,11 @@
 package modele.xmldata;
 
-import java.util.List;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 
 import modele.business.TSP;
 import modele.business.TSP1;
@@ -290,14 +290,30 @@ public class Modele implements ModeleLecture
         return sousTournee;
     }
 
-    private void remplirHoraires()
-    {
-        //TODO: replace mock implementation by data actually derived from TSP sollution
-        demande.getFenetres().stream().forEach((fenetre) -> {
-            fenetre.getListeLivraisons().values().stream().forEach((livraison) -> {
-                livraison.setHoraireDePassage((int) (Math.random() * 3600));
-            });
-        });
+    private void remplirHoraires() {
+    	
+    	int heure = demande.getFenetres().get(1).getTimestampDebut();
+    	int intersectionCourante = demande.getEntrepot().getId();
+    	
+    	demande.getFenetres().get(0).getLivraison(-1).setHoraireDePassage(heure);
+    	
+        for (int iFenetre = 1; iFenetre < demande.getFenetres().size(); ++iFenetre) {
+        	Fenetre fenetre = demande.getFenetres().get(iFenetre);
+        	
+        	for (int prochaineIntersection : intersectionTournee.get(iFenetre - 1)) {
+        		float dureeTroncon = plan.getIntersection(intersectionCourante).getTroncon(prochaineIntersection).getDuree();
+        		
+        		heure += dureeTroncon;
+        		intersectionCourante = prochaineIntersection;
+        		
+        		// Mise à jour de l'horaire de passage si on est sur une livraison
+        		final int intersectionFinale = intersectionCourante;
+        		final int heureFinale = heure;
+        		fenetre.getListeLivraisons().values().stream()
+        			.filter(l -> l.getAdresse() == intersectionFinale).findFirst()
+        			.ifPresent(l -> l.setHoraireDePassage(heureFinale));
+        	}
+        }
     }
 
     @Override

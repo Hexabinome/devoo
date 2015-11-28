@@ -25,17 +25,6 @@ public class DetailFenetre extends ObjetVisualisable {
         return "";
     }
 
-    /**
-     * Convertis un temps en seconde en chaine de caractère sous la forme HH:mm:ss
-     * @param tempsEnSeconde temps à convertir
-     */
-    private static String convertirEnHeureLisible(int tempsEnSeconde) {
-        int heure = tempsEnSeconde / 3600;
-        int mn = (tempsEnSeconde % 3600) / 60;
-        int sec = tempsEnSeconde % 60;
-        return String.format("%02d:%02d:%02d", heure, mn, sec);
-    }
-
     @Override
     public void accepter(Visiteur v) {
         v.visit(this);
