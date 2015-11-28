@@ -299,6 +299,7 @@ public class Modele implements ModeleLecture
     	
         for (int iFenetre = 1; iFenetre < demande.getFenetres().size(); ++iFenetre) {
         	Fenetre fenetre = demande.getFenetres().get(iFenetre);
+    		List<Integer> dejaVisites = new ArrayList<Integer>();
         	
         	for (int prochaineIntersection : intersectionTournee.get(iFenetre - 1)) {
         		float dureeTroncon = plan.getIntersection(intersectionCourante).getTroncon(prochaineIntersection).getDuree();
@@ -307,11 +308,16 @@ public class Modele implements ModeleLecture
         		intersectionCourante = prochaineIntersection;
         		
         		// Mise à jour de l'horaire de passage si on est sur une livraison
-        		final int intersectionFinale = intersectionCourante;
-        		final int heureFinale = heure;
-        		fenetre.getListeLivraisons().values().stream()
-        			.filter(l -> l.getAdresse() == intersectionFinale).findFirst()
-        			.ifPresent(l -> l.setHoraireDePassage(heureFinale));
+        		for (Livraison l : fenetre.getListeLivraisons().values()) {
+        			if (l.getAdresse() == intersectionCourante && !dejaVisites.contains(l.getAdresse())) {
+        				if (heure < fenetre.getTimestampDebut()) {
+        					heure = fenetre.getTimestampDebut();
+        				}
+        				l.setHoraireDePassage(heure);
+        				dejaVisites.add(l.getAdresse());
+        				break;
+        			}
+        		}
         	}
         }
     }
