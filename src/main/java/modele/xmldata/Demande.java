@@ -19,7 +19,9 @@ public class Demande
     private final List<Fenetre> fenetres;
 
     /**
-     * Lors de la consturction d'une demande, on ajoute automatiquement l'entrepot comme premiere fenêtre 
+     * Lors de la consturction d'une demande, on ajoute automatiquement
+     * l'entrepot comme premiere fenêtre
+     *
      * @param entrepot
      * @param fenetres
      */
@@ -27,10 +29,10 @@ public class Demande
     {
         this.entrepot = entrepot;
         Fenetre fenetreEntrepot = new Fenetre(0, 0);
-        
+
         Livraison livraisonEntrepot = new Livraison(-1, -1, entrepot.getId());
         fenetreEntrepot.ajouterLivraison(livraisonEntrepot.getId(), livraisonEntrepot);
-        
+
         this.fenetres = new ArrayList<>();
         this.fenetres.add(fenetreEntrepot);
         this.fenetres.addAll(fenetres);
@@ -87,6 +89,39 @@ public class Demande
         }
 
         return livraison.size();
+    }
+
+    public void supprimerLivraision(int livraisonId)
+    {
+        fenetres.stream().forEach((fenetre) -> {
+            fenetre.supprimerLivraison(livraisonId);
+        });
+    }
+
+    /**
+     * Recuperer une livraison a parti de son id.
+     *
+     * @param idLivraison
+     * @return la livraison si elle existe, null sinon
+     */
+    public Livraison identifierLivraison(int idLivraison)
+    {
+        Livraison result = null;
+
+        for (Fenetre f : fenetres) {
+            result = (f.getListeLivraisons().keySet().contains(idLivraison) ? f.getLivraison(idLivraison) : result);
+        }
+
+        return result;
+    }
+
+    Fenetre getFenetreDeLivraison(int idLivraison)
+    {
+        for (Fenetre f : fenetres) {
+            if (f.getListeLivraisons().keySet().contains(idLivraison))
+                return f;
+        }
+        throw new RuntimeException("Fenetre introuvable pour livraison: " + idLivraison);
     }
 
 }

@@ -2,7 +2,9 @@ package modele.xmldata;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 import modele.business.TSP;
@@ -10,7 +12,7 @@ import modele.business.TSP1;
 
 /**
  *
- * @author Max Schiedermeier
+ * @author Maxou
  */
 public class Modele implements ModeleLecture
 {
@@ -19,6 +21,8 @@ public class Modele implements ModeleLecture
     private final Demande demande;
     private GrapheRealisation graphe;
     private TSP tsp;
+
+    private int customLivraisonCompteur = Integer.MAX_VALUE;
 
     //cette liste des listes stoque pour chque fenetre les livraisons a effecturer dans une tournee calculle par TSP (sans l'entrepot au debout et a la fin de sla tournee)
     private List<List<Livraison>> livraisonTournee;
@@ -57,17 +61,16 @@ public class Modele implements ModeleLecture
      */
     public void removeLivraison(int idLivraison)
     {
+        //identifier la livraison
+        Livraison liv = demande.identifierLivraison(idLivraison);
+
         //parcourir la tournee calculle par tsp et supprimer la livraison specifiee
         livraisonTournee.stream().forEach((fenetre) -> {
-            Livraison livraison = null;
-
-            for (Livraison l : fenetre) {
-                if (l.getId() == idLivraison)
-                    livraison = l;
-            }
-
-            fenetre.remove(livraison);
+            fenetre.remove(liv);
         });
+
+        //supprimer la livraision (dans la demande)
+        demande.supprimerLivraision(idLivraison);
 
         //mettre a jour la tournee et les horaires
         intersectionTournee = creerIntersectionTournee();
@@ -83,6 +86,79 @@ public class Modele implements ModeleLecture
      */
     public void addLivraison(int idLivraisonAvant, int intersectionId)
     {
+        // d'abord recuperer la livraison avant
+        Livraison livraisonAvant = demande.identifierLivraison(idLivraisonAvant);
+
+        // creer une nouvelle livriason et la stoquer dans le modele
+        Fenetre f = demande.getFenetreDeLivraison(idLivraisonAvant);
+
+        //manipuler la tournee cree par TSP en ajoutant la nouvelle livraison dans le bon endroit (apres la livraison precendente)
+        Livraison nouvelleLivraison = new Livraison(customLivraisonCompteur, -1, intersectionId);
+        customLivraisonCompteur -= 1;
+        f.ajouterLivraison(intersectionId, nouvelleLivraison);
+
+        //calculer et stoquer le chemin vers la nouvelle livraison
+        //TODO: c'est ppossible qu;on a pas beson de faire ca, le permier appel de dijkstra a deja calcule ca, si on stoquait le resultat on peut eviter cette re-calculation
+        Collection<Chemin> cheminsSortantDeLivraisonAvant = Fenetre.dijkstra(plan.getIntersection(livraisonAvant.getAdresse()), plan);
+        cheminsSortantDeLivraisonAvant.stream().filter((c) -> (c.getIdFin() == intersectionId)).forEach((c) -> {
+            graphe.setChemin(c, livraisonAvant.getAdresse(), intersectionId);
+        });
+
+        //calculer et stoquer le chemin de la nouvelle livraison vers la livraison apres
+        Livraison livraisonApres = recupererLivraisonApres(livraisonAvant);
+        int idIintersectionApres = livraisonApres.getAdresse();
+        Collection<Chemin> cheminsSortantDeNouvelleLiv = Fenetre.dijkstra(plan.getIntersection(intersectionId), plan);
+        cheminsSortantDeNouvelleLiv.stream().filter((c) -> (c.getIdFin() == idIintersectionApres)).forEach((c) -> {
+            graphe.setChemin(c, nouvelleLivraison.getAdresse(), idIintersectionApres);
+        });
+        
+        //MAJ de la tournee (par rapport aux livraisons)
+        insererLivraisionDansTournee(livraisonAvant, nouvelleLivraison);
+
+        //MAJ de la tournee (par rapport aux intersections)
+        intersectionTournee = creerIntersectionTournee();
+
+        //MAJ des horraires de passage
+        remplirHoraires();
+    }
+
+    /**
+     * Ajouter une nouvelle livraison dans la bonne position (c'est a dire
+     * directement apres une livraison deja existant) dans la tournee
+     *
+     * @param livraisonAvant
+     * @param nouvelleLivraison
+     */
+    private void insererLivraisionDansTournee(Livraison livraisonAvant, Livraison nouvelleLivraison)
+    {
+        livraisonTournee.stream().filter((sousTournee) -> (sousTournee.contains(livraisonAvant))).forEach((sousTournee) -> {
+            int position = sousTournee.indexOf(livraisonAvant);
+            sousTournee.add(position + 1, nouvelleLivraison);
+        });
+    }
+
+    /**
+     * Cherche la livraison directement apres une livraison contenu dans la
+     * tournee. C'est possible que cette livraion est dans la fenetre apres.
+     *
+     * @param livraisonAvant
+     * @return
+     */
+    private Livraison recupererLivraisonApres(Livraison livraisonAvant)
+    {
+        //d'abourd on va creer une nouvelle liste  contennant toutes les livraisons (sans connaisance des fenetreas). Celle ci est plus facile a iterer.
+        List<Livraison> totalList = new LinkedList<>();
+        for (List<Livraison> fenetre : livraisonTournee) {
+            totalList.addAll(fenetre);
+        }
+        Iterator<Livraison> iter = totalList.iterator();
+        Livraison liv = iter.next();
+        while (liv != livraisonAvant) {
+            iter.next();
+        }
+        if (iter.hasNext())
+            return iter.next();
+        throw new RuntimeException("Livraison ne fait pas parti de la tounree");
 
     }
 

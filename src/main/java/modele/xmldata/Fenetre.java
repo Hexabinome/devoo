@@ -16,7 +16,7 @@ import java.util.Set;
  * Une Fenetre correspond a une periode de temps fixe avec une nombre des
  * livraisons prevus.
  *
- * @author mhaidara / maxou / jolan
+ * @author jolan
  */
 public class Fenetre
 {
@@ -62,9 +62,9 @@ public class Fenetre
 
     public Livraison getLivraison(int idLivraison)
     {
-    	return livraisons.get(idLivraison);
+        return livraisons.get(idLivraison);
     }
-    
+
     @Override
     public String toString()
     {
@@ -102,7 +102,8 @@ public class Fenetre
                 //ajouter nouveau entry
                 intersectionVersLivraisons.put(livraison.getAdresse(), new LinkedList<>());
 
-            intersectionVersLivraisons.get(livraison.getAdresse()).add(livraison);        }
+            intersectionVersLivraisons.get(livraison.getAdresse()).add(livraison);
+        }
 
         //stoque toutes les livraisons de cette et la prochaine fenetre
         Collection<Livraison> livraisonsArrivees = new LinkedList<>();
@@ -136,8 +137,7 @@ public class Fenetre
         }
     }
 
-    //TODO set private (public pour les test)
-    public Collection<Chemin> dijkstra(Intersection intersectionDepart, PlanDeVille plan)
+    public static Collection<Chemin> dijkstra(Intersection intersectionDepart, PlanDeVille plan)
     {
         //INITIALISATION
 
@@ -207,7 +207,7 @@ public class Fenetre
      * @param plan
      * @return
      */
-    public ArrayList<Intersection> getListeIntersectionSuivante(Intersection intersection, PlanDeVille plan)
+    public static ArrayList<Intersection> getListeIntersectionSuivante(Intersection intersection, PlanDeVille plan)
     {
         ArrayList<Intersection> intersections = new ArrayList<>();
 
@@ -218,6 +218,17 @@ public class Fenetre
         return intersections;
     }
 
+    void supprimerLivraison(int livraisonId)
+    {
+        if (livraisons.keySet().contains(livraisonId))
+            livraisons.remove(livraisonId);
+    }
+
+    Object identiferLivraison(int idLivraison)
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     /**
      * Classe utile pour la priority Queue. Le but est de lui fournir un
      * comparateur pour qu'elle s'ordonne. L'intersection en paramètres ne doit
@@ -226,7 +237,7 @@ public class Fenetre
      * @author Djowood
      *
      */
-    public class CoutComparator implements Comparator<Intersection>
+    public static class CoutComparator implements Comparator<Intersection>
     {
 
         @Override
@@ -240,8 +251,9 @@ public class Fenetre
 
     }
 
-	
-    public int getNbLivraison() {
-		return livraisons.size();
-	}
+    public int getNbLivraison()
+    {
+        return livraisons.size();
+    }
+
 }
