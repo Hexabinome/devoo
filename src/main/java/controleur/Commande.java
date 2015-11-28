@@ -26,9 +26,9 @@ public interface Commande
     boolean estAnnulable();
 
     /**
-     * La creation d'une commande ne declenche pas automatiquement sa execution
-     * (c'est notamment utile pour l'historique, qund on veut reexecuter un
-     * command)
+     * La creation d'une commande ne declenche pas automatiquement son execution
+     * (c'est notamment utile pour l'historique, qund on veut reexecuter une
+     * commande)
      */
     void executer() throws CommandException;
 
