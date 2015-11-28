@@ -171,7 +171,7 @@ public class VueTextuelle implements Initializable, Visiteur, ActivationObserver
      * Notification déclenchée lors d'un changement dans le model
      */
     @Override
-    public void notifierLesOberseursDuModel() {
+    public void notificationModelAChange() {
         effacerVueTableLivraison();
         construireVueTableLivraion(controleurInterface.getModel().getDemande());
     }

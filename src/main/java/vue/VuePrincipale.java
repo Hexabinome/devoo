@@ -283,7 +283,7 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
     }
 
     @Override
-    public void notifierLesObserveursDuPlan() {
+    public void notificationPlanAChange() {
         vueGraphique.construireGraphe(controleurInterface.getPlanDeVille());
         //activation de menu element graphique qui permet de charger un fichier de livraison
         //(Ici on peut le faire sans appel observeur, parce qu' a parti d'ici on possede toujours un plan valide.)
@@ -292,7 +292,7 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
     }
 
     @Override
-    public void notifierLesOberseursDuModel() {
+    public void notificationModelAChange() {
         ModeleLecture modele = controleurInterface.getModel();
 
         if (modele.getTournee() != null)

@@ -113,7 +113,7 @@ public class ControleurDonnees
     public void notifierLesObserveursDuPlan()
     {
         planObserveurs.stream().forEach((planObserveur -> {
-            planObserveur.notifierLesObserveursDuPlan();
+            planObserveur.notificationPlanAChange();
         }));
     }
 
@@ -127,21 +127,21 @@ public class ControleurDonnees
     public void notifyAllModelObserveurs()
     {
         modelObserveurs.stream().forEach((obs) -> {
-            obs.notifierLesOberseursDuModel();
+            obs.notificationModelAChange();
         });
     }
 
     public void notifyAllAnnulerObserveurs()
     {
         annulerCommandeObserveurs.stream().forEach((obs) -> {
-            obs.notifierLesObserveurs();
+            obs.notificationAnnulerCommande();
         });
     }
 
     public void notifyAllRetablirObserveurs()
     {
         retablirCommandeObserveurs.stream().forEach((obs) -> {
-            obs.notifierLesObserveurs();
+            obs.notificationRetablirCommande();
         });
     }
 

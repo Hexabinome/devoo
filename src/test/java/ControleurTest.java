@@ -41,7 +41,7 @@ public class ControleurTest {
         miseAJourAppelee = false;
         observer = new ModelObserveur() {
             @Override
-            public void notifierLesOberseursDuModel() {
+            public void notificationModelAChange() {
                 miseAJourAppelee = true;
             }
         };

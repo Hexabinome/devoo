@@ -6,5 +6,5 @@ package controleur;
  */
 public interface ModelObserveur
 {
-    void notifierLesOberseursDuModel();
+    void notificationModelAChange();
 }
