@@ -255,7 +255,6 @@ public class VueGraphiqueAideur {
             Paint couleur;
             if (idIntersection == entrepot) {
                 couleur = ConstantesGraphique.COULEUR_ENTREPOT;
-                System.out.println("entrepot : " + idIntersection);
             } else if ( listeIdLivraison != null && listeIdLivraison.containsKey(idIntersection)) {
                 couleur = ConstantesGraphique.COULEURS_FENETRES[listeIdLivraison.get(idIntersection) % ConstantesGraphique.COULEURS_FENETRES.length];
             } else {
@@ -418,7 +417,7 @@ public class VueGraphiqueAideur {
         // Affichage départ de l'entrepot
         Ellipse entrepot = intersectionsGraphiques.get(this.entrepot).getKey();
         Ellipse premierNoeud = intersectionsGraphiques.get(tournee.get(0).get(0)).getKey();
-        afficherTroncon(entrepot, premierNoeud, ConstantesGraphique.COULEURS_FENETRES[0]);
+        afficherTroncon(entrepot, premierNoeud, ConstantesGraphique.COULEURS_FENETRES[1]);
 
         // Afficher les trajets entre les fenêtres
         for (int idFenetre = 0; idFenetre < tournee.size() - 1; ++idFenetre) {
