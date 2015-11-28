@@ -200,7 +200,6 @@ public class VueTextuelle implements Initializable, Visiteur, ActivationObserver
      */
     private class TableCellSpecial extends TreeTableCell<ObjetVisualisable, String> {
 
-
         public TableCellSpecial() {
             // initialiserClic();
             initialiserHover();
@@ -242,7 +241,6 @@ public class VueTextuelle implements Initializable, Visiteur, ActivationObserver
                     Collection<Livraison> livraisons = ((DetailFenetre) objetSurpasse).getFenetre().getListeLivraisons().values();
                     vueGraphique.surbrillanceLivraisons(livraisons);
                 }
-
 
             });
 

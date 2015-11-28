@@ -54,6 +54,8 @@ public class VueGraphiqueAideur {
      * Liste des id des livraisons récupéreés après avoir chargé la demande, associés au numéro de la fenêtre
      */
     private Map<Integer, Integer> listeIdLivraison;
+    
+    private List<Livraison> livraisons = null;
 
     /**
      * Le canvas graphique sur lequel on dessinera les éléments graphiques
@@ -452,12 +454,14 @@ public class VueGraphiqueAideur {
 
     public void construireDemande(final Demande demande) {
         listeIdLivraison = new HashMap<Integer, Integer>();
+        livraisons = new ArrayList<Livraison>();
         this.entrepot = demande.getEntrepot().getId();
 
     	List<Fenetre> fenetres = demande.getFenetres();
         for (int i = 0; i < fenetres.size(); ++i) {
     		Fenetre fenetre = fenetres.get(i);
             for (Entry<Integer, Livraison> pair : fenetre.getListeLivraisons().entrySet()) {
+            	livraisons.add(pair.getValue());
                 if(pair.getKey() != -1) // -1 c'est l'identifiant de l'entrepot qui est crée comme une livraison dans une fenetre speciale
                     listeIdLivraison.put(pair.getValue().getAdresse(), i);
             }
@@ -517,6 +521,27 @@ public class VueGraphiqueAideur {
         }
     }
 
+	/**
+	 * Retourne la livraison si les coordonnées paramètres correspondent à la position de la livraison 
+	 * @param x Coordonnées X du canvas graphique
+	 * @param y Coordonnées Y du canvas graphique
+	 * @return null si les coordonnées ne sont sur aucune livraison
+	 */
+	public Livraison estSurLivraison(double x, double y) {
+		if (livraisons == null || livraisons.isEmpty())
+			return null;
+		
+		for (Livraison l : livraisons) {
+			Ellipse e = intersectionsGraphiques.get(l.getAdresse()).getKey();
+			if (e.getCenterX() - ConstantesGraphique.DIAMETRE_INTERSECTION <= x && x <= e.getCenterX() + ConstantesGraphique.DIAMETRE_INTERSECTION
+					&& e.getCenterY() - ConstantesGraphique.DIAMETRE_INTERSECTION <= y && y <= e.getCenterY() + ConstantesGraphique.DIAMETRE_INTERSECTION) {
+				return l;
+			}
+		}
+		
+		return null;
+	}
+
     /**
      * Contient les constantes définissant certaines propriétés (taille, marge, couleur,...) de la fenêtre
      */
@@ -549,7 +574,8 @@ public class VueGraphiqueAideur {
             Color.LIGHTSEAGREEN,
             Color.BLUE,
             Color.GREEN,
-            Color.VIOLET
+            Color.VIOLET,
+            Color.BISQUE
         };
     }
 }

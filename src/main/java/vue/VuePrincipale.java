@@ -1,11 +1,14 @@
 package vue;
 
-import controleur.ControleurInterface;
-import controleur.ModelObserveur;
-import controleur.PlanObserveur;
+import java.io.File;
+import java.net.URL;
+import java.util.Optional;
+import java.util.ResourceBundle;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
@@ -14,15 +17,17 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Menu;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
+import modele.xmldata.Livraison;
 import modele.xmldata.ModeleLecture;
+
 import org.controlsfx.dialog.ExceptionDialog;
 
-import java.io.File;
-import java.net.URL;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import controleur.ControleurInterface;
+import controleur.ModelObserveur;
+import controleur.PlanObserveur;
 
 /**
  * Cette classe joue le rôle de binding pour la fenetre principale de
@@ -159,6 +164,20 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         vueGraphique = new VueGraphiqueAideur(canvasGraphique, group, scrollPane);
+        
+        canvasGraphique.setOnMouseMoved(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				Livraison l = vueGraphique.estSurLivraison(event.getX(), event.getY());
+				if (l == null) {
+					vueGraphique.desactiverSurbrillance();
+					return;
+				}
+				
+				vueGraphique.surbrillanceLivraison(l);
+				// TODO mettre en surbrillance élément dans la liste
+			}
+		});
     }
 
     public VueGraphiqueAideur getAideurVueGraphique() {
