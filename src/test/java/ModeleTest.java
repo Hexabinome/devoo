@@ -6,6 +6,7 @@
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.List;
 
 import modele.persistance.DeserialiseurXML;
 import modele.persistance.ExceptionXML;
@@ -65,7 +66,6 @@ public class ModeleTest
     @Test
     public void TestManipulerModele()
     {
-        //Fenetre fenetre0 = new Fenetre(10000, 20000);
         Fenetre fenetre1 = new Fenetre(30000, 40000);
         Fenetre fenetre2 = new Fenetre(50000, 60000);
 
@@ -143,22 +143,34 @@ public class ModeleTest
         plan.addInstersection(i10);
         plan.addInstersection(i11);
 
-        //fenetre0.ajouterLivraison(1, new Livraison(101, 201, 1));
         fenetre1.ajouterLivraison(102, new Livraison(102, 202, 2));
         fenetre1.ajouterLivraison(104, new Livraison(104, 204, 4));
-        fenetre1.ajouterLivraison(103, new Livraison(103, 203, 5));
+        Livraison testLivraison = new Livraison(103, 203, 5);
+        fenetre1.ajouterLivraison(103, testLivraison);
         fenetre2.ajouterLivraison(205, new Livraison(205, 205, 10));
         fenetre2.ajouterLivraison(206, new Livraison(206, 206, 11));
 
         ArrayList<Fenetre> fenetres = new ArrayList<>();
-        //fenetres.add(fenetre0);
         fenetres.add(fenetre1);
         fenetres.add(fenetre2);
 
         Demande demande = new Demande(i1, fenetres);
         Modele monModele = new Modele(plan, demande);
-         
+        
+        //creer la tournee et verifier qu'elle est bon
         monModele.calculerTournee();
+        List<List<Integer>> tournee = monModele.getTournee();
+        
+        //on attend 3 sous listes: une pour chaque fenetre et une troisieme pour retourner a l'entrepot
+        assertEquals("La tournee ne contient pas le bon valuer des sous-tournees", 3, tournee.size());
+        
+        //verifier que la tournee passe par l'intersection de la test-livraison 103 (intersection 5)
+        assertEquals("", true, tournee.get(0).contains(5));
+        
+        // maintenant on essaye de manipuler le modele - on efface une livraison, on sait que sans cette livraison il n'est plus necessire de passer par la sa intersection.
+        monModele.removeLivraison(testLivraison.getId());
+        tournee = monModele.getTournee();
+        assertEquals("La tounree ne devrait pas passer par l'intersection 5", false, tournee.get(0).contains(5));
     }
 
 }
