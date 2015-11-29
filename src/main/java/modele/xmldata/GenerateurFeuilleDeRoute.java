@@ -54,12 +54,13 @@ public class GenerateurFeuilleDeRoute {
                         break;
                     }
                 }
-                if (livraison != null)
+                if (livraison != null) {
                     feuilleDeRoute.append("* ").append(convertirEnHeureLisible(livraison.getHoraireDePassage()))
                             .append(" - Effectuez la livraison ").append(livraison.getId())
                             .append(" chez le client ").append(livraison.getClientId())
                             .append(" à l'adresse ").append(livraison.getAdresse())
                             .append(System.lineSeparator());
+                }
             }
         }
 

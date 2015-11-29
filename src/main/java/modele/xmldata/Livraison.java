@@ -10,6 +10,11 @@ public class Livraison
 
     //une fois la tourne a ete calcule on peut associer une horarie de passage a chaque livraison
     private int horaireDePassage;
+    
+    /**
+     * Si la livraison a du retard, après que la tournée ait été calculée
+     */
+    private boolean retard = false;
 
     public int getHoraireDePassage()
     {
@@ -67,5 +72,13 @@ public class Livraison
                 + ", adresse=" + adresse
                 + '}';
     }
+
+	public boolean estEnRetard() {
+		return retard;
+	}
+	
+	public void setRetard(boolean retard) {
+		this.retard = retard;
+	}
 
 }

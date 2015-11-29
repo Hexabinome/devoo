@@ -10,6 +10,16 @@ public abstract class ObjetVisualisable implements Visitable {
 
     abstract public String afficherCaracteriqueSpeciale();
     
+    private CouleurTexte couleurDefaut = CouleurTexte.NON_SURBRILLANCE;
+    
+    public void setCouleurDefaut(CouleurTexte couleur) {
+    	couleurDefaut = couleur;
+    }
+    
+    public CouleurTexte getCouleurDefaut() {
+    	return couleurDefaut;
+    }
+    
     /**
      * Convertis un temps en seconde en chaine de caractère sous la forme HH:mm:ss
      * @param tempsEnSeconde temps à convertir
@@ -19,5 +29,11 @@ public abstract class ObjetVisualisable implements Visitable {
         int mn = (tempsEnSeconde % 3600) / 60;
         int sec = tempsEnSeconde % 60;
         return String.format("%02d:%02d:%02d", heure, mn, sec);
+    }
+    
+    public enum CouleurTexte {
+    	SURBRILLANCE,
+    	NON_SURBRILLANCE,
+    	RETARD;
     }
 }

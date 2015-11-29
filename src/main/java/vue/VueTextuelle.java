@@ -1,8 +1,11 @@
 package vue;
 
-import controleur.ControleurInterface;
-import controleur.ActivationObserverInterface;
-import controleur.ModelObserveur;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.ResourceBundle;
+
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -18,13 +21,11 @@ import modele.xmldata.Livraison;
 import vue.vuetextuelle.DetailFenetre;
 import vue.vuetextuelle.DetailLivraison;
 import vue.vuetextuelle.ObjetVisualisable;
+import vue.vuetextuelle.ObjetVisualisable.CouleurTexte;
 import vue.vuetextuelle.Visiteur;
-
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.ResourceBundle;
+import controleur.ActivationObserverInterface;
+import controleur.ControleurInterface;
+import controleur.ModelObserveur;
 
 /**
  * Controleur de la TreeTableView qui affiche les livraisons et les horaires.
@@ -232,8 +233,22 @@ public class VueTextuelle implements Initializable, Visiteur, ActivationObserver
             // Pour afficher l'entrepot
             if (item != null && item.startsWith("-1")) {
                 setText("Entrepot");
-            } else
+            } else {
                 setText(item);
+            }
+            
+           
+            ObjetVisualisable obj = getTreeTableRow().getItem();
+            if (obj == null) {
+            	return;
+            }
+            if (obj instanceof DetailLivraison) {
+            	DetailLivraison detail = (DetailLivraison)obj;
+            	if (detail.getLivraison().estEnRetard()) {
+                	obj.setCouleurDefaut(CouleurTexte.RETARD);
+            	}
+            }
+        	setSurbrillance(obj.getCouleurDefaut());
         }
 
         private void initialiserClic() {
@@ -253,7 +268,7 @@ public class VueTextuelle implements Initializable, Visiteur, ActivationObserver
                     return;
 
                 // Change style de la vue textuelle
-                setSurbrillance(true);
+                setSurbrillance(CouleurTexte.SURBRILLANCE);
 
                 // On met en surbrillance une intersection ou toutes les intersections d'une fenêtre
                 if (objetSurpasse instanceof DetailLivraison) {
@@ -267,18 +282,30 @@ public class VueTextuelle implements Initializable, Visiteur, ActivationObserver
             });
 
             setOnMouseExited(event -> {
-            	setSurbrillance(false);
-
+            	ObjetVisualisable obj = getTreeTableRow().getItem();
+            	if (obj == null)
+            		return;
+        		setSurbrillance(obj.getCouleurDefaut());	
+            	
                 vueGraphique.desactiverSurbrillance();
             });
         }
         
-        private void setSurbrillance(boolean activer) {
-        	if (activer)
+        private void setSurbrillance(CouleurTexte couleur) {
+        	switch (couleur) {
+			case SURBRILLANCE:
                 setStyle("-fx-background-color: yellow; -fx-text-fill: black;");
-        	else
+				break;
+			case NON_SURBRILLANCE:
         		setStyle("-fx-background-color: white; -fx-text-fill: black;");
+        		break;
+			case RETARD:
+				setStyle("-fx-background-color: red; -fx-text-fill: black;");
+				break;
+			default:
+				break;
+			}
         }
+        
     }
-
 }

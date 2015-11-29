@@ -306,9 +306,7 @@ public class Modele implements ModeleLecture
         return sousTournee;
     }
 
-    public void remplirHoraires()
-    {
-
+    public void remplirHoraires() {
         int heure = demande.getFenetres().get(1).getTimestampDebut();
         int intersectionCourante = demande.getEntrepot().getId();
 
@@ -327,8 +325,11 @@ public class Modele implements ModeleLecture
                 // Mise à jour de l'horaire de passage si on est sur une livraison
                 for (Livraison l : fenetre.getListeLivraisons().values()) {
                     if (l.getAdresse() == intersectionCourante && !dejaVisites.contains(l.getAdresse())) {
-                        if (heure < fenetre.getTimestampDebut())
+                        if (heure < fenetre.getTimestampDebut()) {
                             heure = fenetre.getTimestampDebut();
+                        } else if (heure > fenetre.getTimestampFin()) {
+                        	l.setRetard(true);
+                        }
                         l.setHoraireDePassage(heure);
                         dejaVisites.add(l.getAdresse());
                         break;
