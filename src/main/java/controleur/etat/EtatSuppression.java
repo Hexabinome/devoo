@@ -19,7 +19,7 @@ public class EtatSuppression extends AbstractEtat
     public EtatSuppression(ControleurDonnees donnees)
     {
         this.donnees = donnees;
-        donnees.notifierAllMessageObserveurs("Souhaitez-vous supprimer une livraison ? Choisissez dans la liste à gauche la livraison que vous voulez supprimer. Clic droit pour sortir du mode de suppression.");
+        donnees.notifierAllMessageObserveurs("[SUPPRESSION] Souhaitez-vous supprimer une livraison ? Choisissez dans la liste à gauche la livraison que vous voulez supprimer. Clic droit pour sortir du mode de suppression.");
     }
 
     @Override
@@ -32,7 +32,8 @@ public class EtatSuppression extends AbstractEtat
             donnees.effacerCommandesARetablir();
 
         } catch (CommandeException e) {
-            e.printStackTrace();
+        	donnees.notifierAllMessageObserveurs(e.getMessage());
+        	// La commande a échoué. Le message sera afficher dans la barre de status
         }
         return this;
     }
@@ -52,8 +53,7 @@ public class EtatSuppression extends AbstractEtat
     @Override
     public EtatInterface cliqueSurPlan(int intersectionId)
     {
-        donnees.notifierAllMessageObserveurs("Veuillez choisir une livraison dans la liste à gauche. Clic droit pour sortir du mode de suppression");
-
+        donnees.notifierAllMessageObserveurs("[SUPPRESSION] Veuillez choisir une livraison dans la liste à gauche. Clic droit pour sortir du mode de suppression");
         return this;
     }
 

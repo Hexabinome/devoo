@@ -46,23 +46,18 @@ public class CommandeSupprimerLivraison implements Commande
     @Override
     public void executer() throws CommandeException
     {
-
-    	if(livraisonSupprimee == null)
-    	{
-    		controleurDonnees.notifierAllMessageObserveurs("La livraison selectionné n'existe pas");
-    		return;
+    	if(livraisonSupprimee == null) {
+    		throw new CommandeException("[SUPPRESSION] La livraison sélectionnée n'existe pas.");
     	}
     	
     	if (livraisonSupprimee.getId() == -1) {
-    		controleurDonnees.notifierAllMessageObserveurs("Il est interdit de supprimer l'entrepôt.");
-    		return;
+    		throw new CommandeException("[SUPPRESSION] Il est interdit de supprimer l'entrepôt.");
     	}
     	
         // Vérifier qu'on a le droit de supprimer la livraison
         Fenetre f = controleurDonnees.getModele().getDemande().getFenetreDeLivraison(livraisonSupprimee.getId());
         if (f.getListeLivraisons().size() <= 1) {
-            controleurDonnees.notifierAllMessageObserveurs("Il est interdit de supprimer la dernière livraison dans une fenêtre.");
-            return;
+            throw new CommandeException("[SUPPRESSION] Il est interdit de supprimer la dernière livraison dans une fenêtre.");
         }
 
         idLivraisonAvant = controleurDonnees.getModele().supprimerLivraison(livraisonSupprimee.getId());
@@ -70,7 +65,7 @@ public class CommandeSupprimerLivraison implements Commande
         controleurDonnees.notifyAllModelObserveurs();
         controleurDonnees.notifyAllAnnulerObserveurs(false);
         controleurDonnees.notifierAllMessageObserveurs(
-        		String.format("La livraison %d, à l'adresse %d et pour le client %d a été supprimée avec succès !",
+        		String.format("[SUPPRESSION] La livraison %d, à l'adresse %d et pour le client %d a été supprimée avec succès !",
         				livraisonSupprimee.getId(),
         				livraisonSupprimee.getAdresse(),
         				livraisonSupprimee.getClientId())

@@ -1,12 +1,16 @@
 package controleur;
 
-import controleur.etat.*;
+import java.io.File;
+
 import modele.xmldata.ModeleLecture;
 import modele.xmldata.PlanDeVille;
-
-import java.io.File;
 import controleur.commande.CommandeException;
 import controleur.commande.CommandeGenererFeuilleDeRoute;
+import controleur.etat.EtatAjout;
+import controleur.etat.EtatEchange;
+import controleur.etat.EtatInitial;
+import controleur.etat.EtatInterface;
+import controleur.etat.EtatSuppression;
 
 /**
  * Implements controller interface. Primary entry point for all interaction with
