@@ -48,6 +48,7 @@ public class EtatEchange extends AbstractEtat
     	for (List<Livraison> fenetre : livraisons) {
     		for (Livraison l : fenetre) {
     			if (l.getAdresse() == intersectionId) {
+                                donnees.notifierAllMessageObserveurs("Premier livraison a ete identifie.");
     				return new EtatEchange2(donnees, l.getId());
     			}
     		}

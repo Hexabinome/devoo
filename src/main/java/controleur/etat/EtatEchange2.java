@@ -53,9 +53,11 @@ public class EtatEchange2 extends AbstractEtat {
     	for (List<Livraison> fenetre : livraisons) {
     		for (Livraison l : fenetre) {
     			if (l.getAdresse() == intersectionId) {
+                                donnees.notifierAllMessageObserveurs("Deuxieme livraison a ete identifie.");
     				Commande cmdEchanger = new CommandeEchangerLivraisons(donnees, idLivraison, l.getId());
     				try {
     					cmdEchanger.executer();
+                                        donnees.notifyAllModelObserveurs();
     				} catch (CommandeException e) {
     					// TODO message
     					e.printStackTrace();

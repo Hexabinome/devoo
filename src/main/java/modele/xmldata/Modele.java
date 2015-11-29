@@ -54,9 +54,10 @@ public class Modele implements ModeleLecture
     {
         return demande;
     }
-    
-    public List<List<Livraison>> getLivraisonsTournee() {
-    	return livraisonTournee;
+
+    public List<List<Livraison>> getLivraisonsTournee()
+    {
+        return livraisonTournee;
     }
 
     /**
@@ -69,7 +70,7 @@ public class Modele implements ModeleLecture
         Livraison liv = demande.identifierLivraison(idLivraison);
 
         //recuperer l'id de la livraison avant
-        int idLivraisonAvant =  recupererLivraisonApresOuAvant(liv, true).getId();
+        int idLivraisonAvant = recupererLivraisonApresOuAvant(liv, true).getId();
 
         //parcourir la tournee calculle par tsp et supprimer la livraison specifiee
         livraisonTournee.stream().forEach((fenetre) -> {
@@ -300,7 +301,8 @@ public class Modele implements ModeleLecture
         return sousTournee;
     }
 
-    public void remplirHoraires() {
+    public void remplirHoraires()
+    {
         int heure = demande.getFenetres().get(1).getTimestampDebut();
         int intersectionCourante = demande.getEntrepot().getId();
 
@@ -319,12 +321,11 @@ public class Modele implements ModeleLecture
                 // Mise à jour de l'horaire de passage si on est sur une livraison
                 for (Livraison l : fenetre.getListeLivraisons().values()) {
                     if (l.getAdresse() == intersectionCourante && !dejaVisites.contains(l.getAdresse())) {
-                    	l.setRetard(false);
-                        if (heure < fenetre.getTimestampDebut()) {
+                        l.setRetard(false);
+                        if (heure < fenetre.getTimestampDebut())
                             heure = fenetre.getTimestampDebut();
-                        } else if (heure > fenetre.getTimestampFin()) {
-                        	l.setRetard(true);
-                        }
+                        else if (heure > fenetre.getTimestampFin())
+                            l.setRetard(true);
                         l.setHoraireDePassage(heure);
                         dejaVisites.add(l.getAdresse());
                         break;
@@ -348,15 +349,17 @@ public class Modele implements ModeleLecture
         return Collections.unmodifiableList(inmodifiableTournee);
 
     }
-    
-	/**
-	 * Génère la feuille de route de la demande de livraison
-	 * @return Une chaîne de caractère formatée correctement
-	 */
-	@Override
-	public String genererFeuilleDeRoute() {
-		return GenerateurFeuilleDeRoute.genererFeuilleDeRoute(this, livraisonTournee);
-	}
+
+    /**
+     * Génère la feuille de route de la demande de livraison
+     *
+     * @return Une chaîne de caractère formatée correctement
+     */
+    @Override
+    public String genererFeuilleDeRoute()
+    {
+        return GenerateurFeuilleDeRoute.genererFeuilleDeRoute(this, livraisonTournee);
+    }
 
     /**
      * Quand on cree une nouvelle livraison on a besoin d'une id unique. Cette
@@ -369,8 +372,38 @@ public class Modele implements ModeleLecture
         return customLivraisonCompteur--;
     }
 
-	public void echangerLivraisons(int idLivraison1, int idLivraison2) {
-		throw new UnsupportedOperationException("A implémenter");
-		// TODO implémenter
-	}
+    /**
+     *
+     *
+     * @param idLivraison1
+     * @param idLivraison2
+     */
+    public void echangerLivraisons(int idLivraison1, int idLivraison2)
+    {
+        Livraison l1 = demande.identifierLivraison(idLivraison1);
+        Livraison l2 = demande.identifierLivraison(idLivraison2);
+        Livraison livrAvantL1 = recupererLivraisonApresOuAvant(l1, true);
+        Livraison livrAvantL2 = recupererLivraisonApresOuAvant(l2, true);
+        int clientId1 = l1.getClientId();
+        int clientId2 = l2.getClientId();
+        int intersection1 = l1.getAdresse();
+        int intersection2 = l2.getAdresse();
+        Fenetre f1 = demande.getFenetreDeLivraison(idLivraison1);
+        Fenetre f2 = demande.getFenetreDeLivraison(idLivraison2);
+
+        removeLivraison(idLivraison1);
+        removeLivraison(idLivraison2);
+        
+        Livraison nouvelleLivraison1 = new Livraison(getProchainCustomLivraisonId(), clientId2, intersection2);
+        Livraison nouvelleLivraison2 = new Livraison(getProchainCustomLivraisonId(), clientId1, intersection1);
+        
+        addLivraison(livrAvantL1.getId(), f1, nouvelleLivraison1);
+        addLivraison(livrAvantL2.getId(), f2, nouvelleLivraison2);
+    }
+/*
+    public void echangerLivraisons(int idLivraison1, int idLivraison2, int nouvelleId1, int nouvelleId2)
+    {
+
+    }
+*/
 }

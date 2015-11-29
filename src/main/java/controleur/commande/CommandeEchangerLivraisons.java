@@ -4,9 +4,9 @@ import controleur.ControleurDonnees;
 
 public class CommandeEchangerLivraisons implements Commande {
 
-	private ControleurDonnees donnees;
-	private int idLivraison1;
-	private int idLivraison2;
+	private final ControleurDonnees donnees;
+	private final int idLivraison1;
+	private final int idLivraison2;
 	
 	public CommandeEchangerLivraisons(ControleurDonnees donnees, int idLivraison1, int idLivraison2) {
 		this.donnees = donnees;

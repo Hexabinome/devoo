@@ -1,7 +1,6 @@
 package controleur;
 
 import java.io.File;
-import javafx.scene.text.Text;
 import modele.xmldata.ModeleLecture;
 import modele.xmldata.PlanDeVille;
 
