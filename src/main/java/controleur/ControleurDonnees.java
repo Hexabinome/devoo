@@ -176,4 +176,25 @@ public class ControleurDonnees
         });
     }
 
+    /**
+     * Efface la liste des commandes à retablir et notifie la vue qu'il doir desactiver l'élément du menu correspondant
+     */
+    public void effacerCommandesARetablir(){
+        hist.effacerCommandeARetablir();
+        notifyAllRetablirObserveurs(true);
+    }
+
+    /**
+     * Efface la liste des commandes à annuler et notifie la vue qu'il doir desactiver l'élément du menu correspondant
+     */
+    public void effacerCommandeAAnnuler(){
+        hist.effacerCommandesAAnnuler();
+        notifyAllAnnulerObserveurs(true);
+    }
+
+    public void effacerHistorique(){
+        effacerCommandeAAnnuler();
+        effacerCommandesARetablir();
+    }
+
 }

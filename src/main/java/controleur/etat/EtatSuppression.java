@@ -28,6 +28,7 @@ public class EtatSuppression extends AbstractEtat
             Commande commande = new CommandeSupprimerLivraison(donnees,livraisonId);
             commande.executer();
             donnees.ajouterCommande(commande);
+            donnees.effacerCommandesARetablir();
 
         } catch (CommandeException e) {
             e.printStackTrace();

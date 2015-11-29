@@ -32,6 +32,7 @@ import java.io.File;
             return this;
         }
         controleurDonnees.ajouterCommande(commande);
+        controleurDonnees.effacerCommandesARetablir();
         return new EtatAjout(controleurDonnees);
     }
 
