@@ -10,14 +10,31 @@ import modele.xmldata.Livraison;
 public class CommandeSupprimerLivraison implements Commande
 {
 
+    /**
+     * Lien vers le controleur de données
+     */
     private final ControleurDonnees controleurDonnees;
 
+    /**
+     * La livraison supprimée
+     */
     private final Livraison livraisonSupprimee;
+
+    /**
+     * La fenetre dans laquelle la livraison se trouve
+     */
+    private final Fenetre fenetreDeLaLivraison;
+
+    /**
+     * Identifiant de la livraison qui se trouve
+     */
+    private int idLivraisonAvant;
 
     public CommandeSupprimerLivraison(ControleurDonnees controleurDonnees, int idLivraison)
     {
         this.controleurDonnees = controleurDonnees;
-        livraisonSupprimee = this.controleurDonnees.getModele().getDemande().identifierLivraison(idLivraison);
+        this.livraisonSupprimee = controleurDonnees.getModele().getDemande().identifierLivraison(idLivraison);
+        this.fenetreDeLaLivraison = controleurDonnees.getModele().getDemande().getFenetreDeLivraison(idLivraison);
 
     }
 
@@ -32,21 +49,29 @@ public class CommandeSupprimerLivraison implements Commande
     {
 
         //verifier qu'on a le droit de supprimer la livraison
-        Fenetre f = controleurDonnees.getModele().getDemande().getFenetreDeLivraison(livraisonSupprimee.getId());
-        if (f.getListeLivraisons().size() <= 1)
+        if (fenetreDeLaLivraison.getListeLivraisons().size() <= 1)
             return;
 
-        controleurDonnees.getModele().removeLivraison(livraisonSupprimee.getId());
+        idLivraisonAvant = controleurDonnees.getModele().removeLivraison(livraisonSupprimee.getId());
         controleurDonnees.getModele().remplirHoraires();
-        controleurDonnees.notifyAllAnnulerObserveurs(false);
         controleurDonnees.notifyAllModelObserveurs();
+        controleurDonnees.notifyAllAnnulerObserveurs(false);
 
+        if (controleurDonnees.getHist().estVideCommandesAnnulees()){ // s'il ya des
+            controleurDonnees.notifyAllRetablirObserveurs(true);
+        }
     }
 
     @Override
     public void annuler()
     {
-        // TODO : appeler le modele pour rajouter la livraison et ne pas calculer toute la tournee
+        controleurDonnees.getModele().addLivraison(idLivraisonAvant,fenetreDeLaLivraison,livraisonSupprimee);
+        controleurDonnees.notifyAllModelObserveurs();
+        controleurDonnees.notifyAllRetablirObserveurs(false);
+
+        if (controleurDonnees.getHist().estVideCommandesExecutees()){
+            controleurDonnees.notifyAllAnnulerObserveurs(true);
+        }
     }
 
 }
