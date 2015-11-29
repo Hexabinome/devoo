@@ -327,6 +327,7 @@ public class Modele implements ModeleLecture
                 // Mise à jour de l'horaire de passage si on est sur une livraison
                 for (Livraison l : fenetre.getListeLivraisons().values()) {
                     if (l.getAdresse() == intersectionCourante && !dejaVisites.contains(l.getAdresse())) {
+                    	l.setRetard(false);
                         if (heure < fenetre.getTimestampDebut()) {
                             heure = fenetre.getTimestampDebut();
                         } else if (heure > fenetre.getTimestampFin()) {

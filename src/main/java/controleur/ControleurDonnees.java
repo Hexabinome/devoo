@@ -3,11 +3,10 @@ package controleur;
 import java.util.Collection;
 import java.util.LinkedList;
 
-import controleur.commande.Commande;
-import controleur.commande.Historique;
-import java.util.concurrent.LinkedBlockingDeque;
 import modele.xmldata.Modele;
 import modele.xmldata.PlanDeVille;
+import controleur.commande.Commande;
+import controleur.commande.Historique;
 
 /**
  * Cette classe contient les donnees necessaires pour la gestion des etats. On

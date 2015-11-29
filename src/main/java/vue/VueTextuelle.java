@@ -230,6 +230,8 @@ public class VueTextuelle implements Initializable, Visiteur, ActivationObserver
             	DetailLivraison detail = (DetailLivraison)obj;
             	if (detail.getLivraison().estEnRetard()) {
                 	obj.setCouleurDefaut(CouleurTexte.RETARD);
+            	} else {
+            		obj.setCouleurDefaut(CouleurTexte.NON_SURBRILLANCE);
             	}
             }
         	setSurbrillance(obj.getCouleurDefaut());
