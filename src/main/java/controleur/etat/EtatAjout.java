@@ -3,10 +3,13 @@ package controleur.etat;
 import java.io.File;
 
 import controleur.ControleurDonnees;
+import controleur.commande.Commande;
+import controleur.commande.CommandeAjouterLivraison;
 import controleur.commande.CommandeException;
 
 /**
- *
+ * Cet état correspond à l'état dans lequel on se trouve quand on clic sur le bouton ajouter.
+ * Dans ce état on doit cliquer sur une intersection dans le plan pour passer à l'étatAjout2
  * @author Maxou
  */
 public class EtatAjout extends AbstractEtat
@@ -22,31 +25,31 @@ public class EtatAjout extends AbstractEtat
     @Override
     public EtatInterface cliqueSurLivraison(int livraisonId)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new RuntimeException("Cet etat ne permet pas d'interagir avec la liste.");
     }
 
     @Override
     public EtatInterface chargerPlan(File plan) throws CommandeException
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new RuntimeException("Cet etat ne permet pas de charger un plan");
     }
 
     @Override
     public EtatInterface chargerLivraisons(File livraisons) throws CommandeException
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new RuntimeException("Cet etat ne permet pas de charger une demande de livraison");
     }
 
     @Override
     public EtatInterface cliqueSurPlan(int intersectionId)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new EtatAjout2(donnees,intersectionId);
     }
 
     @Override
     public EtatInterface cliqueCalculerTournee()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new RuntimeException("Cet etat ne permet pas de calculer la tournée");
     }
 
 }

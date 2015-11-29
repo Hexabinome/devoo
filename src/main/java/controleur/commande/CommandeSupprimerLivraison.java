@@ -57,10 +57,9 @@ public class CommandeSupprimerLivraison implements Commande
         idLivraisonAvant = controleurDonnees.getModele().removeLivraison(livraisonSupprimee.getId());
         controleurDonnees.getModele().remplirHoraires();
         controleurDonnees.notifyAllModelObserveurs();
-
         controleurDonnees.notifyAllAnnulerObserveurs(false);
 
-        if (controleurDonnees.getHist().estVideCommandesAnnulees()) // s'il ya des
+        if (controleurDonnees.getHist().estVideCommandesAnnulees())
             controleurDonnees.notifyAllRetablirObserveurs(true);
     }
 
