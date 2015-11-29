@@ -48,7 +48,8 @@ import java.io.File;
 
     @Override
     public EtatInterface cliqueSurPlan(int intersectionId) {
-        throw new RuntimeException("Cet etat ne permet pas d'interagir avec le plan");
+        controleurDonnees.notifierAllMessageObserveurs("Veuillez choissir la livraison en utilisant la liste a gauche svp.");
+        return this;
     }
 
     @Override

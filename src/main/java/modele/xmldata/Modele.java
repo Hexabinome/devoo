@@ -70,13 +70,23 @@ public class Modele implements ModeleLecture
         Livraison liv = demande.identifierLivraison(idLivraison);
 
         //recuperer l'id de la livraison avant
-        int idLivraisonAvant = recupererLivraisonApresOuAvant(liv, true).getId();
+        Livraison livraisonAvant = recupererLivraisonApresOuAvant(liv, true);
 
+        // verfier que la livriason avant connait le chemin vers la livraison apres (ca peut arriver que le chemin est inconnu, si la livraison apres est une livraison qui a ete ajoute a la main)
+        Livraison livraisonApres = recupererLivraisonApresOuAvant(liv, false);
+        if (graphe.getChemin(livraisonAvant.getId(), livraisonApres.getId()) == null) {
+            Collection<Chemin> cheminsSortantDeLivraisonAvant = Fenetre.dijkstra(plan.getIntersection(livraisonAvant.getAdresse()), plan);
+            //Pour tous les chemins sortant de la "livraison d'avant" dont l'id de fin est l'id de la nouvelle livraison, on l'ajout dans le graphe
+            cheminsSortantDeLivraisonAvant.stream().filter((c) -> (c.getIdFin() == livraisonApres.getAdresse())).forEach((c) -> {
+                graphe.setChemin(c, livraisonAvant.getId(), livraisonApres.getId());
+            });
+        }
+        
         //parcourir la tournee calculle par tsp et supprimer la livraison specifiee
         livraisonTournee.stream().forEach((fenetre) -> {
             fenetre.remove(liv);
         });
-
+        
         //supprimer la livraision (dans la demande)
         demande.supprimerLivraision(idLivraison);
 
@@ -84,7 +94,7 @@ public class Modele implements ModeleLecture
         intersectionTournee = creerIntersectionTournee();
         remplirHoraires();
 
-        return idLivraisonAvant;
+        return livraisonAvant.getId();
     }
 
     /**

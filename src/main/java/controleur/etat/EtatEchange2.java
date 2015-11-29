@@ -66,6 +66,7 @@ public class EtatEchange2 extends AbstractEtat {
     					cmdEchanger.executer();
                                         donnees.notifyAllModelObserveurs();
                                         donnees.notifierAllMessageObserveurs("Les livraisons sont maintenant echange.");
+                                        donnees.notifyAllAnnulerObserveurs(false);
     				} catch (CommandeException e) {
     					// TODO message
     					e.printStackTrace();
