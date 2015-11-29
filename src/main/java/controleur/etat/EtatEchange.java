@@ -25,6 +25,7 @@ public class EtatEchange extends AbstractEtat
     @Override
     public EtatInterface cliqueSurLivraison(int livraisonId)
     {
+        donnees.notifierAllMessageObserveurs("Veuillez choisir la deuxième livraison");
     	return new EtatEchange2(donnees, livraisonId);
     }
 
@@ -72,6 +73,7 @@ public class EtatEchange extends AbstractEtat
 
     @Override
     public EtatInterface clicDroit() {
+        donnees.notifierAllMessageObserveurs("Retour à l'état principal");
         return new EtatPrincipal(donnees);
     }
 

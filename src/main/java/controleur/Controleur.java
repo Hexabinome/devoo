@@ -89,6 +89,7 @@ public class Controleur implements ControleurInterface {
 
     @Override
     public void cliqueOutilEchanger() {
+        controleurDonnees.notifierAllMessageObserveurs("Vous voulez échanger deux livraisons? Veuillez choisir la première livraison");
         etat = new EtatEchange(controleurDonnees);
     }
 
