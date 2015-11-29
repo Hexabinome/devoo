@@ -8,27 +8,31 @@ import controleur.commande.CommandeException;
 import java.io.File;
 
 /**
- * Cet état correspond à l'état où  l'on doit choisir la livraison qui se trouve avant la livraison que l'on souhaite ajouter
- * Cet état exécutera ensuite
+ * Cet état correspond à l'état où l'on doit choisir la livraison qui se trouve
+ * avant la livraison que l'on souhaite ajouter Cet état exécutera ensuite
+ *
  * @author Maxou
- */public class EtatAjout2 extends AbstractEtat {
-
+ */
+public class EtatAjout2 extends AbstractEtat
+{
 
     private ControleurDonnees controleurDonnees;
     private int idIntersectionLivraison;
 
-    public EtatAjout2(ControleurDonnees controleurDonnees, int idIntersectionLivraison){
+    public EtatAjout2(ControleurDonnees controleurDonnees, int idIntersectionLivraison)
+    {
         this.controleurDonnees = controleurDonnees;
         this.idIntersectionLivraison = idIntersectionLivraison;
     }
 
     @Override
-    public EtatInterface cliqueSurLivraison(int idLivraisonAvant) {
-        Commande commande = new CommandeAjouterLivraison(controleurDonnees,idLivraisonAvant,idIntersectionLivraison);
+    public EtatInterface cliqueSurLivraison(int idLivraisonAvant)
+    {
+        Commande commande = new CommandeAjouterLivraison(controleurDonnees, idLivraisonAvant, idIntersectionLivraison);
         try {
             commande.executer();
-        } catch (CommandeException e) {
-            e.printStackTrace();
+        }
+        catch (CommandeException e) {
             return this;
         }
         controleurDonnees.ajouterCommande(commande);
@@ -37,28 +41,34 @@ import java.io.File;
     }
 
     @Override
-    public EtatInterface chargerPlan(File plan) throws CommandeException {
+    public EtatInterface chargerPlan(File plan) throws CommandeException
+    {
         throw new RuntimeException("Cet etat ne permet pas de charger un plan");
     }
 
     @Override
-    public EtatInterface chargerLivraisons(File livraisons) throws CommandeException {
+    public EtatInterface chargerLivraisons(File livraisons) throws CommandeException
+    {
         throw new RuntimeException("Cet etat ne permet pas de charger une demande de livraison");
     }
 
     @Override
-    public EtatInterface cliqueSurPlan(int intersectionId) {
+    public EtatInterface cliqueSurPlan(int intersectionId)
+    {
         controleurDonnees.notifierAllMessageObserveurs("Veuillez choissir la livraison en utilisant la liste a gauche svp.");
         return this;
     }
 
     @Override
-    public EtatInterface cliqueCalculerTournee() {
+    public EtatInterface cliqueCalculerTournee()
+    {
         throw new RuntimeException("Cet etat ne permet pas de calculer la tournée");
     }
 
     @Override
-    public EtatInterface clicDroit() {
+    public EtatInterface clicDroit()
+    {
         return new EtatAjout(controleurDonnees);
     }
+
 }

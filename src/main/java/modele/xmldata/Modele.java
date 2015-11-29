@@ -301,7 +301,10 @@ public class Modele implements ModeleLecture
         for (Livraison arrivee : sousTourneeLivraisons) {
             Chemin chemin = graphe.getChemin(depart.getId(), arrivee.getId());
 
-            //pour toutes les troncons sur le chemin, ajoute le arrivee
+            if(chemin==null)
+                throw new RuntimeException("Une action precedente a oublie a completer la graphe: Il n y a aucune chemin entre "+depart.getId()+" et "+arrivee.getId());
+            
+            //pour toutes les troncons sur le chemin, ajoute l'arrivee
             for (Troncon troncon : chemin.getTroncons()) {
                 sousTournee.add(troncon.getIdDestination());
             }
