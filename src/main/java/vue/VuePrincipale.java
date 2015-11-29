@@ -68,9 +68,15 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
     @FXML
     private StackPane canvasGraphique;
 
+    /**
+     * Ce groupe représente le groupe d'ellipse (noeu du graphe) qui se construit dans la vue graphique
+     */
     @FXML
-    private Group group;
+    private Group groupEllipseVueGraphique;
 
+    /**
+     * Réference vers la vue graphique
+     */
     private VueGraphiqueAideur vueGraphique;
 
     /**
@@ -187,7 +193,7 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        vueGraphique = new VueGraphiqueAideur(canvasGraphique, group, scrollPane, sliderZoom);
+        vueGraphique = new VueGraphiqueAideur(canvasGraphique, groupEllipseVueGraphique, scrollPane, sliderZoom);
     }
 
     public VueGraphiqueAideur getAideurVueGraphique() {
@@ -276,7 +282,7 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
         fileChooser.getExtensionFilters().add(extensionFilter);
 
         // Affichage de la boite de dialogque + récuperation du fichier choisi
-        return fileChooser.showOpenDialog(group.getScene().getWindow());
+        return fileChooser.showOpenDialog(groupEllipseVueGraphique.getScene().getWindow());
     }
     
     /**
@@ -291,7 +297,7 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
     	ExtensionFilter extensionFilter = new ExtensionFilter("Fichier texte (*.txt)", "*.txt");
     	fileChooser.getExtensionFilters().add(extensionFilter);
     	
-    	return fileChooser.showSaveDialog(group.getScene().getWindow());
+    	return fileChooser.showSaveDialog(groupEllipseVueGraphique.getScene().getWindow());
     }
 
     /**
@@ -309,7 +315,7 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
         exceptionDialog.setWidth(ERROR_DIALOG_WIDTH);
         exceptionDialog.setHeight(ERROR_DIALOG_HEIGHT);
         exceptionDialog.setResizable(false);
-        exceptionDialog.initOwner(group.getScene().getWindow());
+        exceptionDialog.initOwner(groupEllipseVueGraphique.getScene().getWindow());
 
         exceptionDialog.showAndWait();
     }

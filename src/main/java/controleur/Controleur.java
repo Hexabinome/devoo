@@ -1,16 +1,12 @@
 package controleur;
 
+import controleur.etat.*;
 import modele.xmldata.ModeleLecture;
 import modele.xmldata.PlanDeVille;
 
 import java.io.File;
 
 import controleur.commande.CommandeException;
-import controleur.etat.EtatAjout;
-import controleur.etat.EtatEchange;
-import controleur.etat.EtatInitial;
-import controleur.etat.EtatInterface;
-import controleur.etat.EtatSuppression;
 import javafx.scene.text.Text;
 
 /**
@@ -94,6 +90,11 @@ public class Controleur implements ControleurInterface {
     @Override
     public void cliqueOutilEchanger() {
         etat = new EtatEchange(controleurDonnees);
+    }
+
+    @Override
+    public void cliqueDroit() {
+        // TODO : a completer
     }
 
     @Override

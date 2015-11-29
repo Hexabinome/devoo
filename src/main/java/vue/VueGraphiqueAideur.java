@@ -10,6 +10,7 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.StackPane;
@@ -104,12 +105,17 @@ public class VueGraphiqueAideur {
 
 		@Override
 		public void handle(MouseEvent event) {
-			int idIntersection = estSurIntersection(event.getX(), event.getY());
-			if (idIntersection == -1) {
-				return;
-			}
-			
-			controleurApplication.cliqueSurPlan(idIntersection);
+            if(event.getButton() == MouseButton.SECONDARY){ // clic droit
+                // TODO : a completer
+                //controleurApplication.cliqueDroit();
+            } else if(event.getButton() == MouseButton.PRIMARY){ // clic gauche
+                int idIntersection = estSurIntersection(event.getX(), event.getY());
+                if (idIntersection == -1) {
+                    return;
+                }
+                controleurApplication.cliqueSurPlan(idIntersection);
+            }
+
 		}
     }
 
