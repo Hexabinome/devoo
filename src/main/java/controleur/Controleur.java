@@ -48,11 +48,6 @@ public class Controleur implements ControleurInterface {
     public void cliqueAnnuler() {
         // etat = etat.cliqueAnnuler();
         controleurDonnees.getHist().annuler();
-        controleurDonnees.notifyAllRetablirObserveurs(false);
-
-        if (controleurDonnees.getHist().estVideCommandesExecutees()){
-            controleurDonnees.notifyAllAnnulerObserveurs(true);
-        }
     }
 
     @Override
@@ -60,12 +55,6 @@ public class Controleur implements ControleurInterface {
         //   etat = etat.cliqueRetablir();
         try {
             controleurDonnees.getHist().executer();
-            controleurDonnees.notifyAllAnnulerObserveurs(false);
-
-            if (controleurDonnees.getHist().estVideCommandesAnnulees()){
-                controleurDonnees.notifyAllRetablirObserveurs(true);
-            }
-
         } catch (CommandeException e) {
             e.printStackTrace();
         }
