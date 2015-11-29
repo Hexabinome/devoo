@@ -1,4 +1,6 @@
-package controleur;
+package controleur.commande;
+
+import controleur.ControleurDonnees;
 
 /**
  *
@@ -15,7 +17,7 @@ public class CommandeCalculerTournee extends CommandeNonAnnulable
     }
 
     @Override
-    public void executer() throws CommandException
+    public void executer() throws CommandeException
     {
         //calculer la tournee
         controleurDonnees.getModele().calculerTournee();

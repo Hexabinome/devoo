@@ -1,4 +1,5 @@
-package controleur;
+package controleur.etat;
+
 
 /**
  * Cette classe implemente les functinoalites qui fonctionnent la meme manier

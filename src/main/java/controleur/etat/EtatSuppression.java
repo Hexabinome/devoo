@@ -1,6 +1,11 @@
-package controleur;
+package controleur.etat;
 
 import java.io.File;
+
+import controleur.ControleurDonnees;
+import controleur.commande.CommandeException;
+import controleur.commande.Commande;
+import controleur.commande.CommandeSupprimerLivraison;
 
 /**
  *
@@ -24,20 +29,20 @@ public class EtatSuppression extends AbstractEtat
             commande.executer();
             donnees.ajouterCommande(commande);
 
-        } catch (CommandException e) {
+        } catch (CommandeException e) {
             e.printStackTrace();
         }
         return this;
     }
 
     @Override
-    public EtatInterface chargerPlan(File plan) throws CommandException
+    public EtatInterface chargerPlan(File plan) throws CommandeException
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public EtatInterface chargerLivraisons(File livraisons) throws CommandException
+    public EtatInterface chargerLivraisons(File livraisons) throws CommandeException
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

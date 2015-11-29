@@ -3,12 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controleur;
+package controleur.commande;
 
-import java.io.IOException;
-import java.text.ParseException;
-import org.jdom2.JDOMException;
-import org.xml.sax.SAXException;
 
 /**
  *
@@ -30,7 +26,7 @@ public interface Commande
      * (c'est notamment utile pour l'historique, qund on veut reexecuter une
      * commande)
      */
-    void executer() throws CommandException;
+    void executer() throws CommandeException;
 
     /**
      * Ssi un command est annulable on peut revenir dans un ancien etat du model

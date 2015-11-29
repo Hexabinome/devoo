@@ -1,6 +1,11 @@
-package controleur;
+package controleur.etat;
 
 import java.io.File;
+
+import controleur.ControleurDonnees;
+import controleur.commande.CommandeException;
+import controleur.commande.CommandeChargerLivraisons;
+import controleur.commande.CommandeChargerPlan;
 
 /**
  *
@@ -23,14 +28,14 @@ public class EtatPlanCharge extends AbstractEtat
     }
 
     @Override
-    public EtatInterface chargerPlan(File plan) throws CommandException
+    public EtatInterface chargerPlan(File plan) throws CommandeException
     {
         new CommandeChargerPlan(controleurDonnees, plan).executer();
         return this;
     }
 
     @Override
-    public EtatInterface chargerLivraisons(File livraisons) throws CommandException
+    public EtatInterface chargerLivraisons(File livraisons) throws CommandeException
     {
         new CommandeChargerLivraisons(controleurDonnees, livraisons).executer();
         return new EtatPrincipal(controleurDonnees);

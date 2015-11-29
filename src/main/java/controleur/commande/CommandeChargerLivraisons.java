@@ -1,15 +1,19 @@
-package controleur;
+package controleur.commande;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
+
 import modele.persistance.DeserialiseurXML;
 import modele.persistance.ExceptionXML;
 import modele.xmldata.Demande;
 import modele.xmldata.Modele;
 import modele.xmldata.PlanDeVille;
+
 import org.jdom2.JDOMException;
 import org.xml.sax.SAXException;
+
+import controleur.ControleurDonnees;
 
 /**
  *
@@ -28,7 +32,7 @@ public class CommandeChargerLivraisons extends CommandeNonAnnulable
     }
 
     @Override
-    public void executer() throws CommandException
+    public void executer() throws CommandeException
     {
         try {
             PlanDeVille plan = controleurDonnees.getPlan();
@@ -42,7 +46,7 @@ public class CommandeChargerLivraisons extends CommandeNonAnnulable
             controleurDonnees.notifyAllModelObserveurs();
         }
         catch (SAXException | ExceptionXML | IOException | JDOMException | ParseException ex) {
-            throw new CommandException(ex.getMessage());
+            throw new CommandeException(ex.getMessage());
         }
     }
 

@@ -1,18 +1,20 @@
-package controleur;
-
+package controleur.etat;
 
 import java.io.File;
+
+import controleur.ControleurDonnees;
+import controleur.commande.CommandeException;
 
 /**
  *
  * @author Maxou
  */
-public class EtatEchange extends AbstractEtat
+public class EtatAjout extends AbstractEtat
 {
 
     private final ControleurDonnees donnees;
 
-    EtatEchange(ControleurDonnees donnees)
+    EtatAjout(ControleurDonnees donnees)
     {
         this.donnees = donnees;
     }
@@ -24,13 +26,13 @@ public class EtatEchange extends AbstractEtat
     }
 
     @Override
-    public EtatInterface chargerPlan(File plan) throws CommandException
+    public EtatInterface chargerPlan(File plan) throws CommandeException
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public EtatInterface chargerLivraisons(File livraisons) throws CommandException
+    public EtatInterface chargerLivraisons(File livraisons) throws CommandeException
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

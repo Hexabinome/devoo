@@ -1,11 +1,15 @@
-package controleur;
+package controleur.commande;
 
 import java.io.File;
 import java.io.IOException;
+
 import modele.persistance.DeserialiseurXML;
 import modele.persistance.ExceptionXML;
+
 import org.jdom2.JDOMException;
 import org.xml.sax.SAXException;
+
+import controleur.ControleurDonnees;
 
 /**
  *
@@ -24,7 +28,7 @@ public class CommandeChargerPlan extends CommandeNonAnnulable
     }
 
     @Override
-    public void executer() throws CommandException
+    public void executer() throws CommandeException
     {
         try {
             //remplacer plan qui est charge d'un nouveau plan (ssi le chargement du xml a reussi)
@@ -34,7 +38,7 @@ public class CommandeChargerPlan extends CommandeNonAnnulable
             controleurDonnees.notifyAllCalculerTourneeObserveurs(false);
         }
         catch (JDOMException | IOException | SAXException | ExceptionXML ex) {
-            throw new CommandException(ex.getMessage());
+            throw new CommandeException(ex.getMessage());
         }
     }
 

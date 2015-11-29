@@ -2,6 +2,9 @@ package controleur;
 
 import java.util.Collection;
 import java.util.LinkedList;
+
+import controleur.commande.Commande;
+import controleur.commande.Historique;
 import modele.xmldata.Modele;
 import modele.xmldata.PlanDeVille;
 

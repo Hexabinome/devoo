@@ -1,5 +1,6 @@
-package controleur;
+package controleur.commande;
 
+import controleur.ControleurDonnees;
 import modele.xmldata.Livraison;
 
 /**
@@ -24,7 +25,7 @@ public class CommandeSupprimerLivraison implements Commande {
     }
 
     @Override
-    public void executer() throws CommandException {
+    public void executer() throws CommandeException {
 
         controleurDonnees.getModele().removeLivraison(livraisonSupprimee.getId());
         controleurDonnees.getModele().remplirHoraires();

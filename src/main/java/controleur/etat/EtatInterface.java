@@ -1,6 +1,8 @@
-package controleur;
+package controleur.etat;
 
 import java.io.File;
+
+import controleur.commande.CommandeException;
 
 /**
  *
@@ -15,9 +17,9 @@ public interface EtatInterface
 
     EtatInterface cliqueSurLivraison(int livraisonId);
 
-    EtatInterface chargerPlan(File plan) throws CommandException;
+    EtatInterface chargerPlan(File plan) throws CommandeException;
 
-    EtatInterface chargerLivraisons(File livraisons) throws CommandException;
+    EtatInterface chargerLivraisons(File livraisons) throws CommandeException;
 
     EtatInterface cliqueSurPlan(int intersectionId);
 

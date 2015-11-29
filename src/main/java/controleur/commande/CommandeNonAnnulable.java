@@ -1,4 +1,5 @@
-package controleur;
+package controleur.commande;
+
 
 /**
  *

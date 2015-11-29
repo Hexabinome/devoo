@@ -1,4 +1,4 @@
-package controleur;
+package controleur.commande;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -47,7 +47,7 @@ class Historique {
     /**
      * Execute la dernière commande annulée s'il y'en a (Ctrl+Y)
      */
-    public void executer() throws CommandException {
+    public void executer() throws CommandeException {
         if (!commandesAnnulees.isEmpty()) {
             Commande commande = commandesAnnulees.pop();
             commande.executer();

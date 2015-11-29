@@ -5,6 +5,13 @@ import modele.xmldata.PlanDeVille;
 
 import java.io.File;
 
+import controleur.commande.CommandeException;
+import controleur.etat.EtatAjout;
+import controleur.etat.EtatEchange;
+import controleur.etat.EtatInitial;
+import controleur.etat.EtatInterface;
+import controleur.etat.EtatSuppression;
+
 /**
  * Implements controller interface. Primary entry point for all interaction with
  * package view.
@@ -58,7 +65,7 @@ public class Controleur implements ControleurInterface {
                 controleurDonnees.notifyAllRetablirObserveurs(true);
             }
 
-        } catch (CommandException e) {
+        } catch (CommandeException e) {
             e.printStackTrace();
         }
     }
@@ -69,7 +76,7 @@ public class Controleur implements ControleurInterface {
         try {
             etat = etat.chargerPlan(fichierPlan);
             return null;
-        } catch (CommandException e) {
+        } catch (CommandeException e) {
             return e;
         }
     }
@@ -79,7 +86,7 @@ public class Controleur implements ControleurInterface {
         try {
             etat = etat.chargerLivraisons(fichierLivraisons);
             return null;
-        } catch (CommandException e) {
+        } catch (CommandeException e) {
             return e;
         }
     }
