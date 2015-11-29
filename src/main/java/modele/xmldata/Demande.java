@@ -114,13 +114,14 @@ public class Demande
 
         return result;
     }
-    
+
     /**
-	 * Renvoie la fenêtre à laquelle appartient la livraison
-	 * @param idLivraison L'identifiant de la livraison qui est dans la fenêtre
-	 * @return La fenêtre ou null si livraison non trouvée
-	 */
-    Fenetre getFenetreDeLivraison(int idLivraison)
+     * Renvoie la fenêtre à laquelle appartient la livraison
+     *
+     * @param idLivraison L'identifiant de la livraison qui est dans la fenêtre
+     * @return La fenêtre ou null si livraison non trouvée
+     */
+    public Fenetre getFenetreDeLivraison(int idLivraison)
     {
         for (Fenetre f : fenetres) {
             if (f.getListeLivraisons().keySet().contains(idLivraison))
@@ -128,4 +129,5 @@ public class Demande
         }
         throw new RuntimeException("Fenetre introuvable pour livraison: " + idLivraison);
     }
+
 }

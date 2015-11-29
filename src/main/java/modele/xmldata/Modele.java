@@ -61,18 +61,18 @@ public class Modele implements ModeleLecture
      *
      * @param idLivraison
      */
-    public void removeLivraison(int idLivraison)
+    public int removeLivraison(int idLivraison)
     {
-    	// On ne peut pas supprimer l'entrepot
-    	if (idLivraison == -1)
-    		return;
-    	
+        // On ne peut pas supprimer l'entrepot
+        if (idLivraison == -1)
+            throw new RuntimeException("On ne peut pas supprimer l'entrepot!");
+
         //identifier la livraison
         Livraison liv = demande.identifierLivraison(idLivraison);
-        
+
         // On ne peut pas supprimer la dernière livraison d'une fenêtre
         if (demande.getFenetreDeLivraison(idLivraison).getListeLivraisons().size() == 1)
-        	return;
+            throw new RuntimeException("Il n'est pas permit de supprimer la derniere livraison d'une fenetre");
 
         //parcourir la tournee calculle par tsp et supprimer la livraison specifiee
         livraisonTournee.stream().forEach((fenetre) -> {
@@ -85,6 +85,9 @@ public class Modele implements ModeleLecture
         //mettre a jour la tournee et les horaires
         intersectionTournee = creerIntersectionTournee();
         remplirHoraires();
+        
+        //retourner l'id de la livraison avant
+        return recupererLivraisonApresOuAvant(liv, true).getId();
     }
 
     /**
@@ -94,34 +97,29 @@ public class Modele implements ModeleLecture
      * @param idLivraisonAvant
      * @param intersectionId
      */
-    public void addLivraison(int idLivraisonAvant, int intersectionId)
+    public void addLivraison(int idLivraisonAvant, Fenetre fenetre, Livraison nouvelleLivraison)
     {
         // d'abord recuperer la livraison avant
         Livraison livraisonAvant = demande.identifierLivraison(idLivraisonAvant);
 
-        // creer une nouvelle livriason et la stoquer dans le modele
-        Fenetre f = demande.getFenetreDeLivraison(idLivraisonAvant);
-
         //manipuler la tournee cree par TSP en ajoutant la nouvelle livraison dans le bon endroit (apres la livraison precendente)
-        Livraison nouvelleLivraison = new Livraison(customLivraisonCompteur, -1, intersectionId);
-        customLivraisonCompteur -= 1;
-        f.ajouterLivraison(intersectionId, nouvelleLivraison);
+        fenetre.ajouterLivraison(nouvelleLivraison.getAdresse(), nouvelleLivraison);
 
         //calculer et stoquer le chemin vers la nouvelle livraison
         //TODO: c'est ppossible qu;on a pas beson de faire ca, le permier appel de dijkstra a deja calcule ca, si on stoquait le resultat on peut eviter cette re-calculation
         Collection<Chemin> cheminsSortantDeLivraisonAvant = Fenetre.dijkstra(plan.getIntersection(livraisonAvant.getAdresse()), plan);
-        cheminsSortantDeLivraisonAvant.stream().filter((c) -> (c.getIdFin() == intersectionId)).forEach((c) -> {
-            graphe.setChemin(c, livraisonAvant.getAdresse(), intersectionId);
+        cheminsSortantDeLivraisonAvant.stream().filter((c) -> (c.getIdFin() == nouvelleLivraison.getAdresse())).forEach((c) -> {
+            graphe.setChemin(c, livraisonAvant.getAdresse(), nouvelleLivraison.getAdresse());
         });
 
         //calculer et stoquer le chemin de la nouvelle livraison vers la livraison apres
-        Livraison livraisonApres = recupererLivraisonApres(livraisonAvant);
+        Livraison livraisonApres = recupererLivraisonApresOuAvant(livraisonAvant, false);
         int idIintersectionApres = livraisonApres.getAdresse();
-        Collection<Chemin> cheminsSortantDeNouvelleLiv = Fenetre.dijkstra(plan.getIntersection(intersectionId), plan);
+        Collection<Chemin> cheminsSortantDeNouvelleLiv = Fenetre.dijkstra(plan.getIntersection(nouvelleLivraison.getAdresse()), plan);
         cheminsSortantDeNouvelleLiv.stream().filter((c) -> (c.getIdFin() == idIintersectionApres)).forEach((c) -> {
             graphe.setChemin(c, nouvelleLivraison.getAdresse(), idIintersectionApres);
         });
-        
+
         //MAJ de la tournee (par rapport aux livraisons)
         insererLivraisionDansTournee(livraisonAvant, nouvelleLivraison);
 
@@ -154,7 +152,7 @@ public class Modele implements ModeleLecture
      * @param livraisonAvant
      * @return
      */
-    private Livraison recupererLivraisonApres(Livraison livraisonAvant)
+    private Livraison recupererLivraisonApresOuAvant(Livraison livraisonAvant, boolean avant)
     {
         //d'abourd on va creer une nouvelle liste  contennant toutes les livraisons (sans connaisance des fenetreas). Celle ci est plus facile a iterer.
         List<Livraison> totalList = new LinkedList<>();
@@ -163,11 +161,16 @@ public class Modele implements ModeleLecture
         }
         Iterator<Livraison> iter = totalList.iterator();
         Livraison liv = iter.next();
+        Livraison livAvant = null;
         while (liv != livraisonAvant) {
-            iter.next();
+            livAvant = liv;
+            liv = iter.next();
         }
         if (iter.hasNext())
-            return iter.next();
+            if (!avant)
+                return iter.next();
+            else
+                return liv;
         throw new RuntimeException("Livraison ne fait pas parti de la tounree");
 
     }
@@ -300,35 +303,35 @@ public class Modele implements ModeleLecture
         return sousTournee;
     }
 
-    public void remplirHoraires() {
-    	
-    	int heure = demande.getFenetres().get(1).getTimestampDebut();
-    	int intersectionCourante = demande.getEntrepot().getId();
-    	
-    	demande.getFenetres().get(0).getLivraison(-1).setHoraireDePassage(heure);
-    	
+    public void remplirHoraires()
+    {
+
+        int heure = demande.getFenetres().get(1).getTimestampDebut();
+        int intersectionCourante = demande.getEntrepot().getId();
+
+        demande.getFenetres().get(0).getLivraison(-1).setHoraireDePassage(heure);
+
         for (int iFenetre = 1; iFenetre < demande.getFenetres().size(); ++iFenetre) {
-        	Fenetre fenetre = demande.getFenetres().get(iFenetre);
-    		List<Integer> dejaVisites = new ArrayList<>();
-        	
-        	for (int prochaineIntersection : intersectionTournee.get(iFenetre - 1)) {
-        		float dureeTroncon = plan.getIntersection(intersectionCourante).getTroncon(prochaineIntersection).getDuree();
-        		
-        		heure += dureeTroncon;
-        		intersectionCourante = prochaineIntersection;
-        		
-        		// Mise à jour de l'horaire de passage si on est sur une livraison
-        		for (Livraison l : fenetre.getListeLivraisons().values()) {
-        			if (l.getAdresse() == intersectionCourante && !dejaVisites.contains(l.getAdresse())) {
-        				if (heure < fenetre.getTimestampDebut()) {
-        					heure = fenetre.getTimestampDebut();
-        				}
-        				l.setHoraireDePassage(heure);
-        				dejaVisites.add(l.getAdresse());
-        				break;
-        			}
-        		}
-        	}
+            Fenetre fenetre = demande.getFenetres().get(iFenetre);
+            List<Integer> dejaVisites = new ArrayList<>();
+
+            for (int prochaineIntersection : intersectionTournee.get(iFenetre - 1)) {
+                float dureeTroncon = plan.getIntersection(intersectionCourante).getTroncon(prochaineIntersection).getDuree();
+
+                heure += dureeTroncon;
+                intersectionCourante = prochaineIntersection;
+
+                // Mise à jour de l'horaire de passage si on est sur une livraison
+                for (Livraison l : fenetre.getListeLivraisons().values()) {
+                    if (l.getAdresse() == intersectionCourante && !dejaVisites.contains(l.getAdresse())) {
+                        if (heure < fenetre.getTimestampDebut())
+                            heure = fenetre.getTimestampDebut();
+                        l.setHoraireDePassage(heure);
+                        dejaVisites.add(l.getAdresse());
+                        break;
+                    }
+                }
+            }
         }
     }
 
@@ -347,116 +350,126 @@ public class Modele implements ModeleLecture
 
     }
 
-	@Override
-	public String genererFeuilleDeRoute() {
-		StringBuilder feuilleDeRoute = new StringBuilder(400);
-		Livraison entrepot = livraisonTournee.get(0).get(0);
-		int intersectionCourante = entrepot.getAdresse();
-		
-		// Entête
-		feuilleDeRoute.append("Feuille de route du ")
-			.append(new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime()))
-			.append(" à ")
-			.append(convertirEnHeureLisible(entrepot.getHoraireDePassage()))
-			.append(System.lineSeparator()).append(System.lineSeparator());
-		
-		feuilleDeRoute.append("Départ prévu depuis l'entrepôt à l'adresse : ").append(intersectionCourante)
-			.append(System.lineSeparator()).append(System.lineSeparator());
-		
-		
-		for (int iFenetre = 0; iFenetre < intersectionTournee.size() - 1; ++iFenetre) {
-			// Entête fenêtre
-			Fenetre f = getDemande().getFenetres().get(iFenetre + 1);
-			feuilleDeRoute.append("Fenêtre ").append(iFenetre + 1)
-				.append(" prévu de ").append(convertirEnHeureLisible(f.getTimestampDebut()))
-				.append(" à ").append(convertirEnHeureLisible(f.getTimestampFin()))
-				.append(System.lineSeparator());
-			
-			// Chaque intersection
-			intersectionTournee.get(iFenetre);
-			for (int iTournee = 0; iTournee < intersectionTournee.get(iFenetre).size(); ++iTournee) {
-				int intersectionCible = intersectionTournee.get(iFenetre).get(iTournee);
-				Troncon troncon = getPlan().getIntersection(intersectionCourante).getTroncon(intersectionCible);
-				// Trajet de l'intersection courante à la suivante 
-				feuilleDeRoute.append(iTournee + 1).append(". ")
-					.append(VERBES_CIRCULATION[(int)Math.round(Math.random() * (VERBES_CIRCULATION.length - 1))])
-					.append(" dans la rue ").append(troncon.getNomRue())
-					.append(" pour ").append(VERBES_DESTINATION[(int)Math.round(Math.random() * (VERBES_DESTINATION.length - 1))])
-					.append(" à l'adresse ").append(intersectionCible)
-					.append(System.lineSeparator());
-				
-				intersectionCourante = intersectionCible;
-				
-				// On regarde si l'intersection est une livraison
-				Livraison livraison = null;
-				for (Livraison l : f.getListeLivraisons().values()) {
-					if (l.getAdresse() == intersectionCourante) {
-						livraison = l;
-						break;
-					}
-				}
-				if (livraison != null) {
-					feuilleDeRoute.append("* ").append(convertirEnHeureLisible(livraison.getHoraireDePassage()))
-						.append(" - Effectuez la livraison ").append(livraison.getId())
-						.append(" chez le client ").append(livraison.getClientId())
-						.append(" à l'adresse ").append(livraison.getAdresse())
-						.append(System.lineSeparator());
-				}
-			}
-		}
-		
-		// Retour à l'entrepôt
-		feuilleDeRoute.append("Retour à l'entrepôt :")
-			.append(System.lineSeparator());
-		List<Integer> derniereFenetre = intersectionTournee.get(intersectionTournee.size() - 1);
-		for (int iTournee = 0; iTournee < derniereFenetre.size(); ++iTournee) {
-			int intersectionCible = derniereFenetre.get(iTournee);
-			Troncon troncon = getPlan().getIntersection(intersectionCourante).getTroncon(intersectionCible);
-			// Trajet de l'intersection courante à la suivante 
-			feuilleDeRoute.append(iTournee + 1).append(". ")
-				.append(VERBES_CIRCULATION[(int)Math.round(Math.random() * (VERBES_CIRCULATION.length - 1))])
-				.append(" dans la rue ").append(troncon.getNomRue())
-				.append(" pour ").append(VERBES_DESTINATION[(int)Math.round(Math.random() * (VERBES_DESTINATION.length - 1))])
-				.append(" à l'adresse ").append(intersectionCible)
-				.append(System.lineSeparator());
-			
-			intersectionCourante = intersectionCible;
-		}
-		
-		
-		// Fin de feuille de route
-		feuilleDeRoute.append(System.lineSeparator())
-			.append("Cette feuille a été générée automatiquement par l'application Optimod'Lyon - H4105");
-		
-		return feuilleDeRoute.toString();
-	}
-	
-	/**
-	 * VERBE dans la rue 10 pour arriver à l'adresse
-	 */
-	private final static String[] VERBES_CIRCULATION = new String[] {
-		"Tournez",
-		"Continuez",
-		"Avancez",
-		"Allez"
-	};
-	
-	private final static String[] VERBES_DESTINATION = new String[] {
-		"rejoindre",
-		"arriver"
-	};
-	
-	
-	
+    @Override
+    public String genererFeuilleDeRoute()
+    {
+        StringBuilder feuilleDeRoute = new StringBuilder(400);
+        Livraison entrepot = livraisonTournee.get(0).get(0);
+        int intersectionCourante = entrepot.getAdresse();
+
+        // Entête
+        feuilleDeRoute.append("Feuille de route du ")
+                .append(new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime()))
+                .append(" à ")
+                .append(convertirEnHeureLisible(entrepot.getHoraireDePassage()))
+                .append(System.lineSeparator()).append(System.lineSeparator());
+
+        feuilleDeRoute.append("Départ prévu depuis l'entrepôt à l'adresse : ").append(intersectionCourante)
+                .append(System.lineSeparator()).append(System.lineSeparator());
+
+        for (int iFenetre = 0; iFenetre < intersectionTournee.size() - 1; ++iFenetre) {
+            // Entête fenêtre
+            Fenetre f = getDemande().getFenetres().get(iFenetre + 1);
+            feuilleDeRoute.append("Fenêtre ").append(iFenetre + 1)
+                    .append(" prévu de ").append(convertirEnHeureLisible(f.getTimestampDebut()))
+                    .append(" à ").append(convertirEnHeureLisible(f.getTimestampFin()))
+                    .append(System.lineSeparator());
+
+            // Chaque intersection
+            intersectionTournee.get(iFenetre);
+            for (int iTournee = 0; iTournee < intersectionTournee.get(iFenetre).size(); ++iTournee) {
+                int intersectionCible = intersectionTournee.get(iFenetre).get(iTournee);
+                Troncon troncon = getPlan().getIntersection(intersectionCourante).getTroncon(intersectionCible);
+                // Trajet de l'intersection courante à la suivante 
+                feuilleDeRoute.append(iTournee + 1).append(". ")
+                        .append(VERBES_CIRCULATION[(int) Math.round(Math.random() * (VERBES_CIRCULATION.length - 1))])
+                        .append(" dans la rue ").append(troncon.getNomRue())
+                        .append(" pour ").append(VERBES_DESTINATION[(int) Math.round(Math.random() * (VERBES_DESTINATION.length - 1))])
+                        .append(" à l'adresse ").append(intersectionCible)
+                        .append(System.lineSeparator());
+
+                intersectionCourante = intersectionCible;
+
+                // On regarde si l'intersection est une livraison
+                Livraison livraison = null;
+                for (Livraison l : f.getListeLivraisons().values()) {
+                    if (l.getAdresse() == intersectionCourante) {
+                        livraison = l;
+                        break;
+                    }
+                }
+                if (livraison != null)
+                    feuilleDeRoute.append("* ").append(convertirEnHeureLisible(livraison.getHoraireDePassage()))
+                            .append(" - Effectuez la livraison ").append(livraison.getId())
+                            .append(" chez le client ").append(livraison.getClientId())
+                            .append(" à l'adresse ").append(livraison.getAdresse())
+                            .append(System.lineSeparator());
+            }
+        }
+
+        // Retour à l'entrepôt
+        feuilleDeRoute.append("Retour à l'entrepôt :")
+                .append(System.lineSeparator());
+        List<Integer> derniereFenetre = intersectionTournee.get(intersectionTournee.size() - 1);
+        for (int iTournee = 0; iTournee < derniereFenetre.size(); ++iTournee) {
+            int intersectionCible = derniereFenetre.get(iTournee);
+            Troncon troncon = getPlan().getIntersection(intersectionCourante).getTroncon(intersectionCible);
+            // Trajet de l'intersection courante à la suivante 
+            feuilleDeRoute.append(iTournee + 1).append(". ")
+                    .append(VERBES_CIRCULATION[(int) Math.round(Math.random() * (VERBES_CIRCULATION.length - 1))])
+                    .append(" dans la rue ").append(troncon.getNomRue())
+                    .append(" pour ").append(VERBES_DESTINATION[(int) Math.round(Math.random() * (VERBES_DESTINATION.length - 1))])
+                    .append(" à l'adresse ").append(intersectionCible)
+                    .append(System.lineSeparator());
+
+            intersectionCourante = intersectionCible;
+        }
+
+        // Fin de feuille de route
+        feuilleDeRoute.append(System.lineSeparator())
+                .append("Cette feuille a été générée automatiquement par l'application Optimod'Lyon - H4105");
+
+        return feuilleDeRoute.toString();
+    }
+
     /**
-     * Convertis un temps en seconde en chaine de caractère sous la forme HH:mm:ss
+     * VERBE dans la rue 10 pour arriver à l'adresse
+     */
+    private final static String[] VERBES_CIRCULATION = new String[]{
+        "Tournez",
+        "Continuez",
+        "Avancez",
+        "Allez"
+    };
+
+    private final static String[] VERBES_DESTINATION = new String[]{
+        "rejoindre",
+        "arriver"
+    };
+
+    /**
+     * Convertis un temps en seconde en chaine de caractère sous la forme
+     * HH:mm:ss
+     *
      * @param tempsEnSeconde temps à convertir
      */
-    private static String convertirEnHeureLisible(int tempsEnSeconde) {
+    private static String convertirEnHeureLisible(int tempsEnSeconde)
+    {
         int heure = tempsEnSeconde / 3600;
         int mn = (tempsEnSeconde % 3600) / 60;
         int sec = tempsEnSeconde % 60;
         return String.format("%02d:%02d:%02d", heure, mn, sec);
+    }
+
+    /**
+     * Quand on cree une nouvelle livraison on a besoin d'une id unique. Cette
+     * compteur aide a recuperer cette id.
+     *
+     * @return
+     */
+    public int getProchainCustomLivraisonId()
+    {
+        return customLivraisonCompteur--;
     }
 
 }
