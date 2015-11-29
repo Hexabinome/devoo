@@ -39,7 +39,9 @@ public class CommandeAjouterLivraison implements Commande {
         controleurDonnees.notifyAllModelObserveurs();
         controleurDonnees.notifyAllAnnulerObserveurs(false);
 
-        // TODO à completer
+        if (controleurDonnees.getHist().estVideCommandesARetablir()){
+            controleurDonnees.notifyAllRetablirObserveurs(true);
+        }
     }
 
     @Override
@@ -47,6 +49,8 @@ public class CommandeAjouterLivraison implements Commande {
         controleurDonnees.getModele().removeLivraison(livraisonAjoutee.getId());
         controleurDonnees.notifyAllModelObserveurs();
         controleurDonnees.notifyAllRetablirObserveurs(false);
-        // TODO à completer
+
+        if (controleurDonnees.getHist().estVideCommandesAAnnuler())
+            controleurDonnees.notifyAllAnnulerObserveurs(true);
     }
 }

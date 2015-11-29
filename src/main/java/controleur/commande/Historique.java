@@ -31,7 +31,7 @@ public class Historique {
      * @param commande Une commande qui s'est éxécutée avec succès
      */
     public void ajouterCommande(Commande commande) {
-        commandesAAnnuller.add(commande);
+        commandesAAnnuller.push(commande);
         effacerCommandeARetablir(); // on efface les commandes qui avaient été annulées quand une ajoute une nouvelle commande
     }
 
@@ -39,9 +39,11 @@ public class Historique {
      * Annule la dernière commande annulable executée (Ctrl+Z)
      */
     public void annuler() {
-        Commande commande = commandesAAnnuller.pop();
-        commandesARetablir.push(commande);
-        commande.annuler();
+        if(!commandesAAnnuller.isEmpty()){
+            Commande commande = commandesAAnnuller.pop();
+            commandesARetablir.push(commande);
+            commande.annuler();
+        }
     }
 
     /**
