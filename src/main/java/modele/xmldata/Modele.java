@@ -76,6 +76,9 @@ public class Modele implements ModeleLecture
         if (demande.getFenetreDeLivraison(idLivraison).getListeLivraisons().size() == 1)
             throw new RuntimeException("Il n'est pas permit de supprimer la derniere livraison d'une fenetre");
 
+        //recuperer l'id de la livraison avant
+        int idLivraisonAvant =  recupererLivraisonApresOuAvant(liv, true).getId();
+
         //parcourir la tournee calculle par tsp et supprimer la livraison specifiee
         livraisonTournee.stream().forEach((fenetre) -> {
             fenetre.remove(liv);
@@ -88,8 +91,7 @@ public class Modele implements ModeleLecture
         intersectionTournee = creerIntersectionTournee();
         remplirHoraires();
 
-        //retourner l'id de la livraison avant
-        return recupererLivraisonApresOuAvant(liv, true).getId();
+        return idLivraisonAvant;
     }
 
     /**
