@@ -36,32 +36,35 @@ public class ModeleTest
     @Test
     public void TestModelPlan() throws JDOMException, IOException, SAXException, ParseException, ExceptionXML
     {
-        // initialisation
+        // initialisation na parti des fichiers xml
         PlanDeVille ville = DeserialiseurXML.ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/plan10x10.xml"));
         Demande demande = DeserialiseurXML.ouvrirLivraison(ClassLoader.getSystemResourceAsStream("samples/livraison10x10-1.xml"), ville);
         ModeleLecture monModel = new Modele(ville, demande);
 
-        //test
+        // tester contructeur du modele
         assertEquals("Le model doit avoir le plan de ville obtenu a la lecture xml", ville, monModel.getPlan());
         assertEquals("Le model doit avoir les livraisons obtenus a la lecture xml", demande, monModel.getDemande());
+
+        // verifier que le modele cree correspod au contenu des fichiers xml
+        // le fichier cintient qu'une seule fenetre. Quand meme on attend 2, car le modele doit creer une fenetre supplementaire pour l'entrepot.
+        assertEquals("Modele cree a parti d'xml ne contient pas la bonne numero des fenetres.", 2, monModel.getDemande().getFenetres().size());
+        assertEquals("Modele cree a parti d'xml ne contient pas la bonne numero des intersections.", 100, monModel.getPlan().getIntersections().size());
     }
 
     @Test
     public void TestCalculerTournee() throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException, JDOMException, IOException, SAXException, ExceptionXML, ParseException
     {
-        // initialisation
+        // initialisation a parti des fichiers xml
         PlanDeVille ville = DeserialiseurXML.ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/plan10x10.xml"));
         Demande demande = DeserialiseurXML.ouvrirLivraison(ClassLoader.getSystemResourceAsStream("samples/livraison10x10-1.xml"), ville);
         Modele monModel = new Modele(ville, demande);
 
         //tester si on peut bien calculer la tournee
         monModel.calculerTournee();
-        
-        //essayer de manipuler la tournee
     }
 
     @Test
-    public void TestCreerModele()
+    public void TestManipulerModele()
     {               /*
          Fenetre fenetre0 = new Fenetre(1448105516, 1448105516);
          Fenetre fenetre1 = new Fenetre(1448105516, 1448105616);
