@@ -53,4 +53,10 @@ public class EtatAjout extends AbstractEtat
         throw new RuntimeException("Cet etat ne permet pas de calculer la tournée");
     }
 
+    @Override
+    public EtatInterface clicDroit() {
+        donnees.notifierAllMessageObserveurs("Retour à l'état principal");
+        return new EtatPrincipal(donnees);
+    }
+
 }

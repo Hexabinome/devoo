@@ -55,4 +55,10 @@ public class EtatPlanCharge extends AbstractEtat
         throw new RuntimeException("Cet etat ne permet pas de calculer la tournee");
     }
 
+    @Override
+    public EtatInterface clicDroit() {
+        // Ne fais rien
+        return this;
+    }
+
 }

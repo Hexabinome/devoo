@@ -25,4 +25,6 @@ public interface EtatInterface
 
     EtatInterface cliqueCalculerTournee();
 
+    EtatInterface clicDroit();
+
 }

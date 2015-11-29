@@ -68,4 +68,10 @@ public class EtatPrincipal implements EtatInterface
         return this;
     }
 
+    @Override
+    public EtatInterface clicDroit() {
+
+        return this;
+    }
+
 }

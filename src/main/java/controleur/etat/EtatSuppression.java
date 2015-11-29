@@ -19,6 +19,7 @@ public class EtatSuppression extends AbstractEtat
     public EtatSuppression(ControleurDonnees donnees)
     {
         this.donnees = donnees;
+        donnees.notifierAllMessageObserveurs("Vous voulez supprimer une livraison ? Choissez dans la liste la livraison que vous voulez supprimer");
     }
 
     @Override
@@ -60,6 +61,12 @@ public class EtatSuppression extends AbstractEtat
     {
         // Ne fais rien
         return this;
+    }
+
+    @Override
+    public EtatInterface clicDroit() {
+        donnees.notifierAllMessageObserveurs("Retour à l'état principal");
+        return new EtatPrincipal(donnees);
     }
 
     @Override
