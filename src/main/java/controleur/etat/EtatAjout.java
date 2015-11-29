@@ -23,7 +23,8 @@ public class EtatAjout extends AbstractEtat
     @Override
     public EtatInterface cliqueSurLivraison(int livraisonId)
     {
-        throw new RuntimeException("Cet etat ne permet pas d'interagir avec la liste.");
+        donnees.notifierAllMessageObserveurs("Veuillez d'abord choissir une intersection svp.");
+        return this;
     }
 
     @Override
@@ -41,6 +42,7 @@ public class EtatAjout extends AbstractEtat
     @Override
     public EtatInterface cliqueSurPlan(int intersectionId)
     {
+        donnees.notifierAllMessageObserveurs("Veuillez maintenant cliquer sur une livraison svp.");
         return new EtatAjout2(donnees,intersectionId);
     }
 

@@ -93,6 +93,8 @@ public class GrapheRealisation implements Graphe
 
         if (i < chemins.length && j < chemins.length)
             chemins[i][j] = chemin;
+        else
+            throw new RuntimeException("Pas possible de enregistrer graph dans matrix, il n'y a plus des champs disponibles");
     }
 
     /**
