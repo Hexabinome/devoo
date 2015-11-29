@@ -63,7 +63,7 @@
                         <Group>
                             <StackPane fx:id="canvasGraphique" style="-fx-background-color: #7b7b7b;">
                                 <children>
-                                    <Group fx:id="group" />
+                                    <Group fx:id="groupEllipseVueGraphique" />
                                 </children>
                             </StackPane>
                         </Group>

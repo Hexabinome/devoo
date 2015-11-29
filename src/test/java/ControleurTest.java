@@ -2,10 +2,16 @@
 import controleur.Controleur;
 import controleur.ControleurInterface;
 import controleur.ModelObserveur;
+import modele.xmldata.ModeleLecture;
+
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -51,19 +57,18 @@ public class ControleurTest {
     /*************************************************
      * Tests chargerPlan
      *************************************************/
-
+/*
     @Test
     public void testChargerPlan() {
         File plan = new File("samples/plan10x10.xml");
         controleurInterface.chargerPlan(plan);
         assert (miseAJourAppelee);
     }
-
-    
+    */
     /*************************************************
      * Tests chargerLivraisons
      *************************************************/
-    
+    /*
     @Test
     public void testChargerLivraisons() {
         File plan = new File("samples/plan10x10.xml");
@@ -89,12 +94,11 @@ public class ControleurTest {
     	
     	assert(jetee);
     }
-    
-    
+     */
     /*************************************************
      * Tests cliqueCalculerTournee
      *************************************************/
-
+/*
     @Test
     public void testCliqueCalculerTournee() {
         File plan = new File("samples/plan10x10.xml");
@@ -177,11 +181,11 @@ public class ControleurTest {
     	
     	assert(jetee);
     }
-    
+    */
     /*************************************************
      * Tests cliqueOutilSupprimer
      *************************************************/
-    
+    /*
     @Test
     public void testCliqueOutilSupprimer() {
         File plan = new File("samples/plan10x10.xml");
@@ -226,11 +230,11 @@ public class ControleurTest {
     	
     	assert(jetee);
     }
-    
+    */
     /*************************************************
      * Tests cliqueOutilAjouter
      *************************************************/
-    
+    /*
     @Test
     public void testCliqueOutilAjouter() {
         File plan = new File("samples/plan10x10.xml");
@@ -275,11 +279,11 @@ public class ControleurTest {
     	
     	assert(jetee);
     }
-    
+    */
     /*************************************************
      * Tests cliqueOutilEchanger
      *************************************************/
-    
+    /*
     @Test
     public void testCliqueOutilEchanger() {
         File plan = new File("samples/plan10x10.xml");
@@ -324,11 +328,11 @@ public class ControleurTest {
     	
     	assert(jetee);
     }
-    
+    */
     /*************************************************
      * Tests cliqueSurPlan
      *************************************************/
-    
+    /*
     @Test
     public void testCliqueSurPlanAjouter() {
         File plan = new File("samples/plan10x10.xml");
@@ -345,11 +349,11 @@ public class ControleurTest {
 
         assert (miseAJourAppelee);
     }
-    
+    */
     /*************************************************
      * Tests cliqueSurLivraison
      *************************************************/
-    
+    /*
     @Test
     public void testCliqueSurLivraisonAjouter() {
         File plan = new File("samples/plan10x10.xml");
@@ -403,11 +407,11 @@ public class ControleurTest {
 
         assert (miseAJourAppelee);
     }
-    
+    */
     /*************************************************
      * Tests cliqueAnnuler
      *************************************************/
-    
+    /*
     @Test
     public void testCliqueAnnulerSansPlan() {
 
@@ -458,11 +462,11 @@ public class ControleurTest {
 
         assert (miseAJourAppelee);
     }
-    
+    */
     /*************************************************
      * Tests cliqueRetablir
      *************************************************/
-    
+    /*
     @Test
     public void testCliqueRetablirSansPlan() {
 
@@ -492,8 +496,472 @@ public class ControleurTest {
     	
     	assert(jetee);
     }
-    
+    */
     /*************************************************
      * Tests getModel
      *************************************************/
+
+    @Test
+	public void testResultatCalculerLivraison()
+	{
+		File plan = new File("target\\classes\\samples\\planTest2.xml");
+        controleurInterface.chargerPlan(plan);
+
+        File livraisons = new File("target\\classes\\samples\\livraisonTest2.xml");
+        controleurInterface.chargerLivraisons(livraisons);
+        
+        controleurInterface.cliqueCalculerTourne();
+        
+        ModeleLecture model = controleurInterface.getModel();
+        List<List<Integer>> tournee = model.getTournee();
+
+        List<List<Integer>> tourneeAttendus = new ArrayList<>();
+        List<Integer> listeTemp = new ArrayList<Integer>();
+        listeTemp.add(2);
+        listeTemp.add(4);
+        listeTemp.add(5);
+        tourneeAttendus.add(listeTemp);
+        
+        listeTemp = new ArrayList<Integer>();
+        listeTemp.add(4);
+        listeTemp.add(9);
+        listeTemp.add(10);
+        listeTemp.add(11);
+        tourneeAttendus.add(listeTemp);
+        
+        listeTemp = new ArrayList<Integer>();
+        listeTemp.add(9);
+        listeTemp.add(4);
+        listeTemp.add(5);
+        listeTemp.add(1);
+
+        tourneeAttendus.add(listeTemp);
+        
+        assertEquals("La tournee est bien calculé", tourneeAttendus, tournee);
+	}
+    
+    @Test
+	public void testSuppressionCalculerLivraison()
+	{
+		File plan = new File("target\\classes\\samples\\planTest2.xml");
+        controleurInterface.chargerPlan(plan);
+
+        File livraisons = new File("target\\classes\\samples\\livraisonTest2.xml");
+        controleurInterface.chargerLivraisons(livraisons);
+        
+        controleurInterface.cliqueCalculerTourne();
+        ModeleLecture model = controleurInterface.getModel();       
+        controleurInterface.cliqueOutilSupprimer();      
+        controleurInterface.cliqueSurLivraison(10103);  
+        
+        model = controleurInterface.getModel();
+        
+        List<List<Integer>> tournee = model.getTournee();
+
+        List<List<Integer>> tourneeAttendus = new ArrayList<>();
+        List<Integer> listeTemp = new ArrayList<Integer>();
+        listeTemp.add(2);
+        listeTemp.add(4);
+        tourneeAttendus.add(listeTemp);
+        
+        listeTemp = new ArrayList<Integer>();
+        listeTemp.add(9);
+        listeTemp.add(10);
+        listeTemp.add(11);
+        tourneeAttendus.add(listeTemp);
+        
+        listeTemp = new ArrayList<Integer>();
+        listeTemp.add(9);
+        listeTemp.add(4);
+        listeTemp.add(5);
+        listeTemp.add(1);
+
+        tourneeAttendus.add(listeTemp);
+        
+        assertEquals("La tournee est bien calculé", tourneeAttendus, tournee);
+	}
+
+    /**
+     * message d'erreur mais rien n'est censé changer dans la livraison
+     */
+    @Test
+	public void testSuppressionEntrepotCalculerLivraison()
+	{
+		File plan = new File("target\\classes\\samples\\planTest2.xml");
+        controleurInterface.chargerPlan(plan);
+
+        File livraisons = new File("target\\classes\\samples\\livraisonTest2.xml");
+        controleurInterface.chargerLivraisons(livraisons);
+        
+        controleurInterface.cliqueCalculerTourne();
+        ModeleLecture model = controleurInterface.getModel();       
+        controleurInterface.cliqueOutilSupprimer();      
+        controleurInterface.cliqueSurLivraison(-1);  
+        model = controleurInterface.getModel();
+        
+        List<List<Integer>> tournee = model.getTournee();
+
+        List<List<Integer>> tourneeAttendus = new ArrayList<>();
+        List<Integer> listeTemp = new ArrayList<Integer>();
+        listeTemp.add(2);
+        listeTemp.add(4);
+        listeTemp.add(5);
+        tourneeAttendus.add(listeTemp);
+        
+        listeTemp = new ArrayList<Integer>();
+        listeTemp.add(9);
+        listeTemp.add(10);
+        listeTemp.add(11);
+        tourneeAttendus.add(listeTemp);
+        
+        listeTemp = new ArrayList<Integer>();
+        listeTemp.add(9);
+        listeTemp.add(4);
+        listeTemp.add(5);
+        listeTemp.add(1);
+
+        tourneeAttendus.add(listeTemp);
+        
+        assertEquals("La tournee est bien calculé", tourneeAttendus, tournee);
+	}
+
+    @Test
+	public void testAnnulerSuppressionCalculerLivraison()
+	{
+		File plan = new File("target\\classes\\samples\\planTest2.xml");
+        controleurInterface.chargerPlan(plan);
+
+        File livraisons = new File("target\\classes\\samples\\livraisonTest2.xml");
+        controleurInterface.chargerLivraisons(livraisons);
+        
+        controleurInterface.cliqueCalculerTourne();
+        ModeleLecture model = controleurInterface.getModel();       
+        controleurInterface.cliqueOutilSupprimer();      
+        controleurInterface.cliqueSurLivraison(10103);
+        
+        controleurInterface.cliqueAnnuler();
+        model = controleurInterface.getModel();
+        
+        List<List<Integer>> tournee = model.getTournee();
+
+        List<List<Integer>> tourneeAttendus = new ArrayList<>();
+        List<Integer> listeTemp = new ArrayList<Integer>();
+        listeTemp.add(2);
+        listeTemp.add(4);
+        listeTemp.add(5);
+        tourneeAttendus.add(listeTemp);
+        
+        listeTemp = new ArrayList<Integer>();
+        listeTemp.add(4);
+        listeTemp.add(9);
+        listeTemp.add(10);
+        listeTemp.add(11);
+        tourneeAttendus.add(listeTemp);
+        
+        listeTemp = new ArrayList<Integer>();
+        listeTemp.add(9);
+        listeTemp.add(4);
+        listeTemp.add(5);
+        listeTemp.add(1);
+
+        tourneeAttendus.add(listeTemp);
+        
+        assertEquals("La tournee est bien calculé", tourneeAttendus, tournee);
+	}
+
+    @Test
+	public void testAnnulerRetablirSuppressionCalculerLivraison()
+	{
+		File plan = new File("target\\classes\\samples\\planTest2.xml");
+        controleurInterface.chargerPlan(plan);
+
+        File livraisons = new File("target\\classes\\samples\\livraisonTest2.xml");
+        controleurInterface.chargerLivraisons(livraisons);
+        
+        controleurInterface.cliqueCalculerTourne();
+        ModeleLecture model = controleurInterface.getModel();       
+        controleurInterface.cliqueOutilSupprimer();      
+        controleurInterface.cliqueSurLivraison(10103); 
+        controleurInterface.cliqueAnnuler();
+        controleurInterface.cliqueRetablir();
+        model = controleurInterface.getModel();
+        
+        List<List<Integer>> tournee = model.getTournee();
+
+        List<List<Integer>> tourneeAttendus = new ArrayList<>();
+        List<Integer> listeTemp = new ArrayList<Integer>();
+        listeTemp.add(2);
+        listeTemp.add(4);
+        tourneeAttendus.add(listeTemp);
+        
+        listeTemp = new ArrayList<Integer>();
+        listeTemp.add(9);
+        listeTemp.add(10);
+        listeTemp.add(11);
+        tourneeAttendus.add(listeTemp);
+        
+        listeTemp = new ArrayList<Integer>();
+        listeTemp.add(9);
+        listeTemp.add(4);
+        listeTemp.add(5);
+        listeTemp.add(1);
+
+        tourneeAttendus.add(listeTemp);
+        
+        assertEquals("La tournee est bien calculé", tourneeAttendus, tournee);
+	}
+    
+    /**
+     * Test l'ajout juste aprés l'entrepot
+     */
+    @Test
+	public void testAjoutApresEntrepotCalculerLivraison()
+	{
+		File plan = new File("target\\classes\\samples\\planTest2.xml");
+        controleurInterface.chargerPlan(plan);
+
+        File livraisons = new File("target\\classes\\samples\\livraisonTest3.xml");
+        controleurInterface.chargerLivraisons(livraisons);
+        
+        controleurInterface.cliqueCalculerTourne();
+
+        ModeleLecture model = controleurInterface.getModel();
+                          
+        controleurInterface.cliqueOutilAjouter();        
+        controleurInterface.cliqueSurPlan(2);     
+        controleurInterface.cliqueSurLivraison(-1); 
+
+        model = controleurInterface.getModel();
+        
+        List<List<Integer>> tourneeAttendus = new ArrayList<>();
+        List<Integer> listeTemp = new ArrayList<Integer>();
+
+        tourneeAttendus = new ArrayList<>();       
+        listeTemp = new ArrayList<Integer>();
+        listeTemp.add(2);
+        listeTemp.add(4);
+        listeTemp.add(5);
+        tourneeAttendus.add(listeTemp);
+        
+        listeTemp = new ArrayList<Integer>();
+        listeTemp.add(4);
+        listeTemp.add(9);
+        listeTemp.add(10);
+        listeTemp.add(11);
+        tourneeAttendus.add(listeTemp);
+        
+        listeTemp = new ArrayList<Integer>();
+        listeTemp.add(9);
+        listeTemp.add(4);
+        listeTemp.add(5);
+        listeTemp.add(1);
+
+        tourneeAttendus.add(listeTemp);
+        
+        assertEquals("La tournee est bien calculé", tourneeAttendus, model.getTournee());
+	}
+    
+    @Test
+	public void testAjoutCalculerLivraison()
+	{
+		File plan = new File("target\\classes\\samples\\planTest2.xml");
+        controleurInterface.chargerPlan(plan);
+
+        File livraisons = new File("target\\classes\\samples\\livraisonTest2.xml");
+        controleurInterface.chargerLivraisons(livraisons);
+        
+        controleurInterface.cliqueCalculerTourne();
+
+        ModeleLecture model = controleurInterface.getModel();
+                          
+        controleurInterface.cliqueOutilAjouter();        
+        controleurInterface.cliqueSurPlan(3);     
+        controleurInterface.cliqueSurLivraison(10101);
+
+        model = controleurInterface.getModel();
+        
+        List<List<Integer>> tourneeAttendus = new ArrayList<>();
+        List<Integer> listeTemp = new ArrayList<Integer>();
+
+        tourneeAttendus = new ArrayList<>();       
+        listeTemp = new ArrayList<Integer>();
+        listeTemp.add(2);
+        listeTemp.add(3);
+        listeTemp.add(4);
+        listeTemp.add(5);
+        tourneeAttendus.add(listeTemp);
+        
+        listeTemp = new ArrayList<Integer>();
+        listeTemp.add(4);
+        listeTemp.add(9);
+        listeTemp.add(10);
+        listeTemp.add(11);
+        tourneeAttendus.add(listeTemp);
+        
+        listeTemp = new ArrayList<Integer>();
+        listeTemp.add(9);
+        listeTemp.add(4);
+        listeTemp.add(5);
+        listeTemp.add(1);
+
+        tourneeAttendus.add(listeTemp);
+        
+        assertEquals("La tournee est bien calculé", tourneeAttendus, model.getTournee());
+	}
+
+    @Test
+	public void testAnnulerAjoutCalculerLivraison()
+	{
+		File plan = new File("target\\classes\\samples\\planTest2.xml");
+        controleurInterface.chargerPlan(plan);
+
+        File livraisons = new File("target\\classes\\samples\\livraisonTest2.xml");
+        controleurInterface.chargerLivraisons(livraisons);
+        
+        controleurInterface.cliqueCalculerTourne();
+
+        ModeleLecture model = controleurInterface.getModel();
+                          
+        controleurInterface.cliqueOutilAjouter();        
+        controleurInterface.cliqueSurPlan(3);     
+        controleurInterface.cliqueSurLivraison(10101); 
+        controleurInterface.cliqueAnnuler();
+
+        model = controleurInterface.getModel();
+        
+        List<List<Integer>> tourneeAttendus = new ArrayList<>();
+        List<Integer> listeTemp = new ArrayList<Integer>();
+
+        tourneeAttendus = new ArrayList<>();       
+        listeTemp = new ArrayList<Integer>();
+        listeTemp.add(2);
+        listeTemp.add(4);
+        listeTemp.add(5);
+        tourneeAttendus.add(listeTemp);
+        
+        listeTemp = new ArrayList<Integer>();
+        listeTemp.add(4);
+        listeTemp.add(9);
+        listeTemp.add(10);
+        listeTemp.add(11);
+        tourneeAttendus.add(listeTemp);
+        
+        listeTemp = new ArrayList<Integer>();
+        listeTemp.add(9);
+        listeTemp.add(4);
+        listeTemp.add(5);
+        listeTemp.add(1);
+
+        tourneeAttendus.add(listeTemp);
+        
+        assertEquals("La tournee est bien calculé", tourneeAttendus, model.getTournee());
+	}
+
+    @Test
+	public void testAnnulerRetablirAjoutCalculerLivraison()
+	{
+		File plan = new File("target\\classes\\samples\\planTest2.xml");
+        controleurInterface.chargerPlan(plan);
+
+        File livraisons = new File("target\\classes\\samples\\livraisonTest2.xml");
+        controleurInterface.chargerLivraisons(livraisons);
+        
+        controleurInterface.cliqueCalculerTourne();
+
+        ModeleLecture model = controleurInterface.getModel();
+                          
+        controleurInterface.cliqueOutilAjouter();        
+        controleurInterface.cliqueSurPlan(3);     
+        controleurInterface.cliqueSurLivraison(10101); 
+        controleurInterface.cliqueAnnuler();
+        controleurInterface.cliqueRetablir();
+
+        model = controleurInterface.getModel();
+        
+        List<List<Integer>> tourneeAttendus = new ArrayList<>();
+        List<Integer> listeTemp = new ArrayList<Integer>();
+
+        tourneeAttendus = new ArrayList<>();       
+        listeTemp = new ArrayList<Integer>();
+        listeTemp.add(2);
+        listeTemp.add(3);
+        listeTemp.add(4);
+        listeTemp.add(5);
+        tourneeAttendus.add(listeTemp);
+        
+        listeTemp = new ArrayList<Integer>();
+        listeTemp.add(4);
+        listeTemp.add(9);
+        listeTemp.add(10);
+        listeTemp.add(11);
+        tourneeAttendus.add(listeTemp);
+        
+        listeTemp = new ArrayList<Integer>();
+        listeTemp.add(9);
+        listeTemp.add(4);
+        listeTemp.add(5);
+        listeTemp.add(1);
+
+        tourneeAttendus.add(listeTemp);
+        
+        assertEquals("La tournee est bien calculé", tourneeAttendus, model.getTournee());
+	}
+
+    /**
+     * Impossible de réaliser cette livraison car on ne peut pas revenir de la derniére livraison
+     */
+    @Test
+	public void testCalculerImpossibleLivraison()
+	{
+		File plan = new File("target\\classes\\samples\\planTest2.xml");
+        controleurInterface.chargerPlan(plan);
+
+        File livraisons = new File("target\\classes\\samples\\livraisonTest4.xml");
+        controleurInterface.chargerLivraisons(livraisons);
+        
+        controleurInterface.cliqueCalculerTourne();
+
+        ModeleLecture model = controleurInterface.getModel();
+        
+        List<List<Integer>> tourneeAttendus = new ArrayList<>();
+        List<Integer> listeTemp = new ArrayList<Integer>();
+
+        tourneeAttendus.add(listeTemp);
+        
+        assertEquals("La tournee est bien calculé", tourneeAttendus, model.getTournee());
+	}
+    
+    @Test
+    public void testSuppressionAll()
+    {
+    	File plan = new File("target\\classes\\samples\\planTest2.xml");
+        controleurInterface.chargerPlan(plan);
+
+        File livraisons = new File("target\\classes\\samples\\livraisonTest2.xml");
+        
+        controleurInterface.chargerLivraisons(livraisons);
+        
+        controleurInterface.cliqueCalculerTourne();
+        ModeleLecture model = controleurInterface.getModel();       
+        controleurInterface.cliqueOutilSupprimer();      
+        controleurInterface.cliqueSurLivraison(20105);   
+        controleurInterface.cliqueOutilSupprimer();      
+        controleurInterface.cliqueSurLivraison(20104);   
+        controleurInterface.cliqueOutilSupprimer();      
+        controleurInterface.cliqueSurLivraison(10103);      
+        controleurInterface.cliqueOutilSupprimer();      
+        controleurInterface.cliqueSurLivraison(10102);   
+        controleurInterface.cliqueOutilSupprimer();      
+        controleurInterface.cliqueSurLivraison(10101); 
+        
+        model = controleurInterface.getModel();
+        
+        List<List<Integer>> tournee = model.getTournee();
+
+        List<List<Integer>> tourneeAttendus = new ArrayList<>();
+        List<Integer> listeTemp = new ArrayList<Integer>();
+        tourneeAttendus.add(listeTemp);
+        
+        assertEquals("La tournee est bien calculé", tourneeAttendus, tournee);
+    }
 }

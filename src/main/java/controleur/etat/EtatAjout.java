@@ -18,12 +18,13 @@ public class EtatAjout extends AbstractEtat
     public EtatAjout(ControleurDonnees donnees)
     {
         this.donnees = donnees;
+        donnees.notifierAllMessageObserveurs("Vous voulez ajouter une livraison ? Choisissez sur la carte une intersection");
     }
 
     @Override
     public EtatInterface cliqueSurLivraison(int livraisonId)
     {
-        donnees.notifierAllMessageObserveurs("Veuillez d'abord choissir une intersection svp.");
+        donnees.notifierAllMessageObserveurs("Veuillez d'abord choisir une intersection svp.");
         return this;
     }
 

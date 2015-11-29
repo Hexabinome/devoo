@@ -103,8 +103,10 @@ public class Modele implements ModeleLecture
         fenetre.ajouterLivraison(nouvelleLivraison.getId(), nouvelleLivraison);
 
         //calculer et stoquer le chemin vers la nouvelle livraison
-        //TODO: c'est ppossible qu;on a pas beson de faire ca, le permier appel de dijkstra a deja calcule ca, si on stoquait le resultat on peut eviter cette re-calculation
+        //TODO: c'est possible que l'on ai pas besoin de faire cela, le premier appel de dijkstra l'a déjà fait.
+        //si l'on stoquait le resultat on peut eviter cette calcul
         Collection<Chemin> cheminsSortantDeLivraisonAvant = Fenetre.dijkstra(plan.getIntersection(livraisonAvant.getAdresse()), plan);
+        //Pour tous les chemins sortant de la "livraison d'avant" dont l'id de fin est l'id de la nouvelle livraison, on l'ajout dans le graphe
         cheminsSortantDeLivraisonAvant.stream().filter((c) -> (c.getIdFin() == nouvelleLivraison.getAdresse())).forEach((c) -> {
             graphe.setChemin(c, livraisonAvant.getId(), nouvelleLivraison.getId());
         });
@@ -212,13 +214,13 @@ public class Modele implements ModeleLecture
     }
 
     /**
-     * Cette methode convert le resultat du TSP dans une liste des listes dont
-     * chaque liste interne represente les livraisons a effectuer dans une
-     * fenetre. L'ordre des livraisons correspond a l'ordre determine par TSP.
+     * Cette methode convertie le resultat du TSP dans une liste de listes.
+     * Chaque liste interne represente les livraisons a effectuer dans une
+     * fenetre. L'ordre des livraisons correspond a l'ordre determinépar TSP.
      *
-     * Cette methode doit etre appele apres que une seul fois (directement apres
-     * le fin du calcule TSP). On n'a plus besoin de cette methode quand
-     * l'utilisateur decide de manipuler la tournee calculle a la main.
+     * Cette methode doit etre appele directement apres la fin du calcule TSP).
+     *  On n'a plus besoin de cette methode quand
+     * l'utilisateur decide de manipuler la tournee calcule a la main.
      */
     private void creerLivraisonTournee()
     {
@@ -249,9 +251,9 @@ public class Modele implements ModeleLecture
 
     /**
      * Cette methode utilise la liste des listes des livraisons pour calculer
-     * une tournee (granularite intersection). Ca nous permet de facilement
-     * mettre ajour la tournee si le utilisateur decide d'ajouter une nouvelle
-     * livraisons.
+     * une tournee (granularite intersection). Cela nous permet de facilement
+     * mettre a jour la tournee si le utilisateur decide d'ajouter ou supprimer
+     * une nouvelle livraisons.
      */
     private List<List<Integer>> creerIntersectionTournee()
     {

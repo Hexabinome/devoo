@@ -1,16 +1,12 @@
 package controleur;
 
+import controleur.etat.*;
 import modele.xmldata.ModeleLecture;
 import modele.xmldata.PlanDeVille;
 
 import java.io.File;
 
 import controleur.commande.CommandeException;
-import controleur.etat.EtatAjout;
-import controleur.etat.EtatEchange;
-import controleur.etat.EtatInitial;
-import controleur.etat.EtatInterface;
-import controleur.etat.EtatSuppression;
 import javafx.scene.text.Text;
 
 /**
@@ -97,6 +93,11 @@ public class Controleur implements ControleurInterface {
     }
 
     @Override
+    public void cliqueDroit() {
+        // TODO : a completer
+    }
+
+    @Override
     public ModeleLecture getModel() {
         if (controleurDonnees.getModele() == null)
             throw new RuntimeException("Model n'existe pas, il faut charger des fichiers xml avant");
@@ -124,7 +125,7 @@ public class Controleur implements ControleurInterface {
 
     @Override
     public void cliqueSurLivraison(int livraisonId) {
-        etat.cliqueSurLivraison(livraisonId);
+       etat = etat.cliqueSurLivraison(livraisonId);
     }
 
     @Override

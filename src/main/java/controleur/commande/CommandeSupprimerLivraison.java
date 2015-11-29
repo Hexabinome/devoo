@@ -46,6 +46,13 @@ public class CommandeSupprimerLivraison implements Commande
     @Override
     public void executer() throws CommandeException
     {
+
+    	if(livraisonSupprimee == null)
+    	{
+    		controleurDonnees.notifierAllMessageObserveurs("La livraison selectionné n'existe pas");
+    		return;
+    	}
+    	
     	if (livraisonSupprimee.getId() == -1) {
     		controleurDonnees.notifierAllMessageObserveurs("Il est interdit de supprimer l'entrepôt.");
     		return;
@@ -55,7 +62,6 @@ public class CommandeSupprimerLivraison implements Commande
         Fenetre f = controleurDonnees.getModele().getDemande().getFenetreDeLivraison(livraisonSupprimee.getId());
         if (f.getListeLivraisons().size() <= 1) {
             controleurDonnees.notifierAllMessageObserveurs("Il est interdit de supprimer la dernière livraison dans une fenêtre.");
-            return;
         }
 
         idLivraisonAvant = controleurDonnees.getModele().removeLivraison(livraisonSupprimee.getId());
