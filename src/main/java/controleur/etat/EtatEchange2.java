@@ -1,41 +1,46 @@
 package controleur.etat;
 
-
 import java.io.File;
 import java.util.List;
 
 import modele.xmldata.Livraison;
 import controleur.ControleurDonnees;
+import controleur.commande.Commande;
+import controleur.commande.CommandeEchangerLivraisons;
 import controleur.commande.CommandeException;
 
-/**
- *
- * @author Maxou
- */
-public class EtatEchange extends AbstractEtat
-{
+public class EtatEchange2 extends AbstractEtat {
 
-    private final ControleurDonnees donnees;
+	private ControleurDonnees donnees;
+    private int idLivraison;
 
-    public EtatEchange(ControleurDonnees donnees)
-    {
-        this.donnees = donnees;
+    public EtatEchange2(ControleurDonnees controleurDonnees, int idLivraison){
+        this.donnees = controleurDonnees;
+        this.idLivraison = idLivraison;
     }
-
+	
     @Override
     public EtatInterface cliqueSurLivraison(int livraisonId)
     {
-    	return new EtatEchange2(donnees, livraisonId);
+    	Commande cmdEchanger = new CommandeEchangerLivraisons(donnees, idLivraison, livraisonId);
+    	try {
+    		cmdEchanger.executer();
+    	} catch (CommandeException e) {
+    		// TODO message
+    		e.printStackTrace();
+    	}
+    	
+    	return new EtatEchange(donnees);
     }
 
     @Override
-    public EtatInterface chargerPlan(File plan) throws CommandeException
+    public EtatInterface chargerPlan(File plan)
     {
     	throw new RuntimeException("Cet état ne permet pas de charger un plan");
     }
 
     @Override
-    public EtatInterface chargerLivraisons(File livraisons) throws CommandeException
+    public EtatInterface chargerLivraisons(File livraisons)
     {
     	throw new RuntimeException("Cet état ne permet pas de charger une demande de livraison");
     }
@@ -48,7 +53,14 @@ public class EtatEchange extends AbstractEtat
     	for (List<Livraison> fenetre : livraisons) {
     		for (Livraison l : fenetre) {
     			if (l.getAdresse() == intersectionId) {
-    				return new EtatEchange2(donnees, l.getId());
+    				Commande cmdEchanger = new CommandeEchangerLivraisons(donnees, idLivraison, l.getId());
+    				try {
+    					cmdEchanger.executer();
+    				} catch (CommandeException e) {
+    					// TODO message
+    					e.printStackTrace();
+    				}
+    				return new EtatEchange(donnees);
     			}
     		}
     	}
@@ -61,5 +73,4 @@ public class EtatEchange extends AbstractEtat
     {
     	throw new RuntimeException("Cet état ne permet pas de calculer la tournée");
     }
-
 }

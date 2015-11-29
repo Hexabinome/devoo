@@ -3,8 +3,6 @@ package controleur.etat;
 import java.io.File;
 
 import controleur.ControleurDonnees;
-import controleur.commande.Commande;
-import controleur.commande.CommandeAjouterLivraison;
 import controleur.commande.CommandeException;
 
 /**

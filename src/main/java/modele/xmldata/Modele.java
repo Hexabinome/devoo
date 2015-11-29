@@ -373,4 +373,9 @@ public class Modele implements ModeleLecture
     {
         return customLivraisonCompteur--;
     }
+
+	public void echangerLivraisons(int idLivraison1, int idLivraison2) {
+		throw new UnsupportedOperationException("A implémenter");
+		// TODO implémenter
+	}
 }
