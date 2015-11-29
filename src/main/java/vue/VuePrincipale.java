@@ -153,7 +153,7 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
         if (file != null) {
             Exception messageErreur = controleurInterface.chargerPlan(file);
             if (messageErreur != null)
-                ouvrirAlerteXML(messageErreur, file.getName());
+                ouvrirErreurFichier(messageErreur, file.getName());
         }
     }
 
@@ -166,7 +166,7 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
         if (file != null) {
             Exception exception = controleurInterface.chargerLivraisons(file);
             if (exception != null)
-                ouvrirAlerteXML(exception, file.getName());
+                ouvrirErreurFichier(exception, file.getName());
         }
     }
 
@@ -231,8 +231,7 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
     			String feuille = controleurInterface.genererFeuilleDeRoute();
         		ecriveurDeFichier.write(feuille);
     		} catch (IOException e) {
-				// TODO GENERATE ERROR
-				e.printStackTrace();
+    			ouvrirErreurFichier(e, fichier.getAbsolutePath());
 			}
     	}
     }
@@ -287,15 +286,15 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
      * @param message Le message à afficher
      * @param fichier Le nom du fichier qui a généré l'erreur
      */
-    private void ouvrirAlerteXML(Exception message, String fichier) {
+    private void ouvrirErreurFichier(Exception message, String fichier) {
 
         ExceptionDialog exceptionDialog = new ExceptionDialog(message);
         exceptionDialog.setTitle("Erreur");
-        exceptionDialog.setHeaderText("Problème avec le fichier xml : " + "'" + fichier + "'");
+        exceptionDialog.setHeaderText("Problème avec le fichier : " + "'" + fichier + "'");
         exceptionDialog.setWidth(ERROR_DIALOG_WIDTH);
         exceptionDialog.setHeight(ERROR_DIALOG_HEIGHT);
         exceptionDialog.setResizable(false);
-        exceptionDialog.initOwner(canvasGraphique.getScene().getWindow());
+        exceptionDialog.initOwner(group.getScene().getWindow());
 
         exceptionDialog.showAndWait();
     }
