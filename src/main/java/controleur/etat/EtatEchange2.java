@@ -75,4 +75,9 @@ public class EtatEchange2 extends AbstractEtat {
     {
     	throw new RuntimeException("Cet état ne permet pas de calculer la tournée");
     }
+
+	@Override
+	public EtatInterface clicDroit() {
+		return new EtatEchange2(donnees,idLivraison);
+	}
 }

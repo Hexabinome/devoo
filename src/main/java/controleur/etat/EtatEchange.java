@@ -63,4 +63,9 @@ public class EtatEchange extends AbstractEtat
     	throw new RuntimeException("Cet état ne permet pas de calculer la tournée");
     }
 
+    @Override
+    public EtatInterface clicDroit() {
+        return new EtatPrincipal(donnees);
+    }
+
 }

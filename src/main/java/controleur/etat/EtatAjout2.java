@@ -55,4 +55,9 @@ import java.io.File;
     public EtatInterface cliqueCalculerTournee() {
         throw new RuntimeException("Cet etat ne permet pas de calculer la tournée");
     }
+
+    @Override
+    public EtatInterface clicDroit() {
+        return new EtatAjout(controleurDonnees);
+    }
 }

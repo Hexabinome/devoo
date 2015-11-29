@@ -94,7 +94,7 @@ public class Controleur implements ControleurInterface {
 
     @Override
     public void cliqueDroit() {
-        // TODO : a completer
+        etat = etat.clicDroit();
     }
 
     @Override
