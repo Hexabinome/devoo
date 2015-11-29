@@ -4,7 +4,7 @@ import java.io.File;
 
 import controleur.ControleurDonnees;
 import controleur.commande.CommandeException;
-import controleur.commande.CommandeChargerLivraisons;
+import controleur.commande.CommandeChargerDemande;
 import controleur.commande.CommandeChargerPlan;
 
 /**
@@ -37,8 +37,8 @@ public class EtatPlanCharge extends AbstractEtat
     @Override
     public EtatInterface chargerLivraisons(File livraisons) throws CommandeException
     {
-        new CommandeChargerLivraisons(controleurDonnees, livraisons).executer();
-        return new EtatPrincipal(controleurDonnees);
+        new CommandeChargerDemande(controleurDonnees, livraisons).executer();
+        return new EtatDemandeCharge(controleurDonnees);
     }
 
     @Override
@@ -50,7 +50,7 @@ public class EtatPlanCharge extends AbstractEtat
     @Override
     public EtatInterface cliqueCalculerTournee()
     {
-        throw new RuntimeException("Cet etat ne permet pas d'calculer la tournee");
+        throw new RuntimeException("Cet etat ne permet pas de calculer la tournee");
     }
 
 }

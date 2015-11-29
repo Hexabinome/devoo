@@ -19,13 +19,13 @@ import controleur.ControleurDonnees;
  *
  * @author Max Schiedermeier
  */
-public class CommandeChargerLivraisons extends CommandeNonAnnulable
+public class CommandeChargerDemande extends CommandeNonAnnulable
 {
 
     private final ControleurDonnees controleurDonnees;
     private final File livraisonsFichier;
 
-    public CommandeChargerLivraisons(ControleurDonnees controleurDonnees, File livraisons)
+    public CommandeChargerDemande(ControleurDonnees controleurDonnees, File livraisons)
     {
         this.controleurDonnees = controleurDonnees;
         livraisonsFichier = livraisons;

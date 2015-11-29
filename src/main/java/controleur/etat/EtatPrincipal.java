@@ -5,7 +5,7 @@ import java.io.File;
 import controleur.ControleurDonnees;
 import controleur.commande.CommandeException;
 import controleur.commande.CommandeCalculerTournee;
-import controleur.commande.CommandeChargerLivraisons;
+import controleur.commande.CommandeChargerDemande;
 import controleur.commande.CommandeChargerPlan;
 
 /**
@@ -51,7 +51,7 @@ public class EtatPrincipal implements EtatInterface
     @Override
     public EtatInterface chargerLivraisons(File livraisons) throws CommandeException
     {
-        new CommandeChargerLivraisons(controleurDonnees, livraisons).executer();
+        new CommandeChargerDemande(controleurDonnees, livraisons).executer();
         return this;
     }
 
@@ -64,12 +64,12 @@ public class EtatPrincipal implements EtatInterface
     @Override
     public EtatInterface cliqueCalculerTournee()
     {
-        try {
+     /*   try {
             new CommandeCalculerTournee(controleurDonnees).executer();
         }
         catch (CommandeException ex) {
             throw new RuntimeException("Pas possible de determiner la tournee");
-        }
+        }*/
 
         return this;
     }
