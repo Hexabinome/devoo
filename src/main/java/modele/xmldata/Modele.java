@@ -309,7 +309,7 @@ public class Modele implements ModeleLecture
     	
         for (int iFenetre = 1; iFenetre < demande.getFenetres().size(); ++iFenetre) {
         	Fenetre fenetre = demande.getFenetres().get(iFenetre);
-    		List<Integer> dejaVisites = new ArrayList<Integer>();
+    		List<Integer> dejaVisites = new ArrayList<>();
         	
         	for (int prochaineIntersection : intersectionTournee.get(iFenetre - 1)) {
         		float dureeTroncon = plan.getIntersection(intersectionCourante).getTroncon(prochaineIntersection).getDuree();
