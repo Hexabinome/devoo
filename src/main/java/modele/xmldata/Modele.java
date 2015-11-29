@@ -24,12 +24,15 @@ public class Modele implements ModeleLecture
 
     private int customLivraisonCompteur = Integer.MAX_VALUE;
 
-    //cette liste des listes stoque pour chque fenetre les livraisons a effecturer dans une tournee calculle par TSP (sans l'entrepot au debout et a la fin de sla tournee)
+    //cette liste des listes stoque pour chque fenetre les livraisons a effecturer dans une tournee calcule par TSP (sans l'entrepot au debout et a la fin de sla tournee)
     private List<List<Livraison>> livraisonTournee;
 
-    //cette liste des listes stoque pour chque fenetre les intersetions a parcourir dans une tournee calculle par TSP (incluant l'entrepot au debout et a la fin de sla tournee)
+    //cette liste des listes stoque pour chque fenetre les intersetions a parcourir dans une tournee calcule par TSP (incluant l'entrepot au debout et a la fin de sla tournee)
     private List<List<Integer>> intersectionTournee;
 
+    //Renseigne si une livraison à été supprimer derniérement, pour pouvoir recalculer un id de livraison en cas d'ajout
+	boolean aUneLivraisonSupprimer= false;
+	
     public Modele(PlanDeVille plan, Demande demande)
     {
         this.plan = plan;
@@ -66,6 +69,7 @@ public class Modele implements ModeleLecture
      */
     public int removeLivraison(int idLivraison)
     {
+    	aUneLivraisonSupprimer = true;
         //identifier la livraison
         Livraison liv = demande.identifierLivraison(idLivraison);
 
@@ -384,7 +388,12 @@ public class Modele implements ModeleLecture
      */
     public int getProchainCustomLivraisonId()
     {
-        return customLivraisonCompteur--;
+		if(customLivraisonCompteur == Integer.MAX_VALUE || aUneLivraisonSupprimer)
+		{
+			customLivraisonCompteur = demande.getMaxIdLivraison();
+			aUneLivraisonSupprimer = false;
+		}
+        return customLivraisonCompteur++;
     }
 
     /**

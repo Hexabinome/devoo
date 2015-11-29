@@ -256,4 +256,14 @@ public class Fenetre
         return livraisons.size();
     }
 
+	public int getMaxIdLivraison() {
+		int idLivraisonMax = 0;
+		for(Livraison l: livraisons.values())
+		{
+			if(idLivraisonMax < l.getId())
+				idLivraisonMax = l.getId();
+		}
+		return idLivraisonMax;
+	}
+
 }

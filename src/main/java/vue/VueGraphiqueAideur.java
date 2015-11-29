@@ -468,8 +468,8 @@ public class VueGraphiqueAideur {
 
             Paint couleur = ConstantesGraphique.COULEURS_FENETRES[(idFenetre + 1) % ConstantesGraphique.COULEURS_FENETRES.length];
 
-            for (int idIntersectionLivraison = 0; idIntersectionLivraison < tournee.get(
-                    idFenetre).size() - 1; idIntersectionLivraison++) {
+            for (int idIntersectionLivraison = 0; idIntersectionLivraison < tournee.get(idFenetre).size() - 1; 
+            		idIntersectionLivraison++) {
                 int departIntersectionId = tournee.get(idFenetre).get(idIntersectionLivraison);
                 int arriveeIntersectionId = tournee.get(idFenetre).get(idIntersectionLivraison + 1);
                 Ellipse debut = intersectionsGraphiques.get(departIntersectionId).getKey();
