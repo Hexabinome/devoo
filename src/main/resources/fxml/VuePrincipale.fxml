@@ -74,7 +74,7 @@
             <top>
                 <AnchorPane style="-fx-background-color: white;">
                     <children>
-                        <ObserverButton fx:id="genererFeuilleBouton" onAction="#clic_genererFeuilleRoute" disable="true" layoutY="11.0" mnemonicParsing="false" text="Générer la feuille de route" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="11.0" />
+                        <ObserverButton fx:id="genererFeuilleBouton" disable="true" layoutY="11.0" mnemonicParsing="false" onAction="#clic_genererFeuilleRoute" text="Générer la feuille de route" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="11.0" />
 
                         <ObserverButton fx:id="calculerTourneeBouton" disable="true" layoutX="205.0" layoutY="11.0" mnemonicParsing="false" onAction="#clic_calculer_tournee" text="Calculer tournée" />
                         <ToolBar style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="5.0">
@@ -100,12 +100,15 @@
                 </AnchorPane>
             </top>
             <right>
-                <Slider fx:id="sliderZoom" max="9" min="1" orientation="VERTICAL" value="1" BorderPane.alignment="CENTER" />
+                <Slider fx:id="sliderZoom" max="10" min="1" orientation="VERTICAL" value="1" BorderPane.alignment="CENTER" />
             </right>
          <bottom>
             <Pane prefHeight="21.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
                <children>
-                  <ObserveurMessageChamps fx:id="message" layoutX="16.0" layoutY="16.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenue sur Optimod'Lyon ! Commencez par charger un plan de ville, puis une demande de livraison pour calculer votre tournée optimale !" />
+                  <ObserveurMessageChamps fx:id="message" layoutX="16.0" layoutY="16.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenue sur Optimod'Lyon ! Commencez par charger un plan de ville, puis une demande de livraison pour calculer votre tournée optimale !">
+                     <font>
+                        <Font size="14.0" />
+                     </font></ObserveurMessageChamps>
                </children>
             </Pane>
          </bottom>
