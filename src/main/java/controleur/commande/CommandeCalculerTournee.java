@@ -27,6 +27,8 @@ public class CommandeCalculerTournee extends CommandeNonAnnulable
 
         //notifier la vue que maintenant on peut interagir avec les elements prinicpaux.
         controleurDonnees.notifyAllActObserveurs(false);
+        
+        controleurDonnees.notifierAllMessageObserveurs("Tournée calculée avec succès !");
     }
 
 }

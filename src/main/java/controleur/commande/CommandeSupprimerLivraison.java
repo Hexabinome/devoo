@@ -62,6 +62,12 @@ public class CommandeSupprimerLivraison implements Commande
         controleurDonnees.getModele().remplirHoraires();
         controleurDonnees.notifyAllModelObserveurs();
         controleurDonnees.notifyAllAnnulerObserveurs(false);
+        controleurDonnees.notifierAllMessageObserveurs(
+        		String.format("La livraison %d, à l'adresse %d et pour le client %d a été supprimée avec succès !",
+        				livraisonSupprimee.getId(),
+        				livraisonSupprimee.getAdresse(),
+        				livraisonSupprimee.getClientId())
+        		);
 
         if (controleurDonnees.getHist().estVideCommandesAnnulees()) {
             controleurDonnees.notifyAllRetablirObserveurs(true);
