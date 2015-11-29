@@ -18,13 +18,13 @@ public class EtatAjout extends AbstractEtat
     public EtatAjout(ControleurDonnees donnees)
     {
         this.donnees = donnees;
-        donnees.notifierAllMessageObserveurs("Vous voulez ajouter une livraison ? Choisissez sur la carte une intersection");
+        donnees.notifierAllMessageObserveurs("[AJOUT] Où souhaitez-vous ajouter une livraison ? Choisissez l'adresse de livraison en cliquant sur une intersection de la carte. Clic droit pour sortir du mode d'ajout.");
     }
 
     @Override
     public EtatInterface cliqueSurLivraison(int livraisonId)
     {
-        donnees.notifierAllMessageObserveurs("Veuillez d'abord choisir une intersection svp.");
+        donnees.notifierAllMessageObserveurs("[AJOUT] Veuillez d'abord choisir l'adresse de la livraison en cliquant sur une intersection sur la carte. Clic droit pour sortir du mode d'ajout?");
         return this;
     }
 
@@ -45,7 +45,6 @@ public class EtatAjout extends AbstractEtat
     @Override
     public EtatInterface cliqueSurPlan(int intersectionId)
     {
-        donnees.notifierAllMessageObserveurs("Veuillez maintenant cliquer sur une livraison svp.");
         return new EtatAjout2(donnees,intersectionId);
     }
 
@@ -58,7 +57,7 @@ public class EtatAjout extends AbstractEtat
 
     @Override
     public EtatInterface clicDroit() {
-        donnees.notifierAllMessageObserveurs("Retour à l'état principal");
+        donnees.notifierAllMessageObserveurs(TEXTE_ETAT_PRINCIPAL);
         return new EtatPrincipal(donnees);
     }
 

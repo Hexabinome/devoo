@@ -357,6 +357,7 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
             vueGraphique.construireTournee(modele.getTournee());
 
         vueGraphique.construireDemande(modele.getDemande());
+        vueGraphique.desactiverSurbrillance();
     }
 
     @Override
