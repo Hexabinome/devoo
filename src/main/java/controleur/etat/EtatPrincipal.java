@@ -3,10 +3,9 @@ package controleur.etat;
 import java.io.File;
 
 import controleur.ControleurDonnees;
-import controleur.commande.CommandeException;
-import controleur.commande.CommandeCalculerTournee;
 import controleur.commande.CommandeChargerDemande;
 import controleur.commande.CommandeChargerPlan;
+import controleur.commande.CommandeException;
 
 /**
  * Cet état répresente l'état où la tournée a été calculée.
@@ -53,7 +52,7 @@ public class EtatPrincipal implements EtatInterface
     {
         new CommandeChargerDemande(controleurDonnees, livraisons).executer();
         controleurDonnees.effacerHistorique();
-        return this;
+        return new EtatDemandeChargee(controleurDonnees);
     }
 
     @Override
