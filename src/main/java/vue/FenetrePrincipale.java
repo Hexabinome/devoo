@@ -10,39 +10,31 @@ import javafx.stage.Stage;
 
 /**
  * Cette classe crée la fenetre principale avec ses enfants. Elle se charge aussi de créer le controleur.
- * Elle joue le role de mediateur pour la communication entre les differents controleur de la vue.
- * https://sourcemaking.com/design_patterns/mediator
  */
 public class FenetrePrincipale extends Application {
-
-
-    private VuePrincipale vuePrincipaleControleur;
-
-    private VueTextuelle vueTextuelle;
-
-    /**
-     * Le controleur de l'application
-     */
-    private Controleur controleurApplication;
 
 
     private final int LARGEUR_FENETRE = 1300;
 
     private final int HAUTEUR_FENETRE = 800;
 
+    /**
+     * Lance l'application
+     * @param primaryStage objet père qui contient la fenetre principale
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
 
         // Chargement de la fenetre principale
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/VuePrincipale.fxml"));
         BorderPane root = fxmlLoader.load();
-        vuePrincipaleControleur = (VuePrincipale) fxmlLoader.getController();
+        VuePrincipale vuePrincipaleControleur = (VuePrincipale) fxmlLoader.getController();
 
         // Création du controleur de l'application
-        controleurApplication = new Controleur();
+        Controleur controleurApplication = new Controleur();
 
         // Passage du controleur de l'application au controleur de la vue
-        vuePrincipaleControleur.setControleurInterface(controleurApplication);
+        vuePrincipaleControleur.setControleurApplication(controleurApplication);
         vuePrincipaleControleur.setVueGraphiqueControleurApplication(controleurApplication);
         vuePrincipaleControleur.initialiserMediateur(this);
         vuePrincipaleControleur.initialiserObserveurs();
@@ -51,9 +43,9 @@ public class FenetrePrincipale extends Application {
         FXMLLoader fxmlLoader2 = new FXMLLoader(
                 getClass().getClassLoader().getResource("fxml/VueTextuelle.fxml"));
         AnchorPane anchorPane = fxmlLoader2.load();
-        vueTextuelle = (VueTextuelle) fxmlLoader2.getController();
+        VueTextuelle vueTextuelle = (VueTextuelle) fxmlLoader2.getController();
         vueTextuelle.setAideurVueGraphique(vuePrincipaleControleur.getAideurVueGraphique());
-        vueTextuelle.setControleurInterface(controleurApplication);
+        vueTextuelle.setControleurApplication(controleurApplication);
         vueTextuelle.initialiserMediateur(this);
         vueTextuelle.initialiserObserveurs();
 

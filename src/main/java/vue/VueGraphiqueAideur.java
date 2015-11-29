@@ -67,7 +67,7 @@ public class VueGraphiqueAideur {
     private ScrollPane scrollPane;
 
     private Slider sliderZoom;
-    private ControleurInterface controleurInterface;
+    private ControleurInterface controleurApplication;
 
     /**
      * Constructeur de la vue graphique
@@ -109,12 +109,15 @@ public class VueGraphiqueAideur {
 				return;
 			}
 			
-			controleurInterface.cliqueSurPlan(idIntersection);
+			controleurApplication.cliqueSurPlan(idIntersection);
 		}
     }
 
-    public void setControleurInterface(ControleurInterface controleurInterface) {
-        this.controleurInterface = controleurInterface;
+    /**
+     * Met à jour le controleur de l'application pour la vue graphique
+     */
+    public void setControleurApplication(ControleurInterface controleurApplication) {
+        this.controleurApplication = controleurApplication;
     }
 
     public StackPane getCanvas() {

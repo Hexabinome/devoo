@@ -44,7 +44,7 @@ public class VueTextuelle implements Initializable, Visiteur, ActivationObserver
     /**
      * Controleur principale
      */
-    private ControleurInterface controleurInterface;
+    private ControleurInterface controleurApplication;
 
     /**
      * Colonne livraison de la vue à gauche
@@ -154,8 +154,8 @@ public class VueTextuelle implements Initializable, Visiteur, ActivationObserver
         return elementRacine;
     }
 
-    public void setControleurInterface(ControleurInterface controleurInterface) {
-        this.controleurInterface = controleurInterface;
+    public void setControleurApplication(ControleurInterface controleurApplication) {
+        this.controleurApplication = controleurApplication;
     }
 
     @Override
@@ -172,18 +172,18 @@ public class VueTextuelle implements Initializable, Visiteur, ActivationObserver
     @Override
     public void notificationModelAChange() {
         effacerVueTableLivraison();
-        Demande demandeModifiee = controleurInterface.getModel().getDemande();
+        Demande demandeModifiee = controleurApplication.getModel().getDemande();
         construireVueTableLivraion(demandeModifiee);
         
         vueGraphique.nettoyerAffichage();
         vueGraphique.afficherPlan();
         vueGraphique.construireDemande(demandeModifiee);
-        vueGraphique.construireTournee(controleurInterface.getModel().getTournee());
+        vueGraphique.construireTournee(controleurApplication.getModel().getTournee());
     }
 
     public void initialiserObserveurs() {
-        controleurInterface.ajouterDesactObserver(this);
-        controleurInterface.ajouterModelObserver(this);
+        controleurApplication.ajouterDesactObserver(this);
+        controleurApplication.ajouterModelObserver(this);
     }
 
     @Override
@@ -195,7 +195,7 @@ public class VueTextuelle implements Initializable, Visiteur, ActivationObserver
 
     @Override
     public void visit(DetailLivraison detailLivraison) {
-        controleurInterface.cliqueSurLivraison(detailLivraison.getLivraison().getId());
+        controleurApplication.cliqueSurLivraison(detailLivraison.getLivraison().getId());
     }
 
     /**
@@ -239,7 +239,7 @@ public class VueTextuelle implements Initializable, Visiteur, ActivationObserver
             setOnMouseClicked(event -> {
                 ObjetVisualisable objetVisualisable = getTreeTableRow().getTreeItem().getValue();
                 if (objetVisualisable instanceof DetailLivraison)
-                    controleurInterface.cliqueSurLivraison(((DetailLivraison)objetVisualisable).getLivraison().getId());
+                    controleurApplication.cliqueSurLivraison(((DetailLivraison)objetVisualisable).getLivraison().getId());
             });
 
         }

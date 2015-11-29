@@ -21,7 +21,6 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.StackPane;
-import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import modele.xmldata.ModeleLecture;
@@ -55,7 +54,7 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
     /**
      * Controleur déléguant la logique applicative à la couche controleur
      */
-    private ControleurInterface controleurInterface;
+    private ControleurInterface controleurApplication;
 
     /**
      * Partie droite de la fenêtre, affichant de la graphe du plan de la ville
@@ -140,19 +139,19 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
     }
 
     /**
-     * Met à jour le controleur d'interface
+     * Met à jour le controleur de l'application
      *
-     * @param controleurInterface Le nouveau controleur d'interface
+     * @param controleurApplication Le nouveau controleur d'interface
      */
-    public void setControleurInterface(ControleurInterface controleurInterface) {
-        this.controleurInterface = controleurInterface;
+    public void setControleurApplication(ControleurInterface controleurApplication) {
+        this.controleurApplication = controleurApplication;
     }
 
     /**+
      * Met à jour le controleur de l'application pour la vue graphique
      */
     public void setVueGraphiqueControleurApplication(ControleurInterface controleurApplication){
-        vueGraphique.setControleurInterface(controleurApplication);
+        vueGraphique.setControleurApplication(controleurApplication);
     }
 
     /**
@@ -162,7 +161,7 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
     private void ouvrirPlan(ActionEvent actionEvent) {
         File file = ouvrirSelectionneurDeFichier("Choissiez le plan de la ville");
         if (file != null) {
-            Exception messageErreur = controleurInterface.chargerPlan(file);
+            Exception messageErreur = controleurApplication.chargerPlan(file);
             if (messageErreur != null)
                 ouvrirErreurFichier(messageErreur, file.getName());
         }
@@ -175,7 +174,7 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
     private void ouvrirDemande(ActionEvent actionEvent) {
         File file = ouvrirSelectionneurDeFichier("Choisissez la demande de livraison");
         if (file != null) {
-            Exception exception = controleurInterface.chargerLivraisons(file);
+            Exception exception = controleurApplication.chargerLivraisons(file);
             if (exception != null)
                 ouvrirErreurFichier(exception, file.getName());
         }
@@ -210,7 +209,7 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
      */
     @FXML
     void clic_ajouterLivraison() {
-        controleurInterface.cliqueOutilAjouter();
+        controleurApplication.cliqueOutilAjouter();
     }
 
     /**
@@ -218,7 +217,7 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
      */
     @FXML
     void clic_echangerLivraison() {
-        controleurInterface.cliqueOutilEchanger();
+        controleurApplication.cliqueOutilEchanger();
     }
 
     /**
@@ -226,12 +225,12 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
      */
     @FXML
     void clic_supprimerLivraison() {
-        controleurInterface.cliqueOutilSupprimer();
+        controleurApplication.cliqueOutilSupprimer();
     }
 
     @FXML
     void clic_calculer_tournee() {
-        controleurInterface.cliqueCalculerTourne();
+        controleurApplication.cliqueCalculerTourne();
     }
     
     @FXML
@@ -239,7 +238,7 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
     	File fichier = ouvrirEnregistreurDeFichier("Enregistrer la feuille de route");
     	if (fichier != null) {
     		try (FileWriter ecriveurDeFichier = new FileWriter(fichier)) {
-    			String feuille = controleurInterface.genererFeuilleDeRoute();
+    			String feuille = controleurApplication.genererFeuilleDeRoute();
         		ecriveurDeFichier.write(feuille);
     		} catch (IOException e) {
     			ouvrirErreurFichier(e, fichier.getAbsolutePath());
@@ -249,12 +248,12 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
 
     @FXML
     void annuler(){
-        controleurInterface.cliqueAnnuler();
+        controleurApplication.cliqueAnnuler();
     }
 
     @FXML
     void retablir(){
-        controleurInterface.cliqueRetablir();
+        controleurApplication.cliqueRetablir();
     }
 
     /**
@@ -310,22 +309,25 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
         exceptionDialog.showAndWait();
     }
 
+    /**
+     * Initalise les differents obserserveurs de la vue principale
+     */
     public void initialiserObserveurs() {
-        controleurInterface.ajouterDesactObserver(ajouterLivraisonBouton);
-        controleurInterface.ajouterDesactObserver(echangerLivraisonsBouton);
-        controleurInterface.ajouterDesactObserver(supprimerLivraisonBouton);
-        controleurInterface.ajouterDesactObserver(genererFeuilleBouton);
-        controleurInterface.ajouterTourneeObserveur(calculerTourneeBouton);
-        controleurInterface.ajouterPlanObserveur(this);
-        controleurInterface.ajouterModelObserver(this);
-        controleurInterface.ajouterAnnulerCommandeObserveur(this);
-        controleurInterface.ajouterRetablirCommandeObserveur(this);
-        controleurInterface.ajouterMessageObserveur(message);
+        controleurApplication.ajouterDesactObserver(ajouterLivraisonBouton);
+        controleurApplication.ajouterDesactObserver(echangerLivraisonsBouton);
+        controleurApplication.ajouterDesactObserver(supprimerLivraisonBouton);
+        controleurApplication.ajouterDesactObserver(genererFeuilleBouton);
+        controleurApplication.ajouterTourneeObserveur(calculerTourneeBouton);
+        controleurApplication.ajouterPlanObserveur(this);
+        controleurApplication.ajouterModelObserver(this);
+        controleurApplication.ajouterAnnulerCommandeObserveur(this);
+        controleurApplication.ajouterRetablirCommandeObserveur(this);
+        controleurApplication.ajouterMessageObserveur(message);
     }
 
     @Override
     public void notificationPlanAChange() {
-        vueGraphique.construireGraphe(controleurInterface.getPlanDeVille());
+        vueGraphique.construireGraphe(controleurApplication.getPlanDeVille());
         //activation de menu element graphique qui permet de charger un fichier de livraison
         //(Ici on peut le faire sans appel observeur, parce qu' a parti d'ici on possede toujours un plan valide.)
         menuFichier.getItems().get(1).setDisable(false);
@@ -334,7 +336,7 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
 
     @Override
     public void notificationModelAChange() {
-        ModeleLecture modele = controleurInterface.getModel();
+        ModeleLecture modele = controleurApplication.getModel();
 
         if (modele.getTournee() != null)
             vueGraphique.construireTournee(modele.getTournee());
