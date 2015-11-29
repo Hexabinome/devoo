@@ -12,7 +12,7 @@ import controleur.commande.CommandeChargerPlan;
  *
  * @author Maxou
  */
-class EtatPrincipal implements EtatInterface
+public class EtatPrincipal implements EtatInterface
 {
 
     private final ControleurDonnees controleurDonnees;

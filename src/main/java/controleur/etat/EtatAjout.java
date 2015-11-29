@@ -14,7 +14,7 @@ public class EtatAjout extends AbstractEtat
 
     private final ControleurDonnees donnees;
 
-    EtatAjout(ControleurDonnees donnees)
+    public EtatAjout(ControleurDonnees donnees)
     {
         this.donnees = donnees;
     }

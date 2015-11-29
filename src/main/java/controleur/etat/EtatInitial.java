@@ -10,7 +10,7 @@ import controleur.commande.CommandeChargerPlan;
  *
  * @author Maxou
  */
-class EtatInitial extends AbstractEtat
+public class EtatInitial extends AbstractEtat
 {
 
     private final ControleurDonnees controleurDonnees;

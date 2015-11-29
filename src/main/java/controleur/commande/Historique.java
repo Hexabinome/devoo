@@ -8,7 +8,7 @@ import java.util.Deque;
  *
  * @author Max Schiedermeier
  */
-class Historique {
+public class Historique {
 
     /**
      * Pile des commandes qui ont été éxécutées avec succès

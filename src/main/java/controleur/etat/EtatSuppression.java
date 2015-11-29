@@ -16,7 +16,7 @@ public class EtatSuppression extends AbstractEtat
 
     private final ControleurDonnees donnees;
 
-    EtatSuppression(ControleurDonnees donnees)
+    public EtatSuppression(ControleurDonnees donnees)
     {
         this.donnees = donnees;
     }

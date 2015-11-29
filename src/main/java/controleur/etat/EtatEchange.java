@@ -15,7 +15,7 @@ public class EtatEchange extends AbstractEtat
 
     private final ControleurDonnees donnees;
 
-    EtatEchange(ControleurDonnees donnees)
+    public EtatEchange(ControleurDonnees donnees)
     {
         this.donnees = donnees;
     }
