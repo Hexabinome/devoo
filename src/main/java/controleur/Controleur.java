@@ -5,8 +5,12 @@ import modele.xmldata.ModeleLecture;
 import modele.xmldata.PlanDeVille;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
+import controleur.commande.Commande;
 import controleur.commande.CommandeException;
+import controleur.commande.CommandeGenererFeuilleDeRoute;
 import javafx.scene.text.Text;
 
 /**
@@ -145,8 +149,8 @@ public class Controleur implements ControleurInterface {
     }
 
 	@Override
-	public String genererFeuilleDeRoute() {
-		return getModel().genererFeuilleDeRoute();
+	public void genererFeuilleDeRoute(File fichier) throws CommandeException {
+		new CommandeGenererFeuilleDeRoute(controleurDonnees, fichier).executer();
 	}
 
     @Override

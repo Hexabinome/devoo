@@ -1,8 +1,6 @@
 package vue;
 
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -31,6 +29,7 @@ import controleur.ControleurInterface;
 import controleur.ModelObserveur;
 import controleur.PlanObserveur;
 import controleur.RetablirCommandeObserveur;
+import controleur.commande.CommandeException;
 
 /**
  * Cette classe joue le rôle de binding pour la fenetre principale de
@@ -250,12 +249,11 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
     void clic_genererFeuilleRoute() {
     	File fichier = ouvrirEnregistreurDeFichier("Enregistrer la feuille de route");
     	if (fichier != null) {
-    		try (FileWriter ecriveurDeFichier = new FileWriter(fichier)) {
-    			String feuille = controleurApplication.genererFeuilleDeRoute();
-        		ecriveurDeFichier.write(feuille);
-    		} catch (IOException e) {
-    			ouvrirErreurFichier(e, fichier.getAbsolutePath());
-			}
+    		try {
+    			controleurApplication.genererFeuilleDeRoute(fichier);
+    		} catch (CommandeException e) {
+    			ouvrirErreurFichier(e, fichier.getName());
+    		}
     	}
     }
 

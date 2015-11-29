@@ -19,7 +19,7 @@ public class EtatSuppression extends AbstractEtat
     public EtatSuppression(ControleurDonnees donnees)
     {
         this.donnees = donnees;
-        donnees.notifierAllMessageObserveurs("Vous voulez supprimer une livraison ? Choissez dans la liste la livraison que vous voulez supprimer");
+        donnees.notifierAllMessageObserveurs("Souhaitez-vous supprimer une livraison ? Choisissez dans la liste à gauche la livraison que vous voulez supprimer. Clic droit pour sortir du mode de suppression.");
     }
 
     @Override
@@ -52,7 +52,7 @@ public class EtatSuppression extends AbstractEtat
     @Override
     public EtatInterface cliqueSurPlan(int intersectionId)
     {
-        donnees.notifierAllMessageObserveurs("Veuillez choissir une livraison dans la liste svp.");
+        donnees.notifierAllMessageObserveurs("Veuillez choisir une livraison dans la liste à gauche. Clic droit pour sortir du mode de suppression");
         return this;
     }
 
@@ -65,7 +65,7 @@ public class EtatSuppression extends AbstractEtat
 
     @Override
     public EtatInterface clicDroit() {
-        donnees.notifierAllMessageObserveurs("Retour à l'état principal");
+        donnees.notifierAllMessageObserveurs(TEXTE_ETAT_PRINCIPAL);
         return new EtatPrincipal(donnees);
     }
 

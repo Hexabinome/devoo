@@ -1,6 +1,8 @@
 package controleur;
 
 import java.io.File;
+
+import controleur.commande.CommandeException;
 import modele.xmldata.ModeleLecture;
 import modele.xmldata.PlanDeVille;
 
@@ -65,7 +67,7 @@ public interface ControleurInterface
 
     void cliqueCalculerTourne();
     
-    String genererFeuilleDeRoute();
-
     public void ajouterMessageObserveur(MessageObserveur obs);
+
+	void genererFeuilleDeRoute(File fichier) throws CommandeException;
 }
