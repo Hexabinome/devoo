@@ -105,7 +105,7 @@
          <bottom>
             <Pane prefHeight="21.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
                <children>
-                  <ObserveurMessageChamps fx:id="message" layoutX="16.0" layoutY="16.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Message : ..." />
+                  <ObserveurMessageChamps fx:id="message" layoutX="16.0" layoutY="16.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenue sur Optimod'Lyon ! Commencez par charger un plan de ville, puis une demande de livraison pour calculer votre tournée optimale !" />
                </children>
             </Pane>
          </bottom>

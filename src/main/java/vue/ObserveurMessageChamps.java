@@ -10,8 +10,7 @@ import javafx.scene.text.Text;
 public class ObserveurMessageChamps extends Text implements MessageObserveur {
 
     @Override
-    public void notifierMessagObserveur(String message)
-    {
+    public void notifierMessagObserveur(String message) {
         setText(message);
     }
 

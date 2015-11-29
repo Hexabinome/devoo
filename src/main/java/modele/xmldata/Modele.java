@@ -65,16 +65,8 @@ public class Modele implements ModeleLecture
      */
     public int removeLivraison(int idLivraison)
     {
-        // On ne peut pas supprimer l'entrepot
-        if (idLivraison == -1)
-            throw new RuntimeException("On ne peut pas supprimer l'entrepot!");
-
         //identifier la livraison
         Livraison liv = demande.identifierLivraison(idLivraison);
-
-        // On ne peut pas supprimer la dernière livraison d'une fenêtre
-        if (demande.getFenetreDeLivraison(idLivraison).getListeLivraisons().size() == 1)
-            throw new RuntimeException("Il n'est pas permit de supprimer la derniere livraison d'une fenetre");
 
         //recuperer l'id de la livraison avant
         int idLivraisonAvant =  recupererLivraisonApresOuAvant(liv, true).getId();

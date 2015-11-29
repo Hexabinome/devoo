@@ -46,11 +46,15 @@ public class CommandeSupprimerLivraison implements Commande
     @Override
     public void executer() throws CommandeException
     {
-
-        //verifier qu'on a le droit de supprimer la livraison
+    	if (livraisonSupprimee.getId() == -1) {
+    		controleurDonnees.notifierAllMessageObserveurs("Il est interdit de supprimer l'entrepôt.");
+    		return;
+    	}
+    	
+        // Vérifier qu'on a le droit de supprimer la livraison
         Fenetre f = controleurDonnees.getModele().getDemande().getFenetreDeLivraison(livraisonSupprimee.getId());
         if (f.getListeLivraisons().size() <= 1) {
-            controleurDonnees.notifierAllMessageObserveurs("Il est interdit de supprimer la derniere livraison dans une fenetre.");
+            controleurDonnees.notifierAllMessageObserveurs("Il est interdit de supprimer la dernière livraison dans une fenêtre.");
             return;
         }
 
@@ -59,8 +63,9 @@ public class CommandeSupprimerLivraison implements Commande
         controleurDonnees.notifyAllModelObserveurs();
         controleurDonnees.notifyAllAnnulerObserveurs(false);
 
-        if (controleurDonnees.getHist().estVideCommandesAnnulees())
+        if (controleurDonnees.getHist().estVideCommandesAnnulees()) {
             controleurDonnees.notifyAllRetablirObserveurs(true);
+        }
     }
 
     @Override
