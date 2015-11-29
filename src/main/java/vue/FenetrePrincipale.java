@@ -26,9 +26,9 @@ public class FenetrePrincipale extends Application {
     private Controleur controleurApplication;
 
 
-    private final int LARGEUR_FENETRE = 1000;
+    private final int LARGEUR_FENETRE = 1300;
 
-    private final int HAUTEUR_FENETRE = 668;
+    private final int HAUTEUR_FENETRE = 800;
 
     @Override
     public void start(Stage primaryStage) throws Exception {

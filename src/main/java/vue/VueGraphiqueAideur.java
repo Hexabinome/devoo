@@ -9,6 +9,7 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -77,6 +78,37 @@ public class VueGraphiqueAideur {
         this.scrollPane = scrollPane;
         this.sliderZoom = slider;
         initzoom();
+        
+        canvas.setOnMouseMoved(new HoverGraphiqueGestionnaireEvenement());
+        canvas.setOnMouseClicked(new ClicGraphiqueGestionnaireEvenement());
+    }
+    
+    private class HoverGraphiqueGestionnaireEvenement implements EventHandler<MouseEvent> {
+
+		@Override
+		public void handle(MouseEvent event) {
+			Livraison l = estSurLivraison(event.getX(), event.getY());
+			if (l == null) {
+				desactiverSurbrillance();
+				return;
+			}
+			
+			surbrillanceLivraison(l);
+			// TODO surbrillance de la zone dans la vue textuelle
+		}
+    }
+    
+    private class ClicGraphiqueGestionnaireEvenement implements EventHandler<MouseEvent> {
+
+		@Override
+		public void handle(MouseEvent event) {
+			int idIntersection = estSurIntersection(event.getX(), event.getY());
+			if (idIntersection == -1) {
+				return;
+			}
+			
+			// TODO avec idIntersection ici logique ici
+		}
     }
     
     public StackPane getCanvas() {
@@ -532,19 +564,44 @@ public class VueGraphiqueAideur {
 	 * @param y Coordonnées Y du canvas graphique
 	 * @return null si les coordonnées ne sont sur aucune livraison
 	 */
-	public Livraison estSurLivraison(double x, double y) {
-		if (livraisons == null || livraisons.isEmpty() || intersectionsGraphiques == null)
+	private Livraison estSurLivraison(double x, double y) {
+		if (livraisons == null || livraisons.isEmpty() || intersectionsGraphiques == null) {
 			return null;
+		}
 
 		for (Livraison l : livraisons) {
 			Ellipse e = intersectionsGraphiques.get(l.getAdresse()).getKey();
-			if (e.getCenterX() - ConstantesGraphique.DIAMETRE_INTERSECTION <= x && x <= e.getCenterX() + ConstantesGraphique.DIAMETRE_INTERSECTION
-					&& e.getCenterY() - ConstantesGraphique.DIAMETRE_INTERSECTION <= y && y <= e.getCenterY() + ConstantesGraphique.DIAMETRE_INTERSECTION) {
+			if (estSurEllipse(e, x, y)) {
 				return l;
 			}
 		}
 
 		return null;
+	}
+	
+	/**
+	 * Renvoie l'id de l'intersection sur laquelle on a cliqué
+	 * @param x La position x sur le canvas graphique
+	 * @param y La position y sur le canvas graphique
+	 * @return -1 si les positions ne sont pas sur une intersection
+	 */
+	private int estSurIntersection(double x, double y) {
+		if (intersectionsGraphiques == null || intersectionsGraphiques.isEmpty()) {
+			return -1;
+		}
+		
+		for (Entry<Integer, Pair<Ellipse, Collection<Integer>>> pair : intersectionsGraphiques.entrySet()) {
+			Ellipse e = pair.getValue().getKey();
+			if (estSurEllipse(e, x, y)) {
+				return pair.getKey();
+			}
+		}
+		return -1;
+	}
+	
+	private boolean estSurEllipse(Ellipse e, double x, double y) {
+		return e.getCenterX() - ConstantesGraphique.DIAMETRE_PERMISSION <= x && x <= e.getCenterX() + ConstantesGraphique.DIAMETRE_PERMISSION
+				&& e.getCenterY() - ConstantesGraphique.DIAMETRE_PERMISSION <= y && y <= e.getCenterY() + ConstantesGraphique.DIAMETRE_PERMISSION;
 	}
 
     /**
@@ -556,6 +613,9 @@ public class VueGraphiqueAideur {
          * ville
          */
         private final static double DIAMETRE_INTERSECTION = 7;
+        
+        private final static double DIAMETRE_PERMISSION = 13;
+        
         /**
          * La marge à laisser sur les côté du canvas graphique afin d'avoir plus
          * du lisibilité

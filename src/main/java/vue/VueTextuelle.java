@@ -7,14 +7,12 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.beans.property.ReadOnlyStringWrapper;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableCell;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableView;
-import javafx.scene.input.MouseEvent;
 import modele.xmldata.Demande;
 import modele.xmldata.Fenetre;
 import modele.xmldata.Livraison;
@@ -70,22 +68,8 @@ public class VueTextuelle implements Initializable, Visiteur, ActivationObserver
     public void setAideurVueGraphique(VueGraphiqueAideur vueGraphique) {
         this.vueGraphique = vueGraphique;
     
-        this.vueGraphique.getCanvas().setOnMouseMoved(new HoverGraphiqueGestionnaireEvenement());
     }
-    
-    private class HoverGraphiqueGestionnaireEvenement implements EventHandler<MouseEvent> {
 
-		@Override
-		public void handle(MouseEvent event) {
-			Livraison l = vueGraphique.estSurLivraison(event.getX(), event.getY());
-			if (l == null) {
-				vueGraphique.desactiverSurbrillance();
-				return;
-			}
-			
-			vueGraphique.surbrillanceLivraison(l);
-		}
-    }
 
     public void initialiserMediateur(FenetrePrincipale fenetrePrincipale) {
         this.mediateur = fenetrePrincipale;
