@@ -85,7 +85,7 @@ public class Modele implements ModeleLecture
         //mettre a jour la tournee et les horaires
         intersectionTournee = creerIntersectionTournee();
         remplirHoraires();
-        
+
         //retourner l'id de la livraison avant
         return recupererLivraisonApresOuAvant(liv, true).getId();
     }
@@ -149,10 +149,10 @@ public class Modele implements ModeleLecture
      * Cherche la livraison directement apres une livraison contenu dans la
      * tournee. C'est possible que cette livraion est dans la fenetre apres.
      *
-     * @param livraisonAvant
+     * @param livraison
      * @return
      */
-    private Livraison recupererLivraisonApresOuAvant(Livraison livraisonAvant, boolean avant)
+    private Livraison recupererLivraisonApresOuAvant(Livraison livraison, boolean avant)
     {
         //d'abourd on va creer une nouvelle liste  contennant toutes les livraisons (sans connaisance des fenetreas). Celle ci est plus facile a iterer.
         List<Livraison> totalList = new LinkedList<>();
@@ -162,16 +162,17 @@ public class Modele implements ModeleLecture
         Iterator<Livraison> iter = totalList.iterator();
         Livraison liv = iter.next();
         Livraison livAvant = null;
-        while (liv != livraisonAvant) {
+        while (liv != livraison && iter.hasNext()) {
             livAvant = liv;
             liv = iter.next();
         }
-        if (iter.hasNext())
-            if (!avant)
+        if (!avant) {
+            if (iter.hasNext())
                 return iter.next();
-            else
-                return liv;
-        throw new RuntimeException("Livraison ne fait pas parti de la tounree");
+            throw new RuntimeException("Livraison ne fait pas parti de la tounree");
+        }
+        else
+            return livAvant;
 
     }
 
