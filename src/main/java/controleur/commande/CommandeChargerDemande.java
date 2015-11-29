@@ -40,7 +40,7 @@ public class CommandeChargerDemande extends CommandeNonAnnulable
             controleurDonnees.setModele(new Modele(plan, demande));
 
             //permettre de calculer la tournee
-            controleurDonnees.notifyAllCalculerTourneeObserveurs(true);
+            controleurDonnees.notifyAllCalculerTourneeObserveurs(false);
             
             //notifier les observeurs que il y a un model maintenant
             controleurDonnees.notifyAllModelObserveurs();

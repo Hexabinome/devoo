@@ -35,7 +35,7 @@ public class CommandeChargerPlan extends CommandeNonAnnulable
             controleurDonnees.setPlan(DeserialiseurXML.ouvrirPlanDeVille(planFichier));
             controleurDonnees.notifyAllActObserveurs(true);
             controleurDonnees.notifierLesObserveursDuPlan(); // notification des observeurs du plan
-            controleurDonnees.notifyAllCalculerTourneeObserveurs(false);
+            controleurDonnees.notifyAllCalculerTourneeObserveurs(true);
             controleurDonnees.notifierAllMessageObserveurs(String.format("Plan de la ville (%s) chargé avec succès !", planFichier.getName()));
         }
         catch (JDOMException | IOException | SAXException | ExceptionXML ex) {

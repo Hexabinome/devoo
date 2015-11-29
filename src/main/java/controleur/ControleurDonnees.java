@@ -165,7 +165,7 @@ public class ControleurDonnees
     public void notifyAllCalculerTourneeObserveurs(boolean activation)
     {
         tourneeObserveurs.stream().forEach((obs) -> {
-            obs.notifierLesObserveurs(!activation);
+            obs.notifierLesObserveurs(activation);
         });
     }
     
