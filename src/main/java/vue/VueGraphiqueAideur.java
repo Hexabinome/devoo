@@ -1,5 +1,6 @@
 package vue;
 
+import controleur.ControleurInterface;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
@@ -66,6 +67,7 @@ public class VueGraphiqueAideur {
     private ScrollPane scrollPane;
 
     private Slider sliderZoom;
+    private ControleurInterface controleurInterface;
 
     /**
      * Constructeur de la vue graphique
@@ -107,10 +109,14 @@ public class VueGraphiqueAideur {
 				return;
 			}
 			
-			// TODO avec idIntersection ici logique ici
+			controleurInterface.cliqueSurPlan(idIntersection);
 		}
     }
-    
+
+    public void setControleurInterface(ControleurInterface controleurInterface) {
+        this.controleurInterface = controleurInterface;
+    }
+
     public StackPane getCanvas() {
     	return canvas;
     }

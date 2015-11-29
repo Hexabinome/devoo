@@ -43,6 +43,7 @@ public class FenetrePrincipale extends Application {
 
         // Passage du controleur de l'application au controleur de la vue
         vuePrincipaleControleur.setControleurInterface(controleurApplication);
+        vuePrincipaleControleur.setVueGraphiqueControleurApplication(controleurApplication);
         vuePrincipaleControleur.initialiserMediateur(this);
         vuePrincipaleControleur.initialiserObserveurs();
 

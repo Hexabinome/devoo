@@ -148,6 +148,13 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
         this.controleurInterface = controleurInterface;
     }
 
+    /**+
+     * Met à jour le controleur de l'application pour la vue graphique
+     */
+    public void setVueGraphiqueControleurApplication(ControleurInterface controleurApplication){
+        vueGraphique.setControleurInterface(controleurApplication);
+    }
+
     /**
      * Appelée quand l'utilisateur clique sur "Ouvrir plan de ville"
      */
