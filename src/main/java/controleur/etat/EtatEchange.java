@@ -20,12 +20,12 @@ public class EtatEchange extends AbstractEtat
     public EtatEchange(ControleurDonnees donnees)
     {
         this.donnees = donnees;
+        this.donnees.notifierAllMessageObserveurs("[ECHANGE] Souhaitez-vous échanger deux livraisons ? Veuillez choisir la première livraison en cliquant sur le plan ou sur la liste à gauche. Clic droit pour sortir du mode d'échange.");
     }
 
     @Override
     public EtatInterface cliqueSurLivraison(int livraisonId)
     {
-        donnees.notifierAllMessageObserveurs("Veuillez choisir la deuxième livraison");
     	return new EtatEchange2(donnees, livraisonId);
     }
 
@@ -49,14 +49,12 @@ public class EtatEchange extends AbstractEtat
     	for (List<Livraison> fenetre : livraisons) {
     		for (Livraison l : fenetre) {
     			if (l.getAdresse() == intersectionId) {
-                                                            //ignorer si c'estait l'entrepot
-                                if(donnees.getModele().getDemande().getEntrepot().getId() == intersectionId)
-                                {
-                                    donnees.notifierAllMessageObserveurs("Deplacement de l'entrepot pas possible.");
-                                    return this;
-                                }
+                    // Ignorer si c'est l'entrepot
+                    if(donnees.getModele().getDemande().getEntrepot().getId() == intersectionId) {
+                        donnees.notifierAllMessageObserveurs("[ECHANGE] Déplacement de l'entrepôt impossible. Veuillez choisir la première livraison en cliquant sur le plan ou sur la liste à gauche. Clic droit pour sortir du mode d'échange.");
+                        return this;
+                    }
                             
-                                donnees.notifierAllMessageObserveurs("Premier livraison a ete identifie.");
     				return new EtatEchange2(donnees, l.getId());
     			}
     		}
@@ -73,7 +71,7 @@ public class EtatEchange extends AbstractEtat
 
     @Override
     public EtatInterface clicDroit() {
-        donnees.notifierAllMessageObserveurs("Retour à l'état principal");
+        donnees.notifierAllMessageObserveurs(TEXTE_ETAT_PRINCIPAL);
         return new EtatPrincipal(donnees);
     }
 

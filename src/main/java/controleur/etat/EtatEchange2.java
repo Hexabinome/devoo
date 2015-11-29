@@ -17,6 +17,7 @@ public class EtatEchange2 extends AbstractEtat {
     public EtatEchange2(ControleurDonnees controleurDonnees, int idLivraison){
         this.donnees = controleurDonnees;
         this.idLivraison = idLivraison;
+        donnees.notifierAllMessageObserveurs("[ECHANGE] Veuillez choisir la deuxième livraison en cliquant sur le plan ou sur la liste à gauche. Clic droit pour revenir au choix de la première livraison.");
     }
 	
     @Override
@@ -30,7 +31,9 @@ public class EtatEchange2 extends AbstractEtat {
     		e.printStackTrace();
     	}
     	
-    	return new EtatEchange(donnees);
+    	EtatInterface nouvelEtat = new EtatEchange(donnees);
+    	donnees.notifierAllMessageObserveurs(String.format("[ECHANGE] Les livraisons %d <-> %d ont été échangées avec succès. Veuillez choisir la première livraison en cliquant sur le plan ou sur la liste à gauche. Clic droit pour revenir au choix de la première livraison.", idLivraison, livraisonId));
+    	return nouvelEtat;
     }
 
     @Override
@@ -53,26 +56,25 @@ public class EtatEchange2 extends AbstractEtat {
     	for (List<Livraison> fenetre : livraisons) {
     		for (Livraison l : fenetre) {
     			if (l.getAdresse() == intersectionId) {
-                                //ignorer si c'estait l'entrepot
-                                if(donnees.getModele().getDemande().getEntrepot().getId() == intersectionId)
-                                {
-                                    donnees.notifierAllMessageObserveurs("Deplacement de l'entrepot pas possible.");
-                                    return this;
-                                }
+	                //ignorer si c'estait l'entrepot
+	                if(donnees.getModele().getDemande().getEntrepot().getId() == intersectionId) {
+	                	donnees.notifierAllMessageObserveurs("[ECHANGE] Déplacement de l'entrepôt impossible. Veuillez choisir la deuxième livraison en cliquant sur le plan ou sur la liste à gauche. Clic droit pour revenir au choix de la première livraison.");
+	                    return this;
+	                }
                             
-                                donnees.notifierAllMessageObserveurs("Deuxieme livraison a ete identifie.");
     				Commande cmdEchanger = new CommandeEchangerLivraisons(donnees, idLivraison, l.getId());
     				try {
     					cmdEchanger.executer();
-                                        donnees.ajouterCommande(cmdEchanger);
-                                        donnees.notifyAllModelObserveurs();
-                                        donnees.notifierAllMessageObserveurs("Les livraisons sont maintenant echange.");
-                                        donnees.notifyAllAnnulerObserveurs(false);
+                        donnees.ajouterCommande(cmdEchanger);
+                        donnees.notifyAllModelObserveurs();
+                        donnees.notifyAllAnnulerObserveurs(false);
     				} catch (CommandeException e) {
     					// TODO message
     					e.printStackTrace();
     				}
-    				return new EtatEchange(donnees);
+    				EtatInterface nouvelEtat = new EtatEchange(donnees);
+    				donnees.notifierAllMessageObserveurs(String.format("[ECHANGE] Les livraisons %d <-> %d ont été échangées avec succès. Veuillez choisir la première livraison en cliquant sur le plan ou sur la liste à gauche. Clic droit pour sortir au mode d'échange.", idLivraison, l.getId()));
+    				return nouvelEtat;
     			}
     		}
     	}
@@ -88,6 +90,6 @@ public class EtatEchange2 extends AbstractEtat {
 
 	@Override
 	public EtatInterface clicDroit() {
-		return new EtatEchange2(donnees,idLivraison);
+		return new EtatEchange(donnees);
 	}
 }

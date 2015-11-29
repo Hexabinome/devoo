@@ -38,7 +38,7 @@ public class EtatAjout2 extends AbstractEtat {
         controleurDonnees.ajouterCommande(commande);
         controleurDonnees.effacerCommandesARetablir();
         EtatInterface etat = new EtatAjout(controleurDonnees);
-        controleurDonnees.notifierAllMessageObserveurs(String.format("[AJOUT] Nouvelle livraison à l'adresse %d créée, suivant la livraison %d. Cliquez sur la carte pour choisir une autre intersection pour créer une livraison ou clic droit pour sortir du mode d'ajout.", idIntersectionLivraison, idLivraisonAvant));
+        controleurDonnees.notifierAllMessageObserveurs(String.format("[AJOUT] Nouvelle livraison à l'adresse %d créée, suivant la livraison %d. Cliquez sur le plan pour choisir une autre intersection pour créer une livraison ou clic droit pour sortir du mode d'ajout.", idIntersectionLivraison, idLivraisonAvant));
         return etat;
     }
 
