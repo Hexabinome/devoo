@@ -125,7 +125,7 @@ public class Controleur implements ControleurInterface {
 
     @Override
     public void cliqueSurLivraison(int livraisonId) {
-        etat.cliqueSurLivraison(livraisonId);
+       etat = etat.cliqueSurLivraison(livraisonId);
     }
 
     @Override
