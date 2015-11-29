@@ -24,7 +24,7 @@ public class Fenetre
     private final int heureDebut;
     private final int heureFin;
 
-    // map qui stoque des livraisons idntifie avec leur livraisonId
+    // map qui stoque des livraisons identifie avec leur livraisonId
     private final Map<Integer, Livraison> livraisons;
 
     public Fenetre(int timestampDebut, int timestampFin)
