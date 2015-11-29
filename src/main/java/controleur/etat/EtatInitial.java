@@ -12,7 +12,6 @@ import controleur.commande.CommandeChargerPlan;
  */
 public class EtatInitial extends AbstractEtat
 {
-
     private final ControleurDonnees controleurDonnees;
 
     public EtatInitial(ControleurDonnees controleurDonnees)
