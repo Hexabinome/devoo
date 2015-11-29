@@ -1,6 +1,7 @@
 package controleur;
 
 import java.io.File;
+import javafx.scene.text.Text;
 import modele.xmldata.ModeleLecture;
 import modele.xmldata.PlanDeVille;
 
@@ -64,4 +65,6 @@ public interface ControleurInterface
     void cliqueCalculerTourne();
     
     String genererFeuilleDeRoute();
+
+    public void ajouterMessageObserveur(MessageObserveur obs);
 }

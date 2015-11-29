@@ -11,6 +11,7 @@ import controleur.etat.EtatEchange;
 import controleur.etat.EtatInitial;
 import controleur.etat.EtatInterface;
 import controleur.etat.EtatSuppression;
+import javafx.scene.text.Text;
 
 /**
  * Implements controller interface. Primary entry point for all interaction with
@@ -139,7 +140,7 @@ public class Controleur implements ControleurInterface {
 
     @Override
     public void ajouterTourneeObserveur(ActivationObserverInterface tourneeObserveur) {
-        controleurDonnees.addTourneeObserveur(tourneeObserveur);
+        controleurDonnees.ajouterTourneeObserveur(tourneeObserveur);
     }
 
     @Override
@@ -156,5 +157,10 @@ public class Controleur implements ControleurInterface {
 	public String genererFeuilleDeRoute() {
 		return getModel().genererFeuilleDeRoute();
 	}
+
+    @Override
+    public void ajouterMessageObserveur(MessageObserveur obs)
+    {
+controleurDonnees.ajouterMessageObserveur(obs);    }
 
 }

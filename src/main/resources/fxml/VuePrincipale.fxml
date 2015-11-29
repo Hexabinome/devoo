@@ -105,7 +105,7 @@
          <bottom>
             <Pane prefHeight="21.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
                <children>
-                  <Text fx:id="message" layoutX="16.0" layoutY="16.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Message : ..." />
+                  <ObserveurMessageChamps fx:id="message" layoutX="16.0" layoutY="16.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Message : ..." />
                </children>
             </Pane>
          </bottom>

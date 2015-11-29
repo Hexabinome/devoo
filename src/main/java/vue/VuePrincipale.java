@@ -115,7 +115,7 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
     private Slider sliderZoom;
     
     @FXML
-    private Text message;
+    private ObserveurMessageChamps message;
 
     /**
      * Méthode appelée lors du redimensionnement de la fenêtre. Elle replace les
@@ -127,7 +127,7 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
         public void changed(ObservableValue<? extends Number> observable,
                             Number oldValue, Number newValue) {
         	
-        	vueGraphique.nettoyerAffichage();
+            vueGraphique.nettoyerAffichage();
             vueGraphique.afficherPlan();
             vueGraphique.afficherDemande();
             vueGraphique.afficherTournee();
@@ -313,6 +313,7 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
         controleurInterface.ajouterModelObserver(this);
         controleurInterface.ajouterAnnulerCommandeObserveur(this);
         controleurInterface.ajouterRetablirCommandeObserveur(this);
+        controleurInterface.ajouterMessageObserveur(message);
     }
 
     @Override

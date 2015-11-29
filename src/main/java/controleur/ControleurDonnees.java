@@ -5,6 +5,7 @@ import java.util.LinkedList;
 
 import controleur.commande.Commande;
 import controleur.commande.Historique;
+import java.util.concurrent.LinkedBlockingDeque;
 import modele.xmldata.Modele;
 import modele.xmldata.PlanDeVille;
 
@@ -34,15 +35,17 @@ public class ControleurDonnees
 
     // collection des observers pour la passibilite d'annuler / retablis des interactions effectuees.
     private final Collection<RetablirCommandeObserveur> retablirCommandeObserveurs;
-
+    
     private final Collection<PlanObserveur> planObserveurs;
-
+    
     private final Collection<ActivationObserverInterface> tourneeObserveurs;
-
+    
+    private final Collection<MessageObserveur> messageObserveurs;
+    
     private PlanDeVille plan = null;
-
+    
     private Historique hist;
-
+    
     public ControleurDonnees()
     {
         desactObserveurs = new LinkedList<>();
@@ -51,112 +54,126 @@ public class ControleurDonnees
         retablirCommandeObserveurs = new LinkedList<>();
         planObserveurs = new LinkedList<>();
         tourneeObserveurs = new LinkedList<>();
+        messageObserveurs = new LinkedList<>();
         hist = new Historique();
     }
-
+    
     public Modele getModele()
     {
         return modele;
     }
-
+    
     public void setModele(Modele modele)
     {
         this.modele = modele;
     }
-
+    
     public PlanDeVille getPlan()
     {
         return plan;
     }
-
+    
     public void setPlan(PlanDeVille plan)
     {
         this.plan = plan;
     }
-
+    
     public Historique getHist()
     {
         return hist;
     }
-
+    
     public void setHist(Historique hist)
     {
         this.hist = hist;
     }
-
+    
     public void addDesactObserveur(ActivationObserverInterface obs)
     {
         desactObserveurs.add(obs);
     }
-
+    
     public void addModelObserveur(ModelObserveur obs)
     {
         modelObserveurs.add(obs);
     }
-
+    
     public void ajouterAnnulerCommandeObserveur(AnnulerCommandeObserveur obs)
     {
         annulerCommandeObserveurs.add(obs);
     }
-
+    
     public void ajouterRetablirCommandeObserveur(RetablirCommandeObserveur obs)
     {
         retablirCommandeObserveurs.add(obs);
     }
-
+    
     public void ajouterPlanObserveur(PlanObserveur planObserveur)
     {
         planObserveurs.add(planObserveur);
     }
-
-    void addTourneeObserveur(ActivationObserverInterface tourneeObserveur)
+    
+    void ajouterTourneeObserveur(ActivationObserverInterface tourneeObserveur)
     {
         tourneeObserveurs.add(tourneeObserveur);
     }
-
-    public void ajouterCommande(Commande commande){
+    
+    void ajouterMessageObserveur(MessageObserveur obs)
+    {
+        messageObserveurs.add(obs);
+    }
+    
+    public void ajouterCommande(Commande commande)
+    {
         hist.ajouterCommande(commande);
     }
-
+    
     public void notifierLesObserveursDuPlan()
     {
         planObserveurs.stream().forEach((planObserveur -> {
             planObserveur.notificationPlanAChange();
         }));
     }
-
+    
     public void notifyAllActObserveurs(boolean state)
     {
         desactObserveurs.stream().forEach((obs) -> {
             obs.notifierLesObserveurs(state);
         });
     }
-
+    
     public void notifyAllModelObserveurs()
     {
         modelObserveurs.stream().forEach((obs) -> {
             obs.notificationModelAChange();
         });
     }
-
+    
     public void notifyAllAnnulerObserveurs(boolean activation)
     {
         annulerCommandeObserveurs.stream().forEach((obs) -> {
             obs.notificationAnnulerCommande(activation);
         });
     }
-
+    
     public void notifyAllRetablirObserveurs(boolean activation)
     {
         retablirCommandeObserveurs.stream().forEach((obs) -> {
             obs.notificationRetablirCommande(activation);
         });
     }
-
+    
     public void notifyAllCalculerTourneeObserveurs(boolean activation)
     {
         tourneeObserveurs.stream().forEach((obs) -> {
             obs.notifierLesObserveurs(!activation);
+        });
+    }
+    
+    public void notifierAllMessageObserveurs(String message)
+    {
+        messageObserveurs.stream().forEach((obs) -> {
+            obs.notifierMessagObserveur(message);
         });
     }
 
