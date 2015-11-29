@@ -51,7 +51,8 @@ public class EtatSuppression extends AbstractEtat
     @Override
     public EtatInterface cliqueSurPlan(int intersectionId)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        donnees.notifierAllMessageObserveurs("Veuillez choissir une livraison dans la liste svp.");
+        return this;
     }
 
     @Override

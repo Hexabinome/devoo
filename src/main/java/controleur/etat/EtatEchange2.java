@@ -53,11 +53,19 @@ public class EtatEchange2 extends AbstractEtat {
     	for (List<Livraison> fenetre : livraisons) {
     		for (Livraison l : fenetre) {
     			if (l.getAdresse() == intersectionId) {
+                                //ignorer si c'estait l'entrepot
+                                if(donnees.getModele().getDemande().getEntrepot().getId() == intersectionId)
+                                {
+                                    donnees.notifierAllMessageObserveurs("Deplacement de l'entrepot pas possible.");
+                                    return this;
+                                }
+                            
                                 donnees.notifierAllMessageObserveurs("Deuxieme livraison a ete identifie.");
     				Commande cmdEchanger = new CommandeEchangerLivraisons(donnees, idLivraison, l.getId());
     				try {
     					cmdEchanger.executer();
                                         donnees.notifyAllModelObserveurs();
+                                        donnees.notifierAllMessageObserveurs("Les livraisons sont maintenant echange.");
     				} catch (CommandeException e) {
     					// TODO message
     					e.printStackTrace();

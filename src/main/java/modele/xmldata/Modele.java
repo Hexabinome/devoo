@@ -219,8 +219,8 @@ public class Modele implements ModeleLecture
      * fenetre. L'ordre des livraisons correspond a l'ordre determinépar TSP.
      *
      * Cette methode doit etre appele directement apres la fin du calcule TSP).
-     *  On n'a plus besoin de cette methode quand
-     * l'utilisateur decide de manipuler la tournee calcule a la main.
+     * On n'a plus besoin de cette methode quand l'utilisateur decide de
+     * manipuler la tournee calcule a la main.
      */
     private void creerLivraisonTournee()
     {
@@ -382,6 +382,9 @@ public class Modele implements ModeleLecture
      */
     public void echangerLivraisons(int idLivraison1, int idLivraison2)
     {
+        if (demande.getEntrepot().getId() == idLivraison1 || demande.getEntrepot().getId() == idLivraison2)
+            throw new RuntimeException("Il est interdit de deplacer l'entrepot.");
+
         Livraison l1 = demande.identifierLivraison(idLivraison1);
         Livraison l2 = demande.identifierLivraison(idLivraison2);
         Livraison livrAvantL1 = recupererLivraisonApresOuAvant(l1, true);
@@ -395,17 +398,18 @@ public class Modele implements ModeleLecture
 
         removeLivraison(idLivraison1);
         removeLivraison(idLivraison2);
-        
+
         Livraison nouvelleLivraison1 = new Livraison(getProchainCustomLivraisonId(), clientId2, intersection2);
         Livraison nouvelleLivraison2 = new Livraison(getProchainCustomLivraisonId(), clientId1, intersection1);
-        
+
         addLivraison(livrAvantL1.getId(), f1, nouvelleLivraison1);
         addLivraison(livrAvantL2.getId(), f2, nouvelleLivraison2);
     }
-/*
-    public void echangerLivraisons(int idLivraison1, int idLivraison2, int nouvelleId1, int nouvelleId2)
-    {
+    /*
+     public void echangerLivraisons(int idLivraison1, int idLivraison2, int nouvelleId1, int nouvelleId2)
+     {
 
-    }
-*/
+     }
+     */
+
 }
