@@ -46,11 +46,15 @@ public class CommandeSupprimerLivraison implements Commande
     @Override
     public void executer() throws CommandeException
     {
-
-        //verifier qu'on a le droit de supprimer la livraison
+    	if (livraisonSupprimee.getId() == -1) {
+    		controleurDonnees.notifierAllMessageObserveurs("Il est interdit de supprimer l'entrepôt.");
+    		return;
+    	}
+    	
+        // Vérifier qu'on a le droit de supprimer la livraison
         Fenetre f = controleurDonnees.getModele().getDemande().getFenetreDeLivraison(livraisonSupprimee.getId());
         if (f.getListeLivraisons().size() <= 1) {
-            controleurDonnees.notifierAllMessageObserveurs("Il est interdit de supprimer la derniere livraison dans une fenetre.");
+            controleurDonnees.notifierAllMessageObserveurs("Il est interdit de supprimer la dernière livraison dans une fenêtre.");
             return;
         }
 
@@ -58,9 +62,17 @@ public class CommandeSupprimerLivraison implements Commande
         controleurDonnees.getModele().remplirHoraires();
         controleurDonnees.notifyAllModelObserveurs();
         controleurDonnees.notifyAllAnnulerObserveurs(false);
+        controleurDonnees.notifierAllMessageObserveurs(
+        		String.format("La livraison %d, à l'adresse %d et pour le client %d a été supprimée avec succès !",
+        				livraisonSupprimee.getId(),
+        				livraisonSupprimee.getAdresse(),
+        				livraisonSupprimee.getClientId())
+        		);
 
-        if (controleurDonnees.getHist().estVideCommandesAnnulees())
+
+        if (controleurDonnees.getHist().estVideCommandesARetablir()){
             controleurDonnees.notifyAllRetablirObserveurs(true);
+        }
     }
 
     @Override
@@ -70,7 +82,7 @@ public class CommandeSupprimerLivraison implements Commande
         controleurDonnees.notifyAllModelObserveurs();
         controleurDonnees.notifyAllRetablirObserveurs(false);
 
-        if (controleurDonnees.getHist().estVideCommandesExecutees())
+        if (controleurDonnees.getHist().estVideCommandesAAnnuler())
             controleurDonnees.notifyAllAnnulerObserveurs(true);
     }
 

@@ -7,7 +7,6 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import controleur.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -26,6 +25,12 @@ import javafx.stage.FileChooser.ExtensionFilter;
 import modele.xmldata.ModeleLecture;
 
 import org.controlsfx.dialog.ExceptionDialog;
+
+import controleur.AnnulerCommandeObserveur;
+import controleur.ControleurInterface;
+import controleur.ModelObserveur;
+import controleur.PlanObserveur;
+import controleur.RetablirCommandeObserveur;
 
 /**
  * Cette classe joue le rôle de binding pour la fenetre principale de

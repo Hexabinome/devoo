@@ -1,11 +1,8 @@
 package vue;
 
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.ResourceBundle;
-
+import controleur.ActivationObserverInterface;
+import controleur.ControleurInterface;
+import controleur.ModelObserveur;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -21,9 +18,12 @@ import vue.vuetextuelle.DetailLivraison;
 import vue.vuetextuelle.ObjetVisualisable;
 import vue.vuetextuelle.ObjetVisualisable.CouleurTexte;
 import vue.vuetextuelle.Visiteur;
-import controleur.ActivationObserverInterface;
-import controleur.ControleurInterface;
-import controleur.ModelObserveur;
+
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.ResourceBundle;
 
 /**
  * Controleur de la TreeTableView qui affiche les livraisons et les horaires.
@@ -67,7 +67,7 @@ public class VueTextuelle implements Initializable, Visiteur, ActivationObserver
 
     public void setAideurVueGraphique(VueGraphiqueAideur vueGraphique) {
         this.vueGraphique = vueGraphique;
-    
+
     }
 
 
@@ -174,7 +174,7 @@ public class VueTextuelle implements Initializable, Visiteur, ActivationObserver
         effacerVueTableLivraison();
         Demande demandeModifiee = controleurApplication.getModel().getDemande();
         construireVueTableLivraion(demandeModifiee);
-        
+
         vueGraphique.nettoyerAffichage();
         vueGraphique.afficherPlan();
         vueGraphique.construireDemande(demandeModifiee);
@@ -206,7 +206,7 @@ public class VueTextuelle implements Initializable, Visiteur, ActivationObserver
     private class TableCellSpecial extends TreeTableCell<ObjetVisualisable, String> {
 
         public TableCellSpecial() {
-             initialiserClic();
+            initialiserClic();
             initialiserHover();
 
         }
@@ -220,26 +220,31 @@ public class VueTextuelle implements Initializable, Visiteur, ActivationObserver
             } else {
                 setText(item);
             }
-            
-           
+
+
             ObjetVisualisable obj = getTreeTableRow().getItem();
             if (obj == null) {
-            	return;
+                return;
             }
             if (obj instanceof DetailLivraison) {
             	DetailLivraison detail = (DetailLivraison)obj;
             	if (detail.getLivraison().estEnRetard()) {
                 	obj.setCouleurDefaut(CouleurTexte.RETARD);
+            	} else {
+            		obj.setCouleurDefaut(CouleurTexte.NON_SURBRILLANCE);
             	}
             }
-        	setSurbrillance(obj.getCouleurDefaut());
+            setSurbrillance(obj.getCouleurDefaut());
         }
 
         private void initialiserClic() {
             setOnMouseClicked(event -> {
-                ObjetVisualisable objetVisualisable = getTreeTableRow().getTreeItem().getValue();
-                if (objetVisualisable instanceof DetailLivraison)
-                    controleurApplication.cliqueSurLivraison(((DetailLivraison)objetVisualisable).getLivraison().getId());
+                if (getTreeTableRow().getTreeItem() != null) {
+                    ObjetVisualisable objetVisualisable = getTreeTableRow().getTreeItem().getValue();
+                    if (objetVisualisable instanceof DetailLivraison)
+                        controleurApplication.cliqueSurLivraison(
+                                ((DetailLivraison) objetVisualisable).getLivraison().getId());
+                }
             });
 
         }
@@ -266,30 +271,30 @@ public class VueTextuelle implements Initializable, Visiteur, ActivationObserver
             });
 
             setOnMouseExited(event -> {
-            	ObjetVisualisable obj = getTreeTableRow().getItem();
-            	if (obj == null)
-            		return;
-        		setSurbrillance(obj.getCouleurDefaut());	
-            	
+                ObjetVisualisable obj = getTreeTableRow().getItem();
+                if (obj == null)
+                    return;
+                setSurbrillance(obj.getCouleurDefaut());
+
                 vueGraphique.desactiverSurbrillance();
             });
         }
-        
+
         private void setSurbrillance(CouleurTexte couleur) {
-        	switch (couleur) {
-			case SURBRILLANCE:
-                setStyle("-fx-background-color: yellow; -fx-text-fill: black;");
-				break;
-			case NON_SURBRILLANCE:
-        		setStyle("-fx-background-color: white; -fx-text-fill: black;");
-        		break;
-			case RETARD:
-				setStyle("-fx-background-color: red; -fx-text-fill: black;");
-				break;
-			default:
-				break;
-			}
+            switch (couleur) {
+                case SURBRILLANCE:
+                    setStyle("-fx-background-color: yellow; -fx-text-fill: black;");
+                    break;
+                case NON_SURBRILLANCE:
+                    setStyle("-fx-background-color: white; -fx-text-fill: black;");
+                    break;
+                case RETARD:
+                    setStyle("-fx-background-color: red; -fx-text-fill: black;");
+                    break;
+                default:
+                    break;
+            }
         }
-        
+
     }
 }

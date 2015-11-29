@@ -3,11 +3,10 @@ package controleur;
 import java.util.Collection;
 import java.util.LinkedList;
 
-import controleur.commande.Commande;
-import controleur.commande.Historique;
-import java.util.concurrent.LinkedBlockingDeque;
 import modele.xmldata.Modele;
 import modele.xmldata.PlanDeVille;
+import controleur.commande.Commande;
+import controleur.commande.Historique;
 
 /**
  * Cette classe contient les donnees necessaires pour la gestion des etats. On
@@ -175,6 +174,27 @@ public class ControleurDonnees
         messageObserveurs.stream().forEach((obs) -> {
             obs.notifierMessagObserveur(message);
         });
+    }
+
+    /**
+     * Efface la liste des commandes à retablir et notifie la vue qu'il doir desactiver l'élément du menu correspondant
+     */
+    public void effacerCommandesARetablir(){
+        hist.effacerCommandeARetablir();
+        notifyAllRetablirObserveurs(true);
+    }
+
+    /**
+     * Efface la liste des commandes à annuler et notifie la vue qu'il doir desactiver l'élément du menu correspondant
+     */
+    public void effacerCommandeAAnnuler(){
+        hist.effacerCommandesAAnnuler();
+        notifyAllAnnulerObserveurs(true);
+    }
+
+    public void effacerHistorique(){
+        effacerCommandeAAnnuler();
+        effacerCommandesARetablir();
     }
 
 }

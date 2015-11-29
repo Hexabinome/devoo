@@ -44,6 +44,8 @@ public class CommandeChargerDemande extends CommandeNonAnnulable
             
             //notifier les observeurs que il y a un model maintenant
             controleurDonnees.notifyAllModelObserveurs();
+
+            controleurDonnees.notifierAllMessageObserveurs(String.format("Demande de livraisons (%s) chargée avec succès !", livraisonsFichier.getName()));
         }
         catch (SAXException | ExceptionXML | IOException | JDOMException | ParseException ex) {
             throw new CommandeException(ex.getMessage());

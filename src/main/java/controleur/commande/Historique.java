@@ -11,18 +11,18 @@ import java.util.Deque;
 public class Historique {
 
     /**
-     * Pile des commandes qui ont été éxécutées avec succès
+     * Pile des commandes qui ont été éxécutées avec succès c'est à dire les commandes à annuler
      */
-    Deque<Commande> commandesExecutees;
+    Deque<Commande> commandesAAnnuller;
 
     /**
-     * Pile des commandes annulées
+     * Pile des commandes à retablir c'est à dire les commandes à retabir
      */
-    Deque<Commande> commandesAnnulees;
+    Deque<Commande> commandesARetablir;
 
     public Historique() {
-        commandesExecutees = new ArrayDeque<Commande>();
-        commandesAnnulees = new ArrayDeque<Commande>();
+        commandesAAnnuller = new ArrayDeque<Commande>();
+        commandesARetablir = new ArrayDeque<Commande>();
     }
 
     /**
@@ -31,16 +31,16 @@ public class Historique {
      * @param commande Une commande qui s'est éxécutée avec succès
      */
     public void ajouterCommande(Commande commande) {
-        commandesExecutees.add(commande);
-        effacerCommandesAnnullees(); // on efface les commandes qui avaient été annulées quand une ajoute une nouvelle commande
+        commandesAAnnuller.add(commande);
+        effacerCommandeARetablir(); // on efface les commandes qui avaient été annulées quand une ajoute une nouvelle commande
     }
 
     /**
      * Annule la dernière commande annulable executée (Ctrl+Z)
      */
     public void annuler() {
-        Commande commande = commandesExecutees.pop();
-        commandesAnnulees.push(commande);
+        Commande commande = commandesAAnnuller.pop();
+        commandesARetablir.push(commande);
         commande.annuler();
     }
 
@@ -48,10 +48,10 @@ public class Historique {
      * Execute la dernière commande annulée s'il y'en a (Ctrl+Y)
      */
     public void executer() throws CommandeException {
-        if (!commandesAnnulees.isEmpty()) {
-            Commande commande = commandesAnnulees.pop();
+        if (!commandesARetablir.isEmpty()) {
+            Commande commande = commandesARetablir.pop();
             commande.executer();
-            commandesExecutees.add(commande);
+            commandesAAnnuller.add(commande);
         }
     }
 
@@ -59,33 +59,33 @@ public class Historique {
      * Efface toutes les commandes stockées
      */
     public void effacerToutesLesCommandes() {
-        effacerCommandesAnnullees();
-        effacerCommandesExecutees();
+        effacerCommandeARetablir();
+        effacerCommandesAAnnuler();
     }
 
     /**
      * Efface le contenu la pile des commandes qui ont été annulées
      */
-    public void effacerCommandesAnnullees() {
-        commandesAnnulees.clear();
+    public void effacerCommandeARetablir() {
+        commandesARetablir.clear();
     }
 
     /**
      * Efface le contenu de la pile des commandes qui ont été éxécutées
      */
-    public void effacerCommandesExecutees() {
-        commandesExecutees.clear();
+    public void effacerCommandesAAnnuler() {
+        commandesAAnnuller.clear();
     }
 
     /**
      * Renvoie true s'il reste des commandes à annuler
      */
-    public boolean estVideCommandesAnnulees(){
-        return commandesAnnulees.isEmpty();
+    public boolean estVideCommandesARetablir(){
+        return commandesARetablir.isEmpty();
     }
 
-    public boolean estVideCommandesExecutees(){
-        return commandesExecutees.isEmpty();
+    public boolean estVideCommandesAAnnuler(){
+        return commandesAAnnuller.isEmpty();
     }
 
 }
