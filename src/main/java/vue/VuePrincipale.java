@@ -21,6 +21,7 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import modele.xmldata.ModeleLecture;
@@ -112,6 +113,9 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
 
     @FXML
     private Slider sliderZoom;
+    
+    @FXML
+    private Text message;
 
     /**
      * Méthode appelée lors du redimensionnement de la fenêtre. Elle replace les
