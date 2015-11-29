@@ -23,4 +23,6 @@ public interface ModeleLecture
      */
     List<List<Integer>> getTournee();
 
+	String genererFeuilleDeRoute();
+
 }

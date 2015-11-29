@@ -62,4 +62,6 @@ public interface ControleurInterface
     PlanDeVille getPlanDeVille();
 
     void cliqueCalculerTourne();
+    
+    String genererFeuilleDeRoute();
 }

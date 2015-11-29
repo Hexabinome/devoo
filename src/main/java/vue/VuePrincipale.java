@@ -1,6 +1,8 @@
 package vue;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -20,6 +22,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import modele.xmldata.ModeleLecture;
 
 import org.controlsfx.dialog.ExceptionDialog;
@@ -219,6 +222,20 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
     void clic_calculer_tournee() {
         controleurInterface.cliqueCalculerTourne();
     }
+    
+    @FXML
+    void clic_genererFeuilleRoute() {
+    	File fichier = ouvrirEnregistreurDeFichier("Enregistrer la feuille de route");
+    	if (fichier != null) {
+    		try (FileWriter ecriveurDeFichier = new FileWriter(fichier)) {
+    			String feuille = controleurInterface.genererFeuilleDeRoute();
+        		ecriveurDeFichier.write(feuille);
+    		} catch (IOException e) {
+				// TODO GENERATE ERROR
+				e.printStackTrace();
+			}
+    	}
+    }
 
     @FXML
     void annuler(){
@@ -245,7 +262,22 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
         fileChooser.getExtensionFilters().add(extensionFilter);
 
         // Affichage de la boite de dialogque + récuperation du fichier choisi
-        return fileChooser.showOpenDialog(canvasGraphique.getScene().getWindow());
+        return fileChooser.showOpenDialog(group.getScene().getWindow());
+    }
+    
+    /**
+     * Ouvre une boîte de dialogue pour enregistrer un fichier
+     * @param titreDialogue Le titre de la boôte de dialogue
+     * @return Le nom et chemin du fichier choisi
+     */
+    private File ouvrirEnregistreurDeFichier(String titreDialogue) {
+    	FileChooser fileChooser = new FileChooser();
+    	
+    	fileChooser.setTitle(titreDialogue);
+    	ExtensionFilter extensionFilter = new ExtensionFilter("Fichier texte (*.txt)", "*.txt");
+    	fileChooser.getExtensionFilters().add(extensionFilter);
+    	
+    	return fileChooser.showSaveDialog(group.getScene().getWindow());
     }
 
     /**

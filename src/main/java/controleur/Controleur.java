@@ -145,4 +145,9 @@ public class Controleur implements ControleurInterface {
         controleurDonnees.ajouterRetablirCommandeObserveur(retablirCommandeObserveur);
     }
 
+	@Override
+	public String genererFeuilleDeRoute() {
+		return getModel().genererFeuilleDeRoute();
+	}
+
 }
