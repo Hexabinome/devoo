@@ -69,7 +69,8 @@ public class CommandeSupprimerLivraison implements Commande
         				livraisonSupprimee.getClientId())
         		);
 
-        if (controleurDonnees.getHist().estVideCommandesAnnulees()) {
+
+        if (controleurDonnees.getHist().estVideCommandesARetablir()){
             controleurDonnees.notifyAllRetablirObserveurs(true);
         }
     }
@@ -81,7 +82,7 @@ public class CommandeSupprimerLivraison implements Commande
         controleurDonnees.notifyAllModelObserveurs();
         controleurDonnees.notifyAllRetablirObserveurs(false);
 
-        if (controleurDonnees.getHist().estVideCommandesExecutees())
+        if (controleurDonnees.getHist().estVideCommandesAAnnuler())
             controleurDonnees.notifyAllAnnulerObserveurs(true);
     }
 
