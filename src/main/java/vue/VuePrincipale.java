@@ -126,6 +126,8 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
     
     @FXML
     private ObserveurMessageChamps message;
+    
+    private File file;
 
     /**
      * Méthode appelée lors du redimensionnement de la fenêtre. Elle replace les
@@ -170,7 +172,7 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
      */
     @FXML
     private void ouvrirPlan(ActionEvent actionEvent) {
-        File file = ouvrirSelectionneurDeFichier("Choissiez le plan de la ville");
+        file = ouvrirSelectionneurDeFichier("Choissiez le plan de la ville");
         if (file != null) {
             Exception messageErreur = controleurApplication.chargerPlan(file);
             if (messageErreur != null)
@@ -183,7 +185,7 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
      */
     @FXML
     private void ouvrirDemande(ActionEvent actionEvent) {
-        File file = ouvrirSelectionneurDeFichier("Choisissez la demande de livraison");
+        file = ouvrirSelectionneurDeFichier("Choisissez la demande de livraison");
         if (file != null) {
             Exception exception = controleurApplication.chargerLivraisons(file);
             if (exception != null)
@@ -275,7 +277,11 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
     private File ouvrirSelectionneurDeFichier(String titreDialogue) {
 
         FileChooser fileChooser = new FileChooser();
-
+        
+        if(file != null){
+            File existDirectory = file.getParentFile();
+            fileChooser.setInitialDirectory(existDirectory);
+        }
         fileChooser.setTitle(titreDialogue);
         //  Filtrage de l'extension
         FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("Fichier xml (*.xml)", "*.xml");
