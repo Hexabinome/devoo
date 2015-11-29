@@ -52,7 +52,7 @@ public class EtatDemandeChargee extends AbstractEtat {
         catch (CommandeException ex) {
             throw new RuntimeException("Un problème est survenu lors du calcul de la tournée");
         }
-
+        controleurDonnees.effacerHistorique();
         return new EtatPrincipal(controleurDonnees);
     }
 

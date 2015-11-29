@@ -31,6 +31,7 @@ public class EtatPlanCharge extends AbstractEtat
     public EtatInterface chargerPlan(File plan) throws CommandeException
     {
         new CommandeChargerPlan(controleurDonnees, plan).executer();
+        controleurDonnees.effacerHistorique();
         return this;
     }
 
@@ -38,6 +39,7 @@ public class EtatPlanCharge extends AbstractEtat
     public EtatInterface chargerLivraisons(File livraisons) throws CommandeException
     {
         new CommandeChargerDemande(controleurDonnees, livraisons).executer();
+        controleurDonnees.effacerHistorique();
         return new EtatDemandeChargee(controleurDonnees);
     }
 

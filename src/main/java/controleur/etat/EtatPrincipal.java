@@ -52,6 +52,7 @@ public class EtatPrincipal implements EtatInterface
     public EtatInterface chargerLivraisons(File livraisons) throws CommandeException
     {
         new CommandeChargerDemande(controleurDonnees, livraisons).executer();
+        controleurDonnees.effacerHistorique();
         return this;
     }
 
@@ -64,13 +65,6 @@ public class EtatPrincipal implements EtatInterface
     @Override
     public EtatInterface cliqueCalculerTournee()
     {
-     /*   try {
-            new CommandeCalculerTournee(controleurDonnees).executer();
-        }
-        catch (CommandeException ex) {
-            throw new RuntimeException("Pas possible de determiner la tournee");
-        }*/
-
         return this;
     }
 
