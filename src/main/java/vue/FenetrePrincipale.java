@@ -59,7 +59,7 @@ public class FenetrePrincipale extends Application {
         BorderPane centerBorderPane = (BorderPane) root.getCenter();
         centerBorderPane.setLeft(anchorPane.getChildren().get(0));
 
-        primaryStage.setTitle("OptimodLyon");
+        primaryStage.setTitle("Optimod'Lyon");
         primaryStage.setScene(new Scene(root, LARGEUR_FENETRE, HAUTEUR_FENETRE));
         primaryStage.setMinWidth(LARGEUR_FENETRE);
         primaryStage.setMinHeight(HAUTEUR_FENETRE);
