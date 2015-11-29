@@ -25,7 +25,7 @@ public class CommandeAjouterLivraison implements Commande {
         this.controleurDonnees = controleurDonnees;
         this.idLivraisonAvant = idLivraisonAvant;
         this.fenetre = controleurDonnees.getModele().getDemande().getFenetreDeLivraison(idLivraisonAvant);
-        this.livraisonAjoutee = new Livraison(controleurDonnees.getModele().getProchainCustomLivraisonId(),-1,idIntersectionLivraison);
+        this.livraisonAjoutee = new Livraison(controleurDonnees.getModele().getProchainIdCustomLivraison(this.fenetre),-1,idIntersectionLivraison);
     }
 
     @Override
@@ -35,7 +35,7 @@ public class CommandeAjouterLivraison implements Commande {
 
     @Override
     public void executer() throws CommandeException {
-        controleurDonnees.getModele().addLivraison(idLivraisonAvant,fenetre,livraisonAjoutee);
+        controleurDonnees.getModele().ajouterLivraison(idLivraisonAvant,fenetre,livraisonAjoutee);
         controleurDonnees.notifyAllModelObserveurs();
         controleurDonnees.notifyAllAnnulerObserveurs(false);
 
@@ -46,7 +46,7 @@ public class CommandeAjouterLivraison implements Commande {
 
     @Override
     public void annuler() {
-        controleurDonnees.getModele().removeLivraison(livraisonAjoutee.getId());
+        controleurDonnees.getModele().supprimerLivraison(livraisonAjoutee.getId());
         controleurDonnees.notifyAllModelObserveurs();
         controleurDonnees.notifyAllRetablirObserveurs(false);
 

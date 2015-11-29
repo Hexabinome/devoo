@@ -168,7 +168,7 @@ public class ModeleTest
         assertEquals("", true, tournee.get(0).contains(5));
         
         // maintenant on essaye de manipuler le modele - on efface une livraison, on sait que sans cette livraison il n'est plus necessire de passer par la sa intersection.
-        monModele.removeLivraison(testLivraison.getId());
+        monModele.supprimerLivraison(testLivraison.getId());
         tournee = monModele.getTournee();
         assertEquals("La tounree ne devrait pas passer par l'intersection 5", false, tournee.get(0).contains(5));
     }

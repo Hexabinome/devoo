@@ -53,6 +53,7 @@ public class EtatSuppression extends AbstractEtat
     public EtatInterface cliqueSurPlan(int intersectionId)
     {
         donnees.notifierAllMessageObserveurs("Veuillez choisir une livraison dans la liste à gauche. Clic droit pour sortir du mode de suppression");
+
         return this;
     }
 

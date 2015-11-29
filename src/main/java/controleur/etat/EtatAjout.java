@@ -31,12 +31,14 @@ public class EtatAjout extends AbstractEtat
     @Override
     public EtatInterface chargerPlan(File plan) throws CommandeException
     {
+    	donnees.notifierAllMessageObserveurs("Cet etat ne permet pas de charger un plan");
         throw new RuntimeException("Cet etat ne permet pas de charger un plan");
     }
 
     @Override
     public EtatInterface chargerLivraisons(File livraisons) throws CommandeException
     {
+    	donnees.notifierAllMessageObserveurs("Cet etat ne permet pas de charger une demande de livraison");
         throw new RuntimeException("Cet etat ne permet pas de charger une demande de livraison");
     }
 
@@ -50,6 +52,7 @@ public class EtatAjout extends AbstractEtat
     @Override
     public EtatInterface cliqueCalculerTournee()
     {
+    	donnees.notifierAllMessageObserveurs("Cet etat ne permet pas de calculer la tournée");
         throw new RuntimeException("Cet etat ne permet pas de calculer la tournée");
     }
 

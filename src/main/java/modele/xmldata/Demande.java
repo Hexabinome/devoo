@@ -130,16 +130,4 @@ public class Demande
         throw new RuntimeException("Fenetre introuvable pour livraison: " + idLivraison);
     }
 
-	public int getMaxIdLivraison() {
-		int idLivraisonMax = 0;
-		for(Fenetre f: fenetres)
-		{
-			int idMax = f.getMaxIdLivraison();
-			if(idLivraisonMax < idMax)
-				idLivraisonMax = idMax;
-				
-		}
-		return idLivraisonMax;
-	}
-
 }

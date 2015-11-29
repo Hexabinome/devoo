@@ -16,13 +16,10 @@ import modele.business.TSP1;
  */
 public class Modele implements ModeleLecture
 {
-
     private final PlanDeVille plan;
     private final Demande demande;
     private GrapheRealisation graphe;
     private TSP tsp;
-
-    private int customLivraisonCompteur = Integer.MAX_VALUE;
 
     //cette liste des listes stoque pour chque fenetre les livraisons a effecturer dans une tournee calcule par TSP (sans l'entrepot au debout et a la fin de sla tournee)
     private List<List<Livraison>> livraisonTournee;
@@ -67,7 +64,7 @@ public class Modele implements ModeleLecture
      *
      * @param idLivraison
      */
-    public int removeLivraison(int idLivraison)
+    public int supprimerLivraison(int idLivraison)
     {
     	aUneLivraisonSupprimer = true;
         //identifier la livraison
@@ -76,7 +73,8 @@ public class Modele implements ModeleLecture
         //recuperer l'id de la livraison avant
         Livraison livraisonAvant = recupererLivraisonApresOuAvant(liv, true);
 
-        // verfier que la livriason avant connait le chemin vers la livraison apres (ca peut arriver que le chemin est inconnu, si la livraison apres est une livraison qui a ete ajoute a la main)
+        // verfier que la livriason avant connait le chemin vers la livraison apres (il peut arriver que le chemin soit inconnu, 
+        //si la livraison apres est une livraison qui a ete ajoute a la main)
         Livraison livraisonApres = recupererLivraisonApresOuAvant(liv, false);
         if (graphe.getChemin(livraisonAvant.getId(), livraisonApres.getId()) == null) {
             Collection<Chemin> cheminsSortantDeLivraisonAvant = Fenetre.dijkstra(plan.getIntersection(livraisonAvant.getAdresse()), plan);
@@ -86,7 +84,7 @@ public class Modele implements ModeleLecture
             });
         }
 
-        //parcourir la tournee calculle par tsp et supprimer la livraison specifiee
+        //parcourir la tournee calcule par tsp et supprimer la livraison specifiee
         livraisonTournee.stream().forEach((fenetre) -> {
             fenetre.remove(liv);
         });
@@ -108,7 +106,7 @@ public class Modele implements ModeleLecture
      * @param idLivraisonAvant
      * @param intersectionId
      */
-    public void addLivraison(int idLivraisonAvant, Fenetre fenetre, Livraison nouvelleLivraison)
+    public void ajouterLivraison(int idLivraisonAvant, Fenetre fenetre, Livraison nouvelleLivraison)
     {
         // d'abord recuperer la livraison avant
         Livraison livraisonAvant = demande.identifierLivraison(idLivraisonAvant);
@@ -386,14 +384,19 @@ public class Modele implements ModeleLecture
      *
      * @return
      */
-    public int getProchainCustomLivraisonId()
+    public int getProchainIdCustomLivraison(Fenetre f)
     {
-		if(customLivraisonCompteur == Integer.MAX_VALUE || aUneLivraisonSupprimer)
+    	int id=0;
+		for(Fenetre fenetre : demande.getFenetres())
 		{
-			customLivraisonCompteur = demande.getMaxIdLivraison();
-			aUneLivraisonSupprimer = false;
+			if(fenetre == f)
+			{
+				id = fenetre.getMaxIdLivraison();
+				break;
+			}
 		}
-        return customLivraisonCompteur++;
+		id++;
+        return id;
     }
 
     /**
@@ -418,25 +421,19 @@ public class Modele implements ModeleLecture
         Fenetre f1 = demande.getFenetreDeLivraison(idLivraison1);
         Fenetre f2 = demande.getFenetreDeLivraison(idLivraison2);
 
-        removeLivraison(idLivraison1);
-        removeLivraison(idLivraison2);
+        supprimerLivraison(idLivraison1);
+        supprimerLivraison(idLivraison2);
         if (nouvelleLivraisonId1 == Integer.MIN_VALUE) {
-            nouvelleLivraisonId1 = getProchainCustomLivraisonId();
-            nouvelleLivraisonId2 = getProchainCustomLivraisonId();
+            nouvelleLivraisonId1 = getProchainIdCustomLivraison(f1);
+            nouvelleLivraisonId2 = getProchainIdCustomLivraison(f2);
         }
         Livraison nouvelleLivraison1 = new Livraison(nouvelleLivraisonId1, clientId2, intersection2);
         Livraison nouvelleLivraison2 = new Livraison(nouvelleLivraisonId2, clientId1, intersection1);
 
-        addLivraison(livrAvantL1.getId(), f1, nouvelleLivraison1);
-        addLivraison(livrAvantL2.getId(), f2, nouvelleLivraison2);
+        ajouterLivraison(livrAvantL1.getId(), f1, nouvelleLivraison1);
+        ajouterLivraison(livrAvantL2.getId(), f2, nouvelleLivraison2);
 
         return nouvelleLivraisonId1;
     }
-    /*
-     public void echangerLivraisons(int idLivraison1, int idLivraison2, int nouvelleId1, int nouvelleId2)
-     {
-
-     }
-     */
 
 }

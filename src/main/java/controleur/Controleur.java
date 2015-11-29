@@ -5,13 +5,8 @@ import modele.xmldata.ModeleLecture;
 import modele.xmldata.PlanDeVille;
 
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-
-import controleur.commande.Commande;
 import controleur.commande.CommandeException;
 import controleur.commande.CommandeGenererFeuilleDeRoute;
-import javafx.scene.text.Text;
 
 /**
  * Implements controller interface. Primary entry point for all interaction with
@@ -57,6 +52,9 @@ public class Controleur implements ControleurInterface {
             controleurDonnees.getHist().executer();
         } catch (CommandeException e) {
             e.printStackTrace();
+        } catch (RuntimeException e) {
+        	controleurDonnees.notifierAllMessageObserveurs(e.getMessage());
+        	e.printStackTrace();
         }
     }
 
@@ -68,6 +66,10 @@ public class Controleur implements ControleurInterface {
             return null;
         } catch (CommandeException e) {
             return e;
+        } catch (RuntimeException e) {
+        	controleurDonnees.notifierAllMessageObserveurs(e.getMessage());
+        	e.printStackTrace();
+        	return e;
         }
     }
 
@@ -78,6 +80,10 @@ public class Controleur implements ControleurInterface {
             return null;
         } catch (CommandeException e) {
             return e;
+        } catch (RuntimeException e) {
+        	controleurDonnees.notifierAllMessageObserveurs(e.getMessage());
+        	e.printStackTrace();
+        	return e;
         }
     }
 
@@ -156,6 +162,7 @@ public class Controleur implements ControleurInterface {
     @Override
     public void ajouterMessageObserveur(MessageObserveur obs)
     {
-controleurDonnees.ajouterMessageObserveur(obs);    }
+		controleurDonnees.ajouterMessageObserveur(obs);    
+	}
 
 }

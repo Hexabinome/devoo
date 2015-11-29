@@ -62,9 +62,10 @@ public class CommandeSupprimerLivraison implements Commande
         Fenetre f = controleurDonnees.getModele().getDemande().getFenetreDeLivraison(livraisonSupprimee.getId());
         if (f.getListeLivraisons().size() <= 1) {
             controleurDonnees.notifierAllMessageObserveurs("Il est interdit de supprimer la dernière livraison dans une fenêtre.");
+            return;
         }
 
-        idLivraisonAvant = controleurDonnees.getModele().removeLivraison(livraisonSupprimee.getId());
+        idLivraisonAvant = controleurDonnees.getModele().supprimerLivraison(livraisonSupprimee.getId());
         controleurDonnees.getModele().remplirHoraires();
         controleurDonnees.notifyAllModelObserveurs();
         controleurDonnees.notifyAllAnnulerObserveurs(false);
@@ -84,7 +85,7 @@ public class CommandeSupprimerLivraison implements Commande
     @Override
     public void annuler()
     {
-        controleurDonnees.getModele().addLivraison(idLivraisonAvant, fenetreDeLaLivraison, livraisonSupprimee);
+        controleurDonnees.getModele().ajouterLivraison(idLivraisonAvant, fenetreDeLaLivraison, livraisonSupprimee);
         controleurDonnees.notifyAllModelObserveurs();
         controleurDonnees.notifyAllRetablirObserveurs(false);
 

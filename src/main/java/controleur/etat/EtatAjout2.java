@@ -55,7 +55,7 @@ public class EtatAjout2 extends AbstractEtat
     @Override
     public EtatInterface cliqueSurPlan(int intersectionId)
     {
-        controleurDonnees.notifierAllMessageObserveurs("Veuillez choissir la livraison en utilisant la liste a gauche svp.");
+        controleurDonnees.notifierAllMessageObserveurs("Veuillez choisir la livraison en utilisant la liste a gauche svp.");
         return this;
     }
 
