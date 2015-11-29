@@ -113,7 +113,7 @@ public class Modele implements ModeleLecture
         //TODO: c'est ppossible qu;on a pas beson de faire ca, le permier appel de dijkstra a deja calcule ca, si on stoquait le resultat on peut eviter cette re-calculation
         Collection<Chemin> cheminsSortantDeLivraisonAvant = Fenetre.dijkstra(plan.getIntersection(livraisonAvant.getAdresse()), plan);
         cheminsSortantDeLivraisonAvant.stream().filter((c) -> (c.getIdFin() == nouvelleLivraison.getAdresse())).forEach((c) -> {
-            graphe.setChemin(c, livraisonAvant.getAdresse(), nouvelleLivraison.getAdresse());
+            graphe.setChemin(c, livraisonAvant.getId(), nouvelleLivraison.getId());
         });
 
         //calculer et stoquer le chemin de la nouvelle livraison vers la livraison apres
@@ -121,7 +121,7 @@ public class Modele implements ModeleLecture
         int idIintersectionApres = livraisonApres.getAdresse();
         Collection<Chemin> cheminsSortantDeNouvelleLiv = Fenetre.dijkstra(plan.getIntersection(nouvelleLivraison.getAdresse()), plan);
         cheminsSortantDeNouvelleLiv.stream().filter((c) -> (c.getIdFin() == idIintersectionApres)).forEach((c) -> {
-            graphe.setChemin(c, nouvelleLivraison.getAdresse(), idIintersectionApres);
+            graphe.setChemin(c, nouvelleLivraison.getId(), livraisonApres.getId());
         });
 
         //MAJ de la tournee (par rapport aux livraisons)
