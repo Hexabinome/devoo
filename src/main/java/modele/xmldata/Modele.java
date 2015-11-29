@@ -81,12 +81,12 @@ public class Modele implements ModeleLecture
                 graphe.setChemin(c, livraisonAvant.getId(), livraisonApres.getId());
             });
         }
-        
+
         //parcourir la tournee calculle par tsp et supprimer la livraison specifiee
         livraisonTournee.stream().forEach((fenetre) -> {
             fenetre.remove(liv);
         });
-        
+
         //supprimer la livraision (dans la demande)
         demande.supprimerLivraision(idLivraison);
 
@@ -301,9 +301,9 @@ public class Modele implements ModeleLecture
         for (Livraison arrivee : sousTourneeLivraisons) {
             Chemin chemin = graphe.getChemin(depart.getId(), arrivee.getId());
 
-            if(chemin==null)
-                throw new RuntimeException("Une action precedente a oublie a completer la graphe: Il n y a aucune chemin entre "+depart.getId()+" et "+arrivee.getId());
-            
+            if (chemin == null)
+                throw new RuntimeException("Une action precedente a oublie a completer la graphe: Il n y a aucune chemin entre " + depart.getId() + " et " + arrivee.getId());
+
             //pour toutes les troncons sur le chemin, ajoute l'arrivee
             for (Troncon troncon : chemin.getTroncons()) {
                 sousTournee.add(troncon.getIdDestination());
@@ -393,7 +393,7 @@ public class Modele implements ModeleLecture
      * @param idLivraison1
      * @param idLivraison2
      */
-    public void echangerLivraisons(int idLivraison1, int idLivraison2)
+    public int echangerLivraisons(int idLivraison1, int idLivraison2, int nouvelleLivraisonId1, int nouvelleLivraisonId2)
     {
         if (demande.getEntrepot().getId() == idLivraison1 || demande.getEntrepot().getId() == idLivraison2)
             throw new RuntimeException("Il est interdit de deplacer l'entrepot.");
@@ -411,12 +411,17 @@ public class Modele implements ModeleLecture
 
         removeLivraison(idLivraison1);
         removeLivraison(idLivraison2);
-
-        Livraison nouvelleLivraison1 = new Livraison(getProchainCustomLivraisonId(), clientId2, intersection2);
-        Livraison nouvelleLivraison2 = new Livraison(getProchainCustomLivraisonId(), clientId1, intersection1);
+        if (nouvelleLivraisonId1 == Integer.MIN_VALUE) {
+            nouvelleLivraisonId1 = getProchainCustomLivraisonId();
+            nouvelleLivraisonId2 = getProchainCustomLivraisonId();
+        }
+        Livraison nouvelleLivraison1 = new Livraison(nouvelleLivraisonId1, clientId2, intersection2);
+        Livraison nouvelleLivraison2 = new Livraison(nouvelleLivraisonId2, clientId1, intersection1);
 
         addLivraison(livrAvantL1.getId(), f1, nouvelleLivraison1);
         addLivraison(livrAvantL2.getId(), f2, nouvelleLivraison2);
+
+        return nouvelleLivraisonId1;
     }
     /*
      public void echangerLivraisons(int idLivraison1, int idLivraison2, int nouvelleId1, int nouvelleId2)
