@@ -7,7 +7,7 @@ import controleur.commande.CommandeException;
 import controleur.commande.CommandeChargerPlan;
 
 /**
- *
+ * Premier état de l'application au lancement. A partir de cet état on ne peut charger un plan.
  * @author Maxou
  */
 public class EtatInitial extends AbstractEtat

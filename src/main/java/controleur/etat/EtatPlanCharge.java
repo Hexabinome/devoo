@@ -8,7 +8,7 @@ import controleur.commande.CommandeChargerDemande;
 import controleur.commande.CommandeChargerPlan;
 
 /**
- *
+ * On se retrouve dans cet état après avoir le chargé le plan.
  * @author Maxou
  */
 public class EtatPlanCharge extends AbstractEtat
@@ -38,7 +38,7 @@ public class EtatPlanCharge extends AbstractEtat
     public EtatInterface chargerLivraisons(File livraisons) throws CommandeException
     {
         new CommandeChargerDemande(controleurDonnees, livraisons).executer();
-        return new EtatDemandeCharge(controleurDonnees);
+        return new EtatDemandeChargee(controleurDonnees);
     }
 
     @Override

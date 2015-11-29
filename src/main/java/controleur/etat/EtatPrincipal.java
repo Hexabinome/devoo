@@ -9,7 +9,7 @@ import controleur.commande.CommandeChargerDemande;
 import controleur.commande.CommandeChargerPlan;
 
 /**
- *
+ * Cet état répresente l'état où la tournée a été calculée.
  * @author Maxou
  */
 public class EtatPrincipal implements EtatInterface

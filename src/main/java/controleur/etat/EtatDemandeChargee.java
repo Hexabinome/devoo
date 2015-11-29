@@ -9,14 +9,15 @@ import controleur.commande.CommandeException;
 import java.io.File;
 
 /**
- * Created by elmhaidara on 29/11/15.
+ * On se retrouve dans cet état après avoir chargé la demande de livraisons mais sans avoir calculé la tournée encore.
+ *
  */
-public class EtatDemandeCharge extends AbstractEtat {
+public class EtatDemandeChargee extends AbstractEtat {
 
     private final ControleurDonnees controleurDonnees;
 
 
-    public EtatDemandeCharge(ControleurDonnees controleurDonnees) {
+    public EtatDemandeChargee(ControleurDonnees controleurDonnees) {
         this.controleurDonnees = controleurDonnees;
     }
 

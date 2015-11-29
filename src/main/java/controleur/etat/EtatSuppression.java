@@ -8,7 +8,7 @@ import controleur.commande.Commande;
 import controleur.commande.CommandeSupprimerLivraison;
 
 /**
- *
+ * On se retrouve dans ce état après avoir cliqué sur le bouton Supprimer livraisons.
  * @author Maxou
  */
 public class EtatSuppression extends AbstractEtat
