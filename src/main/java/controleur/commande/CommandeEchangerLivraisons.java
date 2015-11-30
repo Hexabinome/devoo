@@ -22,6 +22,10 @@ public class CommandeEchangerLivraisons extends CommandAnnulable
         //faire une copie du modele
         super.backupModele(donnees.getModele());
         donnees.getModele().echangerLivraisons(idLivraison1, idLivraison2);
+        
+        //MAJ des horaires de passage
+        donnees.getModele().remplirHoraires();
+        
         donnees.notifierAllMessageObserveurs("L'echange a ete effectue.");
         donnees.notifyAllModelObserveurs();
         donnees.notifyAllAnnulerObserveurs(false);

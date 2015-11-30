@@ -12,8 +12,9 @@ public class CommandeAjouterLivraison extends CommandAnnulable
 
     private final ControleurDonnees controleurDonnees;
     private final int idLivraisonAvant;
-    private final Livraison livraisonAjoutee;
-    private final Fenetre fenetre;
+    private final int idIntersectionLivraison;
+    //private final Livraison livraisonAjoutee;
+    //private final Fenetre fenetre;
 
     /**
      * Crée une nouvelle de commande d'ajout de livraison
@@ -28,8 +29,8 @@ public class CommandeAjouterLivraison extends CommandAnnulable
     {
         this.controleurDonnees = controleurDonnees;
         this.idLivraisonAvant = idLivraisonAvant;
-        this.fenetre = controleurDonnees.getModele().getDemande().getFenetreDeLivraison(idLivraisonAvant);
-        this.livraisonAjoutee = new Livraison(controleurDonnees.getModele().getProchainIdCustomLivraison(this.fenetre), -1, idIntersectionLivraison);
+        this.idIntersectionLivraison = idIntersectionLivraison;
+
     }
 
     @Override
@@ -43,6 +44,9 @@ public class CommandeAjouterLivraison extends CommandAnnulable
     {
         //faire backup
         super.backupModele(controleurDonnees.getModele());
+        
+        Fenetre fenetre = controleurDonnees.getModele().getDemande().getFenetreDeLivraison(idLivraisonAvant);
+        Livraison livraisonAjoutee = new Livraison(controleurDonnees.getModele().getProchainIdCustomLivraison(fenetre), -1, idIntersectionLivraison);
         
         controleurDonnees.getModele().ajouterLivraison(idLivraisonAvant, fenetre, livraisonAjoutee);
         controleurDonnees.notifyAllModelObserveurs();

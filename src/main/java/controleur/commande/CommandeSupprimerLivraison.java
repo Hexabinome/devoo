@@ -18,12 +18,13 @@ public class CommandeSupprimerLivraison extends CommandAnnulable
     /**
      * La livraison supprimée
      */
-    private final Livraison livraisonSupprimee;
+    private int idLivraisonSupprime;
+    //private final Livraison livraisonSupprimee;
 
     /**
      * La fenetre dans laquelle la livraison se trouve
      */
-    private final Fenetre fenetreDeLaLivraison;
+    //private final Fenetre fenetreDeLaLivraison;
 
     /**
      * Identifiant de la livraison qui se trouve
@@ -33,8 +34,8 @@ public class CommandeSupprimerLivraison extends CommandAnnulable
     public CommandeSupprimerLivraison(ControleurDonnees controleurDonnees, int idLivraison)
     {
         this.controleurDonnees = controleurDonnees;
-        this.livraisonSupprimee = controleurDonnees.getModele().getDemande().identifierLivraison(idLivraison);
-        this.fenetreDeLaLivraison = controleurDonnees.getModele().getDemande().getFenetreDeLivraison(idLivraison);
+        this.idLivraisonSupprime = idLivraison;
+        //this.fenetreDeLaLivraison = controleurDonnees.getModele().getDemande().getFenetreDeLivraison(idLivraison);
     }
 
     @Override
@@ -46,6 +47,8 @@ public class CommandeSupprimerLivraison extends CommandAnnulable
     @Override
     public void executer() throws CommandeException
     {
+        Livraison livraisonSupprimee = controleurDonnees.getModele().getDemande().identifierLivraison(idLivraisonSupprime);
+        
     	if(livraisonSupprimee == null) {
     		throw new CommandeException("[SUPPRESSION] La livraison sélectionnée n'existe pas.");
     	}
