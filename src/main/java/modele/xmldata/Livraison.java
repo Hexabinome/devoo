@@ -1,11 +1,13 @@
 package modele.xmldata;
 
+import java.io.Serializable;
+
 /**
  * Represente un livraison a effectuer.
  *
  * @author mhaidara / maxou
  */
-public class Livraison
+public class Livraison implements Serializable
 {
 
     //une fois la tourne a ete calcule on peut associer une horarie de passage a chaque livraison

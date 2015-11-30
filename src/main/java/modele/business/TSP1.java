@@ -1,5 +1,6 @@
 package modele.business;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Iterator;
 import modele.xmldata.Graphe;
@@ -8,7 +9,7 @@ import modele.xmldata.Graphe;
  *
  * @author C.Solnon
  */
-public class TSP1 extends TemplateTSP {
+public class TSP1 extends TemplateTSP implements Serializable {
 
 	@Override
 	protected int bound(Integer sommetCourant, Collection<Integer> nonVus) {

@@ -1,5 +1,6 @@
 package modele.xmldata;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -11,7 +12,7 @@ import java.util.Set;
  *
  * @author Mohamed El Mouctar HAIDARA
  */
-public class Demande
+public class Demande implements Serializable
 {
 
     private final Intersection entrepot;

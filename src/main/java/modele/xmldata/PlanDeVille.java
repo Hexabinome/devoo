@@ -1,5 +1,6 @@
 package modele.xmldata;
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,7 +14,7 @@ import java.util.Map;
  *
  * @author Mohamed El Mouctar HAIDARA / maxou
  */
-public class PlanDeVille {
+public class PlanDeVille implements Serializable {
 
     /**
      * Répresente l'ensemble des intersections du plan sous la forme d'une MAP

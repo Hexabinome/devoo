@@ -1,5 +1,6 @@
 package modele.xmldata;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -14,7 +15,7 @@ import modele.business.TSP1;
  *
  * @author Maxou
  */
-public class Modele implements ModeleLecture
+public class Modele implements ModeleLecture, Serializable
 {
 
     private final PlanDeVille plan;

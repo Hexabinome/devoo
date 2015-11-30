@@ -1,10 +1,12 @@
 package modele.xmldata;
 
+import java.io.Serializable;
+
 /**
  * Represente un troncon de rue entre deux intersections.
  * @author Mohamed El Mouctar HAIDARA / maxou
  */
-public class Troncon {
+public class Troncon  implements Serializable{
 
     /**
      * Nom de la rue dans lequel le troncon se trouve.

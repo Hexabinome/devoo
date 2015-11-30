@@ -1,5 +1,6 @@
 package modele.xmldata;
 
+import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -10,7 +11,7 @@ import java.util.Map.Entry;
  *
  * @author mhaidara / maxou
  */
-public class Intersection {
+public class Intersection  implements Serializable{
 
     private final int id;
     private final int x;

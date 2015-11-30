@@ -1,5 +1,6 @@
 package modele.xmldata;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -18,7 +19,7 @@ import java.util.Set;
  *
  * @author jolan
  */
-public class Fenetre
+public class Fenetre implements Serializable
 {
 
     private final int heureDebut;

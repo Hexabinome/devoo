@@ -7,7 +7,7 @@ import modele.xmldata.Livraison;
 /**
  * Représente une commande de suppression de livraisons
  */
-public class CommandeSupprimerLivraison implements Commande
+public class CommandeSupprimerLivraison extends CommandAnnulable
 {
 
     /**
@@ -59,6 +59,9 @@ public class CommandeSupprimerLivraison implements Commande
         if (f.getListeLivraisons().size() <= 1) {
             throw new CommandeException("[SUPPRESSION] Il est interdit de supprimer la dernière livraison dans une fenêtre.");
         }
+        
+        //garder une copie de la modele
+        super.backupModele(controleurDonnees.getModele());
 
         idLivraisonAvant = controleurDonnees.getModele().supprimerLivraison(livraisonSupprimee.getId());
         controleurDonnees.getModele().remplirHoraires();
@@ -80,7 +83,9 @@ public class CommandeSupprimerLivraison implements Commande
     @Override
     public void annuler()
     {
-        controleurDonnees.getModele().ajouterLivraison(idLivraisonAvant, fenetreDeLaLivraison, livraisonSupprimee);
+        //controleurDonnees.getModele().ajouterLivraison(idLivraisonAvant, fenetreDeLaLivraison, livraisonSupprimee);
+        controleurDonnees.setModele(super.getModelCopie());
+        
         controleurDonnees.notifyAllModelObserveurs();
         controleurDonnees.notifyAllRetablirObserveurs(false);
 

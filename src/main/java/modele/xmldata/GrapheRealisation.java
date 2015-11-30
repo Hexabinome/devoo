@@ -1,5 +1,6 @@
 package modele.xmldata;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -7,7 +8,7 @@ import java.util.Objects;
  *
  * @author maxou
  */
-public class GrapheRealisation implements Graphe
+public class GrapheRealisation implements Graphe, Serializable
 {
 
     private final Chemin[][] chemins;

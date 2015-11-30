@@ -1,10 +1,11 @@
 package modele.xmldata;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Chemin
+public class Chemin implements Serializable
 {
 
     private float cout;
