@@ -1,6 +1,5 @@
 package controleur.commande;
 
-import java.awt.Desktop.Action;
 import java.io.File;
 import java.io.IOException;
 
@@ -38,7 +37,7 @@ public class CommandeChargerPlan extends CommandeNonAnnulable
             controleurDonnees.notifierLesObserveursDuPlan(true); // notification des observeurs du plan
             controleurDonnees.notifierLesObserveursDuChargementDuPlan(true);
             controleurDonnees.notifyAllCalculerTourneeObserveurs(true);
-            controleurDonnees.notifierAllMessageObserveurs(String.format("Plan de la ville (%s) chargé avec succès !", planFichier.getName()));
+            controleurDonnees.notifierAllMessageObserveurs(String.format("Plan de la ville (%s) chargé avec succès ! Veuillez charger la demande de livraison maintenant.", planFichier.getName()));
         }
         catch (JDOMException | IOException | SAXException | ExceptionXML ex) {
             throw new CommandeException(ex.getMessage());
