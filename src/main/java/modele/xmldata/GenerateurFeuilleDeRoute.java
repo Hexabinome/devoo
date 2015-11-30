@@ -56,6 +56,7 @@ public class GenerateurFeuilleDeRoute {
                 }
                 if (livraison != null) {
                     feuilleDeRoute.append("* ").append(convertirEnHeureLisible(livraison.getHoraireDePassage()))
+                    		.append(" -> ").append(convertirEnHeureLisible(livraison.getHoraireDePassage() + 600))
                             .append(" - Effectuez la livraison ").append(livraison.getId())
                             .append(" chez le client ").append(livraison.getClientId())
                             .append(" à l'adresse ").append(livraison.getAdresse())

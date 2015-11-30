@@ -208,7 +208,7 @@ public class VuePrincipale implements Initializable, PlanObserveur, ActiverCharg
         aProposDialog.showAndWait();
     }
     
-    private final String TEXTE_APROPOS_HEADER = String.format("Opti'mod Lyon - H4105%sGérer vos livraisons de façon optimale !", System.lineSeparator());
+    private final String TEXTE_APROPOS_HEADER = String.format("Optimod'Lyon - H4105%sGérer vos livraisons de façon optimale !", System.lineSeparator());
     private final String TEXTE_APROPOS = new StringBuilder().append("Réalisé par l'hexanôme H4105 de l'INSA Lyon (2015) :")
     										.append(System.lineSeparator())
     										.append("Alexis Andra").append(System.lineSeparator())

@@ -40,7 +40,7 @@ public class CommandeEchangerLivraisons extends CommandAnnulable
     {
         donnees.setModele(super.getModelCopie());
         //donnees.getModele().echangerLivraisons(nouvelleLivraisonId1, nouvelleLivraisonId2, idLivraison1, idLivraison2);
-        donnees.notifierAllMessageObserveurs("L'echange a ete annullee.");
+        donnees.notifierAllMessageObserveurs(String.format("L'échange %d <-> %d a été annulée.", idLivraison1, idLivraison2));
         donnees.notifyAllModelObserveurs();
         
         donnees.notifyAllRetablirObserveurs(false);

@@ -8,6 +8,8 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.sun.javafx.scene.traversal.Hueristic2D;
+
 import modele.business.TSP;
 import modele.business.TSP1;
 
@@ -344,11 +346,14 @@ public class Modele implements ModeleLecture, Serializable
                 for (Livraison l : fenetre.getListeLivraisons().values()) {
                     if (l.getAdresse() == intersectionCourante && !dejaVisites.contains(l.getAdresse())) {
                         l.setRetard(false);
-                        if (heure < fenetre.getTimestampDebut())
+                        if (heure < fenetre.getTimestampDebut()) {
                             heure = fenetre.getTimestampDebut();
-                        else if (heure > fenetre.getTimestampFin())
+                        }
+                        else if (heure > fenetre.getTimestampFin()) {
                             l.setRetard(true);
+                        }
                         l.setHoraireDePassage(heure);
+                        heure += 600; // Livraison = 10 minutes
                         dejaVisites.add(l.getAdresse());
                         break;
                     }
