@@ -214,6 +214,7 @@ public class VueTextuelle implements Initializable, Visiteur, ActivationObserver
         @Override
         protected void updateItem(String item, boolean empty) {
             super.updateItem(item, empty);
+            setStyle("-fx-background-color: white; -fx-text-fill: black;");
             // Pour afficher l'entrepot
             if (item != null && item.startsWith("-1")) {
                 setText("Entrepot");
