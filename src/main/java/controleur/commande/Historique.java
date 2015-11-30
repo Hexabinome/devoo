@@ -6,7 +6,7 @@ import java.util.Deque;
 /**
  * Cette classe gere l'historique des commandes pour le undo et le redo
  *
- * @author Max Schiedermeier
+ * @author Maxou
  */
 public class Historique {
 
@@ -21,8 +21,8 @@ public class Historique {
     Deque<Commande> commandesARetablir;
 
     public Historique() {
-        commandesAAnnuller = new ArrayDeque<Commande>();
-        commandesARetablir = new ArrayDeque<Commande>();
+        commandesAAnnuller = new ArrayDeque<>();
+        commandesARetablir = new ArrayDeque<>();
     }
 
     /**

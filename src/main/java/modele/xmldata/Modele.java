@@ -22,6 +22,8 @@ public class Modele implements ModeleLecture, Serializable
     private final Demande demande;
     private GrapheRealisation graphe;
     private TSP tsp;
+    
+    private int customLivraisonCompteur = Integer.MAX_VALUE;
 
     //cette liste des listes stoque pour chque fenetre les livraisons a effecturer dans une tournee calcule par TSP (sans l'entrepot au debout et a la fin de sla tournee)
     private List<List<Livraison>> livraisonTournee;
@@ -388,27 +390,28 @@ public class Modele implements ModeleLecture, Serializable
      */
     public int getProchainIdCustomLivraison(Fenetre fenetre)
     {
-        return fenetre.getMaxIdLivraison() + 1;
+        customLivraisonCompteur--;
+        return customLivraisonCompteur;
 
         /*
-        int id = 0;
-        for (Fenetre fenetre : demande.getFenetres()) {
-            if (fenetre == f) {
-                id = fenetre.getMaxIdLivraison();
-                break;
-            }
-        }
-        id++;
-        return id;*/
+         int id = 0;
+         for (Fenetre fenetre : demande.getFenetres()) {
+         if (fenetre == f) {
+         id = fenetre.getMaxIdLivraison();
+         break;
+         }
+         }
+         id++;
+         return id;*/
     }
 
     /**
-     *
+     * Echnage deux livraisons
      *
      * @param idLivraison1
      * @param idLivraison2
      */
-    public int echangerLivraisons(int idLivraison1, int idLivraison2, int nouvelleLivraisonId1, int nouvelleLivraisonId2)
+    public void echangerLivraisons(int idLivraison1, int idLivraison2)
     {
         if (demande.getEntrepot().getId() == idLivraison1 || demande.getEntrepot().getId() == idLivraison2)
             throw new RuntimeException("Il est interdit de deplacer l'entrepot.");
@@ -426,17 +429,15 @@ public class Modele implements ModeleLecture, Serializable
 
         supprimerLivraison(idLivraison1);
         supprimerLivraison(idLivraison2);
-        if (nouvelleLivraisonId1 == Integer.MIN_VALUE) {
-            nouvelleLivraisonId1 = getProchainIdCustomLivraison(f1);
-            nouvelleLivraisonId2 = getProchainIdCustomLivraison(f2);
-        }
+        //if (nouvelleLivraisonId1 == Integer.MIN_VALUE) {
+        int nouvelleLivraisonId1 = getProchainIdCustomLivraison(f1);
+        int nouvelleLivraisonId2 = getProchainIdCustomLivraison(f2);
+        //}
         Livraison nouvelleLivraison1 = new Livraison(nouvelleLivraisonId1, clientId2, intersection2);
         Livraison nouvelleLivraison2 = new Livraison(nouvelleLivraisonId2, clientId1, intersection1);
 
         ajouterLivraison(livrAvantL1.getId(), f1, nouvelleLivraison1);
         ajouterLivraison(livrAvantL2.getId(), f2, nouvelleLivraison2);
-
-        return nouvelleLivraisonId1;
     }
 
 }
