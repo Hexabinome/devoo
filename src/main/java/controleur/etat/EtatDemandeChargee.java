@@ -61,7 +61,7 @@ public class EtatDemandeChargee extends AbstractEtat {
     @Override
     public EtatInterface clicDroit() {
         // Ne fais rien
-    	return;
+    	return this;
         //throw new RuntimeException("Le clic droit sur cet état n'a pas d'effet");
     }
 
