@@ -32,7 +32,7 @@ public class Historique {
      */
     public void ajouterCommande(Commande commande) {
         commandesAAnnuller.push(commande);
-        effacerCommandeARetablir(); // on efface les commandes qui avaient été annulées quand une ajoute une nouvelle commande
+        //effacerCommandeARetablir(); // on efface les commandes qui avaient été annulées quand une ajoute une nouvelle commande
     }
 
     /**

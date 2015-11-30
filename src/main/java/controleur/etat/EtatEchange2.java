@@ -30,7 +30,9 @@ public class EtatEchange2 extends AbstractEtat {
     		// TODO message
     		e.printStackTrace();
     	}
-    	
+		donnees.ajouterCommande(cmdEchanger);
+		donnees.effacerCommandesARetablir();
+
     	EtatInterface nouvelEtat = new EtatEchange(donnees);
     	donnees.notifierAllMessageObserveurs(String.format("[ECHANGE] Les livraisons %d <-> %d ont été échangées avec succès. Veuillez choisir la première livraison en cliquant sur le plan ou sur la liste à gauche. Clic droit pour revenir au choix de la première livraison.", idLivraison, livraisonId));
     	return nouvelEtat;
@@ -66,8 +68,7 @@ public class EtatEchange2 extends AbstractEtat {
     				try {
     					cmdEchanger.executer();
                         donnees.ajouterCommande(cmdEchanger);
-                        donnees.notifyAllModelObserveurs();
-                        donnees.notifyAllAnnulerObserveurs(false);
+						donnees.effacerCommandesARetablir();
     				} catch (CommandeException e) {
     					// TODO message
     					e.printStackTrace();
