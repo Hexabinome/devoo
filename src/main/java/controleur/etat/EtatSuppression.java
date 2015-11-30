@@ -19,6 +19,8 @@ public class EtatSuppression extends AbstractEtat
     public EtatSuppression(ControleurDonnees donnees)
     {
         this.donnees = donnees;
+        donnees.notifierLesObserveursDuChargementDuPlan(false);
+        donnees.notifierLesObserveursDuPlan(false);
         donnees.notifierAllMessageObserveurs("[SUPPRESSION] Souhaitez-vous supprimer une livraison ? Choisissez dans la liste à gauche la livraison que vous voulez supprimer. Clic droit pour sortir du mode de suppression.");
     }
 

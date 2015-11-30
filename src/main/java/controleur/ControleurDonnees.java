@@ -1,5 +1,6 @@
 package controleur;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 
@@ -37,6 +38,8 @@ public class ControleurDonnees
     
     private final Collection<PlanObserveur> planObserveurs;
     
+    private final Collection<ActiverChargementPlanObserveur> chargementPlanObserveurs;
+    
     private final Collection<ActivationObserverInterface> tourneeObserveurs;
     
     private final Collection<MessageObserveur> messageObserveurs;
@@ -55,6 +58,7 @@ public class ControleurDonnees
         tourneeObserveurs = new LinkedList<>();
         messageObserveurs = new LinkedList<>();
         hist = new Historique();
+        chargementPlanObserveurs = new ArrayList<ActiverChargementPlanObserveur>();
     }
     
     public Modele getModele()
@@ -112,6 +116,10 @@ public class ControleurDonnees
         planObserveurs.add(planObserveur);
     }
     
+    public void ajouterChargementPlanObserveur(ActiverChargementPlanObserveur chargementPlanObserveur) {
+    	chargementPlanObserveurs.add(chargementPlanObserveur);
+    }
+    
     void ajouterTourneeObserveur(ActivationObserverInterface tourneeObserveur)
     {
         tourneeObserveurs.add(tourneeObserveur);
@@ -127,10 +135,16 @@ public class ControleurDonnees
         hist.ajouterCommande(commande);
     }
     
-    public void notifierLesObserveursDuPlan()
+    public void notifierLesObserveursDuPlan(boolean activer)
     {
         planObserveurs.stream().forEach((planObserveur -> {
-            planObserveur.notificationPlanAChange();
+            planObserveur.notificationPlanAChange(activer);
+        }));
+    }
+    
+    public void notifierLesObserveursDuChargementDuPlan(boolean activer) {
+    	chargementPlanObserveurs.stream().forEach((chargementPlanObserveur -> {
+    		chargementPlanObserveur.notificationActiverChargementPlan(activer);
         }));
     }
     

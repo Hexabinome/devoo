@@ -19,6 +19,8 @@ public interface ControleurInterface
 
     void ajouterPlanObserveur(PlanObserveur planObserveur);
     
+    void ajouterActivationChargementPlanObserveur(ActiverChargementPlanObserveur chargementPlanObserveur);
+    
     void ajouterTourneeObserveur(ActivationObserverInterface tourneeObserveur);
 
     void ajouterAnnulerCommandeObserveur(AnnulerCommandeObserveur annulerCommandeObserveur);

@@ -24,6 +24,7 @@ import modele.xmldata.ModeleLecture;
 
 import org.controlsfx.dialog.ExceptionDialog;
 
+import controleur.ActiverChargementPlanObserveur;
 import controleur.AnnulerCommandeObserveur;
 import controleur.ControleurInterface;
 import controleur.ModelObserveur;
@@ -38,7 +39,7 @@ import controleur.commande.CommandeException;
  *
  * @author David
  */
-public class VuePrincipale implements Initializable, PlanObserveur, ModelObserveur, AnnulerCommandeObserveur,
+public class VuePrincipale implements Initializable, PlanObserveur, ActiverChargementPlanObserveur, ModelObserveur, AnnulerCommandeObserveur,
         RetablirCommandeObserveur {
 
     /**
@@ -174,8 +175,11 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
         file = ouvrirSelectionneurDeFichier("Choissiez le plan de la ville");
         if (file != null) {
             Exception messageErreur = controleurApplication.chargerPlan(file);
-            if (messageErreur != null)
+            if (messageErreur != null) {
                 ouvrirErreurFichier(messageErreur, file.getName());
+            } else {
+            	vueGraphique.construireGraphe(controleurApplication.getPlanDeVille());
+            }
         }
     }
 
@@ -338,16 +342,21 @@ public class VuePrincipale implements Initializable, PlanObserveur, ModelObserve
         controleurApplication.ajouterAnnulerCommandeObserveur(this);
         controleurApplication.ajouterRetablirCommandeObserveur(this);
         controleurApplication.ajouterMessageObserveur(message);
+        controleurApplication.ajouterActivationChargementPlanObserveur(this);
     }
 
     @Override
-    public void notificationPlanAChange() {
-        vueGraphique.construireGraphe(controleurApplication.getPlanDeVille());
+    public void notificationPlanAChange(boolean activer) {
+        //vueGraphique.construireGraphe(controleurApplication.getPlanDeVille());
         //activation de menu element graphique qui permet de charger un fichier de livraison
         //(Ici on peut le faire sans appel observeur, parce qu' a parti d'ici on possede toujours un plan valide.)
-        menuFichier.getItems().get(1).setDisable(false);
-
+        menuFichier.getItems().get(1).setDisable(!activer);
     }
+
+	@Override
+	public void notificationActiverChargementPlan(boolean activer) {
+		menuFichier.getItems().get(0).setDisable(!activer);
+	}
 
     @Override
     public void notificationModelAChange() {

@@ -19,6 +19,7 @@ public class EtatPlanCharge extends AbstractEtat
     public EtatPlanCharge(ControleurDonnees controleurDonnees)
     {
         this.controleurDonnees = controleurDonnees;
+        controleurDonnees.notifierLesObserveursDuChargementDuPlan(true);
     }
 
     @Override
@@ -57,7 +58,7 @@ public class EtatPlanCharge extends AbstractEtat
 
     @Override
     public EtatInterface clicDroit() {
-        // Ne fais rien
+        // Ne fait rien
         return this;
     }
 

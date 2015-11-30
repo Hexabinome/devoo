@@ -168,4 +168,10 @@ public class Controleur implements ControleurInterface {
 		controleurDonnees.ajouterMessageObserveur(obs);    
 	}
 
+	@Override
+	public void ajouterActivationChargementPlanObserveur(ActiverChargementPlanObserveur chargementPlanObserveur) {
+		controleurDonnees.ajouterChargementPlanObserveur(chargementPlanObserveur);
+		
+	}
+
 }

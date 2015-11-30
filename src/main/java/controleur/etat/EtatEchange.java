@@ -20,6 +20,8 @@ public class EtatEchange extends AbstractEtat
     public EtatEchange(ControleurDonnees donnees)
     {
         this.donnees = donnees;
+        donnees.notifierLesObserveursDuChargementDuPlan(false);
+        donnees.notifierLesObserveursDuPlan(false);
         this.donnees.notifierAllMessageObserveurs("[ECHANGE] Souhaitez-vous échanger deux livraisons ? Veuillez choisir la première livraison en cliquant sur le plan ou sur la liste à gauche. Clic droit pour sortir du mode d'échange.");
     }
 

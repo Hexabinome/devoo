@@ -1,5 +1,6 @@
 package controleur.commande;
 
+import java.awt.Desktop.Action;
 import java.io.File;
 import java.io.IOException;
 
@@ -34,7 +35,8 @@ public class CommandeChargerPlan extends CommandeNonAnnulable
             //remplacer plan qui est charge d'un nouveau plan (ssi le chargement du xml a reussi)
             controleurDonnees.setPlan(DeserialiseurXML.ouvrirPlanDeVille(planFichier));
             controleurDonnees.notifyAllActObserveurs(true);
-            controleurDonnees.notifierLesObserveursDuPlan(); // notification des observeurs du plan
+            controleurDonnees.notifierLesObserveursDuPlan(true); // notification des observeurs du plan
+            controleurDonnees.notifierLesObserveursDuChargementDuPlan(true);
             controleurDonnees.notifyAllCalculerTourneeObserveurs(true);
             controleurDonnees.notifierAllMessageObserveurs(String.format("Plan de la ville (%s) chargé avec succès !", planFichier.getName()));
         }
