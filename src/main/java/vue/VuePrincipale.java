@@ -196,6 +196,29 @@ public class VuePrincipale implements Initializable, PlanObserveur, ActiverCharg
                 ouvrirErreurFichier(exception, file.getName());
         }
     }
+    
+    @FXML
+    public void aPropos() {
+        Alert aProposDialog = new Alert(AlertType.INFORMATION);
+        aProposDialog.setTitle("A propos");
+        aProposDialog.setHeaderText(TEXTE_APROPOS_HEADER);
+        aProposDialog.setContentText(TEXTE_APROPOS);
+        aProposDialog.setResizable(false);
+
+        aProposDialog.showAndWait();
+    }
+    
+    private final String TEXTE_APROPOS_HEADER = String.format("Opti'mod Lyon - H4105%sGérer vos livraisons de façon optimale !", System.lineSeparator());
+    private final String TEXTE_APROPOS = new StringBuilder().append("Réalisé par l'hexanôme H4105 de l'INSA Lyon (2015) :")
+    										.append(System.lineSeparator())
+    										.append("Alexis Andra").append(System.lineSeparator())
+    										.append("Jolan Cornevin").append(System.lineSeparator())
+    										.append("Mohamed Haidara").append(System.lineSeparator())
+    										.append("Alexis Papin").append(System.lineSeparator())
+    										.append("Robin Royer").append(System.lineSeparator())
+    										.append("Maximilian Schiedermeier").append(System.lineSeparator())
+    										.append("David Wobrock").append(System.lineSeparator())
+    										.toString();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
