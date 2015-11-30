@@ -23,7 +23,7 @@ public class Modele implements ModeleLecture, Serializable
     private GrapheRealisation graphe;
     private TSP tsp;
     
-    private int customLivraisonCompteur = Integer.MAX_VALUE;
+    private int customLivraisonCompteur = 420000;
 
     //cette liste des listes stoque pour chque fenetre les livraisons a effecturer dans une tournee calcule par TSP (sans l'entrepot au debout et a la fin de sla tournee)
     private List<List<Livraison>> livraisonTournee;
@@ -205,6 +205,7 @@ public class Modele implements ModeleLecture, Serializable
 
         //creer a parti des listes des livraisonsid, la tournee (granularite intersecitons)
         intersectionTournee = creerIntersectionTournee();
+        
         //egalement calculer les horaires de passage pour chaque livraison
         remplirHoraires();
     }
@@ -323,7 +324,7 @@ public class Modele implements ModeleLecture, Serializable
     }
 
     public void remplirHoraires()
-    {
+    {        
         int heure = demande.getFenetres().get(1).getTimestampDebut();
         int intersectionCourante = demande.getEntrepot().getId();
 
@@ -392,17 +393,6 @@ public class Modele implements ModeleLecture, Serializable
     {
         customLivraisonCompteur--;
         return customLivraisonCompteur;
-
-        /*
-         int id = 0;
-         for (Fenetre fenetre : demande.getFenetres()) {
-         if (fenetre == f) {
-         id = fenetre.getMaxIdLivraison();
-         break;
-         }
-         }
-         id++;
-         return id;*/
     }
 
     /**

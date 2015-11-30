@@ -61,12 +61,12 @@ public class EtatEchange2 extends AbstractEtat
         for (List<Livraison> fenetre : livraisons) {
             for (Livraison l : fenetre) {
                 if (l.getAdresse() == intersectionId) {
-                    //ignorer si c'estait l'entrepot
+                    //ignorer si c'etait l'entrepot
                     if (donnees.getModele().getDemande().getEntrepot().getId() == intersectionId) {
                         donnees.notifierAllMessageObserveurs("[ECHANGE] Déplacement de l'entrepôt impossible. Veuillez choisir la deuxième livraison en cliquant sur le plan ou sur la liste à gauche. Clic droit pour revenir au choix de la première livraison.");
                         return this;
                     }
-                    cliqueSurLivraison(l.getId());
+                    return cliqueSurLivraison(l.getId());
                 }
             }
         }
