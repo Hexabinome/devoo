@@ -16,6 +16,7 @@ import modele.business.TSP1;
  */
 public class Modele implements ModeleLecture
 {
+
     private final PlanDeVille plan;
     private final Demande demande;
     private GrapheRealisation graphe;
@@ -28,8 +29,8 @@ public class Modele implements ModeleLecture
     private List<List<Integer>> intersectionTournee;
 
     //Renseigne si une livraison à été supprimer derniérement, pour pouvoir recalculer un id de livraison en cas d'ajout
-	boolean aUneLivraisonSupprimer= false;
-	
+    boolean aUneLivraisonSupprimer = false;
+
     public Modele(PlanDeVille plan, Demande demande)
     {
         this.plan = plan;
@@ -66,7 +67,7 @@ public class Modele implements ModeleLecture
      */
     public int supprimerLivraison(int idLivraison)
     {
-    	aUneLivraisonSupprimer = true;
+        aUneLivraisonSupprimer = true;
         //identifier la livraison
         Livraison liv = demande.identifierLivraison(idLivraison);
 
@@ -384,19 +385,20 @@ public class Modele implements ModeleLecture
      *
      * @return
      */
-    public int getProchainIdCustomLivraison(Fenetre f)
+    public int getProchainIdCustomLivraison(Fenetre fenetre)
     {
-    	int id=0;
-		for(Fenetre fenetre : demande.getFenetres())
-		{
-			if(fenetre == f)
-			{
-				id = fenetre.getMaxIdLivraison();
-				break;
-			}
-		}
-		id++;
-        return id;
+        return fenetre.getMaxIdLivraison() + 1;
+
+        /*
+        int id = 0;
+        for (Fenetre fenetre : demande.getFenetres()) {
+            if (fenetre == f) {
+                id = fenetre.getMaxIdLivraison();
+                break;
+            }
+        }
+        id++;
+        return id;*/
     }
 
     /**
