@@ -24,6 +24,7 @@ import modele.xmldata.ModeleLecture;
 
 import org.controlsfx.dialog.ExceptionDialog;
 
+import controleur.ActivationObserveurAutresBoutonInterface;
 import controleur.ActiverChargementPlanObserveur;
 import controleur.AnnulerCommandeObserveur;
 import controleur.ControleurInterface;
@@ -40,7 +41,7 @@ import controleur.commande.CommandeException;
  * @author David
  */
 public class VuePrincipale implements Initializable, PlanObserveur, ActiverChargementPlanObserveur, ModelObserveur, AnnulerCommandeObserveur,
-        RetablirCommandeObserveur {
+        RetablirCommandeObserveur, ActivationObserveurAutresBoutonInterface  {
 
     /**
      * Mediateur : permet de communiquer avec les autres controleurs
@@ -337,6 +338,7 @@ public class VuePrincipale implements Initializable, PlanObserveur, ActiverCharg
         controleurApplication.ajouterDesactObserver(supprimerLivraisonBouton);
         controleurApplication.ajouterDesactObserver(genererFeuilleBouton);
         controleurApplication.ajouterTourneeObserveur(calculerTourneeBouton);
+        controleurApplication.ajouterAutresBoutonsObserveur(this);
         controleurApplication.ajouterPlanObserveur(this);
         controleurApplication.ajouterModelObserver(this);
         controleurApplication.ajouterAnnulerCommandeObserveur(this);
@@ -368,7 +370,15 @@ public class VuePrincipale implements Initializable, PlanObserveur, ActiverCharg
         vueGraphique.construireDemande(modele.getDemande());
         vueGraphique.desactiverSurbrillance();
     }
-
+    
+	@Override
+	public void notifierLesAutresBoutons(boolean activer) {
+		this.ajouterLivraisonBouton.setDisable(!activer);
+		this.echangerLivraisonsBouton.setDisable(!activer);
+		this.supprimerLivraisonBouton.setDisable(!activer);
+		this.genererFeuilleBouton.setDisable(!activer);
+	}
+	
     @Override
     public void notificationAnnulerCommande(boolean activation) {
         menuEdition.getItems().get(0).setDisable(activation);

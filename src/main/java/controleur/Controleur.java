@@ -171,7 +171,14 @@ public class Controleur implements ControleurInterface {
 	@Override
 	public void ajouterActivationChargementPlanObserveur(ActiverChargementPlanObserveur chargementPlanObserveur) {
 		controleurDonnees.ajouterChargementPlanObserveur(chargementPlanObserveur);
+	}
+
+	@Override
+	public void ajouterAutresBoutonsObserveur(ActivationObserveurAutresBoutonInterface obs) {
+		controleurDonnees.ajouterAutresBoutonsObserveurs(obs);
 		
 	}
+	
+	
 
 }

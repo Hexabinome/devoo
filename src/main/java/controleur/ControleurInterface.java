@@ -26,6 +26,8 @@ public interface ControleurInterface
     void ajouterAnnulerCommandeObserveur(AnnulerCommandeObserveur annulerCommandeObserveur);
 
     void ajouterRetablirCommandeObserveur(RetablirCommandeObserveur retablirCommandeObserveur);
+    
+    void ajouterAutresBoutonsObserveur(ActivationObserveurAutresBoutonInterface obs);
 
     void cliqueSurPlan(int intersectionId);
     
