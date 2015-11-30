@@ -53,7 +53,7 @@ public class Historique {
         if (!commandesARetablir.isEmpty()) {
             Commande commande = commandesARetablir.pop();
             commande.executer();
-            commandesAAnnuller.add(commande);
+            commandesAAnnuller.push(commande);
         }
     }
 
