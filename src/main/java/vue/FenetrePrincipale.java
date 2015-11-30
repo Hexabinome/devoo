@@ -14,9 +14,9 @@ import javafx.stage.Stage;
 public class FenetrePrincipale extends Application {
 
 
-    private final int LARGEUR_FENETRE = 1300;
+    private final int LARGEUR_FENETRE = 1000;
 
-    private final int HAUTEUR_FENETRE = 800;
+    private final int HAUTEUR_FENETRE = 668;
 
     /**
      * Lance l'application
