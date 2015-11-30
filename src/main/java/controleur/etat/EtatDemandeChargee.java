@@ -18,6 +18,7 @@ public class EtatDemandeChargee extends AbstractEtat {
 
 
     public EtatDemandeChargee(ControleurDonnees controleurDonnees) {
+    	controleurDonnees.notifierLesAutresBoutons(false);
         this.controleurDonnees = controleurDonnees;
     }
 

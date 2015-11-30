@@ -44,6 +44,8 @@ public class ControleurDonnees
     
     private final Collection<MessageObserveur> messageObserveurs;
     
+    private final Collection<ActivationObserveurAutresBoutonInterface> autresBoutonsObserveurs;
+    
     private PlanDeVille plan = null;
     
     private Historique hist;
@@ -59,6 +61,7 @@ public class ControleurDonnees
         messageObserveurs = new LinkedList<>();
         hist = new Historique();
         chargementPlanObserveurs = new ArrayList<ActiverChargementPlanObserveur>();
+        autresBoutonsObserveurs = new ArrayList<ActivationObserveurAutresBoutonInterface>();
     }
     
     public Modele getModele()
@@ -130,6 +133,10 @@ public class ControleurDonnees
         messageObserveurs.add(obs);
     }
     
+    void ajouterAutresBoutonsObserveurs(ActivationObserveurAutresBoutonInterface observeur) {
+    	autresBoutonsObserveurs.add(observeur);
+    }
+    
     public void ajouterCommande(Commande commande)
     {
         hist.ajouterCommande(commande);
@@ -188,6 +195,10 @@ public class ControleurDonnees
         messageObserveurs.stream().forEach((obs) -> {
             obs.notifierMessagObserveur(message);
         });
+    }
+    
+    public void notifierLesAutresBoutons(boolean activation) {
+    	autresBoutonsObserveurs.forEach(obs -> obs.notifierLesAutresBoutons(activation));
     }
 
     /**

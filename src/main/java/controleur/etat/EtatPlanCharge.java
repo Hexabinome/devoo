@@ -20,6 +20,7 @@ public class EtatPlanCharge extends AbstractEtat
     {
         this.controleurDonnees = controleurDonnees;
         controleurDonnees.notifierLesObserveursDuChargementDuPlan(true);
+        controleurDonnees.notifierLesAutresBoutons(false);
     }
 
     @Override
