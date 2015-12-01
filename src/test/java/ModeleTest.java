@@ -38,7 +38,7 @@ public class ModeleTest
     {
         // initialisation na parti des fichiers xml
         PlanDeVille ville = DeserialiseurXML.ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/plan10x10.xml"));
-        Demande demande = DeserialiseurXML.ouvrirLivraison(ClassLoader.getSystemResourceAsStream("samples/livraison10x10-1.xml"), ville);
+        Demande demande = DeserialiseurXML.ouvrirDemande(ClassLoader.getSystemResourceAsStream("samples/livraison10x10-1.xml"), ville);
         ModeleLecture monModel = new Modele(ville, demande);
 
         // tester contructeur du modele
@@ -56,7 +56,7 @@ public class ModeleTest
     {
         // initialisation a parti des fichiers xml
         PlanDeVille ville = DeserialiseurXML.ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/plan10x10.xml"));
-        Demande demande = DeserialiseurXML.ouvrirLivraison(ClassLoader.getSystemResourceAsStream("samples/livraison10x10-1.xml"), ville);
+        Demande demande = DeserialiseurXML.ouvrirDemande(ClassLoader.getSystemResourceAsStream("samples/livraison10x10-1.xml"), ville);
         Modele monModel = new Modele(ville, demande);
 
         //tester si on peut bien calculer la tournee

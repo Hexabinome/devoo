@@ -131,7 +131,7 @@ public class DeserialiseurXMLTest {
     public void TestOuvrirLivraison() throws JDOMException, IOException, SAXException, ParseException, ExceptionXML {
         PlanDeVille ville = DeserialiseurXML.ouvrirPlanDeVille(
                 ClassLoader.getSystemResourceAsStream("samples/planTest.xml"));
-        Demande demande = DeserialiseurXML.ouvrirLivraison(
+        Demande demande = DeserialiseurXML.ouvrirDemande(
                 ClassLoader.getSystemResourceAsStream("samples/livraisonTest.xml"), ville);
 
         Livraison livr1 = new Livraison(1, 1, 1);
@@ -279,7 +279,7 @@ public class DeserialiseurXMLTest {
 
         PlanDeVille ville = DeserialiseurXML.ouvrirPlanDeVille(
                 ClassLoader.getSystemResourceAsStream("samples/plan10x10.xml"));
-        Demande demande = DeserialiseurXML.ouvrirLivraison(
+        Demande demande = DeserialiseurXML.ouvrirDemande(
                 ClassLoader.getSystemResourceAsStream("samples/livraisonErreur1.xml"), ville);
         fail("le chargement devrait lever une erreur");
 
@@ -292,7 +292,7 @@ public class DeserialiseurXMLTest {
         // Adresse de l'entreport inexistant
         PlanDeVille ville = DeserialiseurXML.ouvrirPlanDeVille(
                 ClassLoader.getSystemResourceAsStream("samples/plan10x10.xml"));
-        Demande demande = DeserialiseurXML.ouvrirLivraison(
+        Demande demande = DeserialiseurXML.ouvrirDemande(
                 ClassLoader.getSystemResourceAsStream("samples/livraisonErreur2.xml"), ville);
         fail("Le chargement aurait du lever une Exception de type JDOMParseException");
 
@@ -305,7 +305,7 @@ public class DeserialiseurXMLTest {
         // heure de fin avant l'heure de debut
         PlanDeVille ville = DeserialiseurXML.ouvrirPlanDeVille(
                 ClassLoader.getSystemResourceAsStream("samples/plan10x10.xml"));
-        Demande demande = DeserialiseurXML.ouvrirLivraison(
+        Demande demande = DeserialiseurXML.ouvrirDemande(
                 ClassLoader.getSystemResourceAsStream("samples/livraisonErreur3.xml"), ville);
         fail("Le chargement aurait du lever une Exception de type ExceptionXML");
 
@@ -319,7 +319,7 @@ public class DeserialiseurXMLTest {
 
         PlanDeVille ville = DeserialiseurXML.ouvrirPlanDeVille(
                 ClassLoader.getSystemResourceAsStream("samples/plan10x10.xml"));
-        DeserialiseurXML.ouvrirLivraison(
+        DeserialiseurXML.ouvrirDemande(
                 ClassLoader.getSystemResourceAsStream("samples/livraisonErreur4.xml"), ville);
         fail("Le chargement aurait du lever une Exception de type JDOMParseException");
 
@@ -333,7 +333,7 @@ public class DeserialiseurXMLTest {
 
         PlanDeVille ville = DeserialiseurXML.ouvrirPlanDeVille(
                 ClassLoader.getSystemResourceAsStream("samples/plan10x10.xml"));
-        DeserialiseurXML.ouvrirLivraison(
+        DeserialiseurXML.ouvrirDemande(
                 ClassLoader.getSystemResourceAsStream("samples/livraisonErreur5.xml"), ville);
         fail("Le chargement aurait du lever une Exception de type JDOMParseException");
 
@@ -347,7 +347,7 @@ public class DeserialiseurXMLTest {
 
         PlanDeVille ville = DeserialiseurXML.ouvrirPlanDeVille(
                 ClassLoader.getSystemResourceAsStream("samples/plan10x10.xml"));
-        Demande demande = DeserialiseurXML.ouvrirLivraison(
+        Demande demande = DeserialiseurXML.ouvrirDemande(
                 ClassLoader.getSystemResourceAsStream("samples/livraisonErreur6.xml"), ville);
         fail("Le chargement aurait du lever une Exception de type JDOMParseException");
 
@@ -360,7 +360,7 @@ public class DeserialiseurXMLTest {
         // adresse de livraison inexistante
         PlanDeVille ville = DeserialiseurXML.ouvrirPlanDeVille(
                 ClassLoader.getSystemResourceAsStream("samples/plan10x10.xml"));
-        Demande demande = DeserialiseurXML.ouvrirLivraison(
+        Demande demande = DeserialiseurXML.ouvrirDemande(
                 ClassLoader.getSystemResourceAsStream("samples/livraisonErreur7.xml"), ville);
         fail("Le chargement aurait du lever une Exception de type ExceptionXML");
 
@@ -374,7 +374,7 @@ public class DeserialiseurXMLTest {
 
         PlanDeVille ville = DeserialiseurXML.ouvrirPlanDeVille(
                 ClassLoader.getSystemResourceAsStream("samples/plan10x10.xml"));
-        Demande demande = DeserialiseurXML.ouvrirLivraison(
+        Demande demande = DeserialiseurXML.ouvrirDemande(
                 ClassLoader.getSystemResourceAsStream("samples/livraisonErreur8.xml"), ville);
         fail("le chargement devrait lever une erreur");
 

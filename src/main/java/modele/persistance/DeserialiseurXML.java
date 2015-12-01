@@ -114,7 +114,7 @@ public final class DeserialiseurXML {
      * @throws JDOMException Problème survenu lors de du parsing
      * @throws IOException   Problème survenu lors de la lecture du fichier
      */
-    public static Demande ouvrirLivraison(InputStream livraisonXml, final PlanDeVille planDeVille)
+    public static Demande ouvrirDemande(InputStream livraisonXml, final PlanDeVille planDeVille)
             throws SAXException, IOException, JDOMException, ParseException, ExceptionXML {
 
         // Chargement du validateur xsd et validation
@@ -193,12 +193,12 @@ public final class DeserialiseurXML {
      * @throws JDOMException Problème survenu lors de du parsing
      * @throws IOException   Problème survenu lors de la lecture du fichier
      */
-    public static Demande ouvrirLivraison(File livraisonXml, final PlanDeVille planDeVille)
+    public static Demande ouvrirDemande(File livraisonXml, final PlanDeVille planDeVille)
             throws SAXException, IOException, JDOMException, ParseException, ExceptionXML {
 
         InputStream inputStream = new FileInputStream(livraisonXml);
 
-        return ouvrirLivraison(inputStream, planDeVille);
+        return ouvrirDemande(inputStream, planDeVille);
     }
 
     /**
