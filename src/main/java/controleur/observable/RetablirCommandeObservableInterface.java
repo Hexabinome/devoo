@@ -1,4 +1,4 @@
-package controleur;
+package controleur.observable;
 
 /**
  * Interface des observables pour le rétali

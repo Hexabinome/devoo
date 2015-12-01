@@ -1,6 +1,6 @@
 package vue;
 
-import controleur.MessageObservableInterface;
+import controleur.observable.MessageObservableInterface;
 import javafx.scene.text.Text;
 
 /**

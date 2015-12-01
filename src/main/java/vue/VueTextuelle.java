@@ -1,8 +1,8 @@
 package vue;
 
-import controleur.ActivationObservableInterface;
 import controleur.ControleurInterface;
-import controleur.ModeleObservableInterface;
+import controleur.observable.ActivationObservableInterface;
+import controleur.observable.ModeleObservableInterface;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

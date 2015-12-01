@@ -1,4 +1,4 @@
-package controleur;
+package controleur.observable;
 
 /**
  * Interface pour les observables du plan 

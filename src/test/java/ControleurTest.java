@@ -1,6 +1,6 @@
 import controleur.Controleur;
 import controleur.ControleurInterface;
-import controleur.ModeleObservableInterface;
+import controleur.observable.ModeleObservableInterface;
 import modele.xmldata.ModeleLecture;
 
 import org.junit.Before;

@@ -1,4 +1,4 @@
-package controleur;
+package controleur.observable;
 
 /**
  * Joue le rôle d'observeur quand l'action annulée doit etre activée

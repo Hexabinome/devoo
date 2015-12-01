@@ -3,6 +3,14 @@ package controleur;
 import java.io.File;
 
 import controleur.commande.CommandeException;
+import controleur.observable.ActivationFonctionnalitesObservableInterface;
+import controleur.observable.ActivationObservableInterface;
+import controleur.observable.AnnulerCommandeObservableInterface;
+import controleur.observable.ChargementPlanObservableInterface;
+import controleur.observable.MessageObservableInterface;
+import controleur.observable.ModeleObservableInterface;
+import controleur.observable.PlanObservableInterface;
+import controleur.observable.RetablirCommandeObservableInterface;
 import modele.xmldata.ModeleLecture;
 import modele.xmldata.PlanDeVille;
 

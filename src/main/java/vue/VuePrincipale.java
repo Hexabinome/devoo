@@ -24,14 +24,14 @@ import modele.xmldata.ModeleLecture;
 
 import org.controlsfx.dialog.ExceptionDialog;
 
-import controleur.ActivationFonctionnalitesObservableInterface;
-import controleur.ChargementPlanObservableInterface;
-import controleur.AnnulerCommandeObservableInterface;
 import controleur.ControleurInterface;
-import controleur.ModeleObservableInterface;
-import controleur.PlanObservableInterface;
-import controleur.RetablirCommandeObservableInterface;
 import controleur.commande.CommandeException;
+import controleur.observable.ActivationFonctionnalitesObservableInterface;
+import controleur.observable.AnnulerCommandeObservableInterface;
+import controleur.observable.ChargementPlanObservableInterface;
+import controleur.observable.ModeleObservableInterface;
+import controleur.observable.PlanObservableInterface;
+import controleur.observable.RetablirCommandeObservableInterface;
 
 /**
  * Cette classe joue le rôle de binding pour la fenetre principale de

@@ -11,6 +11,14 @@ import controleur.etat.EtatEchange;
 import controleur.etat.EtatInitial;
 import controleur.etat.EtatInterface;
 import controleur.etat.EtatSuppression;
+import controleur.observable.ActivationFonctionnalitesObservableInterface;
+import controleur.observable.ActivationObservableInterface;
+import controleur.observable.AnnulerCommandeObservableInterface;
+import controleur.observable.ChargementPlanObservableInterface;
+import controleur.observable.MessageObservableInterface;
+import controleur.observable.ModeleObservableInterface;
+import controleur.observable.PlanObservableInterface;
+import controleur.observable.RetablirCommandeObservableInterface;
 
 /**
  * Implémente l'interface contrôleur. Point d'entrée principal pour toutes les intéractions avec le package vue.

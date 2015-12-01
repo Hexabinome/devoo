@@ -1,6 +1,6 @@
 package vue;
 
-import controleur.ActivationObservableInterface;
+import controleur.observable.ActivationObservableInterface;
 import javafx.scene.control.Button;
 
 /**

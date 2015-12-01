@@ -7,6 +7,14 @@ import modele.xmldata.Modele;
 import modele.xmldata.PlanDeVille;
 import controleur.commande.Commande;
 import controleur.commande.Historique;
+import controleur.observable.ActivationFonctionnalitesObservableInterface;
+import controleur.observable.ActivationObservableInterface;
+import controleur.observable.AnnulerCommandeObservableInterface;
+import controleur.observable.ChargementPlanObservableInterface;
+import controleur.observable.MessageObservableInterface;
+import controleur.observable.ModeleObservableInterface;
+import controleur.observable.PlanObservableInterface;
+import controleur.observable.RetablirCommandeObservableInterface;
 
 /**
  * Cette classe contient les données nécessaires pour la gestion des états. On
