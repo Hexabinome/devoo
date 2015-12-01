@@ -11,7 +11,7 @@ import modele.xmldata.Modele;
  * Représente une commande annulable
  * @author Max Schiedermeier
  */
-public abstract class CommandAnnulable implements Commande {
+public abstract class CommandeAnnulable implements Commande {
 
     /**
      * On stocke une copie du modèle

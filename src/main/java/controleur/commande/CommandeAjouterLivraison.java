@@ -7,7 +7,7 @@ import modele.xmldata.Livraison;
 /**
  * Répresente une commande d'ajout de livraison
  */
-public class CommandeAjouterLivraison extends CommandAnnulable {
+public class CommandeAjouterLivraison extends CommandeAnnulable {
 
     /**
      * Le cotrôleur de données

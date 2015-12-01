@@ -7,7 +7,7 @@ import modele.xmldata.Livraison;
 /**
  * Représente une commande de suppression de livraisons
  */
-public class CommandeSupprimerLivraison extends CommandAnnulable {
+public class CommandeSupprimerLivraison extends CommandeAnnulable {
 
     /**
      * Le controleur de données

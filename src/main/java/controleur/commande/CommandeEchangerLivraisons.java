@@ -6,7 +6,7 @@ import controleur.ControleurDonnees;
  * La commande d'échange de livraison
  * @author David
  */
-public class CommandeEchangerLivraisons extends CommandAnnulable {
+public class CommandeEchangerLivraisons extends CommandeAnnulable {
 
     /**
      * Le contrôleur de données
