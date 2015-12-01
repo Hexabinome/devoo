@@ -43,7 +43,7 @@ public final class DeserialiseurXML {
      * @throws SAXException  Problème survenu lors de la validation par le schéma
      *                       XSD
      */
-    public static PlanDeVille ouvrirPlanDeVille(InputStream planXML)
+    public static PlanDeVille ouvrirPlanDeVille(final InputStream planXML)
             throws JDOMException, IOException, SAXException, ExceptionXML {
         // Chargement du validateur xsd et validation
         // La même instance du validateur ne peut pas être utilisée deux fois d'où la création à chaque nouvel chargement
@@ -100,7 +100,7 @@ public final class DeserialiseurXML {
      * @throws SAXException  Problème survenu lors de la validation par le schéma
      *                       XSD
      */
-    public static PlanDeVille ouvrirPlanDeVille(File planXML)
+    public static PlanDeVille ouvrirPlanDeVille(final File planXML)
             throws JDOMException, IOException, SAXException, ExceptionXML {
         InputStream inputStream = new FileInputStream(planXML);
         return ouvrirPlanDeVille(inputStream);
@@ -114,7 +114,7 @@ public final class DeserialiseurXML {
      * @throws JDOMException Problème survenu lors de du parsing
      * @throws IOException   Problème survenu lors de la lecture du fichier
      */
-    public static Demande ouvrirDemande(InputStream livraisonXml, final PlanDeVille planDeVille)
+    public static Demande ouvrirDemande(final InputStream livraisonXml, final PlanDeVille planDeVille)
             throws SAXException, IOException, JDOMException, ParseException, ExceptionXML {
 
         // Chargement du validateur xsd et validation
@@ -193,7 +193,7 @@ public final class DeserialiseurXML {
      * @throws JDOMException Problème survenu lors de du parsing
      * @throws IOException   Problème survenu lors de la lecture du fichier
      */
-    public static Demande ouvrirDemande(File livraisonXml, final PlanDeVille planDeVille)
+    public static Demande ouvrirDemande(final File livraisonXml, final PlanDeVille planDeVille)
             throws SAXException, IOException, JDOMException, ParseException, ExceptionXML {
 
         InputStream inputStream = new FileInputStream(livraisonXml);
@@ -210,7 +210,7 @@ public final class DeserialiseurXML {
      * @throws JDOMException Si la validation du XML a échoué.
      * @throws IOException   S'il y a eu une erreur de lecture.
      */
-    private static Document validerFichierXML(InputStream xsdStream, InputStream fichierXML)
+    private static Document validerFichierXML(final InputStream xsdStream, final InputStream fichierXML)
             throws JDOMException, IOException {
 
         Document document;
