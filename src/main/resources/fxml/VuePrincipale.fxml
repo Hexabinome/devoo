@@ -74,26 +74,26 @@
             <top>
                 <AnchorPane style="-fx-background-color: white;">
                     <children>
-                        <ObserverButton fx:id="genererFeuilleBouton" disable="true" layoutY="11.0" mnemonicParsing="false" onAction="#clic_genererFeuilleRoute" text="Générer la feuille de route" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="11.0" />
+                        <BoutonObserveur fx:id="genererFeuilleBouton" disable="true" layoutY="11.0" mnemonicParsing="false" onAction="#clic_genererFeuilleRoute" text="Générer la feuille de route" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="11.0" />
 
-                        <ObserverButton fx:id="calculerTourneeBouton" disable="true" layoutX="205.0" layoutY="11.0" mnemonicParsing="false" onAction="#clic_calculer_tournee" text="Calculer tournée" />
+                        <BoutonObserveur fx:id="calculerTourneeBouton" disable="true" layoutX="205.0" layoutY="11.0" mnemonicParsing="false" onAction="#clic_calculer_tournee" text="Calculer tournée" />
                         <ToolBar style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="5.0">
                             <items>
-                                <ObserverButton fx:id="ajouterLivraisonBouton" disable="true" mnemonicParsing="false" onAction="#clic_ajouterLivraison" text="Ajouter livraisons">
+                                <BoutonObserveur fx:id="ajouterLivraisonBouton" disable="true" mnemonicParsing="false" onAction="#clic_ajouterLivraison" text="Ajouter livraisons">
                                     <graphic>
                                         <Glyph fontFamily="FontAwesome" icon="PLUS" />
                                     </graphic>
-                                </ObserverButton>
-                                <ObserverButton fx:id="echangerLivraisonsBouton" disable="true" mnemonicParsing="false" onAction="#clic_echangerLivraison" text="Echanger livraisons">
+                                </BoutonObserveur>
+                                <BoutonObserveur fx:id="echangerLivraisonsBouton" disable="true" mnemonicParsing="false" onAction="#clic_echangerLivraison" text="Echanger livraisons">
                                     <graphic>
                                         <Glyph fontFamily="FontAwesome" icon="ARROWS_H" />
                                     </graphic>
-                                </ObserverButton>
-                                <ObserverButton fx:id="supprimerLivraisonBouton" disable="true" mnemonicParsing="false" onAction="#clic_supprimerLivraison" text="Supprimer livraisons">
+                                </BoutonObserveur>
+                                <BoutonObserveur fx:id="supprimerLivraisonBouton" disable="true" mnemonicParsing="false" onAction="#clic_supprimerLivraison" text="Supprimer livraisons">
                                     <graphic>
                                         <Glyph fontFamily="FontAwesome" icon="TRASH" />
                                     </graphic>
-                                </ObserverButton>
+                                </BoutonObserveur>
                             </items>
                         </ToolBar>
                     </children>

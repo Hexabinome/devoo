@@ -96,28 +96,28 @@ public class VuePrincipale implements Initializable, PlanObserveur, ActiverCharg
      * Bouton qui permet d'ajouter des livraisons
      */
     @FXML
-    private ObserverButton ajouterLivraisonBouton;
+    private BoutonObserveur ajouterLivraisonBouton;
 
     /**
      * Bouton qui permet d'echanger des livraisons
      */
     @FXML
-    private ObserverButton echangerLivraisonsBouton;
+    private BoutonObserveur echangerLivraisonsBouton;
 
     /**
      * Bouton qui permet de supprimer des livraisons
      */
     @FXML
-    private ObserverButton supprimerLivraisonBouton;
+    private BoutonObserveur supprimerLivraisonBouton;
 
     /**
      * Bouton qui permet de generer le feuille de route
      */
     @FXML
-    private ObserverButton genererFeuilleBouton;
+    private BoutonObserveur genererFeuilleBouton;
 
     @FXML
-    private ObserverButton calculerTourneeBouton;
+    private BoutonObserveur calculerTourneeBouton;
 
     @FXML
     private ScrollPane scrollPane;
