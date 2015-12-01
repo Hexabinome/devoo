@@ -4,22 +4,27 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 
 /**
- * Cette classe gere l'historique des commandes pour le undo et le redo
+ * Cette classe gere l'historique des commandes pour le undo et le redo.
+ * Elle stocke deux piles de commandes : une pile pour les commandes à annuler et une autre pile pour les commandes
+ * à retablir c'est à dire celles qui ont été annulées par l'utilisateur.
  *
- * @author Maxou
+ * @author Mohamed El Mocutar HAIDARA
  */
 public class Historique {
 
     /**
      * Pile des commandes qui ont été éxécutées avec succès c'est à dire les commandes à annuler
      */
-    Deque<Commande> commandesAAnnuller;
+    private Deque<Commande> commandesAAnnuller;
 
     /**
-     * Pile des commandes à retablir c'est à dire les commandes à retabir
+     * Pile des commandes à retablir.
      */
-    Deque<Commande> commandesARetablir;
+    private Deque<Commande> commandesARetablir;
 
+    /**
+     * Constructeur. Pas de paramètre
+     */
     public Historique() {
         commandesAAnnuller = new ArrayDeque<>();
         commandesARetablir = new ArrayDeque<>();
@@ -32,17 +37,16 @@ public class Historique {
      */
     public void ajouterCommande(Commande commande) {
         commandesAAnnuller.push(commande);
-        //effacerCommandeARetablir(); // on efface les commandes qui avaient été annulées quand une ajoute une nouvelle commande
     }
 
     /**
-     * Annule la dernière commande annulable executée (Ctrl+Z)
+     * Annule la dernière commande annulable executée s'il y'en a (Ctrl+Z)
      */
     public void annuler() {
         if(!commandesAAnnuller.isEmpty()){
-            Commande commande = commandesAAnnuller.pop();
-            commandesARetablir.push(commande);
-            commande.annuler();
+            Commande commandeAAnnuler = commandesAAnnuller.pop();
+            commandesARetablir.push(commandeAAnnuler);
+            commandeAAnnuler.annuler();
         }
     }
 
@@ -58,7 +62,7 @@ public class Historique {
     }
 
     /**
-     * Efface toutes les commandes stockées
+     * Efface toutes les commandes stockées dans l'historique
      */
     public void effacerToutesLesCommandes() {
         effacerCommandeARetablir();
@@ -80,12 +84,15 @@ public class Historique {
     }
 
     /**
-     * Renvoie true s'il reste des commandes à annuler
+     * Renvoie vrai s'il reste des commandes à retablir faux sinon
      */
     public boolean estVideCommandesARetablir(){
         return commandesARetablir.isEmpty();
     }
 
+    /**
+     * Renvoie vrai s'il reste des commandes à annuler faux sinon
+     */
     public boolean estVideCommandesAAnnuler(){
         return commandesAAnnuller.isEmpty();
     }
