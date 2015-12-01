@@ -1,7 +1,7 @@
 package vue;
 
 import controleur.ControleurInterface;
-import controleur.observable.ActivationObservableInterface;
+import controleur.observable.ChargementPlanObservableInterface;
 import controleur.observable.ModeleObservableInterface;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.fxml.FXML;
@@ -25,8 +25,8 @@ import java.util.ResourceBundle;
  * Cette classe gère les livraisons et leurs horaires. Elle s'occupe de la vue textuelle qui se trouve à gauche dans la
  * fenêtre principale.
  */
-public class VueTextuelle implements Initializable, ActivationObservableInterface,
-        ModeleObservableInterface {
+public class VueTextuelle implements Initializable,
+        ModeleObservableInterface, ChargementPlanObservableInterface {
 
     /**
      * Table principale contenant la liste des livraisons.
@@ -131,6 +131,7 @@ public class VueTextuelle implements Initializable, ActivationObservableInterfac
 
     /**
      * Contruit un élement de la table (TreeItem) correspondant à une fenetre et ses enfants
+     *
      * @param fenetre fenetre à construire sous forme visuelle
      */
     private static TreeItem<ObjetVisualisable> construireFenetreItem(final Fenetre fenetre) {
@@ -157,23 +158,13 @@ public class VueTextuelle implements Initializable, ActivationObservableInterfac
 
     /**
      * Met à jour le controleur de l'application pour la vue textuelle
+     *
      * @param controleurApplication controleur initialisé (non null)
      */
     public void setControleurApplication(ControleurInterface controleurApplication) {
         this.controleurApplication = controleurApplication;
     }
 
-    /**
-     * Notification reçue quand il y'a eu un changement dans la demande de livraison et que la vue doit la recharger.
-     * @param disabled true si la table doit mise à jour, faux sinon
-     */
-    @Override
-    public void notifierObserveursActivation(boolean disabled) {
-        // TODO : voir si elle réellement utile
-        /*if (disabled) {
-            effacerVueTableLivraison();
-        }*/
-    }
 
     /**
      * Notification déclenchée lors d'un changement dans le model. Elle déclenche
@@ -184,18 +175,21 @@ public class VueTextuelle implements Initializable, ActivationObservableInterfac
         Demande demandeModifiee = controleurApplication.getModele().getDemande();
         construireVueTableLivraion(demandeModifiee);
 
-        vueGraphique.nettoyerAffichage();
-        vueGraphique.afficherPlan();
-        vueGraphique.construireDemande(demandeModifiee);
-        vueGraphique.construireTournee(controleurApplication.getModele().getTournee());
     }
 
     /**
      * Ajoute la vue textuelle comme observeurs au près du controleur
      */
     public void initialiserObserveurs() {
-        controleurApplication.ajouterActivationObserveur(this);
         controleurApplication.ajouterModeleObserveur(this);
+        controleurApplication.ajouterChargementPlanObserveur(this);
+    }
+
+    @Override
+    public void notifierObserveursChargementPlan(boolean activer) {
+        if (activer) {
+            effacerVueTableLivraison();
+        }
     }
 
     /**
@@ -215,7 +209,8 @@ public class VueTextuelle implements Initializable, ActivationObservableInterfac
 
         /**
          * Cette méthode est appelée pour chaque élement qu'on veut afficher dans la colonne 'Livraison' de la table
-         * @param item le texte affiché (peut être null)
+         *
+         * @param item  le texte affiché (peut être null)
          * @param empty booleen qui dit si le texte est vide ou pas
          */
         @Override
@@ -300,6 +295,7 @@ public class VueTextuelle implements Initializable, ActivationObservableInterfac
 
         /**
          * Applique une couleur à un élement de la table
+         *
          * @param couleur couleur à appliquer
          */
         private void setSurbrillance(CouleurTexte couleur) {

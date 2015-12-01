@@ -388,7 +388,11 @@ public class VuePrincipale implements Initializable, PlanObservableInterface, Ch
         if (modele.getTournee() != null)
             vueGraphique.construireTournee(modele.getTournee());
 
+
+        vueGraphique.nettoyerAffichage();
+        vueGraphique.afficherPlan();
         vueGraphique.construireDemande(modele.getDemande());
+        vueGraphique.construireTournee(controleurApplication.getModele().getTournee());
         vueGraphique.desactiverSurbrillance();
     }
     
