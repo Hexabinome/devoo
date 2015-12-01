@@ -9,7 +9,7 @@ import controleur.observable.AnnulerCommandeObservableInterface;
 import controleur.observable.ChargementPlanObservableInterface;
 import controleur.observable.MessageObservableInterface;
 import controleur.observable.ModeleObservableInterface;
-import controleur.observable.PlanObservableInterface;
+import controleur.observable.ActivationOuvrirDemandeObserveur;
 import controleur.observable.RetablirCommandeObservableInterface;
 import modele.xmldata.ModeleLecture;
 import modele.xmldata.PlanDeVille;
@@ -36,7 +36,7 @@ public interface ControleurInterface {
      * Ajoute un observateur des changement du plan
      * @param planObserveur
      */
-    void ajouterPlanObserveur(PlanObservableInterface planObserveur);
+    void ajouterPlanObserveur(ActivationOuvrirDemandeObserveur planObserveur);
     
     /**
      * Ajoute un observateur du chargement du plan

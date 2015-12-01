@@ -30,7 +30,7 @@ import controleur.observable.ActivationFonctionnalitesObservableInterface;
 import controleur.observable.AnnulerCommandeObservableInterface;
 import controleur.observable.ChargementPlanObservableInterface;
 import controleur.observable.ModeleObservableInterface;
-import controleur.observable.PlanObservableInterface;
+import controleur.observable.ActivationOuvrirDemandeObserveur;
 import controleur.observable.RetablirCommandeObservableInterface;
 
 /**
@@ -40,7 +40,7 @@ import controleur.observable.RetablirCommandeObservableInterface;
  *
  * @author David
  */
-public class VuePrincipale implements Initializable, PlanObservableInterface, ChargementPlanObservableInterface, ModeleObservableInterface, AnnulerCommandeObservableInterface,
+public class VuePrincipale implements Initializable, ActivationOuvrirDemandeObserveur, ChargementPlanObservableInterface, ModeleObservableInterface, AnnulerCommandeObservableInterface,
         RetablirCommandeObservableInterface, ActivationFonctionnalitesObservableInterface  {
 
     /**
@@ -369,10 +369,8 @@ public class VuePrincipale implements Initializable, PlanObservableInterface, Ch
     }
 
     @Override
-    public void notifierObserveursPlan(boolean activer) {
-        //vueGraphique.construireGraphe(controleurApplication.getPlanDeVille());
-        //activation de menu element graphique qui permet de charger un fichier de livraison
-        //(Ici on peut le faire sans appel observeur, parce qu' a parti d'ici on possede toujours un plan valide.)
+    public void notifierObserveurOuvrirDemande(boolean activer) {
+        //activation de l'élement du menu qui permet de charger un fichier de livraison
         menuFichier.getItems().get(1).setDisable(!activer);
     }
 

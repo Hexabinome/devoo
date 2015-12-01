@@ -167,14 +167,14 @@ public class VueTextuelle implements Initializable,
 
 
     /**
-     * Notification déclenchée lors d'un changement dans le model. Elle déclenche
+     * Notification déclenchée lors d'un changement dans le model. Cette peut etre notification est déclenchée que si
+     * on a déja chargé un plan et une demande de livraison dans l'application
      */
     @Override
     public void notifierObserveursModele() {
         effacerVueTableLivraison();
         Demande demandeModifiee = controleurApplication.getModele().getDemande();
         construireVueTableLivraion(demandeModifiee);
-
     }
 
     /**

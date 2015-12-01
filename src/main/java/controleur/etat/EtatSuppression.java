@@ -20,7 +20,7 @@ public class EtatSuppression extends AbstractEtat
     {
         this.donnees = donnees;
         donnees.notifierObserveursChargementDuPlan(false);
-        donnees.notifierObserveursDuPlan(false);
+        donnees.notifierObserveurOuvrirDemande(false);
         donnees.notifierObserveursMessage("[SUPPRESSION] Souhaitez-vous supprimer une livraison ? Choisissez dans la liste à gauche la livraison que vous voulez supprimer. Clic droit pour sortir du mode de suppression.");
     }
 

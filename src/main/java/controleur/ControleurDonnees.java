@@ -13,7 +13,7 @@ import controleur.observable.AnnulerCommandeObservableInterface;
 import controleur.observable.ChargementPlanObservableInterface;
 import controleur.observable.MessageObservableInterface;
 import controleur.observable.ModeleObservableInterface;
-import controleur.observable.PlanObservableInterface;
+import controleur.observable.ActivationOuvrirDemandeObserveur;
 import controleur.observable.RetablirCommandeObservableInterface;
 
 /**
@@ -55,7 +55,7 @@ public class ControleurDonnees {
     /**
      * Collection des observeurs des modifications du plan
      */
-    private final Collection<PlanObservableInterface> planObserveurs = new ArrayList<PlanObservableInterface>();
+    private final Collection<ActivationOuvrirDemandeObserveur> planObserveurs = new ArrayList<ActivationOuvrirDemandeObserveur>();
     
     /**
      * Collection des  observeurs du chargement du plan
@@ -164,7 +164,7 @@ public class ControleurDonnees {
         retablirCommandeObserveurs.add(obs);
     }
     
-    public void ajouterPlanObserveur(PlanObservableInterface planObserveur)
+    public void ajouterPlanObserveur(ActivationOuvrirDemandeObserveur planObserveur)
     {
         planObserveurs.add(planObserveur);
     }
@@ -213,8 +213,8 @@ public class ControleurDonnees {
      * Notifie les observateurs du plan
      * @param activer Vrai s'il faut envoyer un message d'activation aux observateurs
      */
-    public void notifierObserveursDuPlan(boolean activer) {
-        planObserveurs.forEach(planObserveur -> planObserveur.notifierObserveursPlan(activer));
+    public void notifierObserveurOuvrirDemande(boolean activer) {
+        planObserveurs.forEach(planObserveur -> planObserveur.notifierObserveurOuvrirDemande(activer));
     }
     
     /**

@@ -5,11 +5,11 @@ package controleur.observable;
  * @author elmhaidara 
  * @date 25/11/15
  */
-public interface PlanObservableInterface {
+public interface ActivationOuvrirDemandeObserveur {
 	
     /**
-     * Notifie les observeurs du plan
+     * Notifie les observeurs de l'élement du menu qui permet d'ouvrir une livraison.
      * @param activer Vrai s'il faut s'activer ou se désactiver lors de cette modification
      */
-    void notifierObserveursPlan(boolean activer);
+    void notifierObserveurOuvrirDemande(boolean activer);
 }
