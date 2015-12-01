@@ -64,7 +64,8 @@ public class EtatEchange extends AbstractEtat {
     	}
 
     	// Sinon on reste dans l'état actuel
-    	return this; // TODO reste dans l'état ou exception ?
+    	//return this; // TODO reste dans l'état ou exception ?
+        throw new RuntimeException("L'intersection n'est pas une livraison");
     }
 
     @Override

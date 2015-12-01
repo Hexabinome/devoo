@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -37,8 +32,8 @@ public class ModeleTest
     public void TestModelPlan() throws JDOMException, IOException, SAXException, ParseException, ExceptionXML
     {
         // initialisation na parti des fichiers xml
-        PlanDeVille ville = DeserialiseurXML.ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/plan10x10.xml"));
-        Demande demande = DeserialiseurXML.ouvrirDemande(ClassLoader.getSystemResourceAsStream("samples/livraison10x10-1.xml"), ville);
+        PlanDeVille ville = DeserialiseurXML.getInstance().ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/plan10x10.xml"));
+        Demande demande = DeserialiseurXML.getInstance().ouvrirDemande(ClassLoader.getSystemResourceAsStream("samples/livraison10x10-1.xml"), ville);
         ModeleLecture monModel = new Modele(ville, demande);
 
         // tester contructeur du modele
@@ -55,8 +50,8 @@ public class ModeleTest
     public void TestCalculerTournee() throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException, JDOMException, IOException, SAXException, ExceptionXML, ParseException
     {
         // initialisation a parti des fichiers xml
-        PlanDeVille ville = DeserialiseurXML.ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/plan10x10.xml"));
-        Demande demande = DeserialiseurXML.ouvrirDemande(ClassLoader.getSystemResourceAsStream("samples/livraison10x10-1.xml"), ville);
+        PlanDeVille ville = DeserialiseurXML.getInstance().ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/plan10x10.xml"));
+        Demande demande = DeserialiseurXML.getInstance().ouvrirDemande(ClassLoader.getSystemResourceAsStream("samples/livraison10x10-1.xml"), ville);
         Modele monModel = new Modele(ville, demande);
 
         //tester si on peut bien calculer la tournee

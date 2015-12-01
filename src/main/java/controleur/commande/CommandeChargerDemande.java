@@ -45,7 +45,7 @@ public class CommandeChargerDemande extends CommandeNonAnnulable {
     public void executer() throws CommandeException {
         try {
             PlanDeVille plan = controleurDonnees.getPlan();
-            Demande demande = DeserialiseurXML.ouvrirDemande(livraisonsFichier, plan);
+            Demande demande = DeserialiseurXML.getInstance().ouvrirDemande(livraisonsFichier, plan);
             controleurDonnees.setModele(new Modele(plan, demande));
 
             // Permettre de calculer la tournee

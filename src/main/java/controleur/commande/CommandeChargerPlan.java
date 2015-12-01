@@ -41,7 +41,7 @@ public class CommandeChargerPlan extends CommandeNonAnnulable {
     public void executer() throws CommandeException {
         try {
             // Remplacer plan qui est chargé d'un nouveau plan (si et seulement le chargement du xml a reussi)
-            controleurDonnees.setPlan(DeserialiseurXML.ouvrirPlanDeVille(planFichier));
+            controleurDonnees.setPlan(DeserialiseurXML.getInstance().ouvrirPlanDeVille(planFichier));
 
             controleurDonnees.notifierObserveursActivation(true);
             controleurDonnees.notifierObserveurOuvrirDemande(true);

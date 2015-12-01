@@ -57,7 +57,7 @@ public class CommandeSupprimerLivraison extends CommandeAnnulable {
             throw new CommandeException("[SUPPRESSION] Il est interdit de supprimer la dernière livraison dans une fenêtre.");
         }
         
-        //Garder une copie de la modele
+        // Garder une copie de la modele
         super.backupModele(controleurDonnees.getModele());
 
         idLivraisonAvant = controleurDonnees.getModele().supprimerLivraison(livraisonSupprimee.getId());

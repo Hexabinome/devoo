@@ -75,8 +75,8 @@ public class EtatEchange2 extends AbstractEtat {
             }
         }
 
-        return this; // TODO retour normal ou exception ?
-        // throw new RuntimeException("L'intersection n'est pas une livraison");
+        //return this; // TODO retour normal ou exception ?
+        throw new RuntimeException("L'intersection n'est pas une livraison");
     }
 
     @Override
