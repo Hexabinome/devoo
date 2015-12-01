@@ -23,12 +23,12 @@ public class CommandeCalculerTournee extends CommandeNonAnnulable
         controleurDonnees.getModele().calculerTournee();
 
         //notifier la vue que maintenant il y a un model qui on peut afficher / des horaires prevus
-        controleurDonnees.notifyAllModelObserveurs();
+        controleurDonnees.notifierObserveursModele();
 
         //notifier la vue que maintenant on peut interagir avec les elements prinicpaux.
-        controleurDonnees.notifyAllActObserveurs(false);
+        controleurDonnees.notifierObserveursActivation(false);
         
-        controleurDonnees.notifierAllMessageObserveurs("Tournée calculée avec succès !");
+        controleurDonnees.notifierObserveursMessage("Tournée calculée avec succès !");
     }
 
 }

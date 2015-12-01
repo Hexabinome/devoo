@@ -26,12 +26,12 @@ public class CommandeEchangerLivraisons extends CommandAnnulable
         //MAJ des horaires de passage
         donnees.getModele().remplirHoraires();
         
-        donnees.notifierAllMessageObserveurs("L'echange a ete effectue.");
-        donnees.notifyAllModelObserveurs();
-        donnees.notifyAllAnnulerObserveurs(false);
+        donnees.notifierObserveursMessage("L'echange a ete effectue.");
+        donnees.notifierObserveursModele();
+        donnees.notifierObserveursAnnuler(false);
 
         if (donnees.getHist().estVideCommandesARetablir())
-            donnees.notifyAllRetablirObserveurs(true);
+            donnees.notifierObserveursRetablir(true);
 
     }
 
@@ -40,13 +40,13 @@ public class CommandeEchangerLivraisons extends CommandAnnulable
     {
         donnees.setModele(super.getModelCopie());
         //donnees.getModele().echangerLivraisons(nouvelleLivraisonId1, nouvelleLivraisonId2, idLivraison1, idLivraison2);
-        donnees.notifierAllMessageObserveurs(String.format("L'échange %d <-> %d a été annulée.", idLivraison1, idLivraison2));
-        donnees.notifyAllModelObserveurs();
+        donnees.notifierObserveursMessage(String.format("L'échange %d <-> %d a été annulée.", idLivraison1, idLivraison2));
+        donnees.notifierObserveursModele();
         
-        donnees.notifyAllRetablirObserveurs(false);
+        donnees.notifierObserveursRetablir(false);
 
         if (donnees.getHist().estVideCommandesAAnnuler())
-            donnees.notifyAllAnnulerObserveurs(true);
+            donnees.notifierObserveursAnnuler(true);
     }
 
     @Override

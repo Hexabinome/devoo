@@ -20,9 +20,9 @@ public class EtatEchange extends AbstractEtat
     public EtatEchange(ControleurDonnees donnees)
     {
         this.donnees = donnees;
-        donnees.notifierLesObserveursDuChargementDuPlan(false);
-        donnees.notifierLesObserveursDuPlan(false);
-        this.donnees.notifierAllMessageObserveurs("[ECHANGE] Souhaitez-vous échanger deux livraisons ? Veuillez choisir la première livraison en cliquant sur le plan ou sur la liste à gauche. Clic droit pour sortir du mode d'échange.");
+        donnees.notifierObserveursChargementDuPlan(false);
+        donnees.notifierObserveursDuPlan(false);
+        this.donnees.notifierObserveursMessage("[ECHANGE] Souhaitez-vous échanger deux livraisons ? Veuillez choisir la première livraison en cliquant sur le plan ou sur la liste à gauche. Clic droit pour sortir du mode d'échange.");
     }
 
     @Override
@@ -53,7 +53,7 @@ public class EtatEchange extends AbstractEtat
     			if (l.getAdresse() == intersectionId) {
                     // Ignorer si c'est l'entrepot
                     if(donnees.getModele().getDemande().getEntrepot().getId() == intersectionId) {
-                        donnees.notifierAllMessageObserveurs("[ECHANGE] Déplacement de l'entrepôt impossible. Veuillez choisir la première livraison en cliquant sur le plan ou sur la liste à gauche. Clic droit pour sortir du mode d'échange.");
+                        donnees.notifierObserveursMessage("[ECHANGE] Déplacement de l'entrepôt impossible. Veuillez choisir la première livraison en cliquant sur le plan ou sur la liste à gauche. Clic droit pour sortir du mode d'échange.");
                         return this;
                     }
                             
@@ -73,7 +73,7 @@ public class EtatEchange extends AbstractEtat
 
     @Override
     public EtatInterface clicDroit() {
-        donnees.notifierAllMessageObserveurs(TEXTE_ETAT_PRINCIPAL);
+        donnees.notifierObserveursMessage(TEXTE_ETAT_PRINCIPAL);
         return new EtatPrincipal(donnees);
     }
 

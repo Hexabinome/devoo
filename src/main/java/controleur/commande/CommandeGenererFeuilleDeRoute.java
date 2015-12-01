@@ -23,7 +23,7 @@ public class CommandeGenererFeuilleDeRoute extends CommandeNonAnnulable {
 		try (FileWriter ecriveurDeFichier = new FileWriter(fichier)) {
 			String feuille = GenerateurFeuilleDeRoute.genererFeuilleDeRoute(controleurDonnees.getModele(), controleurDonnees.getModele().getLivraisonsTournee());
     		ecriveurDeFichier.write(feuille);
-    		controleurDonnees.notifierAllMessageObserveurs(String.format("Feuille de route (%s) générée avec succès !", fichier.getName()));
+    		controleurDonnees.notifierObserveursMessage(String.format("Feuille de route (%s) générée avec succès !", fichier.getName()));
 		} catch (Exception e) {
 			throw new CommandeException(e.getMessage());
 		}

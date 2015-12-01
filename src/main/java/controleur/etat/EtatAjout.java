@@ -18,29 +18,29 @@ public class EtatAjout extends AbstractEtat
     public EtatAjout(ControleurDonnees donnees)
     {
         this.donnees = donnees;
-        donnees.notifierLesObserveursDuChargementDuPlan(false);
-        donnees.notifierLesObserveursDuPlan(false);
-        donnees.notifierAllMessageObserveurs("[AJOUT] Où souhaitez-vous ajouter une livraison ? Choisissez l'adresse de livraison en cliquant sur une intersection de le plan. Clic droit pour sortir du mode d'ajout.");
+        donnees.notifierObserveursChargementDuPlan(false);
+        donnees.notifierObserveursDuPlan(false);
+        donnees.notifierObserveursMessage("[AJOUT] Où souhaitez-vous ajouter une livraison ? Choisissez l'adresse de livraison en cliquant sur une intersection de le plan. Clic droit pour sortir du mode d'ajout.");
     }
 
     @Override
     public EtatInterface cliqueSurLivraison(int livraisonId)
     {
-        donnees.notifierAllMessageObserveurs("[AJOUT] Veuillez d'abord choisir l'adresse de la livraison en cliquant sur une intersection sur le plan. Clic droit pour sortir du mode d'ajout?");
+        donnees.notifierObserveursMessage("[AJOUT] Veuillez d'abord choisir l'adresse de la livraison en cliquant sur une intersection sur le plan. Clic droit pour sortir du mode d'ajout?");
         return this;
     }
 
     @Override
     public EtatInterface chargerPlan(File plan) throws CommandeException
     {
-    	donnees.notifierAllMessageObserveurs("Cet etat ne permet pas de charger un plan");
+    	donnees.notifierObserveursMessage("Cet etat ne permet pas de charger un plan");
         throw new RuntimeException("Cet etat ne permet pas de charger un plan");
     }
 
     @Override
     public EtatInterface chargerLivraisons(File livraisons) throws CommandeException
     {
-    	donnees.notifierAllMessageObserveurs("Cet etat ne permet pas de charger une demande de livraison");
+    	donnees.notifierObserveursMessage("Cet etat ne permet pas de charger une demande de livraison");
         throw new RuntimeException("Cet etat ne permet pas de charger une demande de livraison");
     }
 
@@ -53,13 +53,13 @@ public class EtatAjout extends AbstractEtat
     @Override
     public EtatInterface cliqueCalculerTournee()
     {
-    	donnees.notifierAllMessageObserveurs("Cet etat ne permet pas de calculer la tournée");
+    	donnees.notifierObserveursMessage("Cet etat ne permet pas de calculer la tournée");
         throw new RuntimeException("Cet etat ne permet pas de calculer la tournée");
     }
 
     @Override
     public EtatInterface clicDroit() {
-        donnees.notifierAllMessageObserveurs(TEXTE_ETAT_PRINCIPAL);
+        donnees.notifierObserveursMessage(TEXTE_ETAT_PRINCIPAL);
         return new EtatPrincipal(donnees);
     }
 

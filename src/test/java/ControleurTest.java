@@ -53,7 +53,7 @@ public class ControleurTest
             }
 
         };
-        controleurInterface.ajouterModelObserver(observer);
+        controleurInterface.ajouterModeleObserveur(observer);
     }
 
     /**
@@ -535,9 +535,9 @@ public class ControleurTest
         File livraisons = new File("target" + File.separator + "classes" + File.separator + "samples" + File.separator + "livraisonTest2.xml");
         controleurInterface.chargerLivraisons(livraisons);
 
-        controleurInterface.cliqueCalculerTourne();
+        controleurInterface.clicCalculerTourne();
 
-        ModeleLecture model = controleurInterface.getModel();
+        ModeleLecture model = controleurInterface.getModele();
         List<List<Integer>> tournee = model.getTournee();
 
         List<List<Integer>> tourneeAttendus = new ArrayList<>();
@@ -574,12 +574,12 @@ public class ControleurTest
         File livraisons = new File("target\\classes\\samples\\livraisonTest2.xml");
         controleurInterface.chargerLivraisons(livraisons);
 
-        controleurInterface.cliqueCalculerTourne();
-        ModeleLecture model = controleurInterface.getModel();
-        controleurInterface.cliqueOutilSupprimer();
-        controleurInterface.cliqueSurLivraison(10103);
+        controleurInterface.clicCalculerTourne();
+        ModeleLecture model = controleurInterface.getModele();
+        controleurInterface.clicOutilSupprimer();
+        controleurInterface.clicSurLivraison(10103);
 
-        model = controleurInterface.getModel();
+        model = controleurInterface.getModele();
 
         List<List<Integer>> tournee = model.getTournee();
 
@@ -618,11 +618,11 @@ public class ControleurTest
         File livraisons = new File("target\\classes\\samples\\livraisonTest2.xml");
         controleurInterface.chargerLivraisons(livraisons);
 
-        controleurInterface.cliqueCalculerTourne();
-        ModeleLecture model = controleurInterface.getModel();
-        controleurInterface.cliqueOutilSupprimer();
-        controleurInterface.cliqueSurLivraison(-1);
-        model = controleurInterface.getModel();
+        controleurInterface.clicCalculerTourne();
+        ModeleLecture model = controleurInterface.getModele();
+        controleurInterface.clicOutilSupprimer();
+        controleurInterface.clicSurLivraison(-1);
+        model = controleurInterface.getModele();
 
         List<List<Integer>> tournee = model.getTournee();
 
@@ -659,13 +659,13 @@ public class ControleurTest
         File livraisons = new File("target\\classes\\samples\\livraisonTest2.xml");
         controleurInterface.chargerLivraisons(livraisons);
 
-        controleurInterface.cliqueCalculerTourne();
-        ModeleLecture model = controleurInterface.getModel();
-        controleurInterface.cliqueOutilSupprimer();
-        controleurInterface.cliqueSurLivraison(10103);
+        controleurInterface.clicCalculerTourne();
+        ModeleLecture model = controleurInterface.getModele();
+        controleurInterface.clicOutilSupprimer();
+        controleurInterface.clicSurLivraison(10103);
 
-        controleurInterface.cliqueAnnuler();
-        model = controleurInterface.getModel();
+        controleurInterface.clicAnnuler();
+        model = controleurInterface.getModele();
 
         List<List<Integer>> tournee = model.getTournee();
 
@@ -703,13 +703,13 @@ public class ControleurTest
         File livraisons = new File("target\\classes\\samples\\livraisonTest2.xml");
         controleurInterface.chargerLivraisons(livraisons);
 
-        controleurInterface.cliqueCalculerTourne();
-        ModeleLecture model = controleurInterface.getModel();
-        controleurInterface.cliqueOutilSupprimer();
-        controleurInterface.cliqueSurLivraison(10103);
-        controleurInterface.cliqueAnnuler();
-        controleurInterface.cliqueRetablir();
-        model = controleurInterface.getModel();
+        controleurInterface.clicCalculerTourne();
+        ModeleLecture model = controleurInterface.getModele();
+        controleurInterface.clicOutilSupprimer();
+        controleurInterface.clicSurLivraison(10103);
+        controleurInterface.clicAnnuler();
+        controleurInterface.clicRetablir();
+        model = controleurInterface.getModele();
 
         List<List<Integer>> tournee = model.getTournee();
 
@@ -748,15 +748,15 @@ public class ControleurTest
         File livraisons = new File("target\\classes\\samples\\livraisonTest3.xml");
         controleurInterface.chargerLivraisons(livraisons);
 
-        controleurInterface.cliqueCalculerTourne();
+        controleurInterface.clicCalculerTourne();
 
-        ModeleLecture model = controleurInterface.getModel();
+        ModeleLecture model = controleurInterface.getModele();
 
-        controleurInterface.cliqueOutilAjouter();
-        controleurInterface.cliqueSurPlan(2);
-        controleurInterface.cliqueSurLivraison(-1);
+        controleurInterface.clicOutilAjouter();
+        controleurInterface.clicSurPlan(2);
+        controleurInterface.clicSurLivraison(-1);
 
-        model = controleurInterface.getModel();
+        model = controleurInterface.getModele();
 
         List<List<Integer>> tourneeAttendus = new ArrayList<>();
         List<Integer> listeTemp = new ArrayList<Integer>();
@@ -795,15 +795,15 @@ public class ControleurTest
         File livraisons = new File("target\\classes\\samples\\livraisonTest2.xml");
         controleurInterface.chargerLivraisons(livraisons);
 
-        controleurInterface.cliqueCalculerTourne();
+        controleurInterface.clicCalculerTourne();
 
-        ModeleLecture model = controleurInterface.getModel();
+        ModeleLecture model = controleurInterface.getModele();
 
-        controleurInterface.cliqueOutilAjouter();
-        controleurInterface.cliqueSurPlan(3);
-        controleurInterface.cliqueSurLivraison(10101);
+        controleurInterface.clicOutilAjouter();
+        controleurInterface.clicSurPlan(3);
+        controleurInterface.clicSurLivraison(10101);
 
-        model = controleurInterface.getModel();
+        model = controleurInterface.getModele();
 
         List<List<Integer>> tourneeAttendus = new ArrayList<>();
         List<Integer> listeTemp = new ArrayList<Integer>();
@@ -843,16 +843,16 @@ public class ControleurTest
         File livraisons = new File("target\\classes\\samples\\livraisonTest2.xml");
         controleurInterface.chargerLivraisons(livraisons);
 
-        controleurInterface.cliqueCalculerTourne();
+        controleurInterface.clicCalculerTourne();
 
-        ModeleLecture model = controleurInterface.getModel();
+        ModeleLecture model = controleurInterface.getModele();
 
-        controleurInterface.cliqueOutilAjouter();
-        controleurInterface.cliqueSurPlan(3);
-        controleurInterface.cliqueSurLivraison(10101);
-        controleurInterface.cliqueAnnuler();
+        controleurInterface.clicOutilAjouter();
+        controleurInterface.clicSurPlan(3);
+        controleurInterface.clicSurLivraison(10101);
+        controleurInterface.clicAnnuler();
 
-        model = controleurInterface.getModel();
+        model = controleurInterface.getModele();
 
         List<List<Integer>> tourneeAttendus = new ArrayList<>();
         List<Integer> listeTemp = new ArrayList<Integer>();
@@ -891,17 +891,17 @@ public class ControleurTest
         File livraisons = new File("target\\classes\\samples\\livraisonTest2.xml");
         controleurInterface.chargerLivraisons(livraisons);
 
-        controleurInterface.cliqueCalculerTourne();
+        controleurInterface.clicCalculerTourne();
 
-        ModeleLecture model = controleurInterface.getModel();
+        ModeleLecture model = controleurInterface.getModele();
 
-        controleurInterface.cliqueOutilAjouter();
-        controleurInterface.cliqueSurPlan(3);
-        controleurInterface.cliqueSurLivraison(10101);
-        controleurInterface.cliqueAnnuler();
-        controleurInterface.cliqueRetablir();
+        controleurInterface.clicOutilAjouter();
+        controleurInterface.clicSurPlan(3);
+        controleurInterface.clicSurLivraison(10101);
+        controleurInterface.clicAnnuler();
+        controleurInterface.clicRetablir();
 
-        model = controleurInterface.getModel();
+        model = controleurInterface.getModele();
 
         List<List<Integer>> tourneeAttendus = new ArrayList<>();
         List<Integer> listeTemp = new ArrayList<Integer>();
@@ -945,9 +945,9 @@ public class ControleurTest
         File livraisons = new File("target\\classes\\samples\\livraisonTest4.xml");
         controleurInterface.chargerLivraisons(livraisons);
 
-        controleurInterface.cliqueCalculerTourne();
+        controleurInterface.clicCalculerTourne();
 
-        ModeleLecture model = controleurInterface.getModel();
+        ModeleLecture model = controleurInterface.getModele();
 
         List<List<Integer>> tourneeAttendus = new ArrayList<>();
         List<Integer> listeTemp = new ArrayList<Integer>();
@@ -967,20 +967,20 @@ public class ControleurTest
 
         controleurInterface.chargerLivraisons(livraisons);
 
-        controleurInterface.cliqueCalculerTourne();
-        ModeleLecture model = controleurInterface.getModel();
-        controleurInterface.cliqueOutilSupprimer();
-        controleurInterface.cliqueSurLivraison(20105);
-        controleurInterface.cliqueOutilSupprimer();
-        controleurInterface.cliqueSurLivraison(20104);
-        controleurInterface.cliqueOutilSupprimer();
-        controleurInterface.cliqueSurLivraison(10103);
-        controleurInterface.cliqueOutilSupprimer();
-        controleurInterface.cliqueSurLivraison(10102);
-        controleurInterface.cliqueOutilSupprimer();
-        controleurInterface.cliqueSurLivraison(10101);
+        controleurInterface.clicCalculerTourne();
+        ModeleLecture model = controleurInterface.getModele();
+        controleurInterface.clicOutilSupprimer();
+        controleurInterface.clicSurLivraison(20105);
+        controleurInterface.clicOutilSupprimer();
+        controleurInterface.clicSurLivraison(20104);
+        controleurInterface.clicOutilSupprimer();
+        controleurInterface.clicSurLivraison(10103);
+        controleurInterface.clicOutilSupprimer();
+        controleurInterface.clicSurLivraison(10102);
+        controleurInterface.clicOutilSupprimer();
+        controleurInterface.clicSurLivraison(10101);
 
-        model = controleurInterface.getModel();
+        model = controleurInterface.getModele();
 
         List<List<Integer>> tournee = model.getTournee();
 

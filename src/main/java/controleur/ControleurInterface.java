@@ -13,13 +13,13 @@ import modele.xmldata.PlanDeVille;
 public interface ControleurInterface
 {
 
-    void ajouterDesactObserver(ActivationObserveurInterface observer);
+    void ajouterActivationObserveur(ActivationObserveurInterface observer);
 
-    void ajouterModelObserver(ModelObserveur observer);
+    void ajouterModeleObserveur(ModelObserveur observer);
 
     void ajouterPlanObserveur(PlanObserveur planObserveur);
     
-    void ajouterActivationChargementPlanObserveur(ChargementPlanObserveurInterface chargementPlanObserveur);
+    void ajouterChargementPlanObserveur(ChargementPlanObserveurInterface chargementPlanObserveur);
     
     void ajouterTourneeObserveur(ActivationObserveurInterface tourneeObserveur);
 
@@ -27,15 +27,15 @@ public interface ControleurInterface
 
     void ajouterRetablirCommandeObserveur(RetablirCommandeObserveur retablirCommandeObserveur);
     
-    void ajouterAutresBoutonsObserveur(ActivationFonctionnalitesObserveurInterface obs);
+    void ajouterActivationFonctionnalitesObserveur(ActivationFonctionnalitesObserveurInterface obs);
 
-    void cliqueSurPlan(int intersectionId);
+    void clicSurPlan(int intersectionId);
     
-    void cliqueSurLivraison(int livraisonId);
+    void clicSurLivraison(int livraisonId);
 
-    void cliqueAnnuler();
+    void clicAnnuler();
 
-    void cliqueRetablir();
+    void clicRetablir();
 
     /**
      * Cette methode essaye de convertir un fichier XML dans sa representation
@@ -57,19 +57,19 @@ public interface ControleurInterface
      */
     Exception chargerLivraisons(File fichierLivraisons);
 
-    void cliqueOutilAjouter();
+    void clicOutilAjouter();
 
-    void cliqueOutilSupprimer();
+    void clicOutilSupprimer();
 
-    void cliqueOutilEchanger();
+    void clicOutilEchanger();
 
-    void cliqueDroit();
+    void clicDroit();
     
-    ModeleLecture getModel();
+    ModeleLecture getModele();
     
     PlanDeVille getPlanDeVille();
 
-    void cliqueCalculerTourne();
+    void clicCalculerTourne();
     
     public void ajouterMessageObserveur(MessageObserveur obs);
 

@@ -19,7 +19,7 @@ public class EtatEchange2 extends AbstractEtat
     {
         this.donnees = controleurDonnees;
         this.idLivraison = idLivraison;
-        donnees.notifierAllMessageObserveurs("[ECHANGE] Veuillez choisir la deuxième livraison en cliquant sur le plan ou sur la liste à gauche. Clic droit pour revenir au choix de la première livraison.");
+        donnees.notifierObserveursMessage("[ECHANGE] Veuillez choisir la deuxième livraison en cliquant sur le plan ou sur la liste à gauche. Clic droit pour revenir au choix de la première livraison.");
     }
 
     @Override
@@ -36,7 +36,7 @@ public class EtatEchange2 extends AbstractEtat
             e.printStackTrace();
         }
         EtatInterface nouvelEtat = new EtatEchange(donnees);
-        donnees.notifierAllMessageObserveurs(String.format("[ECHANGE] Les livraisons %d <-> %d ont été échangées avec succès. Veuillez choisir la première livraison en cliquant sur le plan ou sur la liste à gauche. Clic droit pour sortir au mode d'échange.", idLivraison, livraisonId));
+        donnees.notifierObserveursMessage(String.format("[ECHANGE] Les livraisons %d <-> %d ont été échangées avec succès. Veuillez choisir la première livraison en cliquant sur le plan ou sur la liste à gauche. Clic droit pour sortir au mode d'échange.", idLivraison, livraisonId));
         return nouvelEtat;
 
     }
@@ -63,7 +63,7 @@ public class EtatEchange2 extends AbstractEtat
                 if (l.getAdresse() == intersectionId) {
                     //ignorer si c'etait l'entrepot
                     if (donnees.getModele().getDemande().getEntrepot().getId() == intersectionId) {
-                        donnees.notifierAllMessageObserveurs("[ECHANGE] Déplacement de l'entrepôt impossible. Veuillez choisir la deuxième livraison en cliquant sur le plan ou sur la liste à gauche. Clic droit pour revenir au choix de la première livraison.");
+                        donnees.notifierObserveursMessage("[ECHANGE] Déplacement de l'entrepôt impossible. Veuillez choisir la deuxième livraison en cliquant sur le plan ou sur la liste à gauche. Clic droit pour revenir au choix de la première livraison.");
                         return this;
                     }
                     return cliqueSurLivraison(l.getId());

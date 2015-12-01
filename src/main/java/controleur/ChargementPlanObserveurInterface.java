@@ -1,7 +1,7 @@
 package controleur;
 
 /**
- * Interface du chargement du plan
+ * Interface des observeurs du chargement du plan
  * @author David
  */
 public interface ChargementPlanObserveurInterface {

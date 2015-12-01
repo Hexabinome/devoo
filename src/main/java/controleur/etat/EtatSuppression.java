@@ -19,9 +19,9 @@ public class EtatSuppression extends AbstractEtat
     public EtatSuppression(ControleurDonnees donnees)
     {
         this.donnees = donnees;
-        donnees.notifierLesObserveursDuChargementDuPlan(false);
-        donnees.notifierLesObserveursDuPlan(false);
-        donnees.notifierAllMessageObserveurs("[SUPPRESSION] Souhaitez-vous supprimer une livraison ? Choisissez dans la liste à gauche la livraison que vous voulez supprimer. Clic droit pour sortir du mode de suppression.");
+        donnees.notifierObserveursChargementDuPlan(false);
+        donnees.notifierObserveursDuPlan(false);
+        donnees.notifierObserveursMessage("[SUPPRESSION] Souhaitez-vous supprimer une livraison ? Choisissez dans la liste à gauche la livraison que vous voulez supprimer. Clic droit pour sortir du mode de suppression.");
     }
 
     @Override
@@ -34,7 +34,7 @@ public class EtatSuppression extends AbstractEtat
             donnees.effacerCommandesARetablir();
 
         } catch (CommandeException e) {
-        	donnees.notifierAllMessageObserveurs(e.getMessage());
+        	donnees.notifierObserveursMessage(e.getMessage());
         	// La commande a échoué. Le message sera afficher dans la barre de status
         }
         return this;
@@ -55,7 +55,7 @@ public class EtatSuppression extends AbstractEtat
     @Override
     public EtatInterface cliqueSurPlan(int intersectionId)
     {
-        donnees.notifierAllMessageObserveurs("[SUPPRESSION] Veuillez choisir une livraison dans la liste à gauche. Clic droit pour sortir du mode de suppression");
+        donnees.notifierObserveursMessage("[SUPPRESSION] Veuillez choisir une livraison dans la liste à gauche. Clic droit pour sortir du mode de suppression");
         return this;
     }
 
@@ -68,7 +68,7 @@ public class EtatSuppression extends AbstractEtat
 
     @Override
     public EtatInterface clicDroit() {
-        donnees.notifierAllMessageObserveurs(TEXTE_ETAT_PRINCIPAL);
+        donnees.notifierObserveursMessage(TEXTE_ETAT_PRINCIPAL);
         return new EtatPrincipal(donnees);
     }
 

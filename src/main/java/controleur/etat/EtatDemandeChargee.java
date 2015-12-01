@@ -18,7 +18,7 @@ public class EtatDemandeChargee extends AbstractEtat {
 
 
     public EtatDemandeChargee(ControleurDonnees controleurDonnees) {
-    	controleurDonnees.notifierLesAutresBoutons(false);
+    	controleurDonnees.notifierObserveursFonctionnalites(false);
         this.controleurDonnees = controleurDonnees;
     }
 
@@ -54,7 +54,7 @@ public class EtatDemandeChargee extends AbstractEtat {
             throw new RuntimeException("Un problème est survenu lors du calcul de la tournée");
         }
         controleurDonnees.effacerHistorique();
-        controleurDonnees.notifyAllCalculerTourneeObserveurs(true);
+        controleurDonnees.notifierObserveursCalculTournee(true);
         return new EtatPrincipal(controleurDonnees);
     }
 

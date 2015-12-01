@@ -13,29 +13,37 @@ import controleur.etat.EtatInterface;
 import controleur.etat.EtatSuppression;
 
 /**
- * Implements controller interface. Primary entry point for all interaction with
- * package view.
- *
+ * Implémente l'interface contrôleur. Point d'entrée principal pour toutes les intéractions avec le package vue.
  * @author Maxou
  */
 public class Controleur implements ControleurInterface {
 
+    /**
+     * Etat actuel de l'application
+     */
     private EtatInterface etat;
+    
+    /**
+     * Le contrôleur qui intéragit avec le package modèle
+     */
     private final ControleurDonnees controleurDonnees;
 
+    /**
+     * Constructeur public du contrôleur 
+     */
     public Controleur() {
         controleurDonnees = new ControleurDonnees();
         etat = new EtatInitial(controleurDonnees);
     }
 
     @Override
-    public void ajouterDesactObserver(ActivationObserveurInterface observer) {
-        controleurDonnees.addDesactObserveur(observer);
+    public void ajouterActivationObserveur(ActivationObserveurInterface observer) {
+        controleurDonnees.ajouterActivationObserveur(observer);
     }
 
     @Override
-    public void ajouterModelObserver(ModelObserveur observer) {
-        controleurDonnees.addModelObserveur(observer);
+    public void ajouterModeleObserveur(ModelObserveur observer) {
+        controleurDonnees.ajouterModeleObserveur(observer);
     }
 
     @Override
@@ -44,36 +52,26 @@ public class Controleur implements ControleurInterface {
     }
 
     @Override
-    public void cliqueAnnuler() {
-        // etat = etat.cliqueAnnuler();
+    public void clicAnnuler() {
         controleurDonnees.getHist().annuler();
     }
 
     @Override
-    public void cliqueRetablir() {
-        //   etat = etat.cliqueRetablir();
+    public void clicRetablir() {
         try {
             controleurDonnees.getHist().executer();
         } catch (CommandeException e) {
             e.printStackTrace();
-        } catch (RuntimeException e) {
-        	controleurDonnees.notifierAllMessageObserveurs(e.getMessage());
-        	e.printStackTrace();
         }
     }
 
     @Override
     public Exception chargerPlan(File fichierPlan) {
-        //TODO: catch and return exception here
         try {
             etat = etat.chargerPlan(fichierPlan);
             return null;
         } catch (CommandeException e) {
             return e;
-        } catch (RuntimeException e) {
-        	controleurDonnees.notifierAllMessageObserveurs(e.getMessage());
-        	e.printStackTrace();
-        	return e;
         }
     }
 
@@ -84,47 +82,43 @@ public class Controleur implements ControleurInterface {
             return null;
         } catch (CommandeException e) {
             return e;
-        } catch (RuntimeException e) {
-        	controleurDonnees.notifierAllMessageObserveurs(e.getMessage());
-        	e.printStackTrace();
-        	return e;
         }
     }
 
     @Override
-    public void cliqueOutilAjouter() {
+    public void clicOutilAjouter() {
         etat = new EtatAjout(controleurDonnees);
     }
 
     @Override
-    public void cliqueOutilSupprimer() {
+    public void clicOutilSupprimer() {
         etat = new EtatSuppression(controleurDonnees);
     }
 
     @Override
-    public void cliqueOutilEchanger() {
+    public void clicOutilEchanger() {
         etat = new EtatEchange(controleurDonnees);
     }
 
     @Override
-    public void cliqueDroit() {
+    public void clicDroit() {
         etat = etat.clicDroit();
     }
 
     @Override
-    public ModeleLecture getModel() {
+    public ModeleLecture getModele() {
         if (controleurDonnees.getModele() == null)
-            throw new RuntimeException("Model n'existe pas, il faut charger des fichiers xml avant");
+            throw new RuntimeException("Modèle n'existe pas, il faut charger des fichiers xml avant");
         return controleurDonnees.getModele();
     }
 
     @Override
-    public void cliqueSurPlan(int intersectionId) {
+    public void clicSurPlan(int intersectionId) {
         etat = etat.cliqueSurPlan(intersectionId);
     }
 
     @Override
-    public void cliqueCalculerTourne() {
+    public void clicCalculerTourne() {
         etat = etat.cliqueCalculerTournee();
     }
 
@@ -133,12 +127,12 @@ public class Controleur implements ControleurInterface {
         PlanDeVille plan = controleurDonnees.getPlan();
         if (plan == null)
             throw new RuntimeException(
-                    "Plan n'existe pas, il faut charger le fichier xml avant d'appeler cette methode");
+                    "Plan n'existe pas, il faut charger le fichier xml avant d'appeler cette méthode");
         return plan;
     }
 
     @Override
-    public void cliqueSurLivraison(int livraisonId) {
+    public void clicSurLivraison(int livraisonId) {
        etat = etat.cliqueSurLivraison(livraisonId);
     }
 
@@ -163,19 +157,18 @@ public class Controleur implements ControleurInterface {
 	}
 
     @Override
-    public void ajouterMessageObserveur(MessageObserveur obs)
-    {
-		controleurDonnees.ajouterMessageObserveur(obs);    
+    public void ajouterMessageObserveur(MessageObserveur obs) {
+		controleurDonnees.ajouterMessageObserveur(obs);
 	}
 
 	@Override
-	public void ajouterActivationChargementPlanObserveur(ChargementPlanObserveurInterface chargementPlanObserveur) {
+	public void ajouterChargementPlanObserveur(ChargementPlanObserveurInterface chargementPlanObserveur) {
 		controleurDonnees.ajouterChargementPlanObserveur(chargementPlanObserveur);
 	}
 
 	@Override
-	public void ajouterAutresBoutonsObserveur(ActivationFonctionnalitesObserveurInterface obs) {
-		controleurDonnees.ajouterAutresBoutonsObserveurs(obs);
+	public void ajouterActivationFonctionnalitesObserveur(ActivationFonctionnalitesObserveurInterface obs) {
+		controleurDonnees.ajouterActivationFonctionnalitesObserveurs(obs);
 		
 	}
 	

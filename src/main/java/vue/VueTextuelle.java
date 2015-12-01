@@ -181,21 +181,21 @@ public class VueTextuelle implements Initializable, ActivationObserveurInterface
     @Override
     public void notificationModelAChange() {
         effacerVueTableLivraison();
-        Demande demandeModifiee = controleurApplication.getModel().getDemande();
+        Demande demandeModifiee = controleurApplication.getModele().getDemande();
         construireVueTableLivraion(demandeModifiee);
 
         vueGraphique.nettoyerAffichage();
         vueGraphique.afficherPlan();
         vueGraphique.construireDemande(demandeModifiee);
-        vueGraphique.construireTournee(controleurApplication.getModel().getTournee());
+        vueGraphique.construireTournee(controleurApplication.getModele().getTournee());
     }
 
     /**
      * Ajoute la vue textuelle comme observeurs au près du controleur
      */
     public void initialiserObserveurs() {
-        controleurApplication.ajouterDesactObserver(this);
-        controleurApplication.ajouterModelObserver(this);
+        controleurApplication.ajouterActivationObserveur(this);
+        controleurApplication.ajouterModeleObserveur(this);
     }
 
     /**
@@ -257,7 +257,7 @@ public class VueTextuelle implements Initializable, ActivationObserveurInterface
                 if (getTreeTableRow().getTreeItem() != null) {
                     ObjetVisualisable objetVisualisable = getTreeTableRow().getTreeItem().getValue();
                     if (objetVisualisable instanceof DetailLivraison)
-                        controleurApplication.cliqueSurLivraison(
+                        controleurApplication.clicSurLivraison(
                                 ((DetailLivraison) objetVisualisable).getLivraison().getId());
                 }
             });

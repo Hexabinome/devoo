@@ -19,8 +19,8 @@ public class EtatPrincipal implements EtatInterface
     public EtatPrincipal(ControleurDonnees controleurDonnees)
     {
         this.controleurDonnees = controleurDonnees;
-        controleurDonnees.notifierLesObserveursDuPlan(true);
-        controleurDonnees.notifierLesObserveursDuChargementDuPlan(true);
+        controleurDonnees.notifierObserveursDuPlan(true);
+        controleurDonnees.notifierObserveursChargementDuPlan(true);
     }
 
     @Override

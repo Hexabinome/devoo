@@ -249,7 +249,7 @@ public class VuePrincipale implements Initializable, PlanObserveur, ChargementPl
      */
     @FXML
     void clic_ajouterLivraison() {
-        controleurApplication.cliqueOutilAjouter();
+        controleurApplication.clicOutilAjouter();
     }
 
     /**
@@ -257,7 +257,7 @@ public class VuePrincipale implements Initializable, PlanObserveur, ChargementPl
      */
     @FXML
     void clic_echangerLivraison() {
-        controleurApplication.cliqueOutilEchanger();
+        controleurApplication.clicOutilEchanger();
     }
 
     /**
@@ -265,12 +265,12 @@ public class VuePrincipale implements Initializable, PlanObserveur, ChargementPl
      */
     @FXML
     void clic_supprimerLivraison() {
-        controleurApplication.cliqueOutilSupprimer();
+        controleurApplication.clicOutilSupprimer();
     }
 
     @FXML
     void clic_calculer_tournee() {
-        controleurApplication.cliqueCalculerTourne();
+        controleurApplication.clicCalculerTourne();
     }
     
     @FXML
@@ -287,12 +287,12 @@ public class VuePrincipale implements Initializable, PlanObserveur, ChargementPl
 
     @FXML
     void annuler(){
-        controleurApplication.cliqueAnnuler();
+        controleurApplication.clicAnnuler();
     }
 
     @FXML
     void retablir(){
-        controleurApplication.cliqueRetablir();
+        controleurApplication.clicRetablir();
     }
 
     /**
@@ -356,18 +356,18 @@ public class VuePrincipale implements Initializable, PlanObserveur, ChargementPl
      * Initalise les differents obserserveurs de la vue principale
      */
     public void initialiserObserveurs() {
-        controleurApplication.ajouterDesactObserver(ajouterLivraisonBouton);
-        controleurApplication.ajouterDesactObserver(echangerLivraisonsBouton);
-        controleurApplication.ajouterDesactObserver(supprimerLivraisonBouton);
-        controleurApplication.ajouterDesactObserver(genererFeuilleBouton);
+        controleurApplication.ajouterActivationObserveur(ajouterLivraisonBouton);
+        controleurApplication.ajouterActivationObserveur(echangerLivraisonsBouton);
+        controleurApplication.ajouterActivationObserveur(supprimerLivraisonBouton);
+        controleurApplication.ajouterActivationObserveur(genererFeuilleBouton);
         controleurApplication.ajouterTourneeObserveur(calculerTourneeBouton);
-        controleurApplication.ajouterAutresBoutonsObserveur(this);
+        controleurApplication.ajouterActivationFonctionnalitesObserveur(this);
         controleurApplication.ajouterPlanObserveur(this);
-        controleurApplication.ajouterModelObserver(this);
+        controleurApplication.ajouterModeleObserveur(this);
         controleurApplication.ajouterAnnulerCommandeObserveur(this);
         controleurApplication.ajouterRetablirCommandeObserveur(this);
         controleurApplication.ajouterMessageObserveur(message);
-        controleurApplication.ajouterActivationChargementPlanObserveur(this);
+        controleurApplication.ajouterChargementPlanObserveur(this);
     }
 
     @Override
@@ -385,7 +385,7 @@ public class VuePrincipale implements Initializable, PlanObserveur, ChargementPl
 
     @Override
     public void notificationModelAChange() {
-        ModeleLecture modele = controleurApplication.getModel();
+        ModeleLecture modele = controleurApplication.getModele();
 
         if (modele.getTournee() != null)
             vueGraphique.construireTournee(modele.getTournee());

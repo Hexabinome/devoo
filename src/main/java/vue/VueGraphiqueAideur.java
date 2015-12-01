@@ -107,13 +107,13 @@ public class VueGraphiqueAideur {
 		public void handle(MouseEvent event) {
             if(event.getButton() == MouseButton.SECONDARY){ // clic droit
                 // TODO : a completer
-                controleurApplication.cliqueDroit();
+                controleurApplication.clicDroit();
             } else if(event.getButton() == MouseButton.PRIMARY){ // clic gauche
                 int idIntersection = estSurIntersection(event.getX(), event.getY());
                 if (idIntersection == -1) {
                     return;
                 }
-                controleurApplication.cliqueSurPlan(idIntersection);
+                controleurApplication.clicSurPlan(idIntersection);
             }
 
 		}

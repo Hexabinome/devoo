@@ -33,11 +33,11 @@ public class CommandeChargerPlan extends CommandeNonAnnulable
         try {
             //remplacer plan qui est charge d'un nouveau plan (ssi le chargement du xml a reussi)
             controleurDonnees.setPlan(DeserialiseurXML.ouvrirPlanDeVille(planFichier));
-            controleurDonnees.notifyAllActObserveurs(true);
-            controleurDonnees.notifierLesObserveursDuPlan(true); // notification des observeurs du plan
-            controleurDonnees.notifierLesObserveursDuChargementDuPlan(true);
-            controleurDonnees.notifyAllCalculerTourneeObserveurs(true);
-            controleurDonnees.notifierAllMessageObserveurs(String.format("Plan de la ville (%s) chargé avec succès ! Veuillez charger la demande de livraison maintenant.", planFichier.getName()));
+            controleurDonnees.notifierObserveursActivation(true);
+            controleurDonnees.notifierObserveursDuPlan(true); // notification des observeurs du plan
+            controleurDonnees.notifierObserveursChargementDuPlan(true);
+            controleurDonnees.notifierObserveursCalculTournee(true);
+            controleurDonnees.notifierObserveursMessage(String.format("Plan de la ville (%s) chargé avec succès ! Veuillez charger la demande de livraison maintenant.", planFichier.getName()));
         }
         catch (JDOMException | IOException | SAXException | ExceptionXML ex) {
             throw new CommandeException(ex.getMessage());

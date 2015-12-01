@@ -40,12 +40,12 @@ public class CommandeChargerDemande extends CommandeNonAnnulable
             controleurDonnees.setModele(new Modele(plan, demande));
 
             //permettre de calculer la tournee
-            controleurDonnees.notifyAllCalculerTourneeObserveurs(false);
+            controleurDonnees.notifierObserveursCalculTournee(false);
             
             //notifier les observeurs que il y a un model maintenant
-            controleurDonnees.notifyAllModelObserveurs();
+            controleurDonnees.notifierObserveursModele();
 
-            controleurDonnees.notifierAllMessageObserveurs(String.format("Demande de livraisons (%s) chargée avec succès ! Veuillez calculer la tournée maintenant.", livraisonsFichier.getName()));
+            controleurDonnees.notifierObserveursMessage(String.format("Demande de livraisons (%s) chargée avec succès ! Veuillez calculer la tournée maintenant.", livraisonsFichier.getName()));
         }
         catch (SAXException | ExceptionXML | IOException | JDOMException | ParseException ex) {
             throw new CommandeException(ex.getMessage());
