@@ -1,16 +1,16 @@
 package vue;
 
-import controleur.observable.MessageObservableInterface;
+import controleur.observateur.MessageObservateur;
 import javafx.scene.text.Text;
 
 /**
  *
  * @author Max Schiedermeier
  */
-public class ObserveurMessageChamps extends Text implements MessageObservableInterface {
+public class ObserveurMessageChamps extends Text implements MessageObservateur {
 
     @Override
-    public void notifierObserveursMessage(String message) {
+    public void notifierObservateursMessage(String message) {
         setText(message);
     }
 

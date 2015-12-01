@@ -1,14 +1,14 @@
-package controleur.observable;
+package controleur.observateur;
 
 /**
  * Joue le rôle d'observeur quand l'action annulée doit etre activée
  * @author Maxou
  */
-public interface AnnulerCommandeObservableInterface {
+public interface AnnulerCommandeObservateur {
 
     /**
      * @param active Dit si l'action Annuler doit etre activée ou non
      */
-    void notifierObserveursAnnulerCommande(boolean active);
+    void notifierObservateurAnnulerCommande(boolean active);
 
 }

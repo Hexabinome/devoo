@@ -5,7 +5,7 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import controleur.observable.*;
+import controleur.observateur.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -35,8 +35,9 @@ import controleur.commande.CommandeException;
  *
  * @author David
  */
-public class VuePrincipale implements Initializable, ActivationOuvrirDemandeObserveur, ActivationOuvrirPlanObserveur, ModeleObservableInterface, AnnulerCommandeObservableInterface,
-        RetablirCommandeObservableInterface, ActivationFonctionnalitesObservableInterface, PlanChargeObserveur {
+public class VuePrincipale implements Initializable, ActivationOuvrirDemandeObservateur, ActivationOuvrirPlanObservateur,
+        ModeleObservateur, AnnulerCommandeObservateur,
+        RetablirCommandeObservateur, ActivationFonctionnalitesObservateur, PlanChargeObservateur {
 
     /**
      * Mediateur : permet de communiquer avec les autres controleurs
@@ -375,18 +376,18 @@ public class VuePrincipale implements Initializable, ActivationOuvrirDemandeObse
     }
 
     @Override
-    public void notifierObserveurOuvrirDemande(boolean activer) {
+    public void notifierObservateurOuvrirDemande(boolean activer) {
         //activation de l'élement du menu qui permet de charger un fichier de livraison
         menuFichier.getItems().get(1).setDisable(!activer);
     }
 
 	@Override
-	public void notifierObserveursOuvrirPlan(boolean activer) {
+	public void notifierObservateursOuvrirPlan(boolean activer) {
 		menuFichier.getItems().get(0).setDisable(!activer);
 	}
 
     @Override
-    public void notifierObserveursModele() {
+    public void notifierObservateursModele() {
         ModeleLecture modele = controleurApplication.getModele();
 
         if (modele.getTournee() != null)
@@ -401,7 +402,7 @@ public class VuePrincipale implements Initializable, ActivationOuvrirDemandeObse
     }
     
 	@Override
-	public void notifierObserveursFonctionnalites(boolean activer) {
+	public void notifierObservateursFonctionnalites(boolean activer) {
 		this.ajouterLivraisonBouton.setDisable(!activer);
 		this.echangerLivraisonsBouton.setDisable(!activer);
 		this.supprimerLivraisonBouton.setDisable(!activer);
@@ -409,17 +410,17 @@ public class VuePrincipale implements Initializable, ActivationOuvrirDemandeObse
 	}
 	
     @Override
-    public void notifierObserveursAnnulerCommande(boolean activation) {
+    public void notifierObservateurAnnulerCommande(boolean activation) {
         menuEdition.getItems().get(0).setDisable(activation);
     }
 
     @Override
-    public void notifierObserveursRetablirCommande(boolean activation) {
+    public void notifierObservateurRetablirCommande(boolean activation) {
         menuEdition.getItems().get(1).setDisable(activation);
     }
 
     @Override
-    public void notifierObserveurPlanCharge() {
+    public void notifierObservateursPlanCharge() {
         vueGraphique.nettoyerAffichage();
         vueGraphique.construireGraphe(controleurApplication.getPlanDeVille());
     }

@@ -1,14 +1,14 @@
-package controleur.observable;
+package controleur.observateur;
 
 /**
  * Interface pour les observables qui envoie des messages
  * @author maex
  */
-public interface MessageObservableInterface {
+public interface MessageObservateur {
 	
     /**
      * Notifie les observateurs des messages
      * @param message Le message envoyé
      */
-    void notifierObserveursMessage(String message);
+    void notifierObservateursMessage(String message);
 }

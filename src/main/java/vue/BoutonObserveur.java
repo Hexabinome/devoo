@@ -1,6 +1,6 @@
 package vue;
 
-import controleur.observable.ActivationObservableInterface;
+import controleur.observateur.ActivationObservableInterface;
 import javafx.scene.control.Button;
 
 /**
@@ -10,7 +10,7 @@ import javafx.scene.control.Button;
 public class BoutonObserveur extends Button implements ActivationObservableInterface {
 
     @Override
-    public void notifierObserveursActivation(boolean disabled) {
+    public void notifierObservateursActivation(boolean disabled) {
         setDisable(disabled);
     }
 

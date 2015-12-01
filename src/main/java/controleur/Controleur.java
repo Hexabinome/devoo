@@ -2,7 +2,7 @@ package controleur;
 
 import java.io.File;
 
-import controleur.observable.*;
+import controleur.observateur.*;
 import modele.xmldata.ModeleLecture;
 import modele.xmldata.PlanDeVille;
 import controleur.commande.CommandeException;
@@ -43,12 +43,12 @@ public class Controleur implements ControleurInterface {
     }
 
     @Override
-    public void ajouterModeleObserveur(ModeleObservableInterface observer) {
+    public void ajouterModeleObserveur(ModeleObservateur observer) {
         controleurDonnees.ajouterModeleObserveur(observer);
     }
 
     @Override
-    public void ajouterPlanObserveur(ActivationOuvrirDemandeObserveur planObserveur) {
+    public void ajouterPlanObserveur(ActivationOuvrirDemandeObservateur planObserveur) {
         controleurDonnees.ajouterPlanObserveur(planObserveur);
     }
 
@@ -133,12 +133,12 @@ public class Controleur implements ControleurInterface {
     }
 
     @Override
-    public void ajouterAnnulerCommandeObserveur(AnnulerCommandeObservableInterface annulerCommandeObserveur) {
+    public void ajouterAnnulerCommandeObserveur(AnnulerCommandeObservateur annulerCommandeObserveur) {
         controleurDonnees.ajouterAnnulerCommandeObserveur(annulerCommandeObserveur);
     }
 
     @Override
-    public void ajouterRetablirCommandeObserveur(RetablirCommandeObservableInterface retablirCommandeObserveur) {
+    public void ajouterRetablirCommandeObserveur(RetablirCommandeObservateur retablirCommandeObserveur) {
         controleurDonnees.ajouterRetablirCommandeObserveur(retablirCommandeObserveur);
     }
 
@@ -148,22 +148,22 @@ public class Controleur implements ControleurInterface {
 	}
 
     @Override
-    public void ajouterMessageObserveur(MessageObservableInterface obs) {
+    public void ajouterMessageObserveur(MessageObservateur obs) {
 		controleurDonnees.ajouterMessageObserveur(obs);
 	}
 
     @Override
-    public void ajouterPlanChargeObserveur(PlanChargeObserveur planChargeObserveur) {
-        controleurDonnees.ajouterPlanChargeObserveur(planChargeObserveur);
+    public void ajouterPlanChargeObserveur(PlanChargeObservateur planChargeObservateur) {
+        controleurDonnees.ajouterPlanChargeObserveur(planChargeObservateur);
     }
 
     @Override
-	public void ajouterChargementPlanObserveur(ActivationOuvrirPlanObserveur chargementPlanObserveur) {
+	public void ajouterChargementPlanObserveur(ActivationOuvrirPlanObservateur chargementPlanObserveur) {
 		controleurDonnees.ajouterChargementPlanObserveur(chargementPlanObserveur);
 	}
 
 	@Override
-	public void ajouterActivationFonctionnalitesObserveur(ActivationFonctionnalitesObservableInterface obs) {
+	public void ajouterActivationFonctionnalitesObserveur(ActivationFonctionnalitesObservateur obs) {
 		controleurDonnees.ajouterActivationFonctionnalitesObserveurs(obs);
 		
 	}

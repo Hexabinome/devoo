@@ -1,14 +1,14 @@
-package controleur.observable;
+package controleur.observateur;
 
 /**
  * Interface des observables pour notifier les boutons des fonctionnalités
  * @author David
  */
-public interface ActivationFonctionnalitesObservableInterface {
+public interface ActivationFonctionnalitesObservateur {
     
 	/**
 	 * Notifie les boutons de fonctionnalités qu'il faut changer l'état d'activation
      * @param activer Vrai s'il faut activer les boutons des fonctionnalités
      */
-    void notifierObserveursFonctionnalites(boolean activer);
+    void notifierObservateursFonctionnalites(boolean activer);
 }

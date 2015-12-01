@@ -3,7 +3,7 @@ package controleur;
 import java.io.File;
 
 import controleur.commande.CommandeException;
-import controleur.observable.*;
+import controleur.observateur.*;
 import modele.xmldata.ModeleLecture;
 import modele.xmldata.PlanDeVille;
 
@@ -23,19 +23,19 @@ public interface ControleurInterface {
      * Ajoute un observateur au changement du modèle
      * @param observeur
      */
-    void ajouterModeleObserveur(ModeleObservableInterface observeur);
+    void ajouterModeleObserveur(ModeleObservateur observeur);
 
     /**
      * Ajoute un observateur des changement du plan
      * @param planObserveur
      */
-    void ajouterPlanObserveur(ActivationOuvrirDemandeObserveur planObserveur);
+    void ajouterPlanObserveur(ActivationOuvrirDemandeObservateur planObserveur);
     
     /**
      * Ajoute un observateur du chargement du plan
      * @param chargementPlanObserveur
      */
-    void ajouterChargementPlanObserveur(ActivationOuvrirPlanObserveur chargementPlanObserveur);
+    void ajouterChargementPlanObserveur(ActivationOuvrirPlanObservateur chargementPlanObserveur);
     
     /**
      * Ajoute un observateur à la tournée
@@ -47,27 +47,27 @@ public interface ControleurInterface {
      * Ajoute un observateur à l'annulation d'une commande
      * @param annulerCommandeObserveur
      */
-    void ajouterAnnulerCommandeObserveur(AnnulerCommandeObservableInterface annulerCommandeObserveur);
+    void ajouterAnnulerCommandeObserveur(AnnulerCommandeObservateur annulerCommandeObserveur);
 
     /**
      * Ajoute un observateur au rétablissement d'une commande
      * @param retablirCommandeObserveur
      */
-    void ajouterRetablirCommandeObserveur(RetablirCommandeObservableInterface retablirCommandeObserveur);
+    void ajouterRetablirCommandeObserveur(RetablirCommandeObservateur retablirCommandeObserveur);
     
     /**
      * Ajoute un observateur à l'activation des fonctionnalités
      * @param obs
      */
-    void ajouterActivationFonctionnalitesObserveur(ActivationFonctionnalitesObservableInterface obs);
+    void ajouterActivationFonctionnalitesObserveur(ActivationFonctionnalitesObservateur obs);
     
     /**
      * Ajoute un observateur des messages envoyés
      * @param obs
      */
-     void ajouterMessageObserveur(MessageObservableInterface obs);
+     void ajouterMessageObserveur(MessageObservateur obs);
 
-    void ajouterPlanChargeObserveur(PlanChargeObserveur planChargeObserveur);
+    void ajouterPlanChargeObserveur(PlanChargeObservateur planChargeObservateur);
 
     /**
      * Appel quand il y a un clic sur plan

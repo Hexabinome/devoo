@@ -1,13 +1,13 @@
-package controleur.observable;
+package controleur.observateur;
 
 /**
  * Interface pour les observables du modèle
  * @author Maxou
  */
-public interface ModeleObservableInterface {
+public interface ModeleObservateur {
 	
     /**
      * Notifie les observeurs que le modèle a changé
      */
-    void notifierObserveursModele();
+    void notifierObservateursModele();
 }
