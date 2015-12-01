@@ -3,6 +3,7 @@ package vue;
 import controleur.ControleurInterface;
 import controleur.observable.ActivationOuvrirPlanObserveur;
 import controleur.observable.ModeleObservableInterface;
+import controleur.observable.PlanChargeObserveur;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -26,7 +27,7 @@ import java.util.ResourceBundle;
  * fenêtre principale.
  */
 public class VueTextuelle implements Initializable,
-        ModeleObservableInterface, ActivationOuvrirPlanObserveur {
+        ModeleObservableInterface, PlanChargeObserveur {
 
     /**
      * Table principale contenant la liste des livraisons.
@@ -182,15 +183,14 @@ public class VueTextuelle implements Initializable,
      */
     public void initialiserObserveurs() {
         controleurApplication.ajouterModeleObserveur(this);
-        controleurApplication.ajouterChargementPlanObserveur(this);
+        controleurApplication.ajouterPlanChargeObserveur(this);
     }
 
     @Override
-    public void notifierObserveursOuvrirPlan(boolean activer) {
-        if (activer) {
-            effacerVueTableLivraison();
-        }
+    public void notifierObserveurPlanCharge() {
+        effacerVueTableLivraison();
     }
+
 
     /**
      * Gestion du clic et hover sur les elements de la table. En créant une autre classe séparée, on n'aurait
