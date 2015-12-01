@@ -8,70 +8,67 @@ import controleur.commande.CommandeChargerPlan;
 import controleur.commande.CommandeException;
 
 /**
- * Cet état répresente l'état où la tournée a été calculée.
+ * Etat principal de l'application après avoir calculé la tournée. Les fonctionnalités sont débloqués
  * @author Maxou
  */
-public class EtatPrincipal implements EtatInterface
-{
+public class EtatPrincipal implements EtatInterface {
 
+    /** Le contrôleur de données */
     private final ControleurDonnees controleurDonnees;
 
-    public EtatPrincipal(ControleurDonnees controleurDonnees)
-    {
+    /**
+     * Constructeur de l'état principal
+     * @param controleurDonnees Le contrôleur de données
+     */
+    public EtatPrincipal(ControleurDonnees controleurDonnees) {
         this.controleurDonnees = controleurDonnees;
         controleurDonnees.notifierObserveurOuvrirDemande(true);
         controleurDonnees.notifierObserveursOuvrirPlan(true);
     }
 
     @Override
-    public EtatInterface cliqueAnnuler()
-    {
-        throw new UnsupportedOperationException("Undo/Redo is allowed in this state, but not supported yet, since not a core feature."); //To change body of generated methods, choose Tools | Templates.
+    public EtatInterface clicAnnuler() {
+        throw new UnsupportedOperationException("Cet état ne permet pas d'annuler des commandes");
     }
 
     @Override
-    public EtatInterface cliqueRetablir()
-    {
-        throw new UnsupportedOperationException("Undo/Redo is allowed in this state, but not supported yet, since not a core feature."); //To change body of generated methods, choose Tools | Templates.
+    public EtatInterface clicRetablir() {
+        throw new UnsupportedOperationException("Cet état ne permet pas de rétablier des commandes");
     }
 
     @Override
-    public EtatInterface cliqueSurLivraison(int livraisonId)
-    {
-        //cet interation sera sans effect.
+    public EtatInterface clicSurLivraison(int livraisonId) {
+        // Ne fait rien
         return this;
     }
 
     @Override
-    public EtatInterface chargerPlan(File plan) throws CommandeException
-    {
+    public EtatInterface chargerPlan(File plan) throws CommandeException {
         new CommandeChargerPlan(controleurDonnees, plan).executer();
         return new EtatPlanCharge(controleurDonnees);
     }
 
     @Override
-    public EtatInterface chargerLivraisons(File livraisons) throws CommandeException
-    {
+    public EtatInterface chargerLivraisons(File livraisons) throws CommandeException {
         new CommandeChargerDemande(controleurDonnees, livraisons).executer();
         controleurDonnees.effacerHistorique();
         return new EtatDemandeChargee(controleurDonnees);
     }
 
     @Override
-    public EtatInterface cliqueSurPlan(int intersectionId)
-    {
-        throw new UnsupportedOperationException("Interaction with plan is allowed in this state, but not supported yet, since not a core feature."); //To change body of generated methods, choose Tools | Templates.
+    public EtatInterface clicSurPlan(int intersectionId) {
+        throw new UnsupportedOperationException("Cet état ne permet pas de charger un plan");
     }
 
     @Override
-    public EtatInterface cliqueCalculerTournee()
-    {
+    public EtatInterface clicCalculerTournee() {
+    	// Ne fait rien
         return this;
     }
 
     @Override
     public EtatInterface clicDroit() {
-
+    	// Ne fait rien
         return this;
     }
 

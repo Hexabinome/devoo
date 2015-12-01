@@ -8,52 +8,50 @@ import controleur.commande.CommandeChargerDemande;
 import controleur.commande.CommandeChargerPlan;
 
 /**
- * On se retrouve dans cet état après avoir le chargé le plan.
+ * Etat après le chargement du plan
  * @author Maxou
  */
-public class EtatPlanCharge extends AbstractEtat
-{
+public class EtatPlanCharge extends AbstractEtat {
 
+    /** Le contrôleur de données */
     private final ControleurDonnees controleurDonnees;
 
-    public EtatPlanCharge(ControleurDonnees controleurDonnees)
-    {
+    /**
+     * Constructeur de l'état après le chargement du plan
+     * @param controleurDonnees Le contrôleur de données
+     */
+    public EtatPlanCharge(ControleurDonnees controleurDonnees) {
         this.controleurDonnees = controleurDonnees;
         controleurDonnees.notifierObserveursFonctionnalites(false);
     }
 
     @Override
-    public EtatInterface cliqueSurLivraison(int livraisonId)
-    {
-        throw new RuntimeException("Cet etat ne permet pas d'interagir avec la liste.");
+    public EtatInterface clicSurLivraison(int livraisonId) {
+        throw new RuntimeException("Cet état ne permet pas d'interagir avec la liste.");
     }
 
     @Override
-    public EtatInterface chargerPlan(File plan) throws CommandeException
-    {
+    public EtatInterface chargerPlan(File plan) throws CommandeException {
         new CommandeChargerPlan(controleurDonnees, plan).executer();
         controleurDonnees.effacerHistorique();
         return this;
     }
 
     @Override
-    public EtatInterface chargerLivraisons(File livraisons) throws CommandeException
-    {
+    public EtatInterface chargerLivraisons(File livraisons) throws CommandeException {
         new CommandeChargerDemande(controleurDonnees, livraisons).executer();
         controleurDonnees.effacerHistorique();
         return new EtatDemandeChargee(controleurDonnees);
     }
 
     @Override
-    public EtatInterface cliqueSurPlan(int intersectionId)
-    {
-        throw new RuntimeException("Cet etat ne permet pas d'interagir avec le plan.");
+    public EtatInterface clicSurPlan(int intersectionId) {
+        throw new RuntimeException("Cet état ne permet pas d'interagir avec le plan.");
     }
 
     @Override
-    public EtatInterface cliqueCalculerTournee()
-    {
-        throw new RuntimeException("Cet etat ne permet pas de calculer la tournee");
+    public EtatInterface clicCalculerTournee() {
+        throw new RuntimeException("Cet état ne permet pas de calculer la tournee");
     }
 
     @Override

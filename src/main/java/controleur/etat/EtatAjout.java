@@ -7,16 +7,19 @@ import controleur.commande.CommandeException;
 
 /**
  * Cet état correspond à l'état dans lequel on se trouve quand on clic sur le bouton ajouter.
- * Dans ce état on doit cliquer sur une intersection dans le plan pour passer à l'étatAjout2
+ * Dans cet état on doit cliquer sur une intersection dans le plan pour passer à l'étatAjout2
  * @author Maxou
  */
-public class EtatAjout extends AbstractEtat
-{
+public class EtatAjout extends AbstractEtat {
 
+    /** Le contrôleur de données */
     private final ControleurDonnees donnees;
 
-    public EtatAjout(ControleurDonnees donnees)
-    {
+    /**
+     * Constructeur du premier état d'ajout
+     * @param donnees Le contrôleur de données
+     */
+    public EtatAjout(ControleurDonnees donnees) {
         this.donnees = donnees;
         donnees.notifierObserveursOuvrirPlan(false);
         donnees.notifierObserveurOuvrirDemande(false);
@@ -24,37 +27,29 @@ public class EtatAjout extends AbstractEtat
     }
 
     @Override
-    public EtatInterface cliqueSurLivraison(int livraisonId)
-    {
+    public EtatInterface clicSurLivraison(int livraisonId) {
         donnees.notifierObserveursMessage("[AJOUT] Veuillez d'abord choisir l'adresse de la livraison en cliquant sur une intersection sur le plan. Clic droit pour sortir du mode d'ajout?");
         return this;
     }
 
     @Override
-    public EtatInterface chargerPlan(File plan) throws CommandeException
-    {
-    	donnees.notifierObserveursMessage("Cet etat ne permet pas de charger un plan");
-        throw new RuntimeException("Cet etat ne permet pas de charger un plan");
+    public EtatInterface chargerPlan(File plan) throws CommandeException {
+        throw new RuntimeException("Cet état ne permet pas de charger un plan");
     }
 
     @Override
-    public EtatInterface chargerLivraisons(File livraisons) throws CommandeException
-    {
-    	donnees.notifierObserveursMessage("Cet etat ne permet pas de charger une demande de livraison");
-        throw new RuntimeException("Cet etat ne permet pas de charger une demande de livraison");
+    public EtatInterface chargerLivraisons(File livraisons) throws CommandeException {
+        throw new RuntimeException("Cet état ne permet pas de charger une demande de livraison");
     }
 
     @Override
-    public EtatInterface cliqueSurPlan(int intersectionId)
-    {
+    public EtatInterface clicSurPlan(int intersectionId) {
         return new EtatAjout2(donnees,intersectionId);
     }
 
     @Override
-    public EtatInterface cliqueCalculerTournee()
-    {
-    	donnees.notifierObserveursMessage("Cet etat ne permet pas de calculer la tournée");
-        throw new RuntimeException("Cet etat ne permet pas de calculer la tournée");
+    public EtatInterface clicCalculerTournee() {
+        throw new RuntimeException("Cet état ne permet pas de calculer la tournée");
     }
 
     @Override

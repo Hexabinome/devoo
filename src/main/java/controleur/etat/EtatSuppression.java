@@ -8,16 +8,19 @@ import controleur.commande.Commande;
 import controleur.commande.CommandeSupprimerLivraison;
 
 /**
- * On se retrouve dans ce état après avoir cliqué sur le bouton Supprimer livraisons.
+ * Etat de suppression
  * @author Maxou
  */
-public class EtatSuppression extends AbstractEtat
-{
+public class EtatSuppression extends AbstractEtat {
 
+    /** Le contrôleur de données */
     private final ControleurDonnees donnees;
 
-    public EtatSuppression(ControleurDonnees donnees)
-    {
+    /**
+     * Constructeur de l'état de suppression
+     * @param donnees Le contrôleur de données
+     */
+    public EtatSuppression(ControleurDonnees donnees) {
         this.donnees = donnees;
         donnees.notifierObserveursOuvrirPlan(false);
         donnees.notifierObserveurOuvrirDemande(false);
@@ -25,44 +28,39 @@ public class EtatSuppression extends AbstractEtat
     }
 
     @Override
-    public EtatInterface cliqueSurLivraison(int livraisonId)
-    {
+    public EtatInterface clicSurLivraison(int livraisonId) {
         try {
             Commande commande = new CommandeSupprimerLivraison(donnees,livraisonId);
             commande.executer();
             donnees.ajouterCommande(commande);
             donnees.effacerCommandesARetablir();
-
         } catch (CommandeException e) {
-        	donnees.notifierObserveursMessage(e.getMessage());
-        	// La commande a échoué. Le message sera afficher dans la barre de status
+        	e.printStackTrace();
+        	// TODO afficher ou erreur?
+        	//donnees.notifierObserveursMessage(e.getMessage());
         }
         return this;
     }
 
     @Override
-    public EtatInterface chargerPlan(File plan) throws CommandeException
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public EtatInterface chargerPlan(File plan) throws CommandeException {
+        throw new UnsupportedOperationException("Cet état ne permet pas de charger un plan");
     }
 
     @Override
-    public EtatInterface chargerLivraisons(File livraisons) throws CommandeException
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public EtatInterface chargerLivraisons(File livraisons) throws CommandeException {
+        throw new UnsupportedOperationException("Cet état ne permet pas de charger une demande de livraison");
     }
 
     @Override
-    public EtatInterface cliqueSurPlan(int intersectionId)
-    {
+    public EtatInterface clicSurPlan(int intersectionId) {
         donnees.notifierObserveursMessage("[SUPPRESSION] Veuillez choisir une livraison dans la liste à gauche. Clic droit pour sortir du mode de suppression");
         return this;
     }
 
     @Override
-    public EtatInterface cliqueCalculerTournee()
-    {
-        // Ne fais rien
+    public EtatInterface clicCalculerTournee() {
+        // Ne fait rien
         return this;
     }
 
@@ -73,15 +71,13 @@ public class EtatSuppression extends AbstractEtat
     }
 
     @Override
-    public EtatInterface cliqueAnnuler()
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public EtatInterface clicAnnuler() {
+        throw new UnsupportedOperationException("Cet état ne permet pas d'annuler");
     }
 
     @Override
-    public EtatInterface cliqueRetablir()
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public EtatInterface clicRetablir() {
+        throw new UnsupportedOperationException("Cet état ne permet pas de rétablir.");
     }
 
 }

@@ -105,12 +105,12 @@ public class Controleur implements ControleurInterface {
 
     @Override
     public void clicSurPlan(int intersectionId) {
-        etat = etat.cliqueSurPlan(intersectionId);
+        etat = etat.clicSurPlan(intersectionId);
     }
 
     @Override
     public void clicCalculTournee() {
-        etat = etat.cliqueCalculerTournee();
+        etat = etat.clicCalculerTournee();
     }
 
     @Override
@@ -124,7 +124,7 @@ public class Controleur implements ControleurInterface {
 
     @Override
     public void clicSurLivraison(int livraisonId) {
-       etat = etat.cliqueSurLivraison(livraisonId);
+       etat = etat.clicSurLivraison(livraisonId);
     }
 
     @Override

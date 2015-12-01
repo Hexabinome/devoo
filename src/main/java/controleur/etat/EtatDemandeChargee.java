@@ -14,16 +14,21 @@ import java.io.File;
  */
 public class EtatDemandeChargee extends AbstractEtat {
 
+    /** Le contrôleur de données */
     private final ControleurDonnees controleurDonnees;
 
-
+    /**
+     * Constructeur de l'état demande chargée
+     * @param controleurDonnees Le contrôleur de données
+     */
     public EtatDemandeChargee(ControleurDonnees controleurDonnees) {
     	controleurDonnees.notifierObserveursFonctionnalites(false);
         this.controleurDonnees = controleurDonnees;
     }
 
     @Override
-    public EtatInterface cliqueSurLivraison(int livraisonId) {
+    public EtatInterface clicSurLivraison(int livraisonId) {
+    	// Ne fait rien
         return this;
     }
 
@@ -40,17 +45,16 @@ public class EtatDemandeChargee extends AbstractEtat {
     }
 
     @Override
-    public EtatInterface cliqueSurPlan(int intersectionId) {
-        // Ne fais rien
+    public EtatInterface clicSurPlan(int intersectionId) {
+        // Ne fait rien
         return this;
     }
 
     @Override
-    public EtatInterface cliqueCalculerTournee() {
+    public EtatInterface clicCalculerTournee() {
         try {
             new CommandeCalculerTournee(controleurDonnees).executer();
-        }
-        catch (CommandeException ex) {
+        } catch (CommandeException ex) {
             throw new RuntimeException("Un problème est survenu lors du calcul de la tournée");
         }
         controleurDonnees.effacerHistorique();
@@ -60,9 +64,8 @@ public class EtatDemandeChargee extends AbstractEtat {
 
     @Override
     public EtatInterface clicDroit() {
-        // Ne fais rien
+        // Ne fait rien
     	return this;
-        //throw new RuntimeException("Le clic droit sur cet état n'a pas d'effet");
     }
-
+    
 }
