@@ -100,7 +100,7 @@
                 </AnchorPane>
             </top>
             <right>
-                <Slider fx:id="sliderZoom" max="10" min="1" orientation="VERTICAL" value="1" BorderPane.alignment="CENTER" />
+                <Slider fx:id="sliderZoom" max="10" min="1" blockIncrement="0.5" orientation="VERTICAL" value="1" BorderPane.alignment="CENTER" />
             </right>
          <bottom>
             <Pane prefHeight="21.0" prefWidth="1000.0" BorderPane.alignment="CENTER">

@@ -81,34 +81,33 @@ public class VueGraphiqueAideur {
         this.scrollPane = scrollPane;
         this.sliderZoom = slider;
         initzoom();
-        
+
         canvas.setOnMouseMoved(new HoverGraphiqueGestionnaireEvenement());
         canvas.setOnMouseClicked(new ClicGraphiqueGestionnaireEvenement());
     }
-    
+
     private class HoverGraphiqueGestionnaireEvenement implements EventHandler<MouseEvent> {
 
-		@Override
-		public void handle(MouseEvent event) {
-			Livraison l = estSurLivraison(event.getX(), event.getY());
-			if (l == null) {
-				desactiverSurbrillance();
-				return;
-			}
-			
-			surbrillanceLivraison(l);
-			// TODO surbrillance de la zone dans la vue textuelle
-		}
+        @Override
+        public void handle(MouseEvent event) {
+            Livraison l = estSurLivraison(event.getX(), event.getY());
+            if (l == null) {
+                desactiverSurbrillance();
+                return;
+            }
+
+            surbrillanceLivraison(l);
+            // TODO surbrillance de la zone dans la vue textuelle
+        }
     }
-    
+
     private class ClicGraphiqueGestionnaireEvenement implements EventHandler<MouseEvent> {
 
-		@Override
-		public void handle(MouseEvent event) {
-            if(event.getButton() == MouseButton.SECONDARY){ // clic droit
-                // TODO : a completer
+        @Override
+        public void handle(MouseEvent event) {
+            if (event.getButton() == MouseButton.SECONDARY) { // clic droit
                 controleurApplication.clicDroit();
-            } else if(event.getButton() == MouseButton.PRIMARY){ // clic gauche
+            } else if (event.getButton() == MouseButton.PRIMARY) { // clic gauche
                 int idIntersection = estSurIntersection(event.getX(), event.getY());
                 if (idIntersection == -1) {
                     return;
@@ -116,7 +115,7 @@ public class VueGraphiqueAideur {
                 controleurApplication.clicSurPlan(idIntersection);
             }
 
-		}
+        }
     }
 
     /**
@@ -127,13 +126,20 @@ public class VueGraphiqueAideur {
     }
 
     public StackPane getCanvas() {
-    	return canvas;
+        return canvas;
     }
 
+    /**
+     * Initialise la fonctionnalité permettant de faire sur un zoom sur la vue graphique c'est à dire le graphe.
+     * Le zoom est inspiré de : http://stackoverflow.com/questions/16680295/javafx-correct-scaling
+     */
     private void initzoom() {
-        final Group scrollContent = (Group) scrollPane.getContent();
-        sliderZoom.setBlockIncrement(0.5);
 
+        final Group contenuDuScrollPane = (Group) scrollPane.getContent();
+
+        /**
+         * Ajoute un écouteur sur les changements de taille du scroll pane pour adapter la taille du canvas.
+         */
         scrollPane.viewportBoundsProperty().addListener(new ChangeListener<Bounds>() {
             @Override
             public void changed(ObservableValue<? extends Bounds> observable,
@@ -144,18 +150,22 @@ public class VueGraphiqueAideur {
 
 
         /**
-         * Liaison du slider avec le canvas.
+         * Liaison du slider avec le canvas. Le slider permet ainsi de zoomer/dézommer au cas où l'utilisateur n'aurait
+         * pas de molette de souris
          */
         canvas.scaleXProperty().bind(sliderZoom.valueProperty());
         canvas.scaleYProperty().bind(sliderZoom.valueProperty());
 
+        /**
+         * Ajout d'un écouteur l'évènement scroll avec la souris sur la vue graphique
+         */
         canvas.setOnScroll(new EventHandler<ScrollEvent>() {
             @Override
             public void handle(ScrollEvent event) {
                 event.consume();
 
 
-                double oldScale = canvas.getScaleX();
+                double ancienneEchelle = canvas.getScaleX();
 
                 if (event.getDeltaY() == 0) {
                     return;
@@ -166,18 +176,15 @@ public class VueGraphiqueAideur {
                     sliderZoom.decrement();
                 }
 
-                double newScale = canvas.getScaleX();
+                double nouvelleEchelle = canvas.getScaleX();
 
-                double scaleFactor = newScale / oldScale;
+                double facteurDEchelle = nouvelleEchelle / ancienneEchelle;
 
+                // Calcul le decalage par rapport à un point
+                Point2D scrollOffset = calculerDecalage(contenuDuScrollPane, scrollPane);
 
-                // amount of scrolling in each direction in scrollContent coordinate
-                // Calcul le decalage
-                Point2D scrollOffset = figureScrollOffset(scrollContent, scrollPane);
-
-                // Repositionne la scrollbare pour que la fenetre soit centrée
-                repositionScroller(scrollContent, scrollPane, scaleFactor, scrollOffset);
-
+                // Repositionne le scroller pour que la fenetre soit centrée
+                repositionnerScroller(contenuDuScrollPane, scrollPane, facteurDEchelle, scrollOffset);
 
             }
         });
@@ -192,10 +199,10 @@ public class VueGraphiqueAideur {
      *             persistance
      */
     public void construireGraphe(PlanDeVille plan) {
-    	intersectionsGraphiques = new HashMap<Integer, Pair<Ellipse,Collection<Integer>>>();
-    	listeIdLivraison = null;
-    	livraisons = null;
-    	tournee = null;
+        intersectionsGraphiques = new HashMap<Integer, Pair<Ellipse, Collection<Integer>>>();
+        listeIdLivraison = null;
+        livraisons = null;
+        tournee = null;
         group.getChildren().clear();
 
         Map<Integer, Intersection> toutesIntersections = plan.getIntersections();
@@ -274,7 +281,7 @@ public class VueGraphiqueAideur {
 
         // Mise en surbrillance d'une intersection + agrandissement
         Ellipse livraisonGraphique = intersectionsGraphiques.get(livraison.getAdresse()).getKey();
-        
+
         colorerEllipse(livraison.getAdresse(), livraisonGraphique);
 
         changerTailleEllipse(livraisonGraphique,
@@ -297,9 +304,9 @@ public class VueGraphiqueAideur {
      * Désactive la surbrillance pour toutes les surbrillances
      */
     public void desactiverSurbrillance() {
-    	if (intersectionsGraphiques == null || listeIdLivraison == null)
-    		return;
-    	
+        if (intersectionsGraphiques == null || listeIdLivraison == null)
+            return;
+
         Iterator<Entry<Integer, Pair<Ellipse, Collection<Integer>>>> it = intersectionsGraphiques.entrySet().iterator();
 
         while (it.hasNext()) {
@@ -360,22 +367,23 @@ public class VueGraphiqueAideur {
      * @param couleur La nouvelle couleur
      */
     private void colorerEllipse(Ellipse e, Paint couleur) {
-       
+
         e.setFill(couleur);
     }
-    
+
     private void colorerEllipse(int idIntersection, Ellipse e) {
-    	 // Choix de la bonne couleur
+        // Choix de la bonne couleur
         Paint couleur;
 
         if (idIntersection == entrepot) {
             couleur = ConstantesGraphique.COULEUR_ENTREPOT;
         } else if (listeIdLivraison != null && listeIdLivraison.containsKey(idIntersection)) {
-            couleur = ConstantesGraphique.COULEURS_FENETRES[listeIdLivraison.get(idIntersection) % ConstantesGraphique.COULEURS_FENETRES.length];
+            couleur = ConstantesGraphique.COULEURS_FENETRES[listeIdLivraison.get(
+                    idIntersection) % ConstantesGraphique.COULEURS_FENETRES.length];
         } else {
             couleur = ConstantesGraphique.COULEUR_INTERSECTION;
         }
-        
+
         colorerEllipse(e, couleur);
     }
 
@@ -468,8 +476,8 @@ public class VueGraphiqueAideur {
 
             Paint couleur = ConstantesGraphique.COULEURS_FENETRES[(idFenetre + 1) % ConstantesGraphique.COULEURS_FENETRES.length];
 
-            for (int idIntersectionLivraison = 0; idIntersectionLivraison < tournee.get(idFenetre).size() - 1; 
-            		idIntersectionLivraison++) {
+            for (int idIntersectionLivraison = 0; idIntersectionLivraison < tournee.get(idFenetre).size() - 1;
+                 idIntersectionLivraison++) {
                 int departIntersectionId = tournee.get(idFenetre).get(idIntersectionLivraison);
                 int arriveeIntersectionId = tournee.get(idFenetre).get(idIntersectionLivraison + 1);
                 Ellipse debut = intersectionsGraphiques.get(departIntersectionId).getKey();
@@ -503,18 +511,18 @@ public class VueGraphiqueAideur {
 
     public void construireDemande(final Demande demande) {
         tournee = null;
-        
+
         listeIdLivraison = new HashMap<Integer, Integer>();
         livraisons = new ArrayList<Livraison>();
         this.entrepot = demande.getEntrepot().getId();
-        
 
-    	List<Fenetre> fenetres = demande.getFenetres();
+
+        List<Fenetre> fenetres = demande.getFenetres();
         for (int i = 0; i < fenetres.size(); ++i) {
-    		Fenetre fenetre = fenetres.get(i);
+            Fenetre fenetre = fenetres.get(i);
             for (Entry<Integer, Livraison> pair : fenetre.getListeLivraisons().entrySet()) {
-            	livraisons.add(pair.getValue());
-                if(pair.getKey() != -1) // -1 c'est l'identifiant de l'entrepot qui est crée comme une livraison dans une fenetre speciale
+                livraisons.add(pair.getValue());
+                if (pair.getKey() != -1) // -1 c'est l'identifiant de l'entrepot qui est crée comme une livraison dans une fenetre speciale
                     listeIdLivraison.put(pair.getValue().getAdresse(), i);
             }
         }
@@ -534,13 +542,21 @@ public class VueGraphiqueAideur {
         colorerEllipse(entrepot, ConstantesGraphique.COULEUR_ENTREPOT);
 
         // Affichage des livraisons
-        listeIdLivraison.forEach((idLivraison, idCouleur) -> colorerEllipse(idLivraison, ConstantesGraphique.COULEURS_FENETRES[idCouleur % ConstantesGraphique.COULEURS_FENETRES.length]));
+        listeIdLivraison.forEach((idLivraison, idCouleur) -> colorerEllipse(idLivraison,
+                ConstantesGraphique.COULEURS_FENETRES[idCouleur % ConstantesGraphique.COULEURS_FENETRES.length]));
 
         intersectionAuPremierPlan();
     }
 
 
-    private Point2D figureScrollOffset(Node scrollContent, ScrollPane scroller) {
+    /**
+     * Calcul le décalage du scroll pane par rapport à son contenu en créant un point qui contiendra le décallage horizontal
+     * et vertical
+     * http://stackoverflow.com/questions/16680295/javafx-correct-scaling
+     * @param scroller      le scroll pane
+     * @param scrollContent le contenu du scroll pane
+     */
+    private Point2D calculerDecalage(Node scrollContent, ScrollPane scroller) {
         double extraWidth = scrollContent.getLayoutBounds().getWidth() - scroller.getViewportBounds().getWidth();
         double hScrollProportion = (scroller.getHvalue() - scroller.getHmin()) / (scroller.getHmax() - scroller.getHmin());
         double scrollXOffset = hScrollProportion * Math.max(0, extraWidth);
@@ -550,22 +566,31 @@ public class VueGraphiqueAideur {
         return new Point2D(scrollXOffset, scrollYOffset);
     }
 
-    private void repositionScroller(Node scrollContent, ScrollPane scroller, double scaleFactor, Point2D scrollOffset) {
+    /**
+     * Répositionne le scroller en fonction du facteur d'échelle
+     * http://stackoverflow.com/questions/16680295/javafx-correct-scaling
+     * @param facteurDEchelle facteur d'échelle
+     * @param scroller        le scrolleur à repositionner
+     * @param contenuDuScrollPane   le contenu du scroll pane
+     * @param scrollOffset    point servant de réference pour le décalge
+     */
+    private void repositionnerScroller(Node contenuDuScrollPane, ScrollPane scroller, double facteurDEchelle,
+                                       Point2D scrollOffset) {
         double scrollXOffset = scrollOffset.getX();
         double scrollYOffset = scrollOffset.getY();
-        double extraWidth = scrollContent.getLayoutBounds().getWidth() - scroller.getViewportBounds().getWidth();
+        double extraWidth = contenuDuScrollPane.getLayoutBounds().getWidth() - scroller.getViewportBounds().getWidth();
         if (extraWidth > 0) {
             double halfWidth = scroller.getViewportBounds().getWidth() / 2;
-            double newScrollXOffset = (scaleFactor - 1) * halfWidth + scaleFactor * scrollXOffset;
+            double newScrollXOffset = (facteurDEchelle - 1) * halfWidth + facteurDEchelle * scrollXOffset;
             scroller.setHvalue(
                     scroller.getHmin() + newScrollXOffset * (scroller.getHmax() - scroller.getHmin()) / extraWidth);
         } else {
             scroller.setHvalue(scroller.getHmin());
         }
-        double extraHeight = scrollContent.getLayoutBounds().getHeight() - scroller.getViewportBounds().getHeight();
+        double extraHeight = contenuDuScrollPane.getLayoutBounds().getHeight() - scroller.getViewportBounds().getHeight();
         if (extraHeight > 0) {
             double halfHeight = scroller.getViewportBounds().getHeight() / 2;
-            double newScrollYOffset = (scaleFactor - 1) * halfHeight + scaleFactor * scrollYOffset;
+            double newScrollYOffset = (facteurDEchelle - 1) * halfHeight + facteurDEchelle * scrollYOffset;
             scroller.setVvalue(
                     scroller.getVmin() + newScrollYOffset * (scroller.getVmax() - scroller.getVmin()) / extraHeight);
         } else {
@@ -573,51 +598,53 @@ public class VueGraphiqueAideur {
         }
     }
 
-	/**
-	 * Retourne la livraison si les coordonnées paramètres correspondent à la position de la livraison
-	 * @param x Coordonnées X du canvas graphique
-	 * @param y Coordonnées Y du canvas graphique
-	 * @return null si les coordonnées ne sont sur aucune livraison
-	 */
-	private Livraison estSurLivraison(double x, double y) {
-		if (livraisons == null || livraisons.isEmpty() || intersectionsGraphiques == null) {
-			return null;
-		}
+    /**
+     * Retourne la livraison si les coordonnées paramètres correspondent à la position de la livraison
+     *
+     * @param x Coordonnées X du canvas graphique
+     * @param y Coordonnées Y du canvas graphique
+     * @return null si les coordonnées ne sont sur aucune livraison
+     */
+    private Livraison estSurLivraison(double x, double y) {
+        if (livraisons == null || livraisons.isEmpty() || intersectionsGraphiques == null) {
+            return null;
+        }
 
-		for (Livraison l : livraisons) {
-			Ellipse e = intersectionsGraphiques.get(l.getAdresse()).getKey();
-			if (estSurEllipse(e, x, y)) {
-				return l;
-			}
-		}
+        for (Livraison l : livraisons) {
+            Ellipse e = intersectionsGraphiques.get(l.getAdresse()).getKey();
+            if (estSurEllipse(e, x, y)) {
+                return l;
+            }
+        }
 
-		return null;
-	}
-	
-	/**
-	 * Renvoie l'id de l'intersection sur laquelle on a cliqué
-	 * @param x La position x sur le canvas graphique
-	 * @param y La position y sur le canvas graphique
-	 * @return -1 si les positions ne sont pas sur une intersection
-	 */
-	private int estSurIntersection(double x, double y) {
-		if (intersectionsGraphiques == null || intersectionsGraphiques.isEmpty()) {
-			return -1;
-		}
-		
-		for (Entry<Integer, Pair<Ellipse, Collection<Integer>>> pair : intersectionsGraphiques.entrySet()) {
-			Ellipse e = pair.getValue().getKey();
-			if (estSurEllipse(e, x, y)) {
-				return pair.getKey();
-			}
-		}
-		return -1;
-	}
-	
-	private boolean estSurEllipse(Ellipse e, double x, double y) {
-		return e.getCenterX() - ConstantesGraphique.DIAMETRE_PERMISSION <= x && x <= e.getCenterX() + ConstantesGraphique.DIAMETRE_PERMISSION
-				&& e.getCenterY() - ConstantesGraphique.DIAMETRE_PERMISSION <= y && y <= e.getCenterY() + ConstantesGraphique.DIAMETRE_PERMISSION;
-	}
+        return null;
+    }
+
+    /**
+     * Renvoie l'id de l'intersection sur laquelle on a cliqué
+     *
+     * @param x La position x sur le canvas graphique
+     * @param y La position y sur le canvas graphique
+     * @return -1 si les positions ne sont pas sur une intersection
+     */
+    private int estSurIntersection(double x, double y) {
+        if (intersectionsGraphiques == null || intersectionsGraphiques.isEmpty()) {
+            return -1;
+        }
+
+        for (Entry<Integer, Pair<Ellipse, Collection<Integer>>> pair : intersectionsGraphiques.entrySet()) {
+            Ellipse e = pair.getValue().getKey();
+            if (estSurEllipse(e, x, y)) {
+                return pair.getKey();
+            }
+        }
+        return -1;
+    }
+
+    private boolean estSurEllipse(Ellipse e, double x, double y) {
+        return e.getCenterX() - ConstantesGraphique.DIAMETRE_PERMISSION <= x && x <= e.getCenterX() + ConstantesGraphique.DIAMETRE_PERMISSION
+                && e.getCenterY() - ConstantesGraphique.DIAMETRE_PERMISSION <= y && y <= e.getCenterY() + ConstantesGraphique.DIAMETRE_PERMISSION;
+    }
 
     /**
      * Contient les constantes définissant certaines propriétés (taille, marge, couleur,...) de la fenêtre
@@ -628,9 +655,9 @@ public class VueGraphiqueAideur {
          * ville
          */
         private final static double DIAMETRE_INTERSECTION = 7;
-        
+
         private final static double DIAMETRE_PERMISSION = 13;
-        
+
         /**
          * La marge à laisser sur les côté du canvas graphique afin d'avoir plus
          * du lisibilité
@@ -649,18 +676,18 @@ public class VueGraphiqueAideur {
 
         private final static Paint COULEUR_ENTREPOT = Color.RED;
 
-        private final static Paint[] COULEURS_FENETRES = new Paint[] {
-            Color.LIGHTSEAGREEN,
-            Color.BLUE,
-            Color.GREEN,
-            Color.VIOLET,
-            Color.ORANGE,
-            Color.CHARTREUSE,
-            Color.DARKSLATEBLUE
+        private final static Paint[] COULEURS_FENETRES = new Paint[]{
+                Color.LIGHTSEAGREEN,
+                Color.BLUE,
+                Color.GREEN,
+                Color.VIOLET,
+                Color.ORANGE,
+                Color.CHARTREUSE,
+                Color.DARKSLATEBLUE
         };
     }
 
-	public void nettoyerAffichage() {
-		group.getChildren().clear();
-	}
+    public void nettoyerAffichage() {
+        group.getChildren().clear();
+    }
 }
