@@ -46,7 +46,6 @@ public class FenetrePrincipale extends Application {
         VueTextuelle vueTextuelle = (VueTextuelle) fxmlLoader2.getController();
         vueTextuelle.setAideurVueGraphique(vuePrincipaleControleur.getAideurVueGraphique());
         vueTextuelle.setControleurApplication(controleurApplication);
-        vueTextuelle.initialiserMediateur(this);
         vueTextuelle.initialiserObserveurs();
 
         BorderPane centerBorderPane = (BorderPane) root.getCenter();
