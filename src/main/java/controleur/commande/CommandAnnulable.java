@@ -8,22 +8,24 @@ import java.io.ObjectOutputStream;
 import modele.xmldata.Modele;
 
 /**
- *
+ * Représente une commande annulable
  * @author Max Schiedermeier
  */
-public abstract class CommandAnnulable implements Commande
-{
+public abstract class CommandAnnulable implements Commande {
 
-    private Modele modelCopie;
+    /**
+     * On stocke une copie du modèle
+     */
+    private Modele modeleCopie;
 
     @Override
-    public boolean estAnnulable()
-    {
+    public boolean estAnnulable() {
         return true;
     }
 
-    void backupModele(Modele modele)
-    {
+    // TODO a enlever je pense :)
+    
+    void backupModele(Modele modele) {
         // http://stackoverflow.com/questions/64036/how-do-you-make-a-deep-copy-of-an-object-in-java
         
         ObjectOutputStream oos = null;
@@ -39,7 +41,7 @@ public abstract class CommandAnnulable implements Commande
 
             //deserializer modele
             ByteArrayInputStream bais = new ByteArrayInputStream(byteData);
-            modelCopie = (Modele) new ObjectInputStream(bais).readObject();
+            modeleCopie = (Modele) new ObjectInputStream(bais).readObject();
         }
         catch (IOException | ClassNotFoundException ex) {
             ex.printStackTrace();
@@ -57,7 +59,7 @@ public abstract class CommandAnnulable implements Commande
 
     Modele getModelCopie()
     {
-        return modelCopie;
+        return modeleCopie;
     }
 
 }

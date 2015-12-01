@@ -1,37 +1,30 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controleur.commande;
 
 
 /**
- *
+ * L'interface définissant les méthodes des commandes
  * @author maxou
  */
-public interface Commande
-{
+public interface Commande {
 
     /**
-     * Il y a des commandes qui on ne peut pas annuler, ep.e. charger un fichier
-     * xml ou calculer la tournee.
+     * Il y a des commandes qu'on ne peut pas annuler, par exemple charger un fichier
+     * xml ou calculer la tournée.
      *
-     * @return boolean, si cette type de commande est annulable
+     * @return Vrai si annulable
      */
     boolean estAnnulable();
 
     /**
-     * La creation d'une commande ne declenche pas automatiquement son execution
-     * (c'est notamment utile pour l'historique, qund on veut reexecuter une
+     * La création d'une commande ne déclenche pas automatiquement son exécution
+     * (ce qui est notamment utile pour l'historique, quand on veut ré-exécuter une
      * commande)
      */
     void executer() throws CommandeException;
 
     /**
-     * Ssi un command est annulable on peut revenir dans un ancien etat du model
-     * en appelant cette methode.
+     * Si une commande est annulable, on peut revenir dans un ancien etat du modèle
+     * en appelant cette methode et annulant la commande.
      */
     void annuler();
-
 }

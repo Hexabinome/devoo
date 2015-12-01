@@ -7,46 +7,40 @@ import modele.xmldata.Livraison;
 /**
  * Représente une commande de suppression de livraisons
  */
-public class CommandeSupprimerLivraison extends CommandAnnulable
-{
+public class CommandeSupprimerLivraison extends CommandAnnulable {
 
     /**
-     * Lien vers le controleur de données
+     * Le controleur de données
      */
     private final ControleurDonnees controleurDonnees;
 
     /**
-     * La livraison supprimée
+     * L'identifiant de la livraison supprimée
      */
     private int idLivraisonSupprime;
-    //private final Livraison livraisonSupprimee;
-
+    
     /**
-     * La fenetre dans laquelle la livraison se trouve
-     */
-    //private final Fenetre fenetreDeLaLivraison;
-
-    /**
-     * Identifiant de la livraison qui se trouve
+     * L'identifiant de la livraison précédent la livraison supprimée
      */
     private int idLivraisonAvant;
 
-    public CommandeSupprimerLivraison(ControleurDonnees controleurDonnees, int idLivraison)
-    {
+    /**
+     * Constructeur de la commande de suppression d'une livraison
+     * @param controleurDonnees Le contrôleur de données
+     * @param idLivraison L'identifiant de la livraison a supprimé
+     */
+    public CommandeSupprimerLivraison(ControleurDonnees controleurDonnees, int idLivraison) {
         this.controleurDonnees = controleurDonnees;
         this.idLivraisonSupprime = idLivraison;
-        //this.fenetreDeLaLivraison = controleurDonnees.getModele().getDemande().getFenetreDeLivraison(idLivraison);
     }
 
     @Override
-    public boolean estAnnulable()
-    {
+    public boolean estAnnulable() {
         return true;
     }
 
     @Override
-    public void executer() throws CommandeException
-    {
+    public void executer() throws CommandeException {
         Livraison livraisonSupprimee = controleurDonnees.getModele().getDemande().identifierLivraison(idLivraisonSupprime);
         
     	if(livraisonSupprimee == null) {
@@ -63,7 +57,7 @@ public class CommandeSupprimerLivraison extends CommandAnnulable
             throw new CommandeException("[SUPPRESSION] Il est interdit de supprimer la dernière livraison dans une fenêtre.");
         }
         
-        //garder une copie de la modele
+        //Garder une copie de la modele
         super.backupModele(controleurDonnees.getModele());
 
         idLivraisonAvant = controleurDonnees.getModele().supprimerLivraison(livraisonSupprimee.getId());
@@ -78,7 +72,7 @@ public class CommandeSupprimerLivraison extends CommandAnnulable
         		);
 
 
-        if (controleurDonnees.getHist().estVideCommandesARetablir()){
+        if (controleurDonnees.getHist().estVideCommandesARetablir()) {
             controleurDonnees.notifierObserveursRetablir(true);
         }
     }
@@ -86,14 +80,15 @@ public class CommandeSupprimerLivraison extends CommandAnnulable
     @Override
     public void annuler()
     {
-        //controleurDonnees.getModele().ajouterLivraison(idLivraisonAvant, fenetreDeLaLivraison, livraisonSupprimee);
+        // controleurDonnees.getModele().ajouterLivraison(idLivraisonAvant, fenetreDeLaLivraison, livraisonSupprimee);
         controleurDonnees.setModele(super.getModelCopie());
         
         controleurDonnees.notifierObserveursModele();
         controleurDonnees.notifierObserveursRetablir(false);
 
-        if (controleurDonnees.getHist().estVideCommandesAAnnuler())
+        if (controleurDonnees.getHist().estVideCommandesAAnnuler()) {
             controleurDonnees.notifierObserveursAnnuler(true);
+        }
     }
 
 }

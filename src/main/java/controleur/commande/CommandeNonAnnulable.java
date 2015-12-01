@@ -2,22 +2,19 @@ package controleur.commande;
 
 
 /**
- *
+ * Représente les commandes non annulable
  * @author Max Schiedermeier
  */
-public abstract class CommandeNonAnnulable implements Commande
-{
+public abstract class CommandeNonAnnulable implements Commande {
 
     @Override
-    public boolean estAnnulable()
-    {
+    public boolean estAnnulable() {
         return false;
     }
 
     @Override
-    public void annuler()
-    {
-        throw new RuntimeException("Il n'est pas possible d'annuler ce command.");
+    public void annuler() {
+        throw new RuntimeException("Il n'est pas possible d'annuler cette commande.");
     }
 
 

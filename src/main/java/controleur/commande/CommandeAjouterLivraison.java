@@ -5,44 +5,45 @@ import modele.xmldata.Fenetre;
 import modele.xmldata.Livraison;
 
 /**
- * Répresente une commande d'ajout de livraisons
+ * Répresente une commande d'ajout de livraison
  */
-public class CommandeAjouterLivraison extends CommandAnnulable
-{
+public class CommandeAjouterLivraison extends CommandAnnulable {
 
+    /**
+     * Le cotrôleur de données
+     */
     private final ControleurDonnees controleurDonnees;
+    
+    /**
+     * L'identifiant de la livraison avant la nouvelle livraison
+     */
     private final int idLivraisonAvant;
+    
+    /**
+     * L'identifiant de l'intersection de la nouvelle livraison
+     */
     private final int idIntersectionLivraison;
-    //private final Livraison livraisonAjoutee;
-    //private final Fenetre fenetre;
 
     /**
      * Crée une nouvelle de commande d'ajout de livraison
      *
-     * @param idLivraisonAvant identifiant de la livraison qui se trouve avant
-     * celle qu'on veut ajouter
-     * @param idIntersectionLivraison intersection où on veut ajouter la
-     * livraison
-     *
+     * @param idLivraisonAvant identifiant de la livraison qui se trouve avant celle qu'on veut ajouter
+     * @param idIntersectionLivraison intersection où on veut ajouter la livraison
      */
-    public CommandeAjouterLivraison(ControleurDonnees controleurDonnees, int idLivraisonAvant, int idIntersectionLivraison)
-    {
+    public CommandeAjouterLivraison(ControleurDonnees controleurDonnees, int idLivraisonAvant, int idIntersectionLivraison) {
         this.controleurDonnees = controleurDonnees;
         this.idLivraisonAvant = idLivraisonAvant;
         this.idIntersectionLivraison = idIntersectionLivraison;
-
     }
 
     @Override
-    public boolean estAnnulable()
-    {
+    public boolean estAnnulable() {
         return true;
     }
 
     @Override
-    public void executer() throws CommandeException
-    {
-        //faire backup
+    public void executer() throws CommandeException {
+        // Faire backup
         super.backupModele(controleurDonnees.getModele());
         
         Fenetre fenetre = controleurDonnees.getModele().getDemande().getFenetreDeLivraison(idLivraisonAvant);
@@ -57,16 +58,16 @@ public class CommandeAjouterLivraison extends CommandAnnulable
     }
 
     @Override
-    public void annuler()
-    {
+    public void annuler() {
         //controleurDonnees.getModele().supprimerLivraison(livraisonAjoutee.getId());
         controleurDonnees.setModele(super.getModelCopie());
 
         controleurDonnees.notifierObserveursModele();
         controleurDonnees.notifierObserveursRetablir(false);
 
-        if (controleurDonnees.getHist().estVideCommandesAAnnuler())
+        if (controleurDonnees.getHist().estVideCommandesAAnnuler()) {
             controleurDonnees.notifierObserveursAnnuler(true);
+        }
     }
 
 }

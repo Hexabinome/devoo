@@ -16,40 +16,47 @@ import org.xml.sax.SAXException;
 import controleur.ControleurDonnees;
 
 /**
- *
+ * La commande de chargement de la demande
  * @author Max Schiedermeier
  */
-public class CommandeChargerDemande extends CommandeNonAnnulable
-{
+public class CommandeChargerDemande extends CommandeNonAnnulable {
 
+    /**
+     * Le contrôleur de données
+     */
     private final ControleurDonnees controleurDonnees;
+    
+    /**
+     * Le fichier de livraion
+     */
     private final File livraisonsFichier;
 
-    public CommandeChargerDemande(ControleurDonnees controleurDonnees, File livraisons)
-    {
+    /**
+     * Constructeur de la commande de chargement de la demande
+     * @param controleurDonnees Le contrôleur de données
+     * @param livraisons Le fichier de demande de livraisons
+     */
+    public CommandeChargerDemande(ControleurDonnees controleurDonnees, File livraisons) {
         this.controleurDonnees = controleurDonnees;
         livraisonsFichier = livraisons;
     }
 
     @Override
-    public void executer() throws CommandeException
-    {
+    public void executer() throws CommandeException {
         try {
             PlanDeVille plan = controleurDonnees.getPlan();
             Demande demande = DeserialiseurXML.ouvrirLivraison(livraisonsFichier, plan);
             controleurDonnees.setModele(new Modele(plan, demande));
 
-            //permettre de calculer la tournee
+            // Permettre de calculer la tournee
             controleurDonnees.notifierObserveursCalculTournee(false);
             
-            //notifier les observeurs que il y a un model maintenant
+            // Notifier les observeurs que il y a un model maintenant
             controleurDonnees.notifierObserveursModele();
 
             controleurDonnees.notifierObserveursMessage(String.format("Demande de livraisons (%s) chargée avec succès ! Veuillez calculer la tournée maintenant.", livraisonsFichier.getName()));
-        }
-        catch (SAXException | ExceptionXML | IOException | JDOMException | ParseException ex) {
+        } catch (SAXException | ExceptionXML | IOException | JDOMException | ParseException ex) {
             throw new CommandeException(ex.getMessage());
         }
     }
-
 }
