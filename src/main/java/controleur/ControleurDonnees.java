@@ -25,7 +25,7 @@ public class ControleurDonnees
     private Modele modele;
 
     //collection des observeurs (pour gui avec functionalite reduit si plan et livraisons n'sons pas encore charge)
-    private final Collection<ActivationObserverInterface> desactObserveurs;
+    private final Collection<ActivationObserveurInterface> desactObserveurs;
 
     //collection des observeurs pour le model
     private final Collection<ModelObserveur> modelObserveurs;
@@ -38,13 +38,13 @@ public class ControleurDonnees
     
     private final Collection<PlanObserveur> planObserveurs;
     
-    private final Collection<ActiverChargementPlanObserveur> chargementPlanObserveurs;
+    private final Collection<ChargementPlanObserveurInterface> chargementPlanObserveurs;
     
-    private final Collection<ActivationObserverInterface> tourneeObserveurs;
+    private final Collection<ActivationObserveurInterface> tourneeObserveurs;
     
     private final Collection<MessageObserveur> messageObserveurs;
     
-    private final Collection<ActivationObserveurAutresBoutonInterface> autresBoutonsObserveurs;
+    private final Collection<ActivationFonctionnalitesObserveurInterface> autresBoutonsObserveurs;
     
     private PlanDeVille plan = null;
     
@@ -60,8 +60,8 @@ public class ControleurDonnees
         tourneeObserveurs = new LinkedList<>();
         messageObserveurs = new LinkedList<>();
         hist = new Historique();
-        chargementPlanObserveurs = new ArrayList<ActiverChargementPlanObserveur>();
-        autresBoutonsObserveurs = new ArrayList<ActivationObserveurAutresBoutonInterface>();
+        chargementPlanObserveurs = new ArrayList<ChargementPlanObserveurInterface>();
+        autresBoutonsObserveurs = new ArrayList<ActivationFonctionnalitesObserveurInterface>();
     }
     
     public Modele getModele()
@@ -94,7 +94,7 @@ public class ControleurDonnees
         this.hist = hist;
     }
     
-    public void addDesactObserveur(ActivationObserverInterface obs)
+    public void addDesactObserveur(ActivationObserveurInterface obs)
     {
         desactObserveurs.add(obs);
     }
@@ -119,11 +119,11 @@ public class ControleurDonnees
         planObserveurs.add(planObserveur);
     }
     
-    public void ajouterChargementPlanObserveur(ActiverChargementPlanObserveur chargementPlanObserveur) {
+    public void ajouterChargementPlanObserveur(ChargementPlanObserveurInterface chargementPlanObserveur) {
     	chargementPlanObserveurs.add(chargementPlanObserveur);
     }
     
-    void ajouterTourneeObserveur(ActivationObserverInterface tourneeObserveur)
+    void ajouterTourneeObserveur(ActivationObserveurInterface tourneeObserveur)
     {
         tourneeObserveurs.add(tourneeObserveur);
     }
@@ -133,7 +133,7 @@ public class ControleurDonnees
         messageObserveurs.add(obs);
     }
     
-    void ajouterAutresBoutonsObserveurs(ActivationObserveurAutresBoutonInterface observeur) {
+    void ajouterAutresBoutonsObserveurs(ActivationFonctionnalitesObserveurInterface observeur) {
     	autresBoutonsObserveurs.add(observeur);
     }
     
@@ -158,7 +158,7 @@ public class ControleurDonnees
     public void notifyAllActObserveurs(boolean state)
     {
         desactObserveurs.stream().forEach((obs) -> {
-            obs.notifierLesObserveurs(state);
+            obs.notifierLesObserveursActivation(state);
         });
     }
     
@@ -186,7 +186,7 @@ public class ControleurDonnees
     public void notifyAllCalculerTourneeObserveurs(boolean activation)
     {
         tourneeObserveurs.stream().forEach((obs) -> {
-            obs.notifierLesObserveurs(activation);
+            obs.notifierLesObserveursActivation(activation);
         });
     }
     
@@ -198,7 +198,7 @@ public class ControleurDonnees
     }
     
     public void notifierLesAutresBoutons(boolean activation) {
-    	autresBoutonsObserveurs.forEach(obs -> obs.notifierLesAutresBoutons(activation));
+    	autresBoutonsObserveurs.forEach(obs -> obs.notifierLesObserveursFonctionnalites(activation));
     }
 
     /**

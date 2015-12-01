@@ -27,7 +27,7 @@ public class GenerateurFeuilleDeRoute {
             Fenetre f = modele.getDemande().getFenetres().get(iFenetre + 1);
             feuilleDeRoute.append(System.lineSeparator())
             		.append("Fenêtre ").append(iFenetre + 1)
-                    .append(" prévu de ").append(convertirEnHeureLisible(f.getTimestampDebut()))
+                    .append(" prévue de ").append(convertirEnHeureLisible(f.getTimestampDebut()))
                     .append(" à ").append(convertirEnHeureLisible(f.getTimestampFin()))
                     .append(System.lineSeparator());
 

@@ -24,8 +24,8 @@ import modele.xmldata.ModeleLecture;
 
 import org.controlsfx.dialog.ExceptionDialog;
 
-import controleur.ActivationObserveurAutresBoutonInterface;
-import controleur.ActiverChargementPlanObserveur;
+import controleur.ActivationFonctionnalitesObserveurInterface;
+import controleur.ChargementPlanObserveurInterface;
 import controleur.AnnulerCommandeObserveur;
 import controleur.ControleurInterface;
 import controleur.ModelObserveur;
@@ -40,8 +40,8 @@ import controleur.commande.CommandeException;
  *
  * @author David
  */
-public class VuePrincipale implements Initializable, PlanObserveur, ActiverChargementPlanObserveur, ModelObserveur, AnnulerCommandeObserveur,
-        RetablirCommandeObserveur, ActivationObserveurAutresBoutonInterface  {
+public class VuePrincipale implements Initializable, PlanObserveur, ChargementPlanObserveurInterface, ModelObserveur, AnnulerCommandeObserveur,
+        RetablirCommandeObserveur, ActivationFonctionnalitesObserveurInterface  {
 
     /**
      * Mediateur : permet de communiquer avec les autres controleurs
@@ -395,7 +395,7 @@ public class VuePrincipale implements Initializable, PlanObserveur, ActiverCharg
     }
     
 	@Override
-	public void notifierLesAutresBoutons(boolean activer) {
+	public void notifierLesObserveursFonctionnalites(boolean activer) {
 		this.ajouterLivraisonBouton.setDisable(!activer);
 		this.echangerLivraisonsBouton.setDisable(!activer);
 		this.supprimerLivraisonBouton.setDisable(!activer);

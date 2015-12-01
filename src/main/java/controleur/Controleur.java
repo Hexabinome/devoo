@@ -29,7 +29,7 @@ public class Controleur implements ControleurInterface {
     }
 
     @Override
-    public void ajouterDesactObserver(ActivationObserverInterface observer) {
+    public void ajouterDesactObserver(ActivationObserveurInterface observer) {
         controleurDonnees.addDesactObserveur(observer);
     }
 
@@ -143,7 +143,7 @@ public class Controleur implements ControleurInterface {
     }
 
     @Override
-    public void ajouterTourneeObserveur(ActivationObserverInterface tourneeObserveur) {
+    public void ajouterTourneeObserveur(ActivationObserveurInterface tourneeObserveur) {
         controleurDonnees.ajouterTourneeObserveur(tourneeObserveur);
     }
 
@@ -169,12 +169,12 @@ public class Controleur implements ControleurInterface {
 	}
 
 	@Override
-	public void ajouterActivationChargementPlanObserveur(ActiverChargementPlanObserveur chargementPlanObserveur) {
+	public void ajouterActivationChargementPlanObserveur(ChargementPlanObserveurInterface chargementPlanObserveur) {
 		controleurDonnees.ajouterChargementPlanObserveur(chargementPlanObserveur);
 	}
 
 	@Override
-	public void ajouterAutresBoutonsObserveur(ActivationObserveurAutresBoutonInterface obs) {
+	public void ajouterAutresBoutonsObserveur(ActivationFonctionnalitesObserveurInterface obs) {
 		controleurDonnees.ajouterAutresBoutonsObserveurs(obs);
 		
 	}

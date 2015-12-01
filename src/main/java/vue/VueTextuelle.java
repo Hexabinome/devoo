@@ -1,6 +1,6 @@
 package vue;
 
-import controleur.ActivationObserverInterface;
+import controleur.ActivationObserveurInterface;
 import controleur.ControleurInterface;
 import controleur.ModelObserveur;
 import javafx.beans.property.ReadOnlyStringWrapper;
@@ -25,7 +25,7 @@ import java.util.ResourceBundle;
  * Cette classe gère les livraisons et leurs horaires. Elle s'occupe de la vue textuelle qui se trouve à gauche dans la
  * fenêtre principale.
  */
-public class VueTextuelle implements Initializable, ActivationObserverInterface,
+public class VueTextuelle implements Initializable, ActivationObserveurInterface,
         ModelObserveur {
 
     /**
@@ -168,11 +168,11 @@ public class VueTextuelle implements Initializable, ActivationObserverInterface,
      * @param disabled true si la table doit mise à jour, faux sinon
      */
     @Override
-    public void notifierLesObserveurs(boolean disabled) {
+    public void notifierLesObserveursActivation(boolean disabled) {
         // TODO : voir si elle réellement utile
-        if (disabled) {
+        /*if (disabled) {
             effacerVueTableLivraison();
-        }
+        }*/
     }
 
     /**
