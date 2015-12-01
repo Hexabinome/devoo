@@ -1,4 +1,4 @@
-package vue.vuetextuelle;
+package vue;
 
 /**
  * Cette classe permet de visualer une Fenetre (de livraison) ou une livraison sous forme textuelle.

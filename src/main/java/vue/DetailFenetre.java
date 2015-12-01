@@ -1,4 +1,4 @@
-package vue.vuetextuelle;
+package vue;
 
 import modele.xmldata.Fenetre;
 
