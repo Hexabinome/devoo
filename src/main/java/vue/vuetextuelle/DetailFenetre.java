@@ -25,11 +25,6 @@ public class DetailFenetre extends ObjetVisualisable {
         return "";
     }
 
-    @Override
-    public void accepter(Visiteur v) {
-        v.visit(this);
-    }
-
     public Fenetre getFenetre() {
         return fenetre;
     }

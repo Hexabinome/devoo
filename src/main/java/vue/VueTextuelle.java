@@ -17,7 +17,6 @@ import vue.vuetextuelle.DetailFenetre;
 import vue.vuetextuelle.DetailLivraison;
 import vue.vuetextuelle.ObjetVisualisable;
 import vue.vuetextuelle.ObjetVisualisable.CouleurTexte;
-import vue.vuetextuelle.Visiteur;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -30,7 +29,7 @@ import java.util.ResourceBundle;
  * Elle passe par le controleur principale de la vue quand elle reçoie des
  * actions.
  */
-public class VueTextuelle implements Initializable, Visiteur, ActivationObserverInterface,
+public class VueTextuelle implements Initializable, ActivationObserverInterface,
         ModelObserveur {
 
     @FXML
@@ -184,18 +183,6 @@ public class VueTextuelle implements Initializable, Visiteur, ActivationObserver
     public void initialiserObserveurs() {
         controleurApplication.ajouterDesactObserver(this);
         controleurApplication.ajouterModelObserver(this);
-    }
-
-    @Override
-    public void visit(DetailFenetre detailFenetre) {
-        // TODO : completer si besoin
-        System.out.println(detailFenetre.getFenetre());
-
-    }
-
-    @Override
-    public void visit(DetailLivraison detailLivraison) {
-        controleurApplication.cliqueSurLivraison(detailLivraison.getLivraison().getId());
     }
 
     /**

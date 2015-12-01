@@ -5,7 +5,7 @@ package vue.vuetextuelle;
  * Cette visualisation peut se faire de deux façons façons differentes. Ces objets sont aussi Visitable (lors d'un clique
  * par exemple)
  */
-public abstract class ObjetVisualisable implements Visitable {
+public abstract class ObjetVisualisable {
     abstract public String afficherCaracteriquesGloable();
 
     abstract public String afficherCaracteriqueSpeciale();

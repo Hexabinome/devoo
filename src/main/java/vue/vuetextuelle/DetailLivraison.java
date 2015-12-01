@@ -23,10 +23,6 @@ public class DetailLivraison extends ObjetVisualisable {
         return convertirEnHeureLisible(livraison.getHoraireDePassage());
     }
 
-    @Override
-    public void accepter(Visiteur v) {
-        v.visit(this);
-    }
 
     public Livraison getLivraison() {
         return livraison;
