@@ -14,7 +14,7 @@ import controleur.etat.EtatSuppression;
 import controleur.observable.ActivationFonctionnalitesObservableInterface;
 import controleur.observable.ActivationObservableInterface;
 import controleur.observable.AnnulerCommandeObservableInterface;
-import controleur.observable.ChargementPlanObservableInterface;
+import controleur.observable.ActivationOuvrirPlanObserveur;
 import controleur.observable.MessageObservableInterface;
 import controleur.observable.ModeleObservableInterface;
 import controleur.observable.ActivationOuvrirDemandeObserveur;
@@ -160,7 +160,7 @@ public class Controleur implements ControleurInterface {
 	}
 
 	@Override
-	public void ajouterChargementPlanObserveur(ChargementPlanObservableInterface chargementPlanObserveur) {
+	public void ajouterChargementPlanObserveur(ActivationOuvrirPlanObserveur chargementPlanObserveur) {
 		controleurDonnees.ajouterChargementPlanObserveur(chargementPlanObserveur);
 	}
 

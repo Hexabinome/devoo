@@ -28,7 +28,7 @@ import controleur.ControleurInterface;
 import controleur.commande.CommandeException;
 import controleur.observable.ActivationFonctionnalitesObservableInterface;
 import controleur.observable.AnnulerCommandeObservableInterface;
-import controleur.observable.ChargementPlanObservableInterface;
+import controleur.observable.ActivationOuvrirPlanObserveur;
 import controleur.observable.ModeleObservableInterface;
 import controleur.observable.ActivationOuvrirDemandeObserveur;
 import controleur.observable.RetablirCommandeObservableInterface;
@@ -40,7 +40,7 @@ import controleur.observable.RetablirCommandeObservableInterface;
  *
  * @author David
  */
-public class VuePrincipale implements Initializable, ActivationOuvrirDemandeObserveur, ChargementPlanObservableInterface, ModeleObservableInterface, AnnulerCommandeObservableInterface,
+public class VuePrincipale implements Initializable, ActivationOuvrirDemandeObserveur, ActivationOuvrirPlanObserveur, ModeleObservableInterface, AnnulerCommandeObservableInterface,
         RetablirCommandeObservableInterface, ActivationFonctionnalitesObservableInterface  {
 
     /**
@@ -375,7 +375,7 @@ public class VuePrincipale implements Initializable, ActivationOuvrirDemandeObse
     }
 
 	@Override
-	public void notifierObserveursChargementPlan(boolean activer) {
+	public void notifierObserveursOuvrirPlan(boolean activer) {
 		menuFichier.getItems().get(0).setDisable(!activer);
 	}
 

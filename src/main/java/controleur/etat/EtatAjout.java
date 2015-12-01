@@ -18,7 +18,7 @@ public class EtatAjout extends AbstractEtat
     public EtatAjout(ControleurDonnees donnees)
     {
         this.donnees = donnees;
-        donnees.notifierObserveursChargementDuPlan(false);
+        donnees.notifierObserveursOuvrirPlan(false);
         donnees.notifierObserveurOuvrirDemande(false);
         donnees.notifierObserveursMessage("[AJOUT] Où souhaitez-vous ajouter une livraison ? Choisissez l'adresse de livraison en cliquant sur une intersection de le plan. Clic droit pour sortir du mode d'ajout.");
     }

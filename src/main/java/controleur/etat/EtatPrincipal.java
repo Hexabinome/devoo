@@ -20,7 +20,7 @@ public class EtatPrincipal implements EtatInterface
     {
         this.controleurDonnees = controleurDonnees;
         controleurDonnees.notifierObserveurOuvrirDemande(true);
-        controleurDonnees.notifierObserveursChargementDuPlan(true);
+        controleurDonnees.notifierObserveursOuvrirPlan(true);
     }
 
     @Override

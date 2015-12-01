@@ -1,7 +1,7 @@
 package vue;
 
 import controleur.ControleurInterface;
-import controleur.observable.ChargementPlanObservableInterface;
+import controleur.observable.ActivationOuvrirPlanObserveur;
 import controleur.observable.ModeleObservableInterface;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.fxml.FXML;
@@ -26,7 +26,7 @@ import java.util.ResourceBundle;
  * fenêtre principale.
  */
 public class VueTextuelle implements Initializable,
-        ModeleObservableInterface, ChargementPlanObservableInterface {
+        ModeleObservableInterface, ActivationOuvrirPlanObserveur {
 
     /**
      * Table principale contenant la liste des livraisons.
@@ -186,7 +186,7 @@ public class VueTextuelle implements Initializable,
     }
 
     @Override
-    public void notifierObserveursChargementPlan(boolean activer) {
+    public void notifierObserveursOuvrirPlan(boolean activer) {
         if (activer) {
             effacerVueTableLivraison();
         }

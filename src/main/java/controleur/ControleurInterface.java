@@ -6,7 +6,7 @@ import controleur.commande.CommandeException;
 import controleur.observable.ActivationFonctionnalitesObservableInterface;
 import controleur.observable.ActivationObservableInterface;
 import controleur.observable.AnnulerCommandeObservableInterface;
-import controleur.observable.ChargementPlanObservableInterface;
+import controleur.observable.ActivationOuvrirPlanObserveur;
 import controleur.observable.MessageObservableInterface;
 import controleur.observable.ModeleObservableInterface;
 import controleur.observable.ActivationOuvrirDemandeObserveur;
@@ -42,7 +42,7 @@ public interface ControleurInterface {
      * Ajoute un observateur du chargement du plan
      * @param chargementPlanObserveur
      */
-    void ajouterChargementPlanObserveur(ChargementPlanObservableInterface chargementPlanObserveur);
+    void ajouterChargementPlanObserveur(ActivationOuvrirPlanObserveur chargementPlanObserveur);
     
     /**
      * Ajoute un observateur à la tournée

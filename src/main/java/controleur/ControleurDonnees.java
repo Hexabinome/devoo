@@ -10,7 +10,7 @@ import controleur.commande.Historique;
 import controleur.observable.ActivationFonctionnalitesObservableInterface;
 import controleur.observable.ActivationObservableInterface;
 import controleur.observable.AnnulerCommandeObservableInterface;
-import controleur.observable.ChargementPlanObservableInterface;
+import controleur.observable.ActivationOuvrirPlanObserveur;
 import controleur.observable.MessageObservableInterface;
 import controleur.observable.ModeleObservableInterface;
 import controleur.observable.ActivationOuvrirDemandeObserveur;
@@ -60,7 +60,7 @@ public class ControleurDonnees {
     /**
      * Collection des  observeurs du chargement du plan
      */
-    private final Collection<ChargementPlanObservableInterface> chargementPlanObserveurs = new ArrayList<ChargementPlanObservableInterface>();
+    private final Collection<ActivationOuvrirPlanObserveur> chargementPlanObserveurs = new ArrayList<ActivationOuvrirPlanObserveur>();
     
     /**
      * Collection des observeurs d'activation/désactivation de composants
@@ -173,7 +173,7 @@ public class ControleurDonnees {
      * Ajoute un observateur du chargement du plan
      * @param chargementPlanObserveur L'objet observateur
      */
-    public void ajouterChargementPlanObserveur(ChargementPlanObservableInterface chargementPlanObserveur) {
+    public void ajouterChargementPlanObserveur(ActivationOuvrirPlanObserveur chargementPlanObserveur) {
     	chargementPlanObserveurs.add(chargementPlanObserveur);
     }
     
@@ -221,8 +221,8 @@ public class ControleurDonnees {
      * Notifie les observateurs du chargement du plan
      * @param activer Vrai s'il faut envoyer un message d'activation aux observateurs
      */
-    public void notifierObserveursChargementDuPlan(boolean activer) {
-    	chargementPlanObserveurs.forEach(chargementPlanObserveur -> chargementPlanObserveur.notifierObserveursChargementPlan(activer));
+    public void notifierObserveursOuvrirPlan(boolean activer) {
+    	chargementPlanObserveurs.forEach(chargementPlanObserveur -> chargementPlanObserveur.notifierObserveursOuvrirPlan(activer));
     }
     
     /**
