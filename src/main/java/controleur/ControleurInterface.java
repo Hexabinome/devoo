@@ -3,14 +3,7 @@ package controleur;
 import java.io.File;
 
 import controleur.commande.CommandeException;
-import controleur.observable.ActivationFonctionnalitesObservableInterface;
-import controleur.observable.ActivationObservableInterface;
-import controleur.observable.AnnulerCommandeObservableInterface;
-import controleur.observable.ActivationOuvrirPlanObserveur;
-import controleur.observable.MessageObservableInterface;
-import controleur.observable.ModeleObservableInterface;
-import controleur.observable.ActivationOuvrirDemandeObserveur;
-import controleur.observable.RetablirCommandeObservableInterface;
+import controleur.observable.*;
 import modele.xmldata.ModeleLecture;
 import modele.xmldata.PlanDeVille;
 
@@ -72,7 +65,9 @@ public interface ControleurInterface {
      * Ajoute un observateur des messages envoyés
      * @param obs
      */
-    public void ajouterMessageObserveur(MessageObservableInterface obs);
+     void ajouterMessageObserveur(MessageObservableInterface obs);
+
+    void ajouterPlanChargeObserveur(PlanChargeObserveur planChargeObserveur);
 
     /**
      * Appel quand il y a un clic sur plan

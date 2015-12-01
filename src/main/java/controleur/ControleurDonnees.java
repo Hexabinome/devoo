@@ -3,18 +3,11 @@ package controleur;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import controleur.observable.*;
 import modele.xmldata.Modele;
 import modele.xmldata.PlanDeVille;
 import controleur.commande.Commande;
 import controleur.commande.Historique;
-import controleur.observable.ActivationFonctionnalitesObservableInterface;
-import controleur.observable.ActivationObservableInterface;
-import controleur.observable.AnnulerCommandeObservableInterface;
-import controleur.observable.ActivationOuvrirPlanObserveur;
-import controleur.observable.MessageObservableInterface;
-import controleur.observable.ModeleObservableInterface;
-import controleur.observable.ActivationOuvrirDemandeObserveur;
-import controleur.observable.RetablirCommandeObservableInterface;
 
 /**
  * Cette classe contient les données nécessaires pour la gestion des états. On
@@ -76,6 +69,8 @@ public class ControleurDonnees {
      * Collection des observeurs d'activation des fonctionnalités
      */
     private final Collection<ActivationFonctionnalitesObservableInterface> activationFonctionnalitesObserveurs = new ArrayList<ActivationFonctionnalitesObservableInterface>();
+
+    private final Collection<PlanChargeObserveur> planChargeObserveurs = new ArrayList<>();
     
     /**
      * Le plan de la ville
@@ -270,6 +265,14 @@ public class ControleurDonnees {
      */
     public void notifierObserveursMessage(String message) {
         messageObserveurs.forEach(obs -> obs.notifierObserveursMessage(message));
+    }
+
+    public void notifierPlanChargeObserveur(){
+        planChargeObserveurs.forEach(obs -> obs.notifierObserveurPlanCharge());
+    }
+
+    public void ajouterPlanChargeObserveur(PlanChargeObserveur planChargeObserveur){
+        planChargeObserveurs.add(planChargeObserveur);
     }
     
     /**

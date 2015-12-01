@@ -2,6 +2,7 @@ package controleur;
 
 import java.io.File;
 
+import controleur.observable.*;
 import modele.xmldata.ModeleLecture;
 import modele.xmldata.PlanDeVille;
 import controleur.commande.CommandeException;
@@ -11,14 +12,6 @@ import controleur.etat.EtatEchange;
 import controleur.etat.EtatInitial;
 import controleur.etat.EtatInterface;
 import controleur.etat.EtatSuppression;
-import controleur.observable.ActivationFonctionnalitesObservableInterface;
-import controleur.observable.ActivationObservableInterface;
-import controleur.observable.AnnulerCommandeObservableInterface;
-import controleur.observable.ActivationOuvrirPlanObserveur;
-import controleur.observable.MessageObservableInterface;
-import controleur.observable.ModeleObservableInterface;
-import controleur.observable.ActivationOuvrirDemandeObserveur;
-import controleur.observable.RetablirCommandeObservableInterface;
 
 /**
  * Implémente l'interface contrôleur. Point d'entrée principal pour toutes les intéractions avec le package vue.
@@ -159,7 +152,12 @@ public class Controleur implements ControleurInterface {
 		controleurDonnees.ajouterMessageObserveur(obs);
 	}
 
-	@Override
+    @Override
+    public void ajouterPlanChargeObserveur(PlanChargeObserveur planChargeObserveur) {
+        controleurDonnees.ajouterPlanChargeObserveur(planChargeObserveur);
+    }
+
+    @Override
 	public void ajouterChargementPlanObserveur(ActivationOuvrirPlanObserveur chargementPlanObserveur) {
 		controleurDonnees.ajouterChargementPlanObserveur(chargementPlanObserveur);
 	}

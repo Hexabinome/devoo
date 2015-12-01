@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import controleur.observable.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -26,12 +27,6 @@ import org.controlsfx.dialog.ExceptionDialog;
 
 import controleur.ControleurInterface;
 import controleur.commande.CommandeException;
-import controleur.observable.ActivationFonctionnalitesObservableInterface;
-import controleur.observable.AnnulerCommandeObservableInterface;
-import controleur.observable.ActivationOuvrirPlanObserveur;
-import controleur.observable.ModeleObservableInterface;
-import controleur.observable.ActivationOuvrirDemandeObserveur;
-import controleur.observable.RetablirCommandeObservableInterface;
 
 /**
  * Cette classe joue le rôle de binding pour la fenetre principale de
@@ -41,7 +36,7 @@ import controleur.observable.RetablirCommandeObservableInterface;
  * @author David
  */
 public class VuePrincipale implements Initializable, ActivationOuvrirDemandeObserveur, ActivationOuvrirPlanObserveur, ModeleObservableInterface, AnnulerCommandeObservableInterface,
-        RetablirCommandeObservableInterface, ActivationFonctionnalitesObservableInterface  {
+        RetablirCommandeObservableInterface, ActivationFonctionnalitesObservableInterface, PlanChargeObserveur {
 
     /**
      * Mediateur : permet de communiquer avec les autres controleurs
@@ -176,7 +171,7 @@ public class VuePrincipale implements Initializable, ActivationOuvrirDemandeObse
         file = ouvrirSelectionneurDeFichier("Choissiez le plan de la ville");
         try {
             controleurApplication.chargerPlan(file);
-        	vueGraphique.construireGraphe(controleurApplication.getPlanDeVille());
+
         } catch (Exception e) {
             ouvrirErreurFichier(e, file.getName());
         }
@@ -354,18 +349,29 @@ public class VuePrincipale implements Initializable, ActivationOuvrirDemandeObse
      * Initalise les differents obserserveurs de la vue principale
      */
     public void initialiserObserveurs() {
+
+        // Observateur pour les boutons
         controleurApplication.ajouterActivationObserveur(ajouterLivraisonBouton);
         controleurApplication.ajouterActivationObserveur(echangerLivraisonsBouton);
         controleurApplication.ajouterActivationObserveur(supprimerLivraisonBouton);
         controleurApplication.ajouterActivationObserveur(genererFeuilleBouton);
         controleurApplication.ajouterTourneeObserveur(calculerTourneeBouton);
+
+
         controleurApplication.ajouterActivationFonctionnalitesObserveur(this);
         controleurApplication.ajouterPlanObserveur(this);
         controleurApplication.ajouterModeleObserveur(this);
+
+        // Observateur undo/redo
         controleurApplication.ajouterAnnulerCommandeObserveur(this);
         controleurApplication.ajouterRetablirCommandeObserveur(this);
+
+        // Observateur message affiché en bas
         controleurApplication.ajouterMessageObserveur(message);
         controleurApplication.ajouterChargementPlanObserveur(this);
+
+
+        controleurApplication.ajouterPlanChargeObserveur(this);
     }
 
     @Override
@@ -410,5 +416,11 @@ public class VuePrincipale implements Initializable, ActivationOuvrirDemandeObse
     @Override
     public void notifierObserveursRetablirCommande(boolean activation) {
         menuEdition.getItems().get(1).setDisable(activation);
+    }
+
+    @Override
+    public void notifierObserveurPlanCharge() {
+        vueGraphique.nettoyerAffichage();
+        vueGraphique.construireGraphe(controleurApplication.getPlanDeVille());
     }
 }
