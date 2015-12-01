@@ -24,13 +24,13 @@ import modele.xmldata.ModeleLecture;
 
 import org.controlsfx.dialog.ExceptionDialog;
 
-import controleur.ActivationFonctionnalitesObserveurInterface;
-import controleur.ChargementPlanObserveurInterface;
-import controleur.AnnulerCommandeObserveur;
+import controleur.ActivationFonctionnalitesObservableInterface;
+import controleur.ChargementPlanObservableInterface;
+import controleur.AnnulerCommandeObservableInterface;
 import controleur.ControleurInterface;
-import controleur.ModelObserveur;
-import controleur.PlanObserveur;
-import controleur.RetablirCommandeObserveur;
+import controleur.ModeleObservableInterface;
+import controleur.PlanObservableInterface;
+import controleur.RetablirCommandeObservableInterface;
 import controleur.commande.CommandeException;
 
 /**
@@ -40,8 +40,8 @@ import controleur.commande.CommandeException;
  *
  * @author David
  */
-public class VuePrincipale implements Initializable, PlanObserveur, ChargementPlanObserveurInterface, ModelObserveur, AnnulerCommandeObserveur,
-        RetablirCommandeObserveur, ActivationFonctionnalitesObserveurInterface  {
+public class VuePrincipale implements Initializable, PlanObservableInterface, ChargementPlanObservableInterface, ModeleObservableInterface, AnnulerCommandeObservableInterface,
+        RetablirCommandeObservableInterface, ActivationFonctionnalitesObservableInterface  {
 
     /**
      * Mediateur : permet de communiquer avec les autres controleurs
@@ -174,13 +174,11 @@ public class VuePrincipale implements Initializable, PlanObserveur, ChargementPl
     @FXML
     private void ouvrirPlan(ActionEvent actionEvent) {
         file = ouvrirSelectionneurDeFichier("Choissiez le plan de la ville");
-        if (file != null) {
-            Exception messageErreur = controleurApplication.chargerPlan(file);
-            if (messageErreur != null) {
-                ouvrirErreurFichier(messageErreur, file.getName());
-            } else {
-            	vueGraphique.construireGraphe(controleurApplication.getPlanDeVille());
-            }
+        try {
+            controleurApplication.chargerPlan(file);
+        	vueGraphique.construireGraphe(controleurApplication.getPlanDeVille());
+        } catch (Exception e) {
+            ouvrirErreurFichier(e, file.getName());
         }
     }
 
@@ -190,10 +188,10 @@ public class VuePrincipale implements Initializable, PlanObserveur, ChargementPl
     @FXML
     private void ouvrirDemande(ActionEvent actionEvent) {
         file = ouvrirSelectionneurDeFichier("Choisissez la demande de livraison");
-        if (file != null) {
-            Exception exception = controleurApplication.chargerLivraisons(file);
-            if (exception != null)
-                ouvrirErreurFichier(exception, file.getName());
+        try {
+            controleurApplication.chargerLivraisons(file);
+        } catch (Exception e) {
+            ouvrirErreurFichier(e, file.getName());
         }
     }
     
@@ -270,7 +268,7 @@ public class VuePrincipale implements Initializable, PlanObserveur, ChargementPl
 
     @FXML
     void clic_calculer_tournee() {
-        controleurApplication.clicCalculerTourne();
+        controleurApplication.clicCalculTournee();
     }
     
     @FXML
@@ -371,7 +369,7 @@ public class VuePrincipale implements Initializable, PlanObserveur, ChargementPl
     }
 
     @Override
-    public void notificationPlanAChange(boolean activer) {
+    public void notifierObserveursPlan(boolean activer) {
         //vueGraphique.construireGraphe(controleurApplication.getPlanDeVille());
         //activation de menu element graphique qui permet de charger un fichier de livraison
         //(Ici on peut le faire sans appel observeur, parce qu' a parti d'ici on possede toujours un plan valide.)
@@ -379,12 +377,12 @@ public class VuePrincipale implements Initializable, PlanObserveur, ChargementPl
     }
 
 	@Override
-	public void notificationActiverChargementPlan(boolean activer) {
+	public void notifierObserveursChargementPlan(boolean activer) {
 		menuFichier.getItems().get(0).setDisable(!activer);
 	}
 
     @Override
-    public void notificationModelAChange() {
+    public void notifierObserveursModele() {
         ModeleLecture modele = controleurApplication.getModele();
 
         if (modele.getTournee() != null)
@@ -395,7 +393,7 @@ public class VuePrincipale implements Initializable, PlanObserveur, ChargementPl
     }
     
 	@Override
-	public void notifierLesObserveursFonctionnalites(boolean activer) {
+	public void notifierObserveursFonctionnalites(boolean activer) {
 		this.ajouterLivraisonBouton.setDisable(!activer);
 		this.echangerLivraisonsBouton.setDisable(!activer);
 		this.supprimerLivraisonBouton.setDisable(!activer);
@@ -403,12 +401,12 @@ public class VuePrincipale implements Initializable, PlanObserveur, ChargementPl
 	}
 	
     @Override
-    public void notificationAnnulerCommande(boolean activation) {
+    public void notifierObserveursAnnulerCommande(boolean activation) {
         menuEdition.getItems().get(0).setDisable(activation);
     }
 
     @Override
-    public void notificationRetablirCommande(boolean activation) {
+    public void notifierObserveursRetablirCommande(boolean activation) {
         menuEdition.getItems().get(1).setDisable(activation);
     }
 }

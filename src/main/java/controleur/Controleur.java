@@ -37,17 +37,17 @@ public class Controleur implements ControleurInterface {
     }
 
     @Override
-    public void ajouterActivationObserveur(ActivationObserveurInterface observer) {
+    public void ajouterActivationObserveur(ActivationObservableInterface observer) {
         controleurDonnees.ajouterActivationObserveur(observer);
     }
 
     @Override
-    public void ajouterModeleObserveur(ModelObserveur observer) {
+    public void ajouterModeleObserveur(ModeleObservableInterface observer) {
         controleurDonnees.ajouterModeleObserveur(observer);
     }
 
     @Override
-    public void ajouterPlanObserveur(PlanObserveur planObserveur) {
+    public void ajouterPlanObserveur(PlanObservableInterface planObserveur) {
         controleurDonnees.ajouterPlanObserveur(planObserveur);
     }
 
@@ -66,23 +66,13 @@ public class Controleur implements ControleurInterface {
     }
 
     @Override
-    public Exception chargerPlan(File fichierPlan) {
-        try {
-            etat = etat.chargerPlan(fichierPlan);
-            return null;
-        } catch (CommandeException e) {
-            return e;
-        }
+    public void chargerPlan(File fichierPlan) throws Exception {
+        etat = etat.chargerPlan(fichierPlan);
     }
 
     @Override
-    public Exception chargerLivraisons(File fichierLivraisons) {
-        try {
-            etat = etat.chargerLivraisons(fichierLivraisons);
-            return null;
-        } catch (CommandeException e) {
-            return e;
-        }
+    public void chargerLivraisons(File fichierLivraisons) throws Exception {
+        etat = etat.chargerLivraisons(fichierLivraisons);
     }
 
     @Override
@@ -118,7 +108,7 @@ public class Controleur implements ControleurInterface {
     }
 
     @Override
-    public void clicCalculerTourne() {
+    public void clicCalculTournee() {
         etat = etat.cliqueCalculerTournee();
     }
 
@@ -137,17 +127,17 @@ public class Controleur implements ControleurInterface {
     }
 
     @Override
-    public void ajouterTourneeObserveur(ActivationObserveurInterface tourneeObserveur) {
+    public void ajouterTourneeObserveur(ActivationObservableInterface tourneeObserveur) {
         controleurDonnees.ajouterTourneeObserveur(tourneeObserveur);
     }
 
     @Override
-    public void ajouterAnnulerCommandeObserveur(AnnulerCommandeObserveur annulerCommandeObserveur) {
+    public void ajouterAnnulerCommandeObserveur(AnnulerCommandeObservableInterface annulerCommandeObserveur) {
         controleurDonnees.ajouterAnnulerCommandeObserveur(annulerCommandeObserveur);
     }
 
     @Override
-    public void ajouterRetablirCommandeObserveur(RetablirCommandeObserveur retablirCommandeObserveur) {
+    public void ajouterRetablirCommandeObserveur(RetablirCommandeObservableInterface retablirCommandeObserveur) {
         controleurDonnees.ajouterRetablirCommandeObserveur(retablirCommandeObserveur);
     }
 
@@ -157,21 +147,18 @@ public class Controleur implements ControleurInterface {
 	}
 
     @Override
-    public void ajouterMessageObserveur(MessageObserveur obs) {
+    public void ajouterMessageObserveur(MessageObservableInterface obs) {
 		controleurDonnees.ajouterMessageObserveur(obs);
 	}
 
 	@Override
-	public void ajouterChargementPlanObserveur(ChargementPlanObserveurInterface chargementPlanObserveur) {
+	public void ajouterChargementPlanObserveur(ChargementPlanObservableInterface chargementPlanObserveur) {
 		controleurDonnees.ajouterChargementPlanObserveur(chargementPlanObserveur);
 	}
 
 	@Override
-	public void ajouterActivationFonctionnalitesObserveur(ActivationFonctionnalitesObserveurInterface obs) {
+	public void ajouterActivationFonctionnalitesObserveur(ActivationFonctionnalitesObservableInterface obs) {
 		controleurDonnees.ajouterActivationFonctionnalitesObserveurs(obs);
 		
 	}
-	
-	
-
 }

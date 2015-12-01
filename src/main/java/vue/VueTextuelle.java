@@ -1,8 +1,8 @@
 package vue;
 
-import controleur.ActivationObserveurInterface;
+import controleur.ActivationObservableInterface;
 import controleur.ControleurInterface;
-import controleur.ModelObserveur;
+import controleur.ModeleObservableInterface;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -25,8 +25,8 @@ import java.util.ResourceBundle;
  * Cette classe gère les livraisons et leurs horaires. Elle s'occupe de la vue textuelle qui se trouve à gauche dans la
  * fenêtre principale.
  */
-public class VueTextuelle implements Initializable, ActivationObserveurInterface,
-        ModelObserveur {
+public class VueTextuelle implements Initializable, ActivationObservableInterface,
+        ModeleObservableInterface {
 
     /**
      * Table principale contenant la liste des livraisons.
@@ -168,7 +168,7 @@ public class VueTextuelle implements Initializable, ActivationObserveurInterface
      * @param disabled true si la table doit mise à jour, faux sinon
      */
     @Override
-    public void notifierLesObserveursActivation(boolean disabled) {
+    public void notifierObserveursActivation(boolean disabled) {
         // TODO : voir si elle réellement utile
         /*if (disabled) {
             effacerVueTableLivraison();
@@ -179,7 +179,7 @@ public class VueTextuelle implements Initializable, ActivationObserveurInterface
      * Notification déclenchée lors d'un changement dans le model. Elle déclenche
      */
     @Override
-    public void notificationModelAChange() {
+    public void notifierObserveursModele() {
         effacerVueTableLivraison();
         Demande demandeModifiee = controleurApplication.getModele().getDemande();
         construireVueTableLivraion(demandeModifiee);

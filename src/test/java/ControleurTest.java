@@ -1,12 +1,13 @@
 import controleur.Controleur;
 import controleur.ControleurInterface;
-import controleur.ModelObserveur;
+import controleur.ModeleObservableInterface;
 import modele.xmldata.ModeleLecture;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -34,7 +35,7 @@ public class ControleurTest
      +getModel():ModelLecture
      +cliqueCalculerTourne():void 
      */
-    ModelObserveur observer;
+    ModeleObservableInterface observer;
     boolean miseAJourAppelee;
     ControleurInterface controleurInterface;
 
@@ -44,10 +45,10 @@ public class ControleurTest
 
         controleurInterface = new Controleur();
         miseAJourAppelee = false;
-        observer = new ModelObserveur()
+        observer = new ModeleObservableInterface()
         {
             @Override
-            public void notificationModelAChange()
+            public void notifierObserveursModele()
             {
                 miseAJourAppelee = true;
             }
@@ -529,13 +530,21 @@ public class ControleurTest
     {
         //File plan = new File("target\\classes\\samples\\planTest2.xml");
         File plan = new File("target" + File.separator + "classes" + File.separator + "samples" + File.separator + "planTest2.xml");
-        controleurInterface.chargerPlan(plan);
+        try {
+			controleurInterface.chargerPlan(plan);
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
 
         //File livraisons = new File("target\\classes\\samples\\livraisonTest2.xml");
         File livraisons = new File("target" + File.separator + "classes" + File.separator + "samples" + File.separator + "livraisonTest2.xml");
-        controleurInterface.chargerLivraisons(livraisons);
+        try {
+			controleurInterface.chargerLivraisons(livraisons);
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
 
-        controleurInterface.clicCalculerTourne();
+        controleurInterface.clicCalculTournee();
 
         ModeleLecture model = controleurInterface.getModele();
         List<List<Integer>> tournee = model.getTournee();
@@ -569,12 +578,20 @@ public class ControleurTest
     public void testSuppressionCalculerLivraison()
     {
         File plan = new File("target\\classes\\samples\\planTest2.xml");
-        controleurInterface.chargerPlan(plan);
+        try {
+			controleurInterface.chargerPlan(plan);
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
 
         File livraisons = new File("target\\classes\\samples\\livraisonTest2.xml");
-        controleurInterface.chargerLivraisons(livraisons);
+        try {
+			controleurInterface.chargerLivraisons(livraisons);
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
 
-        controleurInterface.clicCalculerTourne();
+        controleurInterface.clicCalculTournee();
         ModeleLecture model = controleurInterface.getModele();
         controleurInterface.clicOutilSupprimer();
         controleurInterface.clicSurLivraison(10103);
@@ -613,12 +630,20 @@ public class ControleurTest
     public void testSuppressionEntrepotCalculerLivraison()
     {
         File plan = new File("target\\classes\\samples\\planTest2.xml");
-        controleurInterface.chargerPlan(plan);
+        try {
+			controleurInterface.chargerPlan(plan);
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
 
         File livraisons = new File("target\\classes\\samples\\livraisonTest2.xml");
-        controleurInterface.chargerLivraisons(livraisons);
+        try {
+			controleurInterface.chargerLivraisons(livraisons);
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
 
-        controleurInterface.clicCalculerTourne();
+        controleurInterface.clicCalculTournee();
         ModeleLecture model = controleurInterface.getModele();
         controleurInterface.clicOutilSupprimer();
         controleurInterface.clicSurLivraison(-1);
@@ -654,12 +679,20 @@ public class ControleurTest
     public void testAnnulerSuppressionCalculerLivraison()
     {
         File plan = new File("target\\classes\\samples\\planTest2.xml");
-        controleurInterface.chargerPlan(plan);
+        try {
+			controleurInterface.chargerPlan(plan);
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
 
         File livraisons = new File("target\\classes\\samples\\livraisonTest2.xml");
-        controleurInterface.chargerLivraisons(livraisons);
+        try {
+			controleurInterface.chargerLivraisons(livraisons);
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
 
-        controleurInterface.clicCalculerTourne();
+        controleurInterface.clicCalculTournee();
         ModeleLecture model = controleurInterface.getModele();
         controleurInterface.clicOutilSupprimer();
         controleurInterface.clicSurLivraison(10103);
@@ -698,12 +731,20 @@ public class ControleurTest
     public void testAnnulerRetablirSuppressionCalculerLivraison()
     {
         File plan = new File("target\\classes\\samples\\planTest2.xml");
-        controleurInterface.chargerPlan(plan);
+        try {
+			controleurInterface.chargerPlan(plan);
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
 
         File livraisons = new File("target\\classes\\samples\\livraisonTest2.xml");
-        controleurInterface.chargerLivraisons(livraisons);
+        try {
+			controleurInterface.chargerLivraisons(livraisons);
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
 
-        controleurInterface.clicCalculerTourne();
+        controleurInterface.clicCalculTournee();
         ModeleLecture model = controleurInterface.getModele();
         controleurInterface.clicOutilSupprimer();
         controleurInterface.clicSurLivraison(10103);
@@ -743,12 +784,20 @@ public class ControleurTest
     public void testAjoutApresEntrepotCalculerLivraison()
     {
         File plan = new File("target\\classes\\samples\\planTest2.xml");
-        controleurInterface.chargerPlan(plan);
+        try {
+			controleurInterface.chargerPlan(plan);
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
 
         File livraisons = new File("target\\classes\\samples\\livraisonTest3.xml");
-        controleurInterface.chargerLivraisons(livraisons);
+        try {
+			controleurInterface.chargerLivraisons(livraisons);
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
 
-        controleurInterface.clicCalculerTourne();
+        controleurInterface.clicCalculTournee();
 
         ModeleLecture model = controleurInterface.getModele();
 
@@ -790,12 +839,20 @@ public class ControleurTest
     public void testAjoutCalculerLivraison()
     {
         File plan = new File("target\\classes\\samples\\planTest2.xml");
-        controleurInterface.chargerPlan(plan);
+        try {
+			controleurInterface.chargerPlan(plan);
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
 
         File livraisons = new File("target\\classes\\samples\\livraisonTest2.xml");
-        controleurInterface.chargerLivraisons(livraisons);
+        try {
+			controleurInterface.chargerLivraisons(livraisons);
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
 
-        controleurInterface.clicCalculerTourne();
+        controleurInterface.clicCalculTournee();
 
         ModeleLecture model = controleurInterface.getModele();
 
@@ -838,12 +895,20 @@ public class ControleurTest
     public void testAnnulerAjoutCalculerLivraison()
     {
         File plan = new File("target\\classes\\samples\\planTest2.xml");
-        controleurInterface.chargerPlan(plan);
+        try {
+			controleurInterface.chargerPlan(plan);
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
 
         File livraisons = new File("target\\classes\\samples\\livraisonTest2.xml");
-        controleurInterface.chargerLivraisons(livraisons);
+        try {
+			controleurInterface.chargerLivraisons(livraisons);
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
 
-        controleurInterface.clicCalculerTourne();
+        controleurInterface.clicCalculTournee();
 
         ModeleLecture model = controleurInterface.getModele();
 
@@ -886,12 +951,20 @@ public class ControleurTest
     public void testAnnulerRetablirAjoutCalculerLivraison()
     {
         File plan = new File("target\\classes\\samples\\planTest2.xml");
-        controleurInterface.chargerPlan(plan);
+        try {
+			controleurInterface.chargerPlan(plan);
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
 
         File livraisons = new File("target\\classes\\samples\\livraisonTest2.xml");
-        controleurInterface.chargerLivraisons(livraisons);
+        try {
+			controleurInterface.chargerLivraisons(livraisons);
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
 
-        controleurInterface.clicCalculerTourne();
+        controleurInterface.clicCalculTournee();
 
         ModeleLecture model = controleurInterface.getModele();
 
@@ -940,12 +1013,20 @@ public class ControleurTest
     public void testCalculerImpossibleLivraison()
     {
         File plan = new File("target\\classes\\samples\\planTest2.xml");
-        controleurInterface.chargerPlan(plan);
+        try {
+			controleurInterface.chargerPlan(plan);
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
 
         File livraisons = new File("target\\classes\\samples\\livraisonTest4.xml");
-        controleurInterface.chargerLivraisons(livraisons);
+        try {
+			controleurInterface.chargerLivraisons(livraisons);
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
 
-        controleurInterface.clicCalculerTourne();
+        controleurInterface.clicCalculTournee();
 
         ModeleLecture model = controleurInterface.getModele();
 
@@ -961,13 +1042,21 @@ public class ControleurTest
     public void testSuppressionAll()
     {
         File plan = new File("target\\classes\\samples\\planTest2.xml");
-        controleurInterface.chargerPlan(plan);
+        try {
+			controleurInterface.chargerPlan(plan);
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
 
         File livraisons = new File("target\\classes\\samples\\livraisonTest2.xml");
 
-        controleurInterface.chargerLivraisons(livraisons);
+        try {
+			controleurInterface.chargerLivraisons(livraisons);
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
 
-        controleurInterface.clicCalculerTourne();
+        controleurInterface.clicCalculTournee();
         ModeleLecture model = controleurInterface.getModele();
         controleurInterface.clicOutilSupprimer();
         controleurInterface.clicSurLivraison(20105);
