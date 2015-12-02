@@ -185,6 +185,9 @@ public class VueTextuelle implements Initializable,
         controleurApplication.ajouterPlanChargeObserveur(this);
     }
 
+    /**
+     * Efface le contenu de la table à chaque chargement d'un plan.
+     */
     @Override
     public void notifierObservateursPlanCharge() {
         effacerVueTableLivraison();

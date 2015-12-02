@@ -28,7 +28,7 @@ public class ControleurDonnees {
     /**
      * Collection des observateurs (pour GUI avec functionalités réduites si plan et livraisons ne sont pas encore chargés)
      */
-    private final Collection<ActivationObservableInterface> activationObservateurs = new ArrayList<ActivationObservableInterface>();
+    private final Collection<ActivationObservateur> activationObservateurs = new ArrayList<ActivationObservateur>();
 
     /**
      * Collection des observateurs pour le modèle
@@ -58,7 +58,7 @@ public class ControleurDonnees {
     /**
      * Collection des observateurs d'activation/désactivation de composants
      */
-    private final Collection<ActivationObservableInterface> tourneeObservateurs = new ArrayList<ActivationObservableInterface>();
+    private final Collection<ActivationObservateur> tourneeObservateurs = new ArrayList<ActivationObservateur>();
     
     /**
      * Collection des observateurs des messages envoyés à la vue
@@ -131,7 +131,7 @@ public class ControleurDonnees {
      * Ajoute un observateur d'activation
      * @param obs L'objet observateur
      */
-    public void ajouterActivationObservateur(ActivationObservableInterface obs) {
+    public void ajouterActivationObservateur(ActivationObservateur obs) {
         activationObservateurs.add(obs);
     }
     
@@ -176,7 +176,7 @@ public class ControleurDonnees {
      * Ajoute un observateur pour l'activation de la génération de la tournée
      * @param tourneeObserveur L'objet observateur
      */
-    void ajouterTourneeObservateur(ActivationObservableInterface tourneeObserveur) {
+    void ajouterTourneeObservateur(ActivationObservateur tourneeObserveur) {
         tourneeObservateurs.add(tourneeObserveur);
     }
     

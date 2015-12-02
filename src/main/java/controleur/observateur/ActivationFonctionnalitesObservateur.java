@@ -7,7 +7,7 @@ package controleur.observateur;
 public interface ActivationFonctionnalitesObservateur {
     
 	/**
-	 * Notifie les boutons de fonctionnalités qu'il faut changer l'état d'activation
+	 * Notifie les boutons de fonctionnalités (ajouter, supprimer, echanger) qu'il faut changer l'état d'activation
      * @param activer Vrai s'il faut activer les boutons des fonctionnalités
      */
     void notifierObservateursFonctionnalites(boolean activer);

@@ -8,7 +8,6 @@ import java.util.ResourceBundle;
 import controleur.observateur.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
@@ -92,29 +91,29 @@ public class VuePrincipale implements Initializable, ActivationOuvrirDemandeObse
      * Bouton qui permet d'ajouter des livraisons
      */
     @FXML
-    private BoutonObserveur ajouterLivraisonBouton;
+    private BoutonObservateur ajouterLivraisonBouton;
 
     /**
      * Bouton qui permet d'echanger des livraisons
      */
     @FXML
-    private BoutonObserveur echangerLivraisonsBouton;
+    private BoutonObservateur echangerLivraisonsBouton;
 
     /**
      * Bouton qui permet de supprimer des livraisons
      */
     @FXML
-    private BoutonObserveur supprimerLivraisonBouton;
+    private BoutonObservateur supprimerLivraisonBouton;
 
     /**
      * Bouton qui permet de generer le feuille de route
      */
     @FXML
-    private BoutonObserveur genererFeuilleBouton;
+    private BoutonObservateur genererFeuilleBouton;
 
     /** Bouton de calcul de tournée */
     @FXML
-    private BoutonObserveur calculerTourneeBouton;
+    private BoutonObservateur calculerTourneeBouton;
 
     /** Barre de défilement */
     @FXML

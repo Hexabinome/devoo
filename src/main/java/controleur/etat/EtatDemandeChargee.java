@@ -22,6 +22,7 @@ public class EtatDemandeChargee extends AbstractEtat {
      * @param controleurDonnees Le contrôleur de données
      */
     public EtatDemandeChargee(ControleurDonnees controleurDonnees) {
+        // On désactive les fonctionnalités principales
     	controleurDonnees.notifierObservateursFonctionnalites(false);
         this.controleurDonnees = controleurDonnees;
     }

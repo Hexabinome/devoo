@@ -17,7 +17,7 @@ public interface ControleurInterface {
      * Ajoute un observateur de l'activation
      * @param observeur
      */
-    void ajouterActivationObserveur(ActivationObservableInterface observeur);
+    void ajouterActivationObserveur(ActivationObservateur observeur);
 
     /**
      * Ajoute un observateur au changement du modèle
@@ -41,7 +41,7 @@ public interface ControleurInterface {
      * Ajoute un observateur à la tournée
      * @param tourneeObserveur
      */
-    void ajouterTourneeObserveur(ActivationObservableInterface tourneeObserveur);
+    void ajouterTourneeObserveur(ActivationObservateur tourneeObserveur);
 
     /**
      * Ajoute un observateur à l'annulation d'une commande

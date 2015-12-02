@@ -38,7 +38,7 @@ public class Controleur implements ControleurInterface {
     }
 
     @Override
-    public void ajouterActivationObserveur(ActivationObservableInterface observer) {
+    public void ajouterActivationObserveur(ActivationObservateur observer) {
         controleurDonnees.ajouterActivationObservateur(observer);
     }
 
@@ -128,7 +128,7 @@ public class Controleur implements ControleurInterface {
     }
 
     @Override
-    public void ajouterTourneeObserveur(ActivationObservableInterface tourneeObserveur) {
+    public void ajouterTourneeObserveur(ActivationObservateur tourneeObserveur) {
         controleurDonnees.ajouterTourneeObservateur(tourneeObserveur);
     }
 
