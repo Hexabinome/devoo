@@ -32,7 +32,7 @@ public class VueTextuelle implements Initializable,
      * Table principale contenant la liste des livraisons.
      */
     @FXML
-    TreeTableView<ObjetVisualisable> tableViewFenetre;
+    private TreeTableView<ObjetVisualisable> tableViewFenetre;
 
     /**
      * Element racine de la Table qui contient tous les autres éléments. Il ne sera pas affiché dans la table.
@@ -67,7 +67,7 @@ public class VueTextuelle implements Initializable,
     /**
      * Met à jour la référence vers la vue graphique
      */
-    public void setAideurVueGraphique(VueGraphiqueAideur vueGraphique) {
+    protected void setAideurVueGraphique(VueGraphiqueAideur vueGraphique) {
         this.vueGraphique = vueGraphique;
 
     }
@@ -161,7 +161,7 @@ public class VueTextuelle implements Initializable,
      *
      * @param controleurApplication controleur initialisé (non null)
      */
-    public void setControleurApplication(ControleurInterface controleurApplication) {
+    protected void setControleurApplication(ControleurInterface controleurApplication) {
         this.controleurApplication = controleurApplication;
     }
 
@@ -180,7 +180,7 @@ public class VueTextuelle implements Initializable,
     /**
      * Ajoute la vue textuelle comme observeurs au près du controleur
      */
-    public void initialiserObserveurs() {
+    protected void initialiserObserveurs() {
         controleurApplication.ajouterModeleObservateur(this);
         controleurApplication.ajouterPlanChargeObserveur(this);
     }
