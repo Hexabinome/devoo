@@ -55,6 +55,7 @@ public class CommandeChargerDemande extends CommandeNonAnnulable {
             controleurDonnees.notifierObservateursModele();
 
             controleurDonnees.notifierObservateursMessage(String.format("Demande de livraisons (%s) chargée avec succès ! Veuillez calculer la tournée maintenant.", livraisonsFichier.getName()));
+            controleurDonnees.effacerHistorique();
         } catch (SAXException | ExceptionXML | IOException | JDOMException | ParseException ex) {
             throw new CommandeException(ex.getMessage());
         }

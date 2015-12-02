@@ -48,6 +48,7 @@ public class CommandeChargerPlan extends CommandeNonAnnulable {
             controleurDonnees.notifierObservateursCalculTournee(true);
             controleurDonnees.notifierPlanChargeObservateur();
             controleurDonnees.notifierObservateursMessage(String.format("Plan de la ville (%s) chargé avec succès ! Veuillez charger la demande de livraison maintenant.", planFichier.getName()));
+            controleurDonnees.effacerHistorique();
         } catch (JDOMException | IOException | SAXException | ExceptionXML ex) {
             throw new CommandeException(ex.getMessage());
         }

@@ -51,7 +51,6 @@ public class EtatPrincipal implements EtatInterface {
     @Override
     public EtatInterface chargerLivraisons(File livraisons) throws CommandeException {
         new CommandeChargerDemande(controleurDonnees, livraisons).executer();
-        controleurDonnees.effacerHistorique();
         return new EtatDemandeChargee(controleurDonnees);
     }
 

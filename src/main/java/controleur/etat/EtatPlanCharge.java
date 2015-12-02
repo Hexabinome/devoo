@@ -33,14 +33,12 @@ public class EtatPlanCharge extends AbstractEtat {
     @Override
     public EtatInterface chargerPlan(File plan) throws CommandeException {
         new CommandeChargerPlan(controleurDonnees, plan).executer();
-        controleurDonnees.effacerHistorique();
         return this;
     }
 
     @Override
     public EtatInterface chargerLivraisons(File livraisons) throws CommandeException {
         new CommandeChargerDemande(controleurDonnees, livraisons).executer();
-        controleurDonnees.effacerHistorique();
         return new EtatDemandeChargee(controleurDonnees);
     }
 
