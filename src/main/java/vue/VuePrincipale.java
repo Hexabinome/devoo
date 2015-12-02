@@ -366,25 +366,25 @@ public class VuePrincipale implements Initializable, ActivationOuvrirDemandeObse
     public void initialiserObserveurs() {
 
         // Observateur pour les boutons
-        controleurApplication.ajouterActivationObserveur(ajouterLivraisonBouton);
-        controleurApplication.ajouterActivationObserveur(echangerLivraisonsBouton);
-        controleurApplication.ajouterActivationObserveur(supprimerLivraisonBouton);
-        controleurApplication.ajouterActivationObserveur(genererFeuilleBouton);
+        controleurApplication.ajouterActivationFonctionnalitesObservateur(ajouterLivraisonBouton);
+        controleurApplication.ajouterActivationFonctionnalitesObservateur(echangerLivraisonsBouton);
+        controleurApplication.ajouterActivationFonctionnalitesObservateur(supprimerLivraisonBouton);
+        controleurApplication.ajouterActivationFonctionnalitesObservateur(genererFeuilleBouton);
 
 
-        controleurApplication.ajouterTourneeObserveur(calculerTourneeBouton);
+        controleurApplication.ajouterTourneeObservateur(calculerTourneeBouton);
 
 
-        controleurApplication.ajouterPlanObserveur(this);
-        controleurApplication.ajouterModeleObserveur(this);
+        controleurApplication.ajouterActivationOuvrirDemandeObservateur(this);
+        controleurApplication.ajouterModeleObservateur(this);
 
         // Observateur undo/redo
-        controleurApplication.ajouterAnnulerCommandeObserveur(this);
-        controleurApplication.ajouterRetablirCommandeObserveur(this);
+        controleurApplication.ajouterAnnulerCommandeObservateur(this);
+        controleurApplication.ajouterRetablirCommandeObservateur(this);
 
         // Observateur message affiché en bas
-        controleurApplication.ajouterMessageObserveur(message);
-        controleurApplication.ajouterChargementPlanObserveur(this);
+        controleurApplication.ajouterMessageObservateur(message);
+        controleurApplication.ajouterActivationOuvrirPlanObservateur(this);
 
 
         controleurApplication.ajouterPlanChargeObserveur(this);

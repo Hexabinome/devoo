@@ -181,7 +181,7 @@ public class VueTextuelle implements Initializable,
      * Ajoute la vue textuelle comme observeurs au près du controleur
      */
     public void initialiserObserveurs() {
-        controleurApplication.ajouterModeleObserveur(this);
+        controleurApplication.ajouterModeleObservateur(this);
         controleurApplication.ajouterPlanChargeObserveur(this);
     }
 

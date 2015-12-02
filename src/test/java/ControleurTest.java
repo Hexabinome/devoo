@@ -54,7 +54,7 @@ public class ControleurTest
             }
 
         };
-        controleurInterface.ajouterModeleObserveur(observer);
+        controleurInterface.ajouterModeleObservateur(observer);
     }
 
     /**

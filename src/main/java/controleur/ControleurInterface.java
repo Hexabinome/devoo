@@ -14,53 +14,53 @@ import modele.donneesxml.PlanDeVille;
 public interface ControleurInterface {
 
     /**
-     * Ajoute un observateur de l'activation
+     * Ajoute un observateur pour l'activation des fonctionnalités principales de l'application
      * @param observeur
      */
-    void ajouterActivationObserveur(ActivationFonctionnalitesObservateur observeur);
+    void ajouterActivationFonctionnalitesObservateur(ActivationFonctionnalitesObservateur observeur);
 
     /**
      * Ajoute un observateur au changement du modèle
      * @param observeur
      */
-    void ajouterModeleObserveur(ModeleObservateur observeur);
+    void ajouterModeleObservateur(ModeleObservateur observeur);
 
     /**
      * Ajoute un observateur des changement du plan
      * @param planObserveur
      */
-    void ajouterPlanObserveur(ActivationOuvrirDemandeObservateur planObserveur);
+    void ajouterActivationOuvrirDemandeObservateur(ActivationOuvrirDemandeObservateur planObserveur);
     
     /**
      * Ajoute un observateur du chargement du plan
      * @param chargementPlanObserveur
      */
-    void ajouterChargementPlanObserveur(ActivationOuvrirPlanObservateur chargementPlanObserveur);
+    void ajouterActivationOuvrirPlanObservateur(ActivationOuvrirPlanObservateur chargementPlanObserveur);
     
     /**
      * Ajoute un observateur à la tournée
      * @param tourneeObserveur
      */
-    void ajouterTourneeObserveur(ActivationFonctionnalitesObservateur tourneeObserveur);
+    void ajouterTourneeObservateur(ActivationFonctionnalitesObservateur tourneeObserveur);
 
     /**
      * Ajoute un observateur à l'annulation d'une commande
      * @param annulerCommandeObserveur
      */
-    void ajouterAnnulerCommandeObserveur(AnnulerCommandeObservateur annulerCommandeObserveur);
+    void ajouterAnnulerCommandeObservateur(AnnulerCommandeObservateur annulerCommandeObserveur);
 
     /**
      * Ajoute un observateur au rétablissement d'une commande
      * @param retablirCommandeObserveur
      */
-    void ajouterRetablirCommandeObserveur(RetablirCommandeObservateur retablirCommandeObserveur);
+    void ajouterRetablirCommandeObservateur(RetablirCommandeObservateur retablirCommandeObserveur);
     
 
     /**
      * Ajoute un observateur des messages envoyés
      * @param obs
      */
-     void ajouterMessageObserveur(MessageObservateur obs);
+     void ajouterMessageObservateur(MessageObservateur obs);
 
     void ajouterPlanChargeObserveur(PlanChargeObservateur planChargeObservateur);
 

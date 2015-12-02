@@ -38,17 +38,17 @@ public class Controleur implements ControleurInterface {
     }
 
     @Override
-    public void ajouterActivationObserveur(ActivationFonctionnalitesObservateur observer) {
+    public void ajouterActivationFonctionnalitesObservateur(ActivationFonctionnalitesObservateur observer) {
         controleurDonnees.ajouterActivationObservateur(observer);
     }
 
     @Override
-    public void ajouterModeleObserveur(ModeleObservateur observer) {
+    public void ajouterModeleObservateur(ModeleObservateur observer) {
         controleurDonnees.ajouterModeleObservateur(observer);
     }
 
     @Override
-    public void ajouterPlanObserveur(ActivationOuvrirDemandeObservateur planObserveur) {
+    public void ajouterActivationOuvrirDemandeObservateur(ActivationOuvrirDemandeObservateur planObserveur) {
         controleurDonnees.ajouterPlanObservateur(planObserveur);
     }
 
@@ -128,17 +128,17 @@ public class Controleur implements ControleurInterface {
     }
 
     @Override
-    public void ajouterTourneeObserveur(ActivationFonctionnalitesObservateur tourneeObserveur) {
+    public void ajouterTourneeObservateur(ActivationFonctionnalitesObservateur tourneeObserveur) {
         controleurDonnees.ajouterTourneeObservateur(tourneeObserveur);
     }
 
     @Override
-    public void ajouterAnnulerCommandeObserveur(AnnulerCommandeObservateur annulerCommandeObserveur) {
+    public void ajouterAnnulerCommandeObservateur(AnnulerCommandeObservateur annulerCommandeObserveur) {
         controleurDonnees.ajouterAnnulerCommandeObservateur(annulerCommandeObserveur);
     }
 
     @Override
-    public void ajouterRetablirCommandeObserveur(RetablirCommandeObservateur retablirCommandeObserveur) {
+    public void ajouterRetablirCommandeObservateur(RetablirCommandeObservateur retablirCommandeObserveur) {
         controleurDonnees.ajouterRetablirCommandeObservateur(retablirCommandeObserveur);
     }
 
@@ -148,7 +148,7 @@ public class Controleur implements ControleurInterface {
 	}
 
     @Override
-    public void ajouterMessageObserveur(MessageObservateur obs) {
+    public void ajouterMessageObservateur(MessageObservateur obs) {
 		controleurDonnees.ajouterMessageObservateur(obs);
 	}
 
@@ -158,7 +158,7 @@ public class Controleur implements ControleurInterface {
     }
 
     @Override
-	public void ajouterChargementPlanObserveur(ActivationOuvrirPlanObservateur chargementPlanObserveur) {
+	public void ajouterActivationOuvrirPlanObservateur(ActivationOuvrirPlanObservateur chargementPlanObserveur) {
 		controleurDonnees.ajouterChargementPlanObservateur(chargementPlanObserveur);
 	}
 
