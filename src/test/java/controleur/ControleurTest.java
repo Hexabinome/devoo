@@ -1,3 +1,4 @@
+package controleur;
 import controleur.Controleur;
 import controleur.ControleurInterface;
 import controleur.observateur.ModeleObservateur;

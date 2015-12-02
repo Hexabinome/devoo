@@ -1,3 +1,4 @@
+package modele.donneesxml;
 import modele.donneesxml.Chemin;
 import modele.donneesxml.GrapheRealisation;
 import modele.donneesxml.Troncon;

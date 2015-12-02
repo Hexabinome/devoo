@@ -1,3 +1,4 @@
+package modele.donneesxml;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -8,14 +9,16 @@
  *
  * @author robinroyer
  */
-public class LivraisonTest {
+public class GrapheTest {
     
-        //-----------TEST  Livraison
+            //-----------TEST  Livraison
         /*
             +Livraisons(int id, int clientId, int idIntersection): ctor
             +getId(): int
             +getClientId(): int
             +getAdresse(): int
         */
+    
+
     
 }

@@ -1,3 +1,4 @@
+package modele.donneesxml;
 
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;

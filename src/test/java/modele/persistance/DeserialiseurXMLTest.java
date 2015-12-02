@@ -1,20 +1,18 @@
+package modele.persistance;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
+import java.io.IOException;
+import java.text.ParseException;
+
 import modele.donneesxml.Demande;
-import modele.donneesxml.Livraison;
 import modele.donneesxml.PlanDeVille;
 import modele.donneesxml.Troncon;
-import modele.persistance.DeserialiseurXML;
-import modele.persistance.ExceptionXML;
 
 import org.jdom2.JDOMException;
 import org.jdom2.input.JDOMParseException;
 import org.junit.Test;
 import org.xml.sax.SAXException;
-
-import java.io.IOException;
-import java.text.ParseException;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 /**
  * Test de la classe Deserialiseur XMl
@@ -135,22 +133,17 @@ public class DeserialiseurXMLTest {
         Demande demande = DeserialiseurXML.getInstance().ouvrirDemande(
                 ClassLoader.getSystemResourceAsStream("samples/livraisonTest.xml"), ville);
 
-        Livraison livr1 = new Livraison(1, 1, 1);
-        Livraison livr2 = new Livraison(2, 2, 9);
-        Livraison livr3 = new Livraison(3, 3, 4);
-
         //test si l'entrepot a le bon id d'intercetion
         assertEquals("l'entrepot doit etre stocke", 5, demande.getEntrepot().getId());
         //test si les fenetres sont bien stockees
-        // assertEquals("La fenetre 1 doit avoir le bon timestamp de debut", 8 * 3600, ((Fenetre)((ArrayList <Fenetre>)demande.getFenetres()).get(0)).getTimestampDebut());
-        // assertEquals("La fenetre 1 doit avoir le bon timestamp de fin", 12 * 3600, ((Fenetre)((ArrayList <Fenetre>)demande.getFenetres()).get(0)).getTimestampFin());
+        assertEquals("La fenetre 1 doit avoir le bon timestamp de debut", 8 * 3600, demande.getFenetres().get(1).getTimestampDebut());
+        assertEquals("La fenetre 1 doit avoir le bon timestamp de fin", 12 * 3600, demande.getFenetres().get(1).getTimestampFin());
 
-        // assertEquals("La fenetre 2 doit avoir le bon timestamp de debut", 13 * 3600, ((Fenetre)((ArrayList <Fenetre>)demande.getFenetres()).get(1)).getTimestampDebut());
-        // assertEquals("La fenetre 2 doit avoir le bon timestamp de fin", 18 * 3600, ((Fenetre)((ArrayList <Fenetre>)demande.getFenetres()).get(1)).getTimestampFin());
-        // //test si les livraison sont bien stockees
-        // assertEquals("La livraison 1 doit etre stockee", livr1, ((Fenetre)((ArrayList <Fenetre>)demande.getFenetres()).get(0)).getLivraisons().get(1));
-        // assertEquals("La livraison 2 doit etre stockee", livr2, ((Fenetre)((ArrayList <Fenetre>)demande.getFenetres()).get(0)).getLivraisons().get(2));
-        // assertEquals("La livraison 3 doit etre stockee", livr3, ((Fenetre)((ArrayList <Fenetre>)demande.getFenetres()).get(1)).getLivraisons().get(3));
+        assertEquals("La fenetre 2 doit avoir le bon timestamp de debut", 13 * 3600, demande.getFenetres().get(2).getTimestampDebut());
+        assertEquals("La fenetre 2 doit avoir le bon timestamp de fin", 18 * 3600, demande.getFenetres().get(2).getTimestampFin());
+        
+        assertEquals("La fenêtre 0 doit avec un timestamp de début à 0", 0, demande.getFenetres().get(0).getTimestampDebut());
+        assertEquals("La fenêtre 0 doit avec un timestamp de fin à 0", 0, demande.getFenetres().get(0).getTimestampFin());
     }
 
 
@@ -160,7 +153,7 @@ public class DeserialiseurXMLTest {
             throws java.lang.RuntimeException, org.jdom2.JDOMException, java.io.IOException, org.xml.sax.SAXException,
             ExceptionXML {
         //noeud sans livraison
-        PlanDeVille ville1 = DeserialiseurXML.getInstance().ouvrirPlanDeVille(
+        DeserialiseurXML.getInstance().ouvrirPlanDeVille(
                 ClassLoader.getSystemResourceAsStream("samples/planTestErreur1.xml"));
         fail("Le chargement aurait du lever une Exception de type JDOMParseException");
 
@@ -172,7 +165,7 @@ public class DeserialiseurXMLTest {
             ExceptionXML {
         // une balise noeud fermante manquante
 
-        PlanDeVille ville2 = DeserialiseurXML.getInstance().ouvrirPlanDeVille(
+        DeserialiseurXML.getInstance().ouvrirPlanDeVille(
                 ClassLoader.getSystemResourceAsStream("samples/planTestErreur2.xml"));
         fail("Le chargement aurait du lever une Exception de type JDOMParseException");
 
@@ -185,7 +178,7 @@ public class DeserialiseurXMLTest {
             throws java.lang.RuntimeException, org.jdom2.JDOMException, java.io.IOException, org.xml.sax.SAXException,
             ExceptionXML {
         // Données au mauvais format(lettre a la place de chiffre)
-        PlanDeVille ville3 = DeserialiseurXML.getInstance().ouvrirPlanDeVille(
+        DeserialiseurXML.getInstance().ouvrirPlanDeVille(
                 ClassLoader.getSystemResourceAsStream("samples/planTestErreur3.xml"));
         fail("Le chargement aurait du lever une Exception de type JDOMParseException");
 
@@ -239,7 +232,7 @@ public class DeserialiseurXMLTest {
             ExceptionXML {
         // troncon a l'exterieur d'un noeud
 
-        PlanDeVille ville8 = DeserialiseurXML.getInstance().ouvrirPlanDeVille(
+        DeserialiseurXML.getInstance().ouvrirPlanDeVille(
                 ClassLoader.getSystemResourceAsStream("samples/planTestErreur8.xml"));
         fail("Le chargement aurait du lever une Exception de type JDOMParseException");
 
@@ -251,7 +244,7 @@ public class DeserialiseurXMLTest {
             ExceptionXML {
         // 2 reseaux
 
-        PlanDeVille ville9 = DeserialiseurXML.getInstance().ouvrirPlanDeVille(
+        DeserialiseurXML.getInstance().ouvrirPlanDeVille(
                 ClassLoader.getSystemResourceAsStream("samples/planTestErreur9.xml"));
         fail("Le chargement aurait du lever une Exception de type JDOMParseException");
 
@@ -263,7 +256,7 @@ public class DeserialiseurXMLTest {
             ExceptionXML {
         // troncon avec id de destination inexistant
         try {
-            PlanDeVille ville10 = DeserialiseurXML.getInstance().ouvrirPlanDeVille(
+            DeserialiseurXML.getInstance().ouvrirPlanDeVille(
                     ClassLoader.getSystemResourceAsStream("samples/planTestErreur10.xml"));
             fail("le chargement devrait lever une erreur");
         } catch (JDOMException | IOException | SAXException e) {
@@ -280,7 +273,7 @@ public class DeserialiseurXMLTest {
 
         PlanDeVille ville = DeserialiseurXML.getInstance().ouvrirPlanDeVille(
                 ClassLoader.getSystemResourceAsStream("samples/plan10x10.xml"));
-        Demande demande = DeserialiseurXML.getInstance().ouvrirDemande(
+        DeserialiseurXML.getInstance().ouvrirDemande(
                 ClassLoader.getSystemResourceAsStream("samples/livraisonErreur1.xml"), ville);
         fail("le chargement devrait lever une erreur");
 
@@ -293,7 +286,7 @@ public class DeserialiseurXMLTest {
         // Adresse de l'entreport inexistant
         PlanDeVille ville = DeserialiseurXML.getInstance().ouvrirPlanDeVille(
                 ClassLoader.getSystemResourceAsStream("samples/plan10x10.xml"));
-        Demande demande = DeserialiseurXML.getInstance().ouvrirDemande(
+        DeserialiseurXML.getInstance().ouvrirDemande(
                 ClassLoader.getSystemResourceAsStream("samples/livraisonErreur2.xml"), ville);
         fail("Le chargement aurait du lever une Exception de type JDOMParseException");
 
@@ -306,7 +299,7 @@ public class DeserialiseurXMLTest {
         // heure de fin avant l'heure de debut
         PlanDeVille ville = DeserialiseurXML.getInstance().ouvrirPlanDeVille(
                 ClassLoader.getSystemResourceAsStream("samples/plan10x10.xml"));
-        Demande demande = DeserialiseurXML.getInstance().ouvrirDemande(
+        DeserialiseurXML.getInstance().ouvrirDemande(
                 ClassLoader.getSystemResourceAsStream("samples/livraisonErreur3.xml"), ville);
         fail("Le chargement aurait du lever une Exception de type ExceptionXML");
 
@@ -348,7 +341,7 @@ public class DeserialiseurXMLTest {
 
         PlanDeVille ville = DeserialiseurXML.getInstance().ouvrirPlanDeVille(
                 ClassLoader.getSystemResourceAsStream("samples/plan10x10.xml"));
-        Demande demande = DeserialiseurXML.getInstance().ouvrirDemande(
+        DeserialiseurXML.getInstance().ouvrirDemande(
                 ClassLoader.getSystemResourceAsStream("samples/livraisonErreur6.xml"), ville);
         fail("Le chargement aurait du lever une Exception de type JDOMParseException");
 
@@ -361,7 +354,7 @@ public class DeserialiseurXMLTest {
         // adresse de livraison inexistante
         PlanDeVille ville = DeserialiseurXML.getInstance().ouvrirPlanDeVille(
                 ClassLoader.getSystemResourceAsStream("samples/plan10x10.xml"));
-        Demande demande = DeserialiseurXML.getInstance().ouvrirDemande(
+        DeserialiseurXML.getInstance().ouvrirDemande(
                 ClassLoader.getSystemResourceAsStream("samples/livraisonErreur7.xml"), ville);
         fail("Le chargement aurait du lever une Exception de type ExceptionXML");
 
@@ -375,7 +368,7 @@ public class DeserialiseurXMLTest {
 
         PlanDeVille ville = DeserialiseurXML.getInstance().ouvrirPlanDeVille(
                 ClassLoader.getSystemResourceAsStream("samples/plan10x10.xml"));
-        Demande demande = DeserialiseurXML.getInstance().ouvrirDemande(
+        DeserialiseurXML.getInstance().ouvrirDemande(
                 ClassLoader.getSystemResourceAsStream("samples/livraisonErreur8.xml"), ville);
         fail("le chargement devrait lever une erreur");
 
