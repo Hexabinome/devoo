@@ -19,4 +19,4 @@ Pour lancer les tests : `mvn test`.
 
 ## Quelques liens utiles
  - [Tuto JavaFx](http://code.makery.ch/library/javafx-2-tutorial/)
- - ...
+ - [Tuto JUnit](http://blog.soat.fr/2014/02/du-bon-usage-de-junit-12/)
