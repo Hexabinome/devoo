@@ -175,13 +175,14 @@ public class VuePrincipale implements Initializable, ActivationOuvrirDemandeObse
      * Appelée quand l'utilisateur clique sur "Ouvrir plan de ville"
      */
     @FXML
-    private void ouvrirPlan(ActionEvent actionEvent) {
+    private void ouvrirPlan() {
         file = ouvrirSelectionneurDeFichier("Choissiez le plan de la ville");
-        try {
-            controleurApplication.chargerPlan(file);
-
-        } catch (Exception e) {
-            ouvrirErreurFichier(e, file.getName());
+        if(file != null){
+            try {
+                controleurApplication.chargerPlan(file);
+            } catch (Exception e) {
+                ouvrirErreurFichier(e, file.getName());
+            }
         }
     }
 
@@ -189,12 +190,14 @@ public class VuePrincipale implements Initializable, ActivationOuvrirDemandeObse
      * Appelée quand l'utilisateur clique sur "Ouvrir demande de livraisons"
      */
     @FXML
-    private void ouvrirDemande(ActionEvent actionEvent) {
+    private void ouvrirDemande() {
         file = ouvrirSelectionneurDeFichier("Choisissez la demande de livraison");
-        try {
-            controleurApplication.chargerLivraisons(file);
-        } catch (Exception e) {
-            ouvrirErreurFichier(e, file.getName());
+        if(file != null){
+            try {
+                controleurApplication.chargerLivraisons(file);
+            } catch (Exception e) {
+                ouvrirErreurFichier(e, file.getName());
+            }
         }
     }
     
@@ -317,6 +320,7 @@ public class VuePrincipale implements Initializable, ActivationOuvrirDemandeObse
      * Ouvre une boite de dialogue pour choisir un fichier
      *
      * @param titreDialogue Le titre du sélectionneur de fichier
+     *                      @return file fichier selectionné ou null si l'utilisateur a cliqué sur annuler
      */
     private File ouvrirSelectionneurDeFichier(String titreDialogue) {
 
