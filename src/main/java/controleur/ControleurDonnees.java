@@ -64,11 +64,6 @@ public class ControleurDonnees {
      * Collection des observateurs des messages envoyés à la vue
      */
     private final Collection<MessageObservateur> messageObservateurs = new ArrayList<MessageObservateur>();
-    
-    /**
-     * Collection des observateurs d'activation des fonctionnalités
-     */
-    private final Collection<ActivationFonctionnalitesObservateur> activationFonctionnalitesObservateurs = new ArrayList<ActivationFonctionnalitesObservateur>();
 
     private final Collection<PlanChargeObservateur> planChargeObservateurs = new ArrayList<>();
     
@@ -187,14 +182,7 @@ public class ControleurDonnees {
     void ajouterMessageObservateur(MessageObservateur obs) {
         messageObservateurs.add(obs);
     }
-    
-    /**
-     * Ajoute un observateur pour activer les boutons des fonctionnalités
-     * @param observeur L'objet observateur
-     */
-    void ajouterActivationFonctionnalitesObservateurs(ActivationFonctionnalitesObservateur observeur) {
-    	activationFonctionnalitesObservateurs.add(observeur);
-    }
+
     
     /**
      * Ajoute une commande à l'historique
@@ -273,14 +261,6 @@ public class ControleurDonnees {
 
     public void ajouterPlanChargeObservateur(PlanChargeObservateur planChargeObservateur){
         planChargeObservateurs.add(planChargeObservateur);
-    }
-    
-    /**
-     * Notifie les observateurs d'un changement pour les boutons de fonctionnalités
-     * @param activation Vrai si les boutons des fonctionnalités doivent s'activer
-     */
-    public void notifierObservateursFonctionnalites(boolean activation) {
-    	activationFonctionnalitesObservateurs.forEach(obs -> obs.notifierObservateursFonctionnalites(activation));
     }
 
     /**

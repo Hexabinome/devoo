@@ -162,9 +162,4 @@ public class Controleur implements ControleurInterface {
 		controleurDonnees.ajouterChargementPlanObservateur(chargementPlanObserveur);
 	}
 
-	@Override
-	public void ajouterActivationFonctionnalitesObserveur(ActivationFonctionnalitesObservateur obs) {
-		controleurDonnees.ajouterActivationFonctionnalitesObservateurs(obs);
-		
-	}
 }

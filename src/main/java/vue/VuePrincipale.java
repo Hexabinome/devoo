@@ -36,7 +36,7 @@ import controleur.commande.CommandeException;
  */
 public class VuePrincipale implements Initializable, ActivationOuvrirDemandeObservateur, ActivationOuvrirPlanObservateur,
         ModeleObservateur, AnnulerCommandeObservateur,
-        RetablirCommandeObservateur, ActivationFonctionnalitesObservateur, PlanChargeObservateur {
+        RetablirCommandeObservateur, PlanChargeObservateur {
     /**
      * Largeur de la boîte de dialogue d'erreur
      */
@@ -370,10 +370,11 @@ public class VuePrincipale implements Initializable, ActivationOuvrirDemandeObse
         controleurApplication.ajouterActivationObserveur(echangerLivraisonsBouton);
         controleurApplication.ajouterActivationObserveur(supprimerLivraisonBouton);
         controleurApplication.ajouterActivationObserveur(genererFeuilleBouton);
+
+
         controleurApplication.ajouterTourneeObserveur(calculerTourneeBouton);
 
 
-        controleurApplication.ajouterActivationFonctionnalitesObserveur(this);
         controleurApplication.ajouterPlanObserveur(this);
         controleurApplication.ajouterModeleObserveur(this);
 
@@ -410,15 +411,7 @@ public class VuePrincipale implements Initializable, ActivationOuvrirDemandeObse
         vueGraphique.construireTournee(modele.getTournee());
         vueGraphique.desactiverSurbrillance();
     }
-    
-	@Override
-	public void notifierObservateursFonctionnalites(boolean activer) {
-		this.ajouterLivraisonBouton.setDisable(!activer);
-		this.echangerLivraisonsBouton.setDisable(!activer);
-		this.supprimerLivraisonBouton.setDisable(!activer);
-		this.genererFeuilleBouton.setDisable(!activer);
-	}
-	
+
     @Override
     public void notifierObservateurAnnulerCommande(boolean activation) {
         menuEdition.getItems().get(0).setDisable(activation);

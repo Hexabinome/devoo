@@ -55,12 +55,7 @@ public interface ControleurInterface {
      */
     void ajouterRetablirCommandeObserveur(RetablirCommandeObservateur retablirCommandeObserveur);
     
-    /**
-     * Ajoute un observateur à l'activation des fonctionnalités
-     * @param obs
-     */
-    void ajouterActivationFonctionnalitesObserveur(ActivationFonctionnalitesObservateur obs);
-    
+
     /**
      * Ajoute un observateur des messages envoyés
      * @param obs

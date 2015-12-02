@@ -23,7 +23,8 @@ public class EtatDemandeChargee extends AbstractEtat {
      */
     public EtatDemandeChargee(ControleurDonnees controleurDonnees) {
         // On désactive les fonctionnalités principales
-    	controleurDonnees.notifierObservateursFonctionnalites(false);
+    	//controleurDonnees.notifierObservateursFonctionnalites(false);
+        controleurDonnees.notifierObservateursActivation(true);
         this.controleurDonnees = controleurDonnees;
     }
 
