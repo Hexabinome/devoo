@@ -110,7 +110,7 @@ public class VueTextuelle implements Initializable,
      */
     private void initialiserColonneLivraison() {
         colonneLivraison.setCellValueFactory((TreeTableColumn.CellDataFeatures<ObjetVisualisable, String> param)
-                -> new ReadOnlyStringWrapper(param.getValue().getValue().afficherCaracteriquesGloable()));
+                -> new ReadOnlyStringWrapper(param.getValue().getValue().afficherCaracteriquesGlobales()));
     }
 
     /**
@@ -119,7 +119,7 @@ public class VueTextuelle implements Initializable,
      */
     private void initialiserColonneHoraire() {
         colonneHoraire.setCellValueFactory((TreeTableColumn.CellDataFeatures<ObjetVisualisable, String> param)
-                -> new ReadOnlyStringWrapper(param.getValue().getValue().afficherCaracteriqueSpeciale()));
+                -> new ReadOnlyStringWrapper(param.getValue().getValue().afficherCaracteriquesSpeciales()));
     }
 
     /**

@@ -112,15 +112,19 @@ public class VuePrincipale implements Initializable, ActivationOuvrirDemandeObse
     @FXML
     private BoutonObserveur genererFeuilleBouton;
 
+    /** Bouton de calcul de tournée */
     @FXML
     private BoutonObserveur calculerTourneeBouton;
 
+    /** Barre de défilement */
     @FXML
     private ScrollPane scrollPane;
 
+    /** Le slider de zoom */
     @FXML
     private Slider sliderZoom;
     
+    /** Barre de status de l'application en bas de l'écran */
     @FXML
     private ObserveurMessageChamps message;
     
@@ -144,6 +148,9 @@ public class VuePrincipale implements Initializable, ActivationOuvrirDemandeObse
 
     };
 
+    /**
+     * @param fenetrePrincipale Initialise la fenêtre principale servant de médiateur
+     */
     public void initialiserMediateur(FenetrePrincipale fenetrePrincipale) {
         this.mediateur = fenetrePrincipale;
     }
@@ -191,6 +198,8 @@ public class VuePrincipale implements Initializable, ActivationOuvrirDemandeObse
         }
     }
     
+    /** Affiche la boîte de dialogue "A propos"
+     */
     @FXML
     public void aPropos() {
         Alert aProposDialog = new Alert(AlertType.INFORMATION);
@@ -202,7 +211,9 @@ public class VuePrincipale implements Initializable, ActivationOuvrirDemandeObse
         aProposDialog.showAndWait();
     }
     
+    /** L'entete de l'à propos */
     private final String TEXTE_APROPOS_HEADER = String.format("Optimod'Lyon - H4105%sGérer vos livraisons de façon optimale !", System.lineSeparator());
+    /** Contenu de l'à propos */
     private final String TEXTE_APROPOS = new StringBuilder().append("Réalisé par l'hexanôme H4105 de l'INSA Lyon (2015) :")
     										.append(System.lineSeparator())
     										.append("Alexis Andra").append(System.lineSeparator())
@@ -219,6 +230,9 @@ public class VuePrincipale implements Initializable, ActivationOuvrirDemandeObse
         vueGraphique = new VueGraphiqueAideur(canvasGraphique, groupEllipseVueGraphique, scrollPane, sliderZoom);
     }
 
+    /**
+     * @return La vue graphique
+     */
     public VueGraphiqueAideur getAideurVueGraphique() {
         return vueGraphique;
     }
@@ -262,11 +276,15 @@ public class VuePrincipale implements Initializable, ActivationOuvrirDemandeObse
         controleurApplication.clicOutilSupprimer();
     }
 
+    /** Evènement clic sur le bouton de calcul de tournée
+     */
     @FXML
     void clic_calculer_tournee() {
         controleurApplication.clicCalculTournee();
     }
     
+    /** Evènement clic sur la génération de la feuille de route
+     */
     @FXML
     void clic_genererFeuilleRoute() {
     	File fichier = ouvrirEnregistreurDeFichier("Enregistrer la feuille de route");
@@ -279,13 +297,19 @@ public class VuePrincipale implements Initializable, ActivationOuvrirDemandeObse
     	}
     }
 
+    /** 
+     * Clic sur l'annulation ou Ctrl+Z
+     */
     @FXML
-    void annuler(){
+    void annuler() {
         controleurApplication.clicAnnuler();
     }
 
+    /**
+     * Clic sur le rétablissement ou Ctrl+Y
+     */
     @FXML
-    void retablir(){
+    void retablir() {
         controleurApplication.clicRetablir();
     }
 

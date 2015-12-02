@@ -56,6 +56,7 @@ public class VueGraphiqueAideur {
      */
     private Map<Integer, Integer> listeIdLivraison;
 
+    /** La liste des livraisons */
     private List<Livraison> livraisons = null;
 
     /**
@@ -65,15 +66,22 @@ public class VueGraphiqueAideur {
 
     private Group group;
 
+    /** La barre de défilement */
     private ScrollPane scrollPane;
 
+    /** Le slider pour le zoom */
     private Slider sliderZoom;
+    
+    /** Le contrôleur de l'application */
     private ControleurInterface controleurApplication;
 
     /**
      * Constructeur de la vue graphique
      *
      * @param canvas Le canvas sur lequel on dessinera les éléments graphiques
+     * @param group Le group de la partie graphique
+     * @param scrollPane La barre de défilement
+     * @param slider Le slide de zoom
      */
     public VueGraphiqueAideur(StackPane canvas, Group group, ScrollPane scrollPane, Slider slider) {
         this.canvas = canvas;
@@ -86,6 +94,8 @@ public class VueGraphiqueAideur {
         canvas.setOnMouseClicked(new ClicGraphiqueGestionnaireEvenement());
     }
 
+    /** Gère la subrillance quand on passe sur la zone graphique
+     */
     private class HoverGraphiqueGestionnaireEvenement implements EventHandler<MouseEvent> {
 
         @Override
@@ -101,6 +111,8 @@ public class VueGraphiqueAideur {
         }
     }
 
+    /** Gère le clic sur la partie graphique
+     */
     private class ClicGraphiqueGestionnaireEvenement implements EventHandler<MouseEvent> {
 
         @Override
@@ -125,6 +137,9 @@ public class VueGraphiqueAideur {
         this.controleurApplication = controleurApplication;
     }
 
+    /**
+     * @return Retourne la partie graphique pour dessiné
+     */
     public StackPane getCanvas() {
         return canvas;
     }
@@ -274,10 +289,15 @@ public class VueGraphiqueAideur {
         surbrillanceLivraison(livraison, true);
     }
 
+    /** Met en surbrillance une livraison
+     * @param livraison La livraison à faire surbriller
+     * @param desactiverSurbrillance Si vrai, désactivation d'abord de toutes les surbrillances activées 
+     */
     private void surbrillanceLivraison(Livraison livraison, boolean desactiverSurbrillance) {
         // Repeindre toutes les intersections en couleur normal (pour parvenir aux entrées et sorties non détectées) si demandé
-        if (desactiverSurbrillance)
+        if (desactiverSurbrillance) {
             desactiverSurbrillance();
+        }
 
         // Mise en surbrillance d'une intersection + agrandissement
         Ellipse livraisonGraphique = intersectionsGraphiques.get(livraison.getAdresse()).getKey();
@@ -304,8 +324,9 @@ public class VueGraphiqueAideur {
      * Désactive la surbrillance pour toutes les surbrillances
      */
     public void desactiverSurbrillance() {
-        if (intersectionsGraphiques == null || listeIdLivraison == null)
+        if (intersectionsGraphiques == null || listeIdLivraison == null) {
             return;
+        }
 
         Iterator<Entry<Integer, Pair<Ellipse, Collection<Integer>>>> it = intersectionsGraphiques.entrySet().iterator();
 
@@ -363,14 +384,17 @@ public class VueGraphiqueAideur {
     /**
      * Change la couleur d'une ellipse
      *
-     * @param e       L'ellipse à modifier
+     * @param e L'ellipse à modifier
      * @param couleur La nouvelle couleur
      */
     private void colorerEllipse(Ellipse e, Paint couleur) {
-
         e.setFill(couleur);
     }
 
+    /** Colore une ellipse
+     * @param idIntersection L'identifiant de l'intersection à colorer
+     * @param e L'ellipse à colorer
+     */
     private void colorerEllipse(int idIntersection, Ellipse e) {
         // Choix de la bonne couleur
         Paint couleur;
@@ -390,7 +414,7 @@ public class VueGraphiqueAideur {
     /**
      * Change le rayon d'une ellipse (qui est un cercle)
      *
-     * @param e     L'ellipse à modifier
+     * @param e L'ellipse à modifier
      * @param rayon Le nouveau rayon
      */
     private void changerTailleEllipse(Ellipse e, double rayon) {
@@ -443,7 +467,7 @@ public class VueGraphiqueAideur {
     }
 
     /**
-     * Id (adresse) de l'intersection où se situe l'entrepot
+     * Identifiant (adresse) de l'intersection où se situe l'entrepot
      */
     private int entrepot = -1;
 
@@ -455,7 +479,7 @@ public class VueGraphiqueAideur {
     /**
      * Construit et affiche la tournée
      *
-     * @param tournee
+     * @param tournee La tournée calculée
      */
     public void construireTournee(List<List<Integer>> tournee) {
         // Mémoriser l'ordre de tournée
@@ -509,6 +533,9 @@ public class VueGraphiqueAideur {
         intersectionAuPremierPlan();
     }
 
+    /** Stocke la demande
+     * @param demande La demande de livraison
+     */
     public void construireDemande(final Demande demande) {
         tournee = null;
 
@@ -522,8 +549,9 @@ public class VueGraphiqueAideur {
             Fenetre fenetre = fenetres.get(i);
             for (Entry<Integer, Livraison> pair : fenetre.getListeLivraisons().entrySet()) {
                 livraisons.add(pair.getValue());
-                if (pair.getKey() != -1) // -1 c'est l'identifiant de l'entrepot qui est crée comme une livraison dans une fenetre speciale
+                if (pair.getKey() != -1) { // -1 c'est l'identifiant de l'entrepot qui est crée comme une livraison dans une fenetre speciale
                     listeIdLivraison.put(pair.getValue().getAdresse(), i);
+                }
             }
         }
 
@@ -535,8 +563,9 @@ public class VueGraphiqueAideur {
      */
     public void afficherDemande() {
 
-        if (listeIdLivraison == null)
+        if (listeIdLivraison == null) {
             return;
+        }
 
         // Affichage entrepot
         colorerEllipse(entrepot, ConstantesGraphique.COULEUR_ENTREPOT);
@@ -641,6 +670,12 @@ public class VueGraphiqueAideur {
         return -1;
     }
 
+    /** Détermine si les positions x et y sont sur le l'ellipse
+     * @param e L'ellipse à tester
+     * @param x Coordonnée abscisse
+     * @param y Coordonnée ordonnée
+     * @return Vrai si superposition
+     */
     private boolean estSurEllipse(Ellipse e, double x, double y) {
         return e.getCenterX() - ConstantesGraphique.DIAMETRE_PERMISSION <= x && x <= e.getCenterX() + ConstantesGraphique.DIAMETRE_PERMISSION
                 && e.getCenterY() - ConstantesGraphique.DIAMETRE_PERMISSION <= y && y <= e.getCenterY() + ConstantesGraphique.DIAMETRE_PERMISSION;
@@ -687,6 +722,9 @@ public class VueGraphiqueAideur {
         };
     }
 
+    /**
+     * Supprime tous les éléments sur la partie graphique
+     */
     public void nettoyerAffichage() {
         group.getChildren().clear();
     }

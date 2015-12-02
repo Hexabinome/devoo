@@ -13,9 +13,10 @@ import javafx.stage.Stage;
  */
 public class FenetrePrincipale extends Application {
 
-
+    /** Largeur minimale de la fenêtre */
     private final int LARGEUR_FENETRE = 1000;
 
+    /** Hauteur minimale de la fenêtre */
     private final int HAUTEUR_FENETRE = 668;
 
     /**
