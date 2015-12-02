@@ -8,10 +8,16 @@ L'architecture globale du projet est basée sur le patron de conception MVC. En 
 d'avoir une bonne séparation entre la logique applicative et l'interface graphique de l'application. Elle
 offre ainsi un cadre normalisé pour structurer une application d'une certaine complexité comme celle
 qu'on a eu à développer. Avec cette structure on pourra facilement changer d'interface graphique
-en gardant notre le *Modele* qui constitue le coeur de l'application.
+en gardant notre le *Modèle* qui constitue le coeur de l'application.
 
 ### Controleur
+TODO
 
+### Modèle
+TODO
+
+### Vue
+TODO
 
 ## Patron de conception Etat 
 
@@ -28,7 +34,7 @@ n'effectueront aucun traitement.
 Dans notre cas, au vu des différentes fonctionnalités de notre application,  il paraissait évident
 d'utiliser un tel patron de conception.
 
-## Observateur
+## Patron de conception Observateur/Observable
 
 Pour assurer une communication entre notre modèle et la vue, on a utilisé le patron de conception
 observateur/observable. Ce pattern permet de faire communiquer des modules tout en reduisant les
@@ -39,11 +45,11 @@ chose. Dans notre cas, la vue constitue l'observateur. Elle est notifiée à cha
 changement dans le modéle par exemple lors de la fin du calcul de la tournée par exemple pour lui
 dire qu'elle doit l'afficher.
 
-## Pattern Commande
+## Patron de conception Commande
 TODO
 
-## Singleton
-TODO
+## Patron de conception Singleton
+TODO : cf DeserialiseurXML
 
 
 
