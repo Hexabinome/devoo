@@ -26,47 +26,47 @@ public class ControleurDonnees {
     private Modele modele;
 
     /**
-     * Collection des observeurs (pour GUI avec functionalités réduites si plan et livraisons ne sont pas encore chargés)
+     * Collection des observateurs (pour GUI avec functionalités réduites si plan et livraisons ne sont pas encore chargés)
      */
-    private final Collection<ActivationObservableInterface> activationObserveurs = new ArrayList<ActivationObservableInterface>();
+    private final Collection<ActivationObservableInterface> activationObservateurs = new ArrayList<ActivationObservableInterface>();
 
     /**
-     * Collection des observeurs pour le modèle
+     * Collection des observateurs pour le modèle
      */
-    private final Collection<ModeleObservateur> modelObserveurs = new ArrayList<ModeleObservateur>();
+    private final Collection<ModeleObservateur> modeleObservateurs = new ArrayList<ModeleObservateur>();
 
     /**
-     * Collection des observeurs pour la possibilité d'annuler des intéractions effectuées
+     * Collection des observateurs pour la possibilité d'annuler des intéractions effectuées
      */
-    private final Collection<AnnulerCommandeObservateur> annulerCommandeObserveurs = new ArrayList<AnnulerCommandeObservateur>();
+    private final Collection<AnnulerCommandeObservateur> annulerCommandeObservateurs = new ArrayList<AnnulerCommandeObservateur>();
 
     /**
-     * Collection des observeurs pour la possibilité de rétablir des intéractions effectuées.
+     * Collection des observateurs pour la possibilité de rétablir des intéractions effectuées.
      */
-    private final Collection<RetablirCommandeObservateur> retablirCommandeObserveurs = new ArrayList<RetablirCommandeObservateur>();
+    private final Collection<RetablirCommandeObservateur> retablirCommandeObservateurs = new ArrayList<RetablirCommandeObservateur>();
     
     /**
-     * Collection des observeurs des modifications du plan
+     * Collection des observateurs des modifications du plan
      */
-    private final Collection<ActivationOuvrirDemandeObservateur> planObserveurs = new ArrayList<ActivationOuvrirDemandeObservateur>();
+    private final Collection<ActivationOuvrirDemandeObservateur> planObservateurs = new ArrayList<ActivationOuvrirDemandeObservateur>();
     
     /**
-     * Collection des  observeurs du chargement du plan
+     * Collection des  observateurs du chargement du plan
      */
-    private final Collection<ActivationOuvrirPlanObservateur> chargementPlanObserveurs = new ArrayList<ActivationOuvrirPlanObservateur>();
+    private final Collection<ActivationOuvrirPlanObservateur> chargementPlanObservateurs = new ArrayList<ActivationOuvrirPlanObservateur>();
     
     /**
-     * Collection des observeurs d'activation/désactivation de composants
+     * Collection des observateurs d'activation/désactivation de composants
      */
-    private final Collection<ActivationObservableInterface> tourneeObserveurs = new ArrayList<ActivationObservableInterface>();
+    private final Collection<ActivationObservableInterface> tourneeObservateurs = new ArrayList<ActivationObservableInterface>();
     
     /**
-     * Collection des observeurs des messages envoyés
+     * Collection des observateurs des messages envoyés à la vue
      */
-    private final Collection<MessageObservateur> messageObserveurs = new ArrayList<MessageObservateur>();
+    private final Collection<MessageObservateur> messageObservateurs = new ArrayList<MessageObservateur>();
     
     /**
-     * Collection des observeurs d'activation des fonctionnalités
+     * Collection des observateurs d'activation des fonctionnalités
      */
     private final Collection<ActivationFonctionnalitesObservateur> activationFonctionnalitesObservateurs = new ArrayList<ActivationFonctionnalitesObservateur>();
 
@@ -131,68 +131,68 @@ public class ControleurDonnees {
      * Ajoute un observateur d'activation
      * @param obs L'objet observateur
      */
-    public void ajouterActivationObserveur(ActivationObservableInterface obs) {
-        activationObserveurs.add(obs);
+    public void ajouterActivationObservateur(ActivationObservableInterface obs) {
+        activationObservateurs.add(obs);
     }
     
     /**
      * Ajoute un observateur du modèle
      * @param obs L'objet observateur
      */
-    public void ajouterModeleObserveur(ModeleObservateur obs) {
-        modelObserveurs.add(obs);
+    public void ajouterModeleObservateur(ModeleObservateur obs) {
+        modeleObservateurs.add(obs);
     }
     
     /**
      * Ajoute un observateur de la commande annuler
      * @param obs L'objet observateur
      */
-    public void ajouterAnnulerCommandeObserveur(AnnulerCommandeObservateur obs) {
-        annulerCommandeObserveurs.add(obs);
+    public void ajouterAnnulerCommandeObservateur(AnnulerCommandeObservateur obs) {
+        annulerCommandeObservateurs.add(obs);
     }
     
     /**
      * Ajoute un observateur de la commande rétablir
      * @param obs L'objet observateur
      */
-    public void ajouterRetablirCommandeObserveur(RetablirCommandeObservateur obs) {
-        retablirCommandeObserveurs.add(obs);
+    public void ajouterRetablirCommandeObservateur(RetablirCommandeObservateur obs) {
+        retablirCommandeObservateurs.add(obs);
     }
     
-    public void ajouterPlanObserveur(ActivationOuvrirDemandeObservateur planObserveur)
+    public void ajouterPlanObservateur(ActivationOuvrirDemandeObservateur planObserveur)
     {
-        planObserveurs.add(planObserveur);
+        planObservateurs.add(planObserveur);
     }
     
     /**
      * Ajoute un observateur du chargement du plan
      * @param chargementPlanObserveur L'objet observateur
      */
-    public void ajouterChargementPlanObserveur(ActivationOuvrirPlanObservateur chargementPlanObserveur) {
-    	chargementPlanObserveurs.add(chargementPlanObserveur);
+    public void ajouterChargementPlanObservateur(ActivationOuvrirPlanObservateur chargementPlanObserveur) {
+    	chargementPlanObservateurs.add(chargementPlanObserveur);
     }
     
     /**
      * Ajoute un observateur pour l'activation de la génération de la tournée
      * @param tourneeObserveur L'objet observateur
      */
-    void ajouterTourneeObserveur(ActivationObservableInterface tourneeObserveur) {
-        tourneeObserveurs.add(tourneeObserveur);
+    void ajouterTourneeObservateur(ActivationObservableInterface tourneeObserveur) {
+        tourneeObservateurs.add(tourneeObserveur);
     }
     
     /**
      * Ajoute un observateur pour l'envoie d'un message
      * @param obs L'objet observateur
      */
-    void ajouterMessageObserveur(MessageObservateur obs) {
-        messageObserveurs.add(obs);
+    void ajouterMessageObservateur(MessageObservateur obs) {
+        messageObservateurs.add(obs);
     }
     
     /**
      * Ajoute un observateur pour activer les boutons des fonctionnalités
      * @param observeur L'objet observateur
      */
-    void ajouterActivationFonctionnalitesObserveurs(ActivationFonctionnalitesObservateur observeur) {
+    void ajouterActivationFonctionnalitesObservateurs(ActivationFonctionnalitesObservateur observeur) {
     	activationFonctionnalitesObservateurs.add(observeur);
     }
     
@@ -208,70 +208,70 @@ public class ControleurDonnees {
      * Notifie les observateurs du plan
      * @param activer Vrai s'il faut envoyer un message d'activation aux observateurs
      */
-    public void notifierObserveurOuvrirDemande(boolean activer) {
-        planObserveurs.forEach(planObserveur -> planObserveur.notifierObservateurOuvrirDemande(activer));
+    public void notifierObservateurOuvrirDemande(boolean activer) {
+        planObservateurs.forEach(planObserveur -> planObserveur.notifierObservateurOuvrirDemande(activer));
     }
     
     /**
      * Notifie les observateurs du chargement du plan
      * @param activer Vrai s'il faut envoyer un message d'activation aux observateurs
      */
-    public void notifierObserveursOuvrirPlan(boolean activer) {
-    	chargementPlanObserveurs.forEach(chargementPlanObserveur -> chargementPlanObserveur.notifierObservateursOuvrirPlan(activer));
+    public void notifierObservateurOuvrirPlan(boolean activer) {
+    	chargementPlanObservateurs.forEach(chargementPlanObserveur -> chargementPlanObserveur.notifierObservateursOuvrirPlan(activer));
     }
     
     /**
      * Notifie les observateurs de l'activation
      * @param etat Vrai s'il faut activer les observateurs
      */
-    public void notifierObserveursActivation(boolean etat) {
-        activationObserveurs.forEach(obs -> obs.notifierObservateursActivation(etat));
+    public void notifierObservateursActivation(boolean etat) {
+        activationObservateurs.forEach(obs -> obs.notifierObservateursActivation(etat));
     }
     
     /**
      * Notifie les observateurs du changemetn du modèle
      */
-    public void notifierObserveursModele() {
-        modelObserveurs.forEach(obs -> obs.notifierObservateursModele());
+    public void notifierObservateursModele() {
+        modeleObservateurs.forEach(obs -> obs.notifierObservateursModele());
     }
     
     /**
      * Notifie les observateurs qu'il y a eu une annulation
      * @param activation Vrai si les observateurs doivent s'activer dans ce cas d'annulation
      */
-    public void notifierObserveursAnnuler(boolean activation) {
-        annulerCommandeObserveurs.forEach(obs -> obs.notifierObservateurAnnulerCommande(activation));
+    public void notifierObservateursAnnuler(boolean activation) {
+        annulerCommandeObservateurs.forEach(obs -> obs.notifierObservateurAnnulerCommande(activation));
     }
     
     /**
      * Notifie les observateurs qu'il y eu un rétablissement
      * @param activation Vrai si les observateurs doivent s'activer dans ce cas de rétablissement
      */
-    public void notifierObserveursRetablir(boolean activation) {
-        retablirCommandeObserveurs.forEach(obs -> obs.notifierObservateurRetablirCommande(activation));
+    public void notifierObservateursRetablir(boolean activation) {
+        retablirCommandeObservateurs.forEach(obs -> obs.notifierObservateurRetablirCommande(activation));
     }
     
     /**
      * Notifie les observateurs du calcul de la tournée
      * @param activation Vrai si les observateurs doivent s'activer
      */
-    public void notifierObserveursCalculTournee(boolean activation) {
-        tourneeObserveurs.forEach(obs -> obs.notifierObservateursActivation(activation));
+    public void notifierObservateursCalculTournee(boolean activation) {
+        tourneeObservateurs.forEach(obs -> obs.notifierObservateursActivation(activation));
     }
     
     /**
      * Notifie les observateurs qu'il y a un message
      * @param message Le message envoyé
      */
-    public void notifierObserveursMessage(String message) {
-        messageObserveurs.forEach(obs -> obs.notifierObservateursMessage(message));
+    public void notifierObservateursMessage(String message) {
+        messageObservateurs.forEach(obs -> obs.notifierObservateursMessage(message));
     }
 
-    public void notifierPlanChargeObserveur(){
+    public void notifierPlanChargeObservateur(){
         planChargeObservateurs.forEach(obs -> obs.notifierObservateursPlanCharge());
     }
 
-    public void ajouterPlanChargeObserveur(PlanChargeObservateur planChargeObservateur){
+    public void ajouterPlanChargeObservateur(PlanChargeObservateur planChargeObservateur){
         planChargeObservateurs.add(planChargeObservateur);
     }
     
@@ -279,7 +279,7 @@ public class ControleurDonnees {
      * Notifie les observateurs d'un changement pour les boutons de fonctionnalités
      * @param activation Vrai si les boutons des fonctionnalités doivent s'activer
      */
-    public void notifierObserveursFonctionnalites(boolean activation) {
+    public void notifierObservateursFonctionnalites(boolean activation) {
     	activationFonctionnalitesObservateurs.forEach(obs -> obs.notifierObservateursFonctionnalites(activation));
     }
 
@@ -288,7 +288,7 @@ public class ControleurDonnees {
      */
     public void effacerCommandesARetablir() {
         hist.effacerCommandeARetablir();
-        notifierObserveursRetablir(true);
+        notifierObservateursRetablir(true);
     }
 
     /**
@@ -296,7 +296,7 @@ public class ControleurDonnees {
      */
     public void effacerCommandeAAnnuler() {
         hist.effacerCommandesAAnnuler();
-        notifierObserveursAnnuler(true);
+        notifierObservateursAnnuler(true);
     }
 
     /**

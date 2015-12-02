@@ -50,11 +50,11 @@ public class CommandeAjouterLivraison extends CommandeAnnulable {
         Livraison livraisonAjoutee = new Livraison(controleurDonnees.getModele().getProchainIdCustomLivraison(fenetre), -1, idIntersectionLivraison);
         
         controleurDonnees.getModele().ajouterLivraison(idLivraisonAvant, fenetre, livraisonAjoutee);
-        controleurDonnees.notifierObserveursModele();
-        controleurDonnees.notifierObserveursAnnuler(false);
+        controleurDonnees.notifierObservateursModele();
+        controleurDonnees.notifierObservateursAnnuler(false);
 
         if (controleurDonnees.getHist().estVideCommandesARetablir())
-            controleurDonnees.notifierObserveursRetablir(true);
+            controleurDonnees.notifierObservateursRetablir(true);
     }
 
     @Override
@@ -62,11 +62,11 @@ public class CommandeAjouterLivraison extends CommandeAnnulable {
         //controleurDonnees.getModele().supprimerLivraison(livraisonAjoutee.getId());
         controleurDonnees.setModele(super.getModelCopie());
 
-        controleurDonnees.notifierObserveursModele();
-        controleurDonnees.notifierObserveursRetablir(false);
+        controleurDonnees.notifierObservateursModele();
+        controleurDonnees.notifierObservateursRetablir(false);
 
         if (controleurDonnees.getHist().estVideCommandesAAnnuler()) {
-            controleurDonnees.notifierObserveursAnnuler(true);
+            controleurDonnees.notifierObservateursAnnuler(true);
         }
     }
 

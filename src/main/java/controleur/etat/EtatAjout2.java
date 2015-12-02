@@ -29,7 +29,7 @@ public class EtatAjout2 extends AbstractEtat {
     public EtatAjout2(ControleurDonnees controleurDonnees, int idIntersectionLivraison) {
         this.controleurDonnees = controleurDonnees;
         this.idIntersectionLivraison = idIntersectionLivraison;
-        controleurDonnees.notifierObserveursMessage("[AJOUT] Veuillez maintenant cliquer sur la livraison dans la liste à gauche qui précèdera la nouvelle livraison. Clic droit pour revenir à l'étape précédente pour choisir l'intersection.");
+        controleurDonnees.notifierObservateursMessage("[AJOUT] Veuillez maintenant cliquer sur la livraison dans la liste à gauche qui précèdera la nouvelle livraison. Clic droit pour revenir à l'étape précédente pour choisir l'intersection.");
     }
 
     @Override
@@ -43,7 +43,7 @@ public class EtatAjout2 extends AbstractEtat {
         controleurDonnees.ajouterCommande(commande);
         controleurDonnees.effacerCommandesARetablir();
         EtatInterface etat = new EtatAjout(controleurDonnees);
-        controleurDonnees.notifierObserveursMessage(String.format("[AJOUT] Nouvelle livraison à l'adresse %d créée, suivant la livraison %d. Cliquez sur le plan pour choisir une autre intersection pour créer une livraison ou clic droit pour sortir du mode d'ajout.", idIntersectionLivraison, idLivraisonAvant));
+        controleurDonnees.notifierObservateursMessage(String.format("[AJOUT] Nouvelle livraison à l'adresse %d créée, suivant la livraison %d. Cliquez sur le plan pour choisir une autre intersection pour créer une livraison ou clic droit pour sortir du mode d'ajout.", idIntersectionLivraison, idLivraisonAvant));
         return etat;
     }
 
@@ -59,7 +59,7 @@ public class EtatAjout2 extends AbstractEtat {
 
     @Override
     public EtatInterface clicSurPlan(int intersectionId) {
-        controleurDonnees.notifierObserveursMessage("[AJOUT] Veuillez choisir une livraison en cliquant la liste à gauche. Clic droit pour revenir à la sélection du l'adresse de la livraison.");
+        controleurDonnees.notifierObservateursMessage("[AJOUT] Veuillez choisir une livraison en cliquant la liste à gauche. Clic droit pour revenir à la sélection du l'adresse de la livraison.");
         return this;
     }
 

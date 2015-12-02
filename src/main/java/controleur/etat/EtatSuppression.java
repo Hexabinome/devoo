@@ -22,9 +22,9 @@ public class EtatSuppression extends AbstractEtat {
      */
     public EtatSuppression(ControleurDonnees donnees) {
         this.donnees = donnees;
-        donnees.notifierObserveursOuvrirPlan(false);
-        donnees.notifierObserveurOuvrirDemande(false);
-        donnees.notifierObserveursMessage("[SUPPRESSION] Souhaitez-vous supprimer une livraison ? Choisissez dans la liste à gauche la livraison que vous voulez supprimer. Clic droit pour sortir du mode de suppression.");
+        donnees.notifierObservateurOuvrirPlan(false);
+        donnees.notifierObservateurOuvrirDemande(false);
+        donnees.notifierObservateursMessage("[SUPPRESSION] Souhaitez-vous supprimer une livraison ? Choisissez dans la liste à gauche la livraison que vous voulez supprimer. Clic droit pour sortir du mode de suppression.");
     }
 
     @Override
@@ -37,7 +37,7 @@ public class EtatSuppression extends AbstractEtat {
         } catch (CommandeException e) {
         	//e.printStackTrace();
         	// TODO afficher ou erreur?
-        	donnees.notifierObserveursMessage(e.getMessage());
+        	donnees.notifierObservateursMessage(e.getMessage());
         }
         return this;
     }
@@ -54,7 +54,7 @@ public class EtatSuppression extends AbstractEtat {
 
     @Override
     public EtatInterface clicSurPlan(int intersectionId) {
-        donnees.notifierObserveursMessage("[SUPPRESSION] Veuillez choisir une livraison dans la liste à gauche. Clic droit pour sortir du mode de suppression");
+        donnees.notifierObservateursMessage("[SUPPRESSION] Veuillez choisir une livraison dans la liste à gauche. Clic droit pour sortir du mode de suppression");
         return this;
     }
 
@@ -66,7 +66,7 @@ public class EtatSuppression extends AbstractEtat {
 
     @Override
     public EtatInterface clicDroit() {
-        donnees.notifierObserveursMessage(TEXTE_ETAT_PRINCIPAL);
+        donnees.notifierObservateursMessage(TEXTE_ETAT_PRINCIPAL);
         return new EtatPrincipal(donnees);
     }
 

@@ -28,7 +28,7 @@ public class EtatEchange2 extends AbstractEtat {
     public EtatEchange2(ControleurDonnees controleurDonnees, int idLivraison) {
         this.donnees = controleurDonnees;
         this.idLivraison = idLivraison;
-        donnees.notifierObserveursMessage("[ECHANGE] Veuillez choisir la deuxième livraison en cliquant sur le plan ou sur la liste à gauche. Clic droit pour revenir au choix de la première livraison.");
+        donnees.notifierObservateursMessage("[ECHANGE] Veuillez choisir la deuxième livraison en cliquant sur le plan ou sur la liste à gauche. Clic droit pour revenir au choix de la première livraison.");
     }
 
     @Override
@@ -43,7 +43,7 @@ public class EtatEchange2 extends AbstractEtat {
             e.printStackTrace();
         }
         EtatInterface nouvelEtat = new EtatEchange(donnees);
-        donnees.notifierObserveursMessage(String.format("[ECHANGE] Les livraisons %d <-> %d ont été échangées avec succès. Veuillez choisir la première livraison en cliquant sur le plan ou sur la liste à gauche. Clic droit pour sortir au mode d'échange.", idLivraison, livraisonId));
+        donnees.notifierObservateursMessage(String.format("[ECHANGE] Les livraisons %d <-> %d ont été échangées avec succès. Veuillez choisir la première livraison en cliquant sur le plan ou sur la liste à gauche. Clic droit pour sortir au mode d'échange.", idLivraison, livraisonId));
         return nouvelEtat;
     }
 
@@ -63,7 +63,7 @@ public class EtatEchange2 extends AbstractEtat {
     	
     	// Ignorer si c'etait l'entrepot
         if (donnees.getModele().getDemande().getEntrepot().getId() == intersectionId) {
-            donnees.notifierObserveursMessage("[ECHANGE] Déplacement de l'entrepôt impossible. Veuillez choisir la deuxième livraison en cliquant sur le plan ou sur la liste à gauche. Clic droit pour revenir au choix de la première livraison.");
+            donnees.notifierObservateursMessage("[ECHANGE] Déplacement de l'entrepôt impossible. Veuillez choisir la deuxième livraison en cliquant sur le plan ou sur la liste à gauche. Clic droit pour revenir au choix de la première livraison.");
             return this;
         }
         List<List<Livraison>> livraisons = donnees.getModele().getLivraisonsTournee();

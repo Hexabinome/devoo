@@ -1,8 +1,7 @@
 package controleur.observateur;
 
 /**
- * Interface des observables pour le rétali
- * Joue le role d'observeur quand l'action retablir doit etre activée
+ * Joue le rôle d'observeur quand l'action retablir doit etre activée.
  * @author Maxou
  */
 public interface RetablirCommandeObservateur {

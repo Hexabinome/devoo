@@ -1,7 +1,7 @@
 package controleur.observateur;
 
 /**
- * Created by elmhaidara on 01/12/15.
+ * Joue le rôle d'observeur quand un nouveau plan a été chargé.
  */
 public interface PlanChargeObservateur {
     /**

@@ -1,7 +1,8 @@
 package controleur.observateur;
 
 /**
- * Interface pour les observables du modèle
+ * Joue le rôle d'observeur quand il y'a eu un changement dans le modèle quand on est dans
+ * l'état principal
  * @author Maxou
  */
 public interface ModeleObservateur {
