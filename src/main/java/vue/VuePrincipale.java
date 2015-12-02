@@ -404,14 +404,10 @@ public class VuePrincipale implements Initializable, ActivationOuvrirDemandeObse
     public void notifierObservateursModele() {
         ModeleLecture modele = controleurApplication.getModele();
 
-        if (modele.getTournee() != null)
-            vueGraphique.construireTournee(modele.getTournee());
-
-
         vueGraphique.nettoyerAffichage();
         vueGraphique.afficherPlan();
         vueGraphique.construireDemande(modele.getDemande());
-        vueGraphique.construireTournee(controleurApplication.getModele().getTournee());
+        vueGraphique.construireTournee(modele.getTournee());
         vueGraphique.desactiverSurbrillance();
     }
     
