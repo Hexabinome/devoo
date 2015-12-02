@@ -47,7 +47,7 @@ public class CommandeAjouterLivraison extends CommandeAnnulable {
         super.backupModele(controleurDonnees.getModele());
         
         Fenetre fenetre = controleurDonnees.getModele().getDemande().getFenetreDeLivraison(idLivraisonAvant);
-        Livraison livraisonAjoutee = new Livraison(controleurDonnees.getModele().getProchainIdCustomLivraison(fenetre), -1, idIntersectionLivraison);
+        Livraison livraisonAjoutee = new Livraison(controleurDonnees.getModele().getProchainIdCustomLivraison(), -1, idIntersectionLivraison);
         
         controleurDonnees.getModele().ajouterLivraison(idLivraisonAvant, fenetre, livraisonAjoutee);
         controleurDonnees.notifierObservateursModele();
