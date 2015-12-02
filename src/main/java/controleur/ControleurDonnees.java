@@ -28,7 +28,7 @@ public class ControleurDonnees {
     /**
      * Collection des observateurs (pour GUI avec functionalités réduites si plan et livraisons ne sont pas encore chargés)
      */
-    private final Collection<ActivationObservateur> activationObservateurs = new ArrayList<ActivationObservateur>();
+    private final Collection<ActivationFonctionnalitesObservateur> activationFonctionnalitesObservateurs = new ArrayList<ActivationFonctionnalitesObservateur>();
 
     /**
      * Collection des observateurs pour le modèle
@@ -58,7 +58,7 @@ public class ControleurDonnees {
     /**
      * Collection des observateurs d'activation/désactivation de composants
      */
-    private final Collection<ActivationObservateur> tourneeObservateurs = new ArrayList<ActivationObservateur>();
+    private final Collection<ActivationFonctionnalitesObservateur> tourneeObservateurs = new ArrayList<ActivationFonctionnalitesObservateur>();
     
     /**
      * Collection des observateurs des messages envoyés à la vue
@@ -126,8 +126,8 @@ public class ControleurDonnees {
      * Ajoute un observateur d'activation
      * @param obs L'objet observateur
      */
-    public void ajouterActivationObservateur(ActivationObservateur obs) {
-        activationObservateurs.add(obs);
+    public void ajouterActivationObservateur(ActivationFonctionnalitesObservateur obs) {
+        activationFonctionnalitesObservateurs.add(obs);
     }
     
     /**
@@ -171,7 +171,7 @@ public class ControleurDonnees {
      * Ajoute un observateur pour l'activation de la génération de la tournée
      * @param tourneeObserveur L'objet observateur
      */
-    void ajouterTourneeObservateur(ActivationObservateur tourneeObserveur) {
+    void ajouterTourneeObservateur(ActivationFonctionnalitesObservateur tourneeObserveur) {
         tourneeObservateurs.add(tourneeObserveur);
     }
     
@@ -213,7 +213,7 @@ public class ControleurDonnees {
      * @param etat Vrai s'il faut activer les observateurs
      */
     public void notifierObservateursActivation(boolean etat) {
-        activationObservateurs.forEach(obs -> obs.notifierObservateursActivation(etat));
+        activationFonctionnalitesObservateurs.forEach(obs -> obs.notifierObservateursActivation(etat));
     }
     
     /**
