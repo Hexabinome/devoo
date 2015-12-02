@@ -1,6 +1,6 @@
 package vue;
 
-import modele.xmldata.Livraison;
+import modele.donneesxml.Livraison;
 
 /**
  * Gére l'affichage sous forme textuelle des details d'une livraison dans la TreeTableView.

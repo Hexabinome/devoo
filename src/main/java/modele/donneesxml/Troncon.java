@@ -1,20 +1,20 @@
-package modele.xmldata;
+package modele.donneesxml;
 
 import java.io.Serializable;
 
 /**
- * Represente un troncon de rue entre deux intersections.
+ * Représente un tronçon de rue entre deux intersections.
  * @author Mohamed El Mouctar HAIDARA / maxou
  */
-public class Troncon  implements Serializable{
+public class Troncon  implements Serializable {
 
     /**
-     * Nom de la rue dans lequel le troncon se trouve.
+     * Nom de la rue dans lequel se trouve le tronçon.
      */
     private String nomRue;
 
     /**
-     * Vitesse moyenne de circulation sur unt troncon.
+     * Vitesse moyenne de circulation sur le troncon.
      */
     private final float vitesse;
 
@@ -24,12 +24,20 @@ public class Troncon  implements Serializable{
     private final float longueur;
 
     /**
-     * Duree de traversee du troncon.
+     * Durée de traversée du tronçon.
      */
     private final float duree;
     
+    /** L'identifiant de l'intersection cible */
     private final int idDestination;
 
+    /**
+     * Constructeur d'un tronçon
+     * @param nomRue Le nom de la rue
+     * @param vitesse La vitesse moyenne sur le tronçon
+     * @param longueur La longueur du tronçon
+     * @param idDestination L'identifiant de l'intersection cible
+     */
     public Troncon(String nomRue, float vitesse, float longueur, int idDestination) {
         this.nomRue = nomRue;
         this.vitesse = vitesse;
@@ -38,22 +46,37 @@ public class Troncon  implements Serializable{
         this.idDestination = idDestination;
     }
     
+    /**
+     * @return Le nom de la rue
+     */
     public String getNomRue() {
         return nomRue;
     }
 
+    /**
+     * @param nomRue Le nouveau nom de rue
+     */
     public void setNomRue(String nomRue) {
         this.nomRue = nomRue;
     }
 
+    /**
+     * @return La vitesse sur tronçon
+     */
     public float getVitesse() {
         return vitesse;
     }
 
+    /**
+     * @return La longueur du tronçon
+     */
     public float getLongueur() {
         return longueur;
     }
 
+    /**
+     * @return La durée sur le tronçon
+     */
     public float getDuree() {
         return duree;
     }
@@ -68,15 +91,18 @@ public class Troncon  implements Serializable{
                 '}';
     }
     
-    public float getCout()
-    {
+    /**
+     * @return Le coût du tronçon, selon la vitesse et la durée
+     */
+    public float getCout() {
     	return vitesse * duree;
     }
 
-    public int getIdDestination()
-    {
+    /**
+     * @return L'identifiant de l'intersection cible
+     */
+    public int getIdDestination() {
         return idDestination;
     }
-    
     
 }

@@ -21,7 +21,7 @@ import javafx.scene.control.Slider;
 import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
-import modele.xmldata.ModeleLecture;
+import modele.donneesxml.ModeleLecture;
 
 import org.controlsfx.dialog.ExceptionDialog;
 

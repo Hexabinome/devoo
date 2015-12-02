@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import controleur.observateur.*;
-import modele.xmldata.Modele;
-import modele.xmldata.PlanDeVille;
+import modele.donneesxml.Modele;
+import modele.donneesxml.PlanDeVille;
 import controleur.commande.Commande;
 import controleur.commande.Historique;
 

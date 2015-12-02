@@ -1,9 +1,10 @@
+import modele.donneesxml.Demande;
+import modele.donneesxml.Livraison;
+import modele.donneesxml.PlanDeVille;
+import modele.donneesxml.Troncon;
 import modele.persistance.DeserialiseurXML;
 import modele.persistance.ExceptionXML;
-import modele.xmldata.Demande;
-import modele.xmldata.Livraison;
-import modele.xmldata.PlanDeVille;
-import modele.xmldata.Troncon;
+
 import org.jdom2.JDOMException;
 import org.jdom2.input.JDOMParseException;
 import org.junit.Test;

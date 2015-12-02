@@ -1,4 +1,4 @@
-package modele.xmldata;
+package modele.donneesxml;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -8,97 +8,98 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.sun.javafx.scene.traversal.Hueristic2D;
-
-import modele.business.TSP;
-import modele.business.TSP1;
+import modele.metier.TSP;
+import modele.metier.TSP1;
 
 /**
- *
+ * Classe interfaçant tout le modèle pour une instance de l'application
  * @author Maxou
  */
-public class Modele implements ModeleLecture, Serializable
-{
+public class Modele implements ModeleLecture, Serializable {
 
+    /** Le plan de la ville */
     private final PlanDeVille plan;
-    private final Demande demande;
-    private GrapheRealisation graphe;
-    private TSP tsp;
     
+    /** La demande de livraison */
+    private final Demande demande;
+    /** Le graphe de réalisation */
+    private GrapheRealisation graphe = null;
+    private TSP tsp = null;
+    
+    /** Entier de début des nouvelles livraisons créées */
     private int customLivraisonCompteur = 420000;
 
-    //cette liste des listes stoque pour chque fenetre les livraisons a effecturer dans une tournee calcule par TSP (sans l'entrepot au debout et a la fin de sla tournee)
+    /** Liste de listes qui stoque pour chaque fenêtre les livraisons à effectuer dans une tournée calculée par TSP (sans l'entrepôt au début et a la fin de la tournée) */
     private List<List<Livraison>> livraisonTournee;
 
-    //cette liste des listes stoque pour chque fenetre les intersetions a parcourir dans une tournee calcule par TSP (incluant l'entrepot au debout et a la fin de sla tournee)
+    /** Liste de listes qui stoque pour chaque fenêtre les intersections à parcourir dans une tournée calculée par TSP (incluant l'entrepôt au debut et à la fin de la tournée)  */
     private List<List<Integer>> intersectionTournee;
 
-    //Renseigne si une livraison à été supprimer derniérement, pour pouvoir recalculer un id de livraison en cas d'ajout
+    /** Renseigne si une livraison a été supprimée dernièrement, pour pouvoir recalculer un identifiant de livraison en cas d'ajout */
     boolean aUneLivraisonSupprimer = false;
 
-    public Modele(PlanDeVille plan, Demande demande)
-    {
+    /** Constructeur du modèle
+     * @param plan Plan de la ville 
+     * @param demande Demande de livraison
+     */
+    public Modele(PlanDeVille plan, Demande demande) {
         this.plan = plan;
         this.demande = demande;
-        tsp = null;
-        intersectionTournee = null;
     }
 
-    public void setGraphe(GrapheRealisation graphe)
-    {
+    /** Affecte un nouveau graphe
+     * @param graphe
+     */
+    public void setGraphe(GrapheRealisation graphe) {
         this.graphe = graphe;
     }
 
     @Override
-    public PlanDeVille getPlan()
-    {
+    public PlanDeVille getPlan() {
         return plan;
     }
 
     @Override
-    public Demande getDemande()
-    {
+    public Demande getDemande() {
         return demande;
     }
 
-    public List<List<Livraison>> getLivraisonsTournee()
-    {
+    /**
+     * @return La liste de listes de livraisons de la tournée
+     */
+    public List<List<Livraison>> getLivraisonsTournee() {
         return livraisonTournee;
     }
 
     /**
-     *
-     * @param idLivraison
+     * Supprime une livraison de la demande
+     * @param idLivraison L'identifiant de la livraison à supprimer
      */
-    public int supprimerLivraison(int idLivraison)
-    {
+    public int supprimerLivraison(int idLivraison) {
         aUneLivraisonSupprimer = true;
-        //identifier la livraison
+        // Identifier la livraison
         Livraison liv = demande.identifierLivraison(idLivraison);
 
-        //recuperer l'id de la livraison avant
+        // Récupérer l'id de la livraison avant
         Livraison livraisonAvant = recupererLivraisonApresOuAvant(liv, true);
 
-        // verfier que la livriason avant connait le chemin vers la livraison apres (il peut arriver que le chemin soit inconnu, 
-        //si la livraison apres est une livraison qui a ete ajoute a la main)
+        // Vérifier que la livriason avant connait le chemin vers la livraison après (il peut arriver que le chemin soit inconnu, 
+        // si la livraison après est une livraison qui a été ajoutée à la main)
         Livraison livraisonApres = recupererLivraisonApresOuAvant(liv, false);
         if (graphe.getChemin(livraisonAvant.getId(), livraisonApres.getId()) == null) {
             Collection<Chemin> cheminsSortantDeLivraisonAvant = Fenetre.dijkstra(plan.getIntersection(livraisonAvant.getAdresse()), plan);
             //Pour tous les chemins sortant de la "livraison d'avant" dont l'id de fin est l'id de la nouvelle livraison, on l'ajout dans le graphe
-            cheminsSortantDeLivraisonAvant.stream().filter((c) -> (c.getIdFin() == livraisonApres.getAdresse())).forEach((c) -> {
-                graphe.setChemin(c, livraisonAvant.getId(), livraisonApres.getId());
-            });
+            cheminsSortantDeLivraisonAvant.stream().filter(c -> (c.getIdFin() == livraisonApres.getAdresse())).forEach((c) -> 
+                graphe.setChemin(c, livraisonAvant.getId(), livraisonApres.getId()));
         }
 
-        //parcourir la tournee calcule par tsp et supprimer la livraison specifiee
-        livraisonTournee.stream().forEach((fenetre) -> {
-            fenetre.remove(liv);
-        });
+        // Parcourir la tournée calculée par tsp et supprimer la livraison specifiée
+        livraisonTournee.stream().forEach(fenetre -> fenetre.remove(liv));
 
-        //supprimer la livraision (dans la demande)
+        // Supprimer la livraison (dans la demande)
         demande.supprimerLivraision(idLivraison);
 
-        //mettre a jour la tournee et les horaires
+        // Mettre à jour la tournée et les horaires
         intersectionTournee = creerIntersectionTournee();
         remplirHoraires();
 
@@ -106,71 +107,68 @@ public class Modele implements ModeleLecture, Serializable
     }
 
     /**
-     * Ajoute la solution dans le tsp, aprés le previousId. Ajoute aussi
-     * l'intersection dans la fenêtre de previousId.
+     * Ajoute la solution dans le tsp, après une livraison. Ajoute aussi
+     * l'intersection dans la fenêtre spécifiée
      *
-     * @param idLivraisonAvant
-     * @param intersectionId
+     * @param idLivraisonAvant L'identifiant de la livraison avant
+     * @param fenetre La fenêtre de la nouvelle livraison
+     * @param nouvelleLivraison La nouvelle livraison
      */
-    public void ajouterLivraison(int idLivraisonAvant, Fenetre fenetre, Livraison nouvelleLivraison)
-    {
-        // d'abord recuperer la livraison avant
+    public void ajouterLivraison(int idLivraisonAvant, Fenetre fenetre, Livraison nouvelleLivraison) {
+        // D'abord recuperer la livraison avant
         Livraison livraisonAvant = demande.identifierLivraison(idLivraisonAvant);
 
-        //manipuler la tournee cree par TSP en ajoutant la nouvelle livraison dans le bon endroit (apres la livraison precendente)
+        // Manipuler la tournee cree par TSP en ajoutant la nouvelle livraison dans le bon endroit (apres la livraison precendente)
         fenetre.ajouterLivraison(nouvelleLivraison.getId(), nouvelleLivraison);
 
-        //calculer et stoquer le chemin vers la nouvelle livraison
+        // Calculer et stoquer le chemin vers la nouvelle livraison
         //TODO: c'est possible que l'on ai pas besoin de faire cela, le premier appel de dijkstra l'a déjà fait.
-        //si l'on stoquait le resultat on peut eviter cette calcul
+        // Si l'on stoquait le résultat on peut éviter ce calcul
         Collection<Chemin> cheminsSortantDeLivraisonAvant = Fenetre.dijkstra(plan.getIntersection(livraisonAvant.getAdresse()), plan);
-        //Pour tous les chemins sortant de la "livraison d'avant" dont l'id de fin est l'id de la nouvelle livraison, on l'ajout dans le graphe
-        cheminsSortantDeLivraisonAvant.stream().filter((c) -> (c.getIdFin() == nouvelleLivraison.getAdresse())).forEach((c) -> {
-            graphe.setChemin(c, livraisonAvant.getId(), nouvelleLivraison.getId());
-        });
+        // Pour tous les chemins sortant de la "livraison d'avant" dont l'id de fin est l'id de la nouvelle livraison, on l'ajout dans le graphe
+        cheminsSortantDeLivraisonAvant.stream().filter(c -> (c.getIdFin() == nouvelleLivraison.getAdresse())).forEach((c) -> 
+            graphe.setChemin(c, livraisonAvant.getId(), nouvelleLivraison.getId()));
 
-        //calculer et stoquer le chemin de la nouvelle livraison vers la livraison apres
+        // Calculer et stoquer le chemin de la nouvelle livraison vers la livraison après
         Livraison livraisonApres = recupererLivraisonApresOuAvant(livraisonAvant, false);
         int idIintersectionApres = livraisonApres.getAdresse();
         Collection<Chemin> cheminsSortantDeNouvelleLiv = Fenetre.dijkstra(plan.getIntersection(nouvelleLivraison.getAdresse()), plan);
-        cheminsSortantDeNouvelleLiv.stream().filter((c) -> (c.getIdFin() == idIintersectionApres)).forEach((c) -> {
-            graphe.setChemin(c, nouvelleLivraison.getId(), livraisonApres.getId());
-        });
+        cheminsSortantDeNouvelleLiv.stream().filter(c -> (c.getIdFin() == idIintersectionApres)).forEach((c) -> 
+            graphe.setChemin(c, nouvelleLivraison.getId(), livraisonApres.getId()));
 
-        //MAJ de la tournee (par rapport aux livraisons)
+        // MAJ de la tournee (par rapport aux livraisons)
         insererLivraisionDansTournee(livraisonAvant, nouvelleLivraison);
 
-        //MAJ de la tournee (par rapport aux intersections)
+        // MAJ de la tournee (par rapport aux intersections)
         intersectionTournee = creerIntersectionTournee();
 
-        //MAJ des horraires de passage
+        // MAJ des horaires de passage
         remplirHoraires();
     }
 
     /**
      * Ajouter une nouvelle livraison dans la bonne position (c'est a dire
-     * directement apres une livraison deja existant) dans la tournee
+     * directement après une livraison déjà existant) dans la tournée
      *
-     * @param livraisonAvant
-     * @param nouvelleLivraison
+     * @param livraisonAvant La livraison précédente
+     * @param nouvelleLivraison La nouvelle livraison
      */
-    private void insererLivraisionDansTournee(Livraison livraisonAvant, Livraison nouvelleLivraison)
-    {
-        livraisonTournee.stream().filter((sousTournee) -> (sousTournee.contains(livraisonAvant))).forEach((sousTournee) -> {
+    private void insererLivraisionDansTournee(Livraison livraisonAvant, Livraison nouvelleLivraison) {
+        livraisonTournee.stream().filter(sousTournee -> (sousTournee.contains(livraisonAvant))).forEach((sousTournee) -> {
             int position = sousTournee.indexOf(livraisonAvant);
             sousTournee.add(position + 1, nouvelleLivraison);
         });
     }
 
     /**
-     * Cherche la livraison directement apres une livraison contenu dans la
-     * tournee. C'est possible que cette livraion est dans la fenetre apres.
+     * Cherche la livraison directement après ou avant une livraison contenue dans la
+     * tournée. C'est possible que cette livraion soit dans la fenêtre après.
      *
-     * @param livraison
-     * @return
+     * @param livraison La livraison de référence
+     * @param avant Si vrai, on récupère la livraison précédente. Sinon la livraison suivante
+     * @return La livraison précédente ou suivante
      */
-    private Livraison recupererLivraisonApresOuAvant(Livraison livraison, boolean avant)
-    {
+    private Livraison recupererLivraisonApresOuAvant(Livraison livraison, boolean avant) {
         //d'abourd on va creer une nouvelle liste  contennant toutes les livraisons (sans connaisance des fenetreas). Celle ci est plus facile a iterer.
         List<Livraison> totalList = new LinkedList<>();
         for (List<Livraison> fenetre : livraisonTournee) {
@@ -184,44 +182,46 @@ public class Modele implements ModeleLecture, Serializable
             liv = iter.next();
         }
         if (!avant) {
-            if (iter.hasNext())
+            if (iter.hasNext()) {
                 return iter.next();
+            }
             throw new RuntimeException("Livraison ne fait pas parti de la tounree");
         }
-        else
+        else {
             return livAvant;
+        }
 
     }
 
-    public void calculerTournee()
-    {
+    /** Calcul la tournée
+     */
+    public void calculerTournee() {
         graphe = demande.creerGraphe(plan);
         graphe.creerInverseLivraisonDictionnaire();
 
-        // apres avoir calcule le graphe il faut qu'on appele TSP ici.
+        // Après avoir calculé le graphe il faut qu'on appelle TSP
         tsp = new TSP1();
         tsp.chercheSolution(1000, graphe);
 
-        //stoque l'ordre des livraisons (calcule par TSP) dans le modele
+        // Stoque l'ordre des livraisons (calcule par TSP) dans le modèle
         creerLivraisonTournee();
 
-        //creer a parti des listes des livraisonsid, la tournee (granularite intersecitons)
+        // Créer à partir des listes des identifiants de livraison, la tournée (granularité intersection)
         intersectionTournee = creerIntersectionTournee();
         
-        //egalement calculer les horaires de passage pour chaque livraison
+        // Egalement calculer les horaires de passage pour chaque livraison
         remplirHoraires();
     }
 
     /**
-     * Cette methode sert a creer une liste des livraionsID dans l'ordre
-     * determine par TSP, pour une fenetre.
+     * Cette méthode sert à créer une liste des identifiants de livraison dans l'ordre
+     * determiné par TSP, pour une fenêtre.
      *
-     * @param fenetre
-     * @param indiceDebutSolutionTsp
-     * @return
+     * @param fenetre Le fenêtre cible
+     * @param indiceDebutSolutionTsp L'indice de début pour le TSP
+     * @return La liste de livraison dans l'ordre optimal pour la fenêtre
      */
-    private List<Livraison> getLivraisonFromSolutionTsp(Fenetre fenetre, int indiceDebutSolutionTsp)
-    {
+    private List<Livraison> getLivraisonFromSolutionTsp(Fenetre fenetre, int indiceDebutSolutionTsp) {
         List<Livraison> listLivraison = new ArrayList<>();
 
         for (int iSolution = indiceDebutSolutionTsp; iSolution < indiceDebutSolutionTsp + fenetre.getNbLivraison(); iSolution++) {
@@ -233,66 +233,65 @@ public class Modele implements ModeleLecture, Serializable
     }
 
     /**
-     * Cette methode convertie le resultat du TSP dans une liste de listes.
-     * Chaque liste interne represente les livraisons a effectuer dans une
-     * fenetre. L'ordre des livraisons correspond a l'ordre determinépar TSP.
+     * Cette méthode convertit le résultat du TSP dans une liste de listes.
+     * Chaque liste interne représente les livraisons à effectuer dans une
+     * fenêtre. L'ordre des livraisons correspond a l'ordre determiné par TSP.
      *
-     * Cette methode doit etre appele directement apres la fin du calcule TSP).
+     * Cette méthode doit etre appelé directement après la fin du calcul TSP
      * On n'a plus besoin de cette methode quand l'utilisateur decide de
-     * manipuler la tournee calcule a la main.
+     * manipuler la tournée calculée à la main.
      */
-    private void creerLivraisonTournee()
-    {
-        if (tsp == null)
+    private void creerLivraisonTournee() {
+        if (tsp == null) {
             throw new RuntimeException("TSP n'a pas encore calcule la tournee");
+        }
 
         livraisonTournee = new LinkedList<>();
 
-        // compteur pour iterer sur la solution cree par TSP
+        // Compteur pour itérer sur la solution créée par TSP
         int compteurSolutionTSP = 0;
         List<Fenetre> listFenetres = new LinkedList<>();
         listFenetres.addAll(demande.getFenetres());
 
-        //ajouter les livraisons de chaque fenetre dans l'ordre calcule par TSP
+        // Ajouter les livraisons de chaque fenêtre dans l'ordre calculé par TSP
         for (Fenetre fenetre : listFenetres) {
-
             List<Livraison> fenetreTspLivraisons = getLivraisonFromSolutionTsp(fenetre, compteurSolutionTSP);
             compteurSolutionTSP += fenetreTspLivraisons.size();
             livraisonTournee.add(fenetreTspLivraisons);
         }
 
-        //ajouter une derniere fentre avec une seule livraison (retour a l'entrepot)
+        // Ajouter une dernière fenêtre avec une seule livraison (retour a l'entrepôt)
         List<Livraison> retourEntrepot = new LinkedList<>();
-        //recuperer la livraison fantastique du premier fenetre (seul livraison au premiere fenetre = entrepot)
+        // Récupérer la livraison de la première fenêtre (seule livraison de la première fenêtre = entrepôt)
         retourEntrepot.add(listFenetres.get(0).getListeLivraisons().values().iterator().next());
         livraisonTournee.add(retourEntrepot);
     }
 
     /**
-     * Cette methode utilise la liste des listes des livraisons pour calculer
-     * une tournee (granularite intersection). Cela nous permet de facilement
-     * mettre a jour la tournee si le utilisateur decide d'ajouter ou supprimer
-     * une nouvelle livraisons.
+     * Cette méthode utilise la liste des listes des livraisons pour calculer
+     * une tournée (granularité intersection). Cela nous permet de facilement
+     * mettre à jour la tournee si le utilisateur décide d'ajouter ou supprimer
+     * une nouvelle livraison.
      */
-    private List<List<Integer>> creerIntersectionTournee()
-    {
+    private List<List<Integer>> creerIntersectionTournee() {
         intersectionTournee = new LinkedList<>();
 
-        //depart est l'entrepot (seul livraison dans premiere fenetre)
+        // Départ est l'entrepôt (seule livraison dans la première fenêtre)
         Livraison depart = livraisonTournee.get(0).get(0);
 
         boolean entrepot = true;
         for (List<Livraison> fenetre : livraisonTournee) {
-            if (entrepot)
-                //on doit sauter la premiere fenetre (l'algo desous utilise toujours une fenetre et sa fenetre precedente)
+            if (entrepot) {
+                // On doit sauter la première fenêtre (l'algo desous utilise toujours une fenêtre et sa fenêtre précédente)
                 entrepot = false;
+            }
             else {
                 List<Integer> sousTournee = creerSousTournee(depart, fenetre);
 
-                //depart de prochaine fenetre est la derniere livraison de cette fenetre
+                // Départ de prochaine fenêtre est la dernière livraison de cette fenêtre
                 depart = fenetre.get(fenetre.size() - 1);
 
-                //ajouter la liste cree pour cette fenetre a la liste principale
+                // Ajouter la liste créée pour cette fenêtre à la liste principale
                 intersectionTournee.add(sousTournee);
             }
 
@@ -301,32 +300,38 @@ public class Modele implements ModeleLecture, Serializable
         return intersectionTournee;
     }
 
-    private List<Integer> creerSousTournee(Livraison depart, List<Livraison> sousTourneeLivraisons)
-    {
-        // Ce liste represente tous les intersections (dans la bonne ordre) qui on doit parcourir pour effecture les livraisons prevus.
+    /** Créer une sous tournée
+     * @param depart La livraison de départ de la sous-tournée
+     * @param sousTourneeLivraisons La liste des livraisons faisant partie de cette sous tournée
+     * @return La liste des intersections dans l'ordre optimal
+     */
+    private List<Integer> creerSousTournee(Livraison depart, List<Livraison> sousTourneeLivraisons) {
+        // Cette liste représente toutes les intersections (dans le bon ordre) qu'on doit parcourir pour effectuer les livraisons prévues.
         List<Integer> sousTournee = new LinkedList<>();
 
-        //Pour chaque chemin entre les livraisons prevus: ajoute les intersection sur le chemin a la sous tournee
+        // Pour chaque chemin entre les livraisons prévues: ajoute les intersections sur le chemin à la sous tournée
         for (Livraison arrivee : sousTourneeLivraisons) {
             Chemin chemin = graphe.getChemin(depart.getId(), arrivee.getId());
 
-            if (chemin == null)
+            if (chemin == null) {
                 throw new RuntimeException("Une action precedente a oublie a completer la graphe: Il n y a aucune chemin entre " + depart.getId() + " et " + arrivee.getId());
+            }
 
-            //pour toutes les troncons sur le chemin, ajoute l'arrivee
+            // Pour tous les tronçons sur le chemin, ajoute l'arrivée
             for (Troncon troncon : chemin.getTroncons()) {
                 sousTournee.add(troncon.getIdDestination());
             }
 
-            //mis a jour du depart
+            // Mise à jour du départ
             depart = arrivee;
         }
 
         return sousTournee;
     }
 
-    public void remplirHoraires()
-    {        
+    /** Remplit les horaires de chaque livraison après le calcul de la tournée. Détermine s'il y a du retard ou non
+     */
+    public void remplirHoraires() {        
         int heure = demande.getFenetres().get(1).getTimestampDebut();
         int intersectionCourante = demande.getEntrepot().getId();
 
@@ -363,10 +368,10 @@ public class Modele implements ModeleLecture, Serializable
     }
 
     @Override
-    public List<List<Integer>> getTournee()
-    {
-        if (intersectionTournee == null)
+    public List<List<Integer>> getTournee() {
+        if (intersectionTournee == null) {
             return null;
+        }
 
         List<List<Integer>> inmodifiableTournee = new LinkedList<>();
 
@@ -383,33 +388,32 @@ public class Modele implements ModeleLecture, Serializable
      * @return Une chaîne de caractère formatée correctement
      */
     @Override
-    public String genererFeuilleDeRoute()
-    {
+    public String genererFeuilleDeRoute() {
         return GenerateurFeuilleDeRoute.genererFeuilleDeRoute(this, livraisonTournee);
     }
 
     /**
-     * Quand on cree une nouvelle livraison on a besoin d'une id unique. Cette
-     * compteur aide a recuperer cette id.
+     * Quand on crée une nouvelle livraison on a besoin d'un identifiant unique. Ce
+     * compteur aide à recuperer cette identifiant.
      *
-     * @return
+     * @return un identifiant unique
      */
-    public int getProchainIdCustomLivraison(Fenetre fenetre)
-    {
+    public int getProchainIdCustomLivraison() {
         customLivraisonCompteur--;
         return customLivraisonCompteur;
     }
 
     /**
-     * Echnage deux livraisons
+     * Echange deux livraisons
      *
-     * @param idLivraison1
-     * @param idLivraison2
+     * @param idLivraison1 Première livraison
+     * @param idLivraison2 Deuxième livraison
      */
     public void echangerLivraisons(int idLivraison1, int idLivraison2)
     {
-        if (demande.getEntrepot().getId() == idLivraison1 || demande.getEntrepot().getId() == idLivraison2)
-            throw new RuntimeException("Il est interdit de deplacer l'entrepot.");
+        if (demande.getEntrepot().getId() == idLivraison1 || demande.getEntrepot().getId() == idLivraison2) {
+            throw new RuntimeException("Il est interdit de déplacer l'entrepôt.");
+        }
 
         Livraison l1 = demande.identifierLivraison(idLivraison1);
         Livraison l2 = demande.identifierLivraison(idLivraison2);
@@ -424,10 +428,10 @@ public class Modele implements ModeleLecture, Serializable
 
         supprimerLivraison(idLivraison1);
         supprimerLivraison(idLivraison2);
-        //if (nouvelleLivraisonId1 == Integer.MIN_VALUE) {
-        int nouvelleLivraisonId1 = getProchainIdCustomLivraison(f1);
-        int nouvelleLivraisonId2 = getProchainIdCustomLivraison(f2);
-        //}
+        
+        int nouvelleLivraisonId1 = getProchainIdCustomLivraison();
+        int nouvelleLivraisonId2 = getProchainIdCustomLivraison();
+        
         Livraison nouvelleLivraison1 = new Livraison(nouvelleLivraisonId1, clientId2, intersection2);
         Livraison nouvelleLivraison2 = new Livraison(nouvelleLivraisonId2, clientId1, intersection1);
 

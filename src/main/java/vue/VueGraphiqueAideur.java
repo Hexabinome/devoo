@@ -20,7 +20,7 @@ import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
 import javafx.util.Pair;
-import modele.xmldata.*;
+import modele.donneesxml.*;
 
 import java.util.*;
 import java.util.Map.Entry;

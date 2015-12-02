@@ -4,13 +4,13 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-import modele.xmldata.Demande;
-import modele.xmldata.Fenetre;
-import modele.xmldata.GrapheRealisation;
-import modele.xmldata.Intersection;
-import modele.xmldata.Livraison;
-import modele.xmldata.PlanDeVille;
-import modele.xmldata.Troncon;
+import modele.donneesxml.Demande;
+import modele.donneesxml.Fenetre;
+import modele.donneesxml.GrapheRealisation;
+import modele.donneesxml.Intersection;
+import modele.donneesxml.Livraison;
+import modele.donneesxml.PlanDeVille;
+import modele.donneesxml.Troncon;
 
 /*
  * To change this license header, choose License Headers in Project Properties.

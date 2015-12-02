@@ -3,8 +3,8 @@ package controleur;
 import java.io.File;
 
 import controleur.observateur.*;
-import modele.xmldata.ModeleLecture;
-import modele.xmldata.PlanDeVille;
+import modele.donneesxml.ModeleLecture;
+import modele.donneesxml.PlanDeVille;
 import controleur.commande.CommandeException;
 import controleur.commande.CommandeGenererFeuilleDeRoute;
 import controleur.etat.EtatAjout;

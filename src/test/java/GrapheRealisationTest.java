@@ -1,7 +1,6 @@
-import modele.xmldata.Chemin;
-import modele.xmldata.GrapheRealisation;
-import modele.xmldata.Troncon;
-
+import modele.donneesxml.Chemin;
+import modele.donneesxml.GrapheRealisation;
+import modele.donneesxml.Troncon;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;

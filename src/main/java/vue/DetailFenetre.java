@@ -1,6 +1,6 @@
 package vue;
 
-import modele.xmldata.Fenetre;
+import modele.donneesxml.Fenetre;
 
 /**
  * Gére l'affichage sous forme textuelle des details d'une fenêtre de livraison dans la TreeTableView.

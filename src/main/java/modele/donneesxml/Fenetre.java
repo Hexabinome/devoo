@@ -1,4 +1,4 @@
-package modele.xmldata;
+package modele.donneesxml;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -9,66 +9,87 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Set;
 
 /**
- * Une Fenetre correspond a une periode de temps fixe avec une nombre des
- * livraisons prevus.
+ * Une fenêtre correspond à une periode de temps fixe avec une nombre des
+ * livraisons prévus.
  *
  * @author jolan
  */
-public class Fenetre implements Serializable
-{
+public class Fenetre implements Serializable {
 
+    /** Heure de début de la livraison (en secondes) */
     private final int heureDebut;
+    /** Heure de fin de la livraison (en secondes) */
     private final int heureFin;
 
-    // map qui stoque des livraisons identifie avec leur livraisonId
+    /** Stoque les livraisons par rapport à leur identifiant */
     private final Map<Integer, Livraison> livraisons;
 
-    public Fenetre(int timestampDebut, int timestampFin)
-    {
+    /**
+     * Constructeur de la fenêtre
+     * @param timestampDebut début de la fenêtre (en secondes)
+     * @param timestampFin fin de la fenêtre (en secondes)
+     */
+    public Fenetre(int timestampDebut, int timestampFin) {
         this.heureDebut = timestampDebut;
         this.heureFin = timestampFin;
 
         livraisons = new LinkedHashMap<>();
     }
 
-    public int getTimestampDebut()
-    {
+    /** Retourne l'heure de début de la fenêtre (en secondes)
+     * @return L'heure de début de la fenêtre (en secondes)
+     */
+    public int getTimestampDebut() {
         return heureDebut;
     }
 
-    public int getTimestampFin()
-    {
+    /** Retourne l'heure de fin de la fenêtre (en secondes)
+     * @return L'heure de fin de la fenêtre (en secondes)
+     */
+    public int getTimestampFin() {
         return heureFin;
     }
 
-    protected void effacerLivraison(int livrasionId)
-    {
+    /**
+     * Supprime une livraison de la fenêtre. Supprime rien si l'identifiant n'existe pas dans la fenêtre
+     * @param livrasionId L'identifiant de la fenêtre
+     */
+    protected void effacerLivraison(int livrasionId) {
         livraisons.remove(livrasionId);
     }
 
-    public void ajouterLivraison(int id, Livraison livraison)
-    {
+    /** Ajoute une livraison dans la fenêtre, supprime l'ancienne si une avec le même identifiant existait déjà
+     * @param id L'identifiant de la nouvelle livraison
+     * @param livraison La nouvelle livraison
+     */
+    public void ajouterLivraison(int id, Livraison livraison) {
         livraisons.put(id, livraison);
     }
 
-    public Map<Integer, Livraison> getListeLivraisons()
-    {
+    /** Retourne les paires d'identifiants et livraisons
+     * @return Une map en lecture seule des identifiants et livraisons associées
+     */
+    public Map<Integer, Livraison> getListeLivraisons() {
         return Collections.unmodifiableMap(livraisons);
     }
 
-    public Livraison getLivraison(int idLivraison)
-    {
+    /**
+     * Retourne une livraison
+     * @param idLivraison L'identifiant de la livraison à retourner
+     * @return La livraison ou null si celle-ci n'existe pas
+     */
+    public Livraison getLivraison(int idLivraison) {
         return livraisons.get(idLivraison);
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "Fenetre{"
                 + "heureDebut=" + heureDebut
                 + ", heureFin=" + heureFin
@@ -80,12 +101,11 @@ public class Fenetre implements Serializable
      * Pour intersection-livraison, on va calculer une liste de chemins vers
      * tous les noeuds de cette fenêtre et de la fenêtre suivante
      *
-     * @param plan
-     * @param graphe in/out
-     * @param fNext
+     * @param plan Le plan de la ville
+     * @param graphe in/out Le graphe de réalisation
+     * @param fNext La prochaine fenêtre
      */
-    public void calculerChemins(PlanDeVille plan, GrapheRealisation graphe, Fenetre fNext)
-    {
+    public void calculerChemins(PlanDeVille plan, GrapheRealisation graphe, Fenetre fNext) {
         //Récupère toutes les livraisons avec les quels on doit calculer le plus court chemin.
         Set<Integer> intersectionsRecherchee = new HashSet<>();
 
@@ -138,8 +158,12 @@ public class Fenetre implements Serializable
         }
     }
 
-    public static Collection<Chemin> dijkstra(Intersection intersectionDepart, PlanDeVille plan)
-    {
+    /** Algorithme de dijkstra
+     * @param intersectionDepart L'intersection de départ
+     * @param plan Le plan de la ville
+     * @return Une collection des chemins à empreinter
+     */
+    public static Collection<Chemin> dijkstra(Intersection intersectionDepart, PlanDeVille plan) {
         //INITIALISATION
 
         //Map de chemin intermédiaires et finaux
@@ -202,15 +226,14 @@ public class Fenetre implements Serializable
     }
 
     /**
-     * Retourne une liste des intersections suivant
+     * Retourne une liste des intersections suivant l'intersection en paramètre
      *
-     * @param intersection
-     * @param plan
-     * @return
+     * @param intersection L'intersection de début
+     * @param plan Le plan de ville
+     * @return Une liste d'intersection
      */
-    public static ArrayList<Intersection> getListeIntersectionSuivante(Intersection intersection, PlanDeVille plan)
-    {
-        ArrayList<Intersection> intersections = new ArrayList<>();
+    public static List<Intersection> getListeIntersectionSuivante(Intersection intersection, PlanDeVille plan) {
+    	List<Intersection> intersections = new ArrayList<>();
 
         for (Integer idIntersection : intersection.getTroncons().keySet()) {
             intersections.add(plan.getIntersection(idIntersection));
@@ -219,52 +242,41 @@ public class Fenetre implements Serializable
         return intersections;
     }
 
-    void supprimerLivraison(int livraisonId)
-    {
-        if (livraisons.keySet().contains(livraisonId))
+    /** Supprime une livraison si celle si existe, sinon rien ne se passe
+     * @param livraisonId L'identifiant de la livraison à supprimer
+     */
+    void supprimerLivraison(int livraisonId) {
+        if (livraisons.keySet().contains(livraisonId)) {
             livraisons.remove(livraisonId);
+        }
     }
 
-    Object identiferLivraison(int idLivraison)
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    /**
+     * Retourne le nombre de livraisons
+     * @return Le nombre de livraisons
+     */
+    public int getNbLivraison() {
+        return livraisons.size();
     }
-
+    
     /**
      * Classe utile pour la priority Queue. Le but est de lui fournir un
      * comparateur pour qu'elle s'ordonne. L'intersection en paramètres ne doit
      * contenir qu'un seul tronçon
      *
      * @author Djowood
-     *
      */
-    public static class CoutComparator implements Comparator<Intersection>
-    {
+    public static class CoutComparator implements Comparator<Intersection> {
 
         @Override
-        public int compare(Intersection x, Intersection y)
-        {
-            if (x.getMinCout() != Float.MAX_VALUE && y.getMinCout() != Float.MAX_VALUE)
+        public int compare(Intersection x, Intersection y) {
+            if (x.getMinCout() != Float.MAX_VALUE && y.getMinCout() != Float.MAX_VALUE) {
                 //Retourne un nombre négatif (donc faux si le coût est inférieur), positif si suppérieur et 0 si égale.
                 return (int) (x.getMinCout() - y.getMinCout());
+            }
             return 0;
         }
-
+        
     }
-
-    public int getNbLivraison()
-    {
-        return livraisons.size();
-    }
-
-	public int getMaxIdLivraison() {
-		int idLivraisonMax = 0;
-		for(Livraison l: livraisons.values())
-		{
-			if(idLivraisonMax < l.getId())
-				idLivraisonMax = l.getId();
-		}
-		return idLivraisonMax;
-	}
-
+    
 }

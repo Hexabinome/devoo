@@ -4,11 +4,11 @@ import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 
+import modele.donneesxml.Demande;
+import modele.donneesxml.Modele;
+import modele.donneesxml.PlanDeVille;
 import modele.persistance.DeserialiseurXML;
 import modele.persistance.ExceptionXML;
-import modele.xmldata.Demande;
-import modele.xmldata.Modele;
-import modele.xmldata.PlanDeVille;
 
 import org.jdom2.JDOMException;
 import org.xml.sax.SAXException;

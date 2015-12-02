@@ -10,9 +10,9 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableCell;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableView;
-import modele.xmldata.Demande;
-import modele.xmldata.Fenetre;
-import modele.xmldata.Livraison;
+import modele.donneesxml.Demande;
+import modele.donneesxml.Fenetre;
+import modele.donneesxml.Livraison;
 import vue.ObjetVisualisable.CouleurTexte;
 
 import java.net.URL;

@@ -4,8 +4,8 @@ import java.io.File;
 
 import controleur.commande.CommandeException;
 import controleur.observateur.*;
-import modele.xmldata.ModeleLecture;
-import modele.xmldata.PlanDeVille;
+import modele.donneesxml.ModeleLecture;
+import modele.donneesxml.PlanDeVille;
 
 /**
  * Interface le contrôleur

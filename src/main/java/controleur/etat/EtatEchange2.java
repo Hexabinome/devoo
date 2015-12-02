@@ -3,7 +3,7 @@ package controleur.etat;
 import java.io.File;
 import java.util.List;
 
-import modele.xmldata.Livraison;
+import modele.donneesxml.Livraison;
 import controleur.ControleurDonnees;
 import controleur.commande.Commande;
 import controleur.commande.CommandeEchangerLivraisons;

@@ -1,8 +1,9 @@
-package modele.business;
+package modele.metier;
 
 import java.util.Collection;
 import java.util.Iterator;
-import modele.xmldata.Graphe;
+
+import modele.donneesxml.Graphe;
 
 /**
  *

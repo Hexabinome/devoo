@@ -1,4 +1,4 @@
-package modele.xmldata;
+package modele.donneesxml;
 
 public interface Graphe {
 

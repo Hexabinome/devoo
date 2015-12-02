@@ -1,4 +1,4 @@
-package modele.xmldata;
+package modele.donneesxml;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -8,26 +8,26 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Demande de livraison charge a partir d'un fichier XML
+ * Demande de livraison, chargé à partir d'un fichier XML
  *
  * @author Mohamed El Mouctar HAIDARA
  */
-public class Demande implements Serializable
-{
+public class Demande implements Serializable {
 
+    /** Entrepot de la demande de livraison, point de départ de la tournée ensuite généré, ainsi que point d'arrivée final */
     private final Intersection entrepot;
 
+    /** Liste des fenêtres qui composent la demande */
     private final List<Fenetre> fenetres;
 
     /**
-     * Lors de la consturction d'une demande, on ajoute automatiquement
+     * Lors de la construction d'une demande, on ajoute automatiquement
      * l'entrepot comme premiere fenêtre
      *
-     * @param entrepot
-     * @param fenetres
+     * @param entrepot L'entrepot, début de la demande
+     * @param fenetres La liste des fenêtres de la demande
      */
-    public Demande(Intersection entrepot, List<Fenetre> fenetres)
-    {
+    public Demande(Intersection entrepot, List<Fenetre> fenetres) {
         this.entrepot = entrepot;
         Fenetre fenetreEntrepot = new Fenetre(0, 0);
 
@@ -39,19 +39,22 @@ public class Demande implements Serializable
         this.fenetres.addAll(fenetres);
     }
 
-    public Intersection getEntrepot()
-    {
+    /** Renvoie l'entrepot de la demande
+     * @return L'entrepot de la demande de livraison, point de départ et d'arrivée des livraisons
+     */
+    public Intersection getEntrepot() {
         return entrepot;
     }
 
-    public List<Fenetre> getFenetres()
-    {
+    /** Renvoie la liste des fenêtres de la demande
+     * @return Liste en lecture seule des fenêtres
+     */
+    public List<Fenetre> getFenetres() {
         return Collections.unmodifiableList(fenetres);
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "Demande{"
                 + "entrepot=" + entrepot
                 + ", fenetres=" + fenetres
@@ -59,16 +62,15 @@ public class Demande implements Serializable
     }
 
     /**
-     * On parcour la liste de fenêtre pour calculer le graphe. Chaque fenêtre
-     * insert dans le graphe des Chemins en fonciton de ces points de livraisons
-     * et les points de livraisons de la fenêtre suivante La première fenêtre
+     * On parcourt la liste de fenêtres pour calculer le graphe. Chaque fenêtre
+     * insère dans le graphe des chemins en fonction de ces points de livraisons
+     * et les points de livraisons de la fenêtre suivante. La première fenêtre
      * est l'entrepot
      *
-     * @param plan
-     * @return
+     * @param plan Le plan de la ville
+     * @return Le graphe de réalisation
      */
-    public GrapheRealisation creerGraphe(PlanDeVille plan)
-    {
+    public GrapheRealisation creerGraphe(PlanDeVille plan) {
         GrapheRealisation graphe = new GrapheRealisation(getNombreLivraison());
 
         for (int iFenetre = 0; iFenetre < fenetres.size() - 1; iFenetre++) {
@@ -81,8 +83,11 @@ public class Demande implements Serializable
         return graphe;
     }
 
-    private int getNombreLivraison()
-    {
+    /**
+     * Retourne le nombre de livraisons de la demande
+     * @return Le nombre de livraison de la demande
+     */
+    private int getNombreLivraison() {
         Set<Integer> livraison = new HashSet<>();
 
         for (int iFenetre = 0; iFenetre < fenetres.size(); iFenetre++) {
@@ -92,21 +97,21 @@ public class Demande implements Serializable
         return livraison.size();
     }
 
-    public void supprimerLivraision(int livraisonId)
-    {
-        fenetres.stream().forEach((fenetre) -> {
-            fenetre.supprimerLivraison(livraisonId);
-        });
+    /**
+     * Supprime une livraison de la demande
+     * @param livraisonId L'identifiant de la livraison à supprimer
+     */
+    public void supprimerLivraision(int livraisonId) {
+        fenetres.forEach(fenetre -> fenetre.supprimerLivraison(livraisonId));
     }
 
     /**
-     * Recuperer une livraison a parti de son id.
+     * Récupère une livraison à partir de son identifiant.
      *
-     * @param idLivraison
-     * @return la livraison si elle existe, null sinon
+     * @param idLivraison L'identifiant de la livraison
+     * @return La livraison si elle existe, null si non
      */
-    public Livraison identifierLivraison(int idLivraison)
-    {
+    public Livraison identifierLivraison(int idLivraison) {
         Livraison result = null;
 
         for (Fenetre f : fenetres) {
@@ -120,13 +125,13 @@ public class Demande implements Serializable
      * Renvoie la fenêtre à laquelle appartient la livraison
      *
      * @param idLivraison L'identifiant de la livraison qui est dans la fenêtre
-     * @return La fenêtre ou null si livraison non trouvée
+     * @return La fenêtre ou null si la livraison n'est pas trouvée
      */
-    public Fenetre getFenetreDeLivraison(int idLivraison)
-    {
+    public Fenetre getFenetreDeLivraison(int idLivraison) {
         for (Fenetre f : fenetres) {
-            if (f.getListeLivraisons().keySet().contains(idLivraison))
+            if (f.getListeLivraisons().keySet().contains(idLivraison)) {
                 return f;
+            }
         }
         throw new RuntimeException("Fenetre introuvable pour livraison: " + idLivraison);
     }

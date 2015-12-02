@@ -1,7 +1,7 @@
 import controleur.Controleur;
 import controleur.ControleurInterface;
 import controleur.observateur.ModeleObservateur;
-import modele.xmldata.ModeleLecture;
+import modele.donneesxml.ModeleLecture;
 
 import org.junit.Before;
 import org.junit.Test;

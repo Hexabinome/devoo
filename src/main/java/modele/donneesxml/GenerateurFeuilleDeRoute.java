@@ -1,11 +1,19 @@
-package modele.xmldata;
+package modele.donneesxml;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
+/** S'occupe de la génération de la feuille de route
+ */
 public class GenerateurFeuilleDeRoute {
 
+	/**
+	 * Génère la feuille de route
+	 * @param modele Le modèle
+	 * @param livraisonTournee La tournée calculée
+	 * @return Une chaine de caractère contenant tout le fichier à écrire
+	 */
 	public static String genererFeuilleDeRoute(ModeleLecture modele, List<List<Livraison>> livraisonTournee) {
         StringBuilder feuilleDeRoute = new StringBuilder(400);
         List<List<Integer>> intersectionTournee = modele.getTournee();
@@ -78,7 +86,7 @@ public class GenerateurFeuilleDeRoute {
                     .append(VERBES_CIRCULATION[(int) Math.round(Math.random() * (VERBES_CIRCULATION.length - 1))])
                     .append(" dans la rue ").append(troncon.getNomRue())
                     .append(" pour ").append(VERBES_DESTINATION[(int) Math.round(Math.random() * (VERBES_DESTINATION.length - 1))])
-                    .append(" à l'adresse ").append(intersectionCible)
+                    .append(" l'adresse ").append(intersectionCible)
                     .append(System.lineSeparator());
 
             intersectionCourante = intersectionCible;
@@ -92,28 +100,27 @@ public class GenerateurFeuilleDeRoute {
     }
 
     /**
-     * VERBE dans la rue 10 pour arriver à l'adresse
+     * Ex : VERBE dans la rue 10 pour arriver à l'adresse
      */
-    private final static String[] VERBES_CIRCULATION = new String[]{
+    private static final String[] VERBES_CIRCULATION = new String[] {
         "Tournez",
         "Continuez",
         "Avancez",
         "Allez"
     };
 
-    private final static String[] VERBES_DESTINATION = new String[]{
+    /** Ex : Tournez dans le rue 15 pour rejoindre */
+    private static final String[] VERBES_DESTINATION = new String[] {
         "rejoindre",
-        "arriver"
+        "arriver à"
     };
 
     /**
-     * Convertis un temps en seconde en chaine de caractère sous la forme
-     * HH:mm:ss
-     *
+     * Convertit un temps en seconde en chaine de caractère sous la forme HH:mm:ss
      * @param tempsEnSeconde temps à convertir
+     * @return Une chaîne de caractère contenant l'heure
      */
-    private static String convertirEnHeureLisible(int tempsEnSeconde)
-    {
+    private static String convertirEnHeureLisible(int tempsEnSeconde) {
         int heure = tempsEnSeconde / 3600;
         int mn = (tempsEnSeconde % 3600) / 60;
         int sec = tempsEnSeconde % 60;

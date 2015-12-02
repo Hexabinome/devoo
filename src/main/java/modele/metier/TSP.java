@@ -1,6 +1,6 @@
-package modele.business;
+package modele.metier;
 
-import modele.xmldata.Graphe;
+import modele.donneesxml.Graphe;
 
 /**
  *

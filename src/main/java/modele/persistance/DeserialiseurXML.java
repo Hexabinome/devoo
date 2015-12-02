@@ -10,12 +10,12 @@ import java.util.List;
 
 import javax.xml.transform.stream.StreamSource;
 
-import modele.xmldata.Demande;
-import modele.xmldata.Fenetre;
-import modele.xmldata.Intersection;
-import modele.xmldata.Livraison;
-import modele.xmldata.PlanDeVille;
-import modele.xmldata.Troncon;
+import modele.donneesxml.Demande;
+import modele.donneesxml.Fenetre;
+import modele.donneesxml.Intersection;
+import modele.donneesxml.Livraison;
+import modele.donneesxml.PlanDeVille;
+import modele.donneesxml.Troncon;
 
 import org.jdom2.DataConversionException;
 import org.jdom2.Document;
@@ -183,7 +183,7 @@ public class DeserialiseurXML {
         int fenetreCompteur = 0;
         List<Fenetre> listeFenetre = new ArrayList<>();
         for (Element elementFenetre : listePlage) {
-        	Fenetre nouvelleFenetre = chargerFenetre(fenetreCompteur++, elementFenetre, planDeVille);
+        	Fenetre nouvelleFenetre = chargerFenetre(++fenetreCompteur, elementFenetre, planDeVille);
             listeFenetre.add(nouvelleFenetre);
         }
 

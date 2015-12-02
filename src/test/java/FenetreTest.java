@@ -1,12 +1,9 @@
 import static org.junit.Assert.assertEquals;
-
-
-import modele.xmldata.Chemin;
-
-import modele.xmldata.Fenetre;
-import modele.xmldata.Intersection;
-import modele.xmldata.PlanDeVille;
-import modele.xmldata.Troncon;
+import modele.donneesxml.Chemin;
+import modele.donneesxml.Fenetre;
+import modele.donneesxml.Intersection;
+import modele.donneesxml.PlanDeVille;
+import modele.donneesxml.Troncon;
 
 import java.util.ArrayList;
 

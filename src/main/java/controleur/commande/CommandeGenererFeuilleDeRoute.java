@@ -3,7 +3,7 @@ package controleur.commande;
 import java.io.File;
 import java.io.FileWriter;
 
-import modele.xmldata.GenerateurFeuilleDeRoute;
+import modele.donneesxml.GenerateurFeuilleDeRoute;
 import controleur.ControleurDonnees;
 
 /**

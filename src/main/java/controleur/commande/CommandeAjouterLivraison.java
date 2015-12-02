@@ -1,8 +1,8 @@
 package controleur.commande;
 
 import controleur.ControleurDonnees;
-import modele.xmldata.Fenetre;
-import modele.xmldata.Livraison;
+import modele.donneesxml.Fenetre;
+import modele.donneesxml.Livraison;
 
 /**
  * Répresente une commande d'ajout de livraison
