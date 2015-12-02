@@ -190,7 +190,7 @@ public class VuePrincipale implements Initializable, ActivationOuvrirDemandeObse
     /** Affiche la boîte de dialogue "A propos"
      */
     @FXML
-    public void aPropos() {
+    private void aPropos() {
         Alert aProposDialog = new Alert(AlertType.INFORMATION);
         aProposDialog.setTitle("A propos");
         aProposDialog.setHeaderText(TEXTE_APROPOS_HEADER);
@@ -222,7 +222,7 @@ public class VuePrincipale implements Initializable, ActivationOuvrirDemandeObse
     /**
      * @return La vue graphique
      */
-    public VueGraphiqueAideur getAideurVueGraphique() {
+    protected VueGraphiqueAideur getAideurVueGraphique() {
         return vueGraphique;
     }
 
@@ -230,7 +230,7 @@ public class VuePrincipale implements Initializable, ActivationOuvrirDemandeObse
      * Appelée quand l'utilisateur clique sur "Quitter dans le menu Fichier"
      */
     @FXML
-    void quitterApplication() {
+    private void quitterApplication() {
         Alert confirmationDialog = new Alert(AlertType.CONFIRMATION);
         confirmationDialog.setTitle("Quitter");
         confirmationDialog.setHeaderText("Êtes-vous sûr(e) de vouloir quitter l'application ?");
@@ -245,7 +245,7 @@ public class VuePrincipale implements Initializable, ActivationOuvrirDemandeObse
      * Appelée quand l'utilisateur clique sur le bouton "Ajouter livraisons"
      */
     @FXML
-    void clic_ajouterLivraison() {
+    private void clic_ajouterLivraison() {
         controleurApplication.clicOutilAjouter();
     }
 
@@ -253,7 +253,7 @@ public class VuePrincipale implements Initializable, ActivationOuvrirDemandeObse
      * Appelée quand l'utilisateur clique sur le bouton "Echanger livraisons"
      */
     @FXML
-    void clic_echangerLivraison() {
+    private void clic_echangerLivraison() {
         controleurApplication.clicOutilEchanger();
     }
 
@@ -261,21 +261,21 @@ public class VuePrincipale implements Initializable, ActivationOuvrirDemandeObse
      * Appelée quand l'utilisateur clique sur le bouton "Supprimer livraisons"
      */
     @FXML
-    void clic_supprimerLivraison() {
+    private void clic_supprimerLivraison() {
         controleurApplication.clicOutilSupprimer();
     }
 
     /** Evènement clic sur le bouton de calcul de tournée
      */
     @FXML
-    void clic_calculer_tournee() {
+    private void clic_calculer_tournee() {
         controleurApplication.clicCalculTournee();
     }
     
     /** Evènement clic sur la génération de la feuille de route
      */
     @FXML
-    void clic_genererFeuilleRoute() {
+    private void clic_genererFeuilleRoute() {
     	File fichier = ouvrirEnregistreurDeFichier("Enregistrer la feuille de route");
     	if (fichier != null) {
     		try {
@@ -363,7 +363,7 @@ public class VuePrincipale implements Initializable, ActivationOuvrirDemandeObse
     /**
      * Initalise les differents obserserveurs de la vue principale
      */
-    public void initialiserObserveurs() {
+    protected void initialiserObserveurs() {
 
         // Observateur pour les boutons
         controleurApplication.ajouterActivationFonctionnalitesObservateur(ajouterLivraisonBouton);
