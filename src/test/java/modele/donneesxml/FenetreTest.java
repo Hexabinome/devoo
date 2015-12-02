@@ -24,8 +24,6 @@ public class FenetreTest
 	@Test
     public void dijkstraTest()
     {
-        Fenetre fenetre = new Fenetre(0, 0);
-
         Troncon a = new Troncon("A", 1, 1, 2);
         Troncon b = new Troncon("B", 1, 1, 3);
         Troncon c = new Troncon("C", 1, 1, 4);
@@ -73,7 +71,7 @@ public class FenetreTest
 
         ArrayList<Troncon> troncon = new ArrayList<>();
 
-        for (Chemin chemin : fenetre.dijkstra(i1, plan)) {
+        for (Chemin chemin : Fenetre.dijkstra(i1, plan)) {
             switch (chemin.getIdFin()) {
                 case 1:
                     assertEquals(chemin.getCout(), 0, 0);

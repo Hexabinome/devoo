@@ -29,7 +29,6 @@ public class DemandeTest {
 	@Test
 	public void calculerCheminsTest()
 	{
-	
 		Fenetre fenetre0 = new Fenetre(1448105516, 1448105516);
 		Fenetre fenetre1 = new Fenetre(1448105516, 1448105616);
 		Fenetre fenetre2 = new Fenetre(1448105616, 1448105716);
@@ -128,50 +127,48 @@ public class DemandeTest {
 
 		ArrayList<Troncon> troncon = new ArrayList<>();
 
-		assertEquals(graphe.getChemin(1, 2).getCout(), 1, 0);
+		assertEquals(graphe.getChemin(101, 102).getCout(), 1, 0);
 		troncon.add(a);
-		assertEquals(graphe.getChemin(1, 2).getTroncons().containsAll(troncon), true);
-		assertEquals(graphe.getChemin(1, 2).getTroncons().size(), troncon.size());
+		assertEquals(graphe.getChemin(101, 102).getTroncons().containsAll(troncon), true);
+		assertEquals(graphe.getChemin(101, 102).getTroncons().size(), troncon.size());
 		
 		troncon = new ArrayList<>();
 
-		assertEquals(graphe.getChemin(1, 5).getCout(), 1, 0);
+		assertEquals(graphe.getChemin(101, 105).getCout(), 1, 0);
 		troncon.add(f);
-		assertEquals(graphe.getChemin(1, 5).getTroncons().containsAll(troncon), true);
-		assertEquals(graphe.getChemin(1, 5).getTroncons().size(), troncon.size());
+		assertEquals(graphe.getChemin(101, 105).getTroncons().containsAll(troncon), true);
+		assertEquals(graphe.getChemin(101, 105).getTroncons().size(), troncon.size());
 		
 		troncon = new ArrayList<>();
 		
-		assertEquals(graphe.getChemin(2, 4).getCout(), 1, 0);
+		assertEquals(graphe.getChemin(102, 104).getCout(), 1, 0);
 		troncon.add(d);
-		assertEquals(graphe.getChemin(2, 4).getTroncons().containsAll(troncon), true);
-		assertEquals(graphe.getChemin(2, 4).getTroncons().size(), troncon.size());
+		assertEquals(graphe.getChemin(102, 104).getTroncons().containsAll(troncon), true);
+		assertEquals(graphe.getChemin(102, 104).getTroncons().size(), troncon.size());
 		
 		troncon = new ArrayList<>();
 		
-		assertEquals(graphe.getChemin(4, 10).getCout(), 2, 0);
+		assertEquals(graphe.getChemin(104, 1010).getCout(), 2, 0);
 		troncon.add(j);
 		troncon.add(k);
-		assertEquals(graphe.getChemin(4, 10).getTroncons().containsAll(troncon), true);
-		assertEquals(graphe.getChemin(4, 10).getTroncons().size(), troncon.size());
+		assertEquals(graphe.getChemin(104, 1010).getTroncons().containsAll(troncon), true);
+		assertEquals(graphe.getChemin(104, 1010).getTroncons().size(), troncon.size());
 		
 		troncon = new ArrayList<>();
 		
-		assertEquals(graphe.getChemin(4, 5).getCout(), 1, 0);
+		assertEquals(graphe.getChemin(104, 105).getCout(), 1, 0);
 		troncon.add(q);
-		assertEquals(graphe.getChemin(4, 5).getTroncons().containsAll(troncon), true);
-		assertEquals(graphe.getChemin(4, 5).getTroncons().size(), troncon.size());
+		assertEquals(graphe.getChemin(104, 105).getTroncons().containsAll(troncon), true);
+		assertEquals(graphe.getChemin(104, 105).getTroncons().size(), troncon.size());
 		
 		troncon = new ArrayList<>();
 		
-		assertEquals(graphe.getChemin(11, 1).getCout(), 4, 0);
+		assertEquals(graphe.getChemin(1011, 101).getCout(), 4, 0);
 		troncon.add(o);
 		troncon.add(p);
 		troncon.add(q);
 		troncon.add(r);
-		assertEquals(graphe.getChemin(11, 1).getTroncons().containsAll(troncon), true);
-		assertEquals(graphe.getChemin(11, 1).getTroncons().size(), troncon.size());
-		
-		troncon = new ArrayList<>();		
+		assertEquals(graphe.getChemin(1011, 101).getTroncons().containsAll(troncon), true);
+		assertEquals(graphe.getChemin(1011, 101).getTroncons().size(), troncon.size());
 	}
 }
