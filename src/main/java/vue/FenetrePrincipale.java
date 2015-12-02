@@ -37,7 +37,6 @@ public class FenetrePrincipale extends Application {
         // Passage du controleur de l'application au controleur de la vue
         vuePrincipaleControleur.setControleurApplication(controleurApplication);
         vuePrincipaleControleur.setVueGraphiqueControleurApplication(controleurApplication);
-        vuePrincipaleControleur.initialiserMediateur(this);
         vuePrincipaleControleur.initialiserObserveurs();
 
         // Chargement de la vue des livraison

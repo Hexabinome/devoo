@@ -37,12 +37,6 @@ import controleur.commande.CommandeException;
 public class VuePrincipale implements Initializable, ActivationOuvrirDemandeObservateur, ActivationOuvrirPlanObservateur,
         ModeleObservateur, AnnulerCommandeObservateur,
         RetablirCommandeObservateur, ActivationFonctionnalitesObservateur, PlanChargeObservateur {
-
-    /**
-     * Mediateur : permet de communiquer avec les autres controleurs
-     */
-    private FenetrePrincipale mediateur;
-
     /**
      * Largeur de la boîte de dialogue d'erreur
      */
@@ -126,7 +120,7 @@ public class VuePrincipale implements Initializable, ActivationOuvrirDemandeObse
     /** Barre de status de l'application en bas de l'écran */
     @FXML
     private ObserveurMessageChamps message;
-    
+
     private File file;
 
     /**
@@ -146,13 +140,6 @@ public class VuePrincipale implements Initializable, ActivationOuvrirDemandeObse
         }
 
     };
-
-    /**
-     * @param fenetrePrincipale Initialise la fenêtre principale servant de médiateur
-     */
-    public void initialiserMediateur(FenetrePrincipale fenetrePrincipale) {
-        this.mediateur = fenetrePrincipale;
-    }
 
     /**
      * Met à jour le controleur de l'application
