@@ -1,23 +1,13 @@
 package modele.donneesxml;
 import static org.junit.Assert.assertEquals;
-import modele.donneesxml.Chemin;
-import modele.donneesxml.Fenetre;
-import modele.donneesxml.Intersection;
-import modele.donneesxml.PlanDeVille;
-import modele.donneesxml.Troncon;
 
 import java.util.ArrayList;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+import org.junit.Test;
+
 /**
  * @author robinroyer
  */
-
-
 public class FenetreTest
 {
 
@@ -31,6 +21,7 @@ public class FenetreTest
      +getLivraisons():Map<Integer, Livraison>
      +toString():String
      */
+	@Test
     public void dijkstraTest()
     {
         Fenetre fenetre = new Fenetre(0, 0);
@@ -154,4 +145,16 @@ public class FenetreTest
         }
     }
 
+	@Test
+	public void livraisonsOperation() {
+		Fenetre f = new Fenetre(10, 20);
+		f.ajouterLivraison(1, new Livraison(1, 1, 1));
+		f.ajouterLivraison(2, new Livraison(2, 2, 2));
+		f.ajouterLivraison(3, new Livraison(3, 3, 3));
+		
+		assertEquals(f.getListeLivraisons().size(), 3);
+		f.effacerLivraison(1);
+		assertEquals(f.getListeLivraisons().size(), 2);
+	}
+	
 }
