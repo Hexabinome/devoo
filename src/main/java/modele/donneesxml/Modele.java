@@ -29,7 +29,7 @@ public class Modele implements ModeleLecture, Serializable {
     /** Entier de début des nouvelles livraisons créées */
     private int customLivraisonCompteur = 420000;
 
-    /** Liste de listes qui stoque pour chaque fenêtre les livraisons à effectuer dans une tournée calculée par TSP (sans l'entrepôt au début et a la fin de la tournée) */
+    /** Liste de listes qui stoque pour chaque fenêtre les livraisons à effectuer dans une tournée calculée par TSP (avec l'entrepôt au début et a la fin de la tournée) */
     private List<List<Livraison>> livraisonTournee;
 
     /** Liste de listes qui stoque pour chaque fenêtre les intersections à parcourir dans une tournée calculée par TSP (incluant l'entrepôt au debut et à la fin de la tournée)  */
