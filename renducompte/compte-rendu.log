@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2015.9.27)  3 DEC 2015 13:00
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2015.9.27)  3 DEC 2015 13:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -478,13 +478,13 @@ Chapitre 3.
 Chapitre 4.
 [11] [12] (./compte-rendu.aux) ) 
 Here is how much of TeX's memory you used:
- 4783 strings out of 494908
- 60966 string characters out of 6177935
- 125223 words of memory out of 5000000
- 7975 multiletter control sequences out of 15000+600000
+ 4785 strings out of 494908
+ 60989 string characters out of 6177935
+ 122223 words of memory out of 5000000
+ 7977 multiletter control sequences out of 15000+600000
  21507 words of font info for 55 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 28i,6n,40p,1907b,439s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 28i,6n,40p,1903b,439s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf-dist/fonts/enc/dvips/cm-super
 /cm-super-t1.enc}</usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1000.pf
 b></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/t
@@ -496,7 +496,7 @@ re/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf-dist/f
 onts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf-dist/fonts/type1/publ
 ic/cm-super/sfrm1728.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfs
 l1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfti1000.pfb>
-Output written on compte-rendu.pdf (12 pages, 197390 bytes).
+Output written on compte-rendu.pdf (12 pages, 198876 bytes).
 PDF statistics:
  92 PDF objects out of 1000 (max. 8388607)
  65 compressed objects within 1 object stream
