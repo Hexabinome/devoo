@@ -546,19 +546,19 @@ public class ControleurTest
         ModeleLecture model = controleurInterface.getModele();
         List<List<Integer>> tournee = model.getTournee();
 
-        List<List<Integer>> tourneeAttendus = new ArrayList<>();
+        List<List<Integer>> tourneeAttendue = new ArrayList<>();
         List<Integer> listeTemp = new ArrayList<Integer>();
         listeTemp.add(2);
         listeTemp.add(4);
         listeTemp.add(5);
-        tourneeAttendus.add(listeTemp);
+        tourneeAttendue.add(listeTemp);
 
         listeTemp = new ArrayList<Integer>();
         listeTemp.add(4);
         listeTemp.add(9);
         listeTemp.add(10);
         listeTemp.add(11);
-        tourneeAttendus.add(listeTemp);
+        tourneeAttendue.add(listeTemp);
 
         listeTemp = new ArrayList<Integer>();
         listeTemp.add(9);
@@ -566,9 +566,9 @@ public class ControleurTest
         listeTemp.add(5);
         listeTemp.add(1);
 
-        tourneeAttendus.add(listeTemp);
+        tourneeAttendue.add(listeTemp);
 
-        assertEquals("La tournee est bien calculé", tourneeAttendus, tournee);
+        assertEquals("La tournee est bien calculé", tourneeAttendue, tournee);
     }
 
     @Test
@@ -598,17 +598,17 @@ public class ControleurTest
 
         List<List<Integer>> tournee = model.getTournee();
 
-        List<List<Integer>> tourneeAttendus = new ArrayList<>();
+        List<List<Integer>> tourneeAttendue = new ArrayList<>();
         List<Integer> listeTemp = new ArrayList<Integer>();
         listeTemp.add(2);
         listeTemp.add(4);
-        tourneeAttendus.add(listeTemp);
+        tourneeAttendue.add(listeTemp);
 
         listeTemp = new ArrayList<Integer>();
         listeTemp.add(9);
         listeTemp.add(10);
         listeTemp.add(11);
-        tourneeAttendus.add(listeTemp);
+        tourneeAttendue.add(listeTemp);
 
         listeTemp = new ArrayList<Integer>();
         listeTemp.add(9);
@@ -616,9 +616,9 @@ public class ControleurTest
         listeTemp.add(5);
         listeTemp.add(1);
 
-        tourneeAttendus.add(listeTemp);
+        tourneeAttendue.add(listeTemp);
 
-        assertEquals("La tournee est bien calculé", tourneeAttendus, tournee);
+        assertEquals("La tournee est bien calculé", tourneeAttendue, tournee);
     }
 
     /**
@@ -644,23 +644,24 @@ public class ControleurTest
         controleurInterface.clicCalculTournee();
         ModeleLecture model = controleurInterface.getModele();
         controleurInterface.clicOutilSupprimer();
-        controleurInterface.clicSurLivraison(-1);
+        controleurInterface.clicSurLivraison(1);
         model = controleurInterface.getModele();
 
         List<List<Integer>> tournee = model.getTournee();
 
-        List<List<Integer>> tourneeAttendus = new ArrayList<>();
+        List<List<Integer>> tourneeAttendue = new ArrayList<>();
         List<Integer> listeTemp = new ArrayList<Integer>();
         listeTemp.add(2);
         listeTemp.add(4);
         listeTemp.add(5);
-        tourneeAttendus.add(listeTemp);
+        tourneeAttendue.add(listeTemp);
 
         listeTemp = new ArrayList<Integer>();
+        listeTemp.add(4);
         listeTemp.add(9);
         listeTemp.add(10);
         listeTemp.add(11);
-        tourneeAttendus.add(listeTemp);
+        tourneeAttendue.add(listeTemp);
 
         listeTemp = new ArrayList<Integer>();
         listeTemp.add(9);
@@ -668,9 +669,9 @@ public class ControleurTest
         listeTemp.add(5);
         listeTemp.add(1);
 
-        tourneeAttendus.add(listeTemp);
+        tourneeAttendue.add(listeTemp);
 
-        assertEquals("La tournee est bien calculé", tourneeAttendus, tournee);
+        assertEquals("La tournee est bien calculé", tourneeAttendue, tournee);
     }
 
     @Test
@@ -700,19 +701,19 @@ public class ControleurTest
 
         List<List<Integer>> tournee = model.getTournee();
 
-        List<List<Integer>> tourneeAttendus = new ArrayList<>();
+        List<List<Integer>> tourneeAttendue = new ArrayList<>();
         List<Integer> listeTemp = new ArrayList<Integer>();
         listeTemp.add(2);
         listeTemp.add(4);
         listeTemp.add(5);
-        tourneeAttendus.add(listeTemp);
+        tourneeAttendue.add(listeTemp);
 
         listeTemp = new ArrayList<Integer>();
         listeTemp.add(4);
         listeTemp.add(9);
         listeTemp.add(10);
         listeTemp.add(11);
-        tourneeAttendus.add(listeTemp);
+        tourneeAttendue.add(listeTemp);
 
         listeTemp = new ArrayList<Integer>();
         listeTemp.add(9);
@@ -720,9 +721,9 @@ public class ControleurTest
         listeTemp.add(5);
         listeTemp.add(1);
 
-        tourneeAttendus.add(listeTemp);
+        tourneeAttendue.add(listeTemp);
 
-        assertEquals("La tournee est bien calculé", tourneeAttendus, tournee);
+        assertEquals("La tournee est bien calculé", tourneeAttendue, tournee);
     }
 
     @Test
@@ -752,17 +753,17 @@ public class ControleurTest
 
         List<List<Integer>> tournee = model.getTournee();
 
-        List<List<Integer>> tourneeAttendus = new ArrayList<>();
+        List<List<Integer>> tourneeAttendue = new ArrayList<>();
         List<Integer> listeTemp = new ArrayList<Integer>();
         listeTemp.add(2);
         listeTemp.add(4);
-        tourneeAttendus.add(listeTemp);
+        tourneeAttendue.add(listeTemp);
 
         listeTemp = new ArrayList<Integer>();
         listeTemp.add(9);
         listeTemp.add(10);
         listeTemp.add(11);
-        tourneeAttendus.add(listeTemp);
+        tourneeAttendue.add(listeTemp);
 
         listeTemp = new ArrayList<Integer>();
         listeTemp.add(9);
@@ -770,9 +771,9 @@ public class ControleurTest
         listeTemp.add(5);
         listeTemp.add(1);
 
-        tourneeAttendus.add(listeTemp);
+        tourneeAttendue.add(listeTemp);
 
-        assertEquals("La tournee est bien calculé", tourneeAttendus, tournee);
+        assertEquals("La tournee est bien calculé", tourneeAttendue, tournee);
     }
 
     /**
@@ -801,26 +802,26 @@ public class ControleurTest
 
         controleurInterface.clicOutilAjouter();
         controleurInterface.clicSurPlan(2);
-        controleurInterface.clicSurLivraison(-1);
+        controleurInterface.clicSurLivraison(1);
 
         model = controleurInterface.getModele();
 
-        List<List<Integer>> tourneeAttendus = new ArrayList<>();
+        List<List<Integer>> tourneeAttendue = new ArrayList<>();
         List<Integer> listeTemp = new ArrayList<Integer>();
 
-        tourneeAttendus = new ArrayList<>();
+        tourneeAttendue = new ArrayList<>();
         listeTemp = new ArrayList<Integer>();
         listeTemp.add(2);
         listeTemp.add(4);
         listeTemp.add(5);
-        tourneeAttendus.add(listeTemp);
+        tourneeAttendue.add(listeTemp);
 
         listeTemp = new ArrayList<Integer>();
         listeTemp.add(4);
         listeTemp.add(9);
         listeTemp.add(10);
         listeTemp.add(11);
-        tourneeAttendus.add(listeTemp);
+        tourneeAttendue.add(listeTemp);
 
         listeTemp = new ArrayList<Integer>();
         listeTemp.add(9);
@@ -828,9 +829,9 @@ public class ControleurTest
         listeTemp.add(5);
         listeTemp.add(1);
 
-        tourneeAttendus.add(listeTemp);
+        tourneeAttendue.add(listeTemp);
 
-        assertEquals("La tournee est bien calculé", tourneeAttendus, model.getTournee());
+        assertEquals("La tournee est bien calculé", tourneeAttendue, model.getTournee());
     }
 
     @Test
@@ -860,23 +861,23 @@ public class ControleurTest
 
         model = controleurInterface.getModele();
 
-        List<List<Integer>> tourneeAttendus = new ArrayList<>();
+        List<List<Integer>> tourneeAttendue = new ArrayList<>();
         List<Integer> listeTemp = new ArrayList<Integer>();
 
-        tourneeAttendus = new ArrayList<>();
+        tourneeAttendue = new ArrayList<>();
         listeTemp = new ArrayList<Integer>();
         listeTemp.add(2);
         listeTemp.add(3);
         listeTemp.add(4);
         listeTemp.add(5);
-        tourneeAttendus.add(listeTemp);
+        tourneeAttendue.add(listeTemp);
 
         listeTemp = new ArrayList<Integer>();
         listeTemp.add(4);
         listeTemp.add(9);
         listeTemp.add(10);
         listeTemp.add(11);
-        tourneeAttendus.add(listeTemp);
+        tourneeAttendue.add(listeTemp);
 
         listeTemp = new ArrayList<Integer>();
         listeTemp.add(9);
@@ -884,9 +885,9 @@ public class ControleurTest
         listeTemp.add(5);
         listeTemp.add(1);
 
-        tourneeAttendus.add(listeTemp);
+        tourneeAttendue.add(listeTemp);
 
-        assertEquals("La tournee est bien calculé", tourneeAttendus, model.getTournee());
+        assertEquals("La tournee est bien calculé", tourneeAttendue, model.getTournee());
     }
 
     @Test
@@ -917,22 +918,22 @@ public class ControleurTest
 
         model = controleurInterface.getModele();
 
-        List<List<Integer>> tourneeAttendus = new ArrayList<>();
+        List<List<Integer>> tourneeAttendue = new ArrayList<>();
         List<Integer> listeTemp = new ArrayList<Integer>();
 
-        tourneeAttendus = new ArrayList<>();
+        tourneeAttendue = new ArrayList<>();
         listeTemp = new ArrayList<Integer>();
         listeTemp.add(2);
         listeTemp.add(4);
         listeTemp.add(5);
-        tourneeAttendus.add(listeTemp);
+        tourneeAttendue.add(listeTemp);
 
         listeTemp = new ArrayList<Integer>();
         listeTemp.add(4);
         listeTemp.add(9);
         listeTemp.add(10);
         listeTemp.add(11);
-        tourneeAttendus.add(listeTemp);
+        tourneeAttendue.add(listeTemp);
 
         listeTemp = new ArrayList<Integer>();
         listeTemp.add(9);
@@ -940,9 +941,9 @@ public class ControleurTest
         listeTemp.add(5);
         listeTemp.add(1);
 
-        tourneeAttendus.add(listeTemp);
+        tourneeAttendue.add(listeTemp);
 
-        assertEquals("La tournee est bien calculé", tourneeAttendus, model.getTournee());
+        assertEquals("La tournee est bien calculé", tourneeAttendue, model.getTournee());
     }
 
     @Test
@@ -974,23 +975,23 @@ public class ControleurTest
 
         model = controleurInterface.getModele();
 
-        List<List<Integer>> tourneeAttendus = new ArrayList<>();
+        List<List<Integer>> tourneeAttendue = new ArrayList<>();
         List<Integer> listeTemp = new ArrayList<Integer>();
 
-        tourneeAttendus = new ArrayList<>();
+        tourneeAttendue = new ArrayList<>();
         listeTemp = new ArrayList<Integer>();
         listeTemp.add(2);
         listeTemp.add(3);
         listeTemp.add(4);
         listeTemp.add(5);
-        tourneeAttendus.add(listeTemp);
+        tourneeAttendue.add(listeTemp);
 
         listeTemp = new ArrayList<Integer>();
         listeTemp.add(4);
         listeTemp.add(9);
         listeTemp.add(10);
         listeTemp.add(11);
-        tourneeAttendus.add(listeTemp);
+        tourneeAttendue.add(listeTemp);
 
         listeTemp = new ArrayList<Integer>();
         listeTemp.add(9);
@@ -998,42 +999,9 @@ public class ControleurTest
         listeTemp.add(5);
         listeTemp.add(1);
 
-        tourneeAttendus.add(listeTemp);
+        tourneeAttendue.add(listeTemp);
 
-        assertEquals("La tournee est bien calculé", tourneeAttendus, model.getTournee());
-    }
-
-    /**
-     * Impossible de réaliser cette livraison car on ne peut pas revenir de la
-     * derniére livraison
-     */
-    @Test
-    public void testCalculerImpossibleLivraison()
-    {
-        File plan = new File("src/main/resources/samples/planTest2.xml");
-        try {
-			controleurInterface.chargerPlan(plan);
-		} catch (Exception e) {
-			fail(e.getMessage());
-		}
-
-        File livraisons = new File("src/main/resources/samples/livraisonTest4.xml");
-        try {
-			controleurInterface.chargerLivraisons(livraisons);
-		} catch (Exception e) {
-			fail(e.getMessage());
-		}
-
-        controleurInterface.clicCalculTournee();
-
-        ModeleLecture model = controleurInterface.getModele();
-
-        List<List<Integer>> tourneeAttendus = new ArrayList<>();
-        List<Integer> listeTemp = new ArrayList<Integer>();
-
-        tourneeAttendus.add(listeTemp);
-
-        assertEquals("La tournee est bien calculé", tourneeAttendus, model.getTournee());
+        assertEquals("La tournee est bien calculé", tourneeAttendue, model.getTournee());
     }
 
     @Test
@@ -1071,11 +1039,11 @@ public class ControleurTest
 
         List<List<Integer>> tournee = model.getTournee();
 
-        List<List<Integer>> tourneeAttendus = new ArrayList<>();
+        List<List<Integer>> tourneeAttendue = new ArrayList<>();
         List<Integer> listeTemp = new ArrayList<Integer>();
-        tourneeAttendus.add(listeTemp);
+        tourneeAttendue.add(listeTemp);
 
-        assertEquals("La tournee est bien calculé", tourneeAttendus, tournee);
+        assertEquals("La tournee est bien calculé", tourneeAttendue, tournee);
     }
 
 }
