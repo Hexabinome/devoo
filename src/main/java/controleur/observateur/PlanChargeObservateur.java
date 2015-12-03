@@ -5,7 +5,7 @@ package controleur.observateur;
  */
 public interface PlanChargeObservateur {
     /**
-     * Notifie la vue qu'un nouveau plan a été chargé plus préci
+     * Notifie la vue qu'un nouveau plan a été chargé.
      */
     void notifierObservateursPlanCharge();
 }

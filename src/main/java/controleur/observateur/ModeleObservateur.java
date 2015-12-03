@@ -1,7 +1,7 @@
 package controleur.observateur;
 
 /**
- * Joue le rôle d'observeur quand il y'a eu un changement dans le modèle quand on est dans
+ * Joue le rôle d'observateur quand il y'a eu un changement dans le modèle quand on est dans
  * l'état principal
  * @author Maxou
  */
