@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.9" icons="false" automaticImage="PNG" always-add-relationships="false" 
+  generalizations="true" realizations="true" associations="true" dependencies="false" nesting-relationships="true" 
+  router="FAN">  
+  <package id="1" language="java" name="modele.donneesxml" project="devoo" file="/devoo/src/main/java/modele/donneesxml" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="827" width="1195" x="291" y="102"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <class id="2" language="java" name="modele.donneesxml.Chemin" project="devoo" 
+    file="/devoo/src/main/java/modele/donneesxml/Chemin.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1124" y="742"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="true" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="modele.donneesxml.Demande" project="devoo" 
+    file="/devoo/src/main/java/modele/donneesxml/Demande.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="572" y="286"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="true" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="modele.donneesxml.Fenetre" project="devoo" 
+    file="/devoo/src/main/java/modele/donneesxml/Fenetre.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="400" y="294"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="true" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="modele.donneesxml.GenerateurFeuilleDeRoute" project="devoo" 
+    file="/devoo/src/main/java/modele/donneesxml/GenerateurFeuilleDeRoute.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1364" y="720"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="true" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <interface id="6" language="java" name="modele.donneesxml.Graphe" project="devoo" 
+    file="/devoo/src/main/java/modele/donneesxml/Graphe.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1420" y="336"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="true" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </interface>  
+  <class id="7" language="java" name="modele.donneesxml.GrapheRealisation" project="devoo" 
+    file="/devoo/src/main/java/modele/donneesxml/GrapheRealisation.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1234" y="344"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="true" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="modele.donneesxml.Intersection" project="devoo" 
+    file="/devoo/src/main/java/modele/donneesxml/Intersection.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="566" y="784"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="true" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="modele.donneesxml.Livraison" project="devoo" 
+    file="/devoo/src/main/java/modele/donneesxml/Livraison.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="408" y="624"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="true" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="modele.donneesxml.Modele" project="devoo" 
+    file="/devoo/src/main/java/modele/donneesxml/Modele.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="870" y="360"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="true" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <interface id="11" language="java" name="modele.donneesxml.ModeleLecture" project="devoo" 
+    file="/devoo/src/main/java/modele/donneesxml/ModeleLecture.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1082" y="180"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="true" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </interface>  
+  <class id="12" language="java" name="modele.donneesxml.PlanDeVille" project="devoo" 
+    file="/devoo/src/main/java/modele/donneesxml/PlanDeVille.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="692" y="628"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="true" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="modele.donneesxml.Troncon" project="devoo" 
+    file="/devoo/src/main/java/modele/donneesxml/Troncon.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="894" y="790"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="true" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="vue.VueGraphiqueAideur" project="devoo" 
+    file="/devoo/src/main/java/vue/VueGraphiqueAideur.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="116" y="626"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="true" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <package id="15" language="java" name="modele.metier" project="devoo" file="/devoo/src/main/java/modele/metier" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="445" width="436" x="1524" y="314"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <class id="16" language="java" name="modele.metier.IteratorSeq" project="devoo" 
+    file="/devoo/src/main/java/modele/metier/IteratorSeq.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1808" y="442"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="true" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="modele.metier.TemplateTSP" project="devoo" 
+    file="/devoo/src/main/java/modele/metier/TemplateTSP.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1660" y="452"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="true" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <interface id="18" language="java" name="modele.metier.TSP" project="devoo" 
+    file="/devoo/src/main/java/modele/metier/TSP.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1664" y="656"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="true" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </interface>  
+  <class id="19" language="java" name="modele.metier.TSP1" project="devoo" 
+    file="/devoo/src/main/java/modele/metier/TSP1.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1814" y="652"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="true" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <association id="20">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="21" name="troncons">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="22" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="23">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="24" name="fenetres">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="25" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="26">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="27" name="graphe">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="28" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="29">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="30" name="plan">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="31" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <realization id="32">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="18"/>  
+  </realization>  
+  <association id="33">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="34" name="tsp">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="35" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="36">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="37" name="intersections">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="38" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <generalization id="39">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="17"/>  
+  </generalization>  
+  <association id="40">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="41" name="entrepot">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="42" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <realization id="43">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="11"/>  
+  </realization>  
+  <association id="44">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="45" name="demande">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="46" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="47">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="48" name="troncons">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="49" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="50">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="51" name="livraisons">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="52" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="53">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="54" name="chemins">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="55" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <realization id="56">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="6"/>  
+  </realization>  
+  <association id="57">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="58" name="g">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="59" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="60">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="61" name="livraisons">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="62" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="false" 
+    sort-features="false" accessors="true" visibility="false">    
+    <attributes public="false" package="false" protected="false" private="false" static="false"/>    
+    <operations public="true" package="false" protected="false" private="false" static="false"/>  
+  </classifier-display>  
+  <association-display labels="false" multiplicity="false"/>
+</class-diagram>

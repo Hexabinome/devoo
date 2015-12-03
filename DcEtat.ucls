@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.9" icons="false" automaticImage="PNG" always-add-relationships="false" 
+  generalizations="true" realizations="true" associations="true" dependencies="false" nesting-relationships="true" 
+  router="FAN">  
+  <package id="1" language="java" name="controleur" project="devoo" file="/devoo/src/main/java/controleur" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="128" width="184" x="699" y="149"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <class id="2" language="java" name="controleur.ControleurDonnees" project="devoo" 
+    file="/devoo/src/main/java/controleur/ControleurDonnees.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="794" y="231"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <package id="3" language="java" name="controleur.etat" project="devoo" file="/devoo/src/main/java/controleur/etat" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="403" width="1068" x="311" y="356"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <class id="4" language="java" name="controleur.etat.AbstractEtat" project="devoo" 
+    file="/devoo/src/main/java/controleur/etat/AbstractEtat.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="778" y="676"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="true" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="controleur.etat.EtatAjout" project="devoo" 
+    file="/devoo/src/main/java/controleur/etat/EtatAjout.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="866" y="448"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="controleur.etat.EtatAjout2" project="devoo" 
+    file="/devoo/src/main/java/controleur/etat/EtatAjout2.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="658" y="450"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="controleur.etat.EtatDemandeChargee" project="devoo" 
+    file="/devoo/src/main/java/controleur/etat/EtatDemandeChargee.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="522" y="446"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="controleur.etat.EtatEchange" project="devoo" 
+    file="/devoo/src/main/java/controleur/etat/EtatEchange.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="52" width="87" x="1043" y="418"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="controleur.etat.EtatEchange2" project="devoo" 
+    file="/devoo/src/main/java/controleur/etat/EtatEchange2.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1182" y="446"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="controleur.etat.EtatInitial" project="devoo" 
+    file="/devoo/src/main/java/controleur/etat/EtatInitial.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="766" y="456"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <interface id="11" language="java" name="controleur.etat.EtatInterface" project="devoo" 
+    file="/devoo/src/main/java/controleur/etat/EtatInterface.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1208" y="684"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </interface>  
+  <class id="12" language="java" name="controleur.etat.EtatPlanCharge" project="devoo" 
+    file="/devoo/src/main/java/controleur/etat/EtatPlanCharge.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="396" y="446"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="controleur.etat.EtatPrincipal" project="devoo" 
+    file="/devoo/src/main/java/controleur/etat/EtatPrincipal.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1291" y="444"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="controleur.etat.EtatSuppression" project="devoo" 
+    file="/devoo/src/main/java/controleur/etat/EtatSuppression.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="52" width="102" x="929" y="424"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <association id="15">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="16" name="donnees"/>      
+      <multiplicity id="17" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <association id="18">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="19" name="controleurDonnees"/>      
+      <multiplicity id="20" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <generalization id="21">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="4"/>  
+  </generalization>  
+  <association id="22">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="23" name="controleurDonnees"/>      
+      <multiplicity id="24" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <generalization id="25">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="4"/>  
+  </generalization>  
+  <association id="26">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="27" name="donnees"/>      
+      <multiplicity id="28" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <generalization id="29">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="4"/>  
+  </generalization>  
+  <association id="30">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="31" name="controleurDonnees"/>      
+      <multiplicity id="32" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <realization id="33">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="11"/>  
+  </realization>  
+  <association id="34">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="35" name="controleurDonnees"/>      
+      <multiplicity id="36" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <generalization id="37">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="4"/>  
+  </generalization>  
+  <generalization id="38">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="4"/>  
+  </generalization>  
+  <association id="39">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="40" name="controleurDonnees"/>      
+      <multiplicity id="41" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <generalization id="42">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="4"/>  
+  </generalization>  
+  <generalization id="43">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="4"/>  
+  </generalization>  
+  <association id="44">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="45" name="donnees"/>      
+      <multiplicity id="46" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <realization id="47">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="11"/>  
+  </realization>  
+  <association id="48">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="49" name="donnees"/>      
+      <multiplicity id="50" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="false" multiplicity="false"/>  
+  </association>  
+  <generalization id="51">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="4"/>  
+  </generalization>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="false" 
+    sort-features="false" accessors="true" visibility="false">    
+    <attributes public="false" package="false" protected="false" private="false" static="false"/>    
+    <operations public="true" package="false" protected="false" private="false" static="false"/>  
+  </classifier-display>  
+  <association-display labels="false" multiplicity="false"/>
+</class-diagram>
