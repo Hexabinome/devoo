@@ -30,7 +30,7 @@ public class CommandeCalculerTournee extends CommandeNonAnnulable {
         controleurDonnees.notifierObservateursModele();
 
         // Notifier la vue que maintenant on peut interagir avec les elements prinicpaux.
-        controleurDonnees.notifierObservateursActivation(false);
+        controleurDonnees.notifierObservateursActivation(true);
         
         controleurDonnees.notifierObservateursMessage("Tournée calculée avec succès !");
     }

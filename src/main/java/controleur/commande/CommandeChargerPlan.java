@@ -43,9 +43,9 @@ public class CommandeChargerPlan extends CommandeNonAnnulable {
             // Remplacer plan qui est chargé d'un nouveau plan (si et seulement le chargement du xml a reussi)
             controleurDonnees.setPlan(DeserialiseurXML.getInstance().ouvrirPlanDeVille(planFichier));
 
-            controleurDonnees.notifierObservateursActivation(true);
+            controleurDonnees.notifierObservateursActivation(false);
             controleurDonnees.notifierObservateurOuvrirDemande(true);
-            controleurDonnees.notifierObservateursCalculTournee(true);
+            controleurDonnees.notifierObservateursCalculTournee(false);
             controleurDonnees.notifierPlanChargeObservateur();
             controleurDonnees.notifierObservateursMessage(String.format("Plan de la ville (%s) chargé avec succès ! Veuillez charger la demande de livraison maintenant.", planFichier.getName()));
             controleurDonnees.effacerHistorique();
