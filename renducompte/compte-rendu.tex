@@ -18,6 +18,15 @@
 \definecolor{lightgray}{rgb}{.95,.95,.95}
 \definecolor{darkgray}{rgb}{.4,.4,.4}
 \definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\usepackage{geometry}
+\geometry{
+ total={ 210mm,297mm},
+ left=20mm,
+ right=20mm,
+ top=15mm,
+ bottom=15mm
+ }
+
 \lstdefinelanguage{JavaScript}{
   keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break, done, fi, elif, for},
   keywordstyle=\color{blue}\bfseries,
@@ -417,26 +426,24 @@ Il s'agit des diagrammes de conception. Ils ne correspondent pas forcement à l'
     \includegraphics[scale=0.4]{vue.png}
     \caption{Diagramme des classes du \textit{vue}}
 \end{figure}
-\section{Choix architecturaux et design patterns}
-\subsection{Design patterns utilisés}
+\section{Choix architecturaux et design patterns utilisés}
+Étant donné la complexité du projet, il a fallu penser en amont à une architecture capable de faciliter le développement, d'assurer une maintenabilité du code et ainsi produire un programme de qualité. 
+
+Dans cette optique, il paraissait évident d'utiliser certains design patterns ou patrons de conception notamment ceux du \textit{Gang of four}.
 \begin{itemize}
-	\item{\textit{Factory} et \textit{Abstract factory}:\\
-Ce patron fournit une interface pour créer des familles d'objets sans spécifier la classe concrète. 
-\footnote{\url{ https://fr.wikipedia.org/wiki/Patron_de_conception\#cite_note-GoF-11}} Le patron factory (en français fabrique) est un patron récurrent. Une fabrique simple retourne une instance d'une classe parmi plusieurs possibles, en fonction des paramètres qui ont été fournis. Toutes les classes ont un lien de parenté, et des méthodes communes, et chacune est optimisée en fonction d'une certaine donnée.
-\footnote{\url{https://fr.wikipedia.org/wiki/Patron_de_conception\#cite_note-Cooper-10}} Le patron abstract factory (en français fabrique abstraite) va un pas plus loin que la fabrique simple. Une fabrique abstraite est utilisée pour obtenir un jeu d'objets connexes. Par exemple pour implémenter une charte graphique: il existe une fabrique qui retourne des objets (boutons, menus) dans le style de Windows, une qui retourne des objets dans le style de Motif, et une dans le style de Macintosh. Une fabrique abstraite est obtenue en utilisant une fabrique simple.}
-	\item{\textit{Command}: \\
-Ce patron emboîte une demande dans un objet, permettant de paramétrer, mettre en file d'attente, journaliser et annuler des demandes. Dans ce patron un objet command correspond à une opération à effectuer. L'interface de cet objet comporte une méthode execute. Pour chaque opération, l'application va créer un objet différent qui implémente cette interface - qui comporte une méthode execute. L'opération est lancée lorsque la méthodeexecute est utilisée. Ce patron est notamment utilisé pour les barres d'outils.\footnote{\url{https://fr.wikipedia.org/wiki/Patron_de_conception\#cite_note-17}}}
-	\item{Observer
-Ce patron établit une relation un à plusieurs entre des objets, où lorsqu'un objet change, plusieurs autres objets sont avisés du changement. Dans ce patron, un objet le sujet tient une liste des objets dépendants les observateurs qui seront avertis des modifications apportées au sujet. Quand une modification est apportée, le sujet émet un message aux différents observateurs. Le message peut contenir une description détaillée du changement.
-\footnote{\url{https://fr.wikipedia.org/wiki/Patron_de_conception\#cite_note-Osmani-23}}
-Dans ce patron, un objet observer comporte une méthode pour inscrire des observateurs. Chaque observateur comporte une méthode Notify. Lorsqu'un message est émis, l'objet appelle la méthode Notify de chaque observateur inscrit.
-\footnote{\url{https://fr.wikipedia.org/wiki/Patron_de_conception\#cite_note-25}}}
-	\item{\textit{State} :\\
+	\item \textbf{Observateur/Observable}
+	
+Ce patron établit une relation un à plusieurs entre des objets, où lorsqu'un objet change, plusieurs autres objets sont avisés du changement. Dans ce patron, un objet le sujet (l'observable) tient une liste des objets dépendants (les observateurs) qui seront avertis des modifications apportées au sujet. Quand une modification est apportée, le sujet émet un message aux différents observateurs. Le message peut contenir une description détaillée du changement. 
+
+Dans ce patron, un objet observable comporte une méthode pour inscrire des observateurs. Chaque observateur comporte une méthode \textit{notify}. Lorsqu'un message est émis,  la méthode \textit{notify} de chaque observateur est appelée.
+
+Pour assurer une communication entre notre modèle et la vue, on a utilisé ce patron de conception.
+
+	\item{\textbf{État}
+	
 Ce patron permet à un objet de modifier son comportement lorsque son état interne change. Ce patron est souvent utilisé pour implémenter une machine à états. Un exemple d'appareil à états est le lecteur audio - dont les états sont lecture, enregistrement, pause et arrêt. Selon ce patron il existe une classe machine à état, et une classe pour chaque état. Lorsqu'un événement provoque le changement d'état, la classe machine à état se relie à un autre état et modifie ainsi son comportement.
 \footnote{\url{https://fr.wikipedia.org/wiki/Patron_de_conception\#cite_note-27}}}
 \end{itemize}
-\subsection{Choix architecturaux}
-TON TEXTE ICI, MOMO :-D
 \newpage
 \section{Diagramme de séquence du calcul de la tournée à partir d'une demande de livraison}
 \begin{figure}[h!]
