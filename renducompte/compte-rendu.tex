@@ -438,7 +438,7 @@ L'architecture globale du projet est basée sur le patron de conception MVC. En 
 
 Notre contrôleur se contente de gérer les différents événements envoyés par la vue. Il n'effectue aucun traitement. Le traitement est géré par les différents états de l'application à travers le pattern État expliqué un peu plus bas. Le contrôleur en tant que tel est divisé deux classes : une partie reçoit les événements puis renvoie la gestion à l'état, l'autre partie appelée \textit{ControleurDonnees} se charge d’accéder au modèle et contient par exemple l'historique des commandes exécutées. C'est cette dernière qui est utilisée par les états pour accéder au modèle.
 
-La vue fait appel au contrôleur grâce à une \textit{façade} (une interface plus précisément) qui n'expose que les méthodes nécessaires à la vue. Ainsi on peut cacher certains détails du contrôleur à la vue ou facilement changer de contrôleur sans impacter la vue notamment pour un mode test ou un mode \textit{mock} \footnote{\url{https://fr.wikipedia.org/wiki/Mock\_(programmation\_orient\%C3\%A9e\_objet)}}.
+La vue fait appel au contrôleur grâce à une \textbf{façade} \footnote{\url{https://fr.wikipedia.org/wiki/Fa\%C3\%A7ade\_(patron\_de\_conception)}} (une interface plus précisément) qui n'expose que les méthodes nécessaires à la vue. Ainsi on peut cacher certains détails du contrôleur à la vue ou facilement changer de contrôleur sans impacter la vue notamment pour un mode test ou un mode \textit{mock} \footnote{\url{https://fr.wikipedia.org/wiki/Mock\_(programmation\_orient\%C3\%A9e\_objet)}}.
 Le lancement de l'application passe par la vue qui se charge créer le contrôleur par l’intermédiaire de la classe \textit{FenetrePrincipale}.
 
 \item{\textbf{État}} 
@@ -456,6 +456,11 @@ Dans ce patron, un objet observable comporte une méthode pour inscrire des obse
 
 Pour assurer une communication entre notre modèle et la vue, on a utilisé ce patron de conception.
 
+\item \textbf{Commande}
+
+Ce patron encapsule une demande dans un objet, permettant de paramétrer, mettre en file d'attente, journaliser et annuler des demandes ou actions utilisateurs. Dans ce patron un objet commande correspond à une opération à effectuer et qui aura un effet sur le modèle. L'interface de cet objet comporte une méthode \textit{exécuter} et \textit{annuler}. Pour chaque opération, l'application va créer un objet différent qui implémente cette interface. L'opération est lancée lorsque la méthode exécuter est utilisée. Chaque commande est responsable d'annuler les modifications qu'elle à apportei adu mcodèle et de notifier la ve.  Utiliser un tel pattern permet de faciliter grandement le mécanisme \textit{Undo/redo} présent dans tous programmes de nos jours.
+
+Il est à noter que l'annulation d'une commande ne change pas l'état de l'application.
 \end{itemize}
 \newpage
 \section{Diagramme de séquence du calcul de la tournée à partir d'une demande de livraison}
