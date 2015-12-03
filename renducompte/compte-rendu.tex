@@ -218,44 +218,102 @@ Le planning prévisionnel du projet s'est déroulé en trois étapes. Tout d'abo
 \subsection{Modifier la tournée (Supprimer une livraison)}
 \begin{itemize}
 	\item{Pré-conditions}
+	\begin{itemize}
+		\item{La tournée doit être calculée}
+	\end{itemize}
 	\item{Scénario principale}
+	\begin{itemize}
+		\item{L'utilisateur entre en mode suppression}
+		\item{Le système demande à l'utilisateur quelle livraison il souhaite supprimer}
+		\item{L'utilisateur indique au système quelle livraison il veut supprimer}
+		\item{Le système modifie la tournée afin de prendre en compte la suppression en compte}
+		\item{Le système affiche les modifications à l'utilisateur}
+	\end{itemize}
 	\item{Scénario alternatif}
 	\item{Liste des appels utilisateurs}
+	\begin{itemize}
+		\item{Supprimer livraison}
+	\end{itemize}
 \end{itemize}
 \subsection{Modifier la tournée (Échanger deux livraisons)}
 \begin{itemize}
 	\item{Pré-conditions}
+		\begin{itemize}
+		\item{La tournée doit être calculée}
+	\end{itemize}
 	\item{Scénario principale}
+	\begin{itemize}
+		\item{L’utilisateur entre en mode échange}
+		\item{Le système demande à l’utilisateur de choisir les deux livraisons à échanger}
+		\item{L’utilisateur sélectionne deux livraisons à échanger}
+		\item{Le système modifie la tournée afin de prendre l’échange en compte}
+		\item{Le système affiche les modifications à l’utilisateur}
+	\end{itemize}
 	\item{Scénario alternatif}
 	\item{Liste des appels utilisateurs}
+	\begin{itemize}
+		\item{Échanger livraisons}
+	\end{itemize}
 \end{itemize}
 \subsection{Modifier la tournée (Ajouter une livraison)}
 \begin{itemize}
 	\item{Pré-conditions}
+		\begin{itemize}
+		\item{La tournée doit être calculée}
+	\end{itemize}
 	\item{Scénario principale}
+	\begin{itemize}
+		\item{L’utilisateur entre en mode ajout}
+		\item{Le système demande à l’utilisateur l’intersection pour le lieu de livraison}
+		\item{L’utilisateur choisit  où il veut que la livraison soit effectuée}
+		\item{Le système demande à l’utilisateur à quel moment la livraison doit être effectuée}
+		\item{L’utilisateur indique au systeme la livraison précédente à celle qu’il désire ajouter}
+		\item{Le système modifie la tournée afin de prendre l’ajout en compte}
+		\item{Le système affiche les modifications à l’utilisateur}
+	\end{itemize}
 	\item{Scénario alternatif}
 	\item{Liste des appels utilisateurs}
+	\begin{itemize}
+		\item{Ajouter livraison}
+	\end{itemize}
 \end{itemize}
 \subsection{Modifier la tournée (Annuler)}
 \begin{itemize}
 	\item{Pré-conditions}
+		\begin{itemize}
+		\item{Il y a eu une modification}
+	\end{itemize}
 	\item{Scénario principale}
+	\begin{itemize}
+		\item{L’utilisateur indique au système qu’il souhaite annuler}
+		\item{Le système effectue l’opération inverse à la modification}
+		\item{Le système modifie la tournée afin de prendre l’annulation en compte}
+		\item{Le système affiche la modification à l’utilisateur}
+	\end{itemize}
 	\item{Scénario alternatif}
 	\item{Liste des appels utilisateurs}
+	\begin{itemize}
+		\item{Annuler}
+	\end{itemize}
 \end{itemize}
 \subsection{Modifier la tournée (Rétablir)}
 \begin{itemize}
 	\item{Pré-conditions}
+		\begin{itemize}
+		\item{Avoir annulé quelque chose}
+	\end{itemize}
 	\item{Scénario principale}
+	\begin{itemize}
+		\item{L’utilisateur indique au système qu’il souhaite rétablir}
+		\item{Le système effectue l’opération qui a été annulée}
+		\item{Le système modifie la tournée afin de prendre en compte le rétablissement}
+		\item{Le système affiche les modifications à l’utilisateur}
+	\end{itemize}
 	\item{Scénario alternatif}
 	\item{Liste des appels utilisateurs}
-\end{itemize}
-\subsection{Modifier la tournée (Rétablir)}
-\begin{itemize}
-	\item{Pré-conditions}
-	\item{Scénario principale}
-	\item{Scénario alternatif}
-	\item{Liste des appels utilisateurs}
+	\begin{itemize}
+		\item{Rétablir}
+	\end{itemize}
 \end{itemize}
 \subsection{Générer la feuille de route}
 \begin{itemize}
