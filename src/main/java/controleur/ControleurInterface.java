@@ -8,7 +8,7 @@ import modele.donneesxml.ModeleLecture;
 import modele.donneesxml.PlanDeVille;
 
 /**
- * Interface le contrôleur
+ * Joue le rôle de façade pour le controleur. La vue ne vera que cette façade pour appeler les méthodes du controleur
  * @author Maxou
  */
 public interface ControleurInterface {

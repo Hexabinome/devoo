@@ -2,7 +2,7 @@ package controleur.commande;
 
 
 /**
- * Représente les commandes non annulable
+ * Représente les commandes non annulables
  * @author Max Schiedermeier
  */
 public abstract class CommandeNonAnnulable implements Commande {
