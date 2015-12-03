@@ -32,8 +32,11 @@
 \BOOKMARK [1][-]{section.3.1}{Code du prototype et des tests unitaires}{chapter.3}% 32
 \BOOKMARK [1][-]{section.3.2}{Documentation JavaDoc du code}{chapter.3}% 33
 \BOOKMARK [1][-]{section.3.3}{Diagramme de packages et de classes r\351tro-g\351n\351r\351s \340 partir du code}{chapter.3}% 34
-\BOOKMARK [0][-]{chapter.4}{Bilan}{}% 35
-\BOOKMARK [1][-]{section.4.1}{Planning effectif du projet}{chapter.4}% 36
-\BOOKMARK [1][-]{section.4.2}{Bilan humain et technique}{chapter.4}% 37
-\BOOKMARK [2][-]{subsection.4.2.1}{Bilan humain}{section.4.2}% 38
-\BOOKMARK [2][-]{subsection.4.2.2}{Bilan technique}{section.4.2}% 39
+\BOOKMARK [2][-]{subsection.3.3.1}{Controleur}{section.3.3}% 35
+\BOOKMARK [2][-]{subsection.3.3.2}{Modele}{section.3.3}% 36
+\BOOKMARK [2][-]{subsection.3.3.3}{Vue}{section.3.3}% 37
+\BOOKMARK [0][-]{chapter.4}{Bilan}{}% 38
+\BOOKMARK [1][-]{section.4.1}{Planning effectif du projet}{chapter.4}% 39
+\BOOKMARK [1][-]{section.4.2}{Bilan humain et technique}{chapter.4}% 40
+\BOOKMARK [2][-]{subsection.4.2.1}{Bilan humain}{section.4.2}% 41
+\BOOKMARK [2][-]{subsection.4.2.2}{Bilan technique}{section.4.2}% 42

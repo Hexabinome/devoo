@@ -34,17 +34,20 @@
 \contentsline {section}{\numberline {3.1}Code du prototype et des tests unitaires}{21}{section.3.1}
 \contentsline {section}{\numberline {3.2}Documentation JavaDoc du code}{21}{section.3.2}
 \contentsline {section}{\numberline {3.3}Diagramme de packages et de classes r\IeC {\'e}tro-g\IeC {\'e}n\IeC {\'e}r\IeC {\'e}s \IeC {\`a} partir du code}{21}{section.3.3}
-\contentsline {chapter}{\numberline {4}Bilan}{23}{chapter.4}
-\contentsline {section}{\numberline {4.1}Planning effectif du projet}{23}{section.4.1}
-\contentsline {section}{\numberline {4.2}Bilan humain et technique}{24}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}Bilan humain}{24}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}Bilan technique}{25}{subsection.4.2.2}
-\contentsline {paragraph}{Pr\IeC {\'e}cisions sur l'impl\IeC {\'e}mentation}{25}{section*.3}
-\contentsline {paragraph}{}{25}{section*.4}
-\contentsline {paragraph}{}{26}{section*.5}
-\contentsline {paragraph}{}{26}{section*.6}
-\contentsline {paragraph}{}{26}{section*.7}
-\contentsline {paragraph}{}{26}{section*.8}
-\contentsline {paragraph}{}{26}{section*.9}
-\contentsline {paragraph}{}{26}{section*.10}
-\contentsline {paragraph}{}{26}{section*.11}
+\contentsline {subsection}{\numberline {3.3.1}Controleur}{21}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}Modele}{22}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3.3}Vue}{22}{subsection.3.3.3}
+\contentsline {chapter}{\numberline {4}Bilan}{25}{chapter.4}
+\contentsline {section}{\numberline {4.1}Planning effectif du projet}{25}{section.4.1}
+\contentsline {section}{\numberline {4.2}Bilan humain et technique}{26}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Bilan humain}{26}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}Bilan technique}{27}{subsection.4.2.2}
+\contentsline {paragraph}{Pr\IeC {\'e}cisions sur l'impl\IeC {\'e}mentation}{27}{section*.3}
+\contentsline {paragraph}{}{27}{section*.4}
+\contentsline {paragraph}{}{28}{section*.5}
+\contentsline {paragraph}{}{28}{section*.6}
+\contentsline {paragraph}{}{28}{section*.7}
+\contentsline {paragraph}{}{28}{section*.8}
+\contentsline {paragraph}{}{28}{section*.9}
+\contentsline {paragraph}{}{28}{section*.10}
+\contentsline {paragraph}{}{28}{section*.11}
