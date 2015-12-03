@@ -33,23 +33,17 @@ public class EtatEchange2 extends AbstractEtat {
 
     @Override
     public EtatInterface clicSurLivraison(int livraisonId2) {
-        if(livraisonId2 == idLivraison1){
-            donnees.notifierObservateursMessage("Vous ne pouvez pas échanger avec elle-même. Selectionner une autre livraison");
-            return this;
-        }
+
         Commande cmdEchanger = new CommandeEchangerLivraisons(donnees, idLivraison1, livraisonId2);
         try {
             cmdEchanger.executer();
             donnees.ajouterCommande(cmdEchanger);
             donnees.effacerCommandesARetablir();
+            return new EtatEchange(donnees);
         } catch (CommandeException e) {
-            // TODO message
-            e.printStackTrace();
+            donnees.notifierObservateursMessage(e.getMessage());
         }
-        EtatInterface nouvelEtat = new EtatEchange(donnees);
-        donnees.notifierObservateursMessage(String.format("[ECHANGE] Les livraisons %d <-> %d ont été échangées avec succès. Veuillez choisir la première livraison en cliquant sur le plan ou sur la liste à gauche. Clic droit pour sortir au mode d'échange.",
-                idLivraison1, livraisonId2));
-        return nouvelEtat;
+        return this;
     }
 
     @Override
