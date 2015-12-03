@@ -37,6 +37,11 @@ public class CommandeEchangerLivraisons extends CommandeAnnulable {
 
     @Override
     public void executer() throws CommandeException {
+
+        if(idLivraison2 == idLivraison1){
+            throw new CommandeException("Vous ne pouvez pas échanger une livraison avec elle-même. Selectionner une autre livraison");
+        }
+
         // Faire une copie du modele
         super.backupModele(donnees.getModele());
         donnees.getModele().echangerLivraisons(idLivraison1, idLivraison2);
