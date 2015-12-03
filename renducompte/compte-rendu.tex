@@ -128,6 +128,22 @@ Pour réaliser ce projet nous avons profite d'une grande variété des technique
 	\item{Pour automatiquement charger les librairies dont on avait besoin, on a intégré \textit{Apache Maven}. On pourrait argumenter que l'intégration de Maven n'était pas forcement nécessaire, car il y avait seulement quatre dépendances. Néanmoins son intégration était très confortable pour l'équipe parce qu'on a jamais perdu du temps en ressoudant les dépendances soulevé par un collègue.}
 	\item{Les tests fonctionnels et unitaires étaient réalises en utilisant \textit{JUnit}. Même si les tests ont contribue beaucoup à trouver et résoudre des erreurs, on aurait encore pu intensifier leur intégration. On a suivi le conseil de jamais laisser un développeur tester son propre code. Quoique ce soit en général une bonne pratique, on avait parfois pas assez de communication entre un auteur d'un classe et le testeur. Ça peut causer que les tests écrit ne peuvent pas passer, car ils n'utilisent pas les interfaces la manière prévu.}
 \end{itemize}
-Finalement on peut résumer que même si il s'agitait d'un projet complexe et qu'on avait pas beaucoup du temps pour le réaliser, nous avons choisi les bonnes outils. Celles ci nous avons permis d'avancer rapidement et créer un produit fiable.
+\paragraph{Précisions sur l'implémentation}
+Il existe quelques problèmes dont nous sommes conscients et quelques détails que nous souhaitons spécifier ici.
+\paragraph{}
+Tout d'abord, il est possible que lors du redimensionnement de la fenêtre alors que le plan est déjà chargé, il peut problème d'affichage. Ce problème survient essentiellement quand on met la fenêtre en pleine écran directement. De plus, après des agrandissements et des zooms, nous avons remarqué qu'il peut y avoir un décalage entre la position de la souris et la position des intersections sur la partie graphique. Les intersections passent en surbrillance seulement si le curseur est un peu en dessous à droite de la position du rond blanc sur le plan.
+\paragraph{}
+Pour le patron de conception Etat (\textit{State}), nous avons préféré recréer un objet de l'état correspond à chaque modification, au lieu d'avoir une instance constante (\textit{final}) et statique de chaque état que nous souhaitons réutiliser. Ce choix a été fait car nous voulions avoir un comportement unique à chaque passage dans un état. Ce comportement se situe dans le constructeur de chaque état.
+\paragraph{}
+Notre patron de conception Commande n'est pas totalement respecté. Dû à des contraintes de temps trop importante et la focalisation sur d'autres fonctionnalités, l'annulation et le rétablissement d'une commande se fait par la restitution du modèle à ce moment. Notre patron Commande est en réalité un mélange entre Commande et Mememto, stockant l'état d'un objet à un certain moment. Pour la copie profonde du modèle, nous n'utilisons pas le patron de conception Prototype, déconseillé par la communauté \footnote{http://stackoverflow.com/questions/64036/how-do-you-make-a-deep-copy-of-an-object-in-java}. Nous sommes conscients que cette manière de faire est beaucoup plus gourmande en mémoire et également en temps processeur. Une amélioration sera vraisemblablement proposée lors du prochain sprint. Afin que la mémoire ne croît pas à l'infini pendant la durée de vie de l'application, nous stockons seulement les dix dernières commandes (copie du modèle du coup) exécutées et les dix dernières annulées.
+\paragraph{}
+Lors de la création d'une livraison, l'identifiant du client est initialisé à -1.
+\paragraph{}
+Nous souhaitons, dans un futur proche, améliorer le rapport généré. Celui-ci ne signale pas les retards, ni les attentes endurés par le chauffeur. Il est pour le moment minimaliste. Nous aurions aimé avoir un rapport en HTML avec un peu de style CSS pour avoir un résultat plus attractif.
+
+
+\paragraph{}
+Finalement, on peut résumer qu'il s'agissait d'un projet complexe et que nous n'avions pas beaucoup de temps pour le réaliser. Nous pensons avoir choisi les bons outils. Ceux-ci nous ont permis d'avancer rapidement et créer un produit fiable.
 \appendix{}
+\end{document}
 \end{document}
