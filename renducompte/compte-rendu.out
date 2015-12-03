@@ -2,25 +2,29 @@
 \BOOKMARK [1][-]{section.1.1}{Planning pr\351visionnel du projet}{chapter.1}% 2
 \BOOKMARK [1][-]{section.1.2}{Mod\350le du domaine}{chapter.1}% 3
 \BOOKMARK [1][-]{section.1.3}{Glossaire}{chapter.1}% 4
-\BOOKMARK [1][-]{section.1.4}{Diagramme de cas d'utilisation}{chapter.1}% 5
-\BOOKMARK [1][-]{section.1.5}{Description textuelle structur\351e des cas d'utilisation}{chapter.1}% 6
-\BOOKMARK [0][-]{chapter.2}{Conception}{}% 7
-\BOOKMARK [1][-]{section.2.1}{Liste des \351v\351nements utilisateur et diagramme \351tats-transitions}{chapter.2}% 8
-\BOOKMARK [2][-]{subsection.2.1.1}{Liste des \351v\351nements utilisateur}{section.2.1}% 9
-\BOOKMARK [2][-]{subsection.2.1.2}{Diagramme \351tats-transitions}{section.2.1}% 10
-\BOOKMARK [1][-]{section.2.2}{Diagrammes de packages et de classes}{chapter.2}% 11
-\BOOKMARK [2][-]{subsection.2.2.1}{Packages}{section.2.2}% 12
-\BOOKMARK [2][-]{subsection.2.2.2}{Controleur}{section.2.2}% 13
-\BOOKMARK [2][-]{subsection.2.2.3}{Modele}{section.2.2}% 14
-\BOOKMARK [2][-]{subsection.2.2.4}{Vue}{section.2.2}% 15
-\BOOKMARK [1][-]{section.2.3}{Document expliquant les choix architecturaux et design patterns utilis\351s}{chapter.2}% 16
-\BOOKMARK [1][-]{section.2.4}{Diagramme de s\351quence du calcul de la tourn\351e \340 partir d'une demande de livraison}{chapter.2}% 17
-\BOOKMARK [0][-]{chapter.3}{Impl\351mentation et tests}{}% 18
-\BOOKMARK [1][-]{section.3.1}{Code du prototype et des tests unitaires}{chapter.3}% 19
-\BOOKMARK [1][-]{section.3.2}{Documentation JavaDoc du code}{chapter.3}% 20
-\BOOKMARK [1][-]{section.3.3}{Diagramme de packages et de classes r\351tro-g\351n\351r\351s \340 partir du code}{chapter.3}% 21
-\BOOKMARK [0][-]{chapter.4}{Bilan}{}% 22
-\BOOKMARK [1][-]{section.4.1}{Planning effectif du projet}{chapter.4}% 23
-\BOOKMARK [1][-]{section.4.2}{Bilan humain et technique}{chapter.4}% 24
-\BOOKMARK [2][-]{subsection.4.2.1}{Bilan humain}{section.4.2}% 25
-\BOOKMARK [2][-]{subsection.4.2.2}{Bilan technique}{section.4.2}% 26
+\BOOKMARK [2][-]{subsection.1.3.1}{Entit\351s}{section.1.3}% 5
+\BOOKMARK [2][-]{subsection.1.3.2}{Actions}{section.1.3}% 6
+\BOOKMARK [1][-]{section.1.4}{Diagramme de cas d'utilisation}{chapter.1}% 7
+\BOOKMARK [1][-]{section.1.5}{Description textuelle structur\351e des cas d'utilisation}{chapter.1}% 8
+\BOOKMARK [0][-]{chapter.2}{Conception}{}% 9
+\BOOKMARK [1][-]{section.2.1}{Liste des \351v\351nements utilisateur et diagramme \351tats-transitions}{chapter.2}% 10
+\BOOKMARK [2][-]{subsection.2.1.1}{Liste des \351v\351nements utilisateur}{section.2.1}% 11
+\BOOKMARK [2][-]{subsection.2.1.2}{Diagramme \351tats-transitions}{section.2.1}% 12
+\BOOKMARK [1][-]{section.2.2}{Diagrammes de packages et de classes}{chapter.2}% 13
+\BOOKMARK [2][-]{subsection.2.2.1}{Packages}{section.2.2}% 14
+\BOOKMARK [2][-]{subsection.2.2.2}{Controleur}{section.2.2}% 15
+\BOOKMARK [2][-]{subsection.2.2.3}{Modele}{section.2.2}% 16
+\BOOKMARK [2][-]{subsection.2.2.4}{Vue}{section.2.2}% 17
+\BOOKMARK [1][-]{section.2.3}{Choix architecturaux et design patterns}{chapter.2}% 18
+\BOOKMARK [2][-]{subsection.2.3.1}{Design patterns utilis\351s}{section.2.3}% 19
+\BOOKMARK [2][-]{subsection.2.3.2}{Choix architecturaux}{section.2.3}% 20
+\BOOKMARK [1][-]{section.2.4}{Diagramme de s\351quence du calcul de la tourn\351e \340 partir d'une demande de livraison}{chapter.2}% 21
+\BOOKMARK [0][-]{chapter.3}{Impl\351mentation et tests}{}% 22
+\BOOKMARK [1][-]{section.3.1}{Code du prototype et des tests unitaires}{chapter.3}% 23
+\BOOKMARK [1][-]{section.3.2}{Documentation JavaDoc du code}{chapter.3}% 24
+\BOOKMARK [1][-]{section.3.3}{Diagramme de packages et de classes r\351tro-g\351n\351r\351s \340 partir du code}{chapter.3}% 25
+\BOOKMARK [0][-]{chapter.4}{Bilan}{}% 26
+\BOOKMARK [1][-]{section.4.1}{Planning effectif du projet}{chapter.4}% 27
+\BOOKMARK [1][-]{section.4.2}{Bilan humain et technique}{chapter.4}% 28
+\BOOKMARK [2][-]{subsection.4.2.1}{Bilan humain}{section.4.2}% 29
+\BOOKMARK [2][-]{subsection.4.2.2}{Bilan technique}{section.4.2}% 30

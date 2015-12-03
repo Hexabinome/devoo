@@ -1,0 +1,9 @@
+
+# latex file
+*.aux
+*.idx
+*.log
+*.out
+*.toc
+*.synctex.gz
+compte-rendu.pdf
