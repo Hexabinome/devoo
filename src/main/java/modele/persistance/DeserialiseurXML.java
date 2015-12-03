@@ -82,7 +82,7 @@ public class DeserialiseurXML {
         List<Element> intersectionList = elementRacine.getChildren(XMLTags.NOEUD);
         for (Element e : intersectionList) {
         	Intersection intersection = chargerIntersection(e);
-            planDeVille.addInstersection(intersection);
+            planDeVille.ajouterInstersection(intersection);
         }
         
         return planDeVille;

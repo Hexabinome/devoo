@@ -4,14 +4,6 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-import modele.donneesxml.Demande;
-import modele.donneesxml.Fenetre;
-import modele.donneesxml.Intersection;
-import modele.donneesxml.Livraison;
-import modele.donneesxml.Modele;
-import modele.donneesxml.ModeleLecture;
-import modele.donneesxml.PlanDeVille;
-import modele.donneesxml.Troncon;
 import modele.persistance.DeserialiseurXML;
 import modele.persistance.ExceptionXML;
 
@@ -123,17 +115,17 @@ public class ModeleTest {
         i11.ajouterTroncon(9, o);
 
         PlanDeVille plan = new PlanDeVille();
-        plan.addInstersection(i1);
-        plan.addInstersection(i2);
-        plan.addInstersection(i3);
-        plan.addInstersection(i4);
-        plan.addInstersection(i5);
-        plan.addInstersection(i6);
-        plan.addInstersection(i7);
-        plan.addInstersection(i8);
-        plan.addInstersection(i9);
-        plan.addInstersection(i10);
-        plan.addInstersection(i11);
+        plan.ajouterInstersection(i1);
+        plan.ajouterInstersection(i2);
+        plan.ajouterInstersection(i3);
+        plan.ajouterInstersection(i4);
+        plan.ajouterInstersection(i5);
+        plan.ajouterInstersection(i6);
+        plan.ajouterInstersection(i7);
+        plan.ajouterInstersection(i8);
+        plan.ajouterInstersection(i9);
+        plan.ajouterInstersection(i10);
+        plan.ajouterInstersection(i11);
 
         fenetre1.ajouterLivraison(102, new Livraison(102, 202, 2));
         fenetre1.ajouterLivraison(104, new Livraison(104, 204, 4));

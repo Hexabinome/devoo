@@ -60,14 +60,14 @@ public class FenetreTest
         Intersection i8 = new Intersection(8, 1, 1);
 
         PlanDeVille plan = new PlanDeVille();
-        plan.addInstersection(i1);
-        plan.addInstersection(i2);
-        plan.addInstersection(i3);
-        plan.addInstersection(i4);
-        plan.addInstersection(i5);
-        plan.addInstersection(i6);
-        plan.addInstersection(i7);
-        plan.addInstersection(i8);
+        plan.ajouterInstersection(i1);
+        plan.ajouterInstersection(i2);
+        plan.ajouterInstersection(i3);
+        plan.ajouterInstersection(i4);
+        plan.ajouterInstersection(i5);
+        plan.ajouterInstersection(i6);
+        plan.ajouterInstersection(i7);
+        plan.ajouterInstersection(i8);
 
         ArrayList<Troncon> troncon = new ArrayList<>();
 
