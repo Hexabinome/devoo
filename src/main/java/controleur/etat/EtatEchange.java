@@ -64,8 +64,9 @@ public class EtatEchange extends AbstractEtat {
     	}
 
     	// Sinon on reste dans l'état actuel
-    	//return this; // TODO reste dans l'état ou exception ?
-        throw new RuntimeException("L'intersection n'est pas une livraison");
+        donnees.notifierObservateursMessage("Vous devez cliquer sur une livraison pour effectuer un échange");
+    	return this;
+
     }
 
     @Override
