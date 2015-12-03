@@ -15,7 +15,7 @@ public class Historique {
     /**
      * Pile des commandes qui ont été éxécutées avec succès c'est à dire les commandes à annuler
      */
-    private Deque<Commande> commandesAAnnuller;
+    private Deque<Commande> commandesAAnnuler;
 
     /**
      * Pile des commandes à retablir
@@ -26,7 +26,7 @@ public class Historique {
      * Constructeur de l'historique
      */
     public Historique() {
-        commandesAAnnuller = new ArrayDeque<>();
+        commandesAAnnuler = new ArrayDeque<>();
         commandesARetablir = new ArrayDeque<>();
     }
 
@@ -35,16 +35,22 @@ public class Historique {
      * @param commande Une commande qui s'est exécutée avec succès
      */
     public void ajouterCommande(Commande commande) {
-        commandesAAnnuller.push(commande);
+        commandesAAnnuler.push(commande);
+        if (commandesAAnnuler.size() > 10) {
+        	commandesAAnnuler.removeLast();
+        }
     }
 
     /**
      * Annule la dernière commande annulable executée s'il y'en a (Ctrl+Z)
      */
     public void annuler() {
-        if(!commandesAAnnuller.isEmpty()) {
-            Commande commandeAAnnuler = commandesAAnnuller.pop();
+        if(!commandesAAnnuler.isEmpty()) {
+            Commande commandeAAnnuler = commandesAAnnuler.pop();
             commandesARetablir.push(commandeAAnnuler);
+            if (commandesARetablir.size() > 10) {
+            	commandesARetablir.removeLast();
+            }
             commandeAAnnuler.annuler();
         }
     }
@@ -56,7 +62,7 @@ public class Historique {
         if (!commandesARetablir.isEmpty()) {
             Commande commande = commandesARetablir.pop();
             commande.executer();
-            commandesAAnnuller.push(commande);
+            commandesAAnnuler.push(commande);
         }
     }
 
@@ -79,7 +85,7 @@ public class Historique {
      * Efface le contenu de la pile des commandes qui ont été éxécutées
      */
     public void effacerCommandesAAnnuler() {
-        commandesAAnnuller.clear();
+        commandesAAnnuler.clear();
     }
 
     /**
@@ -93,6 +99,6 @@ public class Historique {
      * Renvoie vrai s'il reste des commandes à annuler, faux sinon
      */
     public boolean estVideCommandesAAnnuler(){
-        return commandesAAnnuller.isEmpty();
+        return commandesAAnnuler.isEmpty();
     }
 }
