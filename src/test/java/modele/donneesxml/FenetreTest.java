@@ -35,27 +35,27 @@ public class FenetreTest
         Troncon i = new Troncon("I", 1, 1, 8);
 
         Intersection i1 = new Intersection(1, 1, 1);
-        i1.addTroncon(2, a);
-        i1.addTroncon(5, f);
-        i1.addTroncon(6, g);
+        i1.ajouterTroncon(2, a);
+        i1.ajouterTroncon(5, f);
+        i1.ajouterTroncon(6, g);
 
         Intersection i2 = new Intersection(2, 1, 1);
-        i2.addTroncon(3, b);
-        i2.addTroncon(4, d);
+        i2.ajouterTroncon(3, b);
+        i2.ajouterTroncon(4, d);
 
         Intersection i3 = new Intersection(3, 1, 1);
-        i3.addTroncon(4, c);
+        i3.ajouterTroncon(4, c);
 
         Intersection i4 = new Intersection(4, 1, 1);
 
         Intersection i5 = new Intersection(5, 1, 1);
-        i5.addTroncon(4, e);
+        i5.ajouterTroncon(4, e);
 
         Intersection i6 = new Intersection(6, 1, 1);
-        i6.addTroncon(7, h);
+        i6.ajouterTroncon(7, h);
 
         Intersection i7 = new Intersection(7, 1, 1);
-        i7.addTroncon(8, i);
+        i7.ajouterTroncon(8, i);
 
         Intersection i8 = new Intersection(8, 1, 1);
 

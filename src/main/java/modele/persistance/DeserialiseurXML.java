@@ -123,7 +123,7 @@ public class DeserialiseurXML {
              Troncon tronconSortant = chargerTroncon(elementTroncon, idIntersection); 
 
              // Ajout du troncon sortant à l'intersection
-             intersection.addTroncon(tronconSortant.getIdDestination(), tronconSortant);
+             intersection.ajouterTroncon(tronconSortant.getIdDestination(), tronconSortant);
          }
          
          return intersection;
