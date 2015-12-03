@@ -1,0 +1,75 @@
+\documentclass[10pt,a4paper]{book}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\author{Hexanome: 4105\\\\Alexis Andra\\Jolan Cornevin\\Mohamed Haidara\\Alexis Papin\\Robin Royer\\Maximilian Schiedermeier\\Davis Wobrock}
+\title{Compte Rendu DevOO}
+\usepackage{listings}
+\usepackage{color}
+\definecolor{lightgray}{rgb}{.95,.95,.95}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break, done, fi, elif, for},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{black}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+\lstset{
+   language=JavaScript,
+   frame=single,
+   extendedchars=true,
+   basicstyle=\footnotesize\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   numbers=left,
+   numberstyle=\footnotesize,
+   numbersep=9pt,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b,
+   backgroundcolor=\color{lightgray},
+}
+
+\makeindex
+\begin{document}
+\maketitle
+\tableofcontents 
+\chapter{Capture et Analyse des besoins}
+\section{Planning prévisionnel du projet}
+\section{Modèle du domaine}
+\section{Glossaire}
+\section{Diagramme de cas d'utilisation}
+\section{Description textuelle structurée des cas d'utilisation}
+\chapter{Conception}
+\section{Liste des événements utilisateur et diagramme États-Transitions}
+\section{Diagrammes des packages et de classes}
+\section{Document expliquant les choix architecturaux et design patterns utilisés}
+\section{Diagramme des sequence du calcul de la tournée a partir d'une demande de livraison}
+\chapter{Implémentation et tests}
+\section{Code du prototype et des tests unitaires}
+\section{Documentation JavaDoc du code}
+\section{Diagramme de packages et de classes rétro-générés à partir du code}
+\chapter{Bilan}
+\section{Planning effectif du projet}
+\section{Bilan humain et technique}
+\subsection{Bilan humain}
+Coordonner le projet et notamment distribuer les taches dans l'équipe était un devoir délicat. D'un cote un but était de paralléliser les fils de développement le plus que possible. D'autre part il y avait beaucoup des dépendances entre les étapes prévus. C'est pour ça qu'au début de projet la priorité était de identifier une procédure raisonnable qui permettait d'identifier les stations critiques. Comme je n'étais jamais avant en charge d'une équipe assez nombreuse et puissant je dois admettre que d'abord j'avais sous-estimé ce défi.\\ Le résultat de cet effort nous a bien permit de profiter au maximum des ressources humaines, néanmoins il était important de tenir tout l' équipe en courant en ce que regarde les développements qui se sont déroule dans les cotes divers du projet. En particulier la convention de bien commenter son code en combinaison avec une communication fréquente nous ont permis de maitriser cette mission.\\Personnellement je le trouvait éprouvant de trouver une raisonnable granularité pour la gestion des taches ouverts dans l'équipe. Si une charge est trop petit, on risque de perdre du temps en expliquant son contexte. Peut être elle aurait pu réalisé plus rapide directement par la personne qui s'en a déjà occupe. Sinon, quand les taches sont trop complexe on risque qu'un développeur sera bloqué pour trop long et sera exclu des événements qui se passent concurremment. Comme la section avant a relevé, la nombre des heures passes sur le project par développeur n'est pas parfaitement équilibré. Cependant on ne doit pas oublier que les chiffres ne correspondent pas toujours précisément au travail réalise. Notamment le temps passe avec planification, communication et réflexion n'est pas facile a mesurer. Pour ça il me semble plus avéré d'évaluer l'équipe comme un entité indivisible.\\
+Parlant de l'équipe, on peut résumer que on était enchanté de pouvoir observer la réalisation de nos conceptions. Même s'il y avait parfois des défis qu'on n'avait pas prévu, l'équipe était toujours motive de discuter et trouver la meilleure solution ensemble.
+\subsection{Bilan technique}
+Pour réaliser ce projet nous avons profite d'une grande variété des techniques. Au but de permettre à chaque développeur de travailler avec son IDE préféré, nous avons décidé de ne pas garder les fichiers de gestion d'IDE dans le répertoire git. Grâce a çà, nous avons réussi à travailler avec des IDEs \textit{NetBeans}, \textit{Eclipse} et \textit{IntelliJ} en même temps. Concernant les fichiers de conception nous avons également utilise plusieurs outils. La conception des diagrammes de classes était réalisé avec le logiciel \textit{UMLet} \footnote{http://www.umlet.com/}. Les fichiers utilisés par ce logiciel étaient également partage dans le répertoire git.\\Pour tous les autres diagrammes on a profite des outils en ligne, particulièrement \textit{draw.io}, disponible sur \textit{google drive}.\\Pour automatiquement charger les librairies dont on a besoin, on a intégré maven. On pourrait argumenter que l'integration de maven n'etait pas forcement necessaire, car il y avait seulement quatre dependances. Néanmoins son intégration était très confortable pour l'équipe parce qu'on na pas perdu du temps en ressoudant les dépendances soulevé par un collègue.
+Les tests fonctionnels et unitaires étaient réalises en utilisant JUnit. Même si les tests ont contribue beaucoup à trouver et résoudre des erreurs, on aurait encore pu intensifier leur intégration. On a suivi le conseil de jamais laisser un développeur tester son propre code. Quoique ce soit en général une bonne idée, on avait parfois pas assez de communication entre l'auteur d'un classe et le testeur. Ça peut causer que les tests écrit ne peuvent pas passer, car ils n'utilisent pas les interfaces la manière prévu.
+\appendix{}
+\end{document}
