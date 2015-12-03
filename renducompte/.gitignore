@@ -1,8 +1,6 @@
 # latex file
-*.aux
-*.idx
-*.log
-*.out
-*.toc
-*.synctex.gz
+compte-rendu.aux
+compte-rendu.idx
+compte-rendu.toc
+compte-rendu.synctex.gz
 compte-rendu.pdf
