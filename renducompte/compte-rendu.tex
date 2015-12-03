@@ -152,7 +152,136 @@ Le planning prévisionnel du projet s'est déroulé en trois étapes. Tout d'abo
 \item \textbf{Quitter :} Permet de quitter l'application. \vskip1mm
 \end{itemize}
 \section{Diagramme de cas d'utilisation}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=0.28]{cu.png}
+    \caption{Diagramme de cas d'utilisation}
+\end{figure}
 \section{Description textuelle structurée des cas d'utilisation}
+\subsection{Charger le plan}
+\begin{itemize}
+	\item{Pré-conditions}
+	\item{Scénario principale}
+	\begin{itemize}
+		\item{Le système demande de charger le plan de la ville XML}
+		\item{L’utilisateur sélectionne un plan dans son système de fichiers}
+		\item{Le plan de la ville est affiché}
+	\end{itemize}
+	\item{Scénario alternatif}
+	\begin{itemize}
+		\item{Le plan de la ville XML n’est pas au bon format ou bien formé. $\rightarrow$ Le système indique que le plan de la ville XML n’est pas valide et retourne à l’étape 1.}
+	\end{itemize}
+	\item{Liste des appels utilisateurs}
+	\begin{itemize}
+		\item{Choisir le plan de ville XML}
+	\end{itemize}
+\end{itemize}
+\subsection{Charger les livraisons}
+\begin{itemize}
+	\item{Pré-conditions}
+	\begin{itemize}
+		\item{Le plan de la ville xml doit être charge et le plan de la ville est affiche}
+	\end{itemize}
+	\item{Scénario principale}
+	\begin{itemize}
+		\item{Le système demande la saisie d’un plan de livraison xml}
+		\item{L’utilisateur sélectionne, dans son système de fichier, un plan de livraison xml}
+		\item{Le système affiche les adresses de livraisons sur le plan de ville.}
+	\end{itemize}
+	\item{Scénario alternatif}
+	\begin{itemize}
+		\item{Le système indique que le plan de livraisons xml est incorrecte ou mal-forme $\rightarrow$ retour a l’etape 1}
+	\end{itemize}
+	\item{Liste des appels utilisateurs}
+	\begin{itemize}
+		\item{Choisir le plan de livraisons XML}
+	\end{itemize}
+\end{itemize}
+\subsection{Calculer la tournée}
+\begin{itemize}
+	\item{Pré-conditions}
+	\begin{itemize}
+		\item{Le plan de livraisons XML est charge et le plan de livraison est affiche sur le plan de la ville}
+	\end{itemize}
+	\item{Scénario principale}
+	\begin{itemize}
+		\item{L’utilisateur demande le calcul de la tournee.}
+		\item{Le systeme calcul la tournee optimale.}
+		\item{Le systeme affiche la tournee sur le plan et affiche la liste des livraisons(heure de passage, fenetre de livraisons et retard en rouge).}
+	\end{itemize}
+	\item{Scénario alternatif}
+	\item{Liste des appels utilisateurs}
+	\begin{itemize}
+		\item{Demande de calcul de tournées}
+	\end{itemize}
+\end{itemize}
+\subsection{Modifier la tournée (Supprimer une livraison)}
+\begin{itemize}
+	\item{Pré-conditions}
+	\item{Scénario principale}
+	\item{Scénario alternatif}
+	\item{Liste des appels utilisateurs}
+\end{itemize}
+\subsection{Modifier la tournée (Échanger deux livraisons)}
+\begin{itemize}
+	\item{Pré-conditions}
+	\item{Scénario principale}
+	\item{Scénario alternatif}
+	\item{Liste des appels utilisateurs}
+\end{itemize}
+\subsection{Modifier la tournée (Ajouter une livraison)}
+\begin{itemize}
+	\item{Pré-conditions}
+	\item{Scénario principale}
+	\item{Scénario alternatif}
+	\item{Liste des appels utilisateurs}
+\end{itemize}
+\subsection{Modifier la tournée (Annuler)}
+\begin{itemize}
+	\item{Pré-conditions}
+	\item{Scénario principale}
+	\item{Scénario alternatif}
+	\item{Liste des appels utilisateurs}
+\end{itemize}
+\subsection{Modifier la tournée (Rétablir)}
+\begin{itemize}
+	\item{Pré-conditions}
+	\item{Scénario principale}
+	\item{Scénario alternatif}
+	\item{Liste des appels utilisateurs}
+\end{itemize}
+\subsection{Modifier la tournée (Rétablir)}
+\begin{itemize}
+	\item{Pré-conditions}
+	\item{Scénario principale}
+	\item{Scénario alternatif}
+	\item{Liste des appels utilisateurs}
+\end{itemize}
+\subsection{Générer la feuille de route}
+\begin{itemize}
+	\item{Pré-conditions}
+	\begin{itemize}
+		\item{Avoir calulé la tournée}
+	\end{itemize}
+	\item{Scénario principale}
+	\begin{itemize}
+		\item{L’utilisateur demande la génération d’une feuille de route}
+		\item{Le système ouvre une boîte de dialogue pour sélectionner le répertoire d’enregistrement}
+		\item{L’utilisateur choisit le répertoire et le nom du fichier à enregistrer}
+		\item{Le système génère le texte de la feuille de route}
+		\item{Le système écrit le texte dans le fichier choisit préalablement}
+		\item{Le système retourne à l’affichage du plan}
+	\end{itemize}
+	\item{Scénario alternatif}
+	\begin{itemize}
+		\item{L’écriture disque échoue $\rightarrow$
+Le système indique l’erreur à l'utilisateur et retourne à affichage du plan}
+	\end{itemize}
+	\item{Liste des appels utilisateurs}
+	\begin{itemize}
+		\item{Générer la feuille de route}
+	\end{itemize}
+\end{itemize}
 \chapter{Conception}
 \section{Liste des événements utilisateur et diagramme états-transitions}
 \subsection{Liste des événements utilisateur}
