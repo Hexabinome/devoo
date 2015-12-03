@@ -461,6 +461,11 @@ Pour assurer une communication entre notre modèle et la vue, on a utilisé ce p
 Ce patron encapsule une demande dans un objet, permettant de paramétrer, mettre en file d'attente, journaliser et annuler des demandes ou actions utilisateurs. Dans ce patron un objet commande correspond à une opération à effectuer et qui aura un effet sur le modèle. L'interface de cet objet comporte une méthode \textit{exécuter} et \textit{annuler}. Pour chaque opération, l'application va créer un objet différent qui implémente cette interface. L'opération est lancée lorsque la méthode exécuter est utilisée. Chaque commande est responsable d'annuler les modifications qu'elle à apportei adu mcodèle et de notifier la ve.  Utiliser un tel pattern permet de faciliter grandement le mécanisme \textit{Undo/redo} présent dans tous programmes de nos jours.
 
 Il est à noter que l'annulation d'une commande ne change pas l'état de l'application.
+
+\item \textbf{Singleton}
+
+Pour la \textit{déserialisation} des fichiers XML, on mis en place une classe singleton dont l'instanciation plusieurs fois n'aurait pas eu de sens. 
+
 \end{itemize}
 \newpage
 \section{Diagramme de séquence du calcul de la tournée à partir d'une demande de livraison}
@@ -609,11 +614,13 @@ Le résultat de cet effort nous a bien permis de profiter au maximum des ressour
 Personnellement, je trouvais éprouvant de trouver une bonne granularité pour la distribution des tâches dans l'équipe. Si une charge était trop petite, on risque de perdre du temps en expliquant le contexte. Aurait-elle pu être réalisée plus rapidement directement par la personne qui s'en est déjà occupée ? Sinon, quand les tâches sont trop complexes, on risque qu'un développeur sera bloqué et exclu des événements qui se passent à côté. Comme la section précédente l'a relevé, le nombre d'heures passées sur le projet par développeur n'est pas parfaitement équilibré. Cependant on ne doit pas oublier que les chiffres ne correspondent pas toujours précisément au travail réalisé. Notamment le temps passé sur la planification, communication et réflexion n'est pas facile à mesurer. C'est pour cela qu'il me semble plus avéré d'évaluer l'équipe comme une entité indivisible.\\
 Parlant de l'équipe, on peut résumer qu'on était enchanté de pouvoir observer la réalisation de nos conceptions. Même s'il y avait parfois des défis qu'on n'avait pas prévu, l'équipe était toujours motivé pour discuter et trouver la meilleure solution possible.
 \subsection{Bilan technique}
-Pour réaliser ce projet, nous avons profité d'une grande variété des techniques. Dans le but de permettre à chaque développeur de travailler avec son IDE préféré, nous avons décidé de ne pas garder les fichiers de gestion d'IDE dans le répertoire git. Grâce à cela, nous avons réussi à travailler avec les IDEs \textit{NetBeans}, \textit{Eclipse} et \textit{IntelliJ} en même temps. Concernant les fichiers de conception, nous avons également utilisé plusieurs outils :
+Pour réaliser ce projet, nous avons profité d'une grande variété des techniques. Dans le but de permettre à chaque développeur de travailler avec son IDE préféré, nous avons décidé de ne pas garder les fichiers de gestion d'IDE dans le répertoire git. Grâce à cela, nous avons réussi à travailler avec les IDEs \textit{NetBeans}, \textit{Eclipse} et \textit{IntelliJ} en même temps. 
+
+Concernant les fichiers de conception, nous avons également utilisé plusieurs outils :
 \begin{itemize}
 	\item{La conception des diagrammes de classes était réalisée avec le logiciel \textit{UMLet} \footnote{http://www.umlet.com/}. Les fichiers utilisés par ce logiciel étaient également partagés dans le répertoire git.}
 	\item{Pour tous les autres diagrammes nous avons profité des outils en ligne, particulièrement \textit{Draw.io}, dont une intégration est disponible avec \textit{Google Drive}.}
-	\item{Pour automatiquement charger les bibliothèques dont nous avons besoin, nous avons intégré \textit{Apache Maven}. On pourrait argumenter que l'intégration de Maven n'était pas forcement nécessaire, car il y avait seulement quatre dépendances. Néanmoins, son intégration était très confortable pour l'équipe parce qu'on n'a jamais perdu du temps en résolvant les dépendances soulevées par un collègue.}
+	\item{Pour automatiquement charger les bibliothèques dont nous avons besoin et automatiser les tests, nous avons intégré \textit{Apache Maven}. Son intégration était très confortable pour l'équipe parce qu'on n'a jamais perdu du temps en résolvant les dépendances soulevées par un collègue. A coté de Maven on a utilisé un outils d'intégration continue \href{https://travis-ci.org/}{\textbf{Travis-ci}}} qui se marie très bien avec Maven et qui permet de lancer les tests à chaque commit que l'on faisait. Avec cet outils on pouvait très facilement détecter les régressions dans le code et voir les changements ayant apporté la régression.
 	\item{Les tests fonctionnels et unitaires étaient réalises en utilisant le framework \textit{JUnit}. Bien que les tests ont grandement contribué à trouver et résoudre des erreurs, nous aurions encore pu intensifier leur intégration. Nous avons suivi le conseil de ne jamais laisser un développeur tester son propre code. C'est en général une bonne pratique, mais nous avons parfois pas établi assez de communication entre un auteur d'une classe et le testeur. Ça peut causer que les tests ne passent pas, car ils n'utilisent pas les interfaces de la manière prévue.}
 \end{itemize}
 
