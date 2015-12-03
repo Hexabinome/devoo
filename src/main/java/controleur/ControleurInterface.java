@@ -60,7 +60,7 @@ public interface ControleurInterface {
      * Ajoute un observateur des messages envoyés
      * @param obs
      */
-     void ajouterMessageObservateur(MessageObservateur obs);
+    void ajouterMessageObservateur(MessageObservateur obs);
 
     void ajouterPlanChargeObserveur(PlanChargeObservateur planChargeObservateur);
 

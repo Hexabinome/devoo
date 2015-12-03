@@ -25,17 +25,6 @@ import java.util.List;
 public class ControleurTest
 {
 
-    /*  TODO : TEST LES METHODES
-     +ajouterDesactObserver():void
-     +ajouterModelObserver():void
-     +cliqueSurPlan():void
-     +cliqueAnnuler():boolean
-     +cliqueOutilAjouter():void
-     +cliqueOutilSupprimer():void
-     +cliqueOutilEchanger():void
-     +getModel():ModelLecture
-     +cliqueCalculerTourne():void 
-     */
     ModeleObservateur observer;
     boolean miseAJourAppelee;
     ControleurInterface controleurInterface;
@@ -63,464 +52,471 @@ public class ControleurTest
      * Tests chargerPlan
      ************************************************
      */
-    /*
+    
      @Test
-     public void testChargerPlan() {
-     File plan = new File("samples/plan10x10.xml");
-     controleurInterface.chargerPlan(plan);
-     assert (miseAJourAppelee);
+     public void testChargerPlan() throws Exception {
+
+    	 File plan = new File("src/main/resources/samples/plan10x10.xml");
+    	 controleurInterface.chargerPlan(plan);
+		
+    	 assert (miseAJourAppelee);
      }
-     */
+     
     /**
      * ***********************************************
      * Tests chargerLivraisons
      ************************************************
      */
-    /*
+    
      @Test
-     public void testChargerLivraisons() {
-     File plan = new File("samples/plan10x10.xml");
-     controleurInterface.chargerPlan(plan);
-
-     File livraisons = new File("samples/livraison10x10-3.xml");
-     controleurInterface.chargerLivraisons(livraisons);
-
-     assert (miseAJourAppelee);
+     public void testChargerLivraisons() throws Exception {
+ 
+		 File plan = new File("src/main/resources/samples/plan10x10.xml");
+		 controleurInterface.chargerPlan(plan);
+		
+		 File livraisons = new File("src/main/resources/samples/livraison10x10-3.xml");
+		 controleurInterface.chargerLivraisons(livraisons);
+    	 
+	     assert (miseAJourAppelee);
      }
     
      @Test
      public void testChargerLivraisonsSansPlan() {
         
-     boolean jetee = false;
-
-     try {
-     File livraisons = new File("samples/livraison10x10-3.xml");
-     controleurInterface.chargerLivraisons(livraisons);
-     } catch (RuntimeException e) {
-     jetee = true;
+	     boolean jetee = false;
+	
+	     try {
+	    	 File livraisons = new File("src/main/resources/samples/livraison10x10-3.xml");
+	    	 controleurInterface.chargerLivraisons(livraisons);
+	     } catch (Exception e) {
+	    	 jetee = true;
+	     }
+	     assert(jetee);
      }
-    	
-     assert(jetee);
-     }
-     */
+     
     /**
      * ***********************************************
      * Tests cliqueCalculerTournee
      ************************************************
      */
-    /*
+    
      @Test
-     public void testCliqueCalculerTournee() {
-     File plan = new File("samples/plan10x10.xml");
-     controleurInterface.chargerPlan(plan);
+     public void testCliqueCalculerTournee() throws Exception {
 
-     File livraisons = new File("samples/livraison10x10-3.xml");
-     controleurInterface.chargerLivraisons(livraisons);
-        
-     controleurInterface.cliqueCalculerTourne();
-
-     assert (miseAJourAppelee);
+		 File plan = new File("src/main/resources/samples/plan10x10.xml");
+		 controleurInterface.chargerPlan(plan);
+		
+	     File livraisons = new File("src/main/resources/samples/livraison10x10-3.xml");
+	     controleurInterface.chargerLivraisons(livraisons);
+		        
+	     controleurInterface.clicCalculTournee();
+	
+	     assert (miseAJourAppelee);
      }
     
      @Test
      public void testCliqueCalculerTourneeSansPlan() {
         
-     boolean jetee = false;
-
-     try {
-     controleurInterface.cliqueCalculerTourne();
-     } catch (RuntimeException e) {
-     jetee = true;
-     }
-    	
-     assert(jetee);
+	     boolean jetee = false;
+	
+	     try {
+	    	 controleurInterface.clicCalculTournee();
+	     } catch (RuntimeException e) {
+	    	 jetee = true;
+	     }
+	     assert(jetee);
      }
     
      @Test
      public void testCliqueCalculerTourneeSansLivraisons() {
         
-     boolean jetee = false;
-
-     try {
-     File plan = new File("samples/plan10x10.xml");
-     controleurInterface.chargerPlan(plan);
-     controleurInterface.cliqueCalculerTourne();
-     } catch (RuntimeException e) {
-     jetee = true;
-     }
-    	
-     assert(jetee);
+	     boolean jetee = false;
+	
+	     try {
+	    	 File plan = new File("src/main/resources/samples/plan10x10.xml");
+	    	 controleurInterface.chargerPlan(plan);
+	    	 controleurInterface.clicCalculTournee();
+	     } catch (Exception e) {
+	    	 jetee = true;
+	     }	
+	     assert(jetee);
      }
     
      @Test
      public void testCliqueCalculerTourneeApresCalculerTournee() {
         
-     boolean jetee = false;
-
-     try {
-     File plan = new File("samples/plan10x10.xml");
-     controleurInterface.chargerPlan(plan);
-     File livraisons = new File("samples/livraison10x10-3.xml");
-     controleurInterface.chargerLivraisons(livraisons);
-     controleurInterface.cliqueCalculerTourne();
-     controleurInterface.cliqueCalculerTourne();
-     } catch (RuntimeException e) {
-     jetee = true;
-     }
-    	
-     assert(jetee);
+	     boolean jetee = false;
+	
+	     try {
+		     File plan = new File("src/main/resources/samples/plan10x10.xml");
+		     controleurInterface.chargerPlan(plan);
+		     File livraisons = new File("src/main/resources/samples/livraison10x10-3.xml");
+		     controleurInterface.chargerLivraisons(livraisons);
+		     controleurInterface.clicCalculTournee();
+		     controleurInterface.clicCalculTournee();
+	     } catch (Exception e) {
+	    	 jetee = true;
+	     }
+	    	
+	     assert(jetee);
      }
     
      @Test
      public void testCliqueCalculerTourneeApresAjouter() {
         
-     boolean jetee = false;
-
-     try {
-     File plan = new File("samples/plan10x10.xml");
-     controleurInterface.chargerPlan(plan);
-     File livraisons = new File("samples/livraison10x10-3.xml");
-     controleurInterface.chargerLivraisons(livraisons);
-     controleurInterface.cliqueCalculerTourne();
-     controleurInterface.cliqueOutilAjouter();
-     controleurInterface.cliqueSurPlan(32);
-     controleurInterface.cliqueSurLivraison(2);
-     } catch (RuntimeException e) {
-     jetee = true;
+	     boolean jetee = false;
+	
+	     try {
+		     File plan = new File("src/main/resources/samples/plan10x10.xml");
+		     controleurInterface.chargerPlan(plan);
+		     File livraisons = new File("src/main/resources/samples/livraison10x10-3.xml");
+		     controleurInterface.chargerLivraisons(livraisons);
+		     controleurInterface.clicCalculTournee();
+		     controleurInterface.clicOutilAjouter();
+		     controleurInterface.clicSurPlan(32);
+		     controleurInterface.clicSurLivraison(2);
+	     } catch (Exception e) {
+	    	 jetee = true;
+	     }    	
+	     assert(jetee);
      }
-    	
-     assert(jetee);
-     }
-     */
+     
     /**
      * ***********************************************
      * Tests cliqueOutilSupprimer
      ************************************************
      */
-    /*
+    
      @Test
-     public void testCliqueOutilSupprimer() {
-     File plan = new File("samples/plan10x10.xml");
-     controleurInterface.chargerPlan(plan);
-
-     File livraisons = new File("samples/livraison10x10-3.xml");
-     controleurInterface.chargerLivraisons(livraisons);
-        
-     controleurInterface.cliqueCalculerTourne();
-        
-     controleurInterface.cliqueOutilSupprimer();
-
-     assert (miseAJourAppelee);
+     public void testCliqueOutilSupprimer() throws Exception {
+    	 
+	     File plan = new File("src/main/resources/samples/plan10x10.xml");
+	     controleurInterface.chargerPlan(plan);
+	
+	     File livraisons = new File("src/main/resources/samples/livraison10x10-3.xml");
+	     controleurInterface.chargerLivraisons(livraisons);
+	        
+	     controleurInterface.clicCalculTournee();
+	        
+	     controleurInterface.clicOutilSupprimer();
+		
+		 assert (miseAJourAppelee);
      }
     
      @Test
      public void testCliqueOutilSupprimerSansPlan() {
 
-     boolean jetee = false;
-
-     try {
-     controleurInterface.cliqueOutilSupprimer();
-     } catch (RuntimeException e) {
-     jetee = true;
-     }
-    	
-     assert(jetee);
+	     boolean jetee = false;
+	
+	     try {
+	    	 controleurInterface.clicOutilSupprimer();
+	     } catch (RuntimeException e) {
+	    	 jetee = true;
+	     }
+	    	
+	     assert(jetee);
      }
     
      @Test
      public void testCliqueOutilSupprimerSansLivraisons() {
 
-     boolean jetee = false;
-
-     try {
-     File plan = new File("samples/plan10x10.xml");
-     controleurInterface.chargerPlan(plan);
-     controleurInterface.cliqueOutilSupprimer();
-     } catch (RuntimeException e) {
-     jetee = true;
+	     boolean jetee = false;
+	
+	     try {
+		     File plan = new File("src/main/resources/samples/plan10x10.xml");
+		     controleurInterface.chargerPlan(plan);
+		     controleurInterface.clicOutilSupprimer();
+	     } catch (Exception e) {
+	    	 jetee = true;
+	     }
+	    	
+	     assert(jetee);
      }
-    	
-     assert(jetee);
-     }
-     */
+     
     /**
      * ***********************************************
      * Tests cliqueOutilAjouter
      ************************************************
      */
-    /*
+ 
      @Test
-     public void testCliqueOutilAjouter() {
-     File plan = new File("samples/plan10x10.xml");
-     controleurInterface.chargerPlan(plan);
-
-     File livraisons = new File("samples/livraison10x10-3.xml");
-     controleurInterface.chargerLivraisons(livraisons);
-        
-     controleurInterface.cliqueCalculerTourne();
-        
-     controleurInterface.cliqueOutilAjouter();
-
-     assert (miseAJourAppelee);
+     public void testCliqueOutilAjouter() throws Exception {
+    	 
+	     File plan = new File("src/main/resources/samples/plan10x10.xml");
+	     controleurInterface.chargerPlan(plan);
+	
+	     File livraisons = new File("src/main/resources/samples/livraison10x10-3.xml");
+	     controleurInterface.chargerLivraisons(livraisons);
+	        
+	     controleurInterface.clicCalculTournee();
+	        
+	     controleurInterface.clicOutilAjouter();
+		
+		 assert (miseAJourAppelee);
      }
     
      @Test
      public void testCliqueOutilAjouterSansPlan() {
 
-     boolean jetee = false;
-
-     try {
-     controleurInterface.cliqueOutilAjouter();
-     } catch (RuntimeException e) {
-     jetee = true;
-     }
-    	
-     assert(jetee);
+	     boolean jetee = false;
+	
+	     try {
+	    	 controleurInterface.clicOutilAjouter();
+	     } catch (RuntimeException e) {
+	    	 jetee = true;
+	     }
+	    	
+	     assert(jetee);
      }
     
      @Test
      public void testCliqueOutilAjouterSansLivraisons() {
 
-     boolean jetee = false;
+	     boolean jetee = false;
+	
+	     try {
+		     File plan = new File("src/main/resources/samples/plan10x10.xml");
+		     controleurInterface.chargerPlan(plan);
+		     controleurInterface.clicOutilAjouter();
+	     } catch (Exception e) {
+	    	 jetee = true;
+	     }
+	     assert(jetee);
+     }
 
-     try {
-     File plan = new File("samples/plan10x10.xml");
-     controleurInterface.chargerPlan(plan);
-     controleurInterface.cliqueOutilAjouter();
-     } catch (RuntimeException e) {
-     jetee = true;
-     }
-    	
-     assert(jetee);
-     }
-     */
     /**
      * ***********************************************
      * Tests cliqueOutilEchanger
      ************************************************
      */
-    /*
+    
      @Test
-     public void testCliqueOutilEchanger() {
-     File plan = new File("samples/plan10x10.xml");
-     controleurInterface.chargerPlan(plan);
-
-     File livraisons = new File("samples/livraison10x10-3.xml");
-     controleurInterface.chargerLivraisons(livraisons);
-        
-     controleurInterface.cliqueCalculerTourne();
-        
-     controleurInterface.cliqueOutilEchanger();
-
-     assert (miseAJourAppelee);
+     public void testCliqueOutilEchanger() throws Exception {
+    	 
+	     File plan = new File("src/main/resources/samples/plan10x10.xml");
+	     controleurInterface.chargerPlan(plan);
+	
+	     File livraisons = new File("src/main/resources/samples/livraison10x10-3.xml");
+	     controleurInterface.chargerLivraisons(livraisons);
+	        
+	     controleurInterface.clicCalculTournee();
+	        
+	     controleurInterface.clicOutilEchanger();
+	 
+		 assert (miseAJourAppelee);
      }
     
      @Test
      public void testCliqueOutilEchangerSansPlan() {
 
-     boolean jetee = false;
-
-     try {
-     controleurInterface.cliqueOutilEchanger();
-     } catch (RuntimeException e) {
-     jetee = true;
-     }
-    	
-     assert(jetee);
+	     boolean jetee = false;
+	
+	     try {
+	    	 controleurInterface.clicOutilEchanger();
+	     } catch (RuntimeException e) {
+	    	 jetee = true;
+	     }
+	    	
+	     assert(jetee);
      }
     
      @Test
      public void testCliqueOutilEchangerSansLivraisons() {
 
-     boolean jetee = false;
-
-     try {
-     File plan = new File("samples/plan10x10.xml");
-     controleurInterface.chargerPlan(plan);
-     controleurInterface.cliqueOutilEchanger();
-     } catch (RuntimeException e) {
-     jetee = true;
-     }
-    	
+	     boolean jetee = false;
+	
+	     try {
+		     File plan = new File("src/main/resources/samples/plan10x10.xml");
+		     controleurInterface.chargerPlan(plan);
+		     controleurInterface.clicOutilEchanger();
+	     } catch (Exception e) {
+	    	 jetee = true;
+	     }
+	    	
      assert(jetee);
      }
-     */
+   
     /**
      * ***********************************************
      * Tests cliqueSurPlan
      ************************************************
      */
-    /*
+   
      @Test
-     public void testCliqueSurPlanAjouter() {
-     File plan = new File("samples/plan10x10.xml");
-     controleurInterface.chargerPlan(plan);
+     public void testCliqueSurPlanAjouter() throws Exception {
+    	
+	     File plan = new File("src/main/resources/samples/plan10x10.xml");
+	     controleurInterface.chargerPlan(plan);
+	
+	     File livraisons = new File("src/main/resources/samples/livraison10x10-3.xml");
+	     controleurInterface.chargerLivraisons(livraisons);
+	        
+	     controleurInterface.clicCalculTournee();
+	        
+	     controleurInterface.clicOutilAjouter();
+	        
+	     controleurInterface.clicSurPlan(32);
 
-     File livraisons = new File("samples/livraison10x10-3.xml");
-     controleurInterface.chargerLivraisons(livraisons);
-        
-     controleurInterface.cliqueCalculerTourne();
-        
-     controleurInterface.cliqueOutilAjouter();
-        
-     controleurInterface.cliqueSurPlan(32);
-
-     assert (miseAJourAppelee);
+	     assert (miseAJourAppelee);
      }
-     */
+    
     /**
      * ***********************************************
      * Tests cliqueSurLivraison
      ************************************************
      */
-    /*
+   
      @Test
-     public void testCliqueSurLivraisonAjouter() {
-     File plan = new File("samples/plan10x10.xml");
-     controleurInterface.chargerPlan(plan);
-
-     File livraisons = new File("samples/livraison10x10-3.xml");
-     controleurInterface.chargerLivraisons(livraisons);
-        
-     controleurInterface.cliqueCalculerTourne();
-        
-     controleurInterface.cliqueOutilAjouter();
-        
-     controleurInterface.cliqueSurPlan(32);
-        
-     controleurInterface.cliqueSurLivraison(2);
-
-     assert (miseAJourAppelee);
+     public void testCliqueSurLivraisonAjouter() throws Exception {
+		
+	     File plan = new File("src/main/resources/samples/plan10x10.xml");
+	     controleurInterface.chargerPlan(plan);
+	
+	     File livraisons = new File("src/main/resources/samples/livraison10x10-1.xml");
+	     controleurInterface.chargerLivraisons(livraisons);
+	        
+	     controleurInterface.clicCalculTournee();
+	        
+	     controleurInterface.clicOutilAjouter();
+	        
+	     controleurInterface.clicSurPlan(32);
+	        
+	     controleurInterface.clicSurPlan(68);
+		     
+		  assert (miseAJourAppelee);
      }
     
      @Test
-     public void testCliqueSurLivraisonSupprimer() {
-     File plan = new File("samples/plan10x10.xml");
-     controleurInterface.chargerPlan(plan);
-
-     File livraisons = new File("samples/livraison10x10-3.xml");
-     controleurInterface.chargerLivraisons(livraisons);
-        
-     controleurInterface.cliqueCalculerTourne();
-        
-     controleurInterface.cliqueOutilSupprimer();
-        
-     controleurInterface.cliqueSurLivraison(2);
-
-     assert (miseAJourAppelee);
+     public void testCliqueSurLivraisonSupprimer() throws Exception {
+    	
+	     File plan = new File("src/main/resources/samples/plan10x10.xml");
+	     controleurInterface.chargerPlan(plan);
+	
+	     File livraisons = new File("src/main/resources/samples/livraison10x10-3.xml");
+	     controleurInterface.chargerLivraisons(livraisons);
+	        
+	     controleurInterface.clicCalculTournee();
+	        
+	     controleurInterface.clicOutilSupprimer();
+	        
+	     controleurInterface.clicSurLivraison(2);
+	 
+	     assert (miseAJourAppelee);
      }
     
      @Test
-     public void testCliqueSurLivraisonEchanger() {
-     File plan = new File("samples/plan10x10.xml");
-     controleurInterface.chargerPlan(plan);
-
-     File livraisons = new File("samples/livraison10x10-3.xml");
-     controleurInterface.chargerLivraisons(livraisons);
-        
-     controleurInterface.cliqueCalculerTourne();
-        
-     controleurInterface.cliqueOutilEchanger();
-        
-     controleurInterface.cliqueSurLivraison(2);
-     controleurInterface.cliqueSurLivraison(3);
-
-     assert (miseAJourAppelee);
+     public void testCliqueSurLivraisonEchanger() throws Exception {
+    	 
+	     File plan = new File("src/main/resources/samples/plan10x10.xml");
+	     controleurInterface.chargerPlan(plan);
+	
+	     File livraisons = new File("src/main/resources/samples/livraison10x10-1.xml");
+	     controleurInterface.chargerLivraisons(livraisons);
+	        
+	     controleurInterface.clicCalculTournee();
+	        
+	     controleurInterface.clicOutilEchanger();
+	        
+	     controleurInterface.clicSurPlan(13);
+	     controleurInterface.clicSurPlan(68);
+	 
+	     assert (miseAJourAppelee);
      }
-     */
+     
     /**
      * ***********************************************
      * Tests cliqueAnnuler
      ************************************************
      */
-    /*
+    
      @Test
      public void testCliqueAnnulerSansPlan() {
 
-     boolean jetee = false;
-
-     try {
-     controleurInterface.cliqueAnnuler();;
-     } catch (RuntimeException e) {
-     jetee = true;
-     }
-    	
-     assert(jetee);
+	     boolean jetee = false;
+	
+	     try {
+	    	 controleurInterface.clicAnnuler();;
+	     } catch (RuntimeException e) {
+	     jetee = true;
+	     }
+	    	
+	     assert(jetee);
      }
     
      @Test
      public void testCliqueAnnulerSansLivraisons() {
 
-     boolean jetee = false;
-
-     try {
-     File plan = new File("samples/plan10x10.xml");
-     controleurInterface.chargerPlan(plan);
-     controleurInterface.cliqueAnnuler();
-     } catch (RuntimeException e) {
-     jetee = true;
-     }
-    	
-     assert(jetee);
+	     boolean jetee = false;
+	
+	     try {
+		     File plan = new File("src/main/resources/samples/plan10x10.xml");
+		     controleurInterface.chargerPlan(plan);
+		     controleurInterface.clicAnnuler();
+	     } catch (Exception e) {
+	    	 jetee = true;
+	     }
+	    	
+	     assert(jetee);
      }
     
      @Test
-     public void testCliqueAnnulerApresAjouter() {
-     File plan = new File("samples/plan10x10.xml");
-     controleurInterface.chargerPlan(plan);
-
-     File livraisons = new File("samples/livraison10x10-3.xml");
-     controleurInterface.chargerLivraisons(livraisons);
-        
-     controleurInterface.cliqueCalculerTourne();
-        
-     controleurInterface.cliqueOutilAjouter();
-        
-     controleurInterface.cliqueSurPlan(32);
-        
-     controleurInterface.cliqueSurLivraison(2);
-        
-     controleurInterface.cliqueAnnuler();
-
-     assert (miseAJourAppelee);
+     public void testCliqueAnnulerApresAjouter() throws Exception {
+    	 
+		     File plan = new File("src/main/resources/samples/plan10x10.xml");
+		     controleurInterface.chargerPlan(plan);
+		
+		     File livraisons = new File("src/main/resources/samples/livraison10x10-1.xml");
+		     controleurInterface.chargerLivraisons(livraisons);
+		        
+		     controleurInterface.clicCalculTournee();
+		        
+		     controleurInterface.clicOutilAjouter();
+		        
+		     controleurInterface.clicSurPlan(10);
+		        
+		     controleurInterface.clicSurPlan(14);
+		        
+		     controleurInterface.clicAnnuler();
+    	 
+		 assert (miseAJourAppelee);
      }
-     */
+     
     /**
      * ***********************************************
      * Tests cliqueRetablir
      ************************************************
      */
-    /*
+    
      @Test
      public void testCliqueRetablirSansPlan() {
 
-     boolean jetee = false;
-
-     try {
-     controleurInterface.cliqueRetablir();;
-     } catch (RuntimeException e) {
-     jetee = true;
-     }
-    	
-     assert(jetee);
+	     boolean jetee = false;
+	
+	     try {
+	    	 controleurInterface.clicRetablir();;
+	     } catch (RuntimeException e) {
+	    	 jetee = true;
+	     }
+	    	
+	     assert(jetee);
      }
     
      @Test
      public void testCliqueRetablirSansLivraisons() {
 
-     boolean jetee = false;
-
-     try {
-     File plan = new File("samples/plan10x10.xml");
-     controleurInterface.chargerPlan(plan);
-     controleurInterface.cliqueRetablir();
-     } catch (RuntimeException e) {
-     jetee = true;
+	     boolean jetee = false;
+	
+	     try {
+		     File plan = new File("src/main/resources/samples/plan10x10.xml");
+		     controleurInterface.chargerPlan(plan);
+		     controleurInterface.clicRetablir();
+	     } catch (Exception e) {
+	    	 jetee = true;
+	     }
+	    	
+	     assert(jetee);
      }
-    	
-     assert(jetee);
-     }
-     */
+    
     /**
      * ***********************************************
      * Tests getModel
@@ -529,7 +525,7 @@ public class ControleurTest
     @Test
     public void testResultatCalculerLivraison()
     {
-        //File plan = new File("target\\classes\\samples\\planTest2.xml");
+        //File plan = new File("src/main/resources/samples/planTest2.xml");
         File plan = new File("target" + File.separator + "classes" + File.separator + "samples" + File.separator + "planTest2.xml");
         try {
 			controleurInterface.chargerPlan(plan);
@@ -537,7 +533,7 @@ public class ControleurTest
 			fail(e.getMessage());
 		}
 
-        //File livraisons = new File("target\\classes\\samples\\livraisonTest2.xml");
+        //File livraisons = new File("src/main/resources/samples/livraisonTest2.xml");
         File livraisons = new File("target" + File.separator + "classes" + File.separator + "samples" + File.separator + "livraisonTest2.xml");
         try {
 			controleurInterface.chargerLivraisons(livraisons);
@@ -578,14 +574,15 @@ public class ControleurTest
     @Test
     public void testSuppressionCalculerLivraison()
     {
-        File plan = new File("target\\classes\\samples\\planTest2.xml");
+    	
+        File plan = new File("src/main/resources/samples/planTest2.xml");
         try {
 			controleurInterface.chargerPlan(plan);
 		} catch (Exception e) {
 			fail(e.getMessage());
 		}
 
-        File livraisons = new File("target\\classes\\samples\\livraisonTest2.xml");
+        File livraisons = new File("src/main/resources/samples/livraisonTest2.xml");
         try {
 			controleurInterface.chargerLivraisons(livraisons);
 		} catch (Exception e) {
@@ -630,14 +627,14 @@ public class ControleurTest
     @Test
     public void testSuppressionEntrepotCalculerLivraison()
     {
-        File plan = new File("target\\classes\\samples\\planTest2.xml");
+        File plan = new File("src/main/resources/samples/planTest2.xml");
         try {
 			controleurInterface.chargerPlan(plan);
 		} catch (Exception e) {
 			fail(e.getMessage());
 		}
 
-        File livraisons = new File("target\\classes\\samples\\livraisonTest2.xml");
+        File livraisons = new File("src/main/resources/samples/livraisonTest2.xml");
         try {
 			controleurInterface.chargerLivraisons(livraisons);
 		} catch (Exception e) {
@@ -679,14 +676,14 @@ public class ControleurTest
     @Test
     public void testAnnulerSuppressionCalculerLivraison()
     {
-        File plan = new File("target\\classes\\samples\\planTest2.xml");
+        File plan = new File("src/main/resources/samples/planTest2.xml");
         try {
 			controleurInterface.chargerPlan(plan);
 		} catch (Exception e) {
 			fail(e.getMessage());
 		}
 
-        File livraisons = new File("target\\classes\\samples\\livraisonTest2.xml");
+        File livraisons = new File("src/main/resources/samples/livraisonTest2.xml");
         try {
 			controleurInterface.chargerLivraisons(livraisons);
 		} catch (Exception e) {
@@ -731,14 +728,14 @@ public class ControleurTest
     @Test
     public void testAnnulerRetablirSuppressionCalculerLivraison()
     {
-        File plan = new File("target\\classes\\samples\\planTest2.xml");
+        File plan = new File("src/main/resources/samples/planTest2.xml");
         try {
 			controleurInterface.chargerPlan(plan);
 		} catch (Exception e) {
 			fail(e.getMessage());
 		}
 
-        File livraisons = new File("target\\classes\\samples\\livraisonTest2.xml");
+        File livraisons = new File("src/main/resources/samples/livraisonTest2.xml");
         try {
 			controleurInterface.chargerLivraisons(livraisons);
 		} catch (Exception e) {
@@ -784,14 +781,14 @@ public class ControleurTest
     @Test
     public void testAjoutApresEntrepotCalculerLivraison()
     {
-        File plan = new File("target\\classes\\samples\\planTest2.xml");
+        File plan = new File("src/main/resources/samples/planTest2.xml");
         try {
 			controleurInterface.chargerPlan(plan);
 		} catch (Exception e) {
 			fail(e.getMessage());
 		}
 
-        File livraisons = new File("target\\classes\\samples\\livraisonTest3.xml");
+        File livraisons = new File("src/main/resources/samples/livraisonTest3.xml");
         try {
 			controleurInterface.chargerLivraisons(livraisons);
 		} catch (Exception e) {
@@ -839,14 +836,14 @@ public class ControleurTest
     @Test
     public void testAjoutCalculerLivraison()
     {
-        File plan = new File("target\\classes\\samples\\planTest2.xml");
+        File plan = new File("src/main/resources/samples/planTest2.xml");
         try {
 			controleurInterface.chargerPlan(plan);
 		} catch (Exception e) {
 			fail(e.getMessage());
 		}
 
-        File livraisons = new File("target\\classes\\samples\\livraisonTest2.xml");
+        File livraisons = new File("src/main/resources/samples/livraisonTest2.xml");
         try {
 			controleurInterface.chargerLivraisons(livraisons);
 		} catch (Exception e) {
@@ -895,14 +892,14 @@ public class ControleurTest
     @Test
     public void testAnnulerAjoutCalculerLivraison()
     {
-        File plan = new File("target\\classes\\samples\\planTest2.xml");
+        File plan = new File("src/main/resources/samples/planTest2.xml");
         try {
 			controleurInterface.chargerPlan(plan);
 		} catch (Exception e) {
 			fail(e.getMessage());
 		}
 
-        File livraisons = new File("target\\classes\\samples\\livraisonTest2.xml");
+        File livraisons = new File("src/main/resources/samples/livraisonTest2.xml");
         try {
 			controleurInterface.chargerLivraisons(livraisons);
 		} catch (Exception e) {
@@ -951,14 +948,14 @@ public class ControleurTest
     @Test
     public void testAnnulerRetablirAjoutCalculerLivraison()
     {
-        File plan = new File("target\\classes\\samples\\planTest2.xml");
+        File plan = new File("src/main/resources/samples/planTest2.xml");
         try {
 			controleurInterface.chargerPlan(plan);
 		} catch (Exception e) {
 			fail(e.getMessage());
 		}
 
-        File livraisons = new File("target\\classes\\samples\\livraisonTest2.xml");
+        File livraisons = new File("src/main/resources/samples/livraisonTest2.xml");
         try {
 			controleurInterface.chargerLivraisons(livraisons);
 		} catch (Exception e) {
@@ -1013,14 +1010,14 @@ public class ControleurTest
     @Test
     public void testCalculerImpossibleLivraison()
     {
-        File plan = new File("target\\classes\\samples\\planTest2.xml");
+        File plan = new File("src/main/resources/samples/planTest2.xml");
         try {
 			controleurInterface.chargerPlan(plan);
 		} catch (Exception e) {
 			fail(e.getMessage());
 		}
 
-        File livraisons = new File("target\\classes\\samples\\livraisonTest4.xml");
+        File livraisons = new File("src/main/resources/samples/livraisonTest4.xml");
         try {
 			controleurInterface.chargerLivraisons(livraisons);
 		} catch (Exception e) {
@@ -1042,14 +1039,14 @@ public class ControleurTest
     @Test
     public void testSuppressionAll()
     {
-        File plan = new File("target\\classes\\samples\\planTest2.xml");
+        File plan = new File("src/main/resources/samples/planTest2.xml");
         try {
 			controleurInterface.chargerPlan(plan);
 		} catch (Exception e) {
 			fail(e.getMessage());
 		}
 
-        File livraisons = new File("target\\classes\\samples\\livraisonTest2.xml");
+        File livraisons = new File("src/main/resources/samples/livraisonTest2.xml");
 
         try {
 			controleurInterface.chargerLivraisons(livraisons);
