@@ -13,14 +13,16 @@
 \BOOKMARK [2][-]{subsection.2.2.2}{Controleur}{section.2.2}% 13
 \BOOKMARK [2][-]{subsection.2.2.3}{Modele}{section.2.2}% 14
 \BOOKMARK [2][-]{subsection.2.2.4}{Vue}{section.2.2}% 15
-\BOOKMARK [1][-]{section.2.3}{Document expliquant les choix architecturaux et design patterns utilis\351s}{chapter.2}% 16
-\BOOKMARK [1][-]{section.2.4}{Diagramme de s\351quence du calcul de la tourn\351e \340 partir d'une demande de livraison}{chapter.2}% 17
-\BOOKMARK [0][-]{chapter.3}{Impl\351mentation et tests}{}% 18
-\BOOKMARK [1][-]{section.3.1}{Code du prototype et des tests unitaires}{chapter.3}% 19
-\BOOKMARK [1][-]{section.3.2}{Documentation JavaDoc du code}{chapter.3}% 20
-\BOOKMARK [1][-]{section.3.3}{Diagramme de packages et de classes r\351tro-g\351n\351r\351s \340 partir du code}{chapter.3}% 21
-\BOOKMARK [0][-]{chapter.4}{Bilan}{}% 22
-\BOOKMARK [1][-]{section.4.1}{Planning effectif du projet}{chapter.4}% 23
-\BOOKMARK [1][-]{section.4.2}{Bilan humain et technique}{chapter.4}% 24
-\BOOKMARK [2][-]{subsection.4.2.1}{Bilan humain}{section.4.2}% 25
-\BOOKMARK [2][-]{subsection.4.2.2}{Bilan technique}{section.4.2}% 26
+\BOOKMARK [1][-]{section.2.3}{Choix architecturaux et design patterns utilis\351s}{chapter.2}% 16
+\BOOKMARK [2][-]{subsection.2.3.1}{Design patterns utilises}{section.2.3}% 17
+\BOOKMARK [2][-]{subsection.2.3.2}{Choix architecturaux}{section.2.3}% 18
+\BOOKMARK [1][-]{section.2.4}{Diagramme de s\351quence du calcul de la tourn\351e \340 partir d'une demande de livraison}{chapter.2}% 19
+\BOOKMARK [0][-]{chapter.3}{Impl\351mentation et tests}{}% 20
+\BOOKMARK [1][-]{section.3.1}{Code du prototype et des tests unitaires}{chapter.3}% 21
+\BOOKMARK [1][-]{section.3.2}{Documentation JavaDoc du code}{chapter.3}% 22
+\BOOKMARK [1][-]{section.3.3}{Diagramme de packages et de classes r\351tro-g\351n\351r\351s \340 partir du code}{chapter.3}% 23
+\BOOKMARK [0][-]{chapter.4}{Bilan}{}% 24
+\BOOKMARK [1][-]{section.4.1}{Planning effectif du projet}{chapter.4}% 25
+\BOOKMARK [1][-]{section.4.2}{Bilan humain et technique}{chapter.4}% 26
+\BOOKMARK [2][-]{subsection.4.2.1}{Bilan humain}{section.4.2}% 27
+\BOOKMARK [2][-]{subsection.4.2.2}{Bilan technique}{section.4.2}% 28
