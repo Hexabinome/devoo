@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import controleur.ControleurDonnees;
@@ -24,9 +25,11 @@ import modele.donneesxml.Troncon;
  */
 public class CommandeSupprimerLivraisonTest {
 	
-	@Test
-	public void supprimerLivraisonGeneralTest() {
-	// *** Mise en place du plan, demande, tournée... ***
+	private ControleurDonnees donnees = null;
+	
+	@Before
+	public void miseEnPlace() {
+		// *** Mise en place du plan, demande, tournée... ***
 		Map<Integer, Intersection> intersections = new HashMap<Integer, Intersection>();
 		Intersection i1 = new Intersection(1, 0, 0);
 		i1.ajouterTroncon(new Troncon("rue1", 5, 10, 2));
@@ -53,10 +56,65 @@ public class CommandeSupprimerLivraisonTest {
 		modele.setGraphe(graphe);
 		modele.calculerTournee();
 		
-		ControleurDonnees donnees = new ControleurDonnees();
+		donnees = new ControleurDonnees();
 		donnees.setPlan(plan);
 		donnees.setModele(modele);
+	}
+	
+	@Test
+	public void supprimerLivraisonPremiereTest() {
+		// *** Vérification que tout est bien chargé ***
+		verificationOrigine(donnees.getModele().getLivraisonsTournee());
+
+		// *** Exécution de la commande suppression ***
+		CommandeSupprimerLivraison cmdSupp = new CommandeSupprimerLivraison(donnees, 2);
+		try {
+			cmdSupp.executer();
+		} catch (CommandeException e) {
+			fail(e.getMessage());
+		}
 		
+		// *** Vérification ***
+		verificationUneSuppressionPremiere(donnees.getModele().getLivraisonsTournee());
+
+		// ** Tente 3 annulation/rétablissement **
+		for (int i = 0; i < 3; ++i) {
+			// *** Annulation ***
+			cmdSupp.annuler();
+			
+			// *** Vérification ***
+			verificationOrigine(donnees.getModele().getLivraisonsTournee());
+			
+			// *** Refaire ***
+			try {
+				cmdSupp.executer();
+			} catch (CommandeException e) {
+				fail(String.format("Refaire #%d suppression a échoué : %s", i, e.getMessage()));
+			}
+			
+			// *** Vérification ***
+			verificationUneSuppressionPremiere(donnees.getModele().getLivraisonsTournee());
+		}
+	}
+	
+	private void verificationUneSuppressionPremiere(List<List<Livraison>> livraisonsTournee) {
+		assertEquals(3, livraisonsTournee.size()); // Toujours 3 fenêtres (entrepot + fenetre 1 + retour)
+		
+		assertEquals(1, livraisonsTournee.get(0).size()); // 1 seule livraison dans la première fenêtre => entrepôt
+		Livraison entr = livraisonsTournee.get(0).get(0);
+		assertEquals(-1, entr.getId());
+		
+		assertEquals(1, livraisonsTournee.get(1).size());
+		Livraison l1 = livraisonsTournee.get(1).get(0);
+		assertEquals(3, l1.getId());
+
+		assertEquals(1, livraisonsTournee.get(2).size()); // 1 seule livraison dans la première fenêtre => entrepôt
+		Livraison entr2 = livraisonsTournee.get(2).get(0);
+		assertEquals(-1, entr2.getId());
+	}
+	
+	@Test
+	public void supprimerLivraisonGeneralTest() {
 		// *** Vérification que tout est bien chargé ***
 		verificationOrigine(donnees.getModele().getLivraisonsTournee());
 
