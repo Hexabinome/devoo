@@ -53,8 +53,9 @@ public class CommandeAjouterLivraison extends CommandeAnnulable {
         controleurDonnees.notifierObservateursModele();
         controleurDonnees.notifierObservateursAnnuler(true);
 
-        if (controleurDonnees.getHist().estVideCommandesARetablir())
-            controleurDonnees.notifierObservateursRetablir(false);
+        if (controleurDonnees.getHist().estVideCommandesARetablir()) {
+            controleurDonnees.notifierObservateursRetablir(true);
+        }
     }
 
     @Override
