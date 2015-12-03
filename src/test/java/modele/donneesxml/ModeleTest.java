@@ -26,13 +26,11 @@ import org.xml.sax.SAXException;
  *
  * @author robinroyer, maxou
  */
-public class ModeleTest
-{
+public class ModeleTest {
 
     @Test
-    public void TestModelPlan() throws JDOMException, IOException, SAXException, ParseException, ExceptionXML
-    {
-        // initialisation na parti des fichiers xml
+    public void TestModelPlan() throws JDOMException, IOException, SAXException, ParseException, ExceptionXML {
+        // initialisation à partir des fichiers xml
         PlanDeVille ville = DeserialiseurXML.getInstance().ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/plan10x10.xml"));
         Demande demande = DeserialiseurXML.getInstance().ouvrirDemande(ClassLoader.getSystemResourceAsStream("samples/livraison10x10-1.xml"), ville);
         ModeleLecture monModel = new Modele(ville, demande);
@@ -48,8 +46,7 @@ public class ModeleTest
     }
 
     @Test
-    public void TestCalculerTournee() throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException, JDOMException, IOException, SAXException, ExceptionXML, ParseException
-    {
+    public void TestCalculerTournee() throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException, JDOMException, IOException, SAXException, ExceptionXML, ParseException {
         // initialisation a parti des fichiers xml
         PlanDeVille ville = DeserialiseurXML.getInstance().ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/plan10x10.xml"));
         Demande demande = DeserialiseurXML.getInstance().ouvrirDemande(ClassLoader.getSystemResourceAsStream("samples/livraison10x10-1.xml"), ville);
@@ -60,8 +57,7 @@ public class ModeleTest
     }
 
     @Test
-    public void TestManipulerModele()
-    {
+    public void TestManipulerModele() {
         Fenetre fenetre1 = new Fenetre(30000, 40000);
         Fenetre fenetre2 = new Fenetre(50000, 60000);
 
