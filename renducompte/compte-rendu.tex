@@ -6,7 +6,7 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \author{Hexanome: 4105\\\\Alexis Andra\\Jolan Cornevin\\Mohamed Haidara\\Alexis Papin\\Robin Royer\\Maximilian Schiedermeier\\David Wobrock}
-\title{Compte Rendu DevOO}
+\title{Compte-rendu : Devéloppement Orienté Objet}
 \usepackage{graphicx}
 \usepackage{xcolor}
 \usepackage[hidelinks]{hyperref}
@@ -52,39 +52,39 @@
 \begin{document}
 \maketitle
 \tableofcontents 
-\chapter{Capture et Analyse des besoins}
+\chapter{Capture et analyse des besoins}
 \section{Planning prévisionnel du projet}
-Le planning prévisionnel du projet s'est dérouillé en trois étapes. Au début on a identifié les stations nécessaires pour réaliser le projet systématiquement. Cette découpage en missions réalisables est exprimé par la liste suivante:
+Le planning prévisionnel du projet s'est déroulé en trois étapes. Tout d'abord, nous avons identifié les stages nécessaires pour réaliser le projet. Nous avons transformé les missions en tâches réalisables qui sont exprimées par la liste suivante :
 \begin{itemize}
 	\item{Planning previsionnel du projet (3.0 h)}
 	\item{Analyse du modèle (3.0h)}
 	\item{Conception du modèle (2.5 h)}
-	\item{Analyse des \textit{CU}s, conception des \textit{diagrammes des sequence} (3.5 h)}
+	\item{Analyse des \textit{CU}s, conception des \textit{diagrammes de séquences} (3.5 h)}
 	\item{Description textuelle des \textit{CU}s (4.0 h)}
-	\item{Implémentation des classes représentant donnes des \textit{XMLs} (1.5 h)\footnote{La planification d'une heure et demi peut apparaitre insuffisant pour implémenter un modèle. Au moment du conception de l'architecture, le modèle était compris comme une ensemble des Java Beans. La réalisation des algorithmes était prevu dans le package contrôleur.}}
+	\item{Implémentation des classes représentant les données dans les fichiers \textit{XMLs} (1.5 h)\footnote{La planification d'une heure et demi peut apparaître insuffisante pour implémenter un modèle. Au moment de la conception de l'architecture, le modèle était considéré comme un ensemble de \textit{JavaBeans}. La réalisation des algorithmes était prévue dans le package contrôleur.}}
 	\item{Conception d'IHM (prototype) (8.0 h)}
 	\item{Conception d'IHM (précise) (8.0 h)}
-	\item{Spécification '\textit{événements utilisateur} (4.0 h)}
-	\item{Conception du diagramme \textit{États-transitions} (6.0h)}
-	\item{Implémentation du serialiseur / deserialiseur (8.0 h)}
-	\item{Spécification des Interfaces du package contrôleur (5.0 h)}
-	\item{Spécification des Interfaces du package vue (3.0 h)}
-	\item{Spécification des Interfaces du package modele (5.0 h)}
-	\item{Conception de diagramme des classes du package controleur (6.0 h)}
-	\item{Conception de diagramme des classes du package vue (3.0 h)}
-	\item{Conception de diagramme des classes du package modele (6.0 h)}
+	\item{Spécification d'\textit{événements utilisateur} (4.0 h)}
+	\item{Conception du diagramme \textit{états-transitions} (6.0h)}
+	\item{Implémentation du sérialiseur / désérialiseur (8.0 h)}
+	\item{Spécification des interfaces du package contrôleur (5.0 h)}
+	\item{Spécification des interfaces du package vue (3.0 h)}
+	\item{Spécification des interfaces du package modèle (5.0 h)}
+	\item{Conception de diagramme de classes du package contrôleur (6.0 h)}
+	\item{Conception de diagramme de classes du package vue (3.0 h)}
+	\item{Conception de diagramme de classes du package modèle (6.0 h)}
 	\item{Implémentation des observateurs qui notifient la vue (4.0 h)}
 	\item{Réalisation de l'IHM (package vue) (20 h)}
-	\item{Mock implémentation des classes du package controleur (3.5 h)}
+	\item{Mock implémentation des classes du package contrôleur (3.5 h)}
 	\item{Conception et réalisation des tests unitaires (20 h)}	
 	\item{Conception et réalisation des tests fonctionnels (20 h)}
 	\item{Implémentation du package contrôleur (30 h)}
 	\item{Implémentation du package vue (20 h)}
 	\item{Implémentation du package modèle (10 h)}
-	\item{Rétro-génération des diagrammes classes a partir du code (3.0 h)}
+	\item{Rétro-génération des diagrammes de classes à partir du code (3.0 h)}
 	\item{Redaction du glossaire (2.0 h)}
 \end{itemize}
-~\\Deuxièmement on a essayé de trouver toutes les dépendances entre les missions prévus. Le but de cette démarche était de pouvoir paralléliser les développements. La graphique suivant montre le déroulement prévisionnel du projet et également qui était le responsable prévu pour chaque étape.
+~\\Deuxièmement, nous avons essayé de trouver toutes les dépendances entre les missions prévues. Le but de cette démarche était de pouvoir paralléliser au plus les développements. Le graphique suivant montre le déroulement prévisionnel du projet et également qui était le responsable prévu de chaque étape.
 
 \begin{figure}[ht!]
     \centering
@@ -92,7 +92,7 @@ Le planning prévisionnel du projet s'est dérouillé en trois étapes. Au débu
     \caption{Dépendances et déroulement prévisionnel du projet}
 \end{figure}
 
-~\\Dans la troisième et dernière étape, on a essayé d'estimer le temps nécessaire pour réaliser ces taches en utilisant redmine.
+~\\Dans la troisième et dernière étape, nous avons estimé le temps nécessaire pour réaliser ces tâches en utilisant redmine.
 \begin{figure}
     \centering
     \includegraphics[scale=0.25]{redmine.png}
@@ -105,16 +105,17 @@ Le planning prévisionnel du projet s'est dérouillé en trois étapes. Au débu
 \section{Diagramme de cas d'utilisation}
 \section{Description textuelle structurée des cas d'utilisation}
 \chapter{Conception}
-\section{Liste des événements utilisateur et diagramme États-Transitions}
-\section{Diagrammes des packages et de classes}
+\section{Liste des événements utilisateur et diagramme états-transitions}
+\section{Diagrammes de packages et de classes}
 \section{Document expliquant les choix architecturaux et design patterns utilisés}
-\section{Diagramme des sequence du calcul de la tournée a partir d'une demande de livraison}
+\section{Diagramme de séquence du calcul de la tournée à partir d'une demande de livraison}
 \chapter{Implémentation et tests}
 \section{Code du prototype et des tests unitaires}
 \section{Documentation JavaDoc du code}
 \section{Diagramme de packages et de classes rétro-générés à partir du code}
 \chapter{Bilan}
 \section{Planning effectif du projet}
+<<<<<<< HEAD
 Le planning prévisionnel nous a aide beaucoup à réaliser ce projet dans une maniéré bien pensée. La connaissance des dépendances entre les modules nous permettait d'éviter que les développeur étaient bloqués et également de réaliser les taches dans la bonne ordre.\\\\
 \begin{longtable}{|l|l|r|l|}
 \hline
@@ -213,22 +214,30 @@ David & Conception CUs & 4h & 52h\\
 	\item{Même si pas demande, on était motive de trouver le meilleur solution possible. Pour ça on a parfois implémenté plusieurs alternatives. L'implémentation d'annulation des commandes est une bonne exemple.}
 	\item{Les interfaces et classes fourni qui étaient mené a nous simplifier le calcul du chemin optimal, n'étaient pas très bien documente et il n'était pas évident comment il fallait les utiliser pour en profiter dans le cadre du projet.}
 \end{itemize}
+=======
+Le planning prévisionnel nous a beaucoup aidé dans une réalisation bien pensée ce projet. La connaissance des dépendances entre les modules nous a permi d'éviter qu'un développeur est bloqué et de réaliser les tâches dans le bon ordre.\\
+Comme le relevé plus haut le montre, le planning prévisionnel était suffisamment précis pour ce qui concerne la planification et conception. Par contre, nous n'avons pas réussi à réaliser les implémentations dans le temps prévu. Il y a 
+>>>>>>> CR: correction fautes + ajout paragraphe sur JavaFX
 \section{Bilan humain et technique}
 \subsection{Bilan humain}
-Coordonner le projet et notamment distribuer les taches dans l'équipe était un devoir délicat. D'un cote un but était la parallélisation les fils de développement le plus possible. D'autre part il y avait beaucoup des dépendances entre les étapes prévus. C'est pour ça qu'au début du projet la priorité était d'identifier une procédure raisonnable qui permettait d'identifier les stations critiques. Comme je n'étais jamais avant en charge d'une équipe assez nombreuse et puissant je dois admettre que d'abord j'avais sous-estimé ce défi.\\ Le résultat de cet effort nous a bien permit de profiter au maximum des ressources humaines. Néanmoins il était important de tenir tout l' équipe en courant en ce que regarde les développements qui se sont déroule dans les cotes divers du projet en parallèle. En particulier la convention de bien commenter son code en combinaison avec une communication fréquente nous ont permis de maitriser cette mission.\\Personnellement je le trouvait éprouvant de trouver une raisonnable granularité pour la distribution des taches ouverts dans l'équipe. Si une charge est trop petit, on risque de perdre du temps en expliquant le contexte. Aurait elle pu réalisé plus rapide directement par la personne qui s'en a déjà occupe? Sinon, quand les taches sont trop complexe on risque qu'un développeur sera bloqué et exclu des événements qui se passent concurremment. Comme la section avant a relevé, la nombre des heures passes sur le project par développeur n'est pas parfaitement équilibré. Cependant on ne doit pas oublier que les chiffres ne correspondent pas toujours précisément au travail réalisé. Notamment le temps passe avec planification, communication et réflexion n'est pas facile à mesurer. Pour ça il me semble plus avéré d'évaluer l'équipe comme un entité indivisible.\\
-Parlant de l'équipe, on peut résumer que on était enchanté de pouvoir observer la réalisation de nos conceptions. Même s'il y avait parfois des défis qu'on n'avait pas prévu, l'équipe était toujours motivé de discuter et trouver la meilleure solution possible.
+Coordonner le projet et notamment distribuer les tâches dans l'équipe était un devoir délicat. D'un côté, un but était la parallélisation des fils de développement. D'autre part, il y avait beaucoup de dépendances entre les étapes prévus. C'est pour ça qu'au début du projet, la priorité était d'identifier une procédure raisonnable qui permettait d'identifier les étapes critiques. Comme je n'ais jamais été en charge d'une équipe aussi nombreuse et puissante je dois admettre que j'avais d'abord sous-estimé ce défi.\\
+Le résultat de cet effort nous a bien permis de profiter au maximum des ressources humaines. Néanmoins, il était important de tenir toute l'équipe au courant en ce que regarde les développements effectués en parallèle. En particulier, la convention de bien commenter son code, en combinaison avec une communication fréquente, nous a permis de maîtriser cette mission.\\
+Personnellement, je trouvais éprouvant de trouver une bonne granularité pour la distribution des tâches dans l'équipe. Si une charge était trop petite, on risque de perdre du temps en expliquant le contexte. Aurait-elle pu être réalisée plus rapidement directement par la personne qui s'en est déjà occupée ? Sinon, quand les tâches sont trop complexes, on risque qu'un développeur sera bloqué et exclu des événements qui se passent à côté. Comme la section précédente l'a relevé, le nombre d'heures passées sur le projet par développeur n'est pas parfaitement équilibré. Cependant on ne doit pas oublier que les chiffres ne correspondent pas toujours précisément au travail réalisé. Notamment le temps passé sur la planification, communication et réflexion n'est pas facile à mesurer. C'est pour cela qu'il me semble plus avéré d'évaluer l'équipe comme une entité indivisible.\\
+Parlant de l'équipe, on peut résumer qu'on était enchanté de pouvoir observer la réalisation de nos conceptions. Même s'il y avait parfois des défis qu'on n'avait pas prévu, l'équipe était toujours motivé pour discuter et trouver la meilleure solution possible.
 \subsection{Bilan technique}
-Pour réaliser ce projet nous avons profite d'une grande variété des techniques. Au but de permettre à chaque développeur de travailler avec son IDE préféré, nous avons décidé de ne pas garder les fichiers de gestion d'IDE dans le répertoire git. Grâce a çà, nous avons réussi à travailler avec des IDEs \textit{NetBeans}, \textit{Eclipse} et \textit{IntelliJ} en même temps. Concernant les fichiers de conception nous avons également utilisé plusieurs outils:
+Pour réaliser ce projet, nous avons profité d'une grande variété des techniques. Dans le but de permettre à chaque développeur de travailler avec son IDE préféré, nous avons décidé de ne pas garder les fichiers de gestion d'IDE dans le répertoire git. Grâce à cela, nous avons réussi à travailler avec les IDEs \textit{NetBeans}, \textit{Eclipse} et \textit{IntelliJ} en même temps. Concernant les fichiers de conception, nous avons également utilisé plusieurs outils :
 \begin{itemize}
-	\item{La conception des diagrammes de classes était réalisé avec le logiciel \textit{UMLet} \footnote{http://www.umlet.com/}. Les fichiers utilisés par ce logiciel étaient également partagé dans le répertoire git.}
-	\item{Pour tous les autres diagrammes on a profite des outils en ligne, particulièrement \textit{Draw.io}, disponible sur \textit{Google Drive}.}
-	\item{Pour automatiquement charger les librairies dont on avait besoin, on a intégré \textit{Apache Maven}. On pourrait argumenter que l'intégration de Maven n'était pas forcement nécessaire, car il y avait seulement quatre dépendances. Néanmoins son intégration était très confortable pour l'équipe parce qu'on a jamais perdu du temps en ressoudant les dépendances soulevé par un collègue.}
-	\item{Les tests fonctionnels et unitaires étaient réalises en utilisant \textit{JUnit}. Même si les tests ont contribue beaucoup à trouver et résoudre des erreurs, on aurait encore pu intensifier leur intégration. On a suivi le conseil de jamais laisser un développeur tester son propre code. Quoique ce soit en général une bonne pratique, on avait parfois pas assez de communication entre un auteur d'un classe et le testeur. Ça peut causer que les tests écrit ne peuvent pas passer, car ils n'utilisent pas les interfaces la manière prévu.}
+	\item{La conception des diagrammes de classes était réalisée avec le logiciel \textit{UMLet} \footnote{http://www.umlet.com/}. Les fichiers utilisés par ce logiciel étaient également partagés dans le répertoire git.}
+	\item{Pour tous les autres diagrammes nous avons profité des outils en ligne, particulièrement \textit{Draw.io}, dont une intégration est disponible avec \textit{Google Drive}.}
+	\item{Pour automatiquement charger les bibliothèques dont nous avons besoin, nous avons intégré \textit{Apache Maven}. On pourrait argumenter que l'intégration de Maven n'était pas forcement nécessaire, car il y avait seulement quatre dépendances. Néanmoins, son intégration était très confortable pour l'équipe parce qu'on n'a jamais perdu du temps en résolvant les dépendances soulevées par un collègue.}
+	\item{Les tests fonctionnels et unitaires étaient réalises en utilisant le framework \textit{JUnit}. Bien que les tests ont grandement contribué à trouver et résoudre des erreurs, nous aurions encore pu intensifier leur intégration. Nous avons suivi le conseil de ne jamais laisser un développeur tester son propre code. C'est en général une bonne pratique, mais nous avons parfois pas établi assez de communication entre un auteur d'une classe et le testeur. Ça peut causer que les tests ne passent pas, car ils n'utilisent pas les interfaces de la manière prévue.}
 \end{itemize}
 \paragraph{Précisions sur l'implémentation}
 Il existe quelques problèmes dont nous sommes conscients et quelques détails que nous souhaitons spécifier ici.
 \paragraph{}
-Tout d'abord, il est possible que lors du redimensionnement de la fenêtre alors que le plan est déjà chargé, il peut problème d'affichage. Ce problème survient essentiellement quand on met la fenêtre en pleine écran directement. De plus, après des agrandissements et des zooms, nous avons remarqué qu'il peut y avoir un décalage entre la position de la souris et la position des intersections sur la partie graphique. Les intersections passent en surbrillance seulement si le curseur est un peu en dessous à droite de la position du rond blanc sur le plan.
+Tout d'abord, nous étions très heureux d'avoir pu utiliser JavaFX, le dernier framework de développement de client lourd de Java, bien que les ordinateurs du département n'avaient pas Java 8 d'installé. Nous sommes réjouis de voir que le département fait des efforts pour nous permettre d'utiliser les technologies du moment (JavaFX, Androïd dans le cours d'IHM, ...).
+\paragraph{}
+Il est possible que lors du redimensionnement de la fenêtre alors que le plan est déjà chargé, il peut problème d'affichage. Ce problème survient essentiellement quand on met la fenêtre en pleine écran directement. De plus, après des agrandissements et des zooms, nous avons remarqué qu'il peut y avoir un décalage entre la position de la souris et la position des intersections sur la partie graphique. Les intersections passent en surbrillance seulement si le curseur est un peu en dessous à droite de la position du rond blanc sur le plan.
 \paragraph{}
 Pour le patron de conception Etat (\textit{State}), nous avons préféré recréer un objet de l'état correspond à chaque modification, au lieu d'avoir une instance constante (\textit{final}) et statique de chaque état que nous souhaitons réutiliser. Ce choix a été fait car nous voulions avoir un comportement unique à chaque passage dans un état. Ce comportement se situe dans le constructeur de chaque état.
 \paragraph{}
