@@ -13,6 +13,7 @@
 \usepackage{natbib}
 \usepackage{listings}
 \usepackage{color}
+\usepackage{longtable}
 \definecolor{lightgray}{rgb}{.95,.95,.95}
 \definecolor{darkgray}{rgb}{.4,.4,.4}
 \definecolor{purple}{rgb}{0.65, 0.12, 0.82}
@@ -114,8 +115,104 @@ Le planning prévisionnel du projet s'est dérouillé en trois étapes. Au débu
 \section{Diagramme de packages et de classes rétro-générés à partir du code}
 \chapter{Bilan}
 \section{Planning effectif du projet}
-Le planning prévisionnel nous a aide beaucoup de réaliser ce projet dans une maniéré bien pensée. La connaissance des dépendances entre les modules nous permettait d'éviter que un développeur sera bloque et de réaliser les taches dans la bonne ordre.\\
-Comme le relevé en haut montre, le planning prévisionnel était suffisamment précis pour ce que concerne la planification et conception. Par contre on a pas réussi à réaliser les implémentations dans le temps prévu. Il y a 
+Le planning prévisionnel nous a aide beaucoup à réaliser ce projet dans une maniéré bien pensée. La connaissance des dépendances entre les modules nous permettait d'éviter que les développeur étaient bloqués et également de réaliser les taches dans la bonne ordre.\\\\
+\begin{longtable}{|l|l|r|l|}
+\hline
+\textbf{Developpeur}&\multicolumn{2}{c|}{\textbf{Tache}}&\textbf{Total}\\
+\hline
+
+\hline
+Alexis A. & Conception CUs & 4h & 20h\\
+\cline{2-3}
+& Diagramme état-transition & 4h & ~\\
+\cline{2-3}
+& Diagramme séquence calcul tournée & 4h & ~\\
+\cline{2-3}
+& Développement calcul tournée & 8h & ~\\
+\hline
+
+\hline
+Jolan & Implementation JUnit & 4h & 48h\\
+\cline{2-3}
+& Implementation du Dijkstra & 25h & ~\\
+\cline{2-3}
+& Développement modèle & 10 & ~\\
+\cline{2-3}
+& Conception diagramme modèle & 2h & ~\\
+\cline{2-3}
+& Conception diagramme séquence & 3h & ~\\
+\cline{2-3}
+& Correctinos des bugs & 4h & ~\\
+\hline
+
+\hline
+Mohamed & Conception diagramme modèle & 2h & 57h\\
+\cline{2-3}
+& Développement Vue & 29h & ~\\
+\cline{2-3}
+& Développement Contrôleur & 16h & ~\\
+\cline{2-3}
+& Documentation & 4h & ~\\
+\cline{2-3}
+& Correction des bugs & 5h & ~\\
+\cline{2-3}
+& Redaction Design Patterns & 1h & ~\\
+\hline
+
+\hline
+Alexis P. & Conception CUs & 4h & 20h\\
+\cline{2-3}
+& Diagramme état-transition & 4h & ~\\
+\cline{2-3}
+& Diagramme séquence calcul tournée & 4h & ~\\
+\cline{2-3}
+& Développement calcul tournée & 8h & ~\\
+\hline
+
+\hline
+Robin & Conception IHM & 6h & 14h\\
+\cline{2-3}
+& JUnit modèle & 8h & ~\\
+\hline
+
+\hline
+Max & Planning previsionel & 4h & 71h\\
+\cline{2-3}
+& Conception architecture et interfaces & 9h & ~\\
+\cline{2-3}
+& Development Controleur & 18h & ~\\
+\cline{2-3}
+& Development Modele & 26h & ~\\
+\cline{2-3}
+& Gestion des taches & 3h & ~\\
+\cline{2-3}
+& Gestion et réalisation des livrables & 8h & ~\\
+\cline{2-3}
+& Development JUnit Modele & 3h & ~\\
+\hline
+
+\hline
+David & Conception CUs & 4h & 52h\\
+\cline{2-3}
+& Diagramme Sequence & 3h & ~\\
+\cline{2-3}
+& Développement vue & 20h & ~\\
+\cline{2-3}
+& Documentation & 8h & ~\\
+\cline{2-3}
+& JUnit Controleur & 5h & ~\\
+\cline{2-3}
+& Correction des bugs & 10h & ~\\
+\cline{2-3}
+& Redaction rapport & 2h & ~\\
+\hline
+\end{longtable}
+~\\Comme le relevé en haut montre, le planning prévisionnel était suffisamment précis pour ce que concerne la planification et conception. Par contre on n'a pas réussi à réaliser les implémentations dans le temps prévu. Il y a plusieurs facteurs qui ont contribue a ce retardement. Parmi eux voici les plus importants:
+\begin{itemize}
+	\item{On était demande de profondément changer l'architecture dans un moment ou la plupart des classes était déjà implémente.}
+	\item{Même si pas demande, on était motive de trouver le meilleur solution possible. Pour ça on a parfois implémenté plusieurs alternatives. L'implémentation d'annulation des commandes est une bonne exemple.}
+	\item{Les interfaces et classes fourni qui étaient mené a nous simplifier le calcul du chemin optimal, n'étaient pas très bien documente et il n'était pas évident comment il fallait les utiliser pour en profiter dans le cadre du projet.}
+\end{itemize}
 \section{Bilan humain et technique}
 \subsection{Bilan humain}
 Coordonner le projet et notamment distribuer les taches dans l'équipe était un devoir délicat. D'un cote un but était la parallélisation les fils de développement le plus possible. D'autre part il y avait beaucoup des dépendances entre les étapes prévus. C'est pour ça qu'au début du projet la priorité était d'identifier une procédure raisonnable qui permettait d'identifier les stations critiques. Comme je n'étais jamais avant en charge d'une équipe assez nombreuse et puissant je dois admettre que d'abord j'avais sous-estimé ce défi.\\ Le résultat de cet effort nous a bien permit de profiter au maximum des ressources humaines. Néanmoins il était important de tenir tout l' équipe en courant en ce que regarde les développements qui se sont déroule dans les cotes divers du projet en parallèle. En particulier la convention de bien commenter son code en combinaison avec une communication fréquente nous ont permis de maitriser cette mission.\\Personnellement je le trouvait éprouvant de trouver une raisonnable granularité pour la distribution des taches ouverts dans l'équipe. Si une charge est trop petit, on risque de perdre du temps en expliquant le contexte. Aurait elle pu réalisé plus rapide directement par la personne qui s'en a déjà occupe? Sinon, quand les taches sont trop complexe on risque qu'un développeur sera bloqué et exclu des événements qui se passent concurremment. Comme la section avant a relevé, la nombre des heures passes sur le project par développeur n'est pas parfaitement équilibré. Cependant on ne doit pas oublier que les chiffres ne correspondent pas toujours précisément au travail réalisé. Notamment le temps passe avec planification, communication et réflexion n'est pas facile à mesurer. Pour ça il me semble plus avéré d'évaluer l'équipe comme un entité indivisible.\\

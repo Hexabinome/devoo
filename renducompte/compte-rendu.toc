@@ -16,6 +16,6 @@
 \contentsline {section}{\numberline {3.3}Diagramme de packages et de classes r\IeC {\'e}tro-g\IeC {\'e}n\IeC {\'e}r\IeC {\'e}s \IeC {\`a} partir du code}{11}{section.3.3}
 \contentsline {chapter}{\numberline {4}Bilan}{13}{chapter.4}
 \contentsline {section}{\numberline {4.1}Planning effectif du projet}{13}{section.4.1}
-\contentsline {section}{\numberline {4.2}Bilan humain et technique}{13}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}Bilan humain}{13}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}Bilan technique}{14}{subsection.4.2.2}
+\contentsline {section}{\numberline {4.2}Bilan humain et technique}{14}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Bilan humain}{14}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}Bilan technique}{15}{subsection.4.2.2}

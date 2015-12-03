@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2015.9.27)  3 DEC 2015 18:30
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2015.9.27)  3 DEC 2015 19:37
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -544,6 +544,25 @@ File: lstmisc.sty 2014/09/06 1.5e (Carsten Heinz)
 File: listings.cfg 2014/09/06 1.5e listings configuration
 ))
 Package: listings 2014/09/06 1.5e (Carsten Heinz)
+
+(/usr/share/texmf-dist/tex/latex/tools/longtable.sty
+Package: longtable 2004/02/01 v4.11 Multi-page Table package (DPC)
+\LTleft=\skip55
+\LTright=\skip56
+\LTpre=\skip57
+\LTpost=\skip58
+\LTchunksize=\count125
+\LTcapwidth=\dimen125
+\LT@head=\box30
+\LT@firsthead=\box31
+\LT@foot=\box32
+\LT@lastfoot=\box33
+\LT@cols=\count126
+\LT@rows=\count127
+\c@LT@tables=\count128
+\c@LT@chunks=\count129
+\LT@p@ftn=\toks23
+)
 \@indexfile=\write3
 \openout3 = `compte-rendu.idx'.
 
@@ -552,36 +571,36 @@ Writing index file compte-rendu.idx
 (./compte-rendu.aux)
 \openout1 = `compte-rendu.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Info: Redefining \degres on input line 51.
-LaTeX Info: Redefining \dots on input line 51.
-LaTeX Info: Redefining \up on input line 51.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Info: Redefining \degres on input line 52.
+LaTeX Info: Redefining \dots on input line 52.
+LaTeX Info: Redefining \up on input line 52.
  (/usr/share/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count125
-\scratchdimen=\dimen125
-\scratchbox=\box30
-\nofMPsegments=\count126
-\nofMParguments=\count127
-\everyMPshowfont=\toks23
-\MPscratchCnt=\count128
-\MPscratchDim=\dimen126
-\MPnumerator=\count129
-\makeMPintoPDFobject=\count130
-\everyMPtoPDFconversion=\toks24
+\scratchcounter=\count130
+\scratchdimen=\dimen126
+\scratchbox=\box34
+\nofMPsegments=\count131
+\nofMParguments=\count132
+\everyMPshowfont=\toks24
+\MPscratchCnt=\count133
+\MPscratchDim=\dimen127
+\MPnumerator=\count134
+\makeMPintoPDFobject=\count135
+\everyMPtoPDFconversion=\toks25
 ) (/usr/share/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
 
@@ -597,8 +616,8 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-\AtBeginShipoutBox=\box31
-Package hyperref Info: Link coloring OFF on input line 51.
+\AtBeginShipoutBox=\box35
+Package hyperref Info: Link coloring OFF on input line 52.
 
 (/usr/share/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
@@ -606,23 +625,23 @@ Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 (/usr/share/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
-\c@section@level=\count131
+\c@section@level=\count136
 )
-LaTeX Info: Redefining \ref on input line 51.
-LaTeX Info: Redefining \pageref on input line 51.
-LaTeX Info: Redefining \nameref on input line 51.
+LaTeX Info: Redefining \ref on input line 52.
+LaTeX Info: Redefining \pageref on input line 52.
+LaTeX Info: Redefining \nameref on input line 52.
 
 (./compte-rendu.out) (./compte-rendu.out)
 \@outlinefile=\write4
 \openout4 = `compte-rendu.out'.
 
-\c@lstlisting=\count132
-LaTeX Font Info:    Try loading font information for U+msa on input line 53.
+\c@lstlisting=\count137
+LaTeX Font Info:    Try loading font information for U+msa on input line 54.
 
 (/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 53.
+LaTeX Font Info:    Try loading font information for U+msb on input line 54.
 
 (/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -645,14 +664,14 @@ File: der.pdf Graphic file (type pdf)
 Package pdftex.def Info: der.pdf used on input line 52.
 (pdftex.def)             Requested size: 532.70473pt x 551.19717pt.
 )
-Overfull \hbox (1.2548pt too wide) in paragraph at lines 90--91
+Overfull \hbox (1.2548pt too wide) in paragraph at lines 91--92
  [][] 
  []
 
 <redmine.png, id=142, 1298.8525pt x 711.65875pt>
 File: redmine.png Graphic file (type png)
  <use redmine.png>
-Package pdftex.def Info: redmine.png used on input line 97.
+Package pdftex.def Info: redmine.png used on input line 98.
 (pdftex.def)             Requested size: 324.71233pt x 177.91425pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -662,12 +681,12 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 ]
 Chapitre 2.
 
-Overfull \hbox (5.13971pt too wide) in paragraph at lines 107--107
+Overfull \hbox (5.13971pt too wide) in paragraph at lines 108--108
 []\T1/cmr/bx/n/14.4 Liste des évé-ne-ments uti-li-sa-teur et dia-gramme
  []
 
 
-Overfull \hbox (4.05035pt too wide) in paragraph at lines 109--109
+Overfull \hbox (4.05035pt too wide) in paragraph at lines 110--110
 []\T1/cmr/bx/n/14.4 Document ex-pli-quant les choix ar-chi-tec-tu-raux
  []
 
@@ -679,25 +698,39 @@ Chapitre 3.
 
 ]
 Chapitre 4.
-[13]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 133.
- [14]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 133.
+
+Underfull \hbox (badness 10000) in paragraph at lines 118--119
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 118--119
+
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 168
+ []
+
+[13] [14]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 230.
+ [15]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 230.
  (./compte-rendu.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 133.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 133.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 230.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 230.
 Package rerunfilecheck Info: File `compte-rendu.out' has not changed.
 (rerunfilecheck)             Checksum: B7E11538A7E431E61F7FFF2050423996;1620.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 133.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 230.
  ) 
 Here is how much of TeX's memory you used:
- 9570 strings out of 494908
- 131375 string characters out of 6177935
- 236047 words of memory out of 5000000
- 12641 multiletter control sequences out of 15000+600000
+ 9657 strings out of 494908
+ 132379 string characters out of 6177935
+ 241874 words of memory out of 5000000
+ 12722 multiletter control sequences out of 15000+600000
  22180 words of font info for 56 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 29i,10n,40p,1903b,454s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 29i,10n,40p,1903b,481s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/share/t
 exmf-dist/fonts/type1/public/cm-super/sfbx1000.pfb></usr/share/texmf-dist/fonts
 /type1/public/cm-super/sfbx1200.pfb></usr/share/texmf-dist/fonts/type1/public/c
@@ -710,10 +743,10 @@ m1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr
 /share/texmf-dist/fonts/type1/public/cm-super/sfrm1728.pfb></usr/share/texmf-di
 st/fonts/type1/public/cm-super/sfsl1000.pfb></usr/share/texmf-dist/fonts/type1/
 public/cm-super/sfti1000.pfb>
-Output written on compte-rendu.pdf (14 pages, 297254 bytes).
+Output written on compte-rendu.pdf (15 pages, 301576 bytes).
 PDF statistics:
- 260 PDF objects out of 1000 (max. 8388607)
- 220 compressed objects within 3 object streams
- 40 named destinations out of 1000 (max. 500000)
+ 265 PDF objects out of 1000 (max. 8388607)
+ 224 compressed objects within 3 object streams
+ 42 named destinations out of 1000 (max. 500000)
  171 words of extra memory for PDF output out of 10000 (max. 10000000)
 
