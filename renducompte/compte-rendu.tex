@@ -97,18 +97,103 @@ Le planning prévisionnel du projet s'est déroulé en trois étapes. Tout d'abo
 \begin{figure}
     \centering
     \includegraphics[scale=0.25]{redmine.png}
-%http://www.dplot.com/examples/surface-plot-phong-shading.png
     \caption{Capture d'écran de la gestion du projet avec redmine} 
 \end{figure}
 
 \section{Modèle du domaine}
-
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=0.35]{dia-mod.jpg}
+    \caption{Diagramme du modèle}
+\end{figure}
 \section{Glossaire}
+\subsection{Entités}
+\begin{itemize}
+\item \textbf{Plan de ville XML :} Fichier XML décrivant le \textit{plan de ville}. \vskip1mm
+\item \textbf{Plan de ville :} Abstraction de la carte d'une ville. \vskip1mm
+\item \textbf{Intersection :} Coordonnées d'intersection entre des \textit{tronçons}. \vskip1mm
+\item \textbf{Coordonnée x d'intersection :} Coordonnée x d'\textit{intersection}. \vskip1mm
+\item \textbf{Coordonnée x d'intersection :} Coordonnée y d'\textit{intersection}. \vskip1mm
+\item \textbf{Tronçon :} Tronçon de rue entre deux \textit{intersections}. \vskip1mm
+\item \textbf{Longueur du tronçon :} Longueur d'un \textit{tronçon}. \vskip1mm
+\item \textbf{Vitesse moyenne de circulation du tronçon :} Vitesse moyenne de circulation sur un \textit{tronçon}. \vskip1mm
+\item \textbf{Demandes de livraisons XML :} Fichier XML décrivant des \textit{demandes de livraisons}. \vskip1mm
+\item \textbf{Demandes de livraisons :} Abstraction des \textit{livraisons} à effectuer. \vskip1mm
+\item \textbf{Tournée :} Tournée de \textit{livraisons} se composant d'un \textit{itinéraire}, d'une \textit{durée de la tournée} et de tout le détail pour chaque livraison. \vskip1mm
+\item \textbf{Itinéaire :} Suite ordonnée de \textit{livraisons}. \vskip1mm
+\item \textbf{Durée de la tournée :} Durée pour effectuer l'ensemble des \textit{livraisons}. \vskip1mm
+\item \textbf{Entrepot :} \textit{Intersection} de départ et de fin de la \textit{tournée}. \vskip1mm
+\item \textbf{Feuille de route :} Fichier texte spécifiant la \textit{tournée}. \vskip1mm
+\item \textbf{Livraison :} Livraison à effectuer. \vskip1mm
+\item \textbf{Adresse de livraison :} \textit{Interection} où effectuer la \textit{livraison}. \vskip1mm
+\item \textbf{Fenêtre de livraison :} Plage horaire pour effectuer une \textit{livraison}. \vskip1mm
+\item \textbf{Début de fenêtre de livraison :} Heure de début de \textit{fenêtre de livraison}. \vskip1mm
+\item \textbf{Fin de fenêtre de livraison :} Heure de fin de \textit{fenêtre de livraison}. \vskip1mm
+\item \textbf{Temps de livraison :} \textit{Temps de trajet de livraison} + \textit{temps d'arrêt de livraison}. \vskip1mm
+\item \textbf{Chemin de livraison :} Liste des \textit{tronçons} entre deux \textit{livraisons}. \vskip1mm
+\item \textbf{Temps de trajet de livraison :} Temps pour parcourir le \textit{chemin de livraison}. \vskip1mm
+\item \textbf{Temps d'arrêt de livraison :} Temps pour décharger la \textit{livraison} (10 min ou plus si le livreur est en avance sur la \textit{fenêtre de livraison}). \vskip1mm
+\item \textbf{Horaire de passage de livraison :} Heure au début du \textit{temps d'arrêt de la livraison}. \vskip1mm
+\item \textbf{Horaire de départ de livraison :} Heure à la fin du \textit{temps d'arrêt de livraison}. (=\textit{horaire de passage de livraison} + \textit{temps d'arrêt de livraison}) \vskip1mm
+\item \textbf{Livraison en retard :} \textit{Livraison} effectuée en dehors de la \textit{fenêtre de livraison}. \vskip1mm
+\item \textbf{Livraison en retard :} \textit{Livraison} effectuée en dehors de la \textit{fenêtre de livraison}. \vskip1mm
+\end{itemize}
+\subsection{Actions}
+\begin{itemize}
+\item \textbf{Annuler :} Annule la dernière action effectuée. \vskip1mm
+\item \textbf{Rétablir :} Rétablit la dernière action annulée. \vskip1mm
+\item \textbf{Ajouter livraisons :} Permet d'entrer dans le mode d'ajout de \textit{livraisons} à la \textit{tournée}. \vskip1mm
+\item \textbf{Echanger livraisons :} Permet d'entrer dans le mode d'échange de \textit{livraisons} dans la \textit{tournée}. \vskip1mm
+\item \textbf{Supprimer livraisons :} Permet d'entrer dans le mode de suppression de \textit{livraisons} dans le \textit{tournée}. \vskip1mm
+\item \textbf{Calculer tournée :} Génere la \textit{tournée} à partir des \textit{demandes de livraisons}. \vskip1mm
+\item \textbf{Générer la feuille de route :} Génere la \textit{feuille de route} à partir de la \textit{tournée}. \vskip1mm
+\item \textbf{Ouvrir plan de la ville :} Permet de sélectionner et charger le \textit{plan de ville XML} et ainsi de visualiser le \textit{plan de ville}. \vskip1mm
+\item \textbf{Ouvrir demandes de livraisons :} Permet de sélectionner et charger les \textit{demandes de livraisons XML} et ainsi de visualiser les \textit{demandes de livraisons}. \vskip1mm
+\item \textbf{Quitter :} Permet de quitter l'application. \vskip1mm
+\end{itemize}
 \section{Diagramme de cas d'utilisation}
 \section{Description textuelle structurée des cas d'utilisation}
 \chapter{Conception}
 \section{Liste des événements utilisateur et diagramme états-transitions}
 \subsection{Liste des événements utilisateur}
+\begin{itemize}
+	\item{Clic bouton}
+	\begin{itemize}
+		\item{Charger le fichier du plan de la ville}
+		\item{Charger le fichier des demandes de livraisons}
+		\item{Ajouter livraisons}
+		\item{Echanger livraisons}
+		\item{Supprimer livraison}
+		\item{Generer feuille de route}
+	\end{itemize}
+	\item{Clic gauche}
+	\begin{itemize}
+		\item{Livraison (liste+plan)}
+		\item{Intersection (plan)}	
+	\end{itemize}
+	\item{Fichier}
+	\begin{itemize}
+		\item{Ouvrir > plan de la ville}
+		\item{Ouvrir demandes de livraisons}
+	\end{itemize}
+	\item{Edition}	
+	\begin{itemize}
+		\item{Annuler}
+		\item{Rétablir}
+	\end{itemize}
+	\item{Ctrl}
+	\begin{itemize}
+		\item{Z : Annuler}
+		\item{Y : Rétablir}
+		\item{P : Ouvrir plan de la ville}
+		\item{O : Ouvrir demandes de livraisons}
+	\end{itemize}
+	\item{Clic droit}
+	\begin{itemize}
+		\item{Vue graphique}
+	\end{itemize}	
+\end{itemize}
+\newpage
 \subsection{Diagramme états-transitions}
 \begin{figure}[h!]
     \centering
@@ -145,8 +230,8 @@ Il s'agit des diagrammes de conception. Ils ne correspondent pas forcement à l'
     \includegraphics[scale=0.4]{vue.png}
     \caption{Diagramme des classes du \textit{vue}}
 \end{figure}
-\section{Choix architecturaux et design patterns utilisés}
-\subsection{Design patterns utilises}
+\section{Choix architecturaux et design patterns}
+\subsection{Design patterns utilisés}
 \begin{itemize}
 	\item{\textit{Factory} et \textit{Abstract factory}:\\
 Ce patron fournit une interface pour créer des familles d'objets sans spécifier la classe concrète. 
@@ -165,7 +250,13 @@ Ce patron permet à un objet de modifier son comportement lorsque son état inte
 \end{itemize}
 \subsection{Choix architecturaux}
 TON TEXTE ICI, MOMO :-D
+\newpage
 \section{Diagramme de séquence du calcul de la tournée à partir d'une demande de livraison}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=0.28]{tournee2.png}
+    \caption{DSS calcul de la tournee}
+\end{figure}
 \chapter{Implémentation et tests}
 \section{Code du prototype et des tests unitaires}
 \section{Documentation JavaDoc du code}

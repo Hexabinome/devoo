@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2015.9.27)  3 DEC 2015 21:46
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2015.9.27)  3 DEC 2015 22:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -680,113 +680,150 @@ File: redmine.png Graphic file (type png)
 Package pdftex.def Info: redmine.png used on input line 99.
 (pdftex.def)             Requested size: 324.71233pt x 177.91425pt.
 
+<dia-mod.jpg, id=184, 906.38625pt x 612.2875pt>
+File: dia-mod.jpg Graphic file (type jpg)
+ <use dia-mod.jpg>
+Package pdftex.def Info: dia-mod.jpg used on input line 106.
+(pdftex.def)             Requested size: 317.23993pt x 214.30383pt.
+
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [6 <./der.pdf>] [7 <./redmine.png>] [8
+ [6 <./der.pdf>] [7 <./redmine.png> <./dia-mod.jpg>] [8] [9] [10
 
 ]
 Chapitre 2.
 
-Overfull \hbox (5.13971pt too wide) in paragraph at lines 110--110
+Overfull \hbox (5.13971pt too wide) in paragraph at lines 157--157
 []\T1/cmr/bx/n/14.4 Liste des évé-ne-ments uti-li-sa-teur et dia-gramme
  []
 
-<diag-et-trans.png, id=216, 991.705pt x 846.16125pt>
+[11] <diag-et-trans.png, id=233, 991.705pt x 846.16125pt>
 File: diag-et-trans.png Graphic file (type png)
- <use diag-et-trans.png>
-Package pdftex.def Info: diag-et-trans.png used on input line 115.
+
+<use diag-et-trans.png>
+Package pdftex.def Info: diag-et-trans.png used on input line 200.
 (pdftex.def)             Requested size: 347.10196pt x 296.16087pt.
 
-Overfull \hbox (2.10196pt too wide) in paragraph at lines 115--116
+Overfull \hbox (2.10196pt too wide) in paragraph at lines 200--201
  [][] 
  []
 
-[9 <./diag-et-trans.png>] <packages.png, id=223, 2057.6875pt x 682.55pt>
+<packages.png, id=234, 2057.6875pt x 682.55pt>
 File: packages.png Graphic file (type png)
-
-<use packages.png>
-Package pdftex.def Info: packages.png used on input line 124.
+ <use packages.png>
+Package pdftex.def Info: packages.png used on input line 209.
 (pdftex.def)             Requested size: 411.53021pt x 136.50758pt.
 
-Overfull \hbox (66.53021pt too wide) in paragraph at lines 124--125
+Overfull \hbox (66.53021pt too wide) in paragraph at lines 209--210
  [][] 
  []
 
-[10 <./packages.png (PNG copy)>]
-<controleur.png, id=230, 1334.9875pt x 1786.675pt>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[12 <./diag-et-trans.png>] <controleur.png, id=241, 1334.9875pt x 1786.675pt>
 File: controleur.png Graphic file (type png)
- <use controleur.png>
-Package pdftex.def Info: controleur.png used on input line 131.
+
+<use controleur.png>
+Package pdftex.def Info: controleur.png used on input line 216.
 (pdftex.def)             Requested size: 400.49934pt x 536.00664pt.
 
-Overfull \hbox (55.49934pt too wide) in paragraph at lines 131--132
+Overfull \hbox (55.49934pt too wide) in paragraph at lines 216--217
 [][] 
  []
 
-[11 <./controleur.png>] <modele.png, id=236, 1264.725pt x 1887.05pt>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[13 <./packages.png (PNG copy)>] <modele.png, id=248, 1264.725pt x 1887.05pt>
 File: modele.png Graphic file (type png)
 
 <use modele.png>
-Package pdftex.def Info: modele.png used on input line 138.
+Package pdftex.def Info: modele.png used on input line 223.
 (pdftex.def)             Requested size: 354.12059pt x 528.3704pt.
 
-Overfull \hbox (9.12059pt too wide) in paragraph at lines 138--139
+Overfull \hbox (9.12059pt too wide) in paragraph at lines 223--224
  [][] 
  []
 
-[12 <./modele.png>] <vue.png, id=242, 873.2625pt x 461.725pt>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[14 <./controleur.png>] <vue.png, id=254, 873.2625pt x 461.725pt>
 File: vue.png Graphic file (type png)
- <use vue.png>
-Package pdftex.def Info: vue.png used on input line 145.
+
+<use vue.png>
+Package pdftex.def Info: vue.png used on input line 230.
 (pdftex.def)             Requested size: 349.29881pt x 184.68672pt.
 
-Overfull \hbox (4.29881pt too wide) in paragraph at lines 145--146
+Overfull \hbox (4.29881pt too wide) in paragraph at lines 230--231
  [][] 
  []
 
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 153.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 238.
 
 (/usr/share/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
-) [13 <./vue.png (PNG copy)>]
-[14]
-Chapitre 3.
-[15
+)
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-] [16
+ [15 <./modele.png>] [16 <./vue.png (PNG copy)>] [17]
+<tournee2.png, id=288, 875.27pt x 1845.89626pt>
+File: tournee2.png Graphic file (type png)
+ <use tournee2.png>
+Package pdftex.def Info: tournee2.png used on input line 257.
+(pdftex.def)             Requested size: 245.07393pt x 516.84743pt.
+
+Underfull \vbox (badness 1142) has occurred while \output is active []
+
+ [18 <./tournee2.png>]
+Chapitre 3.
+[19
+
+] [20
 
 ]
 Chapitre 4.
 
-Underfull \hbox (badness 10000) in paragraph at lines 175--176
+Underfull \hbox (badness 10000) in paragraph at lines 266--267
 
  []
 
 
-Underfull \vbox (badness 10000) detected at line 225
+Underfull \vbox (badness 10000) detected at line 316
  []
 
-[17] [18] [19]
-Underfull \hbox (badness 10000) in paragraph at lines 297--297
+[21] [22] [23]
+Underfull \hbox (badness 10000) in paragraph at lines 388--388
 [][][]\T1/cmr/m/n/8 .[][]http ://stackoverflow.com/questions/64036/how-do-you-m
 ake-a-deep-copy-of-an-
  []
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 308.
-[20]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 308.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 399.
+[24]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 399.
  (./compte-rendu.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 308.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 308.
-Package rerunfilecheck Info: File `compte-rendu.out' has not changed.
-(rerunfilecheck)             Checksum: 13984CB6246D86D407771D84A29680E8;2171.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 308.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 399.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 399.
+
+
+Package rerunfilecheck Warning: File `compte-rendu.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `compte-rendu.out':
+(rerunfilecheck)             Before: 819F31A2F613F3084724D26141ED5BDF;2162
+(rerunfilecheck)             After:  8D05D3C0E2B52F145CB8FFCB55A4708A;2287.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 399.
  ) 
 Here is how much of TeX's memory you used:
- 9746 strings out of 494908
- 133915 string characters out of 6177935
+ 9765 strings out of 494908
+ 134152 string characters out of 6177935
  240903 words of memory out of 5000000
- 12766 multiletter control sequences out of 15000+600000
+ 12774 multiletter control sequences out of 15000+600000
  23179 words of font info for 58 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
  29i,10n,40p,1076b,481s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -803,10 +840,10 @@ m1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr
 st/fonts/type1/public/cm-super/sfsl1000.pfb></usr/share/texmf-dist/fonts/type1/
 public/cm-super/sfti0800.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super
 /sfti1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt0800.pfb>
-Output written on compte-rendu.pdf (20 pages, 827631 bytes).
+Output written on compte-rendu.pdf (24 pages, 941690 bytes).
 PDF statistics:
- 381 PDF objects out of 1000 (max. 8388607)
- 327 compressed objects within 4 object streams
- 77 named destinations out of 1000 (max. 500000)
- 260 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 407 PDF objects out of 1000 (max. 8388607)
+ 346 compressed objects within 4 object streams
+ 85 named destinations out of 1000 (max. 500000)
+ 270 words of extra memory for PDF output out of 10000 (max. 10000000)
 
