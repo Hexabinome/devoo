@@ -383,16 +383,6 @@ public class Modele implements ModeleLecture, Serializable {
     }
 
     /**
-     * Génère la feuille de route de la demande de livraison
-     *
-     * @return Une chaîne de caractère formatée correctement
-     */
-    @Override
-    public String genererFeuilleDeRoute() {
-        return GenerateurFeuilleDeRoute.genererFeuilleDeRoute(this, livraisonTournee);
-    }
-
-    /**
      * Quand on crée une nouvelle livraison on a besoin d'un identifiant unique. Ce
      * compteur aide à recuperer cette identifiant.
      *
