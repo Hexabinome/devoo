@@ -268,7 +268,7 @@ public class ControleurDonnees {
      */
     public void effacerCommandesARetablir() {
         hist.effacerCommandeARetablir();
-        notifierObservateursRetablir(true);
+        notifierObservateursRetablir(false);
     }
 
     /**
@@ -276,7 +276,7 @@ public class ControleurDonnees {
      */
     public void effacerCommandeAAnnuler() {
         hist.effacerCommandesAAnnuler();
-        notifierObservateursAnnuler(true);
+        notifierObservateursAnnuler(false);
     }
 
     /**
