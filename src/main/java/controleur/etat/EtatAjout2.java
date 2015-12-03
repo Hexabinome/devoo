@@ -37,14 +37,14 @@ public class EtatAjout2 extends AbstractEtat {
         Commande commande = new CommandeAjouterLivraison(controleurDonnees, idLivraisonAvant, idIntersectionLivraison);
         try {
             commande.executer();
+            controleurDonnees.ajouterCommande(commande);
+            controleurDonnees.effacerCommandesARetablir();
+            controleurDonnees.notifierObservateursMessage(String.format("[AJOUT] Nouvelle livraison à l'adresse %d créée, suivant la livraison %d. Cliquez sur le plan pour choisir une autre intersection pour créer une livraison ou clic droit pour sortir du mode d'ajout.", idIntersectionLivraison, idLivraisonAvant));
+            return new EtatAjout(controleurDonnees);
         } catch (CommandeException e) {
-            return this;
+            controleurDonnees.notifierObservateursMessage(e.getMessage());
         }
-        controleurDonnees.ajouterCommande(commande);
-        controleurDonnees.effacerCommandesARetablir();
-        EtatInterface etat = new EtatAjout(controleurDonnees);
-        controleurDonnees.notifierObservateursMessage(String.format("[AJOUT] Nouvelle livraison à l'adresse %d créée, suivant la livraison %d. Cliquez sur le plan pour choisir une autre intersection pour créer une livraison ou clic droit pour sortir du mode d'ajout.", idIntersectionLivraison, idLivraisonAvant));
-        return etat;
+        return this;
     }
 
     @Override
