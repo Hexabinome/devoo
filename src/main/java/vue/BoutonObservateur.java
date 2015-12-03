@@ -11,7 +11,7 @@ public class BoutonObservateur extends Button implements ActivationFonctionnalit
 
     @Override
     public void notifierObservateursActivation(boolean disabled) {
-        setDisable(disabled);
+        setDisable(!disabled);
     }
 
 }

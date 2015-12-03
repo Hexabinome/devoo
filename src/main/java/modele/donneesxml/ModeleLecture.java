@@ -27,10 +27,4 @@ public interface ModeleLecture {
      * @return Une représentation des intersections, par fenêtres, à parcourir ou null.
      */
     List<List<Integer>> getTournee();
-
-    // TODO génération feuille de route en lecture ??
-	/** Génère la feuille de route
-	 * @return Chaîne de caractère bien formée, prête à être écrite dans un fichier
-	 */
-	String genererFeuilleDeRoute();
 }

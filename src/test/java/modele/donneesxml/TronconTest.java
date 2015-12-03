@@ -1,9 +1,8 @@
 package modele.donneesxml;
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
 
 /**
  *
@@ -21,5 +20,11 @@ public class TronconTest {
             +getDuree(): float
             +toString(): String
         */
+	
+	@Test
+	public void calculCoutTest() {
+		Troncon t = new Troncon("nom", 5, 10, 0);
+		assertEquals(10, t.getCout(), 0);
+	}
     
 }

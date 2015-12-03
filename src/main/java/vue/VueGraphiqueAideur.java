@@ -88,7 +88,7 @@ public class VueGraphiqueAideur {
         this.group = group;
         this.scrollPane = scrollPane;
         this.sliderZoom = slider;
-        initzoom();
+        activerZoom();
 
         canvas.setOnMouseMoved(new HoverGraphiqueGestionnaireEvenement());
         canvas.setOnMouseClicked(new ClicGraphiqueGestionnaireEvenement());
@@ -107,7 +107,6 @@ public class VueGraphiqueAideur {
             }
 
             surbrillanceLivraison(l);
-            // TODO surbrillance de la zone dans la vue textuelle
         }
     }
 
@@ -145,10 +144,10 @@ public class VueGraphiqueAideur {
     }
 
     /**
-     * Initialise la fonctionnalité permettant de faire sur un zoom sur la vue graphique c'est à dire le graphe.
+     * Active la fonctionnalité permettant de faire sur un zoom sur la vue graphique c'est à dire le graphe.
      * Le zoom est inspiré de : http://stackoverflow.com/questions/16680295/javafx-correct-scaling
      */
-    private void initzoom() {
+    private void activerZoom() {
 
         final Group contenuDuScrollPane = (Group) scrollPane.getContent();
 

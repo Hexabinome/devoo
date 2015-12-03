@@ -4,14 +4,6 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-import modele.donneesxml.Demande;
-import modele.donneesxml.Fenetre;
-import modele.donneesxml.Intersection;
-import modele.donneesxml.Livraison;
-import modele.donneesxml.Modele;
-import modele.donneesxml.ModeleLecture;
-import modele.donneesxml.PlanDeVille;
-import modele.donneesxml.Troncon;
 import modele.persistance.DeserialiseurXML;
 import modele.persistance.ExceptionXML;
 
@@ -26,13 +18,11 @@ import org.xml.sax.SAXException;
  *
  * @author robinroyer, maxou
  */
-public class ModeleTest
-{
+public class ModeleTest {
 
     @Test
-    public void TestModelPlan() throws JDOMException, IOException, SAXException, ParseException, ExceptionXML
-    {
-        // initialisation na parti des fichiers xml
+    public void TestModelPlan() throws JDOMException, IOException, SAXException, ParseException, ExceptionXML {
+        // initialisation à partir des fichiers xml
         PlanDeVille ville = DeserialiseurXML.getInstance().ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/plan10x10.xml"));
         Demande demande = DeserialiseurXML.getInstance().ouvrirDemande(ClassLoader.getSystemResourceAsStream("samples/livraison10x10-1.xml"), ville);
         ModeleLecture monModel = new Modele(ville, demande);
@@ -48,8 +38,7 @@ public class ModeleTest
     }
 
     @Test
-    public void TestCalculerTournee() throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException, JDOMException, IOException, SAXException, ExceptionXML, ParseException
-    {
+    public void TestCalculerTournee() throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException, JDOMException, IOException, SAXException, ExceptionXML, ParseException {
         // initialisation a parti des fichiers xml
         PlanDeVille ville = DeserialiseurXML.getInstance().ouvrirPlanDeVille(ClassLoader.getSystemResourceAsStream("samples/plan10x10.xml"));
         Demande demande = DeserialiseurXML.getInstance().ouvrirDemande(ClassLoader.getSystemResourceAsStream("samples/livraison10x10-1.xml"), ville);
@@ -60,8 +49,7 @@ public class ModeleTest
     }
 
     @Test
-    public void TestManipulerModele()
-    {
+    public void TestManipulerModele() {
         Fenetre fenetre1 = new Fenetre(30000, 40000);
         Fenetre fenetre2 = new Fenetre(50000, 60000);
 
@@ -87,57 +75,57 @@ public class ModeleTest
 
         // param Intersection: id, x, y
         Intersection i1 = new Intersection(1, 1, 1);
-        i1.addTroncon(2, a);
-        i1.addTroncon(5, f);
-        i1.addTroncon(6, g);
+        i1.ajouterTroncon(2, a);
+        i1.ajouterTroncon(5, f);
+        i1.ajouterTroncon(6, g);
 
         Intersection i2 = new Intersection(2, 1, 1);
-        i2.addTroncon(3, b);
-        i2.addTroncon(4, d);
+        i2.ajouterTroncon(3, b);
+        i2.ajouterTroncon(4, d);
 
         Intersection i3 = new Intersection(3, 1, 1);
-        i3.addTroncon(4, c);
+        i3.ajouterTroncon(4, c);
 
         Intersection i4 = new Intersection(4, 1, 1);
-        i4.addTroncon(5, q);
-        i4.addTroncon(9, j);
+        i4.ajouterTroncon(5, q);
+        i4.ajouterTroncon(9, j);
 
         Intersection i5 = new Intersection(5, 1, 1);
-        i5.addTroncon(4, e);
-        i5.addTroncon(1, r);
+        i5.ajouterTroncon(4, e);
+        i5.ajouterTroncon(1, r);
 
         Intersection i6 = new Intersection(6, 1, 1);
-        i6.addTroncon(7, h);
+        i6.ajouterTroncon(7, h);
 
         Intersection i7 = new Intersection(7, 1, 1);
-        i7.addTroncon(8, i);
+        i7.ajouterTroncon(8, i);
 
         Intersection i8 = new Intersection(8, 1, 1);
 
         Intersection i9 = new Intersection(9, 1, 1);
-        i9.addTroncon(4, p);
-        i9.addTroncon(10, k);
-        i9.addTroncon(11, n);
+        i9.ajouterTroncon(4, p);
+        i9.ajouterTroncon(10, k);
+        i9.ajouterTroncon(11, n);
 
         Intersection i10 = new Intersection(10, 1, 1);
-        i10.addTroncon(11, m);
-        i10.addTroncon(9, l);
+        i10.ajouterTroncon(11, m);
+        i10.ajouterTroncon(9, l);
 
         Intersection i11 = new Intersection(11, 1, 1);
-        i11.addTroncon(9, o);
+        i11.ajouterTroncon(9, o);
 
         PlanDeVille plan = new PlanDeVille();
-        plan.addInstersection(i1);
-        plan.addInstersection(i2);
-        plan.addInstersection(i3);
-        plan.addInstersection(i4);
-        plan.addInstersection(i5);
-        plan.addInstersection(i6);
-        plan.addInstersection(i7);
-        plan.addInstersection(i8);
-        plan.addInstersection(i9);
-        plan.addInstersection(i10);
-        plan.addInstersection(i11);
+        plan.ajouterInstersection(i1);
+        plan.ajouterInstersection(i2);
+        plan.ajouterInstersection(i3);
+        plan.ajouterInstersection(i4);
+        plan.ajouterInstersection(i5);
+        plan.ajouterInstersection(i6);
+        plan.ajouterInstersection(i7);
+        plan.ajouterInstersection(i8);
+        plan.ajouterInstersection(i9);
+        plan.ajouterInstersection(i10);
+        plan.ajouterInstersection(i11);
 
         fenetre1.ajouterLivraison(102, new Livraison(102, 202, 2));
         fenetre1.ajouterLivraison(104, new Livraison(104, 204, 4));

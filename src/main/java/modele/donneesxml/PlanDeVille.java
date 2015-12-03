@@ -7,7 +7,7 @@ import java.util.Map;
 
 /**
  * Réprensente le plan de la ville chargé à partir d'un fichier XML. C'est à
- * dire: Toutes les intersections. Cette classe permet egalement de récupérer
+ * dire: Toutes les intersections. Cette classe permet également de récupérer
  * une intersection par rapport à son identifiant. Cette classe n'est pas à confondre avec
  * un graphe qu'on utilise pour calculer le chemin optimal avec les algorithmes du
  * TSP et dijkstra.
@@ -21,13 +21,16 @@ public class PlanDeVille implements Serializable {
      */
     private final Map<Integer, Intersection> intersections;
 
-    /** Constructeur du plan de la ville
+    /**
+     * Constructeur du plan de la ville
      */
     public PlanDeVille() {
         intersections = new HashMap<>();
     }
 
-    /** Constructeur du plan de la ville
+    /**
+     * Constructeur du plan de la ville
+     *
      * @param intersections Les intersections dans la ville
      */
     public PlanDeVille(Map<Integer, Intersection> intersections) {
@@ -39,12 +42,13 @@ public class PlanDeVille implements Serializable {
      *
      * @param intersection L'intersection à ajouter
      */
-    public void addInstersection(Intersection intersection) {
+    public void ajouterInstersection(Intersection intersection) {
         intersections.put(intersection.getId(), intersection);
     }
 
     /**
      * Récupère l'intersection correspondant à l'id passé en paramètre
+     *
      * @param idIntersection L'identifiant de l'intersection
      * @return La livraison sur cette adresse, si elle n'existe pas null
      */

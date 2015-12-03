@@ -414,12 +414,12 @@ public class VuePrincipale implements Initializable, ActivationOuvrirDemandeObse
 
     @Override
     public void notifierObservateurAnnulerCommande(boolean activation) {
-        menuEdition.getItems().get(0).setDisable(activation);
+        menuEdition.getItems().get(0).setDisable(!activation);
     }
 
     @Override
     public void notifierObservateurRetablirCommande(boolean activation) {
-        menuEdition.getItems().get(1).setDisable(activation);
+        menuEdition.getItems().get(1).setDisable(!activation);
     }
 
     @Override

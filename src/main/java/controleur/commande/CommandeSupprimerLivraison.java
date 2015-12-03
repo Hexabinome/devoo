@@ -66,7 +66,7 @@ public class CommandeSupprimerLivraison extends CommandeAnnulable {
         idLivraisonAvant = controleurDonnees.getModele().supprimerLivraison(livraisonSupprimee.getId());
         controleurDonnees.getModele().remplirHoraires();
         controleurDonnees.notifierObservateursModele();
-        controleurDonnees.notifierObservateursAnnuler(false);
+        controleurDonnees.notifierObservateursAnnuler(true);
         controleurDonnees.notifierObservateursMessage(
                 String.format(
                         "[SUPPRESSION] La livraison %d, à l'adresse %d et pour le client %d a été supprimée avec succès !",
@@ -77,7 +77,7 @@ public class CommandeSupprimerLivraison extends CommandeAnnulable {
 
 
         if (controleurDonnees.getHist().estVideCommandesARetablir()) {
-            controleurDonnees.notifierObservateursRetablir(true);
+            controleurDonnees.notifierObservateursRetablir(false);
         }
     }
 
@@ -87,10 +87,10 @@ public class CommandeSupprimerLivraison extends CommandeAnnulable {
         controleurDonnees.setModele(super.getModelCopie());
 
         controleurDonnees.notifierObservateursModele();
-        controleurDonnees.notifierObservateursRetablir(false);
+        controleurDonnees.notifierObservateursRetablir(true);
 
         if (controleurDonnees.getHist().estVideCommandesAAnnuler()) {
-            controleurDonnees.notifierObservateursAnnuler(true);
+            controleurDonnees.notifierObservateursAnnuler(false);
         }
     }
 

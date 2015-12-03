@@ -82,7 +82,7 @@ public class DeserialiseurXML {
         List<Element> intersectionList = elementRacine.getChildren(XMLTags.NOEUD);
         for (Element e : intersectionList) {
         	Intersection intersection = chargerIntersection(e);
-            planDeVille.addInstersection(intersection);
+            planDeVille.ajouterInstersection(intersection);
         }
         
         return planDeVille;
@@ -123,7 +123,7 @@ public class DeserialiseurXML {
              Troncon tronconSortant = chargerTroncon(elementTroncon, idIntersection); 
 
              // Ajout du troncon sortant à l'intersection
-             intersection.addTroncon(tronconSortant.getIdDestination(), tronconSortant);
+             intersection.ajouterTroncon(tronconSortant.getIdDestination(), tronconSortant);
          }
          
          return intersection;

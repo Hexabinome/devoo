@@ -46,10 +46,10 @@ public class CommandeEchangerLivraisons extends CommandeAnnulable {
         
         donnees.notifierObservateursMessage(String.format("L'échange %d <-> %d a été effectué.", idLivraison1, idLivraison2));
         donnees.notifierObservateursModele();
-        donnees.notifierObservateursAnnuler(false);
+        donnees.notifierObservateursAnnuler(true);
 
         if (donnees.getHist().estVideCommandesARetablir()) {
-            donnees.notifierObservateursRetablir(true);
+            donnees.notifierObservateursRetablir(false);
         }
     }
 
@@ -60,10 +60,10 @@ public class CommandeEchangerLivraisons extends CommandeAnnulable {
         donnees.notifierObservateursMessage(String.format("L'échange %d <-> %d a été annulé.", idLivraison1, idLivraison2));
         donnees.notifierObservateursModele();
         
-        donnees.notifierObservateursRetablir(false);
+        donnees.notifierObservateursRetablir(true);
 
         if (donnees.getHist().estVideCommandesAAnnuler()) {
-            donnees.notifierObservateursAnnuler(true);
+            donnees.notifierObservateursAnnuler(false);
         }
     }
 
