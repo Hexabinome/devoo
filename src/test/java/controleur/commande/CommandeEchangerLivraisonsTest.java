@@ -27,7 +27,7 @@ import controleur.ControleurDonnees;
 public class CommandeEchangerLivraisonsTest {
 	
 	@Test
-	public void echangeDeuxSuccesivesLivraisonsTest() {
+	public void echangeDeuxSuccessivesLivraisonsTest() {
 		// *** Mise en place du plan, demande, tournée... ***
 		Map<Integer, Intersection> intersections = new HashMap<Integer, Intersection>();
 		Intersection i1 = new Intersection(1, 0, 0);
