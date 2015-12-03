@@ -42,11 +42,10 @@ public class Intersection  implements Serializable {
 
     /** Ajoute un tronçon à l'intersection vers une autre intersection.
      * Remplace l'ancien tronçon si il existe déjà
-     * @param id Identifiant de l'intersection destination
      * @param troncon Le nouveau tronçon
      */
-    public void ajouterTroncon(int id, Troncon troncon) {
-        troncons.put(id, troncon);
+    public void ajouterTroncon(Troncon troncon) {
+        troncons.put(troncon.getIdDestination(), troncon);
     }
 
     /**

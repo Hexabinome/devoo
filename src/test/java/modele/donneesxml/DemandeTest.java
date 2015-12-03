@@ -45,44 +45,44 @@ public class DemandeTest {
 		Troncon r = new Troncon("R", 1, 1, 1);
 		
 		Intersection i1 = new Intersection(1, 1, 1); 
-		i1.ajouterTroncon(2, a);
-		i1.ajouterTroncon(5, f);
-		i1.ajouterTroncon(6, g);
+		i1.ajouterTroncon(a);
+		i1.ajouterTroncon(f);
+		i1.ajouterTroncon(g);
 		
 		Intersection i2 = new Intersection(2, 1, 1); 
-		i2.ajouterTroncon(3, b);
-		i2.ajouterTroncon(4, d);
+		i2.ajouterTroncon(b);
+		i2.ajouterTroncon(d);
 		
 		Intersection i3 = new Intersection(3, 1, 1); 
-		i3.ajouterTroncon(4, c);
+		i3.ajouterTroncon(c);
 		
 		Intersection i4 = new Intersection(4, 1, 1);
-		i4.ajouterTroncon(5, q);
-		i4.ajouterTroncon(9, j);
+		i4.ajouterTroncon(q);
+		i4.ajouterTroncon(j);
 		
 		Intersection i5 = new Intersection(5, 1, 1);  
-		i5.ajouterTroncon(4, e);
-		i5.ajouterTroncon(1, r);
+		i5.ajouterTroncon(e);
+		i5.ajouterTroncon(r);
 		
 		Intersection i6 = new Intersection(6, 1, 1); 
-		i6.ajouterTroncon(7, h);
+		i6.ajouterTroncon(h);
 		
 		Intersection i7 = new Intersection(7, 1, 1); 
-		i7.ajouterTroncon(8, i);
+		i7.ajouterTroncon(i);
 
 		Intersection i8 = new Intersection(8, 1, 1);
 		
 		Intersection i9 = new Intersection(9, 1, 1);
-		i9.ajouterTroncon(4, p);
-		i9.ajouterTroncon(10, k);
-		i9.ajouterTroncon(11, n);
+		i9.ajouterTroncon(p);
+		i9.ajouterTroncon(k);
+		i9.ajouterTroncon(n);
 		
 		Intersection i10 = new Intersection(10, 1, 1);
-		i10.ajouterTroncon(11, m);
-		i10.ajouterTroncon(9, l);
+		i10.ajouterTroncon(m);
+		i10.ajouterTroncon(l);
 		
 		Intersection i11 = new Intersection(11, 1, 1);
-		i11.ajouterTroncon(9, o);
+		i11.ajouterTroncon(o);
 
 		PlanDeVille plan = new PlanDeVille();
 		plan.ajouterInstersection(i1);

@@ -29,8 +29,8 @@ public class IntersectionTest {
 		
 		Troncon t1 = new Troncon("rue", 3, 10, 2);
 		Troncon t2 = new Troncon("rue2", 5, 50, 4);
-		i.ajouterTroncon(2, t1);
-		i.ajouterTroncon(4, t2);
+		i.ajouterTroncon(t1);
+		i.ajouterTroncon(t2);
 		
 		assertTrue(i.aLiaison(2));
 		assertFalse(i.aLiaison(3));

@@ -18,22 +18,26 @@ public class EtatEchange2 extends AbstractEtat {
     private ControleurDonnees donnees;
     
     /** L'identifiant de la première livraison */
-    private int idLivraison;
+    private int idLivraison1;
 
     /**
      * Le constructeur du deuxième état d'échange
      * @param controleurDonnees Le contrôleur de données
-     * @param idLivraison L'identifiant de la première livraison, déterminé pendant le premier état d'échange
+     * @param idLivraison1 L'identifiant de la première livraison, déterminé pendant le premier état d'échange
      */
-    public EtatEchange2(ControleurDonnees controleurDonnees, int idLivraison) {
+    public EtatEchange2(ControleurDonnees controleurDonnees, int idLivraison1) {
         this.donnees = controleurDonnees;
-        this.idLivraison = idLivraison;
+        this.idLivraison1 = idLivraison1;
         donnees.notifierObservateursMessage("[ECHANGE] Veuillez choisir la deuxième livraison en cliquant sur le plan ou sur la liste à gauche. Clic droit pour revenir au choix de la première livraison.");
     }
 
     @Override
-    public EtatInterface clicSurLivraison(int livraisonId) {
-        Commande cmdEchanger = new CommandeEchangerLivraisons(donnees, idLivraison, livraisonId);
+    public EtatInterface clicSurLivraison(int livraisonId2) {
+        if(livraisonId2 == idLivraison1){
+            donnees.notifierObservateursMessage("Vous ne pouvez pas échanger avec elle-même. Selectionner une autre livraison");
+            return this;
+        }
+        Commande cmdEchanger = new CommandeEchangerLivraisons(donnees, idLivraison1, livraisonId2);
         try {
             cmdEchanger.executer();
             donnees.ajouterCommande(cmdEchanger);
@@ -43,7 +47,8 @@ public class EtatEchange2 extends AbstractEtat {
             e.printStackTrace();
         }
         EtatInterface nouvelEtat = new EtatEchange(donnees);
-        donnees.notifierObservateursMessage(String.format("[ECHANGE] Les livraisons %d <-> %d ont été échangées avec succès. Veuillez choisir la première livraison en cliquant sur le plan ou sur la liste à gauche. Clic droit pour sortir au mode d'échange.", idLivraison, livraisonId));
+        donnees.notifierObservateursMessage(String.format("[ECHANGE] Les livraisons %d <-> %d ont été échangées avec succès. Veuillez choisir la première livraison en cliquant sur le plan ou sur la liste à gauche. Clic droit pour sortir au mode d'échange.",
+                idLivraison1, livraisonId2));
         return nouvelEtat;
     }
 
