@@ -31,7 +31,6 @@ public class CommandeAjouterLivraisonTest {
 	public void ajouterLivraisonGeneralTest() {
 		
 		// *** Mise en place du plan, demande, tournée... ***
-		
 		Map<Integer, Intersection> intersections = new HashMap<Integer, Intersection>();
 		Intersection i1 = new Intersection(1, 0, 0);
 		i1.ajouterTroncon(new Troncon("rue1", 5, 10, 2));
@@ -55,7 +54,6 @@ public class CommandeAjouterLivraisonTest {
 		Demande demande = new Demande(new Intersection(1, 0, 0), fenetres);
 		Modele modele = new Modele(plan, demande);
 		GrapheRealisation graphe = new GrapheRealisation(4);
-		//graphe.setChemin(new Che, livraisonDepartId, livraisonArriveeId);
 		modele.setGraphe(graphe);
 		modele.calculerTournee();
 		
