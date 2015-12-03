@@ -97,14 +97,14 @@ public class DemandeTest {
 		plan.ajouterInstersection(i10);
 		plan.ajouterInstersection(i11);
 		
-		fenetre0.ajouterLivraison(1, new Livraison(101, 201, 1));
+		fenetre0.ajouterLivraison(new Livraison(101, 201, 1));
 		
-		fenetre1.ajouterLivraison(2, new Livraison(102, 202, 2));
-		fenetre1.ajouterLivraison(4, new Livraison(104, 204, 4));
-		fenetre1.ajouterLivraison(5, new Livraison(103, 203, 5));
+		fenetre1.ajouterLivraison(new Livraison(102, 202, 2));
+		fenetre1.ajouterLivraison(new Livraison(104, 204, 4));
+		fenetre1.ajouterLivraison(new Livraison(103, 203, 5));
 		
-		fenetre2.ajouterLivraison(10, new Livraison(105, 205, 10));
-		fenetre2.ajouterLivraison(11, new Livraison(106, 206, 11));
+		fenetre2.ajouterLivraison(new Livraison(105, 205, 10));
+		fenetre2.ajouterLivraison(new Livraison(106, 206, 11));
 		
 		GrapheRealisation graphe = new GrapheRealisation(6);
 		

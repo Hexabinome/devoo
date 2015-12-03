@@ -65,11 +65,10 @@ public class Fenetre implements Serializable {
     }
 
     /** Ajoute une livraison dans la fenêtre, supprime l'ancienne si une avec le même identifiant existait déjà
-     * @param id L'identifiant de la nouvelle livraison
      * @param livraison La nouvelle livraison
      */
-    public void ajouterLivraison(int id, Livraison livraison) {
-        livraisons.put(id, livraison);
+    public void ajouterLivraison(Livraison livraison) {
+        livraisons.put(livraison.getId(), livraison);
     }
 
     /** Retourne les paires d'identifiants et livraisons

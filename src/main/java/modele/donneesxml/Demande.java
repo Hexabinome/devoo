@@ -32,7 +32,7 @@ public class Demande implements Serializable {
         Fenetre fenetreEntrepot = new Fenetre(0, 0);
 
         Livraison livraisonEntrepot = new Livraison(-1, -1, entrepot.getId());
-        fenetreEntrepot.ajouterLivraison(livraisonEntrepot.getId(), livraisonEntrepot);
+        fenetreEntrepot.ajouterLivraison(livraisonEntrepot);
 
         this.fenetres = new ArrayList<>();
         this.fenetres.add(fenetreEntrepot);

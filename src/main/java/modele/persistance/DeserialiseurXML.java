@@ -248,7 +248,7 @@ public class DeserialiseurXML {
 
         for (Element elementLivraison : listeLivraison) {
             Livraison livraison = chargerLivraison(elementLivraison, numeroFenetre, planDeVille);
-            nouvelleFenetre.ajouterLivraison(livraison.getId(), livraison);
+            nouvelleFenetre.ajouterLivraison(livraison);
         }
         
         return nouvelleFenetre;

@@ -146,9 +146,9 @@ public class FenetreTest
 	@Test
 	public void livraisonsOperation() {
 		Fenetre f = new Fenetre(10, 20);
-		f.ajouterLivraison(1, new Livraison(1, 1, 1));
-		f.ajouterLivraison(2, new Livraison(2, 2, 2));
-		f.ajouterLivraison(3, new Livraison(3, 3, 3));
+		f.ajouterLivraison(new Livraison(1, 1, 1));
+		f.ajouterLivraison(new Livraison(2, 2, 2));
+		f.ajouterLivraison(new Livraison(3, 3, 3));
 		
 		assertEquals(f.getListeLivraisons().size(), 3);
 		f.effacerLivraison(1);

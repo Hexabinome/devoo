@@ -119,7 +119,7 @@ public class Modele implements ModeleLecture, Serializable {
         Livraison livraisonAvant = demande.identifierLivraison(idLivraisonAvant);
 
         // Manipuler la tournee cree par TSP en ajoutant la nouvelle livraison dans le bon endroit (apres la livraison precendente)
-        fenetre.ajouterLivraison(nouvelleLivraison.getId(), nouvelleLivraison);
+        fenetre.ajouterLivraison(nouvelleLivraison);
 
         // Calculer et stoquer le chemin vers la nouvelle livraison
         //TODO: c'est possible que l'on ai pas besoin de faire cela, le premier appel de dijkstra l'a déjà fait.

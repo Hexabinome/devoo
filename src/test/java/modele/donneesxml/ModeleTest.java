@@ -127,12 +127,12 @@ public class ModeleTest {
         plan.ajouterInstersection(i10);
         plan.ajouterInstersection(i11);
 
-        fenetre1.ajouterLivraison(102, new Livraison(102, 202, 2));
-        fenetre1.ajouterLivraison(104, new Livraison(104, 204, 4));
+        fenetre1.ajouterLivraison(new Livraison(102, 202, 2));
+        fenetre1.ajouterLivraison(new Livraison(104, 204, 4));
         Livraison testLivraison = new Livraison(103, 203, 5);
-        fenetre1.ajouterLivraison(103, testLivraison);
-        fenetre2.ajouterLivraison(205, new Livraison(205, 205, 10));
-        fenetre2.ajouterLivraison(206, new Livraison(206, 206, 11));
+        fenetre1.ajouterLivraison(testLivraison);
+        fenetre2.ajouterLivraison(new Livraison(205, 205, 10));
+        fenetre2.ajouterLivraison(new Livraison(206, 206, 11));
 
         ArrayList<Fenetre> fenetres = new ArrayList<>();
         fenetres.add(fenetre1);
