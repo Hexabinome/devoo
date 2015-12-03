@@ -1,0 +1,182 @@
+%% Creator: Inkscape inkscape 0.48.5, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'der.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{530.71456008bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,1.03468522)%
+    \put(0,0){\includegraphics[width=\unitlength]{der.pdf}}%
+    \put(0.1827222,1.01431034){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Model}}}%
+    \put(0.49412577,1.0150541){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Control / IHM}}}%
+    \put(0.21197877,0.95695527){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{Analyse Model}}}%
+    \put(0.20735028,0.85476097){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{Conception UML
+}}}%
+    \put(0.2154708,0.74183072){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{Impl. Model}}}%
+    \put(0.4829091,0.95695527){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Diagramme CU}}}%
+    \put(0.54982208,0.85847681){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Liste des scenarios /
+}}}%
+    \put(0.2154708,0.46659735){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{Impl. import XML}}}%
+    \put(0.53929838,0.75043176){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{Concept. IHM (primitive) 
+}}}%
+    \put(0.77797924,0.31521904){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{Mock Impl. des
+}}}%
+    \put(0.44769902,0.40639002){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{Diagr. des classes
+}}}%
+    \put(0.47350214,0.05374728){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{Implementer pkg control / modele
+}}}%
+    \put(0.21638132,0.33758174){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{Impl. Observer
+}}}%
+    \put(0.49629322,0.66442132){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Liste des evenements 
+}}}%
+    \put(0.7659376,0.44079422){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{Diagramme des}}}%
+    \put(0.43909798,0.29457631){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{Impl IHM}}}%
+    \put(0.48779205,0.18072139){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{JUnit}}}%
+    \put(0.68852824,0.97810064){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{Diagramme}}}%
+    \put(0.68750752,0.95874829){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{ de cas }}}%
+    \put(0.68950788,0.94041663){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{d'utilisation}}}%
+    \put(0.05205101,0.93965471){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{Modele
+}}}%
+    \put(0.05296154,0.9199627){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{du
+}}}%
+    \put(0.05151762,0.89901992){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{
+domaine
+}}}%
+    \put(0.55091154,0.56120878){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{Diagr. Etats
+}}}%
+    \put(0.55198824,0.54290463){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{Transitions
+}}}%
+    \put(0.55607218,0.38918791){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{Diagr. des
+}}}%
+    \put(0.55607218,0.371099){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{classes
+}}}%
+    \put(0.55607218,0.34999521){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{(view)
+}}}%
+    \put(0.67132616,0.06234832){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{Java-}}}%
+    \put(0.79174091,0.06234832){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{Diagrammes
+}}}%
+    \put(0.52654439,0.31022513){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{[Momo / David]}}}%
+    \put(0.68027691,0.46179246){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{[Max]}}}%
+    \put(0.39302084,0.69130839){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{[David / Alexis]}}}%
+    \put(0.15764883,0.3702651){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{[Max]}}}%
+    \put(0.6095456,0.87968474){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{[Robin / Papin / David]}}}%
+    \put(0.50809924,0.98426572){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{[Papin / David]}}}%
+    \put(0.28730437,0.98264709){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{[Momo / Jolan / Max]}}}%
+    \put(0.31146355,0.876076){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{[Momo / Jolan]}}}%
+    \put(0.29775033,0.76131799){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{[Momo / Max]}}}%
+    \put(0.25588893,0.48849704){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{[Momo]}}}%
+    \put(0.88735649,0.31619562){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{[Max]}}}%
+    \put(0.34322038,0.07926574){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{[Alexis / Jolan]}}}%
+    \put(0.61466851,0.18387788){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{[Papin / Robin]}}}%
+    \put(0.39302084,0.43580947){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{[David]}}}%
+    \put(0.3939903,0.49316903){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{[David / Alexis]}}}%
+    \put(0.73839247,0.55847377){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{Definir Interface
+}}}%
+    \put(0.2128135,0.83472918){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{model
+}}}%
+    \put(0.21456028,0.31299731){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{(Model / View)
+}}}%
+    \put(0.47532319,0.03280503){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{(notamment les algos)
+}}}%
+    \put(0.48542515,0.83790669){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{(Description textuelle des CUs)
+}}}%
+    \put(0.53938505,0.64476667){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Utilisateur
+}}}%
+    \put(0.21820241,0.60502648){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{Generer UML}}}%
+    \put(0.24798312,0.63039258){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{[Jolan / Max]}}}%
+    \put(0.09840785,0.64863689){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{Diagr.
+}}}%
+    \put(0.09931837,0.62894484){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{des classes
+}}}%
+    \put(0.09529911,0.6054267){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{
+modele
+}}}%
+    \put(0.36238422,0.63833533){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{Liste
+}}}%
+    \put(0.3632947,0.61864333){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{des even.
+}}}%
+    \put(0.36185083,0.59383745){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{
+utilisateur
+}}}%
+    \put(0.81396558,0.85912358){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{Descr. text.}}}%
+    \put(0.81294487,0.83977123){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{de CU}}}%
+    \put(0.41924461,0.52055301){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{Etats-Transitions
+}}}%
+    \put(0.41924461,0.54585581){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{Diagr.
+}}}%
+    \put(0.13495279,0.21314304){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{Doc. Choix
+}}}%
+    \put(0.13586331,0.19345104){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{d'achitect.
+}}}%
+    \put(0.13184405,0.16993285){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{
+D.P. util.
+}}}%
+    \put(0.85366987,0.20857493){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{Protot. +
+}}}%
+    \put(0.85458035,0.18888293){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{tests uni-
+}}}%
+    \put(0.85056113,0.16536474){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{
+taires
+}}}%
+    \put(0.94796369,0.54696893){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{Diagramme}}}%
+    \put(0.94694297,0.52761659){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{des packages}}}%
+    \put(0.94796369,0.45256119){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{Diagramme}}}%
+    \put(0.94694297,0.43320884){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{des classes}}}%
+    \put(0.94694297,0.41511987){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{controleur}}}%
+    \put(0.7368698,0.53563319){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{package controleur
+}}}%
+    \put(0.7659376,0.4166758){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{classes (controller)}}}%
+    \put(0.43399468,0.3835494){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{+ concept IHM
+}}}%
+    \put(0.77797924,0.29110057){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{classes/methodes business
+}}}%
+    \put(0.67132616,0.04124469){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{Doc}}}%
+    \put(0.79174091,0.04124469){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{UML
+}}}%
+    \put(0.79174091,0.02014107){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{retro-gen.
+}}}%
+  \end{picture}%
+\endgroup%

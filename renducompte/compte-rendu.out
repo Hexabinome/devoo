@@ -1,0 +1,20 @@
+\BOOKMARK [0][-]{chapter.1}{Capture et Analyse des besoins}{}% 1
+\BOOKMARK [1][-]{section.1.1}{Planning pr\351visionnel du projet}{chapter.1}% 2
+\BOOKMARK [1][-]{section.1.2}{Mod\350le du domaine}{chapter.1}% 3
+\BOOKMARK [1][-]{section.1.3}{Glossaire}{chapter.1}% 4
+\BOOKMARK [1][-]{section.1.4}{Diagramme de cas d'utilisation}{chapter.1}% 5
+\BOOKMARK [1][-]{section.1.5}{Description textuelle structur\351e des cas d'utilisation}{chapter.1}% 6
+\BOOKMARK [0][-]{chapter.2}{Conception}{}% 7
+\BOOKMARK [1][-]{section.2.1}{Liste des \351v\351nements utilisateur et diagramme \311tats-Transitions}{chapter.2}% 8
+\BOOKMARK [1][-]{section.2.2}{Diagrammes des packages et de classes}{chapter.2}% 9
+\BOOKMARK [1][-]{section.2.3}{Document expliquant les choix architecturaux et design patterns utilis\351s}{chapter.2}% 10
+\BOOKMARK [1][-]{section.2.4}{Diagramme des sequence du calcul de la tourn\351e a partir d'une demande de livraison}{chapter.2}% 11
+\BOOKMARK [0][-]{chapter.3}{Impl\351mentation et tests}{}% 12
+\BOOKMARK [1][-]{section.3.1}{Code du prototype et des tests unitaires}{chapter.3}% 13
+\BOOKMARK [1][-]{section.3.2}{Documentation JavaDoc du code}{chapter.3}% 14
+\BOOKMARK [1][-]{section.3.3}{Diagramme de packages et de classes r\351tro-g\351n\351r\351s \340 partir du code}{chapter.3}% 15
+\BOOKMARK [0][-]{chapter.4}{Bilan}{}% 16
+\BOOKMARK [1][-]{section.4.1}{Planning effectif du projet}{chapter.4}% 17
+\BOOKMARK [1][-]{section.4.2}{Bilan humain et technique}{chapter.4}% 18
+\BOOKMARK [2][-]{subsection.4.2.1}{Bilan humain}{section.4.2}% 19
+\BOOKMARK [2][-]{subsection.4.2.2}{Bilan technique}{section.4.2}% 20
