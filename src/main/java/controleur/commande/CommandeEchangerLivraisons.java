@@ -72,9 +72,4 @@ public class CommandeEchangerLivraisons extends CommandeAnnulable {
         }
     }
 
-    @Override
-    public boolean estAnnulable() {
-        return true;
-    }
-
 }

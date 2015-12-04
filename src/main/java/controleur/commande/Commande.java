@@ -8,14 +8,6 @@ package controleur.commande;
 public interface Commande {
 
     /**
-     * Il y a des commandes qu'on ne peut pas annuler, par exemple charger un fichier
-     * xml ou calculer la tournée.
-     *
-     * @return Vrai si annulable
-     */
-    boolean estAnnulable();
-
-    /**
      * La création d'une commande ne déclenche pas automatiquement son exécution
      * (ce qui est notamment utile pour l'historique, quand on veut ré-exécuter une
      * commande)

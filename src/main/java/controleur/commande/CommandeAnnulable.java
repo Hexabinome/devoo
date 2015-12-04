@@ -19,13 +19,6 @@ public abstract class CommandeAnnulable implements Commande {
      */
     private Modele modeleCopie;
 
-    @Override
-    public boolean estAnnulable() {
-        return true;
-    }
-
-    // TODO a enlever je pense :)
-    
     void backupModele(Modele modele) {
         // http://stackoverflow.com/questions/64036/how-do-you-make-a-deep-copy-of-an-object-in-java
         

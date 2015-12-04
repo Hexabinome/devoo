@@ -36,10 +36,6 @@ public class CommandeAjouterLivraison extends CommandeAnnulable {
         this.idIntersectionLivraison = idIntersectionLivraison;
     }
 
-    @Override
-    public boolean estAnnulable() {
-        return true;
-    }
 
     @Override
     public void executer() throws CommandeException {

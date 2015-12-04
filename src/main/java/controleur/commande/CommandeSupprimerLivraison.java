@@ -35,10 +35,6 @@ public class CommandeSupprimerLivraison extends CommandeAnnulable {
         this.idLivraisonSupprime = idLivraison;
     }
 
-    @Override
-    public boolean estAnnulable() {
-        return true;
-    }
 
     @Override
     public void executer() throws CommandeException {
