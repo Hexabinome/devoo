@@ -11,7 +11,7 @@ import controleur.commande.CommandeChargerPlan;
  * Etat après le chargement du plan
  * @author Maxou
  */
-public class EtatPlanCharge extends AbstractEtat {
+public class EtatPlanCharge implements EtatInterface {
 
     /** Le contrôleur de données */
     private final ControleurDonnees controleurDonnees;

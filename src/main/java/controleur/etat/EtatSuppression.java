@@ -11,7 +11,7 @@ import controleur.commande.CommandeSupprimerLivraison;
  * Etat de suppression
  * @author Maxou
  */
-public class EtatSuppression extends AbstractEtat {
+public class EtatSuppression implements EtatInterface {
 
     /** Le contrôleur de données */
     private final ControleurDonnees donnees;
@@ -64,18 +64,9 @@ public class EtatSuppression extends AbstractEtat {
 
     @Override
     public EtatInterface clicDroit() {
-        donnees.notifierObservateursMessage(TEXTE_ETAT_PRINCIPAL);
+        donnees.notifierObservateursMessage("Choisissez une action à effectuer pour modifier la tournée à votre guise.");
         return new EtatPrincipal(donnees);
     }
 
-    @Override
-    public EtatInterface clicAnnuler() {
-        throw new UnsupportedOperationException("Cet état ne permet pas d'annuler");
-    }
-
-    @Override
-    public EtatInterface clicRetablir() {
-        throw new UnsupportedOperationException("Cet état ne permet pas de rétablir.");
-    }
 
 }

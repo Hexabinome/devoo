@@ -12,7 +12,7 @@ import controleur.commande.CommandeException;
 /**
  * Le second état d'échange de livraisons
  */
-public class EtatEchange2 extends AbstractEtat {
+public class EtatEchange2 implements EtatInterface {
 
     /** Le contrôleur de données */
     private ControleurDonnees donnees;

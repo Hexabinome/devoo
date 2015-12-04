@@ -10,7 +10,7 @@ import controleur.commande.CommandeChargerPlan;
  * Premier état de l'application au lancement. A partir de cet état on ne peut que charger un plan.
  * @author Maxou
  */
-public class EtatInitial extends AbstractEtat {
+public class EtatInitial implements EtatInterface {
 	
     /** Le contrôleur de données */
     private final ControleurDonnees controleurDonnees;

@@ -10,7 +10,7 @@ import controleur.commande.CommandeException;
  * Dans cet état on doit cliquer sur une intersection dans le plan pour passer à l'étatAjout2
  * @author Maxou
  */
-public class EtatAjout extends AbstractEtat {
+public class EtatAjout implements EtatInterface {
 
     /** Le contrôleur de données */
     private final ControleurDonnees donnees;
@@ -54,7 +54,7 @@ public class EtatAjout extends AbstractEtat {
 
     @Override
     public EtatInterface clicDroit() {
-        donnees.notifierObservateursMessage(TEXTE_ETAT_PRINCIPAL);
+        donnees.notifierObservateursMessage("Choisissez une action à effectuer pour modifier la tournée à votre guise.");
         return new EtatPrincipal(donnees);
     }
 

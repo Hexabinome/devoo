@@ -12,7 +12,7 @@ import java.io.File;
  * On se retrouve dans cet état après avoir chargé la demande de livraisons mais sans avoir calculé la tournée encore.
  *
  */
-public class EtatDemandeChargee extends AbstractEtat {
+public class EtatDemandeChargee implements EtatInterface {
 
     /** Le contrôleur de données */
     private final ControleurDonnees controleurDonnees;

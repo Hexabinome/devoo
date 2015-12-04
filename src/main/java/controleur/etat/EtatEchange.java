@@ -12,7 +12,7 @@ import controleur.commande.CommandeException;
  * Le premier état de la phase d'échange de livraisons
  * @author Maxou
  */
-public class EtatEchange extends AbstractEtat {
+public class EtatEchange implements EtatInterface {
 
     /** Le contôleur de données */
     private final ControleurDonnees donnees;
@@ -76,7 +76,7 @@ public class EtatEchange extends AbstractEtat {
 
     @Override
     public EtatInterface clicDroit() {
-        donnees.notifierObservateursMessage(TEXTE_ETAT_PRINCIPAL);
+        donnees.notifierObservateursMessage("Choisissez une action à effectuer pour modifier la tournée à votre guise.");
         return new EtatPrincipal(donnees);
     }
     

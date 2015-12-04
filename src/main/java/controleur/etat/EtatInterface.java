@@ -11,18 +11,6 @@ import controleur.commande.CommandeException;
 public interface EtatInterface {
 
     /**
-     * Effectue l'action de l'état actuel après avoir demander une annulation
-     * @return Le nouvel état
-     */
-    EtatInterface clicAnnuler();
-
-    /**
-     * Effectue l'action de l'état actuel après avoir demander un rétablissement
-     * @return Le nouvel état
-     */
-    EtatInterface clicRetablir();
-
-    /**
      * Effectue l'action de l'état actuel après avoir cliquer sur une livraison
      * @param livraisonId L'identifiant de la livraison cliqué
      * @return Le nouvel état

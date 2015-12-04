@@ -27,16 +27,6 @@ public class EtatPrincipal implements EtatInterface {
     }
 
     @Override
-    public EtatInterface clicAnnuler() {
-        throw new UnsupportedOperationException("Cet état ne permet pas d'annuler des commandes");
-    }
-
-    @Override
-    public EtatInterface clicRetablir() {
-        throw new UnsupportedOperationException("Cet état ne permet pas de rétablier des commandes");
-    }
-
-    @Override
     public EtatInterface clicSurLivraison(int livraisonId) {
         // Ne fait rien
         return this;

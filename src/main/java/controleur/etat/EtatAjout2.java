@@ -13,7 +13,7 @@ import java.io.File;
  *
  * @author Maxou
  */
-public class EtatAjout2 extends AbstractEtat {
+public class EtatAjout2 implements EtatInterface {
 
     /** Le contrôleur de donénes */
     private ControleurDonnees controleurDonnees;
