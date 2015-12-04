@@ -15,6 +15,7 @@
 \usepackage{color}
 \usepackage{longtable}
 \usepackage{url}
+\usepackage{float}
 \definecolor{lightgray}{rgb}{.95,.95,.95}
 \definecolor{darkgray}{rgb}{.4,.4,.4}
 \definecolor{purple}{rgb}{0.65, 0.12, 0.82}
@@ -94,23 +95,23 @@ Le planning prévisionnel du projet s'est déroulé en trois étapes. Tout d'abo
 	\item{Rétro-génération des diagrammes de classes à partir du code (3.0 h)}
 	\item{Redaction du glossaire (2.0 h)}
 \end{itemize}
-~\\Deuxièmement, nous avons essayé de trouver toutes les dépendances entre les missions prévues. Le but de cette démarche était de pouvoir paralléliser au plus les développements. Le graphique suivant montre le déroulement prévisionnel du projet et également qui était le responsable prévu de chaque étape.
+~\\Deuxièmement, nous avons essayé de trouver toutes les dépendances entre les missions prévues. Le but de cette démarche était de pouvoir paralléliser au plus les développements. Le graphique suivant (Figure \ref{Previsionnel}) montre le déroulement prévisionnel du projet et également qui était le responsable prévu de chaque étape.
 
-\begin{figure}[ht!]
+\begin{figure}[H]
     \centering
     \scalebox{.65}{\input{der.pdf_tex}}
-    \caption{Dépendances et déroulement prévisionnel du projet}
+    \caption{\label{Previsionnel}Dépendances et déroulement prévisionnel du projet}
 \end{figure}
 
 ~\\Dans la troisième et dernière étape, nous avons estimé le temps nécessaire pour réaliser ces tâches en utilisant redmine.
-\begin{figure}
+\begin{figure}[H]
     \centering
     \includegraphics[scale=0.38]{redmine.png}
     \caption{Capture d'écran de la gestion du projet avec redmine} 
 \end{figure}
 
 \section{Modèle du domaine}
-\begin{figure}[h!]
+\begin{figure}[H]
     \centering
     \includegraphics[scale=0.5]{dia-mod.jpg}
     \caption{Diagramme du modèle}
@@ -126,12 +127,12 @@ Le planning prévisionnel du projet s'est déroulé en trois étapes. Tout d'abo
 \item \textbf{Tronçon :} Tronçon de rue entre deux \textit{intersections}. \vskip1mm
 \item \textbf{Longueur du tronçon :} Longueur d'un \textit{tronçon}. \vskip1mm
 \item \textbf{Vitesse moyenne de circulation du tronçon :} Vitesse moyenne de circulation sur un \textit{tronçon}. \vskip1mm
-\item \textbf{Demandes de livraisons XML :} Fichier XML décrivant des \textit{demandes de livraisons}. \vskip1mm
-\item \textbf{Demandes de livraisons :} Abstraction des \textit{livraisons} à effectuer. \vskip1mm
+\item \textbf{Demande de livraison XML :} Fichier XML décrivant une \textit{demande de livraison}. \vskip1mm
+\item \textbf{Demande de livraison :} Abstraction des \textit{livraisons} à effectuer. \vskip1mm
 \item \textbf{Tournée :} Tournée de \textit{livraisons} se composant d'un \textit{itinéraire}, d'une \textit{durée de la tournée} et de tout le détail pour chaque livraison. \vskip1mm
-\item \textbf{Itinéaire :} Suite ordonnée de \textit{livraisons}. \vskip1mm
+\item \textbf{Itinéraire :} Suite ordonnée de \textit{livraisons}. \vskip1mm
 \item \textbf{Durée de la tournée :} Durée pour effectuer l'ensemble des \textit{livraisons}. \vskip1mm
-\item \textbf{Entrepot :} \textit{Intersection} de départ et de fin de la \textit{tournée}. \vskip1mm
+\item \textbf{Entrepôt :} \textit{Intersection} de départ et de fin de la \textit{tournée}. \vskip1mm
 \item \textbf{Feuille de route :} Fichier texte spécifiant la \textit{tournée}. \vskip1mm
 \item \textbf{Livraison :} Livraison à effectuer. \vskip1mm
 \item \textbf{Adresse de livraison :} \textit{Interection} où effectuer la \textit{livraison}. \vskip1mm
@@ -154,13 +155,13 @@ Le planning prévisionnel du projet s'est déroulé en trois étapes. Tout d'abo
 \item \textbf{Echanger livraisons :} Permet d'entrer dans le mode d'échange de \textit{livraisons} dans la \textit{tournée}. \vskip1mm
 \item \textbf{Supprimer livraisons :} Permet d'entrer dans le mode de suppression de \textit{livraisons} dans la \textit{tournée}. \vskip1mm
 \item \textbf{Calculer tournée :} Génere la \textit{tournée} à partir des \textit{demandes de livraisons}. \vskip1mm
-\item \textbf{Générer la feuille de route :} Génere la \textit{feuille de route} à partir de la \textit{tournée}. \vskip1mm
+\item \textbf{Générer la feuille de route :} Génère la \textit{feuille de route} à partir de la \textit{tournée}. \vskip1mm
 \item \textbf{Ouvrir plan de la ville :} Permet de sélectionner et charger le \textit{plan de ville XML} et ainsi de visualiser le \textit{plan de ville}. \vskip1mm
-\item \textbf{Ouvrir demandes de livraisons :} Permet de sélectionner et charger les \textit{demandes de livraisons XML} et ainsi de visualiser les \textit{demandes de livraisons}. \vskip1mm
+\item \textbf{Ouvrir demande de livraison :} Permet de sélectionner et charger une \textit{demande de livraison XML} et ainsi que de visualiser la \textit{demande de livraison}. \vskip1mm
 \item \textbf{Quitter :} Permet de quitter l'application. \vskip1mm
 \end{itemize}
 \section{Diagramme de cas d'utilisation}
-\begin{figure}[h!]
+\begin{figure}[H]
     \centering
     \includegraphics[scale=0.35]{cu.png}
     \caption{Diagramme de cas d'utilisation}
@@ -177,7 +178,7 @@ Le planning prévisionnel du projet s'est déroulé en trois étapes. Tout d'abo
 	\end{itemize}
 	\item{Scénario alternatif}
 	\begin{itemize}
-		\item{Le plan de la ville XML n’est pas au bon format ou mal formé. $\rightarrow$ Le système indique que le plan de la ville XML n’est pas valide et retourne au scénario principal.}
+		\item{Le plan de la ville XML n’est pas au bon format ou mal formé. $\rightarrow$ Le système indique que le plan de la ville XML n’est pas valide et retourne au scénario précédent.}
 	\end{itemize}
 	\item{Liste des appels utilisateurs}
 	\begin{itemize}
@@ -193,7 +194,7 @@ Le planning prévisionnel du projet s'est déroulé en trois étapes. Tout d'abo
 	\item{Scénario principal}
 	\begin{itemize}
 		\item{Le système demande de charger une demande de livraison XML}
-		\item{L’utilisateur sélectionne, dans son système de fichier une demande de livraison XML}
+		\item{L’utilisateur sélectionne, dans son système de fichier, une demande de livraison XML}
 		\item{Le système affiche les adresses de livraisons sur le plan de ville.}
 	\end{itemize}
 	\item{Scénario alternatif}
@@ -337,9 +338,9 @@ Le planning prévisionnel du projet s'est déroulé en trois étapes. Tout d'abo
 \begin{itemize}
 	\item{Pré-conditions}
 	\begin{itemize}
-		\item{Avoir calulé la tournée}
+		\item{Avoir calculé la tournée}
 	\end{itemize}
-	\item{Scénario principale}
+	\item{Scénario principal}
 	\begin{itemize}
 		\item{L’utilisateur demande la génération d’une feuille de route}
 		\item{Le système ouvre une boîte de dialogue pour sélectionner le répertoire d’enregistrement}
@@ -365,7 +366,7 @@ Le système indique l’erreur à l'utilisateur et retourne à affichage du plan
 	\item{Clic bouton}
 	\begin{itemize}
 		\item{Charger le fichier du plan de la ville}
-		\item{Charger le fichier des demandes de livraisons}
+		\item{Charger le fichier de demande de livraison}
 		\item{Ajouter livraisons}
 		\item{Echanger livraisons}
 		\item{Supprimer livraison}
@@ -379,7 +380,7 @@ Le système indique l’erreur à l'utilisateur et retourne à affichage du plan
 	\item{Fichier}
 	\begin{itemize}
 		\item{Ouvrir > plan de la ville}
-		\item{Ouvrir demandes de livraisons}
+		\item{Ouvrir demande de livraison}
 	\end{itemize}
 	\item{Edition}	
 	\begin{itemize}
@@ -391,7 +392,7 @@ Le système indique l’erreur à l'utilisateur et retourne à affichage du plan
 		\item{Z : Annuler}
 		\item{Y : Rétablir}
 		\item{P : Ouvrir plan de la ville}
-		\item{O : Ouvrir demandes de livraisons}
+		\item{O : Ouvrir demande de livraison}
 	\end{itemize}
 	\item{Clic droit}
 	\begin{itemize}
@@ -403,12 +404,12 @@ Le système indique l’erreur à l'utilisateur et retourne à affichage du plan
 \begin{figure}[h!]
     \centering
     \includegraphics[scale=0.5]{diag-et-trans.png}
-    \caption{Diagramme des états et transitions}
+    \caption{Diagramme états-transitions}
 \end{figure}
 \newpage
 \section{Diagrammes de packages et de classes}
 \paragraph{Précisions sur les diagrammes}
-Il s'agit des diagrammes de conception. Ils ne correspondent pas forcement à l'implémentation finalement réalisé.
+Il s'agit des diagrammes de conception. Ils ne correspondent pas forcément à l'implémentation finalement réalisée.
 \subsection{Packages}
 \begin{figure}[h!]
     \centering
@@ -420,26 +421,26 @@ Il s'agit des diagrammes de conception. Ils ne correspondent pas forcement à l'
 \begin{figure}[h!]
 	%\advance\leftskip-3cm
     \includegraphics[scale=0.38]{controleur.png}
-    \caption{Diagramme des classes du \textit{controleur}}
+    \caption{Diagramme des classes du \textit{contrôleur}}
 \end{figure}
 \newpage
-\subsection{Modele}
+\subsection{Modèle}
 \begin{figure}[h!]
     \centering
     \includegraphics[scale=0.35]{modele.png}
-    \caption{Diagramme des classes du \textit{modele}}
+    \caption{Diagramme de classes du \textit{modèle}}
 \end{figure}
 \newpage
 \subsection{Vue}
 \begin{figure}[h!]
     \centering
     \includegraphics[scale=0.4]{vue.png}
-    \caption{Diagramme des classes du \textit{vue}}
+    \caption{Diagramme de classes de la \textit{vue}}
 \end{figure}
 \section{Choix architecturaux et design patterns utilisés}
 Étant donné la complexité du projet, il a fallu penser en amont à une architecture capable de faciliter le développement, d'assurer une maintenabilité du code et ainsi produire un programme de qualité. 
 
-Dans cette optique, il paraissait évident d'utiliser certains design patterns ou patrons de conception notamment ceux du \textit{Gang of four}. Dans cette partie vous trouverez ainsi une description des patrons de conception et les choix architecturaux associés.
+Dans cette optique, il paraissait évident d'utiliser certains design patterns, ou patrons de conception, notamment ceux du \textit{Gang of four}. Dans cette partie, vous trouverez ainsi une description des patrons de conception et les choix architecturaux associés.
 \begin{itemize}
 
 \item \textbf{Modèle-Vue-Contrôleur ou MVC}
