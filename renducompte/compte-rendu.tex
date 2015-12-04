@@ -439,21 +439,21 @@ Il s'agit des diagrammes de conception. Ils ne correspondent pas forcement à l'
 \section{Choix architecturaux et design patterns utilisés}
 Étant donné la complexité du projet, il a fallu penser en amont à une architecture capable de faciliter le développement, d'assurer une maintenabilité du code et ainsi produire un programme de qualité. 
 
-Dans cette optique, il paraissait évident d'utiliser certains design patterns ou patrons de conception notamment ceux du \textit{Gang of four}. Dans cette partie vous trouverez ainsi une description des patrons et les choix architecturaux associés.
+Dans cette optique, il paraissait évident d'utiliser certains design patterns ou patrons de conception notamment ceux du \textit{Gang of four}. Dans cette partie vous trouverez ainsi une description des patrons de conception et les choix architecturaux associés.
 \begin{itemize}
 
 \item \textbf{Modèle-Vue-Contrôleur ou MVC}
 
 L'architecture globale du projet est basée sur le patron de conception MVC. En effet ce patron permet d'avoir une bonne séparation entre la logique applicative et l'interface graphique de l'application. Elle offre ainsi un cadre normalisé pour structurer une application d'une certaine complexité comme celle qu'on a eu à développer. Avec cette structure on pourra facilement changer d'interface graphique en gardant le \textit{Modèle} qui constitue le cœur (algorithmique) de l'application.
 
-Notre contrôleur se contente de gérer les différents événements envoyés par la vue. Il n'effectue aucun traitement. Le traitement est géré par les différents états de l'application à travers le pattern État expliqué un peu plus bas. Le contrôleur en tant que tel est divisé deux classes : une partie reçoit les événements puis renvoie la gestion à l'état, l'autre partie appelée \textit{ControleurDonnees} se charge d’accéder au modèle et contient par exemple l'historique des commandes exécutées. C'est cette dernière qui est utilisée par les états pour accéder au modèle.
+Notre contrôleur se contente de gérer les différents événements envoyés par la vue. Il n'effectue aucun traitement. Le traitement est géré par les différents états de l'application à travers le pattern État expliqué un peu plus bas. Notre contrôleur en tant que tel est divisé deux classes : une partie reçoit les événements puis renvoie la gestion à l'état, l'autre partie appelée \textit{ControleurDonnees} se charge d’accéder au modèle et contient par exemple l'historique des commandes exécutées et la collection des observateurs. C'est cette dernière qui est utilisée par les états pour accéder au modèle.
 
 La vue fait appel au contrôleur grâce à une \textbf{façade} \footnote{\url{https://fr.wikipedia.org/wiki/Fa\%C3\%A7ade\_(patron\_de\_conception)}} (une interface plus précisément) qui n'expose que les méthodes nécessaires à la vue. Ainsi on peut cacher certains détails du contrôleur à la vue ou facilement changer de contrôleur sans impacter la vue notamment pour un mode test ou un mode \textit{mock} \footnote{\url{https://fr.wikipedia.org/wiki/Mock\_(programmation\_orient\%C3\%A9e\_objet)}}.
 Le lancement de l'application passe par la vue qui se charge créer le contrôleur par l’intermédiaire de la classe \textit{FenetrePrincipale}.
 
 \item{\textbf{État}} 
 	
-Pour définir les différents comportements de notre application, on a utilisé le design pattern Etat qui permet déléguer le traitement d'un évènement à une autre classe. Dans une logique de programmer pour des interfaces, on a défini une interface commune à tous les états possibles de notre application. Chaque état implémentant cette interface, rédefini les évènements qui ont un effet sur lui. L'ajout d'un nouvel état c'est à dire d'une nouvelle fonctionnalité devient ainsi assez facile. Par contre, ajouter un nouvel évènement utilisateur serait un peu fastidieux dans la mesure où il faudrait que tous les états redéfinissent la méthode associée à ce nouvel évènement meme s'ils n'effectueront aucun traitement.
+Pour définir les différents comportements de notre application, on a utilisé le design pattern État qui permet de déléguer le traitement d'un événement à une autre classe. Dans une logique de programmer pour des interfaces, on a défini une interface commune à tous les états possibles de notre application. Chaque état implémentant cette interface, redéfini les événements qui ont un effet sur lui. L'ajout d'un nouvel état c'est à dire d'une nouvelle fonctionnalité devient ainsi assez facile. Par contre, ajouter un nouvel événement utilisateur serait un peu fastidieux dans la mesure où il faudrait que tous les états redéfinissent la méthode associée à ce nouvel événement même s'ils n'effectueront aucun traitement.
 
 Dans notre cas, au vu des différentes fonctionnalités de notre application, il paraissait évident d'utiliser un tel patron de conception.	
 
@@ -513,7 +513,7 @@ Pour consulter le javadoc du prototype, veuillez regarder directement le dossier
     \includegraphics[scale=0.5]{DcPersistance.png}
     \caption{Package Persistance}
 \end{figure}
-\newpage
+%\newpage
 \subsection{Vue}
 \begin{figure}[h!]
     \centering
@@ -622,9 +622,12 @@ David & Conception CUs & 4h & 52h\\
 \end{itemize}
 \section{Bilan humain et technique}
 \subsection{Bilan humain}
-Coordonner le projet et notamment distribuer les tâches dans l'équipe était un devoir délicat. D'un côté, un but était la parallélisation des fils de développement. D'autre part, il y avait beaucoup de dépendances entre les étapes prévus. C'est pour ça qu'au début du projet, la priorité était d'identifier une procédure raisonnable qui permettait d'identifier les étapes critiques. Comme je n'ais jamais été en charge d'une équipe aussi nombreuse et puissante je dois admettre que j'avais d'abord sous-estimé ce défi.\\
-Le résultat de cet effort nous a bien permis de profiter au maximum des ressources humaines. Néanmoins, il était important de tenir toute l'équipe au courant en ce que regarde les développements effectués en parallèle. En particulier, la convention de bien commenter son code, en combinaison avec une communication fréquente, nous a permis de maîtriser cette mission.\\
-Personnellement, je trouvais éprouvant de trouver une bonne granularité pour la distribution des tâches dans l'équipe. Si une charge était trop petite, on risque de perdre du temps en expliquant le contexte. Aurait-elle pu être réalisée plus rapidement directement par la personne qui s'en est déjà occupée ? Sinon, quand les tâches sont trop complexes, on risque qu'un développeur sera bloqué et exclu des événements qui se passent à côté. Comme la section précédente l'a relevé, le nombre d'heures passées sur le projet par développeur n'est pas parfaitement équilibré. Cependant on ne doit pas oublier que les chiffres ne correspondent pas toujours précisément au travail réalisé. Notamment le temps passé sur la planification, communication et réflexion n'est pas facile à mesurer. C'est pour cela qu'il me semble plus avéré d'évaluer l'équipe comme une entité indivisible.\\
+Coordonner le projet et notamment distribuer les tâches dans l'équipe était un devoir délicat. D'un côté, un but était la parallélisation des fils de développement. D'autre part, il y avait beaucoup de dépendances entre les étapes prévus. C'est pour ça qu'au début du projet, la priorité était d'identifier une procédure raisonnable qui permettait d'identifier les étapes critiques. Comme je n'ais jamais été en charge d'une équipe aussi nombreuse et puissante je dois admettre que j'avais d'abord sous-estimé ce défi.
+
+Le résultat de cet effort nous a bien permis de profiter au maximum des ressources humaines. Néanmoins, il était important de tenir toute l'équipe au courant en ce que regarde les développements effectués en parallèle. En particulier, la convention de bien commenter son code, en combinaison avec une communication fréquente, nous a permis de maîtriser cette mission.
+
+Personnellement, je trouvais éprouvant de trouver une bonne granularité pour la distribution des tâches dans l'équipe. Si une charge était trop petite, on risque de perdre du temps en expliquant le contexte. Aurait-elle pu être réalisée plus rapidement directement par la personne qui s'en est déjà occupée ? Sinon, quand les tâches sont trop complexes, on risque qu'un développeur sera bloqué et exclu des événements qui se passent à côté. Comme la section précédente l'a relevé, le nombre d'heures passées sur le projet par développeur n'est pas parfaitement équilibré. Cependant on ne doit pas oublier que les chiffres ne correspondent pas toujours précisément au travail réalisé. Notamment le temps passé sur la planification, communication et réflexion n'est pas facile à mesurer. C'est pour cela qu'il me semble plus avéré d'évaluer l'équipe comme une entité indivisible.
+
 Parlant de l'équipe, on peut résumer qu'on était enchanté de pouvoir observer la réalisation de nos conceptions. Même s'il y avait parfois des défis qu'on n'avait pas prévu, l'équipe était toujours motivé pour discuter et trouver la meilleure solution possible.
 \subsection{Bilan technique}
 Pour réaliser ce projet, nous avons profité d'une grande variété des techniques. Dans le but de permettre à chaque développeur de travailler avec son IDE préféré, nous avons décidé de ne pas garder les fichiers de gestion d'IDE dans le répertoire git. Grâce à cela, nous avons réussi à travailler avec les IDEs \textit{NetBeans}, \textit{Eclipse} et \textit{IntelliJ} en même temps. 
