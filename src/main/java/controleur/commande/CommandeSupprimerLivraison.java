@@ -20,11 +20,6 @@ public class CommandeSupprimerLivraison extends CommandeAnnulable {
     private int idLivraisonSupprime;
 
     /**
-     * L'identifiant de la livraison précédent la livraison supprimée
-     */
-    private int idLivraisonAvant;
-
-    /**
      * Constructeur de la commande de suppression d'une livraison
      *
      * @param controleurDonnees Le contrôleur de données
@@ -59,7 +54,7 @@ public class CommandeSupprimerLivraison extends CommandeAnnulable {
         // Garder une copie de la modele
         super.backupModele(controleurDonnees.getModele());
 
-        idLivraisonAvant = controleurDonnees.getModele().supprimerLivraison(livraisonSupprimee.getId());
+        controleurDonnees.getModele().supprimerLivraison(livraisonSupprimee.getId());
         controleurDonnees.getModele().remplirHoraires();
         controleurDonnees.notifierObservateursModele();
         controleurDonnees.notifierObservateursAnnuler(true);
