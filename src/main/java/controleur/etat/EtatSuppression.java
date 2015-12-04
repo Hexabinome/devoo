@@ -35,8 +35,6 @@ public class EtatSuppression extends AbstractEtat {
             donnees.ajouterCommande(commande);
             donnees.effacerCommandesARetablir();
         } catch (CommandeException e) {
-        	//e.printStackTrace();
-        	// TODO afficher ou erreur?
         	donnees.notifierObservateursMessage(e.getMessage());
         }
         return this;
