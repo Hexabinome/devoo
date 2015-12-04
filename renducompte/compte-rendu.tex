@@ -64,7 +64,7 @@
 \tableofcontents 
 \chapter{Capture et analyse des besoins}
 \section{Planning prévisionnel du projet}
-Le planning prévisionnel du projet s'est déroulé en trois étapes. Tout d'abord, nous avons identifié les stages nécessaires pour réaliser le projet. Nous avons transformé les missions en tâches réalisables qui sont exprimées par la liste suivante :
+Le planning prévisionnel du projet s'est déroulé en trois étapes. Tout d'abord, nous avons identifié les étapes nécessaires pour réaliser le projet. Nous avons transformé les missions en tâches réalisables qui sont exprimées par la liste suivante :
 \begin{itemize}
 	\item{Planning previsionnel du projet (3.0 h)}
 	\item{Analyse du modèle (3.0h)}
@@ -122,7 +122,7 @@ Le planning prévisionnel du projet s'est déroulé en trois étapes. Tout d'abo
 \item \textbf{Plan de ville :} Abstraction de la carte d'une ville. \vskip1mm
 \item \textbf{Intersection :} Coordonnées d'intersection entre des \textit{tronçons}. \vskip1mm
 \item \textbf{Coordonnée x d'intersection :} Coordonnée x d'\textit{intersection}. \vskip1mm
-\item \textbf{Coordonnée x d'intersection :} Coordonnée y d'\textit{intersection}. \vskip1mm
+\item \textbf{Coordonnée y d'intersection :} Coordonnée y d'\textit{intersection}. \vskip1mm
 \item \textbf{Tronçon :} Tronçon de rue entre deux \textit{intersections}. \vskip1mm
 \item \textbf{Longueur du tronçon :} Longueur d'un \textit{tronçon}. \vskip1mm
 \item \textbf{Vitesse moyenne de circulation du tronçon :} Vitesse moyenne de circulation sur un \textit{tronçon}. \vskip1mm
@@ -145,7 +145,6 @@ Le planning prévisionnel du projet s'est déroulé en trois étapes. Tout d'abo
 \item \textbf{Horaire de passage de livraison :} Heure au début du \textit{temps d'arrêt de la livraison}. \vskip1mm
 \item \textbf{Horaire de départ de livraison :} Heure à la fin du \textit{temps d'arrêt de livraison}. (=\textit{horaire de passage de livraison} + \textit{temps d'arrêt de livraison}) \vskip1mm
 \item \textbf{Livraison en retard :} \textit{Livraison} effectuée en dehors de la \textit{fenêtre de livraison}. \vskip1mm
-\item \textbf{Livraison en retard :} \textit{Livraison} effectuée en dehors de la \textit{fenêtre de livraison}. \vskip1mm
 \end{itemize}
 \subsection{Actions}
 \begin{itemize}
@@ -153,7 +152,7 @@ Le planning prévisionnel du projet s'est déroulé en trois étapes. Tout d'abo
 \item \textbf{Rétablir :} Rétablit la dernière action annulée. \vskip1mm
 \item \textbf{Ajouter livraisons :} Permet d'entrer dans le mode d'ajout de \textit{livraisons} à la \textit{tournée}. \vskip1mm
 \item \textbf{Echanger livraisons :} Permet d'entrer dans le mode d'échange de \textit{livraisons} dans la \textit{tournée}. \vskip1mm
-\item \textbf{Supprimer livraisons :} Permet d'entrer dans le mode de suppression de \textit{livraisons} dans le \textit{tournée}. \vskip1mm
+\item \textbf{Supprimer livraisons :} Permet d'entrer dans le mode de suppression de \textit{livraisons} dans la \textit{tournée}. \vskip1mm
 \item \textbf{Calculer tournée :} Génere la \textit{tournée} à partir des \textit{demandes de livraisons}. \vskip1mm
 \item \textbf{Générer la feuille de route :} Génere la \textit{feuille de route} à partir de la \textit{tournée}. \vskip1mm
 \item \textbf{Ouvrir plan de la ville :} Permet de sélectionner et charger le \textit{plan de ville XML} et ainsi de visualiser le \textit{plan de ville}. \vskip1mm
@@ -170,7 +169,7 @@ Le planning prévisionnel du projet s'est déroulé en trois étapes. Tout d'abo
 \subsection{Charger le plan}
 \begin{itemize}
 	\item{Pré-conditions}
-	\item{Scénario principale}
+	\item{Scénario principal}
 	\begin{itemize}
 		\item{Le système demande de charger le plan de la ville XML}
 		\item{L’utilisateur sélectionne un plan dans son système de fichiers}
@@ -178,7 +177,7 @@ Le planning prévisionnel du projet s'est déroulé en trois étapes. Tout d'abo
 	\end{itemize}
 	\item{Scénario alternatif}
 	\begin{itemize}
-		\item{Le plan de la ville XML n’est pas au bon format ou bien formé. $\rightarrow$ Le système indique que le plan de la ville XML n’est pas valide et retourne à l’étape 1.}
+		\item{Le plan de la ville XML n’est pas au bon format ou mal formé. $\rightarrow$ Le système indique que le plan de la ville XML n’est pas valide et retourne au scénario principal.}
 	\end{itemize}
 	\item{Liste des appels utilisateurs}
 	\begin{itemize}
@@ -189,39 +188,39 @@ Le planning prévisionnel du projet s'est déroulé en trois étapes. Tout d'abo
 \begin{itemize}
 	\item{Pré-conditions}
 	\begin{itemize}
-		\item{Le plan de la ville xml doit être charge et le plan de la ville est affiche}
+		\item{Le plan de la ville XML doit être chargé et affiché}
 	\end{itemize}
-	\item{Scénario principale}
+	\item{Scénario principal}
 	\begin{itemize}
-		\item{Le système demande la saisie d’un plan de livraison xml}
-		\item{L’utilisateur sélectionne, dans son système de fichier, un plan de livraison xml}
+		\item{Le système demande de charger une demande de livraison XML}
+		\item{L’utilisateur sélectionne, dans son système de fichier une demande de livraison XML}
 		\item{Le système affiche les adresses de livraisons sur le plan de ville.}
 	\end{itemize}
 	\item{Scénario alternatif}
 	\begin{itemize}
-		\item{Le système indique que le plan de livraisons xml est incorrecte ou mal-forme $\rightarrow$ retour a l’etape 1}
+		\item{Le système indique que la demande de livraison XML est incorrecte ou mal-formée $\rightarrow$ Le système indique que la demand est mal-formée et retourne au scénario principal}
 	\end{itemize}
 	\item{Liste des appels utilisateurs}
 	\begin{itemize}
-		\item{Choisir le plan de livraisons XML}
+		\item{Choisir la demande de livraison XML}
 	\end{itemize}
 \end{itemize}
 \subsection{Calculer la tournée}
 \begin{itemize}
 	\item{Pré-conditions}
 	\begin{itemize}
-		\item{Le plan de livraisons XML est charge et le plan de livraison est affiche sur le plan de la ville}
+		\item{Le plan de ville et la demande de livraison sont chargés}
 	\end{itemize}
-	\item{Scénario principale}
+	\item{Scénario principal}
 	\begin{itemize}
 		\item{L’utilisateur demande le calcul de la tournee.}
-		\item{Le systeme calcul la tournee optimale.}
-		\item{Le systeme affiche la tournee sur le plan et affiche la liste des livraisons(heure de passage, fenetre de livraisons et retard en rouge).}
+		\item{Le système calcul la tournée optimale.}
+		\item{Le système affiche la tournée sur le plan et affiche la liste des livraisons (horaire de passage, fenêtre de livraisons et les livraions en retard en rouge).}
 	\end{itemize}
 	\item{Scénario alternatif}
 	\item{Liste des appels utilisateurs}
 	\begin{itemize}
-		\item{Demande de calcul de tournées}
+		\item{Demande de calculer la tournée}
 	\end{itemize}
 \end{itemize}
 \subsection{Modifier la tournée (Supprimer une livraison)}
@@ -230,15 +229,19 @@ Le planning prévisionnel du projet s'est déroulé en trois étapes. Tout d'abo
 	\begin{itemize}
 		\item{La tournée doit être calculée}
 	\end{itemize}
-	\item{Scénario principale}
+	\item{Scénario principal}
 	\begin{itemize}
 		\item{L'utilisateur entre en mode suppression}
 		\item{Le système demande à l'utilisateur quelle livraison il souhaite supprimer}
 		\item{L'utilisateur indique au système quelle livraison il veut supprimer}
-		\item{Le système modifie la tournée afin de prendre en compte la suppression en compte}
+		\item{Le système modifie la tournée afin de prendre en compte la suppression}
 		\item{Le système affiche les modifications à l'utilisateur}
 	\end{itemize}
 	\item{Scénario alternatif}
+	\begin{itemize}
+			\item L'utilisateur décide de ne plus supprimer de livraisons et sort du mode suppression
+		\end{itemize}
+	
 	\item{Liste des appels utilisateurs}
 	\begin{itemize}
 		\item{Supprimer livraison}
@@ -250,7 +253,7 @@ Le planning prévisionnel du projet s'est déroulé en trois étapes. Tout d'abo
 		\begin{itemize}
 		\item{La tournée doit être calculée}
 	\end{itemize}
-	\item{Scénario principale}
+	\item{Scénario principal}
 	\begin{itemize}
 		\item{L’utilisateur entre en mode échange}
 		\item{Le système demande à l’utilisateur de choisir les deux livraisons à échanger}
@@ -259,6 +262,9 @@ Le planning prévisionnel du projet s'est déroulé en trois étapes. Tout d'abo
 		\item{Le système affiche les modifications à l’utilisateur}
 	\end{itemize}
 	\item{Scénario alternatif}
+	\begin{itemize}
+				\item L'utilisateur décide de ne plus échanger de livraisons et sort du mode échange
+			\end{itemize}
 	\item{Liste des appels utilisateurs}
 	\begin{itemize}
 		\item{Échanger livraisons}
@@ -270,7 +276,7 @@ Le planning prévisionnel du projet s'est déroulé en trois étapes. Tout d'abo
 		\begin{itemize}
 		\item{La tournée doit être calculée}
 	\end{itemize}
-	\item{Scénario principale}
+	\item{Scénario principal}
 	\begin{itemize}
 		\item{L’utilisateur entre en mode ajout}
 		\item{Le système demande à l’utilisateur l’intersection pour le lieu de livraison}
@@ -281,6 +287,9 @@ Le planning prévisionnel du projet s'est déroulé en trois étapes. Tout d'abo
 		\item{Le système affiche les modifications à l’utilisateur}
 	\end{itemize}
 	\item{Scénario alternatif}
+	\begin{itemize}
+				\item L'utilisateur décide de ne plus ajouter de livraisons et sort du mode ajout
+			\end{itemize}
 	\item{Liste des appels utilisateurs}
 	\begin{itemize}
 		\item{Ajouter livraison}
@@ -290,9 +299,9 @@ Le planning prévisionnel du projet s'est déroulé en trois étapes. Tout d'abo
 \begin{itemize}
 	\item{Pré-conditions}
 		\begin{itemize}
-		\item{Il y a eu une modification}
+		\item{Il y a eu une modification sur la tournée}
 	\end{itemize}
-	\item{Scénario principale}
+	\item{Scénario principal}
 	\begin{itemize}
 		\item{L’utilisateur indique au système qu’il souhaite annuler}
 		\item{Le système effectue l’opération inverse à la modification}
@@ -309,7 +318,7 @@ Le planning prévisionnel du projet s'est déroulé en trois étapes. Tout d'abo
 \begin{itemize}
 	\item{Pré-conditions}
 		\begin{itemize}
-		\item{Avoir annulé quelque chose}
+		\item{Avoir annulé une modification sur la tournée}
 	\end{itemize}
 	\item{Scénario principale}
 	\begin{itemize}
