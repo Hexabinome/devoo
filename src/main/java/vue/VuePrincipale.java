@@ -210,7 +210,7 @@ public class VuePrincipale implements Initializable, ActivationOuvrirDemandeObse
     										.append("Mohamed Haidara").append(System.lineSeparator())
     										.append("Alexis Papin").append(System.lineSeparator())
     										.append("Robin Royer").append(System.lineSeparator())
-    										.append("Maximilian Schiedermeier").append(System.lineSeparator())
+    										.append("Maximilian").append(System.lineSeparator())
     										.append("David Wobrock").append(System.lineSeparator())
     										.toString();
 

@@ -17,7 +17,7 @@ import controleur.ControleurDonnees;
 
 /**
  * La commande de chargement de la demande
- * @author Max Schiedermeier
+ * @author Maxou
  */
 public class CommandeChargerDemande extends CommandeNonAnnulable {
 

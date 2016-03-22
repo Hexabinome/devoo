@@ -13,7 +13,7 @@ import controleur.ControleurDonnees;
 
 /**
  * La commande de chargement d'un plan
- * @author Max Schiedermeier
+ * @author Maxou
  */
 public class CommandeChargerPlan extends CommandeNonAnnulable {
 

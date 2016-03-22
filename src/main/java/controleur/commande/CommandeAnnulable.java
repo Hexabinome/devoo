@@ -10,7 +10,7 @@ import modele.donneesxml.Modele;
 
 /**
  * Représente une commande annulable
- * @author Max Schiedermeier
+ * @author Maxou
  */
 public abstract class CommandeAnnulable implements Commande {
 

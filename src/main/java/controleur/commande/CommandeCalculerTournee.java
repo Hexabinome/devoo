@@ -4,7 +4,7 @@ import controleur.ControleurDonnees;
 
 /**
  * La commande de calcul de tournée
- * @author Max Schiedermeier
+ * @author Maxou
  */
 public class CommandeCalculerTournee extends CommandeNonAnnulable {
 
