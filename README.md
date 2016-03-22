@@ -34,5 +34,5 @@ Pour lancer les tests : `mvn test`.
  - Mohamed El Mouctar Haidara 
  - Alexis Papin
  - Robin Royer
- - Maximilan Schiedermeier
+ - Maximilan 
  - David Wobrock
